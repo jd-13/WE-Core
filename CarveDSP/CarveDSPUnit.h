@@ -33,21 +33,21 @@
 
 class CarveDSPUnit {
 public:
-    CarveDSPUnit() :    preGain(PREGAIN_DEFAULT),
-    postGain(POSTGAIN_DEFAULT),
-    tweak(TWEAK_DEFAULT),
-    mode(MODE_DEFAULT) { }
+    CarveDSPUnit() :    preGain(PREGAIN.defaultValue),
+                        postGain(POSTGAIN.defaultValue),
+                        tweak(TWEAK.defaultValue),
+                        mode(MODE.defaultValue) { }
     
     virtual ~CarveDSPUnit() {}
     
     // set parameter methods, w/ integrated bounds checks
-    void setMode(int val) { mode = boundsCheck<int>(val, MODE_MIN, MODE_MAX); }
+    void setMode(int val) { mode = MODE.BoundsCheck(val); }
     
-    void setPreGain(float val) { preGain = boundsCheck(val, PREGAIN_MIN, PREGAIN_MAX); }
+    void setPreGain(float val) { preGain = PREGAIN.BoundsCheck(val); }
     
-    void setPostGain(float val) { postGain = boundsCheck(val, POSTGAIN_MIN, POSTGAIN_MAX); }
+    void setPostGain(float val) { postGain = POSTGAIN.BoundsCheck(val); }
     
-    void setTweak(float val) { tweak = boundsCheck(val, TWEAK_MIN, TWEAK_MAX); }
+    void setTweak(float val) { tweak = TWEAK.BoundsCheck(val); }
     
     // get parameter methods
     int getMode() { return mode; }
@@ -69,22 +69,22 @@ public:
      */
     float process (float inSample) const {
         switch (mode) {
-            case MODE_SINE:
+            case MODE.SINE:
                 return processSine(inSample);
                 
-            case MODE_PARABOLIC_SOFT:
+            case MODE.PARABOLIC_SOFT:
                 return processParabolicSoft(inSample);
                 
-            case MODE_PARABOLIC_HARD:
+            case MODE.PARABOLIC_HARD:
                 return processParabolicHard(inSample);
                 
-            case MODE_ASYMMETRIC_SINE:
+            case MODE.ASYMMETRIC_SINE:
                 return processAsymmetricSine(inSample);
                 
-            case MODE_EXPONENT:
+            case MODE.EXPONENT:
                 return processExponent(inSample);
                 
-            case MODE_CLIPPER:
+            case MODE.CLIPPER:
                 return processClipper(inSample);
                 
             default:
@@ -99,14 +99,6 @@ private:
             tweak;
     
     int mode;
-    
-    template<typename T>
-    T boundsCheck(T param, T min, T max) {
-        if (param < min) param = min;
-        if (param > max) param = max;
-        
-        return param;
-    }
     
     // private process methods
     inline float processSine(float inSample) const {
