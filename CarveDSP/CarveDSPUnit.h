@@ -29,7 +29,7 @@
 #define _USE_MATH_DEFINES
 
 #include "math.h"
-#include "ParameterData.h"
+#include "CarveParameters.h"
 
 class CarveDSPUnit {
 public:

@@ -26,7 +26,6 @@
 #define CARVENOISEFILTER_H_INCLUDED
 
 #include "DspFilters/Butterworth.h"
-#include "../JuceLibraryCode/JuceHeader.h"
 
 
 class CarveNoiseFilter {
