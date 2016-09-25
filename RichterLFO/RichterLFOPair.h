@@ -61,17 +61,23 @@ public:
      *
      * This calls various protected methods of each of the oscillators in a specific order
      * to ensure calculations are done correctly.
+     *
+     * args: bpm             Current bpm of the host
+     *       timeInSeconds   Position of the host DAW's playhead at the start of
+     *                       playback
+     *       sampleRate      Current sample rate of the host
      */
-    void prepareForNextBuffer(const juce::AudioPlayHead::CurrentPositionInfo& mTempoInfo,
+    void prepareForNextBuffer(double bpm,
+                              double timeInSeconds,
                               double sampleRate) {
         _LFO.setWaveTablePointers();
         _MOD.setWaveTablePointers();
         
-        _MOD.calcFreq(mTempoInfo.bpm);
-        _MOD.calcPhaseOffset(mTempoInfo.timeInSeconds);
+        _MOD.calcFreq(bpm);
+        _MOD.calcPhaseOffset(timeInSeconds);
         
-        _LFO.calcFreq(mTempoInfo.bpm);
-        _LFO.calcPhaseOffset(mTempoInfo.timeInSeconds);
+        _LFO.calcFreq(bpm);
+        _LFO.calcPhaseOffset(timeInSeconds);
         
         _LFO.calcSamplesPerTremoloCycle(sampleRate);
         _MOD.calcSamplesPerTremoloCycle(sampleRate);

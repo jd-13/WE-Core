@@ -26,7 +26,6 @@
 
 #define _USE_MATH_DEFINES
 
-#include "../JuceLibraryCode/JuceHeader.h"
 #include "math.h"
 #include "RichterParameters.h"
 
@@ -118,12 +117,18 @@ public:
      *
      * Prepares for processing the next buffer of samples. For example if using JUCE, you 
      * would call this in your processBlock() method before doing any processing.
+     *
+     * args: bpm             Current bpm of the host
+     *       timeInSeconds   Position of the host DAW's playhead at the start of
+     *                       playback
+     *       sampleRate      Current sample rate of the host
      */
-    void prepareForNextBuffer(const juce::AudioPlayHead::CurrentPositionInfo& mTempoInfo,
+    void prepareForNextBuffer(double bpm,
+                              double timeInSeconds,
                               double sampleRate) {
         setWaveTablePointers();
-        calcFreq(mTempoInfo.bpm);
-        calcPhaseOffset(mTempoInfo.timeInSeconds);
+        calcFreq(bpm);
+        calcPhaseOffset(timeInSeconds);
         calcSamplesPerTremoloCycle(sampleRate);
         calcNextScale();
     }
