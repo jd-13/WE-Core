@@ -27,7 +27,7 @@
 #define _USE_MATH_DEFINES
 
 #include "math.h"
-#include "ParameterData.h"
+#include "RichterParameters.h"
 
 class RichterLFOBase {
 protected:
@@ -59,17 +59,9 @@ protected:
     float mSquare[kWaveArraySize];
     float mSaw[kWaveArraySize];
     
-    template <typename T>
-    T boundsCheck(T param, T min, T max) {
-        if (param < min) param = min;
-        if (param > max) param = max;
-        
-        return param;
-    }
-    
 public:
     RichterLFOBase() :  manualPhase(0),
-                        wave(WAVE_DEFAULT),
+                        wave(WAVE.defaultValue),
                         index(0),
                         indexOffset(0),
                         samplesProcessed(0),
@@ -77,11 +69,11 @@ public:
                         tempoSyncSwitch(TEMPOSYNC_DEFAULT),
                         phaseSyncSwitch(PHASESYNC_DEFAULT),
                         needsPhaseCalc(true),
-                        tempoNumer(TEMPONUMER_DEFAULT),
-                        tempoDenom(TEMPODENOM_DEFAULT),
-                        tempoFreq(FREQ_DEFAULT),
-                        freq(FREQ_DEFAULT),
-                        depth(DEPTH_DEFAULT),
+                        tempoNumer(TEMPONUMER.defaultValue),
+                        tempoDenom(TEMPODENOM.defaultValue),
+                        tempoFreq(FREQ.defaultValue),
+                        freq(FREQ.defaultValue),
+                        depth(DEPTH.defaultValue),
                         samplesPerTremoloCycle(1),
                         gain(1),
                         offset(0),
@@ -126,22 +118,22 @@ public:
     
     void setTempoSyncSwitch(bool val) { tempoSyncSwitch = val; }
     
-    void setTempoNumer(int val) { tempoNumer = boundsCheck<int>(val, TEMPONUMER_MIN, TEMPONUMER_MAX); }
+    void setTempoNumer(int val) { tempoNumer = TEMPONUMER.BoundsCheck(val); }
     
-    void setTempoDenom (int val) { tempoDenom = boundsCheck<int>(val, TEMPODENOM_MIN, TEMPODENOM_MAX); }
+    void setTempoDenom (int val) { tempoDenom = TEMPODENOM.BoundsCheck(val); }
     
-    void setFreq(float val) { freq = boundsCheck(val, FREQ_MIN, FREQ_MAX); }
+    void setFreq(float val) { freq = FREQ.BoundsCheck(val); }
     
-    void setDepth(float val) { depth = boundsCheck(val, DEPTH_MIN, DEPTH_MAX); }
+    void setDepth(float val) { depth = DEPTH.BoundsCheck(val); }
     
-    void setManualPhase(int val) { manualPhase = boundsCheck(val, PHASE_MIN, PHASE_MAX); }
+    void setManualPhase(int val) { manualPhase = PHASE.BoundsCheck(val); }
     
-    void setWave(float val) { wave = boundsCheck<int>(val, WAVE_MIN, WAVE_MAX); }
+    void setWave(float val) { wave = WAVE.BoundsCheck(val); }
     
     void setWaveTablePointers() {
-        if (wave == WAVE_SINE) { waveArrayPointer = &mSine[0]; }
-        if (wave == WAVE_SQUARE) { waveArrayPointer = &mSquare[0]; }
-        if (wave == WAVE_SAW) { waveArrayPointer = &mSaw[0]; }
+        if (wave == WAVE.SINE) { waveArrayPointer = &mSine[0]; }
+        if (wave == WAVE.SQUARE) { waveArrayPointer = &mSquare[0]; }
+        if (wave == WAVE.SAW) { waveArrayPointer = &mSaw[0]; }
     }
     
     void setIndexOffset(int val) { indexOffset = val; }
@@ -201,7 +193,7 @@ public:
         
         if (tempoSyncSwitch) { freq = tempoFreq; }
         
-        boundsCheck(freq, FREQ_MIN, FREQ_MAX);
+        freq = FREQ.BoundsCheck(freq);
         
     }
     

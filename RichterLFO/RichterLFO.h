@@ -31,10 +31,10 @@ class RichterLFO : public RichterLFOBase {
 public:
     
     RichterLFO() :  RichterLFOBase(),
-    rawFreq(FREQ_DEFAULT),
-    freqMod(FREQMOD_DEFAULT),
-    rawDepth(DEPTH_DEFAULT),
-    depthMod(DEPTHMOD_DEFAULT) {
+    rawFreq(FREQ.defaultValue),
+    freqMod(FREQMOD.defaultValue),
+    rawDepth(DEPTH.defaultValue),
+    depthMod(DEPTHMOD.defaultValue) {
         
         
         // initialise wavetable array values
@@ -97,22 +97,22 @@ public:
     
     void setRawFreq(float val) {
         rawFreq = val;
-        rawFreq = boundsCheck(rawFreq, FREQ_MIN, FREQ_MAX);
+        rawFreq = FREQ.BoundsCheck(rawFreq);
     }
     
     void setFreqMod(float val) {
         freqMod = val;
-        freqMod = boundsCheck(freqMod, FREQMOD_MIN, FREQMOD_MAX);
+        freqMod = FREQMOD.BoundsCheck(freqMod);
     }
     
     void setRawDepth(float val) {
         rawDepth = val;
-        rawDepth = boundsCheck(rawDepth, DEPTH_MIN, DEPTH_MAX);
+        rawDepth = DEPTH.BoundsCheck(rawDepth);
     }
     
     void setDepthMod(float val) {
         depthMod = val;
-        depthMod = boundsCheck(depthMod, DEPTHMOD_MIN, DEPTHMOD_MAX);
+        depthMod = DEPTHMOD.BoundsCheck(depthMod);
     }
     
     /* calcGain
@@ -159,14 +159,14 @@ private:
         
         if (!tempoSyncSwitch) {
             if (modBypassSwitch) {
-                freq = rawFreq + (freqMod * (FREQ_MAX / 2) * modGain);
+                freq = rawFreq + (freqMod * (FREQ.maxValue / 2) * modGain);
             } else {
                 freq = rawFreq;
             }
         }
         
         // Bounds check frequency after the modulation is applied to it
-        freq = boundsCheck(freq, FREQ_MIN, FREQ_MAX);
+        freq = FREQ.BoundsCheck(freq);
         
     }
     
@@ -183,12 +183,12 @@ private:
         // Check whether MOD oscs are activated and apply depth parameter modulation accordingly
         
         if (modBypassSwitch) {
-            depth = rawDepth + (depthMod * DEPTH_MAX * modGain);
+            depth = rawDepth + (depthMod * DEPTH.maxValue * modGain);
         } else {
             depth = rawDepth;
         }
         
-        depth = boundsCheck(depth, DEPTH_MIN, DEPTH_MAX);
+        depth = DEPTH.BoundsCheck(depth);
         
     }
 };
