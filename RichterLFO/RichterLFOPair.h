@@ -24,22 +24,46 @@
 #ifndef RICHTERLFOPAIR_H_INCLUDED
 #define RICHTERLFOPAIR_H_INCLUDED
 
-#include "../JuceLibraryCode/JuceHeader.h"
 #include "RichterLFO.h"
 #include "RichterMOD.h"
 
+
+/* RichterLFOPair
+ *
+ * A convenience class that allows a simple implementation of an LFO that has
+ * been paired with a MOD oscillator to modulate depth and frequency. If you use
+ * this class, you will never need to interact with either of the contained LFOs
+ * for anything other than getting or setting parameter values.
+ *
+ * This class has been created as the LFO relies on the MOD being ready before
+ * it can perform certain operations, which means there are method calls to 
+ * each oscillator which must be interleaved carefully.
+ */
+ 
 class RichterLFOPair {
 public:
     RichterLFOPair() : _LFO(), _MOD() {
     }
     
+    /* reset
+     *
+     * Call each oscillator's reset method.
+     */
     void reset() {
         _LFO.reset();
         _MOD.reset();
     }
     
-    void processBlock(const juce::AudioPlayHead::CurrentPositionInfo& mTempoInfo,
-                                      double sampleRate) {
+    /* prepareForNextBuffer
+     *
+     * Prepares for processing the next buffer of samples. For example if using JUCE, you
+     * would call this in your processBlock() method before doing any processing.
+     *
+     * This calls various protected methods of each of the oscillators in a specific order
+     * to ensure calculations are done correctly.
+     */
+    void prepareForNextBuffer(const juce::AudioPlayHead::CurrentPositionInfo& mTempoInfo,
+                              double sampleRate) {
         _LFO.setWaveTablePointers();
         _MOD.setWaveTablePointers();
         
@@ -56,6 +80,14 @@ public:
         _MOD.calcNextScale();
     }
     
+    /* calcGainInLoop
+     *
+     * Use this in your processing loop. Returns a gain value which is intended to be
+     * multiplied with a single sample to apply the tremolo effect.
+     *
+     * Note: Calling this method will advance the oscillators internal counters by one
+     *       sample. Calling this method will return a different value each time.
+     */
     float calcGainInLoop() {
         _LFO.calcIndexAndScaleInLoop();
         _MOD.calcIndexAndScaleInLoop();

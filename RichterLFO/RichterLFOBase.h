@@ -26,39 +26,13 @@
 
 #define _USE_MATH_DEFINES
 
+#include "../JuceLibraryCode/JuceHeader.h"
 #include "math.h"
 #include "RichterParameters.h"
 
+class RichterLFOPair;
+
 class RichterLFOBase {
-protected:
-    int manualPhase,
-        wave,
-        index,
-        indexOffset,
-        samplesProcessed;
-    
-    bool    bypassSwitch,
-            tempoSyncSwitch,
-            phaseSyncSwitch,
-            needsPhaseCalc;
-        
-    float   tempoNumer,
-            tempoDenom,
-            tempoFreq,
-            freq,
-            depth,
-            samplesPerTremoloCycle,
-            gain,
-            offset,
-            currentScale,
-            nextScale;
-    
-    float   *waveArrayPointer;
-    
-    float mSine[kWaveArraySize];
-    float mSquare[kWaveArraySize];
-    float mSaw[kWaveArraySize];
-    
 public:
     RichterLFOBase() :  manualPhase(0),
                         wave(WAVE.defaultValue),
@@ -83,6 +57,8 @@ public:
     }
     
     virtual ~RichterLFOBase() {};
+    
+    friend class RichterLFOPair;
     
     // getter methods
     
@@ -138,6 +114,19 @@ public:
     
     void setIndexOffset(int val) { indexOffset = val; }
     
+    /* prepareForNextBuffer
+     *
+     * Prepares for processing the next buffer of samples. For example if using JUCE, you 
+     * would call this in your processBlock() method before doing any processing.
+     */
+    void prepareForNextBuffer(const juce::AudioPlayHead::CurrentPositionInfo& mTempoInfo,
+                              double sampleRate) {
+        setWaveTablePointers();
+        calcFreq(mTempoInfo.bpm);
+        calcPhaseOffset(mTempoInfo.bpm);
+        calcSamplesPerTremoloCycle(sampleRate);
+        calcNextScale();
+    }
     
     /* reset
      *
@@ -150,6 +139,68 @@ public:
         currentScale = 0;
         samplesProcessed = 0;
     }
+    
+    /* calcIndexAndScaleInLoop
+     *
+     * Calculates the current index of the oscillator in its wavetable. Includes
+     * protection against indexes out of range (caused by phase offset) and updates
+     * currentScale. Call from within the processing loop. Increments the number of 
+     * samples processed
+     *
+     */
+    void calcIndexAndScaleInLoop() {
+        // calculate the current index within the wave table
+        
+        index = static_cast<long>(samplesProcessed * currentScale) % kWaveArraySize;
+        
+        if ((nextScale != currentScale) && (index == 0)) {
+            currentScale = nextScale;
+            samplesProcessed = 0;
+        }
+        
+        
+        // Must provide two possibilities for each index lookup in order to protect the array from being overflowed by the indexOffset, the first if statement uses the standard index lookup while second if statement deals with the overflow possibility
+        
+        if ((index + indexOffset) < kWaveArraySize) {
+            gain = waveArrayPointer[index + indexOffset];
+        } else if ((index + indexOffset) >= kWaveArraySize) {
+            gain = waveArrayPointer[(index + indexOffset) % kWaveArraySize];
+        }
+        
+        samplesProcessed++;
+    }
+    
+    RichterLFOBase operator=(RichterLFOBase& other) = delete;
+    RichterLFOBase(RichterLFOBase& other) = delete;
+    
+protected:
+    int manualPhase,
+        wave,
+        index,
+        indexOffset,
+        samplesProcessed;
+    
+    bool    bypassSwitch,
+            tempoSyncSwitch,
+            phaseSyncSwitch,
+            needsPhaseCalc;
+    
+    float   tempoNumer,
+            tempoDenom,
+            tempoFreq,
+            freq,
+            depth,
+            samplesPerTremoloCycle,
+            gain,
+            offset,
+            currentScale,
+            nextScale;
+    
+    float   *waveArrayPointer;
+    
+    float mSine[kWaveArraySize];
+    float mSquare[kWaveArraySize];
+    float mSaw[kWaveArraySize];
     
     /* calcPhaseOffset
      *
@@ -204,50 +255,17 @@ public:
      *
      * args: sampleRate   Sample rate of the host DAW
      */
-    void calcSamplesPerTremoloCycle(float sampleRate) {
+    void calcSamplesPerTremoloCycle(double sampleRate) {
         samplesPerTremoloCycle = sampleRate / freq;
-    }
-    
-    /* calcIndexAndScaleInLoop
-     *
-     * Calculates the current index of the oscillator in its wavetable. Includes
-     * protection against indexes out of range (caused by phase offset) and updates
-     * currentScale. Call from within the processing loop. Increments the number of 
-     * samples processed
-     *
-     */
-    void calcIndexAndScaleInLoop() {
-        // calculate the current index within the wave table
-        
-        index = static_cast<long>(samplesProcessed * currentScale) % kWaveArraySize;
-        
-        if ((nextScale != currentScale) && (index == 0)) {
-            currentScale = nextScale;
-            samplesProcessed = 0;
-        }
-        
-        
-        // Must provide two possibilities for each index lookup in order to protect the array from being overflowed by the indexOffset, the first if statement uses the standard index lookup while second if statement deals with the overflow possibility
-        
-        if ((index + indexOffset) < kWaveArraySize) {
-            gain = waveArrayPointer[index + indexOffset];
-        } else if ((index + indexOffset) >= kWaveArraySize) {
-            gain = waveArrayPointer[(index + indexOffset) % kWaveArraySize];
-        }
-        
-        samplesProcessed++;
     }
     
     /* calcNextScale
      *
-     * Calculates the scale factor to be applied when calculating the index. 
+     * Calculates the scale factor to be applied when calculating the index.
      */
     void calcNextScale() {
         nextScale = kWaveArraySize / samplesPerTremoloCycle;
     }
-    
-    RichterLFOBase operator=(RichterLFOBase& other) = delete;
-    RichterLFOBase(RichterLFOBase& other) = delete;
 };
 
 #endif
