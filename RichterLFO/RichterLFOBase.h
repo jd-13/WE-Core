@@ -123,7 +123,7 @@ public:
                               double sampleRate) {
         setWaveTablePointers();
         calcFreq(mTempoInfo.bpm);
-        calcPhaseOffset(mTempoInfo.bpm);
+        calcPhaseOffset(mTempoInfo.timeInSeconds);
         calcSamplesPerTremoloCycle(sampleRate);
         calcNextScale();
     }
