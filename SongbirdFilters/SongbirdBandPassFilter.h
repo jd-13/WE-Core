@@ -24,7 +24,7 @@
 #ifndef SONGBIRDBANDPASSFILTER_H_INCLUDED
 #define SONGBIRDBANDPASSFILTER_H_INCLUDED
 
-#include "DspFilters/Legendre.h"
+#include "DspFilters/Butterworth.h"
 #include "SongbirdFiltersParameters.h"
 
 // an individual band pass filter, with built in gain
@@ -53,7 +53,10 @@ public:
         highPass.process(numSamples, samplesPtrPtr);
         
         // apply gain reduction
-        std::transform(inSamples, &inSamples[numSamples-1], inSamples, std::bind1st(std::multiplies<double>(), gainAbs));
+        std::transform(inSamples,
+                       &inSamples[numSamples-1],
+                       inSamples,
+                       std::bind1st(std::multiplies<double>(), gainAbs * gainCompensation));
     }
     
     void reset() {
@@ -77,9 +80,11 @@ public:
     }
     
 private:
-    Dsp::SimpleFilter<Dsp::Legendre::LowPass<FILTER_ORDER>, 1> lowPass;
-    Dsp::SimpleFilter<Dsp::Legendre::HighPass<FILTER_ORDER>, 1> highPass;
+    Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 1> lowPass;
+    Dsp::SimpleFilter<Dsp::Butterworth::HighPass<FILTER_ORDER>, 1> highPass;
     
+    // value to multiply the output by to correct for the loss in amplitude
+    const double gainCompensation {2};
     
     double gainAbs;
     
