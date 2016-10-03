@@ -24,8 +24,8 @@
 #ifndef SONGBIRDBANDPASSFILTER_H_INCLUDED
 #define SONGBIRDBANDPASSFILTER_H_INCLUDED
 
-#include "ParameterData.h"
 #include "DspFilters/Legendre.h"
+#include "SongbirdFiltersParameters.h"
 
 // an individual band pass filter, with built in gain
 class SongbirdBandPassFilter {

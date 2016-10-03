@@ -85,8 +85,6 @@ public:
                                     formants[iii].bandWidth,
                                     formants[iii].gaindB);
             }
-        } else {
-            Logger::outputDebugString("Incorrect size array of formants - cannot setup filters");
         }
         
         return retVal;

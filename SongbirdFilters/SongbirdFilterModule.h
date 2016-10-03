@@ -24,7 +24,6 @@
 #ifndef SONGBIRDFILTER_H_INCLUDED
 #define SONGBIRDFILTER_H_INCLUDED
 
-#include "ParameterData.h"
 #include "SongbirdFormantFilter.h"
 #include <map>
 
@@ -39,11 +38,11 @@ enum class Channels {
 // a set of 5 pairs of filters for vowel 1, and another set for vowel 2
 class SongbirdFilterModule {
 public:
-    SongbirdFilterModule() :    vowel1(VOWEL_A),
-                                vowel2(VOWEL_E),
-                                filterPosition(FILTER_POSITION_DEFAULT),
+    SongbirdFilterModule() :    vowel1(VOWEL.VOWEL_A),
+                                vowel2(VOWEL.VOWEL_E),
+                                filterPosition(FILTER_POSITION.defaultValue),
                                 sampleRate(44100),
-                                mix(MIX_DEFAULT) {
+                                mix(MIX.defaultValue) {
         
         // initialise the filters to some default values
         setVowel1(vowel1);
@@ -52,7 +51,7 @@ public:
     
     void setVowel1(int val) {
         // perform a bounds check, then apply the appropriate formants
-        vowel1 = boundsCheck(val, VOWEL_MIN, VOWEL_MAX);
+        vowel1 = VOWEL.BoundsCheck(val);
         
         const std::vector<Formant> tempFormants(&allFormants[vowel1 - 1][0],
                                                 &allFormants[vowel1 - 1][NUM_FORMANTS_PER_VOWEL]);
@@ -63,7 +62,7 @@ public:
     
     void setVowel2(int val) {
         // perform a bounds check, then apply the appropriate formants
-        vowel2 = boundsCheck(val, VOWEL_MIN, VOWEL_MAX);
+        vowel2 = VOWEL.BoundsCheck(val);
         
         const std::vector<Formant> tempFormants(&allFormants[vowel2 - 1][0],
                                                 &allFormants[vowel2 - 1][NUM_FORMANTS_PER_VOWEL]);
@@ -71,18 +70,16 @@ public:
         filters2[Channels::RIGHT].setFormants(tempFormants, sampleRate);
     }
     
-    void setFilterPosition(float val) {
-        filterPosition = boundsCheck(val, FILTER_POSITION_MIN, FILTER_POSITION_MAX);
-    }
+    void setFilterPosition(float val) { filterPosition = FILTER_POSITION.BoundsCheck(val); }
     
     void setSampleRate(float val) {
-        sampleRate = boundsCheck(val, static_cast<float>(44100), static_cast<float>(192000));
+        sampleRate = val;
         
         setVowel1(vowel1);
         setVowel2(vowel2);
     }
     
-    void setMix(float val) { mix = boundsCheck(val, MIX_MIN, MIX_MAX); }
+    void setMix(float val) { mix = MIX.BoundsCheck(val); }
     
     void reset() {
         filters1[Channels::LEFT].reset();
@@ -134,14 +131,6 @@ public:
     }
     
 private:
-    template<typename T>
-    T boundsCheck(T param, T min, T max) {
-        if (param < min) param = min;
-        if (param > max) param = max;
-        
-        return param;
-    }
-    
     int vowel1;
     int vowel2;
     float filterPosition;
