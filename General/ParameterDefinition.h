@@ -27,6 +27,14 @@
 #include <unordered_map>
 #include <string>
 
+
+/**
+ * Contains classes that are used for defining parameters. Note that these are not
+ * intended to define individual parameters (and as such they will not store the
+ * current value of a parameter), but are intended to define some characteristics
+ * of a given type of parameter, such as the values that are valid for it and
+ * provide some methods for performing calculations relating to those characteristics.
+ */
 namespace ParameterDefinition {
     class BooleanParameter {
     public:
@@ -35,9 +43,8 @@ namespace ParameterDefinition {
         bool defaultValue;
     };
     
-    /* BaseParameter
-     *
-     * Provides functionality that may be useful for building other parameters from.
+    /**
+     * Provides basic functionality that may be useful for building other parameters from.
      */
     template <class A_Type>
     class BaseParameter {
@@ -52,16 +59,15 @@ namespace ParameterDefinition {
                 maxValue,
                 defaultValue;
         
-        /* BoundsCheck
-         *
+        /**
          * If the given value is between the minimum and maximum values for this parameter,
          * then the value is returned unchanged. If the given value is outside the minimum
          * and maximum values for this parameter, the given value is clipped to this range
          * and then returned.
          *
-         * args: val    Value to clip to minumum and maximum values
+         * @param   val    Value to clip to minumum and maximum values
          *
-         * return: Clipped value
+         * @return  Clipped value
          */
         A_Type BoundsCheck(A_Type val) const {
             if (val < minValue) val = minValue;
@@ -71,8 +77,7 @@ namespace ParameterDefinition {
         }
     };
     
-    /* RangedParameter
-     *
+    /**
      * Provides storage for minimum, maximum and default values for a  parameter
      * which can contain a continuous value (such as a slider), as well as methods to convert
      * between the normalised and internal ranges, and clip a value to the appropriate range.
@@ -82,29 +87,25 @@ namespace ParameterDefinition {
     public:
         using BaseParameter<A_Type>::BaseParameter;
 
-        /* NormalisedToInteral
-         *
+        /**
          * Translates parameter values from the normalised (0 to 1) range as required
          * by VSTs to the range used internally for that parameter
          *
-         * args: val    Normalised value of the parameter
+         * @param   val    Normalised value of the parameter
          *
-         * return: The value of the parameter in the internal range for that parameter
+         * @return  The value of the parameter in the internal range for that parameter
          */
         A_Type NormalisedToInteral(A_Type val) const {
             return val * (this->maxValue - this->minValue) + this->minValue;
         }
         
-        /* InteralToNormalised
-         *
+        /**
          * Translates parameter values from the range used internally for that
          * parameter, to the normalised range (0 to 1) as required by VSTs.
          *
-         * args: val    Value of the parameter in the internal range
-         *       min    The minimum value of the parameter, as specified above
-         *       max    The maximum value of the parameter, as specified above
+         * @param   val    Value of the parameter in the internal range
          *
-         * return: The normalised value of the parameter
+         * @return  The normalised value of the parameter
          */
         A_Type InteralToNormalised(A_Type val) const {
             return (val - this->minValue) / (this->maxValue - this->minValue);

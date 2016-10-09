@@ -27,13 +27,12 @@
 #include "RichterLFO.h"
 #include "RichterMOD.h"
 
-
-/* RichterLFOPair
+/**
  *
  * A convenience class that allows a simple implementation of an LFO that has
- * been paired with a MOD oscillator to modulate depth and frequency. If you use
- * this class, you will never need to interact with either of the contained LFOs
- * for anything other than getting or setting parameter values.
+ * been paired with a MOD oscillator to modulate its depth and frequency. If you use
+ * this class, you will never need to interact directly with either of the contained
+ * LFOs for anything other than getting or setting parameter values.
  *
  * This class has been created as the LFO relies on the MOD being ready before
  * it can perform certain operations, which means there are method calls to 
@@ -45,8 +44,7 @@ public:
     RichterLFOPair() : _LFO(), _MOD() {
     }
     
-    /* reset
-     *
+    /**
      * Call each oscillator's reset method.
      */
     void reset() {
@@ -54,18 +52,17 @@ public:
         _MOD.reset();
     }
     
-    /* prepareForNextBuffer
-     *
+    /**
      * Prepares for processing the next buffer of samples. For example if using JUCE, you
      * would call this in your processBlock() method before doing any processing.
      *
      * This calls various protected methods of each of the oscillators in a specific order
      * to ensure calculations are done correctly.
      *
-     * args: bpm             Current bpm of the host
-     *       timeInSeconds   Position of the host DAW's playhead at the start of
-     *                       playback
-     *       sampleRate      Current sample rate of the host
+     * @param   bpm             Current bpm of the host.
+     * @param   timeInSeconds   Position of the host DAW's playhead at the start of
+     *                          playback.
+     * @param   sampleRate      Current sample rate of the host
      */
     void prepareForNextBuffer(double bpm,
                               double timeInSeconds,
@@ -86,13 +83,14 @@ public:
         _MOD.calcNextScale();
     }
     
-    /* calcGainInLoop
-     *
+    /**
      * Use this in your processing loop. Returns a gain value which is intended to be
      * multiplied with a single sample to apply the tremolo effect.
      *
      * Note: Calling this method will advance the oscillators internal counters by one
      *       sample. Calling this method will return a different value each time.
+     *
+     * @return  The value of the RichterLFO's output at this moment, a value between 0 and 1.
      */
     float calcGainInLoop() {
         _LFO.calcIndexAndScaleInLoop();

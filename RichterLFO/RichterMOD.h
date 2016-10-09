@@ -26,7 +26,19 @@
 
 #include "RichterLFOBase.h"
 
+class RichterLFOPair;
 
+/**
+ * Provides and LFO with: depth, rate, tempo sync, phase, wave shape,
+ * and phase sync controls. This LFO oscillates between -1 and 1, and so
+ * is useful as a modulation source for parameters.
+ *
+ * To use, you simply need to call reset, prepareForNextBuffer, and calcGainInLoop
+ * as necessary (see their descriptions for details), and use the provided getter
+ * and setter methods to manipulate parameters.
+ *
+ * Completes the implementation of RichterLFO.
+ */
 class RichterMOD : public RichterLFOBase {
     
 public:
@@ -76,8 +88,26 @@ public:
         }
     }
     
-    /* calcGain
+    friend class RichterLFOPair;
+    
+    /**
+     * Use this in your processing loop.
      *
+     * Note: Calling this method will advance the oscillators internal counters by one
+     *       sample. Calling this method will return a different value each time.
+     *
+     * @return  The value of the LFO's output at this moment, a value between -1 and 1.
+     */
+    float calcGainInLoop() {
+        calcIndexAndScaleInLoop();
+        return calcGain();
+    }
+    
+    RichterMOD operator=(RichterMOD& other) = delete;
+    RichterMOD(RichterMOD& other) = delete;
+    
+private:
+    /**
      * Calculates the gain value to be applied to a signal (in this case a
      * parameter of another oscillator) which the oscillator is operating on.
      * Outputs a value between -0.5 and 0.5. Always outputs 0 if bypassed.
@@ -89,9 +119,6 @@ public:
             return 0;
         }
     }
-    
-    RichterMOD operator=(RichterMOD& other) = delete;
-    RichterMOD(RichterMOD& other) = delete;
     
 };
 

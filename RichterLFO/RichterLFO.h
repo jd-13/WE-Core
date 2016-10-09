@@ -26,15 +26,32 @@
 
 #include "RichterLFOBase.h"
 
+class RichterLFOPair;
+
+/**
+ * Provides and LFO with: depth, rate, tempo sync, phase, wave shape, and phase sync
+ * controls, plus additional functionality to allow the depth and rate controls to be
+ * modulated by an external source, with internal controls of the for the depth of this
+ * modulation.
+ *
+ * This LFO oscillates between 0 and 1, and so is useful for applying amplitude
+ * modulation directly to an audio signal.
+ *
+ * To use, you simply need to call reset, prepareForNextBuffer, and calcGainInLoop
+ * as necessary (see their descriptions for details), and use the provided getter
+ * and setter methods to manipulate parameters.
+ *
+ * Completes the implementation of RichterLFO.
+ */
 class RichterLFO : public RichterLFOBase {
     
 public:
     
     RichterLFO() :  RichterLFOBase(),
-    rawFreq(FREQ.defaultValue),
-    freqMod(FREQMOD.defaultValue),
-    rawDepth(DEPTH.defaultValue),
-    depthMod(DEPTHMOD.defaultValue) {
+                    rawFreq(FREQ.defaultValue),
+                    freqMod(FREQMOD.defaultValue),
+                    rawDepth(DEPTH.defaultValue),
+                    depthMod(DEPTHMOD.defaultValue) {
         
         
         // initialise wavetable array values
@@ -83,6 +100,9 @@ public:
         }
     }
     
+    friend class RichterLFOPair;
+
+    
     float getRawDepth() { return rawDepth; }
     
     float getDepthMod() { return depthMod; }
@@ -115,24 +135,22 @@ public:
         depthMod = DEPTHMOD.BoundsCheck(depthMod);
     }
     
-    /* calcGain
+    /**
+     * Use this in your processing loop. Returns a gain value which is intended to be
+     * multiplied with a single sample to apply the tremolo effect.
      *
-     * Calculates the gain value to be applied to a signal which the oscillator
-     * is operating on. Outputs a value between 0 and 1. Always outputs 1 if bypassed.
+     * Note: Calling this method will advance the oscillators internal counters by one
+     *       sample. Calling this method will return a different value each time.
      *
-     * args: modBypassSwitch   The state of the modulation oscillator. Determines
-     *                         whether modGain is applied to the calculation
-     *       modGain           The gain output from the modulation oscillator
+     * @param   modBypassSwitch     The state of the modulation oscillator. If set to true,
+     *                              the effect of modGain will be applied.
+     * @param   modGain             The gain output from the modulation oscillator.
+     *
+     * @return  The value of the LFO's output at this moment, a value between 0 and 1.
      */
-    float calcGain(int modBypassSwitch, float modGain) {
-        calcFreqInLoop(modBypassSwitch, modGain);
-        calcDepthInLoop(modBypassSwitch, modGain);
-        
-        if (bypassSwitch) {
-            return ((gain * depth - depth + 1));
-        } else {
-            return 1;
-        }
+    float calcGainInLoop(int modBypassSwitch, float modGain) {
+        calcIndexAndScaleInLoop();
+        return calcGain(modBypassSwitch, modGain);
     }
     
     RichterLFO operator= (RichterLFO& other) = delete;
@@ -145,14 +163,13 @@ private:
             rawDepth,
             depthMod;
     
-    /* calcFreqInLoop
-     *
+    /**
      * Applies frequency modulation to the oscillator. Performed in the processing
      * loop so that the frequency can be updated before processing each sample.
      *
-     * args: modBypassSwitch   The state of the modulation oscillator. Determines
-     *                         whether modGain is applied to the calculation
-     *       modGain           The gain output from the modulation oscillator
+     * @param   modBypassSwitch     The state of the modulation oscillator. If set to true,
+     *                              the effect of modGain will be applied.
+     * @param   modGain             The gain output from the modulation oscillator.
      */
     void calcFreqInLoop(int modBypassSwitch, float modGain) {
         // calculate the frequency based on whether tempo sync or frequency modulation is active
@@ -170,8 +187,7 @@ private:
         
     }
     
-    /* calcDepthInLoop
-     *
+    /**
      * Applies depth modulation to the oscillator. Performed in the processing
      * loop so that the frequency can be updated before processing each sample.
      *
@@ -190,6 +206,26 @@ private:
         
         depth = DEPTH.BoundsCheck(depth);
         
+    }
+    
+    
+    /**
+     * Calculates the gain value to be applied to a signal which the oscillator
+     * is operating on. Outputs a value between 0 and 1. Always outputs 1 if bypassed.
+     *
+     * args: modBypassSwitch   The state of the modulation oscillator. Determines
+     *                         whether modGain is applied to the calculation
+     *       modGain           The gain output from the modulation oscillator
+     */
+    float calcGain(int modBypassSwitch, float modGain) {
+        calcFreqInLoop(modBypassSwitch, modGain);
+        calcDepthInLoop(modBypassSwitch, modGain);
+        
+        if (bypassSwitch) {
+            return ((gain * depth - depth + 1));
+        } else {
+            return 1;
+        }
     }
 };
 

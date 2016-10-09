@@ -24,7 +24,9 @@
 #ifndef FORMANT_H_INCLUDED
 #define FORMANT_H_INCLUDED
 
-// simple class to hold the data about an individual formant
+/**
+ * Simple class to hold the data about an individual formant peak
+ */
 class Formant {
 public:
     Formant(int newFreq,

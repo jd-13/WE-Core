@@ -31,6 +31,15 @@
 
 class RichterLFOPair;
 
+/**
+ * A bass class for providing most of the functionality needed for an LFO.
+ * This cannot be used used directly "as-is" in your project. For an LFO 
+ * which can be dropped straight into your project, see RichterLFO or RichterMOD,
+ * which complete the implementation of this class.
+ *
+ * Supports multiple wave shapes, tempo sync, and phase sync for consistent
+ * playback no matter where the host playhead started playback from.
+ */
 class RichterLFOBase {
 public:
     RichterLFOBase() :  manualPhase(0),
@@ -113,15 +122,14 @@ public:
     
     void setIndexOffset(int val) { indexOffset = val; }
     
-    /* prepareForNextBuffer
-     *
+    /**
      * Prepares for processing the next buffer of samples. For example if using JUCE, you 
      * would call this in your processBlock() method before doing any processing.
      *
-     * args: bpm             Current bpm of the host
-     *       timeInSeconds   Position of the host DAW's playhead at the start of
-     *                       playback
-     *       sampleRate      Current sample rate of the host
+     * @param   bpm             Current bpm of the host
+     * @param   timeInSeconds   Position of the host DAW's playhead at the start of
+     *                          playback.
+     * @param   sampleRate      Current sample rate of the host
      */
     void prepareForNextBuffer(double bpm,
                               double timeInSeconds,
@@ -133,46 +141,15 @@ public:
         calcNextScale();
     }
     
-    /* reset
-     *
-     * Resets indexOffset and currentScale. Call before beginning a new buffer of
-     * samples.
+    /**
+     * Must be called before beginning a new buffer of samples.
+     * Resets internal counters including indexOffset and currentScale.
      */
     void reset() {
         needsPhaseCalc = true;
         indexOffset = 0;
         currentScale = 0;
         samplesProcessed = 0;
-    }
-    
-    /* calcIndexAndScaleInLoop
-     *
-     * Calculates the current index of the oscillator in its wavetable. Includes
-     * protection against indexes out of range (caused by phase offset) and updates
-     * currentScale. Call from within the processing loop. Increments the number of 
-     * samples processed
-     *
-     */
-    void calcIndexAndScaleInLoop() {
-        // calculate the current index within the wave table
-        
-        index = static_cast<long>(samplesProcessed * currentScale) % kWaveArraySize;
-        
-        if ((nextScale != currentScale) && (index == 0)) {
-            currentScale = nextScale;
-            samplesProcessed = 0;
-        }
-        
-        
-        // Must provide two possibilities for each index lookup in order to protect the array from being overflowed by the indexOffset, the first if statement uses the standard index lookup while second if statement deals with the overflow possibility
-        
-        if ((index + indexOffset) < kWaveArraySize) {
-            gain = waveArrayPointer[index + indexOffset];
-        } else if ((index + indexOffset) >= kWaveArraySize) {
-            gain = waveArrayPointer[(index + indexOffset) % kWaveArraySize];
-        }
-        
-        samplesProcessed++;
     }
     
     RichterLFOBase operator=(RichterLFOBase& other) = delete;
@@ -207,13 +184,12 @@ protected:
     float mSquare[kWaveArraySize];
     float mSaw[kWaveArraySize];
     
-    /* calcPhaseOffset
-     *
+    /**
      * Calculates the phase offset to be applied to the oscillator, including any
      * offset required by the phase sync and any offset applied by the user.
      *
-     * args: timeInSeconds   Position of the host DAW's playhead at the start of
-     *                       playback
+     * @param:  timeInSeconds   Position of the host DAW's playhead at the start of
+     *                          playback.
      */
     void calcPhaseOffset(double timeInSeconds) {
         if (phaseSyncSwitch && needsPhaseCalc) {
@@ -235,12 +211,11 @@ protected:
         
     }
     
-    /* calcFreq
-     *
+    /**
      * Calculates the frequency of the oscillator. Will use either the frequency
      * or tempoNumer/tempoDenom depending on whether tempo sync is enabled.
      *
-     * args: bpm   Current bpm of the host DAW
+     * @param   bpm   Current bpm of the host DAW
      */
     void calcFreq(double bpm) {
         // calculate the frequency based on whether tempo sync is active
@@ -253,23 +228,50 @@ protected:
         
     }
     
-    /* calcSamplesPerTremoloCycle
-     *
+    /**
      * Calculates the number of samples which pass in the same time as one cycle
      * of the LFO. Dependant on the LFO frequency and the sample rate.
      *
-     * args: sampleRate   Sample rate of the host DAW
+     * @param   sampleRate   Sample rate of the host DAW
      */
     void calcSamplesPerTremoloCycle(double sampleRate) {
         samplesPerTremoloCycle = sampleRate / freq;
     }
     
-    /* calcNextScale
-     *
+    /**
      * Calculates the scale factor to be applied when calculating the index.
      */
     void calcNextScale() {
         nextScale = kWaveArraySize / samplesPerTremoloCycle;
+    }
+    
+    /**
+     * Calculates the current index of the oscillator in its wavetable. Includes
+     * protection against indexes out of range (caused by phase offset) and updates
+     * currentScale. Call from within the processing loop. Increments the number of
+     * samples processed
+     *
+     */
+    void calcIndexAndScaleInLoop() {
+        // calculate the current index within the wave table
+        
+        index = static_cast<long>(samplesProcessed * currentScale) % kWaveArraySize;
+        
+        if ((nextScale != currentScale) && (index == 0)) {
+            currentScale = nextScale;
+            samplesProcessed = 0;
+        }
+        
+        
+        // Must provide two possibilities for each index lookup in order to protect the array from being overflowed by the indexOffset, the first if statement uses the standard index lookup while second if statement deals with the overflow possibility
+        
+        if ((index + indexOffset) < kWaveArraySize) {
+            gain = waveArrayPointer[index + indexOffset];
+        } else if ((index + indexOffset) >= kWaveArraySize) {
+            gain = waveArrayPointer[(index + indexOffset) % kWaveArraySize];
+        }
+        
+        samplesProcessed++;
     }
 };
 

@@ -31,6 +31,10 @@
 #include "math.h"
 #include "CarveParameters.h"
 
+
+/**
+ * A class for applying waveshaping functions to samples.
+ */
 class CarveDSPUnit {
 public:
     CarveDSPUnit() :    preGain(PREGAIN.defaultValue),
@@ -58,14 +62,14 @@ public:
     
     float getTweak() { return tweak; }
     
-    /* process
+    /**
      *
      * Performs the processing on the sample, by calling the appropriate
      * private processing methods.
      *
-     * args:   inSample    The value of the sample to process
+     * @param   inSample    The sample to be processed
      *
-     * return: The value of inSample after processing
+     * @return The value of inSample after processing
      */
     float process (float inSample) const {
         switch (mode) {
