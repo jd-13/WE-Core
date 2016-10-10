@@ -30,6 +30,10 @@
 /**
  * A simple filter which removes frequencies at the extremes of the human
  * hearing range to clean up audio.
+ *
+ * Has methods for processing either a mono or stereo buffer of samples.
+ *
+ * @see setSampleRate   - recommended to call before performing any processing
  */
 class CarveNoiseFilter {
 public:

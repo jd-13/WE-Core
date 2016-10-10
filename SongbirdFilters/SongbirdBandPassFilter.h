@@ -27,12 +27,38 @@
 #include "DspFilters/Butterworth.h"
 #include "SongbirdFiltersParameters.h"
 
-// an individual band pass filter, with built in gain
+/**
+ * An individual band pass filter, designed to create a single formant peak.
+ * Contains a pair of butterworth filters and an adjustable gain control.
+ *
+ * Supports only mono audio processing. For stereo processing, you must create
+ * two objects of this type. (Do not reuse this object for both channels)
+ *
+ * Compensation is applied to account for any reduction in amplitude of the
+ * frequencies in the pass band, such that the amplitude of the centre frequency
+ * will not be significantly changed.
+ *
+ * @see setup   - must be called before performing any processing
+ */
 class SongbirdBandPassFilter {
 public:
     
+    /**
+     * Constructs internal filters but does not prepare them for processing.
+     *
+     * @see setup - must be called before performing any processing
+     */
     SongbirdBandPassFilter() : lowPass(), highPass(), gainAbs(1) {}
-        
+    
+    /**
+     * Prepares the filters for processing. Call this before performing any processing, or
+     * whenever any of the parameters need updating.
+     *
+     * @param   newSampleRate   Sample rate which should be used for processing future samples
+     * @param   newFrequency    Centre frequency of the filter
+     * @param   newBandWidth    Bandwidth of the filter
+     * @param   gaindB          Gain value in decibels to be applied to the signal after processing
+     */
     void setup(double newSampleRate, double newFrequency, double newBandWidth, int gaindB) {
         
         sampleRate = newSampleRate;
@@ -46,6 +72,13 @@ public:
         gainAbs = pow(10, gaindB / 20.0);
     }
     
+    /**
+     * Applies the filtering to a buffer of samples.
+     * Expect seg faults or other memory issues if arguements passed are incorrect.
+     *
+     * @param   inSample    Pointer to the first sample of the buffer
+     * @param   numSamples  Number of samples in the buffer
+     */
     void process(float* inSamples, int numSamples) {
         float** samplesPtrPtr {&inSamples};
         
@@ -59,11 +92,22 @@ public:
                        std::bind1st(std::multiplies<double>(), gainAbs * gainCompensation));
     }
     
+    /**
+     * Resets all filters.
+     * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
+     */
     void reset() {
         lowPass.reset();
         highPass.reset();
     }
     
+    /**
+     * Dump the current values of the filter's parameters to a string in an
+     * easy to read format.
+     * (Useful for debugging)
+     *
+     * @return  A std::string which contains the parameters of the filter
+     */
     std::string dump() {
         std::string output;
         
@@ -83,15 +127,21 @@ private:
     Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 1> lowPass;
     Dsp::SimpleFilter<Dsp::Butterworth::HighPass<FILTER_ORDER>, 1> highPass;
     
-    // value to multiply the output by to correct for the loss in amplitude
+    /**
+     * Value to multiply the output by to correct for the loss in amplitude
+     */
     const double gainCompensation {2};
     
     double gainAbs;
     
-    // store these to allow easy debugging output
+    //@{
+    /**
+     * Stored to allow easy debugging output
+     */
     double  sampleRate,
             frequency,
             bandWidth;
+    //@}
     
 };
 

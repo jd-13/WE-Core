@@ -38,9 +38,19 @@ public:
     CLIPPER = 6;
 };
 
+//@{
+/**
+ * A parameter which can take any float value between the ranges defined.
+ * The values passed on construction are in the following order:
+ *      minimum value,
+ *      maximum value,
+ *      default value
+ */
 const ParameterDefinition::RangedParameter<float>   PREGAIN(0, 2, 1),
                                                     POSTGAIN(0, 2, 0.5),
                                                     TWEAK(-1, 1, 0);
+//@}
+
 const ModeParameter MODE(1, 6, 1);
 
 #endif /* CarveParameters_h */

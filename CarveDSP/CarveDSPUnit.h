@@ -34,9 +34,14 @@
 
 /**
  * A class for applying waveshaping functions to samples.
+ *
+ * Internally relies on the parameters provided in CarveParameters.h
  */
 class CarveDSPUnit {
 public:
+    /**
+     * Sets all parameters to their default values.
+     */
     CarveDSPUnit() :    preGain(PREGAIN.defaultValue),
                         postGain(POSTGAIN.defaultValue),
                         tweak(TWEAK.defaultValue),
@@ -44,32 +49,73 @@ public:
     
     virtual ~CarveDSPUnit() {}
     
-    // set parameter methods, w/ integrated bounds checks
+    /**
+     * Sets the wave shape which will be applied to the signal.
+     *
+     * @see     ModeParameter for valid values
+     *
+     * @param   val Value the mode should be set to
+     */
     void setMode(int val) { mode = MODE.BoundsCheck(val); }
     
+    /**
+     * Sets the gain to be applied to the signal before processing.
+     * More pre-gain = more distortion.
+     *
+     * @see     PREGAIN for valid values
+     *
+     * @param   val Pre-gain value that should be used
+     */
     void setPreGain(float val) { preGain = PREGAIN.BoundsCheck(val); }
     
+    /**
+     * Sets the gain to be applied to the signal after processing.
+     * More post-gain = more volume.
+     *
+     * @see     POSTGAIN for valid values
+     *
+     * @param   val Post-gain value that should be used
+     */
     void setPostGain(float val) { postGain = POSTGAIN.BoundsCheck(val); }
     
+    /**
+     * Sets the tweak value to be applied to the signal during processing.
+     * This behaves differently for each mode, and modifies the shape of
+     * the wave applied to the signal
+     *
+     * @see     TWEAK for valid values
+     *
+     * @param   val Tweak value that should be used
+     */
     void setTweak(float val) { tweak = TWEAK.BoundsCheck(val); }
     
-    // get parameter methods
+    /**
+     * @see     setMode
+     */
     int getMode() { return mode; }
     
+    /**
+     * @see     setPreGain
+     */
     float getPreGain() { return preGain; }
     
+    /**
+     * @see     setPostGain
+     */
     float getPostGain() { return postGain; }
     
+    /**
+     * @see     setTweak
+     */
     float getTweak() { return tweak; }
     
     /**
-     *
      * Performs the processing on the sample, by calling the appropriate
      * private processing methods.
      *
      * @param   inSample    The sample to be processed
      *
-     * @return The value of inSample after processing
+     * @return  The value of inSample after processing
      */
     float process (float inSample) const {
         switch (mode) {

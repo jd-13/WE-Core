@@ -25,7 +25,7 @@
 #define FORMANT_H_INCLUDED
 
 /**
- * Simple class to hold the data about an individual formant peak
+ * Simple class to hold the data about an individual formant peak.
  */
 class Formant {
 public:
