@@ -14,8 +14,10 @@ SongbirdFilterModule - Contains two SongbirdFormantFilters which can be blended 
 ### Distortions:  
 CarveDSPUnit - A waveshaping distortion module with multiple wave shapes, pre and post gain control, and a "tweak" control which morphs the selected wave shape  
 
+## Documentation  
 Documentation is available at: https://www.whiteelephantaudio.com/doxygen/WECore/html/  
 The documentation is generated from this github repo every 4 hours.
 
+## Required Libraries  
 Some classes within this library require:  
 A Collection of Useful C++ Classes for Digital Signal Processing: https://github.com/vinniefalco/DSPFilters
