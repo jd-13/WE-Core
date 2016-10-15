@@ -32,11 +32,13 @@
  * Contains a pair of butterworth filters and an adjustable gain control.
  *
  * Supports only mono audio processing. For stereo processing, you must create
- * two objects of this type. (Do not reuse this object for both channels)
+ * two objects of this type. (Do not reuse a single object for both channels)
  *
  * Compensation is applied to account for any reduction in amplitude of the
  * frequencies in the pass band, such that the amplitude of the centre frequency
  * will not be significantly changed.
+ *
+ * To use this class, simply call setup, reset, and process as necessary.
  *
  * @see setup   - must be called before performing any processing
  */

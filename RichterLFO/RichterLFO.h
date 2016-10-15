@@ -47,6 +47,12 @@ class RichterLFO : public RichterLFOBase {
     
 public:
     
+    /**
+     * Generates the wave tables on initialsation, while running gain values
+     * are simply looked up from these wave tables.
+     *
+     * Also initialises parameters (that are not part of RichterLFOBase) to default values.
+     */
     RichterLFO() :  RichterLFOBase(),
                     rawFreq(FREQ.defaultValue),
                     freqMod(FREQMOD.defaultValue),

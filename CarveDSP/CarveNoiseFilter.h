@@ -85,7 +85,7 @@ public:
      * Expect seg faults or other memory issues if arguements passed are incorrect.
      *
      * @param   inLeftSample    Pointer to the first sample of the left channel's buffer
-     * @param   inLeftSample    Pointer to the first sample of the right channel's buffer
+     * @param   inRightSample   Pointer to the first sample of the right channel's buffer
      * @param   numSamples      Number of samples in the buffer. The left and right buffers
      *                          must be the same size.
      */

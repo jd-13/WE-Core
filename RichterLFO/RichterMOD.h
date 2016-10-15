@@ -42,6 +42,10 @@ class RichterLFOPair;
 class RichterMOD : public RichterLFOBase {
     
 public:
+    /**
+     * Generates the wave tables on initialsation, while running gain values
+     * are simply looked up from these wave tables.
+     */
     RichterMOD() : RichterLFOBase() {
         
         // mod wavetables below (no correction, move below 0)

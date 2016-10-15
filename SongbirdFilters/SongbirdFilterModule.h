@@ -27,17 +27,46 @@
 #include "SongbirdFormantFilter.h"
 #include <map>
 
+/**
+ * The number of formants (bandpass filters) which are used in a single vowel.
+ */
 static const int NUM_FORMANTS_PER_VOWEL {5};
+
+/**
+ * The number of vowels supported.
+ */
 static const int NUM_VOWELS {5};
 
+/**
+ * Enums used to make identifing left or right channel filters easier
+ */
 enum class Channels {
     LEFT,
     RIGHT
 };
 
-// a set of 5 pairs of filters for vowel 1, and another set for vowel 2
+/**
+ * A filter module providing five different vowel sounds, any two of which can be selected
+ * simulaneously and blended between.
+ *
+ * To use this class, simply call reset, and the process methods as necessary, using the provided
+ * getter and setter methods to manipulate parameters.
+ *
+ * It is recommended to set all available parameters explicitly by calling their setter methods before
+ * attempting to process any audio.
+ *
+ * Internally relies on the parameters provided in SongbirdFiltersParameters.h
+ *
+ * @see SongbirdFormantFilter   - SongbirdFilterModule is composed of two pairs of SongbirdFormantFilters
+ *                                (pairs to allow stereo processing), each pair is assigned one of the five 
+ *                                supported vowels at any time
+ */
 class SongbirdFilterModule {
 public:
+    /**
+     * Does some basic setup and defaulting of parameters, though do not rely on this
+     * to sensibly default all parameters.
+     */
     SongbirdFilterModule() :    vowel1(VOWEL.VOWEL_A),
                                 vowel2(VOWEL.VOWEL_E),
                                 filterPosition(FILTER_POSITION.defaultValue),
@@ -49,6 +78,13 @@ public:
         setVowel2(vowel2);
     }
     
+    /**
+     * Sets the vowel sound that should be created by filter 1.
+     *
+     * @param   val Value that should be used for Vowel 1
+     *
+     * @see     VowelParameter for valid values
+     */
     void setVowel1(int val) {
         // perform a bounds check, then apply the appropriate formants
         vowel1 = VOWEL.BoundsCheck(val);
@@ -60,6 +96,13 @@ public:
         filters1[Channels::RIGHT].setFormants(tempFormants, sampleRate);
     }
     
+    /**
+     * Sets the vowel sound that should be created by filter 2.
+     *
+     * @param   val Value that should be used for Vowel 2
+     *
+     * @see     VowelParameter for valid values
+     */
     void setVowel2(int val) {
         // perform a bounds check, then apply the appropriate formants
         vowel2 = VOWEL.BoundsCheck(val);
@@ -72,6 +115,11 @@ public:
     
     void setFilterPosition(float val) { filterPosition = FILTER_POSITION.BoundsCheck(val); }
     
+    /**
+     * Set the sample rate that the filters expect of the audio which will be processed.
+     *
+     * @param   val The sample rate to set the filters to
+     */
     void setSampleRate(float val) {
         sampleRate = val;
         
@@ -79,8 +127,21 @@ public:
         setVowel2(vowel2);
     }
     
+    /**
+     * Sets the dry/wet mix level.
+     * Lowest value = completely dry, unprocessed signal, no filtering applied.
+     * Highest value = completely wet signal, no unprocessed audio survives.
+     *
+     * @param   val Mix value that should be used
+     *
+     * @see     MIX for valid values
+     */
     void setMix(float val) { mix = MIX.BoundsCheck(val); }
     
+    /**
+     * Resets all filters.
+     * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
+     */
     void reset() {
         filters1[Channels::LEFT].reset();
         filters1[Channels::RIGHT].reset();
@@ -88,14 +149,35 @@ public:
         filters2[Channels::RIGHT].reset();
     }
     
+    /**
+     * @see setVowel1
+     */
     int getVowel1() { return vowel1; }
     
+    /**
+     * @see setVowel2
+     */
     int getVowel2() { return vowel2; }
     
+    /**
+     * @see setFilterPosition
+     */
     float getFilterPosition() { return filterPosition; }
     
+    /**
+     * @see getMix
+     */
     float getMix() { return mix; }
     
+    /**
+     * Applies the filtering to a stereo buffer of samples.
+     * Expect seg faults or other memory issues if arguements passed are incorrect.
+     *
+     * @param   inLeftSample    Pointer to the first sample of the left channel's buffer
+     * @param   inRightSample   Pointer to the first sample of the right channel's buffer
+     * @param   numSamples      Number of samples in the buffer. The left and right buffers
+     *                          must be the same size.
+     */
     void Process2in2out(float* leftSamples,
                         float* rightSamples,
                         int numSamples) {
@@ -140,7 +222,10 @@ private:
     std::map<Channels, SongbirdFormantFilter> filters1;
     std::map<Channels, SongbirdFormantFilter> filters2;
     
-    // an array of all the formants that will be needed (TODO: could be made static again)
+    /**
+     * An array which defines all the formants that will be needed.
+     */
+    // (TODO: could be made static again)
     const Formant allFormants[NUM_VOWELS][NUM_FORMANTS_PER_VOWEL] {
         {Formant(800, 0, 80), Formant(1150, -4, 90), Formant(2800, -20, 120), Formant(3500, -36, 130), Formant(4950, -60, 140)},
         {Formant(400, 0, 60), Formant(1600, -24, 80), Formant(2700, -30, 120), Formant(3300, -35, 150), Formant(4950, -60, 200)},

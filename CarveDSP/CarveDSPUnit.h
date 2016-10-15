@@ -35,6 +35,12 @@
 /**
  * A class for applying waveshaping functions to samples.
  *
+ * To use this class, use the setter and getter methods to manipulate parameters,
+ * and call the process method to process individual samples.
+ *
+ * Each sample is processed with no dependency on the previous samples, therefore a
+ * single object can be reused for multiple audio streams if so desired.
+ *
  * Internally relies on the parameters provided in CarveParameters.h
  */
 class CarveDSPUnit {
@@ -62,19 +68,19 @@ public:
      * Sets the gain to be applied to the signal before processing.
      * More pre-gain = more distortion.
      *
-     * @see     PREGAIN for valid values
-     *
      * @param   val Pre-gain value that should be used
+     *
+     * @see     PREGAIN for valid values
      */
     void setPreGain(float val) { preGain = PREGAIN.BoundsCheck(val); }
     
     /**
      * Sets the gain to be applied to the signal after processing.
      * More post-gain = more volume.
+     *     
+     * @param   val Post-gain value that should be used
      *
      * @see     POSTGAIN for valid values
-     *
-     * @param   val Post-gain value that should be used
      */
     void setPostGain(float val) { postGain = POSTGAIN.BoundsCheck(val); }
     
@@ -83,9 +89,9 @@ public:
      * This behaves differently for each mode, and modifies the shape of
      * the wave applied to the signal
      *
-     * @see     TWEAK for valid values
-     *
      * @param   val Tweak value that should be used
+     *
+     * @see     TWEAK for valid values
      */
     void setTweak(float val) { tweak = TWEAK.BoundsCheck(val); }
     

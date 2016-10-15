@@ -42,6 +42,10 @@ class RichterLFOPair;
  */
 class RichterLFOBase {
 public:
+    
+    /**
+     * Initialises parameters to default values.
+     */
     RichterLFOBase() :  manualPhase(0),
                         wave(WAVE.defaultValue),
                         index(0),

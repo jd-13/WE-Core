@@ -37,8 +37,17 @@ public:
                         VOWEL_U {5};
 };
 
+//@{
+/**
+ * A parameter which can take any float value between the ranges defined.
+ * The values passed on construction are in the following order:
+ *      minimum value,
+ *      maximum value,
+ *      default value
+ */
 const ParameterDefinition::RangedParameter<float>   FILTER_POSITION(0, 1, 0.5),
                                                     MIX(0, 1, 1);
+//@}
 
 const VowelParameter VOWEL(1, 5, 1);
 
