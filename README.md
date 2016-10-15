@@ -1,15 +1,17 @@
 # WE-Core
 A set of core libraries for useful DSP related classes that are used by multiple White Elephant Audio VSTs and Audio Units.  
 
-Contains:  
-LFOs:  
+## Contains:  
+### LFOs:  
 RichterLFO and RichterMOD - substantial functionality with tempo sync, and multiple wave types and parameters  
-Filters:  
+
+### Filters:  
 CarveNoiseFilter - a simple filter to remove noise at the extremes of human hearing  
 SongbirdBandPassFilter - A sharp bandpass filter, designed to create a single formant peak  
 SongbirdFormantFilter - Contains multiple SongbirdBandPassFilters, designed to create vowel sounds  
 SongbirdFilterModule - Contains two SongbirdFormantFilters which can be blended between, with multiple supported vowel sounds built in  
-Distortions:  
+
+### Distortions:  
 CarveDSPUnit - A waveshaping distortion module with multiple wave shapes, pre and post gain control, and a "tweak" control which morphs the selected wave shape  
 
 Documentation is available at: https://www.whiteelephantaudio.com/doxygen/WECore/html/  
