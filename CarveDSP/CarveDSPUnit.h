@@ -148,7 +148,6 @@ public:
         }
     }
     
-    
 private:
     float   preGain,
             postGain,

@@ -68,7 +68,7 @@ public:
                         waveArrayPointer(&mSine[0]) {
     }
     
-    virtual ~RichterLFOBase() {};
+    virtual ~RichterLFOBase() {}
     
     friend class RichterLFOPair;
     

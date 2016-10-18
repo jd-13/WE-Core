@@ -106,6 +106,8 @@ public:
         }
     }
     
+    virtual ~RichterLFO() {};
+    
     friend class RichterLFOPair;
 
     

@@ -92,6 +92,8 @@ public:
         }
     }
     
+    virtual ~RichterMOD() {}
+    
     friend class RichterLFOPair;
     
     /**

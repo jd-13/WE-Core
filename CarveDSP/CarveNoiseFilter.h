@@ -41,6 +41,8 @@ public:
         setSampleRate(44100);
     }
     
+    virtual ~CarveNoiseFilter() {}
+    
     /**
      * Configures the filters for the correct sample rate. Ensure this is
      * called before attempting to process audio.
@@ -97,7 +99,6 @@ public:
         stereoHighCutFilter.process(numSamples, channelsArray);
         delete [] channelsArray;
     }
-    
     
 private:
     static const int FILTER_ORDER {4};

@@ -41,8 +41,9 @@
  
 class RichterLFOPair {
 public:
-    RichterLFOPair() : _LFO(), _MOD() {
-    }
+    RichterLFOPair() : _LFO(), _MOD() {}
+    
+    virtual ~RichterLFOPair() {}
     
     /**
      * Call each oscillator's reset method.

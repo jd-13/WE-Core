@@ -78,6 +78,8 @@ public:
         setVowel2(vowel2);
     }
     
+    virtual ~SongbirdFilterModule() {}
+    
     /**
      * Sets the vowel sound that should be created by filter 1.
      *

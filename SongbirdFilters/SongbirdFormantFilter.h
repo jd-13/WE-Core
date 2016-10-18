@@ -38,7 +38,6 @@
  * @see setFormants - must be called before performing any processing
  * @see Formant     - Formant objects are required for operation of this class
  */
-
 class SongbirdFormantFilter {
 public:
     /**
@@ -58,7 +57,7 @@ public:
     /**
      * Deallocates each filter in the vector.
      */
-    ~SongbirdFormantFilter() {
+    virtual ~SongbirdFormantFilter() {
         for (size_t iii {0}; iii < filters.size(); iii++) {
             SongbirdBandPassFilter* tempFilter {filters[iii]};
             delete tempFilter;
@@ -140,6 +139,9 @@ public:
             filter->reset();
         }
     }
+    
+    SongbirdFormantFilter operator= (SongbirdFormantFilter& other) = delete;
+    SongbirdFormantFilter(SongbirdFormantFilter&) = delete;
     
 private:
     std::vector<SongbirdBandPassFilter*> filters;
