@@ -140,9 +140,6 @@ public:
         }
     }
     
-    SongbirdFormantFilter operator= (SongbirdFormantFilter& other) = delete;
-    SongbirdFormantFilter(SongbirdFormantFilter&) = delete;
-    
 private:
     std::vector<SongbirdBandPassFilter*> filters;
 };
