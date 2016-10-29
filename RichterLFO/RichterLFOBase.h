@@ -80,17 +80,17 @@ public:
     
     int getTempoSyncSwitch() const { return tempoSyncSwitch; }
     
-    float getWave() const { return wave; }
+    int getWave() const { return wave; }
     
-    float getDepth() const { return depth; }
+    double getDepth() const { return depth; }
     
-    float getFreq() const { return freq; }
+    double getFreq() const { return freq; }
     
     int getManualPhase() const { return manualPhase; }
     
-    float getTempoNumer() const { return tempoNumer; }
+    double getTempoNumer() const { return tempoNumer; }
     
-    float getTempoDenom() const { return tempoDenom; }
+    double getTempoDenom() const { return tempoDenom; }
     
     float getWaveArraySize() const { return kWaveArraySize; }
     
@@ -116,7 +116,7 @@ public:
     
     void setManualPhase(int val) { manualPhase = PHASE.BoundsCheck(val); }
     
-    void setWave(float val) { wave = WAVE.BoundsCheck(val); }
+    void setWave(int val) { wave = WAVE.BoundsCheck(val); }
     
     void setWaveTablePointers() {
         if (wave == WAVE.SINE) { waveArrayPointer = &mSine[0]; }
@@ -171,7 +171,7 @@ protected:
             phaseSyncSwitch,
             needsPhaseCalc;
     
-    float   tempoNumer,
+    double  tempoNumer,
             tempoDenom,
             tempoFreq,
             freq,
@@ -182,11 +182,11 @@ protected:
             currentScale,
             nextScale;
     
-    float   *waveArrayPointer;
+    double *waveArrayPointer;
     
-    float mSine[kWaveArraySize];
-    float mSquare[kWaveArraySize];
-    float mSaw[kWaveArraySize];
+    double mSine[kWaveArraySize];
+    double mSquare[kWaveArraySize];
+    double mSaw[kWaveArraySize];
     
     /**
      * Calculates the phase offset to be applied to the oscillator, including any
@@ -197,7 +197,7 @@ protected:
      */
     void calcPhaseOffset(double timeInSeconds) {
         if (phaseSyncSwitch && needsPhaseCalc) {
-            float waveLength {1 / freq};
+            double waveLength {1 / freq};
             double waveTimePosition {0};
             
             if (waveLength < timeInSeconds) {
@@ -205,7 +205,7 @@ protected:
             } else {
                 waveTimePosition = timeInSeconds;
             }
-            indexOffset = (waveTimePosition / waveLength) * kWaveArraySize + manualPhase;
+            indexOffset = static_cast<int>(waveTimePosition / waveLength) * kWaveArraySize + manualPhase;
         }
         
         if (!phaseSyncSwitch && needsPhaseCalc) {

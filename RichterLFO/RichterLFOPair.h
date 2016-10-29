@@ -93,7 +93,7 @@ public:
      *
      * @return  The value of the RichterLFO's output at this moment, a value between 0 and 1.
      */
-    float calcGainInLoop() {
+    double calcGainInLoop() {
         _LFO.calcIndexAndScaleInLoop();
         _MOD.calcIndexAndScaleInLoop();
         

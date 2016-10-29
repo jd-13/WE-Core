@@ -72,7 +72,7 @@ public:
      *
      * @see     PREGAIN for valid values
      */
-    void setPreGain(float val) { preGain = PREGAIN.BoundsCheck(val); }
+    void setPreGain(double val) { preGain = PREGAIN.BoundsCheck(val); }
     
     /**
      * Sets the gain to be applied to the signal after processing.
@@ -82,7 +82,7 @@ public:
      *
      * @see     POSTGAIN for valid values
      */
-    void setPostGain(float val) { postGain = POSTGAIN.BoundsCheck(val); }
+    void setPostGain(double val) { postGain = POSTGAIN.BoundsCheck(val); }
     
     /**
      * Sets the tweak value to be applied to the signal during processing.
@@ -93,7 +93,7 @@ public:
      *
      * @see     TWEAK for valid values
      */
-    void setTweak(float val) { tweak = TWEAK.BoundsCheck(val); }
+    void setTweak(double val) { tweak = TWEAK.BoundsCheck(val); }
     
     /**
      * @see     setMode
@@ -103,17 +103,17 @@ public:
     /**
      * @see     setPreGain
      */
-    float getPreGain() { return preGain; }
+    double getPreGain() { return preGain; }
     
     /**
      * @see     setPostGain
      */
-    float getPostGain() { return postGain; }
+    double getPostGain() { return postGain; }
     
     /**
      * @see     setTweak
      */
-    float getTweak() { return tweak; }
+    double getTweak() { return tweak; }
     
     /**
      * Performs the processing on the sample, by calling the appropriate
@@ -123,7 +123,7 @@ public:
      *
      * @return  The value of inSample after processing
      */
-    float process (float inSample) const {
+    double process (double inSample) const {
         switch (mode) {
             case MODE.SINE:
                 return processSine(inSample);
@@ -149,40 +149,40 @@ public:
     }
     
 private:
-    float   preGain,
+    double  preGain,
             postGain,
             tweak;
     
     int mode;
     
     // private process methods
-    inline float processSine(float inSample) const {
-        return  ((((1 - fabs(tweak/2)) * sin(M_PI * inSample * preGain)))
+    inline double processSine(double inSample) const {
+        return  ((((1 - std::abs(tweak/2)) * sin(M_PI * inSample * preGain)))
                 + ((tweak/2) * sin(4 * M_PI * inSample * preGain)))
                 * postGain;
     }
     
-    inline float processParabolicSoft(float inSample) const {
+    inline double processParabolicSoft(double inSample) const {
         return (M_PI * inSample * preGain * ((4 * tweak) - sqrt(4 * pow(inSample * M_PI * preGain, 2))) * 0.5) * postGain;
     }
     
-    inline float processParabolicHard(float inSample) const {
-        return  (((1 - fabs(tweak/10)) * (atan(preGain * 4 * M_PI * inSample) / 1.5))
+    inline double processParabolicHard(double inSample) const {
+        return  (((1 - std::abs(tweak/10)) * (atan(preGain * 4 * M_PI * inSample) / 1.5))
                 + ((tweak/10) * sin(M_PI * inSample * preGain)))
                 * postGain;
     }
     
-    inline float processAsymmetricSine(float inSample) const {
+    inline double processAsymmetricSine(double inSample) const {
         return (cos(M_PI * inSample * (tweak + 1)) * atan(4 * M_PI * inSample * preGain)) * postGain;
     }
     
-    inline float processExponent(float inSample) const {
+    inline double processExponent(double inSample) const {
         return  (sin(-0.25 *
                      pow(2 * M_E, (inSample * preGain + 1.5))))
                 * postGain;
     }
     
-    inline float processClipper(float inSample) const {
+    inline double processClipper(double inSample) const {
         inSample *= M_PI * preGain;
         
         return (sin(0.5 * inSample) +

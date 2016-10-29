@@ -111,13 +111,13 @@ public:
     friend class RichterLFOPair;
 
     
-    float getRawDepth() { return rawDepth; }
+    double getRawDepth() { return rawDepth; }
     
-    float getDepthMod() { return depthMod; }
+    double getDepthMod() { return depthMod; }
     
-    float getRawFreq() { return rawFreq; }
+    double getRawFreq() { return rawFreq; }
     
-    float getFreqMod() { return freqMod; }
+    double getFreqMod() { return freqMod; }
     
     
     
@@ -156,7 +156,7 @@ public:
      *
      * @return  The value of the LFO's output at this moment, a value between 0 and 1.
      */
-    float calcGainInLoop(int modBypassSwitch, float modGain) {
+    double calcGainInLoop(int modBypassSwitch, double modGain) {
         calcIndexAndScaleInLoop();
         return calcGain(modBypassSwitch, modGain);
     }
@@ -166,7 +166,7 @@ public:
     
 private:
     
-    float   rawFreq,
+    double  rawFreq,
             freqMod,
             rawDepth,
             depthMod;
@@ -179,7 +179,7 @@ private:
      *                              the effect of modGain will be applied.
      * @param   modGain             The gain output from the modulation oscillator.
      */
-    void calcFreqInLoop(int modBypassSwitch, float modGain) {
+    void calcFreqInLoop(int modBypassSwitch, double modGain) {
         // calculate the frequency based on whether tempo sync or frequency modulation is active
         
         if (!tempoSyncSwitch) {
@@ -203,7 +203,7 @@ private:
      *                         whether modGain is applied to the calculation
      *       modGain           The gain output from the modulation oscillator
      */
-    void calcDepthInLoop(int modBypassSwitch, float modGain) {
+    void calcDepthInLoop(int modBypassSwitch, double modGain) {
         // Check whether MOD oscs are activated and apply depth parameter modulation accordingly
         
         if (modBypassSwitch) {
@@ -225,7 +225,7 @@ private:
      *                         whether modGain is applied to the calculation
      *       modGain           The gain output from the modulation oscillator
      */
-    float calcGain(int modBypassSwitch, float modGain) {
+    double calcGain(int modBypassSwitch, double modGain) {
         calcFreqInLoop(modBypassSwitch, modGain);
         calcDepthInLoop(modBypassSwitch, modGain);
         

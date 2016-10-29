@@ -43,7 +43,7 @@ const ParameterDefinition::RangedParameter<int> TEMPONUMER(1, 4, 1),
                                                 TEMPODENOM(1, 32, 1),
                                                 PHASE(0, kWaveArraySize, 0);
 
-const ParameterDefinition::RangedParameter<float>   DEPTH(0, 1, 0.5),
+const ParameterDefinition::RangedParameter<double>  DEPTH(0, 1, 0.5),
                                                     DEPTHMOD(0, 1, 0),
                                                     FREQ(0.5, 20, 2),
                                                     FREQMOD(0, 1, 0);

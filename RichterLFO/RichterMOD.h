@@ -104,7 +104,7 @@ public:
      *
      * @return  The value of the LFO's output at this moment, a value between -1 and 1.
      */
-    float calcGainInLoop() {
+    double calcGainInLoop() {
         calcIndexAndScaleInLoop();
         return calcGain();
     }
@@ -118,7 +118,7 @@ private:
      * parameter of another oscillator) which the oscillator is operating on.
      * Outputs a value between -0.5 and 0.5. Always outputs 0 if bypassed.
      */
-    float calcGain() {
+    double calcGain() {
         if (bypassSwitch) {
             return (gain * depth);
         } else {
