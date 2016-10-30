@@ -26,6 +26,7 @@
 
 #include "SongbirdFormantFilter.h"
 #include <map>
+#include "CarveNoiseFilter.h"
 
 /**
  * The number of formants (bandpass filters) which are used in a single vowel.
@@ -76,9 +77,18 @@ public:
         // initialise the filters to some default values
         setVowel1(vowel1);
         setVowel2(vowel2);
+                                    
+        for (size_t iii {0}; iii < 2; iii++) {
+            CarveNoiseFilter* tempFilter {new CarveNoiseFilter(300, 5000)};
+            _noiseFilters.push_back(tempFilter);
+        }
     }
     
-    virtual ~SongbirdFilterModule() {}
+    virtual ~SongbirdFilterModule() {
+        for (size_t iii {0}; iii < _noiseFilters.size(); iii++) {
+            delete _noiseFilters[iii];
+        }
+    }
     
     /**
      * Sets the vowel sound that should be created by filter 1.
@@ -201,6 +211,14 @@ public:
             filters2[Channels::LEFT].process(&outputBuffer2[Channels::LEFT][0], numSamples);
             filters2[Channels::RIGHT].process(&outputBuffer2[Channels::RIGHT][0], numSamples);
             
+            // remove noise
+            _noiseFilters[0]->ApplyStereoFiltering(&outputBuffer1[Channels::LEFT][0],
+                                                   &outputBuffer1[Channels::RIGHT][0],
+                                                   numSamples);
+            _noiseFilters[1]->ApplyStereoFiltering(&outputBuffer2[Channels::LEFT][0],
+                                                   &outputBuffer2[Channels::RIGHT][0],
+                                                   numSamples);
+            
             // write to output, applying filter position and mix level
             for (size_t iii {0}; iii < numSamples; iii++) {
                 leftSamples[iii] =  leftSamples[iii] * (1 - mix)
@@ -214,6 +232,9 @@ public:
         }
     }
     
+    SongbirdFilterModule operator=(SongbirdFilterModule& other) = delete;
+    SongbirdFilterModule(SongbirdFilterModule& other) = delete;
+    
 private:
     int vowel1;
     int vowel2;
@@ -223,6 +244,8 @@ private:
     
     std::map<Channels, SongbirdFormantFilter> filters1;
     std::map<Channels, SongbirdFormantFilter> filters2;
+    
+    std::vector<CarveNoiseFilter*> _noiseFilters;
     
     /**
      * An array which defines all the formants that will be needed.
