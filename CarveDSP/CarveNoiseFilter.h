@@ -28,8 +28,10 @@
 #include "DspFilters/Butterworth.h"
 
 /**
- * A simple filter which removes frequencies at the extremes of the human
- * hearing range to clean up audio.
+ * A simple bandpass filter which can process mono or stereo signals.
+ * Was initially created to remove frequencies at the extremes of the human
+ * hearing range to clean up audio but can fulfil any typical bandpass
+ * filter purpose.
  *
  * Has methods for processing either a mono or stereo buffer of samples.
  *
@@ -37,7 +39,17 @@
  */
 class CarveNoiseFilter {
 public:
-    CarveNoiseFilter() {
+    
+    /**
+     * Defaults the sample rate. It is recommended to call setSampleRate manually
+     * before attempting any processing.
+     *
+     * @param   lowCutHz    Everything below this frequency will be cut
+     * @param   highCutHz   Everything above this frequency will be cut
+     */
+    CarveNoiseFilter(float lowCutHz,
+                     float highCutHz) : _lowCutHz(lowCutHz),
+                                        _highCutHz(highCutHz) {
         setSampleRate(44100);
     }
     
@@ -50,13 +62,10 @@ public:
      * @param   sampleRate  The sample rate the filter should be configured for
      */
     void setSampleRate(double sampleRate) {
-        const int lowCutHz {25};
-        const int highCutHz {19000};
-        
-        monoLowCutFilter.setup(FILTER_ORDER, sampleRate, lowCutHz);
-        stereoLowCutFilter.setup(FILTER_ORDER, sampleRate, lowCutHz);
-        monoHighCutFilter.setup(FILTER_ORDER, sampleRate, highCutHz);
-        stereoHighCutFilter.setup(FILTER_ORDER, sampleRate, highCutHz);
+        monoLowCutFilter.setup(FILTER_ORDER, sampleRate, _lowCutHz);
+        stereoLowCutFilter.setup(FILTER_ORDER, sampleRate, _lowCutHz);
+        monoHighCutFilter.setup(FILTER_ORDER, sampleRate, _highCutHz);
+        stereoHighCutFilter.setup(FILTER_ORDER, sampleRate, _highCutHz);
     }
     
     /**
@@ -107,6 +116,9 @@ private:
     
     Dsp::SimpleFilter<Dsp::Butterworth::HighPass<4>, 1> monoLowCutFilter;
     Dsp::SimpleFilter<Dsp::Butterworth::HighPass<4>, 2> stereoLowCutFilter;
+    
+    float   _lowCutHz,
+            _highCutHz;
 };
 
 
