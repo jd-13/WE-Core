@@ -74,11 +74,11 @@ public:
     
     // getter methods
     
-    int getBypassSwitch() const { return bypassSwitch; }
+    bool getBypassSwitch() const { return bypassSwitch; }
     
-    int getPhaseSyncSwitch() const { return phaseSyncSwitch; }
+    bool getPhaseSyncSwitch() const { return phaseSyncSwitch; }
     
-    int getTempoSyncSwitch() const { return tempoSyncSwitch; }
+    bool getTempoSyncSwitch() const { return tempoSyncSwitch; }
     
     int getWave() const { return wave; }
     
