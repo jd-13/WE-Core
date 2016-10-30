@@ -125,6 +125,9 @@ public:
      */
     double process (double inSample) const {
         switch (mode) {
+            case MODE.OFF:
+                return 0;
+                
             case MODE.SINE:
                 return processSine(inSample);
                 

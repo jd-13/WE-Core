@@ -30,12 +30,13 @@ class ModeParameter : public ParameterDefinition::BaseParameter<int> {
 public:
     using ParameterDefinition::BaseParameter<int>::BaseParameter;
     
-    static const int   SINE = 1,
-    PARABOLIC_SOFT = 2,
-    PARABOLIC_HARD = 3,
-    ASYMMETRIC_SINE = 4,
-    EXPONENT = 5,
-    CLIPPER = 6;
+    static const int    OFF = 1,
+                        SINE = 2,
+                        PARABOLIC_SOFT = 3,
+                        PARABOLIC_HARD = 4,
+                        ASYMMETRIC_SINE = 5,
+                        EXPONENT = 6,
+                        CLIPPER = 7;
 };
 
 //@{
@@ -51,6 +52,6 @@ const ParameterDefinition::RangedParameter<double>   PREGAIN(0, 2, 1),
                                                     TWEAK(-1, 1, 0);
 //@}
 
-const ModeParameter MODE(1, 6, 1);
+const ModeParameter MODE(1, 7, 1);
 
 #endif /* CarveParameters_h */
