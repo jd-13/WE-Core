@@ -14,6 +14,12 @@ SongbirdFilterModule - Contains two SongbirdFormantFilters which can be blended 
 ### Distortions:  
 CarveDSPUnit - A waveshaping distortion module with multiple wave shapes, pre and post gain control, and a "tweak" control which morphs the selected wave shape  
 
+### Stereo Processing:  
+MONSTRCrossover - A crossover filter made of several MONSTRBand units. Uses the MONSTRBand units to provide multiband stereo width control  
+
+
+Note: The Songbird and MONSTR classes are not yet completed, and so may change frequently  
+
 ## Documentation  
 Documentation is available at: https://www.whiteelephantaudio.com/doxygen/WECore/html/  
 The documentation is generated from this github repo every 4 hours.
