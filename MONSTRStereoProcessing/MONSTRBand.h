@@ -26,8 +26,8 @@
 #define MONSTRBAND_H_INCLUDED
 
 #include <vector>
-#include "ParameterData.h"
 #include "DspFilters/Butterworth.h"
+#include "MONSTRParameters.h"
 
 class MONSTRBand {
 public:
