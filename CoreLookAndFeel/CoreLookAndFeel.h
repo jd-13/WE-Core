@@ -224,6 +224,22 @@ public:
         }
     }
     
+    virtual void drawLinearSliderBackground(Graphics& g,
+                                            int x,
+                                            int y,
+                                            int width,
+                                            int height,
+                                            float /*sliderPos*/,
+                                            float /*minSliderPos*/,
+                                            float /*maxSliderPos*/,
+                                            const Slider::SliderStyle /*style*/,
+                                            Slider& slider) override {
+        g.setColour(lightColour);
+        
+        if (slider.isHorizontal()) {
+            g.fillRect(x, y + height / 2, width, 2);
+        }
+    }
     
     virtual void drawTooltip(Graphics& g,
                              const String& text,
