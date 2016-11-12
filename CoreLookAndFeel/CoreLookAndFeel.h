@@ -35,11 +35,11 @@
 class CoreLookAndFeel : public LookAndFeel_V2 {
 public:
     CoreLookAndFeel() :    LookAndFeel_V2(),
-                            lightGrey(200, 200, 200),
-                            darkGrey(107, 107, 107),
-                            neonBlue(34, 252, 255) {
-        setColour(PopupMenu::highlightedBackgroundColourId, darkGrey);
-        setColour(PopupMenu::backgroundColourId, lightGrey);
+                            lightColour(200, 200, 200),
+                            darkColour(107, 107, 107),
+                            highlightColour(34, 252, 255) {
+        setColour(PopupMenu::highlightedBackgroundColourId, darkColour);
+        setColour(PopupMenu::backgroundColourId, lightColour);
     }
     
     virtual void drawRotarySlider(Graphics& g,
@@ -60,15 +60,15 @@ public:
         
         // draw centre circle
         Path p;
-        g.setColour(darkGrey);
+        g.setColour(darkColour);
         p.addEllipse(width / 2 - diameter / 2, height / 2 - diameter / 2, diameter, diameter);
         g.fillPath(p);
         
         // draw outer ring
         if (slider.isEnabled()) {
-            g.setColour(neonBlue);
+            g.setColour(highlightColour);
         } else {
-            g.setColour(lightGrey);
+            g.setColour(lightColour);
         }
         
         p.clear();
@@ -95,9 +95,9 @@ public:
         Colour* ring;
         
         if (slider.isEnabled()) {
-            ring = &neonBlue;
+            ring = &highlightColour;
         } else {
-            ring = &lightGrey;
+            ring = &lightColour;
         }
         
         if (style == Slider::LinearHorizontal || style == Slider::LinearVertical)
@@ -118,7 +118,7 @@ public:
             Path p;
             p.addEllipse(kx - sliderRadius, ky - sliderRadius, sliderRadius * 2, sliderRadius * 2);
             
-            g.setColour(darkGrey);
+            g.setColour(darkColour);
             g.fillPath(p);
             
             g.setColour(*ring);
@@ -146,12 +146,12 @@ public:
         
         if (button.isEnabled()) {
             if (button.getToggleState()) {
-                bc = &neonBlue;
+                bc = &highlightColour;
             } else {
-                bc = &darkGrey;
+                bc = &darkColour;
             }
         } else {
-            bc = &lightGrey;
+            bc = &lightColour;
         }
         
         
@@ -169,8 +169,8 @@ public:
                               int buttonH,
                               ComboBox& box) override {
         
-        g.fillAll(lightGrey);
-        g.setColour(darkGrey);
+        g.fillAll(lightColour);
+        g.setColour(darkColour);
         g.fillRect(buttonX, buttonY, buttonW, buttonH);
         
         const float arrowX {0.2f};
@@ -183,10 +183,10 @@ public:
                           buttonX + buttonW * arrowX,               buttonY + buttonH * 0.45f);
             
             p.addTriangle(buttonX + buttonW * 0.5f,                 buttonY + buttonH * (0.55f + arrowH),
-                          buttonX + buttonW * (1.0f -arrowX),       buttonY + buttonH * 0.55f,
+                          buttonX + buttonW * (1.0f - arrowX),      buttonY + buttonH * 0.55f,
                           buttonX + buttonW * arrowX,               buttonY + buttonH * 0.55f);
             
-            g.setColour(box.isPopupActive() ? neonBlue : lightGrey);
+            g.setColour(box.isPopupActive() ? highlightColour : lightColour);
             
             g.fillPath(p);
         }
@@ -197,19 +197,31 @@ public:
                              const String& text,
                              int width,
                              int height) override {
-        g.setColour(lightGrey);
+        g.setColour(lightColour);
         g.fillRect(0, 0, width, height);
         
-        g.setColour(darkGrey);
+        g.setColour(darkColour);
         g.drawFittedText(text, 0, 0, width, height, Justification::centred, 3);
     }
     
-private:
+    void setHighlightColour(Colour newColour) {
+        highlightColour = newColour;
+    }
+    
+    void setLightColour(Colour newColour) {
+        lightColour = newColour;
+    }
+    
+    void setDarkColour(Colour newColour) {
+        darkColour = newColour;
+    }
+    
+protected:
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreLookAndFeel)
     
-    Colour  lightGrey,
-            darkGrey,
-            neonBlue;
+    Colour  lightColour,
+            darkColour,
+            highlightColour;
     
 };
 
