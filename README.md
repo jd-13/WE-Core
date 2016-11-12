@@ -18,7 +18,7 @@ CarveDSPUnit - A waveshaping distortion module with multiple wave shapes, pre an
 MONSTRCrossover - A crossover filter made of several MONSTRBand units. Uses the MONSTRBand units to provide multiband stereo width control  
 
 
-Note: The Songbird and MONSTR classes are not yet completed, and so may change frequently  
+Note: The Songbird classes are not yet completed, and so may change frequently  
 
 ## Documentation  
 Documentation is available at: https://www.whiteelephantaudio.com/doxygen/WECore/html/  
@@ -27,3 +27,6 @@ The documentation is generated from this github repo every 4 hours.
 ## Required Libraries  
 Some classes within this library require:  
 A Collection of Useful C++ Classes for Digital Signal Processing: https://github.com/vinniefalco/DSPFilters
+
+LookAndFeel classes are for building UIs using the JUCE library:
+https://www.juce.com/
