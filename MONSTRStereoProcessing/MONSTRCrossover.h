@@ -107,6 +107,7 @@ public:
      * @see     CROSSOVERLOWER for valid values
      */
     void setCrossoverLower(float val) {
+        val = CROSSOVERLOWER.BoundsCheck(val);
         band1.setHighCutoff(val);
         band2.setLowCutoff(val);
     }
@@ -119,6 +120,7 @@ public:
      * @see     CROSSOVERUPPER for valid values
      */
     void setCrossoverUpper(float val) {
+        val = CROSSOVERUPPER.BoundsCheck(val);
         band2.setHighCutoff(val);
         band3.setLowCutoff(val);
     }
