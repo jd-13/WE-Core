@@ -128,10 +128,10 @@ public:
     }
     
     virtual void drawButtonBackground(Graphics& g,
-                                      Button& button,
-                                      const Colour& /*backgroundColour*/,
-                                      bool /*isMouseOverButton*/,
-                                      bool /*isButtonDown*/) override {
+                                                  Button& button,
+                                                  const Colour& /*backgroundColour*/,
+                                                  bool /*isMouseOverButton*/,
+                                                  bool /*isButtonDown*/) override {
         const int width {button.getWidth()};
         const int height {button.getHeight()};
         
@@ -140,23 +140,55 @@ public:
                                     roundToInt(height * 0.4f))};
         
         Path p;
-        p.addRoundedRectangle(indent, indent, width - indent, height - indent, static_cast<float>(cornerSize));
+        PathStrokeType pStroke(1);
+        Colour* bc {nullptr};
         
-        Colour* bc;
+        
+        
         
         if (button.isEnabled()) {
             if (button.getToggleState()) {
                 bc = &highlightColour;
             } else {
-                bc = &darkColour;
+                bc = &lightColour;
             }
         } else {
-            bc = &lightColour;
+            bc = &darkColour;
         }
+        
+        p.addRoundedRectangle(indent, indent, width - 2 * indent, height - 2 * indent, static_cast<float>(cornerSize));
         
         
         g.setColour(*bc);
-        g.fillPath(p);
+        g.strokePath(p, pStroke);
+    }
+    
+    virtual void drawButtonText(Graphics& g,
+                                TextButton& textButton,
+                                bool /*isMouseOverButton*/,
+                                bool /*isButtonDown*/) override {
+        
+        Colour* textColour {nullptr};
+        
+        if (textButton.isEnabled()) {
+            if (textButton.getToggleState() || textButton.getWidth() < 24) {
+                textColour = &highlightColour;
+            } else {
+                textColour = &lightColour;
+            }
+        } else {
+            textColour = &darkColour;
+        }
+        
+        g.setColour(*textColour);
+        int margin {0};
+        
+        // differentiates between the small button on the tempo sync ratio and larger buttons
+        if (textButton.getWidth() > 24) {
+            margin = 5;
+        }
+        
+        g.drawFittedText(textButton.getButtonText(), margin, 0, textButton.getWidth() - 2 * margin, textButton.getHeight(), Justification::centred, 0);
     }
     
     virtual void drawComboBox(Graphics& g,
