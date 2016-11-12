@@ -33,6 +33,8 @@
  * hearing range to clean up audio but can fulfil any typical bandpass
  * filter purpose.
  *
+ * The cutoff frequencies cannot be changed once the object is constructed. 
+ *
  * Has methods for processing either a mono or stereo buffer of samples.
  *
  * @see setSampleRate   - recommended to call before performing any processing
