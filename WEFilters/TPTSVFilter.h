@@ -35,10 +35,10 @@
 class TPTSVFilter {
 public:
     TPTSVFilter() : _sampleRate(44100),
-                    _cutoffHz(CUTOFF.defaultValue),
-                    _Q(Q.defaultValue),
-                    _mode(FILTER_MODE.BYPASS),
-                    _gain(GAIN.defaultValue),
+                    _cutoffHz(TPTSVFilterParameters::CUTOFF.defaultValue),
+                    _Q(TPTSVFilterParameters::Q.defaultValue),
+                    _mode(TPTSVFilterParameters::FILTER_MODE.BYPASS),
+                    _gain(TPTSVFilterParameters::GAIN.defaultValue),
                     _s1(0),
                     _s2(0) {}
     
@@ -46,7 +46,7 @@ public:
     
     void processBlock(float* inSamples, int numSamples) {
         
-        if (_mode != FILTER_MODE.BYPASS) {
+        if (_mode != TPTSVFilterParameters::FILTER_MODE.BYPASS) {
             const float g {std::tanf(M_PI * _cutoffHz / _sampleRate)};
             const float h {1.0f / (1 + g / _Q + g * g)};
             
@@ -62,11 +62,11 @@ public:
                 _s2 = g * yB + yL;
                 
                 switch (_mode) {
-                    case FILTER_MODE.BANDPASS:
+                    case TPTSVFilterParameters::FILTER_MODE.BANDPASS:
                         inSamples[iii] = yB * _gain;
                         break;
                         
-                    case FILTER_MODE.HIGHPASS:
+                    case TPTSVFilterParameters::FILTER_MODE.HIGHPASS:
                         inSamples[iii] = yH * _gain;
                         break;
                         
@@ -88,10 +88,11 @@ public:
     float getQ() const {return _Q;}
     float getGain() const {return _gain;}
     
-    void setMode(int val) {_mode = MODE.BoundsCheck(val);}
-    void setCutoff(float val) {_cutoffHz = CUTOFF.BoundsCheck(val);}
-    void setQ(float val) {_Q = Q.BoundsCheck(val);}
-    void setGain(float val) {_gain = GAIN.BoundsCheck(val);}
+    void setMode(int val) {_mode = TPTSVFilterParameters::FILTER_MODE.BoundsCheck(val);}
+    void setCutoff(float val) {_cutoffHz = TPTSVFilterParameters::CUTOFF.BoundsCheck(val);}
+    void setQ(float val) {_Q = TPTSVFilterParameters::Q.BoundsCheck(val);}
+    void setGain(float val) {_gain = TPTSVFilterParameters::GAIN.BoundsCheck(val);}
+    void setSampleRate(float val) {_sampleRate = val;}
     
 private:
     float   _sampleRate,

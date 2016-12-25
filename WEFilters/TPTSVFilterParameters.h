@@ -26,29 +26,31 @@
 
 #include "ParameterDefinition.h"
 
-class TPTSVFilterModeParameter : public ParameterDefinition::BaseParameter<int> {
-public:
-    using ParameterDefinition::BaseParameter<int>::BaseParameter;
-    
-    static const int    BYPASS = 1,
-                        LOWPASS = 2,
-                        BANDPASS = 3,
-                        HIGHPASS = 4;
-};
+namespace TPTSVFilterParameters {
+    class FilterModeParameter : public ParameterDefinition::BaseParameter<int> {
+    public:
+        using ParameterDefinition::BaseParameter<int>::BaseParameter;
+        
+        static const int    BYPASS = 1,
+                            LOWPASS = 2,
+                            BANDPASS = 3,
+                            HIGHPASS = 4;
+    };
 
-//@{
-/**
- * A parameter which can take any float value between the ranges defined.
- * The values passed on construction are in the following order:
- *      minimum value,
- *      maximum value,
- *      default value
- */
-const ParameterDefinition::RangedParameter<double>  CUTOFF(20, 20000, 20),
-                                                    Q(0.1, 20, 0.5),
-                                                    GAIN(0, 2, 1);
-//@}
+    //@{
+    /**
+     * A parameter which can take any float value between the ranges defined.
+     * The values passed on construction are in the following order:
+     *      minimum value,
+     *      maximum value,
+     *      default value
+     */
+    const ParameterDefinition::RangedParameter<double>  CUTOFF(20, 20000, 20),
+                                                        Q(0.1, 20, 0.5),
+                                                        GAIN(0, 2, 1);
+    //@}
 
-const TPTSVFilterModeParameter TPTSVFILTER_MODE(1, 4, 1);
+    const FilterModeParameter FILTER_MODE(1, 4, 1);
+}
 
 #endif /* TPTSVFILTERParameters_h */
