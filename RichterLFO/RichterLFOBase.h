@@ -197,8 +197,8 @@ protected:
      */
     void calcPhaseOffset(double timeInSeconds) {
         if (phaseSyncSwitch && needsPhaseCalc) {
-            double waveLength {1 / freq};
-            double waveTimePosition {0};
+            static double waveLength {1 / freq};
+            static double waveTimePosition {0};
             
             if (waveLength < timeInSeconds) {
                 waveTimePosition = fmod(timeInSeconds, waveLength);
