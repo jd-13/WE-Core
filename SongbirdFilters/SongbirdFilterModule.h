@@ -27,6 +27,7 @@
 #include "SongbirdFormantFilter.h"
 #include <map>
 #include "CarveNoiseFilter.h"
+#include "SongbirdFiltersParameters.h"
 
 /**
  * The number of formants (bandpass filters) which are used in a single vowel.
@@ -104,8 +105,8 @@ public:
         const std::vector<Formant> tempFormants(&allFormants[vowel1 - 1][0],
                                                 &allFormants[vowel1 - 1][NUM_FORMANTS_PER_VOWEL]);
         
-        filters1[Channels::LEFT].setFormants(tempFormants, sampleRate);
-        filters1[Channels::RIGHT].setFormants(tempFormants, sampleRate);
+        filters1[Channels::LEFT].setFormants(tempFormants);
+        filters1[Channels::RIGHT].setFormants(tempFormants);
     }
     
     /**
@@ -121,8 +122,8 @@ public:
         
         const std::vector<Formant> tempFormants(&allFormants[vowel2 - 1][0],
                                                 &allFormants[vowel2 - 1][NUM_FORMANTS_PER_VOWEL]);
-        filters2[Channels::LEFT].setFormants(tempFormants, sampleRate);
-        filters2[Channels::RIGHT].setFormants(tempFormants, sampleRate);
+        filters2[Channels::LEFT].setFormants(tempFormants);
+        filters2[Channels::RIGHT].setFormants(tempFormants);
     }
     
     void setFilterPosition(float val) { filterPosition = FILTER_POSITION.BoundsCheck(val); }
@@ -135,8 +136,10 @@ public:
     void setSampleRate(float val) {
         sampleRate = val;
         
-        setVowel1(vowel1);
-        setVowel2(vowel2);
+        filters1[Channels::LEFT].setSampleRate(val);
+        filters1[Channels::RIGHT].setSampleRate(val);
+        filters2[Channels::LEFT].setSampleRate(val);
+        filters2[Channels::RIGHT].setSampleRate(val);
     }
     
     /**

@@ -25,7 +25,8 @@
 #define SONGBIRDFORMANTFILTER_H_INCLUDED
 
 #include "Formant.h"
-#include "SongbirdBandPassFilter.h"
+#include "TPTSVFilter.h"
+#include <vector>
 
 /**
  * A class containing a vector of bandpass filters to produce a vowel sound.
@@ -49,7 +50,9 @@ public:
      */
     SongbirdFormantFilter(int numFormants = 5) {
         for (int iii {0}; iii < numFormants; iii++) {
-            SongbirdBandPassFilter* tempFilter = new SongbirdBandPassFilter();
+            TPTSVFilter* tempFilter = new TPTSVFilter();
+            tempFilter->setMode(TPTSVFilterParameters::FILTER_MODE.BANDPASS);
+            tempFilter->setQ(15);
             filters.push_back(tempFilter);
         }
     }
@@ -59,7 +62,7 @@ public:
      */
     virtual ~SongbirdFormantFilter() {
         for (size_t iii {0}; iii < filters.size(); iii++) {
-            SongbirdBandPassFilter* tempFilter {filters[iii]};
+            TPTSVFilter* tempFilter {filters[iii]};
             delete tempFilter;
         }
     }
@@ -82,7 +85,7 @@ public:
                 // copy the input samples to a new buffer
                 std::vector<float> tempBuffer(inSamples, inSamples + numSamples);
                 
-                filters[iii]->process(&tempBuffer[0], numSamples);
+                filters[iii]->processBlock(&tempBuffer[0], numSamples);
                 
                 // add the processed samples to the output buffer
                 for (size_t jjj {0}; jjj < tempBuffer.size(); jjj++) {
@@ -111,7 +114,7 @@ public:
      * @see     Formant - This object is used to as a convenient container of all the
      *                    parameters which can be supplied to a bandpass filter.
      */
-    bool setFormants(std::vector<Formant> formants, double sampleRate) {
+    bool setFormants(std::vector<Formant> formants) {
         bool retVal {false};
         
         // if the correct number of formants have been supplied,
@@ -120,10 +123,10 @@ public:
             retVal = true;
             
             for (size_t iii {0}; iii < filters.size(); iii++) {
-                filters[iii]->setup(sampleRate,
-                                    formants[iii].frequency,
-                                    formants[iii].bandWidth,
-                                    formants[iii].gaindB);
+                filters[iii]->setCutoff(formants[iii].frequency);
+                
+                float gainAbs = pow(10, formants[iii].gaindB / 20.0);
+                filters[iii]->setGain(gainAbs);
             }
         }
         
@@ -131,17 +134,26 @@ public:
     }
     
     /**
+     * Sets the sample rate which the filters will be operating on.
+     */
+    void setSampleRate(double val) {
+        for (TPTSVFilter* filter : filters) {
+            filter->setSampleRate(val);
+        }
+    }
+    
+    /**
      * Resets all filters.
      * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
      */
     void reset() {
-        for (SongbirdBandPassFilter* filter : filters) {
+        for (TPTSVFilter* filter : filters) {
             filter->reset();
         }
     }
     
 private:
-    std::vector<SongbirdBandPassFilter*> filters;
+    std::vector<TPTSVFilter*> filters;
 };
 
 
