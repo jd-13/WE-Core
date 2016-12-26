@@ -1,4 +1,10 @@
-CXXFLAGS = -Wall -Wextra -Wconversion -Wshadow -Wpedantic
+CXXFLAGS = -Wall -Wextra -Wconversion -Wshadow
+
+ifeq ($(CXX), clang++)
+CXXFLAGS += -Wpedantic
+else
+CXXFLAGS += -pedantic
+endif
 
 default: WECoreTest
 
