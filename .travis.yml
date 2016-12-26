@@ -3,12 +3,12 @@ language: cpp
 compiler: gcc
 
 before_script:
-  svn checkout https://github.com/philsquared/Catch/trunk/single_include/
-  CATCH_PATH=`pwd`/single_include/
-  BUILD_ROOT=`pwd`
+  - svn checkout https://github.com/philsquared/Catch/trunk/single_include/
+  - CATCH_PATH=`pwd`/single_include/
+  - WECORE_SRC=`pwd`
 
-  echo $BUILD_ROOT
-  echo $CATCH_PATH
+  - echo $WECORE_SRC
+  - echo $CATCH_PATH
 
 script:
   - make
