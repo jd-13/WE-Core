@@ -1,4 +1,5 @@
-CXXFLAGS = -Wall -Wextra -Wconversion -Wshadow
+CXXFLAGS = -std=c++11 -Wall -Werror -Wextra -Wconversion -Wshadow
+WECORE_HEADERS = -I$(WECORE_SRC)/General -I$(WECORE_SRC)/Tests -I$(WECORE_SRC)/CarveDSP
 
 ifeq ($(CXX), clang++)
 CXXFLAGS += -Wpedantic
@@ -9,12 +10,13 @@ endif
 default: WECoreTest
 
 catchMain.o: $(WECORE_SRC)/Tests/catchMain.cpp
-	$(info $$WECORE_SRC is [${WECORE_SRC}])
-	$(info $$CATCH_PATH is [${CATCH_PATH}])
 	$(CXX) -c $(WECORE_SRC)/Tests/catchMain.cpp -o catchMain.o -I$(CATCH_PATH) $(CXXFLAGS)
 
-WECoreTest: catchMain.o
-	$(CXX) catchMain.o -o WECoreTest
+CarveDSPUnitTests.o: $(WECORE_SRC)/Tests/CarveDSPUnitTests.cpp
+	$(CXX) -c $(WECORE_SRC)/Tests/CarveDSPUnitTests.cpp -o CarveDSPUnitTests.o -I$(CATCH_PATH) $(WECORE_HEADERS) $(CXXFLAGS)
+
+WECoreTest: catchMain.o CarveDSPUnitTests.o
+	$(CXX) catchMain.o CarveDSPUnitTests.o -o WECoreTest
 
 clean:
 	rm *.o

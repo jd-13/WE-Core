@@ -9,6 +9,8 @@
 #ifndef CoreTestLib_h
 #define CoreTestLib_h
 
+#include <iostream>
+
 namespace CoreTestLib {
     const float TOLERANCE_6DP {0.000001f};
     const float TOLERANCE_4DP {0.0001f};
