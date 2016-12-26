@@ -7,3 +7,4 @@ engines:
       stds:
         - c++11
       platform: unix64
+      includes: ./
