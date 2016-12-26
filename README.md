@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/jd-13/WE-Core.svg?branch=master)](https://travis-ci.org/jd-13/WE-Core)
-<a href="https://codeclimate.com/github/jd-13/WE-Core"><img src="https://codeclimate.com/github/jd-13/WE-Core/badges/issue_count.svg" /></a>
 
 # WE-Core
 A set of core libraries for useful DSP related classes that are used by multiple White Elephant Audio VSTs and Audio Units.  
