@@ -9,7 +9,9 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-5
-      env: COMPILER=g++-5
+      env:
+        - COMPILER=g++-5
+        - CCX=g++-5
     - compiler: clang
       addons:
         apt:
@@ -18,7 +20,9 @@ matrix:
             - llvm-toolchain-precise-3.7
           packages:
             - clang-3.7
-      env: COMPILER=clang++-3.7
+      env:
+        - COMPILER=clang++-3.7
+        - CCX=clang++-5
 
 before_script:
   - svn checkout https://github.com/philsquared/Catch/trunk/single_include/
