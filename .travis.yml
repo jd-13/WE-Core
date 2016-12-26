@@ -7,4 +7,6 @@ before_script:
 
 script:
   - make
+
+after_success:
   - ./WECoreTest
