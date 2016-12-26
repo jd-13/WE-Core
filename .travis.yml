@@ -1,6 +1,8 @@
 language: cpp
 
-compiler: g++
+compiler:
+  - g++
+  - clang
 
 before_script:
   - svn checkout https://github.com/philsquared/Catch/trunk/single_include/
