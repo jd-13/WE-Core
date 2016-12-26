@@ -1,0 +1,14 @@
+language: cpp
+
+compiler: gcc
+
+before_script:
+  svn checkout https://github.com/philsquared/Catch/trunk/single_include/
+  CATCH_PATH=`pwd`/single_include/
+  BUILD_ROOT=`pwd`
+
+  echo $BUILD_ROOT
+  echo $CATCH_PATH
+
+script:
+  - make
