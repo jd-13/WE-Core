@@ -53,7 +53,7 @@ SCENARIO("Parameters enforce their bounds correctly") {
             
             THEN("Parameters enforce their lower bounds") {
                 REQUIRE(mCarve.getMode() == 1);
-                REQUIRE(mCarve.getPreGain() == 0);
+                REQUIRE(mCarve.getPreGain() == 0.5);
                 REQUIRE(mCarve.getPostGain() == 0);
                 REQUIRE(mCarve.getTweak() == -1);
             }
