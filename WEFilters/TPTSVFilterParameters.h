@@ -33,7 +33,7 @@ namespace TPTSVFilterParameters {
         
         static const int    BYPASS = 1,
                             LOWPASS = 2,
-                            BANDPASS = 3,
+                            PEAK = 3,
                             HIGHPASS = 4;
     };
 

@@ -51,7 +51,7 @@ public:
     SongbirdFormantFilter(int numFormants = 5) {
         for (int iii {0}; iii < numFormants; iii++) {
             TPTSVFilter* tempFilter = new TPTSVFilter();
-            tempFilter->setMode(TPTSVFilterParameters::FILTER_MODE.BANDPASS);
+            tempFilter->setMode(TPTSVFilterParameters::FILTER_MODE.PEAK);
             tempFilter->setQ(15);
             filters.push_back(tempFilter);
         }

@@ -37,10 +37,10 @@ public:
     TPTSVFilter() : _sampleRate(44100),
                     _cutoffHz(TPTSVFilterParameters::CUTOFF.defaultValue),
                     _Q(TPTSVFilterParameters::Q.defaultValue),
-                    _mode(TPTSVFilterParameters::FILTER_MODE.BYPASS),
                     _gain(TPTSVFilterParameters::GAIN.defaultValue),
                     _s1(0),
-                    _s2(0) {}
+                    _s2(0),
+                    _mode(TPTSVFilterParameters::FILTER_MODE.BYPASS) {}
     
     virtual ~TPTSVFilter() {}
     
@@ -62,7 +62,7 @@ public:
                 _s2 = g * yB + yL;
                 
                 switch (_mode) {
-                    case TPTSVFilterParameters::FILTER_MODE.BANDPASS:
+                    case TPTSVFilterParameters::FILTER_MODE.PEAK:
                         inSamples[iii] = yB * _gain;
                         break;
                         
