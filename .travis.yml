@@ -10,5 +10,7 @@ before_script:
   - echo $WECORE_SRC
   - echo $CATCH_PATH
 
+  - ls -lR
+
 script:
   - make
