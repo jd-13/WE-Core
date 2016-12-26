@@ -1,28 +1,10 @@
 language: cpp
 
-matrix:
-  include:
-    - compiler: g++
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-5
-      env:
-        - COMPILER=g++-5
-        - CCX=g++-5
-    - compiler: clang
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-precise-3.7
-          packages:
-            - clang-3.7
-      env:
-        - COMPILER=clang++-3.7
-        - CCX=clang++-5
+dist: trusty
+
+-compiler:
+  - g++
+  - clang
 
 before_script:
   - svn checkout https://github.com/philsquared/Catch/trunk/single_include/
