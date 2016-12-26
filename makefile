@@ -1,11 +1,10 @@
 CXX = g++
 
-echo $(WECORE_SRC)
-echo $(CATCH_PATH)
-
 default: WECoreTest
 
 catchMain.o: $(WECORE_SRC)/Tests/catchMain.cpp
+	$(info $$WECORE_SRC is [${WECORE_SRC}])
+	$(info $$CATCH_PATH is [${CATCH_PATH}])
 	$(CXX) -c $(WECORE_SRC)/Tests/catchMain.cpp -o catchMain.o -I$(CATCH_PATH)
 
 WECoreTest: catchMain.o
