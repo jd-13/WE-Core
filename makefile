@@ -1,5 +1,8 @@
 CXX = g++
 
+echo $(WECORE_SRC)
+echo $(CATCH_PATH)
+
 default: WECoreTest
 
 catchMain.o: $(WECORE_SRC)/Tests/catchMain.cpp
