@@ -41,7 +41,7 @@
  
 class RichterLFOPair {
 public:
-    RichterLFOPair() : _LFO(), _MOD() {}
+    RichterLFOPair() : LFO(), MOD() {}
     
     virtual ~RichterLFOPair() {}
     
@@ -49,8 +49,8 @@ public:
      * Call each oscillator's reset method.
      */
     void reset() {
-        _LFO.reset();
-        _MOD.reset();
+        LFO.reset();
+        MOD.reset();
     }
     
     /**
@@ -68,20 +68,20 @@ public:
     void prepareForNextBuffer(double bpm,
                               double timeInSeconds,
                               double sampleRate) {
-        _LFO.setWaveTablePointers();
-        _MOD.setWaveTablePointers();
+        LFO.setWaveTablePointers();
+        MOD.setWaveTablePointers();
         
-        _MOD.calcFreq(bpm);
-        _MOD.calcPhaseOffset(timeInSeconds);
+        MOD.calcFreq(bpm);
+        MOD.calcPhaseOffset(timeInSeconds);
         
-        _LFO.calcFreq(bpm);
-        _LFO.calcPhaseOffset(timeInSeconds);
+        LFO.calcFreq(bpm);
+        LFO.calcPhaseOffset(timeInSeconds);
         
-        _LFO.calcSamplesPerTremoloCycle(sampleRate);
-        _MOD.calcSamplesPerTremoloCycle(sampleRate);
+        LFO.calcSamplesPerTremoloCycle(sampleRate);
+        MOD.calcSamplesPerTremoloCycle(sampleRate);
         
-        _LFO.calcNextScale();
-        _MOD.calcNextScale();
+        LFO.calcNextScale();
+        MOD.calcNextScale();
     }
     
     /**
@@ -94,15 +94,15 @@ public:
      * @return  The value of the RichterLFO's output at this moment, a value between 0 and 1.
      */
     double calcGainInLoop() {
-        _LFO.calcIndexAndScaleInLoop();
-        _MOD.calcIndexAndScaleInLoop();
+        LFO.calcIndexAndScaleInLoop();
+        MOD.calcIndexAndScaleInLoop();
         
-        return _LFO.calcGain(_MOD.getBypassSwitch(), _MOD.calcGain());
+        return LFO.calcGain(MOD.getBypassSwitch(), MOD.calcGain());
     }
     
     
-    RichterLFO _LFO;
-    RichterMOD _MOD;
+    RichterLFO LFO;
+    RichterMOD MOD;
     
     RichterLFOPair operator= (RichterLFOPair& other) = delete;
     RichterLFOPair(RichterLFOPair& other) = delete;
