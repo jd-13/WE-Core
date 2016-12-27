@@ -12,7 +12,7 @@
 #include "CoreTestLib.h"
 #include "CarveDSPUnit.h"
 
-SCENARIO("Parameters can be set and retrieved correctly") {
+SCENARIO("CarveDSPUnit: Parameters can be set and retrieved correctly") {
     GIVEN("A new CarveDSPUnit object") {
         CarveDSPUnit mCarve;
         
@@ -41,7 +41,7 @@ SCENARIO("Parameters can be set and retrieved correctly") {
     }
 }
 
-SCENARIO("Parameters enforce their bounds correctly") {
+SCENARIO("CarveDSPUnit: Parameters enforce their bounds correctly") {
     GIVEN("A new CarveDSPUnit object") {
         CarveDSPUnit mCarve;
         
@@ -75,7 +75,7 @@ SCENARIO("Parameters enforce their bounds correctly") {
     }
 }
 
-SCENARIO("Parameter combinations that should result in silence output for any input") {
+SCENARIO("CarveDSPUnit: Parameter combinations that should result in silence output for any input") {
     GIVEN("A new CarveDSPUnit object and a buffer of 0.5fs") {
         std::vector<double> buffer(1024);
         CarveDSPUnit mCarve;
@@ -142,7 +142,7 @@ SCENARIO("Parameter combinations that should result in silence output for any in
     }
 }
 
-SCENARIO("Silence in = silence out") {
+SCENARIO("CarveDSPUnit: Silence in = silence out") {
     GIVEN("A CarveDSPUnit and a buffer of silent samples") {
         std::vector<double> buffer(1024);
         CarveDSPUnit mCarve;
