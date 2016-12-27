@@ -1,5 +1,5 @@
 CXXFLAGS = -std=c++11 -Wall -Werror -Wextra -Wconversion -Wshadow
-WECORE_HEADERS = -I$(WECORE_SRC)/General -I$(WECORE_SRC)/Tests -I$(WECORE_SRC)/CarveDSP
+WECORE_HEADERS = -I$(WECORE_SRC)/General -I$(WECORE_SRC)/Tests -I$(WECORE_SRC)/CarveDSP -I$(WECORE_SRC)/RichterLFO
 
 ifeq ($(CXX), clang++)
 CXXFLAGS += -Wpedantic
@@ -15,8 +15,12 @@ catchMain.o: $(WECORE_SRC)/Tests/catchMain.cpp
 CarveDSPUnitTests.o: $(WECORE_SRC)/Tests/CarveDSPUnitTests.cpp
 	$(CXX) -c $(WECORE_SRC)/Tests/CarveDSPUnitTests.cpp -o CarveDSPUnitTests.o -I$(CATCH_PATH) $(WECORE_HEADERS) $(CXXFLAGS)
 
-WECoreTest: catchMain.o CarveDSPUnitTests.o
-	$(CXX) catchMain.o CarveDSPUnitTests.o -o WECoreTest
+RichterLFOPairTests.o: $(WECORE_SRC)/Tests/RichterLFOPairTests.cpp
+	$(CXX) -c $(WECORE_SRC)/Tests/RichterLFOPairTests.cpp -o RichterLFOPairTests.o -I$(CATCH_PATH) $(WECORE_HEADERS) $(CXXFLAGS)
+
+
+WECoreTest: catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o
+	$(CXX) catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o -o WECoreTest
 
 clean:
 	rm *.o
