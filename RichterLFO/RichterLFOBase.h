@@ -160,11 +160,12 @@ public:
     RichterLFOBase(RichterLFOBase& other) = delete;
     
 protected:
-    int manualPhase,
-        wave,
-        index,
-        indexOffset,
-        samplesProcessed;
+    int     manualPhase,
+            wave,
+            index,
+            indexOffset;
+    
+    long    samplesProcessed;
     
     bool    bypassSwitch,
             tempoSyncSwitch,
@@ -259,7 +260,7 @@ protected:
     void calcIndexAndScaleInLoop() {
         // calculate the current index within the wave table
         
-        index = static_cast<long>(samplesProcessed * currentScale) % kWaveArraySize;
+        index = static_cast<long>(samplesProcessed * currentScale) % static_cast<long>(kWaveArraySize);
         
         if ((nextScale != currentScale) && (index == 0)) {
             currentScale = nextScale;
