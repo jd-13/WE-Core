@@ -123,25 +123,13 @@ public:
     
     // set parameter methods, w/ integrated bounds checks
     
-    void setRawFreq(float val) {
-        rawFreq = val;
-        rawFreq = FREQ.BoundsCheck(rawFreq);
-    }
+    void setRawFreq(double val) { rawFreq = FREQ.BoundsCheck(val); }
     
-    void setFreqMod(float val) {
-        freqMod = val;
-        freqMod = FREQMOD.BoundsCheck(freqMod);
-    }
+    void setFreqMod(double val) { freqMod = FREQMOD.BoundsCheck(val); }
     
-    void setRawDepth(float val) {
-        rawDepth = val;
-        rawDepth = DEPTH.BoundsCheck(rawDepth);
-    }
+    void setRawDepth(double val) { rawDepth = DEPTH.BoundsCheck(val); }
     
-    void setDepthMod(float val) {
-        depthMod = val;
-        depthMod = DEPTHMOD.BoundsCheck(depthMod);
-    }
+    void setDepthMod(double val) { depthMod = DEPTHMOD.BoundsCheck(val); }
     
     /**
      * Use this in your processing loop. Returns a gain value which is intended to be

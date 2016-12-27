@@ -110,9 +110,9 @@ public:
     
     void setTempoDenom (int val) { tempoDenom = TEMPODENOM.BoundsCheck(val); }
     
-    void setFreq(float val) { freq = FREQ.BoundsCheck(val); }
+    void setFreq(double val) { freq = FREQ.BoundsCheck(val); }
     
-    void setDepth(float val) { depth = DEPTH.BoundsCheck(val); }
+    void setDepth(double val) { depth = DEPTH.BoundsCheck(val); }
     
     void setManualPhase(int val) { manualPhase = PHASE.BoundsCheck(val); }
     
