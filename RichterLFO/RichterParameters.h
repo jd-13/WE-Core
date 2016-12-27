@@ -26,7 +26,7 @@
 
 #include "ParameterDefinition.h"
 
-enum	{kWaveArraySize = 2000};
+const int kWaveArraySize {2000};
 
 class WaveParameter : public ParameterDefinition::BaseParameter<int> {
 public:
