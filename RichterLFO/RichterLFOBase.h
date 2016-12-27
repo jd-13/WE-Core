@@ -259,8 +259,8 @@ protected:
      */
     void calcIndexAndScaleInLoop() {
         // calculate the current index within the wave table
-        
-        index = static_cast<long>(samplesProcessed * currentScale) % static_cast<long>(kWaveArraySize);
+        index = static_cast<long>(samplesProcessed * static_cast<long double>(currentScale))
+                % static_cast<long>(kWaveArraySize);
         
         if ((nextScale != currentScale) && (index == 0)) {
             currentScale = nextScale;
