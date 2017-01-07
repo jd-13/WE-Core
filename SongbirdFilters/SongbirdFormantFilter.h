@@ -74,16 +74,16 @@ public:
      * @param   inSample    Pointer to the first sample of the buffer
      * @param   numSamples  Number of samples in the buffer
      */
-    void process(float* inSamples, int numSamples) {
+    void process(double* inSamples, size_t numSamples) {
         if (numSamples > 0 && inSamples != nullptr) {
             
             // initialise the empty output buffer
-            std::vector<float> outputBuffer(numSamples, 0);
+            std::vector<double> outputBuffer(numSamples, 0);
             
             // perform the filtering for each formant peak
             for (size_t iii {0}; iii < filters.size(); iii++) {
                 // copy the input samples to a new buffer
-                std::vector<float> tempBuffer(inSamples, inSamples + numSamples);
+                std::vector<double> tempBuffer(inSamples, inSamples + numSamples);
                 
                 filters[iii]->processBlock(&tempBuffer[0], numSamples);
                 
@@ -94,7 +94,7 @@ public:
             }
             
             // write the buffer to output
-            for (int iii {0}; iii < numSamples; iii++) {
+            for (size_t iii {0}; iii < numSamples; iii++) {
                 inSamples[iii] = outputBuffer[iii];
             }
         }
@@ -125,7 +125,7 @@ public:
             for (size_t iii {0}; iii < filters.size(); iii++) {
                 filters[iii]->setCutoff(formants[iii].frequency);
                 
-                float gainAbs = pow(10, formants[iii].gaindB / 20.0);
+                double gainAbs = pow(10, formants[iii].gaindB / 20.0);
                 filters[iii]->setGain(gainAbs);
             }
         }

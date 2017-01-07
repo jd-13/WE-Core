@@ -214,20 +214,20 @@ public:
      * @param   numSamples      Number of samples in the buffer. The left and right buffers
      *                          must be the same size.
      */
-    void Process2in2out(float* leftSamples,
-                        float* rightSamples,
-                        int numSamples) {
+    void Process2in2out(double* leftSamples,
+                        double* rightSamples,
+                        size_t numSamples) {
         
         if (leftSamples != nullptr && rightSamples != nullptr && numSamples > 0) {
             
             // create two buffers of dry samples
-            std::map<Channels, std::vector<float>> outputBuffer1;
-            outputBuffer1[Channels::LEFT] = std::vector<float>(leftSamples,
+            std::map<Channels, std::vector<double>> outputBuffer1;
+            outputBuffer1[Channels::LEFT] = std::vector<double>(leftSamples,
                                                                leftSamples + numSamples);
-            outputBuffer1[Channels::RIGHT] = std::vector<float>(rightSamples,
+            outputBuffer1[Channels::RIGHT] = std::vector<double>(rightSamples,
                                                                 rightSamples + numSamples);
             
-            std::map<Channels, std::vector<float>> outputBuffer2(outputBuffer1);
+            std::map<Channels, std::vector<double>> outputBuffer2(outputBuffer1);
             
 
             // figure out the modulation here. We have two ways to modulation between
@@ -297,22 +297,22 @@ private:
     
     Vowel calcModVowel() {
         // get the first and second vowels
-        Vowel vowel1 {getVowelDescription(getVowel1())};
-        Vowel vowel2 {getVowelDescription(getVowel2())};
+        Vowel tempVowel1 {getVowelDescription(getVowel1())};
+        Vowel tempVowel2 {getVowelDescription(getVowel2())};
         
         // set the frequency values
-        Vowel retVal {vowel1};
+        Vowel retVal {tempVowel1};
         
-        for (int iii {0}; iii < NUM_FORMANTS_PER_VOWEL; iii++) {
+        for (size_t iii {0}; iii < NUM_FORMANTS_PER_VOWEL; iii++) {
             // Calculate frequency modualtion
-            float freqDelta {std::fabs(vowel1[iii].frequency - vowel2[iii].frequency)};
+            float freqDelta {std::fabs(tempVowel1[iii].frequency - tempVowel2[iii].frequency)};
             
-            retVal[iii].frequency = vowel1[iii].frequency + freqDelta / 2;
+            retVal[iii].frequency = tempVowel1[iii].frequency + freqDelta / 2;
             retVal[iii].frequency += (freqDelta / 2) * modulationSrc;
             
             // Calculate gain modulation
-            float gainDelta {std::fabs(vowel1[iii].gaindB - vowel2[iii].gaindB)};
-            retVal[iii].gaindB = vowel1[iii].gaindB + gainDelta;
+            float gainDelta {std::fabs(tempVowel1[iii].gaindB - tempVowel2[iii].gaindB)};
+            retVal[iii].gaindB = tempVowel1[iii].gaindB + gainDelta;
             retVal[iii].gaindB += (gainDelta / 2) * modulationSrc;
         }
         
