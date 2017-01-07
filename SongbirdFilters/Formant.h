@@ -29,15 +29,14 @@
  */
 class Formant {
 public:
+    Formant() : frequency(0), gaindB(0) {}
+    
     Formant(int newFreq,
-            int newGaindB,
-            int newBandWidth) : frequency(newFreq),
-    gaindB(newGaindB),
-    bandWidth(newBandWidth) {}
+            int newGaindB) : frequency(newFreq),
+    gaindB(newGaindB) {}
     
     int frequency;
     int gaindB;
-    int bandWidth;
 };
 
 #endif  // FORMANT_H_INCLUDED
