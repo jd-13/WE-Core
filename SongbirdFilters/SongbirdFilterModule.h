@@ -30,16 +30,17 @@
 #include "SongbirdFiltersParameters.h"
 #include <array>
 
-/**
- * The number of formants (bandpass filters) which are used in a single vowel.
- */
-static const int NUM_FORMANTS_PER_VOWEL {5};
+namespace  {
+    /**
+     * The number of formants (bandpass filters) which are used in a single vowel.
+     */
+    static const int NUM_FORMANTS_PER_VOWEL {5};
 
-/**
- * The number of vowels supported.
- */
-static const int NUM_VOWELS {5};
-
+    /**
+     * The number of vowels supported.
+     */
+    static const int NUM_VOWELS {5};
+}
 /**
  * A type to make refering to a group of formants easier.
  */
@@ -79,7 +80,9 @@ public:
                                 vowel2(VOWEL.VOWEL_E),
                                 filterPosition(FILTER_POSITION.defaultValue),
                                 sampleRate(44100),
-                                mix(MIX.defaultValue) {
+                                mix(MIX.defaultValue),
+                                modulationSrc(MODULATION.defaultValue),
+                                modMode(MODMODE_DEFAULT) {
         
         // initialise the filters to some default values
         setVowel1(vowel1);
@@ -117,20 +120,6 @@ public:
     }
     
     /**
-     * Sets the vowel sound that should be created by filter 1 using a Vowel
-     * object provided by the caller rather than one of the built in Vowel
-     * objects stored in this class.
-     *
-     * @param   val Value that should be used for Vowel 1
-     */
-    void setVowel1(Vowel val) {
-        const std::vector<Formant> tempFormants(val.begin(), val.end());
-        
-        filters1[Channels::LEFT].setFormants(tempFormants);
-        filters1[Channels::RIGHT].setFormants(tempFormants);
-    }
-    
-    /**
      * Sets the vowel sound that should be created by filter 2.
      *
      * @param   val Value that should be used for Vowel 2
@@ -143,20 +132,6 @@ public:
         
         const std::vector<Formant> tempFormants(&allFormants[vowel2 - 1][0],
                                                 &allFormants[vowel2 - 1][NUM_FORMANTS_PER_VOWEL]);
-        filters2[Channels::LEFT].setFormants(tempFormants);
-        filters2[Channels::RIGHT].setFormants(tempFormants);
-    }
-    
-    /**
-     * Sets the vowel sound that should be created by filter 2 using a Vowel
-     * object provided by the caller rather than one of the built in Vowel
-     * objects stored in this class.
-     *
-     * @param   val Value that should be used for Vowel 1
-     */
-    void setVowel2(Vowel val) {
-        const std::vector<Formant> tempFormants(val.begin(), val.end());
-        
         filters2[Channels::LEFT].setFormants(tempFormants);
         filters2[Channels::RIGHT].setFormants(tempFormants);
     }
@@ -187,6 +162,10 @@ public:
      * @see     MIX for valid values
      */
     void setMix(float val) { mix = MIX.BoundsCheck(val); }
+    
+    void setModulation(float val) { modulationSrc = MODULATION.BoundsCheck(val); }
+    
+    void setModMode(bool val) { modMode = val; }
     
     /**
      * Resets all filters.
@@ -234,6 +213,8 @@ public:
      */
     float getMix() { return mix; }
     
+    bool getModMode() { return modMode; }
+    
     /**
      * Applies the filtering to a stereo buffer of samples.
      * Expect seg faults or other memory issues if arguements passed are incorrect.
@@ -248,6 +229,7 @@ public:
                         int numSamples) {
         
         if (leftSamples != nullptr && rightSamples != nullptr && numSamples > 0) {
+            
             // create two buffers of dry samples
             std::map<Channels, std::vector<float>> outputBuffer1;
             outputBuffer1[Channels::LEFT] = std::vector<float>(leftSamples,
@@ -256,6 +238,20 @@ public:
                                                                 rightSamples + numSamples);
             
             std::map<Channels, std::vector<float>> outputBuffer2(outputBuffer1);
+            
+
+            // figure out the modulation here. We have two ways to modulation between
+            // two formant filters. For MODMODE_BLEND we modulation the filter position
+            // to blend between the two filters. For MODMOD_FREQ we set the filter
+            // position to 0 so that we're only using filter 1, and then modulate the
+            // freqency of filter 1 between the two vowels
+            float modFilterPosition;
+            if (modMode == MODMODE_BLEND) {
+                modFilterPosition = filterPosition + modulationSrc;
+            } else {
+                modFilterPosition = 0;
+                setVowel1(calcModVowel());
+            }
             
             // do the processing for each filter
             filters1[Channels::LEFT].process(&outputBuffer1[Channels::LEFT][0], numSamples);
@@ -273,14 +269,15 @@ public:
                                                    numSamples);
             
             // write to output, applying filter position and mix level
+            // always use modFilterPosition as this will take into account any modulation
             for (size_t iii {0}; iii < numSamples; iii++) {
                 leftSamples[iii] =  leftSamples[iii] * (1 - mix)
-                + outputBuffer1[Channels::LEFT][iii] * (1 - filterPosition) * mix
-                + outputBuffer2[Channels::LEFT][iii] * filterPosition * mix;
+                + outputBuffer1[Channels::LEFT][iii] * (1 - modFilterPosition) * mix
+                + outputBuffer2[Channels::LEFT][iii] * modFilterPosition * mix;
                 
                 rightSamples[iii] = rightSamples[iii] * (1 - mix)
-                + outputBuffer1[Channels::RIGHT][iii] * (1 - filterPosition) * mix
-                + outputBuffer2[Channels::RIGHT][iii] * filterPosition * mix;
+                + outputBuffer1[Channels::RIGHT][iii] * (1 - modFilterPosition) * mix
+                + outputBuffer2[Channels::RIGHT][iii] * modFilterPosition * mix;
             }
         }
     }
@@ -289,16 +286,58 @@ public:
     SongbirdFilterModule(SongbirdFilterModule& other) = delete;
     
 private:
-    int vowel1;
-    int vowel2;
-    float filterPosition;
-    float sampleRate;
-    float mix;
+    int vowel1,
+        vowel2;
+    
+    float   filterPosition,
+            sampleRate,
+            mix,
+            modulationSrc;
+    
+    bool modMode;
     
     std::map<Channels, SongbirdFormantFilter> filters1;
     std::map<Channels, SongbirdFormantFilter> filters2;
     
     std::vector<CarveNoiseFilter*> _noiseFilters;
+    
+    /**
+     * Sets the vowel sound that should be created by filter 1 using a Vowel
+     * object provided by the caller rather than one of the built in Vowel
+     * objects stored in this class.
+     *
+     * @param   val Value that should be used for Vowel 1
+     */
+    void setVowel1(Vowel val) {
+        const std::vector<Formant> tempFormants(val.begin(), val.end());
+        
+        filters1[Channels::LEFT].setFormants(tempFormants);
+        filters1[Channels::RIGHT].setFormants(tempFormants);
+    }
+    
+    Vowel calcModVowel() {
+        // get the first and second vowels
+        Vowel vowel1 {getVowelDescription(getVowel1())};
+        Vowel vowel2 {getVowelDescription(getVowel2())};
+        
+        // set the frequency values
+        Vowel retVal {vowel1};
+        
+        for (int iii {0}; iii < NUM_FORMANTS_PER_VOWEL; iii++) {
+            // Calculate frequency modualtion
+            float freqDelta {std::fabs(vowel1[iii].frequency - vowel2[iii].frequency)};
+            
+            retVal[iii].frequency = vowel1[iii].frequency + freqDelta / 2;
+            retVal[iii].frequency += (freqDelta / 2) * modulationSrc;
+            
+            // Calculate gain modulation
+            float gainDelta {std::fabs(vowel1[iii].gaindB - vowel2[iii].gaindB)};
+            retVal[iii].gaindB = vowel1[iii].gaindB + gainDelta;
+            retVal[iii].gaindB += (gainDelta / 2) * modulationSrc;
+        }
+        
+        return retVal;
+    }
     
     /**
      * An array which defines all the formants that will be needed.

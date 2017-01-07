@@ -46,10 +46,15 @@ public:
  *      default value
  */
 const ParameterDefinition::RangedParameter<float>   FILTER_POSITION(0, 1, 0.5),
-                                                    MIX(0, 1, 1);
+                                                    MIX(0, 1, 1),
+                                                    MODULATION(-1, 1, 0);
 //@}
 
 const VowelParameter VOWEL(1, 5, 1);
+
+const bool  MODMODE_BLEND = false,
+            MODMODE_FREQ = true,
+            MODMODE_DEFAULT = MODMODE_BLEND;
 
 const int FILTER_ORDER {8};
 

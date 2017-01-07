@@ -35,8 +35,8 @@ public:
             int newGaindB) : frequency(newFreq),
     gaindB(newGaindB) {}
     
-    int frequency;
-    int gaindB;
+    float frequency;
+    float gaindB;
 };
 
 #endif  // FORMANT_H_INCLUDED
