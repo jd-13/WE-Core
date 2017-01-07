@@ -28,6 +28,7 @@
 #include <map>
 #include "CarveNoiseFilter.h"
 #include "SongbirdFiltersParameters.h"
+#include <array>
 
 /**
  * The number of formants (bandpass filters) which are used in a single vowel.
@@ -38,6 +39,11 @@ static const int NUM_FORMANTS_PER_VOWEL {5};
  * The number of vowels supported.
  */
 static const int NUM_VOWELS {5};
+
+/**
+ * A type to make refering to a group of formants easier.
+ */
+typedef std::array<Formant, NUM_VOWELS> Vowel;
 
 /**
  * Enums used to make identifing left or right channel filters easier
@@ -92,7 +98,8 @@ public:
     }
     
     /**
-     * Sets the vowel sound that should be created by filter 1.
+     * Sets the vowel sound that should be created by filter 1 using one of
+     * the built in Vowel objects stored in this class.
      *
      * @param   val Value that should be used for Vowel 1
      *
@@ -104,6 +111,20 @@ public:
         
         const std::vector<Formant> tempFormants(&allFormants[vowel1 - 1][0],
                                                 &allFormants[vowel1 - 1][NUM_FORMANTS_PER_VOWEL]);
+        
+        filters1[Channels::LEFT].setFormants(tempFormants);
+        filters1[Channels::RIGHT].setFormants(tempFormants);
+    }
+    
+    /**
+     * Sets the vowel sound that should be created by filter 1 using a Vowel
+     * object provided by the caller rather than one of the built in Vowel
+     * objects stored in this class.
+     *
+     * @param   val Value that should be used for Vowel 1
+     */
+    void setVowel1(Vowel val) {
+        const std::vector<Formant> tempFormants(val.begin(), val.end());
         
         filters1[Channels::LEFT].setFormants(tempFormants);
         filters1[Channels::RIGHT].setFormants(tempFormants);
@@ -122,6 +143,20 @@ public:
         
         const std::vector<Formant> tempFormants(&allFormants[vowel2 - 1][0],
                                                 &allFormants[vowel2 - 1][NUM_FORMANTS_PER_VOWEL]);
+        filters2[Channels::LEFT].setFormants(tempFormants);
+        filters2[Channels::RIGHT].setFormants(tempFormants);
+    }
+    
+    /**
+     * Sets the vowel sound that should be created by filter 2 using a Vowel
+     * object provided by the caller rather than one of the built in Vowel
+     * objects stored in this class.
+     *
+     * @param   val Value that should be used for Vowel 1
+     */
+    void setVowel2(Vowel val) {
+        const std::vector<Formant> tempFormants(val.begin(), val.end());
+        
         filters2[Channels::LEFT].setFormants(tempFormants);
         filters2[Channels::RIGHT].setFormants(tempFormants);
     }
@@ -175,6 +210,21 @@ public:
     int getVowel2() { return vowel2; }
     
     /**
+     * Return a vowel object describing one of the built in vowels.
+     *
+     * @see     VowelParameter for valid values
+          */
+    Vowel getVowelDescription(int val) {
+        Vowel tempVowel;
+        
+        std::copy(&allFormants[val - 1][0],
+                  &allFormants[val - 1][NUM_FORMANTS_PER_VOWEL],
+                  std::begin(tempVowel));
+        
+        return tempVowel;
+    }
+    
+    /**
      * @see setFilterPosition
      */
     float getFilterPosition() { return filterPosition; }
@@ -188,8 +238,8 @@ public:
      * Applies the filtering to a stereo buffer of samples.
      * Expect seg faults or other memory issues if arguements passed are incorrect.
      *
-     * @param   inLeftSample    Pointer to the first sample of the left channel's buffer
-     * @param   inRightSample   Pointer to the first sample of the right channel's buffer
+     * @param   leftSamples    Pointer to the first sample of the left channel's buffer
+     * @param   rightSamples   Pointer to the first sample of the right channel's buffer
      * @param   numSamples      Number of samples in the buffer. The left and right buffers
      *                          must be the same size.
      */
@@ -255,11 +305,11 @@ private:
      */
     // (TODO: could be made static again)
     const Formant allFormants[NUM_VOWELS][NUM_FORMANTS_PER_VOWEL] {
-        {Formant(800, 0, 80), Formant(1150, -4, 90), Formant(2800, -20, 120), Formant(3500, -36, 130), Formant(4950, -60, 140)},
-        {Formant(400, 0, 60), Formant(1600, -24, 80), Formant(2700, -30, 120), Formant(3300, -35, 150), Formant(4950, -60, 200)},
-        {Formant(350, 0, 50), Formant(1700, -20, 100), Formant(2700, -30, 120), Formant(3700, -36, 150), Formant(4950, -60, 200)},
-        {Formant(450, 0, 70), Formant(800, -9, 80), Formant(2830, -16, 100), Formant(3500, -28, 130), Formant(4950, -55, 135)},
-        {Formant(325, 0, 50), Formant(700, -12, 60), Formant(2530, -30, 170), Formant(3500, -40, 180), Formant(4950, -64, 200)},
+        {Formant(800, 0), Formant(1150, -4), Formant(2800, -20), Formant(3500, -36), Formant(4950, -60)},
+        {Formant(400, 0), Formant(1600, -24), Formant(2700, -30), Formant(3300, -35), Formant(4950, -60)},
+        {Formant(350, 0), Formant(1700, -20), Formant(2700, -30), Formant(3700, -36), Formant(4950, -60)},
+        {Formant(450, 0), Formant(800, -9), Formant(2830, -16), Formant(3500, -28), Formant(4950, -55)},
+        {Formant(325, 0), Formant(700, -12), Formant(2530, -30), Formant(3500, -40), Formant(4950, -64)},
     };
 };
 
