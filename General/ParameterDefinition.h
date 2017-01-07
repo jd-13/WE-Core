@@ -36,6 +36,24 @@
  * provide some methods for performing calculations relating to those characteristics.
  */
 namespace ParameterDefinition {
+    /**
+     * If the given value is between the minimum and maximum values for this parameter,
+     * then the value is returned unchanged. If the given value is outside the minimum
+     * and maximum values for this parameter, the given value is clipped to this range
+     * and then returned.
+     *
+     * @param   val    Value to clip to minumum and maximum values
+     *
+     * @return  Clipped value
+     */
+    template <class A_Type>
+    A_Type BoundsCheck(A_Type val, A_Type min, A_Type max) {
+        if (val < min) val = min;
+        if (val > max) val = max;
+        
+        return val;
+    }
+    
     class BooleanParameter {
     public:
         BooleanParameter(bool newDefaultValue) :  defaultValue(newDefaultValue) {}
@@ -70,10 +88,7 @@ namespace ParameterDefinition {
          * @return  Clipped value
          */
         A_Type BoundsCheck(A_Type val) const {
-            if (val < minValue) val = minValue;
-            if (val > maxValue) val = maxValue;
-            
-            return val;
+            return ParameterDefinition::BoundsCheck(val, minValue, maxValue);
         }
     };
     
