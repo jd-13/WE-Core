@@ -301,7 +301,7 @@ private:
         Vowel tempVowel2(getVowelDescription(getVowel2()));
         
 
-        Vowel retVal {tempVowel1};
+        Vowel retVal(tempVowel1);
         
         for (size_t iii {0}; iii < NUM_FORMANTS_PER_VOWEL; iii++) {
             // Calculate frequency modulation
