@@ -182,7 +182,7 @@ public:
      * Return a vowel object describing one of the built in vowels.
      *
      * @see     VowelParameter for valid values
-          */
+     */
     Vowel getVowelDescription(int val) {
         Vowel tempVowel;
         
@@ -297,14 +297,14 @@ private:
     
     Vowel calcModVowel() {
         // get the first and second vowels
-        Vowel tempVowel1 {getVowelDescription(getVowel1())};
-        Vowel tempVowel2 {getVowelDescription(getVowel2())};
+        Vowel tempVowel1(getVowelDescription(getVowel1()));
+        Vowel tempVowel2(getVowelDescription(getVowel2()));
         
-        // set the frequency values
+
         Vowel retVal {tempVowel1};
         
         for (size_t iii {0}; iii < NUM_FORMANTS_PER_VOWEL; iii++) {
-            // Calculate frequency modualtion
+            // Calculate frequency modulation
             float freqDelta {std::fabs(tempVowel1[iii].frequency - tempVowel2[iii].frequency)};
             
             retVal[iii].frequency = tempVowel1[iii].frequency + freqDelta / 2;
