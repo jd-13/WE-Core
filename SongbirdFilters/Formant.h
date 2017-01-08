@@ -31,9 +31,9 @@ class Formant {
 public:
     Formant() : frequency(0), gaindB(0) {}
     
-    Formant(int newFreq,
-            int newGaindB) : frequency(newFreq),
-    gaindB(newGaindB) {}
+    Formant(float newFreq,
+            float newGaindB) :  frequency(newFreq),
+                                gaindB(newGaindB) {}
     
     float frequency;
     float gaindB;
