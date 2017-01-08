@@ -7,7 +7,7 @@ compiler:
   - clang
 
 before_script:
-  - svn checkout https://github.com/philsquared/Catch/trunk/single_include/
+  - curl "https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp" --create-dirs -o "single_include/catch.hpp"
 
 script:
   - make
