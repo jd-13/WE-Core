@@ -1,8 +1,12 @@
-CXXFLAGS = -std=c++11 -Wall -Werror -Wextra -Wconversion -Wshadow
+CXXFLAGS = -std=c++14 -Wall -Werror -Wextra -Wconversion -Wshadow
 WECORE_HEADERS = -I$(WECORE_SRC)/General -I$(WECORE_SRC)/Tests -I$(WECORE_SRC)/CarveDSP -I$(WECORE_SRC)/RichterLFO -I$(WECORE_SRC)/SongbirdFilters -I$(WECORE_SRC)/WEFilters
 
 ifeq ($(CXX), clang++)
-CXXFLAGS += -Wpedantic
+CXXFLAGS += -Weverything -Wpedantic
+
+# TODO: work on removing the need for the below flags
+CXXFLAGS += -Wno-exit-time-destructors -Wno-float-equal -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion
+
 else
 CXXFLAGS += -pedantic
 endif

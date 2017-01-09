@@ -21,8 +21,8 @@
  *  along with WECore.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef Richter_RichterLFOBase_h
-#define Richter_RichterLFOBase_h
+#ifndef RichterLFOBase_h
+#define RichterLFOBase_h
 
 #define _USE_MATH_DEFINES
 
@@ -193,7 +193,7 @@ protected:
      * Calculates the phase offset to be applied to the oscillator, including any
      * offset required by the phase sync and any offset applied by the user.
      *
-     * @param:  timeInSeconds   Position of the host DAW's playhead at the start of
+     * @param   timeInSeconds   Position of the host DAW's playhead at the start of
      *                          playback.
      */
     void calcPhaseOffset(double timeInSeconds) {
@@ -279,4 +279,4 @@ protected:
     }
 };
 
-#endif
+#endif /* RichterLFOBase_h */

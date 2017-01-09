@@ -71,7 +71,7 @@ public:
      * Applies the filtering to a mono buffer of samples.
      * Expect seg faults or other memory issues if arguements passed are incorrect.
      *
-     * @param   inSample    Pointer to the first sample of the buffer
+     * @param   inSamples   Pointer to the first sample of the buffer
      * @param   numSamples  Number of samples in the buffer
      */
     void process(double* inSamples, size_t numSamples) {
@@ -106,7 +106,6 @@ public:
      * @param   formants    A vector of Formants, the size of which must equal the 
      *                      number of bandpass filters in the object, as a single Formant
      *                      is applied to single bandpass filter in a one-to-one fashion
-     * @param   sampleRate  The sample rate of the audio to be processed
      *
      * @return  A boolean value, true if the formants have been applied to the filters
      *          correctly, false if the operation failed

@@ -21,8 +21,8 @@
  *  along with WECore.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef Richter_RichterLFO_h
-#define Richter_RichterLFO_h
+#ifndef RichterLFO_h
+#define RichterLFO_h
 
 #include "RichterLFOBase.h"
 
@@ -106,7 +106,7 @@ public:
         }
     }
     
-    virtual ~RichterLFO() {};
+    virtual ~RichterLFO() = default;
     
     friend class RichterLFOPair;
 
@@ -225,4 +225,4 @@ private:
     }
 };
 
-#endif
+#endif /* RichterLFO_h */
