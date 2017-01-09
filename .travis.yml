@@ -5,7 +5,8 @@ dist: trusty
 addons:
   apt:
     sources:
-      - llvm-toolchain-trusty
+      - llvm-toolchain-trusty-3.7
+      - ubuntu-toolchain-r-test
     packages:
       - clang-3.7
       - g++-5
