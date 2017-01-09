@@ -2,6 +2,14 @@ language: cpp
 
 dist: trusty
 
+addons:
+  apt:
+    sources:
+      - llvm-toolchain-trusty
+    packages:
+      - clang-3.7
+      - g++-5
+
 compiler:
   - g++
   - clang
