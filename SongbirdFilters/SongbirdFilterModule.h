@@ -60,14 +60,14 @@ enum class Channels {
  * To use this class, simply call reset, and the process methods as necessary, using the provided
  * getter and setter methods to manipulate parameters.
  *
- * It is recommended to set all available parameters explicitly by calling their setter methods before
- * attempting to process any audio.
+ * It is recommended to set all available parameters explicitly by calling their setter methods
+ * before attempting to process any audio.
  *
  * Internally relies on the parameters provided in SongbirdFiltersParameters.h
  *
- * @see SongbirdFormantFilter   - SongbirdFilterModule is composed of two pairs of SongbirdFormantFilters
- *                                (pairs to allow stereo processing), each pair is assigned one of the five 
- *                                supported vowels at any time
+ * @see SongbirdFormantFilter   - SongbirdFilterModule is composed of two pairs of
+ *                                SongbirdFormantFilters (pairs to allow stereo processing), each
+ *                                pair is assigned one of the five supported vowels at any time
  */
 class SongbirdFilterModule {
 public:
@@ -126,6 +126,12 @@ public:
         filters2[Channels::RIGHT].setFormants(tempFormants);
     }
     
+    /**
+     * Sets the position between the two filters that have been selected.
+     * The effect of this parameter is dependant on the value of modMode.
+     * If MODMODE_BLEND is selected, then two sets of filters will be created
+     * 
+     */
     void setFilterPosition(float val) { filterPosition = FILTER_POSITION.BoundsCheck(val); }
     
     /**
@@ -235,12 +241,12 @@ public:
             // to blend between the two filters. For MODMOD_FREQ we set the filter
             // position to 0 so that we're only using filter 1, and then modulate the
             // freqency of filter 1 between the two vowels
-            float modFilterPosition;
+            float blendFilterPosition;
             if (modMode == MODMODE_BLEND) {
-                modFilterPosition = filterPosition + modulationSrc;
+                blendFilterPosition = filterPosition + modulationSrc;
             } else {
-                modFilterPosition = 0;
-                setVowel1(calcModVowel());
+                blendFilterPosition = 0;
+                setVowel1(calcVowelForFreqMode());
             }
             
             // do the processing for each filter
@@ -254,12 +260,12 @@ public:
             // always use modFilterPosition as this will take into account any modulation
             for (size_t iii {0}; iii < numSamples; iii++) {
                 leftSamples[iii] =  leftSamples[iii] * (1 - mix)
-                + outputBuffer1[Channels::LEFT][iii] * (1 - modFilterPosition) * mix
-                + outputBuffer2[Channels::LEFT][iii] * modFilterPosition * mix;
+                + outputBuffer1[Channels::LEFT][iii] * (1 - blendFilterPosition) * mix
+                + outputBuffer2[Channels::LEFT][iii] * blendFilterPosition * mix;
                 
                 rightSamples[iii] = rightSamples[iii] * (1 - mix)
-                + outputBuffer1[Channels::RIGHT][iii] * (1 - modFilterPosition) * mix
-                + outputBuffer2[Channels::RIGHT][iii] * modFilterPosition * mix;
+                + outputBuffer1[Channels::RIGHT][iii] * (1 - blendFilterPosition) * mix
+                + outputBuffer2[Channels::RIGHT][iii] * blendFilterPosition * mix;
             }
         }
     }
@@ -282,9 +288,8 @@ private:
     std::map<Channels, SongbirdFormantFilter> filters2;
     
     /**
-     * Sets the vowel sound that should be created by filter 1 using a Vowel
-     * object provided by the caller rather than one of the built in Vowel
-     * objects stored in this class.
+     * Sets the vowel sound that should be created by filter 1 using a Vowel object provided by the
+     * caller rather than one of the built in Vowel objects stored in this class.
      *
      * @param   val Value that should be used for Vowel 1
      */
@@ -295,7 +300,12 @@ private:
         filters1[Channels::RIGHT].setFormants(tempFormants);
     }
     
-    Vowel calcModVowel() {
+    /**
+     * Uses the filterPosition parameter and the modulation source to calculate the vowel that
+     * should be used when in MODMODE_FREQ, as this vowel will sit somewhere between the two vowels
+     * that have been selected by the user.
+     */
+    Vowel calcVowelForFreqMode() {
         // get the first and second vowels
         Vowel tempVowel1(getVowelDescription(getVowel1()));
         Vowel tempVowel2(getVowelDescription(getVowel2()));
@@ -308,12 +318,16 @@ private:
             float freqDelta {std::fabs(tempVowel1[iii].frequency - tempVowel2[iii].frequency)};
             
             retVal[iii].frequency = tempVowel1[iii].frequency + freqDelta / 2;
-            retVal[iii].frequency += (freqDelta / 2) * modulationSrc;
+            retVal[iii].frequency += (freqDelta / 2) * modulationSrc
+                                     + (freqDelta / 2) * filterPosition;
             
             // Calculate gain modulation
+            // TODO: this doesn't seem to work right...
             float gainDelta {std::fabs(tempVowel1[iii].gaindB - tempVowel2[iii].gaindB)};
             retVal[iii].gaindB = tempVowel1[iii].gaindB + gainDelta;
-            retVal[iii].gaindB += (gainDelta / 2) * modulationSrc;
+            retVal[iii].gaindB += (gainDelta / 2) * modulationSrc
+                                  + (gainDelta / 2) * filterPosition;
+            
         }
         
         return retVal;
