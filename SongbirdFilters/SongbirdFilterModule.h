@@ -29,7 +29,7 @@
 #include "SongbirdFiltersParameters.h"
 #include <array>
 
-namespace  {
+namespace {
     /**
      * The number of formants (bandpass filters) which are used in a single vowel.
      */
@@ -314,20 +314,25 @@ private:
         Vowel retVal(tempVowel1);
         
         for (size_t iii {0}; iii < NUM_FORMANTS_PER_VOWEL; iii++) {
+            // TODO: There's definitely some optimisation to be done below
+            
             // Calculate frequency modulation
             float freqDelta {std::fabs(tempVowel1[iii].frequency - tempVowel2[iii].frequency)};
+            // Invert the delta depending on which value is largest
+            freqDelta *= (tempVowel1[iii].frequency > tempVowel2[iii].frequency) ? -1 : 1;
             
             retVal[iii].frequency = tempVowel1[iii].frequency + freqDelta / 2;
             retVal[iii].frequency += (freqDelta / 2) * modulationSrc
-                                     + (freqDelta / 2) * filterPosition;
+                                     + (freqDelta / 2) * ((filterPosition - 0.5) * 2);
             
             // Calculate gain modulation
-            // TODO: this doesn't seem to work right...
             float gainDelta {std::fabs(tempVowel1[iii].gaindB - tempVowel2[iii].gaindB)};
-            retVal[iii].gaindB = tempVowel1[iii].gaindB + gainDelta;
-            retVal[iii].gaindB += (gainDelta / 2) * modulationSrc
-                                  + (gainDelta / 2) * filterPosition;
+            // Invert the delta depending on which value is largest
+            gainDelta *= (tempVowel1[iii].gaindB > tempVowel2[iii].gaindB) ? -1 : 1;
             
+            retVal[iii].gaindB = tempVowel1[iii].gaindB + gainDelta / 2;
+            retVal[iii].gaindB += (gainDelta / 2) * modulationSrc
+                                  + (gainDelta / 2) * ((filterPosition - 0.5) * 2);
         }
         
         return retVal;
