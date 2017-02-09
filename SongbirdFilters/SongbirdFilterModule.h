@@ -319,7 +319,7 @@ private:
             // Calculate frequency modulation
             float freqDelta {std::fabs(tempVowel1[iii].frequency - tempVowel2[iii].frequency)};
             // Invert the delta depending on which value is largest
-            freqDelta *= (tempVowel1[iii].frequency > tempVowel2[iii].frequency) ? -1 : 1;
+            freqDelta *= (tempVowel1[iii].frequency > tempVowel2[iii].frequency) ? -1.0 : 1.0;
 
             retVal[iii].frequency = tempVowel1[iii].frequency + freqDelta / 2;
             retVal[iii].frequency += (freqDelta / 2) * modulationSrc
@@ -328,7 +328,7 @@ private:
             // Calculate gain modulation
             float gainDelta {std::fabs(tempVowel1[iii].gaindB - tempVowel2[iii].gaindB)};
             // Invert the delta depending on which value is largest
-            gainDelta *= (tempVowel1[iii].gaindB > tempVowel2[iii].gaindB) ? -1 : 1;
+            gainDelta *= (tempVowel1[iii].gaindB > tempVowel2[iii].gaindB) ? -1.0 : 1.0;
 
             retVal[iii].gaindB = tempVowel1[iii].gaindB + gainDelta / 2;
             retVal[iii].gaindB += (gainDelta / 2) * modulationSrc
