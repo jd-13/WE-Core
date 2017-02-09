@@ -30,6 +30,11 @@
 /**
  * A state variable filter from a topology-preserving transform.
  *
+ * To use this class, simply call reset, and the process methods as necessary, using the provided
+ * getter and setter methods to manipulate parameters.
+ *
+ * Internally relies on the parameters provided in TPTSVFilterParameters.h
+ *
  * Based on a talk given by Ivan Cohen: https://www.youtube.com/watch?v=esjHXGPyrhg
  */
 class TPTSVFilter {
@@ -42,8 +47,15 @@ public:
                     _s2(0),
                     _mode(TPTSVFilterParameters::FILTER_MODE.BYPASS) {}
     
-    virtual ~TPTSVFilter() {}
+    virtual ~TPTSVFilter() = default;
     
+    /**
+     * Applies the filtering to a buffer of samples.
+     * Expect seg faults or other memory issues if arguements passed are incorrect. 
+     *
+     * @param   inSamples     Pointer to the first sample of the left channel's buffer
+     * @param   numSamples    Number of samples in the buffer
+     */
     void processBlock(double* inSamples, size_t numSamples) {
         
         if (_mode != TPTSVFilterParameters::FILTER_MODE.BYPASS) {
@@ -78,6 +90,10 @@ public:
         }
     }
     
+    /**
+     * Resets filter coefficients.
+     * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
+     */
     void reset() {
         _s1 = 0;
         _s2 = 0;
