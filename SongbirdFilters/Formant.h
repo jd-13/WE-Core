@@ -31,12 +31,12 @@ class Formant {
 public:
     Formant() : frequency(0), gaindB(0) {}
     
-    Formant(float newFreq,
-            float newGaindB) :  frequency(newFreq),
+    Formant(double newFreq,
+            double newGaindB) : frequency(newFreq),
                                 gaindB(newGaindB) {}
     
-    float frequency;
-    float gaindB;
+    double frequency;
+    double gaindB;
 };
 
 #endif  // FORMANT_H_INCLUDED

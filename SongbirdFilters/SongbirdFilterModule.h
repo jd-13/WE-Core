@@ -317,7 +317,7 @@ private:
             // TODO: There's definitely some optimisation to be done below
 
             // Calculate frequency modulation
-            float freqDelta {std::fabs(tempVowel1[iii].frequency - tempVowel2[iii].frequency)};
+            double freqDelta {std::fabs(tempVowel1[iii].frequency - tempVowel2[iii].frequency)};
             // Invert the delta depending on which value is largest
             freqDelta *= (tempVowel1[iii].frequency > tempVowel2[iii].frequency) ? -1.0 : 1.0;
 
@@ -326,7 +326,7 @@ private:
                                      + (freqDelta / 2) * ((filterPosition - 0.5) * 2);
 
             // Calculate gain modulation
-            float gainDelta {std::fabs(tempVowel1[iii].gaindB - tempVowel2[iii].gaindB)};
+            double gainDelta {std::fabs(tempVowel1[iii].gaindB - tempVowel2[iii].gaindB)};
             // Invert the delta depending on which value is largest
             gainDelta *= (tempVowel1[iii].gaindB > tempVowel2[iii].gaindB) ? -1.0 : 1.0;
 
