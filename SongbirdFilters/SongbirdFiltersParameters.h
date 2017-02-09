@@ -45,7 +45,7 @@ public:
  *      maximum value,
  *      default value
  */
-const ParameterDefinition::RangedParameter<float>   FILTER_POSITION(0, 1, 0.5),
+const ParameterDefinition::RangedParameter<double>  FILTER_POSITION(0, 1, 0.5),
                                                     MIX(0, 1, 1),
                                                     MODULATION(-1, 1, 0);
 //@}
