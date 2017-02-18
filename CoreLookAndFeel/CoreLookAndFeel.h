@@ -252,15 +252,15 @@ public:
         g.drawFittedText(text, 0, 0, width, height, Justification::centred, 3);
     }
     
-    void setHighlightColour(Colour newColour) {
+    virtual void setHighlightColour(Colour newColour) {
         highlightColour = newColour;
     }
     
-    void setLightColour(Colour newColour) {
+    virtual void setLightColour(Colour newColour) {
         lightColour = newColour;
     }
     
-    void setDarkColour(Colour newColour) {
+    virtual void setDarkColour(Colour newColour) {
         darkColour = newColour;
     }
     
