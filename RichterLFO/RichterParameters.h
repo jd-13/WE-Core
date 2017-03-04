@@ -40,13 +40,13 @@ public:
 const WaveParameter WAVE(1, 3, 1);
 
 const ParameterDefinition::RangedParameter<int> TEMPONUMER(1, 4, 1),
-                                                TEMPODENOM(1, 32, 1),
-                                                PHASE(0, kWaveArraySize, 0);
+                                                TEMPODENOM(1, 32, 1);
 
 const ParameterDefinition::RangedParameter<double>  DEPTH(0, 1, 0.5),
                                                     DEPTHMOD(0, 1, 0),
                                                     FREQ(0.5, 20, 2),
-                                                    FREQMOD(0, 1, 0);
+                                                    FREQMOD(0, 1, 0),
+                                                    PHASE(0, kWaveArraySize, 0);
 
 const bool  LFOSWITCH_OFF = false,
             LFOSWITCH_ON = true,
