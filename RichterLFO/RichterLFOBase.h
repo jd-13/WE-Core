@@ -114,7 +114,7 @@ public:
     
     void setDepth(double val) { depth = DEPTH.BoundsCheck(val); }
     
-    void setManualPhase(int val) { manualPhase = PHASE.BoundsCheck(val); }
+    void setManualPhase(int val) { manualPhase = static_cast<int>(PHASE.BoundsCheck(val)); }
     
     void setWave(int val) { wave = WAVE.BoundsCheck(val); }
     
