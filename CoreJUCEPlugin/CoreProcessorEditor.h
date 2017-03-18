@@ -50,6 +50,7 @@ protected:
      * one is closed the other will stop applying defaultLookAndFeel.
      */
     void _assignLookAndFeelToAllChildren(LookAndFeel& defaultLookAndFeel) {
+        _tooltipWindow->setLookAndFeel(&defaultLookAndFeel);
         for (int iii {0}; iii < getNumChildComponents(); iii++) {
             getChildComponent(iii)->setLookAndFeel(&defaultLookAndFeel);
         }
