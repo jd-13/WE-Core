@@ -48,10 +48,10 @@ public:
     /**
      * Sets all parameters to their default values.
      */
-    CarveDSPUnit() :    preGain(PREGAIN.defaultValue),
-                        postGain(POSTGAIN.defaultValue),
-                        tweak(TWEAK.defaultValue),
-                        mode(MODE.defaultValue) { }
+    CarveDSPUnit() :    preGain(CarveParameters::PREGAIN.defaultValue),
+                        postGain(CarveParameters::POSTGAIN.defaultValue),
+                        tweak(CarveParameters::TWEAK.defaultValue),
+                        mode(CarveParameters::MODE.defaultValue) { }
     
     virtual ~CarveDSPUnit() {}
     
@@ -62,7 +62,7 @@ public:
      *
      * @param   val Value the mode should be set to
      */
-    void setMode(int val) { mode = MODE.BoundsCheck(val); }
+    void setMode(int val) { mode = CarveParameters::MODE.BoundsCheck(val); }
     
     /**
      * Sets the gain to be applied to the signal before processing.
@@ -72,7 +72,7 @@ public:
      *
      * @see     PREGAIN for valid values
      */
-    void setPreGain(double val) { preGain = PREGAIN.BoundsCheck(val); }
+    void setPreGain(double val) { preGain = CarveParameters::PREGAIN.BoundsCheck(val); }
     
     /**
      * Sets the gain to be applied to the signal after processing.
@@ -82,7 +82,7 @@ public:
      *
      * @see     POSTGAIN for valid values
      */
-    void setPostGain(double val) { postGain = POSTGAIN.BoundsCheck(val); }
+    void setPostGain(double val) { postGain = CarveParameters::POSTGAIN.BoundsCheck(val); }
     
     /**
      * Sets the tweak value to be applied to the signal during processing.
@@ -93,7 +93,7 @@ public:
      *
      * @see     TWEAK for valid values
      */
-    void setTweak(double val) { tweak = TWEAK.BoundsCheck(val); }
+    void setTweak(double val) { tweak = CarveParameters::TWEAK.BoundsCheck(val); }
     
     /**
      * @see     setMode
@@ -125,25 +125,25 @@ public:
      */
     double process (double inSample) const {
         switch (mode) {
-            case MODE.OFF:
+            case CarveParameters::MODE.OFF:
                 return 0;
                 
-            case MODE.SINE:
+            case CarveParameters::MODE.SINE:
                 return processSine(inSample);
                 
-            case MODE.PARABOLIC_SOFT:
+            case CarveParameters::MODE.PARABOLIC_SOFT:
                 return processParabolicSoft(inSample);
                 
-            case MODE.PARABOLIC_HARD:
+            case CarveParameters::MODE.PARABOLIC_HARD:
                 return processParabolicHard(inSample);
                 
-            case MODE.ASYMMETRIC_SINE:
+            case CarveParameters::MODE.ASYMMETRIC_SINE:
                 return processAsymmetricSine(inSample);
                 
-            case MODE.EXPONENT:
+            case CarveParameters::MODE.EXPONENT:
                 return processExponent(inSample);
                 
-            case MODE.CLIPPER:
+            case CarveParameters::MODE.CLIPPER:
                 return processClipper(inSample);
                 
             default:
