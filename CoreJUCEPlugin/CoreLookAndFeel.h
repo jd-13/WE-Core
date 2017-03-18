@@ -42,6 +42,9 @@ public:
         setColour(PopupMenu::backgroundColourId, lightColour);
     }
     
+    CoreLookAndFeel operator=(CoreLookAndFeel&) = delete;
+    CoreLookAndFeel(CoreLookAndFeel&) = delete;
+    
     virtual void drawRotarySlider(Graphics& g,
                                   int /*x*/,
                                   int /*y*/,
