@@ -26,14 +26,16 @@
 
 /**
  * Contains generic math related consts and functions.
- * Used for portability since Visual Studio has a different implementation of math.h
  */
 namespace CoreMath {
-    const long double LONG_PI {3.14159265358979323846264338327950288};
-    const double DOUBLE_PI {static_cast<double>(LONG_PI)};
+    /**
+     * Used for portability since Visual Studio has a different implementation of math.h
+     */
+    constexpr long double LONG_PI {3.14159265358979323846264338327950288};
+    constexpr double DOUBLE_PI {static_cast<double>(LONG_PI)};
+    
+    constexpr long double LONG_TAU {2 * LONG_PI};
+    constexpr double DOUBLE_TAU {static_cast<double>(LONG_TAU)};
 }
-
-
-
 
 #endif /* CoreMath_h */
