@@ -24,7 +24,7 @@
 #ifndef RichterParameters_h
 #define RichterParameters_h
 
-#include "ParameterDefinition.h"
+#include "General/ParameterDefinition.h"
 
 const int kWaveArraySize {2000};
 

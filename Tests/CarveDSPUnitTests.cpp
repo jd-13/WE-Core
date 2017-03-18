@@ -23,7 +23,7 @@
 
 #include "catch.hpp"
 #include "CoreTestLib.h"
-#include "CarveDSPUnit.h"
+#include "CarveDSP/CarveDSPUnit.h"
 
 SCENARIO("CarveDSPUnit: Parameters can be set and retrieved correctly") {
     GIVEN("A new CarveDSPUnit object") {

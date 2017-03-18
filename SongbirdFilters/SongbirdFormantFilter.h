@@ -24,8 +24,8 @@
 #ifndef SONGBIRDFORMANTFILTER_H_INCLUDED
 #define SONGBIRDFORMANTFILTER_H_INCLUDED
 
-#include "Formant.h"
-#include "TPTSVFilter.h"
+#include "SongbirdFilters/Formant.h"
+#include "WEFilters/TPTSVFilter.h"
 #include <vector>
 
 /**

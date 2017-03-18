@@ -24,7 +24,7 @@
 #ifndef TPTSVFILTERParameters_h
 #define TPTSVFILTERParameters_h
 
-#include "ParameterDefinition.h"
+#include "General/ParameterDefinition.h"
 
 namespace TPTSVFilterParameters {
     class FilterModeParameter : public ParameterDefinition::BaseParameter<int> {

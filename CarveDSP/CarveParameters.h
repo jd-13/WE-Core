@@ -24,7 +24,7 @@
 #ifndef CarveParameters_h
 #define CarveParameters_h
 
-#include "ParameterDefinition.h"
+#include "General/ParameterDefinition.h"
 
 class ModeParameter : public ParameterDefinition::BaseParameter<int> {
 public:

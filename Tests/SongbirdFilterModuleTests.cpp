@@ -23,7 +23,7 @@
 
 #include "catch.hpp"
 #include "CoreTestLib.h"
-#include "SongbirdFilterModule.h"
+#include "SongbirdFilters/SongbirdFilterModule.h"
 
 SCENARIO("SongbirdFilterModule: Parameters can be set and retrieved correctly") {
     GIVEN("A new SongbirdFilterModule object") {

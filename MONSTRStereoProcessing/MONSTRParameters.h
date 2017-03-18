@@ -24,7 +24,7 @@
 #ifndef MONSTRParameters_h
 #define MONSTRParameters_h
 
-#include "ParameterDefinition.h"
+#include "General/ParameterDefinition.h"
 
 const bool  BANDSWITCH_OFF {false},
             BANDSWITCH_ON {true},

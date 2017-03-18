@@ -24,7 +24,7 @@
 #ifndef SongbirdFiltersParameters_h
 #define SongbirdFiltersParameters_h
 
-#include "ParameterDefinition.h"
+#include "General/ParameterDefinition.h"
 
 class VowelParameter : public ParameterDefinition::BaseParameter<int> {
 public:

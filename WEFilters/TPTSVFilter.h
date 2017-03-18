@@ -25,7 +25,7 @@
 #define TPTSVFILTER_H_INCLUDED
 
 #include <cmath>
-#include "TPTSVFilterParameters.h"
+#include "WEFilters/TPTSVFilterParameters.h"
 
 /**
  * A state variable filter from a topology-preserving transform.

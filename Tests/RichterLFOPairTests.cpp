@@ -23,7 +23,7 @@
 
 #include "catch.hpp"
 #include "CoreTestLib.h"
-#include "RichterLFOPair.h"
+#include "RichterLFO/RichterLFOPair.h"
 
 SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
     GIVEN("A new RichterLFOPair object") {
