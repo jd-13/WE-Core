@@ -36,7 +36,6 @@ public:
     ~CoreProcessorEditor() = default;
     
 protected:
-    //    CoreProcessorEditor(AudioProcessor& ownerFilter) : AudioProcessorEditor(ownerFilter) {}
     CoreProcessorEditor(AudioProcessor& ownerFilter) : AudioProcessorEditor(ownerFilter) {}
 
     
