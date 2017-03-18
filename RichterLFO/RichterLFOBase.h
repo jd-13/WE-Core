@@ -24,10 +24,8 @@
 #ifndef RichterLFOBase_h
 #define RichterLFOBase_h
 
-#define _USE_MATH_DEFINES
-
-#include "math.h"
 #include "RichterParameters.h"
+#include "General/CoreMath.h"
 
 class RichterLFOPair;
 

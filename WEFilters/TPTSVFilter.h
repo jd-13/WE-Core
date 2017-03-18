@@ -24,7 +24,7 @@
 #ifndef TPTSVFILTER_H_INCLUDED
 #define TPTSVFILTER_H_INCLUDED
 
-#include <cmath>
+#include "General/CoreMath.h"
 #include "WEFilters/TPTSVFilterParameters.h"
 
 /**
@@ -59,7 +59,7 @@ public:
     void processBlock(double* inSamples, size_t numSamples) {
         
         if (_mode != TPTSVFilterParameters::FILTER_MODE.BYPASS) {
-            const double g {std::tan(M_PI * _cutoffHz / _sampleRate)};
+            const double g {std::tan(CoreMath::DOUBLE_PI * _cutoffHz / _sampleRate)};
             const double h {1.0f / (1 + g / _Q + g * g)};
             
             for (size_t iii {0}; iii < numSamples; iii++) {

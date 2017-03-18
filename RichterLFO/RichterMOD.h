@@ -53,7 +53,7 @@ public:
         for (int i = 0; i < kWaveArraySize; ++i) {
             
             // sine wavetable
-            double radians {i * 2.0 * M_PI / kWaveArraySize};
+            double radians {i * 2.0 * CoreMath::DOUBLE_PI / kWaveArraySize};
             mSine[i] = (sin (radians)) * 0.5;
             
             // square wavetable
@@ -70,9 +70,9 @@ public:
              );
             
             // saw wavetable
-            double sawRadians {radians + M_PI};
+            double sawRadians {radians + CoreMath::DOUBLE_PI};
             mSaw[i] =
-            (1/M_PI) *
+            (1/CoreMath::DOUBLE_PI) *
             (
              sin (sawRadians) -
              0.5 * sin (2 * sawRadians) +

@@ -26,10 +26,8 @@
 #ifndef Carve_CarveDSPUnit_h
 #define Carve_CarveDSPUnit_h
 
-#define _USE_MATH_DEFINES
-
-#include <cmath>
 #include "CarveParameters.h"
+#include "General/CoreMath.h"
 
 
 /**
@@ -160,23 +158,23 @@ private:
     
     // private process methods
     inline double processSine(double inSample) const {
-        return  ((((1 - std::abs(tweak/2)) * sin(M_PI * inSample * preGain)))
-                + ((tweak/2) * sin(4 * M_PI * inSample * preGain)))
+        return  ((((1 - std::abs(tweak/2)) * sin(CoreMath::DOUBLE_PI * inSample * preGain)))
+                + ((tweak/2) * sin(4 * CoreMath::DOUBLE_PI * inSample * preGain)))
                 * postGain;
     }
     
     inline double processParabolicSoft(double inSample) const {
-        return (M_PI * inSample * preGain * ((4 * tweak) - sqrt(4 * pow(inSample * M_PI * preGain, 2))) * 0.5) * postGain;
+        return (CoreMath::DOUBLE_PI * inSample * preGain * ((4 * tweak) - sqrt(4 * pow(inSample * CoreMath::DOUBLE_PI * preGain, 2))) * 0.5) * postGain;
     }
     
     inline double processParabolicHard(double inSample) const {
-        return  (((1 - std::abs(tweak/10)) * (atan(preGain * 4 * M_PI * inSample) / 1.5))
-                + ((tweak/10) * sin(M_PI * inSample * preGain)))
+        return  (((1 - std::abs(tweak/10)) * (atan(preGain * 4 * CoreMath::DOUBLE_PI * inSample) / 1.5))
+                + ((tweak/10) * sin(CoreMath::DOUBLE_PI * inSample * preGain)))
                 * postGain;
     }
     
     inline double processAsymmetricSine(double inSample) const {
-        return (cos(M_PI * inSample * (tweak + 1)) * atan(4 * M_PI * inSample * preGain)) * postGain;
+        return (cos(CoreMath::DOUBLE_PI * inSample * (tweak + 1)) * atan(4 * CoreMath::DOUBLE_PI * inSample * preGain)) * postGain;
     }
     
     inline double processExponent(double inSample) const {
@@ -186,7 +184,7 @@ private:
     }
     
     inline double processClipper(double inSample) const {
-        inSample *= M_PI * preGain;
+        inSample *= CoreMath::DOUBLE_PI * preGain;
         
         return (sin(0.5 * inSample) +
                 0.3 * sin(1.5 * inSample) +

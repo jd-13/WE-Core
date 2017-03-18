@@ -25,12 +25,8 @@
 #ifndef CORELOOKANDFEEL_H_INCLUDED
 #define CORELOOKANDFEEL_H_INCLUDED
 
-#define _USE_MATH_DEFINES
-
-#include "math.h"
 #include "../JuceLibraryCode/JuceHeader.h"
-
-
+#include "General/CoreMath.h"
 
 class CoreLookAndFeel : public LookAndFeel_V2 {
 public:
@@ -55,7 +51,7 @@ public:
                                   float /*rotaryEndAngle*/,
                                   Slider &slider) override {
         // calculate useful constants
-        const double rangeOfMotion {260 * (M_PI / 180)};
+        const double rangeOfMotion {260 * (CoreMath::DOUBLE_PI / 180)};
         const double rotation {((slider.getValue() - slider.getMinimum()) / (slider.getMaximum() - slider.getMinimum())) * rangeOfMotion - rangeOfMotion / 2};
         
         const int margin {1};
@@ -77,7 +73,7 @@ public:
         p.clear();
         
         const double gap {0.4};
-        p.addCentredArc(width / 2, height / 2, diameter / 2, diameter / 2, rotation, gap, 2 * M_PI - gap, true);
+        p.addCentredArc(width / 2, height / 2, diameter / 2, diameter / 2, rotation, gap, 2 * CoreMath::DOUBLE_PI - gap, true);
         
         g.strokePath(p, PathStrokeType(2.0f));
     }
