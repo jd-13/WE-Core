@@ -24,6 +24,8 @@
 #ifndef CoreMath_h
 #define CoreMath_h
 
+#include "math.h"
+
 /**
  * Contains generic math related consts and functions.
  */
