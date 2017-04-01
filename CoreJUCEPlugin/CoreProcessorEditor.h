@@ -27,7 +27,10 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-
+/**
+ * This class provides basic functionality that is commonly used by an AudioProcessorEditor in a
+ * White Elephant plugin.
+ */
 class CoreProcessorEditor : public AudioProcessorEditor {
 public:
     

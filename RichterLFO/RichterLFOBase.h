@@ -70,7 +70,8 @@ public:
     
     friend class RichterLFOPair;
     
-    // getter methods
+    /** @name Getter Methods */
+    /** @{ */
     
     bool getBypassSwitch() const { return bypassSwitch; }
     
@@ -93,10 +94,11 @@ public:
     float getWaveArraySize() const { return kWaveArraySize; }
     
     int getIndexOffset() { return indexOffset; }
-        
     
+    /** @} */
     
-    // set parameter methods, w/ integrated bounds checks
+    /** @name Setter Methods */
+    /** @{ */
     
     void setBypassSwitch(bool val) { bypassSwitch = val; }
     
@@ -123,6 +125,8 @@ public:
     }
     
     void setIndexOffset(int val) { indexOffset = val; }
+    
+    /** @} */
     
     /**
      * Prepares for processing the next buffer of samples. For example if using JUCE, you 

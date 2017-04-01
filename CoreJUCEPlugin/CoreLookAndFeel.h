@@ -28,6 +28,15 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "General/CoreMath.h"
 
+/**
+ * A class which contains most of the basic design elements which the white elephant audio plugins
+ * have in common.
+ *
+ * Not all drawing methods are defined, and so methods inherited from LookAndFeel_V2 may be used.
+ *
+ * By default the three colours which are used are dark grey, light grey, and neon blue. These can
+ * be changed using the provided setter methods.
+ */
 class CoreLookAndFeel : public LookAndFeel_V2 {
 public:
     CoreLookAndFeel() :    LookAndFeel_V2(),

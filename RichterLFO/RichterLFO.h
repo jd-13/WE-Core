@@ -110,6 +110,8 @@ public:
     
     friend class RichterLFOPair;
 
+    /** @name Getter Methods */
+    /** @{ */
     
     double getRawDepth() { return rawDepth; }
     
@@ -118,10 +120,11 @@ public:
     double getRawFreq() { return rawFreq; }
     
     double getFreqMod() { return freqMod; }
+
+    /** @} */
     
-    
-    
-    // set parameter methods, w/ integrated bounds checks
+    /** @name Setter Methods */
+    /** @{ */
     
     void setRawFreq(double val) { rawFreq = FREQ.BoundsCheck(val); }
     
@@ -130,6 +133,8 @@ public:
     void setRawDepth(double val) { rawDepth = DEPTH.BoundsCheck(val); }
     
     void setDepthMod(double val) { depthMod = DEPTHMOD.BoundsCheck(val); }
+    
+    /** @} */
     
     /**
      * Use this in your processing loop. Returns a gain value which is intended to be

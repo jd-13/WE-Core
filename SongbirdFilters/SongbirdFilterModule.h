@@ -90,13 +90,16 @@ public:
 
     virtual ~SongbirdFilterModule() {}
 
+    /** @name Setter Methods */
+    /** @{ */
+
     /**
      * Sets the vowel sound that should be created by filter 1 using one of
      * the built in Vowel objects stored in this class.
      *
-     * @param   val Value that should be used for Vowel 1
+     * @param[in]   val Value that should be used for Vowel 1
      *
-     * @see     VowelParameter for valid values
+     * @see         VowelParameter for valid values
      */
     void setVowel1(int val) {
         // perform a bounds check, then apply the appropriate formants
@@ -112,9 +115,9 @@ public:
     /**
      * Sets the vowel sound that should be created by filter 2.
      *
-     * @param   val Value that should be used for Vowel 2
+     * @param[in]   val Value that should be used for Vowel 2
      *
-     * @see     VowelParameter for valid values
+     * @see         VowelParameter for valid values
      */
     void setVowel2(int val) {
         // perform a bounds check, then apply the appropriate formants
@@ -128,16 +131,19 @@ public:
 
     /**
      * Sets the position between the two filters that have been selected.
-     * The effect of this parameter is dependant on the value of modMode.
-     * If MODMODE_BLEND is selected, then two sets of filters will be created
      *
+     * @param[in]   val Filter position to use.
+     *
+     * @see         FILTER_POSITION for valid values
+     * @see         modMode which the effect of this parameter is dependent on
+
      */
     void setFilterPosition(double val) { filterPosition = FILTER_POSITION.BoundsCheck(val); }
 
     /**
      * Set the sample rate that the filters expect of the audio which will be processed.
      *
-     * @param   val The sample rate to set the filters to
+     * @param[in]   val The sample rate to set the filters to
      */
     void setSampleRate(double val) {
         sampleRate = val;
@@ -153,15 +159,28 @@ public:
      * Lowest value = completely dry, unprocessed signal, no filtering applied.
      * Highest value = completely wet signal, no unprocessed audio survives.
      *
-     * @param   val Mix value that should be used
+     * @param[in]   val Mix value that should be used
      *
-     * @see     MIX for valid values
+     * @see         MIX for valid values
      */
     void setMix(double val) { mix = MIX.BoundsCheck(val); }
 
+    /**
+     * Sets the modulation position. Usually driven by an LFO or envelope, use values between -1 and
+     * 1.
+     *
+     * @param[in]   val The output of the modulation source (LFO, envelope, etc)
+     */
     void setModulation(float val) { modulationSrc = MODULATION.BoundsCheck(val); }
 
+    /**
+     * Sets the modulation mode to apply to the filters.
+     * 
+     * @param[in]   val Chooses the modulation mode
+     */
     void setModMode(bool val) { modMode = val; }
+    
+    /** @} */
 
     /**
      * Resets all filters.
@@ -173,6 +192,9 @@ public:
         filters2[Channels::LEFT].reset();
         filters2[Channels::RIGHT].reset();
     }
+
+    /** @name Getter Methods */
+    /** @{ */
 
     /**
      * @see setVowel1
@@ -209,7 +231,12 @@ public:
      */
     double getMix() { return mix; }
 
+    /**
+     * @see modMode
+     */
     bool getModMode() { return modMode; }
+    
+    /** @} */
 
     /**
      * Applies the filtering to a stereo buffer of samples.

@@ -99,16 +99,27 @@ public:
         _s2 = 0;
     }
     
+    /** @name Getter Methods */
+    /** @{ */
+    
     int getMode() const {return _mode;}
     double getCutoff() const {return _cutoffHz;}
     double getQ() const {return _Q;}
     double getGain() const {return _gain;}
     
+    /** @} */
+    
+    /** @name Setter Methods */
+    /** @{ */
+
     void setMode(int val) {_mode = TPTSVFilterParameters::FILTER_MODE.BoundsCheck(val);}
     void setCutoff(double val) {_cutoffHz = TPTSVFilterParameters::CUTOFF.BoundsCheck(val);}
     void setQ(double val) {_Q = TPTSVFilterParameters::Q.BoundsCheck(val);}
     void setGain(double val) {_gain = TPTSVFilterParameters::GAIN.BoundsCheck(val);}
     void setSampleRate(double val) {_sampleRate = val;}
+    
+    /** @} */
+
     
 private:
     double  _sampleRate,

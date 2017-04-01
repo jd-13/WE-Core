@@ -53,6 +53,9 @@ public:
     
     virtual ~CarveDSPUnit() {}
     
+    /** @name Setter Methods */
+    /** @{ */
+    
     /**
      * Sets the wave shape which will be applied to the signal.
      *
@@ -93,6 +96,11 @@ public:
      */
     void setTweak(double val) { tweak = CarveParameters::TWEAK.BoundsCheck(val); }
     
+    /** @} */
+    
+    /** @name Getter Methods */
+    /** @{ */
+    
     /**
      * @see     setMode
      */
@@ -112,6 +120,8 @@ public:
      * @see     setTweak
      */
     double getTweak() { return tweak; }
+    
+    /** @} */
     
     /**
      * Performs the processing on the sample, by calling the appropriate
@@ -155,8 +165,7 @@ private:
             tweak;
     
     int mode;
-    
-    // private process methods
+
     inline double processSine(double inSample) const {
         return  ((((1 - std::abs(tweak/2)) * sin(CoreMath::DOUBLE_PI * inSample * preGain)))
                 + ((tweak/2) * sin(4 * CoreMath::DOUBLE_PI * inSample * preGain)))
