@@ -38,6 +38,9 @@ namespace CoreMath {
     
     constexpr long double LONG_TAU {2 * LONG_PI};
     constexpr double DOUBLE_TAU {static_cast<double>(LONG_TAU)};
+    
+    constexpr long double LONG_E {2.71828182845904523536028747135266250};
+    constexpr double DOUBLE_E {static_cast<double>(LONG_E)};
 }
 
 #endif /* CoreMath_h */

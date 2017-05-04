@@ -188,7 +188,7 @@ private:
     
     inline double processExponent(double inSample) const {
         return  (sin(-0.25 *
-                     pow(2 * M_E, (inSample * preGain + 1.5))))
+                     pow(2 * CoreMath::DOUBLE_E, (inSample * preGain + 1.5))))
                 * postGain;
     }
     
