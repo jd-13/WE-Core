@@ -24,6 +24,8 @@ before_script:
 
 script:
   - make
+  - ./get_code_cov.sh
 
 after_success:
   - ./WECoreTest
+  - bash <(curl -s https://codecov.io/bash)
