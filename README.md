@@ -11,6 +11,7 @@ RichterLFO and RichterMOD - substantial functionality with tempo sync, and multi
 CarveNoiseFilter - a simple filter to remove noise at the extremes of human hearing  
 SongbirdFormantFilter - Contains multiple SongbirdBandPassFilters, designed to create vowel sounds  
 SongbirdFilterModule - Contains two SongbirdFormantFilters which can be blended between, with multiple supported vowel sounds built in  
+TPTSVFilter - Topology preserving filter, configurable as high pass, low pass, or peak  
 
 ### Distortions:  
 CarveDSPUnit - A waveshaping distortion module with multiple wave shapes, pre and post gain control, and a "tweak" control which morphs the selected wave shape  
