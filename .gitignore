@@ -1,2 +1,4 @@
 *.o
 *.swift
+*.gc*
+WECoreTest
