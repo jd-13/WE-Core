@@ -5,7 +5,7 @@ ifeq ($(CXX), clang++)
 CXXFLAGS += -Weverything -Wpedantic
 
 # TODO: work on removing the need for the below flags
-CXXFLAGS += -Wno-exit-time-destructors -Wno-float-equal -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion
+CXXFLAGS += -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion
 
 else
 CXXFLAGS += -pedantic

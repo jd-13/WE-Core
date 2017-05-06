@@ -49,8 +49,8 @@ SCENARIO("SongbirdFilterModule: Parameters can be set and retrieved correctly") 
             THEN("They all get their correct unique values") {
                 REQUIRE(mSongbird.getVowel1() == 3);
                 REQUIRE(mSongbird.getVowel2() == 4);
-                REQUIRE(mSongbird.getFilterPosition() == 0.03);
-                REQUIRE(mSongbird.getMix() == 0.04);
+                REQUIRE(CoreTestLib::compareFloats(mSongbird.getFilterPosition(), 0.03));
+                REQUIRE(CoreTestLib::compareFloats(mSongbird.getMix(), 0.04));
                 REQUIRE(mSongbird.getModMode() == true);
             }
         }
@@ -70,8 +70,8 @@ SCENARIO("SongbirdFilterModule: Parameters enforce their bounds correctly") {
             THEN("Parameters enforce their lower bounds") {
                 REQUIRE(mSongbird.getVowel1() == 1);
                 REQUIRE(mSongbird.getVowel2() == 1);
-                REQUIRE(mSongbird.getFilterPosition() == 0);
-                REQUIRE(mSongbird.getMix() == 0);
+                REQUIRE(CoreTestLib::compareFloats(mSongbird.getFilterPosition(), 0.0));
+                REQUIRE(CoreTestLib::compareFloats(mSongbird.getMix(), 0.0));
             }
         }
         
@@ -84,8 +84,8 @@ SCENARIO("SongbirdFilterModule: Parameters enforce their bounds correctly") {
             THEN("Parameters enforce their upper bounds") {
                 REQUIRE(mSongbird.getVowel1() == 5);
                 REQUIRE(mSongbird.getVowel2() == 5);
-                REQUIRE(mSongbird.getFilterPosition() == 1);
-                REQUIRE(mSongbird.getMix() == 1);
+                REQUIRE(CoreTestLib::compareFloats(mSongbird.getFilterPosition(), 1.0));
+                REQUIRE(CoreTestLib::compareFloats(mSongbird.getMix(), 1.0));
             }
         }
     }

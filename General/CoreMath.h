@@ -41,6 +41,11 @@ namespace CoreMath {
     
     constexpr long double LONG_E {2.71828182845904523536028747135266250};
     constexpr double DOUBLE_E {static_cast<double>(LONG_E)};
+    
+    template <typename T>
+    bool compareFloatsEqual(T x, T y, T tolerance = std::numeric_limits<T>::epsilon()) {
+        return std::abs(x - y) < tolerance;
+    }
 }
 
 #endif /* CoreMath_h */

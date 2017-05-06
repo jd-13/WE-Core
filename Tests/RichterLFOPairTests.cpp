@@ -35,23 +35,23 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 REQUIRE(mLFOPair.LFO.getPhaseSyncSwitch() == false);
                 REQUIRE(mLFOPair.LFO.getTempoSyncSwitch() == false);
                 REQUIRE(mLFOPair.LFO.getWave() == 1);
-                REQUIRE(mLFOPair.LFO.getDepth() == 0.5);
-                REQUIRE(mLFOPair.LFO.getDepthMod() == 0);
-                REQUIRE(mLFOPair.LFO.getFreq() == 2);
-                REQUIRE(mLFOPair.LFO.getFreqMod() == 0);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getDepth(), 0.5));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getDepthMod(), 0.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getFreq(), 2.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getFreqMod(), 0.0));
                 REQUIRE(mLFOPair.LFO.getManualPhase() == 0);
-                REQUIRE(mLFOPair.LFO.getTempoNumer() == 1);
-                REQUIRE(mLFOPair.LFO.getTempoDenom() == 1);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoNumer(), 1.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoDenom(), 1.0));
                 
                 REQUIRE(mLFOPair.MOD.getBypassSwitch() == false);
                 REQUIRE(mLFOPair.MOD.getPhaseSyncSwitch() == false);
                 REQUIRE(mLFOPair.MOD.getTempoSyncSwitch() == false);
                 REQUIRE(mLFOPair.MOD.getWave() == 1);
-                REQUIRE(mLFOPair.MOD.getDepth() == 0.5);
-                REQUIRE(mLFOPair.MOD.getFreq() == 2);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getDepth(), 0.5));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getFreq(), 2.0));
                 REQUIRE(mLFOPair.MOD.getManualPhase() == 0);
-                REQUIRE(mLFOPair.MOD.getTempoNumer() == 1);
-                REQUIRE(mLFOPair.MOD.getTempoDenom() == 1);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoNumer(), 1.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoDenom(), 1.0));
             }
         }
         
@@ -83,23 +83,23 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 REQUIRE(mLFOPair.LFO.getPhaseSyncSwitch() == true);
                 REQUIRE(mLFOPair.LFO.getTempoSyncSwitch() == true);
                 REQUIRE(mLFOPair.LFO.getWave() == 2);
-                REQUIRE(mLFOPair.LFO.getDepth() == 0.1);
-                REQUIRE(mLFOPair.LFO.getDepthMod() == 0.2);
-                REQUIRE(mLFOPair.LFO.getFreq() == 3);
-                REQUIRE(mLFOPair.LFO.getFreqMod() == 0.4);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getDepth(), 0.1));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getDepthMod(), 0.2));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getFreq(), 3.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getFreqMod(), 0.4));
                 REQUIRE(mLFOPair.LFO.getManualPhase() == 5);
-                REQUIRE(mLFOPair.LFO.getTempoNumer() == 2);
-                REQUIRE(mLFOPair.LFO.getTempoDenom() == 3);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoNumer(), 2.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoDenom(), 3.0));
                 
                 REQUIRE(mLFOPair.MOD.getBypassSwitch() == true);
                 REQUIRE(mLFOPair.MOD.getPhaseSyncSwitch() == true);
                 REQUIRE(mLFOPair.MOD.getTempoSyncSwitch() == true);
                 REQUIRE(mLFOPair.MOD.getWave() == 3);
-                REQUIRE(mLFOPair.MOD.getDepth() == 0.5);
-                REQUIRE(mLFOPair.MOD.getFreq() == 6);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getDepth(), 0.5));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getFreq(), 6.0));
                 REQUIRE(mLFOPair.MOD.getManualPhase() == 7);
-                REQUIRE(mLFOPair.MOD.getTempoNumer() == 3);
-                REQUIRE(mLFOPair.MOD.getTempoDenom() == 4);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoNumer(), 3.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoDenom(), 4.0));
             }
         }
     }
@@ -128,20 +128,20 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
             
             THEN("Parameters enforce their lower bounds") {
                 REQUIRE(mLFOPair.LFO.getWave() == 1);
-                REQUIRE(mLFOPair.LFO.getDepth() == 0);
-                REQUIRE(mLFOPair.LFO.getDepthMod() == 0);
-                REQUIRE(mLFOPair.LFO.getFreq() == 0.5);
-                REQUIRE(mLFOPair.LFO.getFreqMod() == 0);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getDepth(), 0.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getDepthMod(), 0.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getFreq(), 0.5));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getFreqMod(), 0.0));
                 REQUIRE(mLFOPair.LFO.getManualPhase() == 0);
-                REQUIRE(mLFOPair.LFO.getTempoNumer() == 1);
-                REQUIRE(mLFOPair.LFO.getTempoDenom() == 1);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoNumer(), 1.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoDenom(), 1.0));
 
                 REQUIRE(mLFOPair.MOD.getWave() == 1);
-                REQUIRE(mLFOPair.MOD.getDepth() == 0);
-                REQUIRE(mLFOPair.MOD.getFreq() == 0.5);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getDepth(), 0.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getFreq(), 0.5));
                 REQUIRE(mLFOPair.MOD.getManualPhase() == 0);
-                REQUIRE(mLFOPair.MOD.getTempoNumer() == 1);
-                REQUIRE(mLFOPair.MOD.getTempoDenom() == 1);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoNumer(), 1.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoDenom(), 1.0));
             }
         }
         
@@ -164,20 +164,20 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
             
             THEN("Parameters enforce their upper bounds") {
                 REQUIRE(mLFOPair.LFO.getWave() == 3);
-                REQUIRE(mLFOPair.LFO.getDepth() == 1);
-                REQUIRE(mLFOPair.LFO.getDepthMod() == 1);
-                REQUIRE(mLFOPair.LFO.getFreq() == 20);
-                REQUIRE(mLFOPair.LFO.getFreqMod() == 1);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getDepth(), 1.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getDepthMod(), 1.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getFreq(), 20.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getFreqMod(), 1.0));
                 REQUIRE(mLFOPair.LFO.getManualPhase() == 2000);
-                REQUIRE(mLFOPair.LFO.getTempoNumer() == 4);
-                REQUIRE(mLFOPair.LFO.getTempoDenom() == 32);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoNumer(), 4.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoDenom(), 32.0));
                 
                 REQUIRE(mLFOPair.MOD.getWave() == 3);
-                REQUIRE(mLFOPair.MOD.getDepth() == 1);
-                REQUIRE(mLFOPair.MOD.getFreq() == 20);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getDepth(), 1.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getFreq(), 20.0));
                 REQUIRE(mLFOPair.MOD.getManualPhase() == 2000);
-                REQUIRE(mLFOPair.MOD.getTempoNumer() == 4);
-                REQUIRE(mLFOPair.MOD.getTempoDenom() == 32);
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoNumer(), 4.0));
+                REQUIRE(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoDenom(), 32.0));
             }
         }
     }
