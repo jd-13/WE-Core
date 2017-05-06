@@ -1,5 +1,5 @@
 GCOVFLAGS = -fprofile-arcs -ftest-coverage
-CXXFLAGS = -std=c++11 -Wall -Werror -Wextra -Wconversion -Wshadow $(GCOVFLAGS)
+CXXFLAGS = -std=c++11 -Wall -Werror -Wextra -Wconversion -Wshadow
 
 ifeq ($(CXX), clang++)
 CXXFLAGS += -Weverything -Wpedantic
@@ -8,7 +8,8 @@ CXXFLAGS += -Weverything -Wpedantic
 CXXFLAGS += -Wno-exit-time-destructors -Wno-float-equal -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion
 
 else
-CXXFLAGS += -pedantic
+CXXFLAGS += -pedantic $(GCOVFLAGS)
+LINKFLAGS = $(GCOVFLAGS)
 endif
 
 default: WECoreTest
@@ -27,7 +28,7 @@ SongbirdFilterModuleTests.o: $(WECORE_SRC)/Tests/SongbirdFilterModuleTests.cpp
 
 
 WECoreTest: catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o
-	$(CXX) catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o -o WECoreTest $(GCOVFLAGS)
+	$(CXX) catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o -o WECoreTest $(LINKFLAGS)
 
 clean:
 	rm *.o
