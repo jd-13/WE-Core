@@ -25,8 +25,8 @@ before_script:
 
 script:
   - make
-  - ./get_code_cov.sh
+  - if [ "$CXX" = "g++-5" ]; then ./get_code_cov.sh; fi
 
 after_success:
   - ./WECoreTest
-  - bash <(curl -s https://codecov.io/bash)
+  - if [ "$CXX" = "g++-5" ]; then bash <(curl -s https://codecov.io/bash); fi
