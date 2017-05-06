@@ -1,5 +1,4 @@
 GCOVFLAGS = -fprofile-arcs -ftest-coverage
-
 CXXFLAGS = -std=c++11 -Wall -Werror -Wextra -Wconversion -Wshadow $(GCOVFLAGS)
 
 ifeq ($(CXX), clang++)
