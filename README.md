@@ -3,6 +3,10 @@
 # WE-Core
 A set of core libraries for useful DSP related classes that are used by multiple White Elephant Audio VSTs and Audio Units.  
 
+This is a headers only library, simply include the appropriate files to use them in your own projects.  
+
+The provided makefile is simply to build a binary which will run unit tests, this is not required to use the library.  
+
 ## Contains:  
 ### LFOs:  
 RichterLFO and RichterMOD - substantial functionality with tempo sync, and multiple wave types and parameters  
