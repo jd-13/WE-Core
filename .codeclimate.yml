@@ -1,9 +1,0 @@
-engines:
-  cppcheck:
-    enabled: true
-    config:
-      check: all
-      language: c++
-      stds:
-        - c++11
-      platform: unix64
