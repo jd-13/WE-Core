@@ -8,7 +8,7 @@ CXXFLAGS += -Weverything -Wpedantic
 CXXFLAGS += -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion
 
 else
-CXXFLAGS += -pedantic -pg
+CXXFLAGS += -pedantic
 endif
 
 default: WECoreTest
