@@ -19,6 +19,7 @@ install:
   - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
   - if [ "$CXX" = "clang++" ]; then export CXX="clang++-3.7" CC="clang-3.7"; fi
   - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+  - sudo apt-get install -qq cppcheck
 
 before_script:
   - curl "https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp" --create-dirs -o "single_include/catch.hpp"
@@ -30,3 +31,4 @@ script:
 after_success:
   - ./WECoreTest
   - if [ "$CXX" = "g++-5" ]; then bash <(curl -s https://codecov.io/bash); fi
+  - cppcheck --quiet --error-exitcode=1 .
