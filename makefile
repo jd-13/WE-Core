@@ -25,10 +25,14 @@ RichterLFOPairTests.o: $(WECORE_SRC)/Tests/RichterLFOPairTests.cpp
 SongbirdFilterModuleTests.o: $(WECORE_SRC)/Tests/SongbirdFilterModuleTests.cpp
 	$(CXX) -c $(WECORE_SRC)/Tests/SongbirdFilterModuleTests.cpp -o SongbirdFilterModuleTests.o -I$(CATCH_PATH) -I$(WECORE_SRC) $(CXXFLAGS)
 
+TPTSVFilterTests.o: $(WECORE_SRC)/Tests/TPTSVFilterTests.cpp
+	$(CXX) -c $(WECORE_SRC)/Tests/TPTSVFilterTests.cpp -o TPTSVFilterTests.o -I$(CATCH_PATH) -I$(WECORE_SRC) $(CXXFLAGS)
 
-WECoreTest: catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o
-	$(CXX) catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o -o WECoreTest $(GCOVFLAGS)
+
+WECoreTest: catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o
+	$(CXX) catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o -o WECoreTest $(GCOVFLAGS)
 
 clean:
 	rm *.o
+	rm *.gc*
 	rm WECoreTest
