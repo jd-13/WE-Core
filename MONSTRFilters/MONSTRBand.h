@@ -26,8 +26,25 @@
 #define MONSTRBAND_H_INCLUDED
 
 #include <vector>
-#include "DspFilters/Butterworth.h"
 #include "MONSTRParameters.h"
+#include "General/CoreMath.h"
+
+
+// DSPFilters sets off a lot of clang warnings - disable them for Butterworth.h only
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wfloat-equal"
+#pragma clang diagnostic ignored "-Wunused-parameter"
+#pragma clang diagnostic ignored "-Wignored-qualifiers"
+#pragma clang diagnostic ignored "-Wold-style-cast"
+#endif
+
+#include "DspFilters/Butterworth.h"
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+
 
 // forward declaration to allow friend class
 class MONSTRCrossover;
@@ -115,7 +132,7 @@ public:
     /**
      * @see setIsActive
      */
-    float getIsActive() const { return isActive; }
+    bool getIsActive() const { return isActive; }
 
 private:
     bool    isActive,
@@ -135,8 +152,8 @@ private:
     Dsp::SimpleFilter<Dsp::Butterworth::LowPass<2>, 2> highCut2;
 
 
-    void filterSamples(float *inLeftSamples, float *inRightSamples, int numSamples) {
-        float** channelsArray = new float*[2];
+    void filterSamples(double *inLeftSamples, double *inRightSamples, int numSamples) {
+        double** channelsArray = new double*[2];
         channelsArray[0] = inLeftSamples;
         channelsArray[1] = inRightSamples;
 
@@ -196,7 +213,7 @@ private:
     
     void setSampleRate(double newSampleRate) {
         // if the new sample rate is different, recalculate the filter coefficients
-        if (newSampleRate != sampleRate) {
+        if (!CoreMath::compareFloatsEqual(newSampleRate, sampleRate)) {
             sampleRate = newSampleRate;
             setLowCutoff(lowCutoffHz);
             setHighCutoff(highCutoffHz);
@@ -237,15 +254,15 @@ private:
      * Performs the effect processing on inLeftSample and inRightSample. Use for
      * stereo in->stereo out signals.
      *
-     * @param   inLeftSamples   Reference to a vector of left samples to be processed
-     * @param   inRightSamples  Reference to a vector of right samples to be processed
+     * @param[out]   inLeftSamples   Reference to a vector of left samples to be processed
+     * @param[out]   inRightSamples  Reference to a vector of right samples to be processed
      */
-    void process2in2out(std::vector<float>& inLeftSamples,
-                        std::vector<float>& inRightSamples) {
+    void process2in2out(std::vector<double>& inLeftSamples,
+                        std::vector<double>& inRightSamples) {
         
         if (inLeftSamples.size() == inRightSamples.size()) {
             // Apply the filtering before processing
-            filterSamples(&inLeftSamples[0], &inRightSamples[0], inLeftSamples.size());
+            filterSamples(&inLeftSamples[0], &inRightSamples[0], static_cast<int>(inLeftSamples.size()));
             
             if (isActive) {
                 // Do the actual stereo widening or narrowing
