@@ -15,10 +15,9 @@ CXXFLAGS_GCC_DSP = $(CXXFLAGS_COMMON)
 # Set the flags we'll actually use based on the compiler
 CXXFLAGS = $(CXXFLAGS_GCC)
 CXXFLAGS_DSP = $(CXXFLAGS_GCC_DSP)
-ifeq ($(CXX), clang++)
+ifeq ($(CXX), $(filter $(CXX),clang++ clang++-3.7))
 CXXFLAGS = $(CXXFLAGS_CLANG)
 CXXFLAGS_DSP = $(CXXFLAGS_CLANG_DSP)
-$(info using clang flags: $(CXXFLAGS) and $(CXXFLAGS_DSP))
 endif
 
 # Build rules start here
