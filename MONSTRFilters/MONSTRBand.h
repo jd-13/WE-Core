@@ -37,12 +37,17 @@
 #pragma clang diagnostic ignored "-Wunused-parameter"
 #pragma clang diagnostic ignored "-Wignored-qualifiers"
 #pragma clang diagnostic ignored "-Wold-style-cast"
+#elif __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wignored-qualifiers"
 #endif
 
 #include "DspFilters/Butterworth.h"
 
 #ifdef __clang__
 #pragma clang diagnostic pop
+#elif __GNUC__
+#pragma GCC diagnostic pop
 #endif
 
 
