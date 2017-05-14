@@ -2,12 +2,15 @@ GCOVFLAGS = -fprofile-arcs -ftest-coverage
 CXXFLAGS = -std=c++11 -Wall -Werror -Wextra -Wconversion -Wshadow $(GCOVFLAGS)
 
 DSPFILTERS_PATH = DSPFilters/shared/DSPFilters
+DSPFILTERS_FLAGS = $(CXXFLAGS)
 
 ifeq ($(CXX), clang++)
 CXXFLAGS += -Weverything -Wpedantic
 
 # TODO: work on removing the need for the below flags
 CXXFLAGS += -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion
+
+DSPFILTERS_FLAGS += -Wno-float-equal -Wno-ignored-qualifiers -Wno-unused-parameter -Wno-old-style-cast -Wno-padded -Wno-unused-variable -Wno-sign-conversion
 
 else
 CXXFLAGS += -pedantic
@@ -23,11 +26,10 @@ TEST_OBJS = catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilter
 
 
 # Build DSP Filters objects
-DSP_FLAGS = -Wno-float-equal -Wno-ignored-qualifiers -Wno-unused-parameter -Wno-old-style-cast -Wno-padded -Wno-unused-variable -Wno-sign-conversion
 DSP_OBJS = Biquad.o PoleFilter.o Butterworth.o Cascade.o
 
 %.o: $(DSPFILTERS_PATH)/source/%.cpp
-	$(CXX) -c $< -o $@ -I$(DSPFILTERS_PATH)/include/ $(CXXFLAGS) $(DSP_FLAGS)
+	$(CXX) -c $< -o $@ -I$(DSPFILTERS_PATH)/include/ $(DSPFILTERS_FLAGS)
 
 
 WECoreTest: $(DSP_OBJS) $(TEST_OBJS)
