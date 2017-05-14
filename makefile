@@ -18,6 +18,7 @@ CXXFLAGS_DSP = $(CXXFLAGS_GCC_DSP)
 ifeq ($(CXX), clang++)
 CXXFLAGS = $(CXXFLAGS_CLANG)
 CXXFLAGS_DSP = $(CXXFLAGS_CLANG_DSP)
+$(info using clang flags: $(CXXFLAGS) and $(CXXFLAGS_DSP))
 endif
 
 # Build rules start here
