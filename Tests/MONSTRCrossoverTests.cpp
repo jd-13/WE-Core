@@ -22,7 +22,6 @@
  */
 
 #include "catch.hpp"
-#include "CoreTestLib.h"
 #include "MONSTRFilters/MONSTRCrossover.h"
 
 SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
