@@ -13,12 +13,11 @@ CXXFLAGS_CLANG_DSP = $(CXXFLAGS_CLANG) -Wno-float-equal -Wno-ignored-qualifiers 
 CXXFLAGS_GCC_DSP = $(CXXFLAGS_COMMON)
 
 # Set the flags we'll actually use based on the compiler
+CXXFLAGS = $(CXXFLAGS_GCC)
+CXXFLAGS_DSP = $(CXXFLAGS_GCC_DSP)
 ifeq ($(CXX), clang++)
 CXXFLAGS = $(CXXFLAGS_CLANG)
 CXXFLAGS_DSP = $(CXXFLAGS_CLANG_DSP)
-else
-CXXFLAGS = $(CXXFLAGS_GCC)
-CXXFLAGS_DSP = $(CXXFLAGS_GCC_DSP)
 endif
 
 # Build rules start here
