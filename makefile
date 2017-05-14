@@ -10,6 +10,7 @@ CXXFLAGS += -Weverything -Wpedantic
 # TODO: work on removing the need for the below flags
 CXXFLAGS += -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion
 
+DSPFILTERS_FLAGS = $(CXXFLAGS)
 DSPFILTERS_FLAGS += -Wno-float-equal -Wno-ignored-qualifiers -Wno-unused-parameter -Wno-old-style-cast -Wno-padded -Wno-unused-variable -Wno-sign-conversion
 
 else
