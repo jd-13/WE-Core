@@ -106,7 +106,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
 }
 
 SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
-    GIVEN("A new CarveDSPUnit object") {
+    GIVEN("A new RichterLFOPair object") {
         RichterLFOPair mLFOPair;
         
         WHEN("All parameter values are too low") {
