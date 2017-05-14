@@ -1,6 +1,8 @@
 GCOVFLAGS = -fprofile-arcs -ftest-coverage
 CXXFLAGS = -std=c++11 -Wall -Werror -Wextra -Wconversion -Wshadow $(GCOVFLAGS)
 
+DSPFILTERS_PATH = DSPFilters/shared/DSPFilters
+
 ifeq ($(CXX), clang++)
 CXXFLAGS += -Weverything -Wpedantic
 
@@ -13,24 +15,23 @@ endif
 
 default: WECoreTest
 
-catchMain.o: $(WECORE_SRC)/Tests/catchMain.cpp
-	$(CXX) -c $(WECORE_SRC)/Tests/catchMain.cpp -o catchMain.o -I$(CATCH_PATH) $(CXXFLAGS)
+# Build test objects
+TEST_OBJS = catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o MONSTRCrossoverTests.o
 
-CarveDSPUnitTests.o: $(WECORE_SRC)/Tests/CarveDSPUnitTests.cpp
-	$(CXX) -c $(WECORE_SRC)/Tests/CarveDSPUnitTests.cpp -o CarveDSPUnitTests.o -I$(CATCH_PATH) -I$(WECORE_SRC) $(CXXFLAGS)
-
-RichterLFOPairTests.o: $(WECORE_SRC)/Tests/RichterLFOPairTests.cpp
-	$(CXX) -c $(WECORE_SRC)/Tests/RichterLFOPairTests.cpp -o RichterLFOPairTests.o -I$(CATCH_PATH) -I$(WECORE_SRC) $(CXXFLAGS)
-
-SongbirdFilterModuleTests.o: $(WECORE_SRC)/Tests/SongbirdFilterModuleTests.cpp
-	$(CXX) -c $(WECORE_SRC)/Tests/SongbirdFilterModuleTests.cpp -o SongbirdFilterModuleTests.o -I$(CATCH_PATH) -I$(WECORE_SRC) $(CXXFLAGS)
-
-TPTSVFilterTests.o: $(WECORE_SRC)/Tests/TPTSVFilterTests.cpp
-	$(CXX) -c $(WECORE_SRC)/Tests/TPTSVFilterTests.cpp -o TPTSVFilterTests.o -I$(CATCH_PATH) -I$(WECORE_SRC) $(CXXFLAGS)
+%.o: $(WECORE_SRC)/Tests/%.cpp
+	$(CXX) -c $< -o $@ -I$(CATCH_PATH) -I$(WECORE_SRC) -I$(DSPFILTERS_PATH)/include/ $(CXXFLAGS)
 
 
-WECoreTest: catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o
-	$(CXX) catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o -o WECoreTest $(GCOVFLAGS)
+# Build DSP Filters objects
+DSP_FLAGS = -Wno-float-equal -Wno-ignored-qualifiers -Wno-unused-parameter -Wno-old-style-cast -Wno-padded -Wno-unused-variable -Wno-sign-conversion
+DSP_OBJS = Biquad.o PoleFilter.o Butterworth.o Cascade.o
+
+%.o: $(DSPFILTERS_PATH)/source/%.cpp
+	$(CXX) -c $< -o $@ -I$(DSPFILTERS_PATH)/include/ $(CXXFLAGS) $(DSP_FLAGS)
+
+
+WECoreTest: $(DSP_OBJS) $(TEST_OBJS)
+	$(CXX) $(DSP_OBJS) $(TEST_OBJS) -o WECoreTest $(GCOVFLAGS)
 
 clean:
 	rm *.o

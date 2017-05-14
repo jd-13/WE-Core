@@ -63,19 +63,19 @@ public:
      * Applies the filtering to a stereo buffer of samples.
      * Expect seg faults or other memory issues if arguements passed are incorrect.
      *
-     * @param   inLeftSample    Pointer to the first sample of the left channel's buffer
-     * @param   inRightSample   Pointer to the first sample of the right channel's buffer
-     * @param   numSamples      Number of samples in the buffer. The left and right buffers
-     *                          must be the same size.
+     * @param[out]   leftSample      Pointer to the first sample of the left channel's buffer
+     * @param[out]   rightSample     Pointer to the first sample of the right channel's buffer
+     * @param[in]    numSamples      Number of samples in the buffer. The left and right buffers
+     *                               must be the same size.
      */
-    void Process2in2out(float* leftSample, float* rightSample, int numSamples) {
+    void Process2in2out(double* leftSample, double* rightSample, size_t numSamples) {
         // make a copy of the buffers for each band to process in parallel
-        std::vector<float> band1LeftBuffer(numSamples);
-        std::vector<float> band1RightBuffer(numSamples);
-        std::vector<float> band2LeftBuffer(numSamples);
-        std::vector<float> band2RightBuffer(numSamples);
-        std::vector<float> band3LeftBuffer(numSamples);
-        std::vector<float> band3RightBuffer(numSamples);
+        std::vector<double> band1LeftBuffer(numSamples);
+        std::vector<double> band1RightBuffer(numSamples);
+        std::vector<double> band2LeftBuffer(numSamples);
+        std::vector<double> band2RightBuffer(numSamples);
+        std::vector<double> band3LeftBuffer(numSamples);
+        std::vector<double> band3RightBuffer(numSamples);
         
         for (size_t iii {0}; iii < numSamples; iii++) {
             band1LeftBuffer[iii] = leftSample[iii];

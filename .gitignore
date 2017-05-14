@@ -2,3 +2,5 @@
 *.swift
 *.gc*
 WECoreTest
+DSPFilters
+DSPFilters/*
