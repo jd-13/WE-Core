@@ -22,7 +22,6 @@
  */
 
 #include "catch.hpp"
-#include "CoreTestLib.h"
 #include "CarveDSP/CarveDSPUnit.h"
 
 SCENARIO("CarveDSPUnit: Parameters can be set and retrieved correctly") {
@@ -32,9 +31,9 @@ SCENARIO("CarveDSPUnit: Parameters can be set and retrieved correctly") {
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
                 CHECK(mCarve.getMode() == 1);
-                CHECK(CoreTestLib::compareFloats(mCarve.getPreGain(), 1.0));
-                CHECK(CoreTestLib::compareFloats(mCarve.getPostGain(), 0.5));
-                CHECK(CoreTestLib::compareFloats(mCarve.getTweak(), 0.0));
+                CHECK(mCarve.getPreGain() == Approx(1.0));
+                CHECK(mCarve.getPostGain() == Approx(0.5));
+                CHECK(mCarve.getTweak() == Approx(0.0));
             }
         }
 
@@ -46,9 +45,9 @@ SCENARIO("CarveDSPUnit: Parameters can be set and retrieved correctly") {
 
             THEN("They all get their correct unique values") {
                 CHECK(mCarve.getMode() == 2);
-                CHECK(CoreTestLib::compareFloats(mCarve.getPreGain(), 0.02));
-                CHECK(CoreTestLib::compareFloats(mCarve.getPostGain(), 0.03));
-                CHECK(CoreTestLib::compareFloats(mCarve.getTweak(), 0.04));
+                CHECK(mCarve.getPreGain() == Approx(0.02));
+                CHECK(mCarve.getPostGain() == Approx(0.03));
+                CHECK(mCarve.getTweak() == Approx(0.04));
             }
         }
     }
@@ -66,9 +65,9 @@ SCENARIO("CarveDSPUnit: Parameters enforce their bounds correctly") {
             
             THEN("Parameters enforce their lower bounds") {
                 CHECK(mCarve.getMode() == 1);
-                CHECK(CoreTestLib::compareFloats(mCarve.getPreGain(), 0.0));
-                CHECK(CoreTestLib::compareFloats(mCarve.getPostGain(), 0.0));
-                CHECK(CoreTestLib::compareFloats(mCarve.getTweak(), -1.0));
+                CHECK(mCarve.getPreGain() == Approx(0.0));
+                CHECK(mCarve.getPostGain() == Approx(0.0));
+                CHECK(mCarve.getTweak() == Approx(-1.0));
             }
         }
         
@@ -80,9 +79,9 @@ SCENARIO("CarveDSPUnit: Parameters enforce their bounds correctly") {
             
             THEN("Parameters enforce their upper bounds") {
                 CHECK(mCarve.getMode() == 7);
-                CHECK(CoreTestLib::compareFloats(mCarve.getPreGain(), 2.0));
-                CHECK(CoreTestLib::compareFloats(mCarve.getPostGain(), 2.0));
-                CHECK(CoreTestLib::compareFloats(mCarve.getTweak(), 1.0));
+                CHECK(mCarve.getPreGain() == Approx(2.0));
+                CHECK(mCarve.getPostGain() == Approx(2.0));
+                CHECK(mCarve.getTweak() == Approx(1.0));
             }
         }
     }
@@ -107,7 +106,7 @@ SCENARIO("CarveDSPUnit: Parameter combinations that should result in silence out
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(CoreTestLib::compareFloats(buffer[iii], 0.0));
+                    CHECK(buffer[iii] == Approx(0.0));
                 }
             }
         }
@@ -127,7 +126,7 @@ SCENARIO("CarveDSPUnit: Parameter combinations that should result in silence out
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(CoreTestLib::compareFloats(buffer[iii], 0.0));
+                    CHECK(buffer[iii] == Approx(0.0));
                 }
             }
         }
@@ -148,7 +147,7 @@ SCENARIO("CarveDSPUnit: Parameter combinations that should result in silence out
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(CoreTestLib::compareFloats(buffer[iii], 0.0));
+                    CHECK(buffer[iii] == Approx(0.0));
                 }
             }
         }
@@ -174,7 +173,7 @@ SCENARIO("CarveDSPUnit: Silence in = silence out") {
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(CoreTestLib::compareFloats(buffer[iii], 0.0));
+                    CHECK(buffer[iii] == Approx(0.0));
                 }
             }
         }

@@ -22,7 +22,6 @@
  */
 
 #include "catch.hpp"
-#include "CoreTestLib.h"
 #include "SongbirdFilters/SongbirdFilterModule.h"
 
 SCENARIO("SongbirdFilterModule: Parameters can be set and retrieved correctly") {
@@ -49,8 +48,8 @@ SCENARIO("SongbirdFilterModule: Parameters can be set and retrieved correctly") 
             THEN("They all get their correct unique values") {
                 CHECK(mSongbird.getVowel1() == 3);
                 CHECK(mSongbird.getVowel2() == 4);
-                CHECK(CoreTestLib::compareFloats(mSongbird.getFilterPosition(), 0.03));
-                CHECK(CoreTestLib::compareFloats(mSongbird.getMix(), 0.04));
+                CHECK(mSongbird.getFilterPosition() == Approx(0.03));
+                CHECK(mSongbird.getMix() == Approx(0.04));
                 CHECK(mSongbird.getModMode() == true);
             }
         }
@@ -70,8 +69,8 @@ SCENARIO("SongbirdFilterModule: Parameters enforce their bounds correctly") {
             THEN("Parameters enforce their lower bounds") {
                 CHECK(mSongbird.getVowel1() == 1);
                 CHECK(mSongbird.getVowel2() == 1);
-                CHECK(CoreTestLib::compareFloats(mSongbird.getFilterPosition(), 0.0));
-                CHECK(CoreTestLib::compareFloats(mSongbird.getMix(), 0.0));
+                CHECK(mSongbird.getFilterPosition() == Approx(0.0));
+                CHECK(mSongbird.getMix() == Approx(0.0));
             }
         }
         
@@ -84,8 +83,8 @@ SCENARIO("SongbirdFilterModule: Parameters enforce their bounds correctly") {
             THEN("Parameters enforce their upper bounds") {
                 CHECK(mSongbird.getVowel1() == 5);
                 CHECK(mSongbird.getVowel2() == 5);
-                CHECK(CoreTestLib::compareFloats(mSongbird.getFilterPosition(), 1.0));
-                CHECK(CoreTestLib::compareFloats(mSongbird.getMix(), 1.0));
+                CHECK(mSongbird.getFilterPosition() == Approx(1.0));
+                CHECK(mSongbird.getMix() == Approx(1.0));
             }
         }
     }
@@ -107,8 +106,8 @@ SCENARIO("SongbirdFilterModule: Silence in = silence out") {
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
-                    CHECK(CoreTestLib::compareFloats(leftBuffer[iii], 0.0));
-                    CHECK(CoreTestLib::compareFloats(rightBuffer[iii], 0.0));
+                    CHECK(leftBuffer[iii] == Approx(0.0));
+                    CHECK(rightBuffer[iii] == Approx(0.0));
                 }
             }
         }

@@ -22,7 +22,6 @@
  */
 
 #include "catch.hpp"
-#include "CoreTestLib.h"
 #include "RichterLFO/RichterLFOPair.h"
 
 SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
@@ -35,23 +34,23 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 CHECK(mLFOPair.LFO.getPhaseSyncSwitch() == false);
                 CHECK(mLFOPair.LFO.getTempoSyncSwitch() == false);
                 CHECK(mLFOPair.LFO.getWave() == 1);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getDepth(), 0.5));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getDepthMod(), 0.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getFreq(), 2.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getFreqMod(), 0.0));
+                CHECK(mLFOPair.LFO.getDepth() == Approx(0.5));
+                CHECK(mLFOPair.LFO.getDepthMod() == Approx(0.0));
+                CHECK(mLFOPair.LFO.getFreq() == Approx(2.0));
+                CHECK(mLFOPair.LFO.getFreqMod() == Approx(0.0));
                 CHECK(mLFOPair.LFO.getManualPhase() == 0);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoNumer(), 1.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoDenom(), 1.0));
+                CHECK(mLFOPair.LFO.getTempoNumer() == Approx(1.0));
+                CHECK(mLFOPair.LFO.getTempoDenom() == Approx(1.0));
                 
                 CHECK(mLFOPair.MOD.getBypassSwitch() == false);
                 CHECK(mLFOPair.MOD.getPhaseSyncSwitch() == false);
                 CHECK(mLFOPair.MOD.getTempoSyncSwitch() == false);
                 CHECK(mLFOPair.MOD.getWave() == 1);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getDepth(), 0.5));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getFreq(), 2.0));
+                CHECK(mLFOPair.MOD.getDepth() == Approx(0.5));
+                CHECK(mLFOPair.MOD.getFreq() == Approx(2.0));
                 CHECK(mLFOPair.MOD.getManualPhase() == 0);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoNumer(), 1.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoDenom(), 1.0));
+                CHECK(mLFOPair.MOD.getTempoNumer() == Approx(1.0));
+                CHECK(mLFOPair.MOD.getTempoDenom() == Approx(1.0));
             }
         }
         
@@ -83,23 +82,23 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 CHECK(mLFOPair.LFO.getPhaseSyncSwitch() == true);
                 CHECK(mLFOPair.LFO.getTempoSyncSwitch() == true);
                 CHECK(mLFOPair.LFO.getWave() == 2);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getDepth(), 0.1));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getDepthMod(), 0.2));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getFreq(), 3.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getFreqMod(), 0.4));
+                CHECK(mLFOPair.LFO.getDepth() == Approx(0.1));
+                CHECK(mLFOPair.LFO.getDepthMod() == Approx(0.2));
+                CHECK(mLFOPair.LFO.getFreq() == Approx(3.0));
+                CHECK(mLFOPair.LFO.getFreqMod() == Approx(0.4));
                 CHECK(mLFOPair.LFO.getManualPhase() == 5);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoNumer(), 2.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoDenom(), 3.0));
+                CHECK(mLFOPair.LFO.getTempoNumer() == Approx(2.0));
+                CHECK(mLFOPair.LFO.getTempoDenom() == Approx(3.0));
                 
                 CHECK(mLFOPair.MOD.getBypassSwitch() == true);
                 CHECK(mLFOPair.MOD.getPhaseSyncSwitch() == true);
                 CHECK(mLFOPair.MOD.getTempoSyncSwitch() == true);
                 CHECK(mLFOPair.MOD.getWave() == 3);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getDepth(), 0.5));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getFreq(), 6.0));
+                CHECK(mLFOPair.MOD.getDepth() == Approx(0.5));
+                CHECK(mLFOPair.MOD.getFreq() == Approx(6.0));
                 CHECK(mLFOPair.MOD.getManualPhase() == 7);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoNumer(), 3.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoDenom(), 4.0));
+                CHECK(mLFOPair.MOD.getTempoNumer() == Approx(3.0));
+                CHECK(mLFOPair.MOD.getTempoDenom() == Approx(4.0));
             }
         }
     }
@@ -128,20 +127,20 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
             
             THEN("Parameters enforce their lower bounds") {
                 CHECK(mLFOPair.LFO.getWave() == 1);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getDepth(), 0.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getDepthMod(), 0.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getFreq(), 0.5));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getFreqMod(), 0.0));
+                CHECK(mLFOPair.LFO.getDepth() == Approx(0.0));
+                CHECK(mLFOPair.LFO.getDepthMod() == Approx(0.0));
+                CHECK(mLFOPair.LFO.getFreq() == Approx(0.5));
+                CHECK(mLFOPair.LFO.getFreqMod() == Approx(0.0));
                 CHECK(mLFOPair.LFO.getManualPhase() == 0);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoNumer(), 1.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoDenom(), 1.0));
+                CHECK(mLFOPair.LFO.getTempoNumer() == Approx(1.0));
+                CHECK(mLFOPair.LFO.getTempoDenom() == Approx(1.0));
 
                 CHECK(mLFOPair.MOD.getWave() == 1);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getDepth(), 0.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getFreq(), 0.5));
+                CHECK(mLFOPair.MOD.getDepth() == Approx(0.0));
+                CHECK(mLFOPair.MOD.getFreq() == Approx(0.5));
                 CHECK(mLFOPair.MOD.getManualPhase() == 0);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoNumer(), 1.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoDenom(), 1.0));
+                CHECK(mLFOPair.MOD.getTempoNumer() == Approx(1.0));
+                CHECK(mLFOPair.MOD.getTempoDenom() == Approx(1.0));
             }
         }
         
@@ -164,20 +163,20 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
             
             THEN("Parameters enforce their upper bounds") {
                 CHECK(mLFOPair.LFO.getWave() == 3);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getDepth(), 1.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getDepthMod(), 1.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getFreq(), 20.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getFreqMod(), 1.0));
+                CHECK(mLFOPair.LFO.getDepth() == Approx(1.0));
+                CHECK(mLFOPair.LFO.getDepthMod() == Approx(1.0));
+                CHECK(mLFOPair.LFO.getFreq() == Approx(20.0));
+                CHECK(mLFOPair.LFO.getFreqMod() == Approx(1.0));
                 CHECK(mLFOPair.LFO.getManualPhase() == 2000);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoNumer(), 4.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.LFO.getTempoDenom(), 32.0));
+                CHECK(mLFOPair.LFO.getTempoNumer() == Approx(4.0));
+                CHECK(mLFOPair.LFO.getTempoDenom() == Approx(32.0));
                 
                 CHECK(mLFOPair.MOD.getWave() == 3);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getDepth(), 1.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getFreq(), 20.0));
+                CHECK(mLFOPair.MOD.getDepth() == Approx(1.0));
+                CHECK(mLFOPair.MOD.getFreq() == Approx(20.0));
                 CHECK(mLFOPair.MOD.getManualPhase() == 2000);
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoNumer(), 4.0));
-                CHECK(CoreTestLib::compareFloats(mLFOPair.MOD.getTempoDenom(), 32.0));
+                CHECK(mLFOPair.MOD.getTempoNumer() == Approx(4.0));
+                CHECK(mLFOPair.MOD.getTempoDenom() == Approx(32.0));
             }
         }
     }

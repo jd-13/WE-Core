@@ -22,7 +22,6 @@
  */
 
 #include "catch.hpp"
-#include "CoreTestLib.h"
 #include "WEFilters/TPTSVFilter.h"
 
 SCENARIO("TPTSVFilter: Parameters can be set and retrieved correctly") {
@@ -32,9 +31,9 @@ SCENARIO("TPTSVFilter: Parameters can be set and retrieved correctly") {
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
                 CHECK(mFilter.getMode() == 1);
-                CHECK(CoreTestLib::compareFloats(mFilter.getCutoff(), 20.0));
-                CHECK(CoreTestLib::compareFloats(mFilter.getQ(), 0.5));
-                CHECK(CoreTestLib::compareFloats(mFilter.getGain(), 1.0));
+                CHECK(mFilter.getCutoff() == Approx(20.0));
+                CHECK(mFilter.getQ() == Approx(0.5));
+                CHECK(mFilter.getGain() == Approx(1.0));
             }
         }
 
@@ -46,9 +45,9 @@ SCENARIO("TPTSVFilter: Parameters can be set and retrieved correctly") {
 
             THEN("They all get their correct unique values") {
                 CHECK(mFilter.getMode() == 2);
-                CHECK(CoreTestLib::compareFloats(mFilter.getCutoff(), 21.0));
-                CHECK(CoreTestLib::compareFloats(mFilter.getQ(), 0.6));
-                CHECK(CoreTestLib::compareFloats(mFilter.getGain(), 1.1));
+                CHECK(mFilter.getCutoff() == Approx(21.0));
+                CHECK(mFilter.getQ() == Approx(0.6));
+                CHECK(mFilter.getGain() == Approx(1.1));
             }
         }
     }
@@ -66,9 +65,9 @@ SCENARIO("TPTSVFilter: Parameters enforce their bounds correctly") {
             
             THEN("Parameters enforce their lower bounds") {
                 CHECK(mFilter.getMode() == 1);
-                CHECK(CoreTestLib::compareFloats(mFilter.getCutoff(), 20.0));
-                CHECK(CoreTestLib::compareFloats(mFilter.getQ(), 0.1));
-                CHECK(CoreTestLib::compareFloats(mFilter.getGain(), 0.0));
+                CHECK(mFilter.getCutoff() == Approx(20.0));
+                CHECK(mFilter.getQ() == Approx(0.1));
+                CHECK(mFilter.getGain() == Approx(0.0));
             }
         }
 
@@ -80,9 +79,9 @@ SCENARIO("TPTSVFilter: Parameters enforce their bounds correctly") {
             
             THEN("Parameters enforce their upper bounds") {
                 CHECK(mFilter.getMode() == 4);
-                CHECK(CoreTestLib::compareFloats(mFilter.getCutoff(), 20000.0));
-                CHECK(CoreTestLib::compareFloats(mFilter.getQ(), 20.0));
-                CHECK(CoreTestLib::compareFloats(mFilter.getGain(), 2.0));
+                CHECK(mFilter.getCutoff() == Approx(20000.0));
+                CHECK(mFilter.getQ() == Approx(20.0));
+                CHECK(mFilter.getGain() == Approx(2.0));
             }
         }
     }
@@ -102,7 +101,7 @@ SCENARIO("TPTSVFilter: Silence in = silence out") {
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(CoreTestLib::compareFloats(buffer[iii], 0.0));
+                    CHECK(buffer[iii] == Approx(0.0));
                 }
             }
         }
