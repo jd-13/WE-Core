@@ -31,10 +31,10 @@ SCENARIO("CarveDSPUnit: Parameters can be set and retrieved correctly") {
         
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
-                REQUIRE(mCarve.getMode() == 1);
-                REQUIRE(CoreTestLib::compareFloats(mCarve.getPreGain(), 1.0));
-                REQUIRE(CoreTestLib::compareFloats(mCarve.getPostGain(), 0.5));
-                REQUIRE(CoreTestLib::compareFloats(mCarve.getTweak(), 0.0));
+                CHECK(mCarve.getMode() == 1);
+                CHECK(CoreTestLib::compareFloats(mCarve.getPreGain(), 1.0));
+                CHECK(CoreTestLib::compareFloats(mCarve.getPostGain(), 0.5));
+                CHECK(CoreTestLib::compareFloats(mCarve.getTweak(), 0.0));
             }
         }
 
@@ -45,10 +45,10 @@ SCENARIO("CarveDSPUnit: Parameters can be set and retrieved correctly") {
             mCarve.setTweak(0.04);
 
             THEN("They all get their correct unique values") {
-                REQUIRE(mCarve.getMode() == 2);
-                REQUIRE(CoreTestLib::compareFloats(mCarve.getPreGain(), 0.02));
-                REQUIRE(CoreTestLib::compareFloats(mCarve.getPostGain(), 0.03));
-                REQUIRE(CoreTestLib::compareFloats(mCarve.getTweak(), 0.04));
+                CHECK(mCarve.getMode() == 2);
+                CHECK(CoreTestLib::compareFloats(mCarve.getPreGain(), 0.02));
+                CHECK(CoreTestLib::compareFloats(mCarve.getPostGain(), 0.03));
+                CHECK(CoreTestLib::compareFloats(mCarve.getTweak(), 0.04));
             }
         }
     }
@@ -65,10 +65,10 @@ SCENARIO("CarveDSPUnit: Parameters enforce their bounds correctly") {
             mCarve.setTweak(-5);
             
             THEN("Parameters enforce their lower bounds") {
-                REQUIRE(mCarve.getMode() == 1);
-                REQUIRE(CoreTestLib::compareFloats(mCarve.getPreGain(), 0.0));
-                REQUIRE(CoreTestLib::compareFloats(mCarve.getPostGain(), 0.0));
-                REQUIRE(CoreTestLib::compareFloats(mCarve.getTweak(), -1.0));
+                CHECK(mCarve.getMode() == 1);
+                CHECK(CoreTestLib::compareFloats(mCarve.getPreGain(), 0.0));
+                CHECK(CoreTestLib::compareFloats(mCarve.getPostGain(), 0.0));
+                CHECK(CoreTestLib::compareFloats(mCarve.getTweak(), -1.0));
             }
         }
         
@@ -79,10 +79,10 @@ SCENARIO("CarveDSPUnit: Parameters enforce their bounds correctly") {
             mCarve.setTweak(5);
             
             THEN("Parameters enforce their upper bounds") {
-                REQUIRE(mCarve.getMode() == 7);
-                REQUIRE(CoreTestLib::compareFloats(mCarve.getPreGain(), 2.0));
-                REQUIRE(CoreTestLib::compareFloats(mCarve.getPostGain(), 2.0));
-                REQUIRE(CoreTestLib::compareFloats(mCarve.getTweak(), 1.0));
+                CHECK(mCarve.getMode() == 7);
+                CHECK(CoreTestLib::compareFloats(mCarve.getPreGain(), 2.0));
+                CHECK(CoreTestLib::compareFloats(mCarve.getPostGain(), 2.0));
+                CHECK(CoreTestLib::compareFloats(mCarve.getTweak(), 1.0));
             }
         }
     }
@@ -107,7 +107,7 @@ SCENARIO("CarveDSPUnit: Parameter combinations that should result in silence out
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    REQUIRE(CoreTestLib::compareFloats(buffer[iii], 0.0));
+                    CHECK(CoreTestLib::compareFloats(buffer[iii], 0.0));
                 }
             }
         }
@@ -127,7 +127,7 @@ SCENARIO("CarveDSPUnit: Parameter combinations that should result in silence out
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    REQUIRE(CoreTestLib::compareFloats(buffer[iii], 0.0));
+                    CHECK(CoreTestLib::compareFloats(buffer[iii], 0.0));
                 }
             }
         }
@@ -148,7 +148,7 @@ SCENARIO("CarveDSPUnit: Parameter combinations that should result in silence out
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    REQUIRE(CoreTestLib::compareFloats(buffer[iii], 0.0));
+                    CHECK(CoreTestLib::compareFloats(buffer[iii], 0.0));
                 }
             }
         }
@@ -174,7 +174,7 @@ SCENARIO("CarveDSPUnit: Silence in = silence out") {
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    REQUIRE(CoreTestLib::compareFloats(buffer[iii], 0.0));
+                    CHECK(CoreTestLib::compareFloats(buffer[iii], 0.0));
                 }
             }
         }
