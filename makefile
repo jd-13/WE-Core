@@ -5,7 +5,7 @@ CXXFLAGS_COMMON = -std=c++11 -Wall -Werror -Wextra -Wconversion -Wshadow $(GCOVF
 
 # Set the GCC and Clang flags
 # TODO: work on removing the need for the below Wno flags
-CXXFLAGS_CLANG = $(CXXFLAGS_COMMON) -Weverything -Wpedantic -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion
+CXXFLAGS_CLANG = $(CXXFLAGS_COMMON) -Weverything -Wpedantic -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion -Wno-unknown-warning-option
 CXXFLAGS_GCC = $(CXXFLAGS_COMMON) -pedantic
 
 # Set # Set the GCC and Clang flags for the DSPFilters library
