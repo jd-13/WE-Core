@@ -33,4 +33,4 @@ script:
 after_success:
   - ./WECoreTest
   - if [ "$CXX" = "g++-5" ]; then bash <(curl -s https://codecov.io/bash); fi
-  - cppcheck --quiet --error-exitcode=1 .
+  - cppcheck -iDSPFilters --quiet --error-exitcode=1 .
