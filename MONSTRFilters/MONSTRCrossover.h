@@ -55,7 +55,10 @@ public:
      */
     MONSTRCrossover() : band1(true, false),
                         band2(false, false),
-                        band3(false, true) {}
+                        band3(false, true) {
+        setCrossoverLower(CROSSOVERLOWER.defaultValue);
+        setCrossoverUpper(CROSSOVERUPPER.defaultValue);
+    }
     
     virtual ~MONSTRCrossover() {}
     
