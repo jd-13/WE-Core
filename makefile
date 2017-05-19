@@ -20,27 +20,32 @@ CXXFLAGS = $(CXXFLAGS_CLANG)
 CXXFLAGS_DSP = $(CXXFLAGS_CLANG_DSP)
 endif
 
+OBJDIR = obj
+
 # Build rules start here
 default: WECoreTest
 
-# Build test objects
-TEST_OBJS = catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o MONSTRCrossoverTests.o
 
-%.o: $(WECORE_SRC)/Tests/%.cpp
+# Build test objects
+TEST_OBJS = $(addprefix $(OBJDIR)/, catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o MONSTRCrossoverTests.o)
+
+$(OBJDIR)/%.o: $(WECORE_SRC)/Tests/%.cpp
 	$(CXX) -c $< -o $@ -I$(CATCH_PATH) -I$(WECORE_SRC) -I$(DSPFILTERS_PATH)/include/ $(CXXFLAGS)
 
 
 # Build DSP Filters objects
-DSP_OBJS = Biquad.o PoleFilter.o Butterworth.o Cascade.o
+DSP_OBJS = $(addprefix $(OBJDIR)/, Biquad.o PoleFilter.o Butterworth.o Cascade.o)
 
-%.o: $(DSPFILTERS_PATH)/source/%.cpp
+$(OBJDIR)/%.o: $(DSPFILTERS_PATH)/source/%.cpp
 	$(CXX) -c $< -o $@ -I$(DSPFILTERS_PATH)/include/ $(CXXFLAGS_DSP)
 
+createDir:
+	mkdir -p $(OBJDIR)
 
-WECoreTest: $(DSP_OBJS) $(TEST_OBJS)
+WECoreTest: createDir $(DSP_OBJS) $(TEST_OBJS)
+	mkdir -p $(OBJDIR)
 	$(CXX) $(DSP_OBJS) $(TEST_OBJS) -o WECoreTest $(GCOVFLAGS)
 
 clean:
-	rm *.o
-	rm *.gc*
+	rm -r $(OBJDIR)
 	rm WECoreTest
