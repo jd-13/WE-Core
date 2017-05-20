@@ -93,3 +93,27 @@ SCENARIO("MONSTRCrossover: Parameters enforce their bounds correctly") {
         }
     }
 }
+
+SCENARIO("MONSTRCrossover: Silence in = silence out") {
+    GIVEN("A MONSTRCrossover and a buffer of silent samples") {
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+        MONSTRCrossover mCrossover;
+        
+        WHEN("The silence samples are processed") {
+            // fill the buffer
+            std::fill(leftBuffer.begin(), leftBuffer.end(), 0);
+            std::fill(rightBuffer.begin(), rightBuffer.end(), 0);
+            
+            // do processing
+            mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+            
+            THEN("The output is silence") {
+                for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
+                    CHECK(leftBuffer[iii] == Approx(0.0));
+                    CHECK(rightBuffer[iii] == Approx(0.0));
+                }
+            }
+        }
+    }
+}
