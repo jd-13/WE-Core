@@ -23,6 +23,7 @@ install:
 
 before_script:
   - curl "https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp" --create-dirs -o "single_include/catch.hpp"
+  - ./valgrind_setup.sh
   - git submodule init
   - git submodule update
 
