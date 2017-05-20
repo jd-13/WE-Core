@@ -25,7 +25,25 @@
 #ifndef CARVENOISEFILTER_H_INCLUDED
 #define CARVENOISEFILTER_H_INCLUDED
 
+// DSPFilters sets off a lot of clang warnings - disable them for Butterworth.h only
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wfloat-equal"
+#pragma clang diagnostic ignored "-Wunused-parameter"
+#pragma clang diagnostic ignored "-Wignored-qualifiers"
+#pragma clang diagnostic ignored "-Wold-style-cast"
+#elif __GNUC__
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wignored-qualifiers"
+#endif
+
 #include "DspFilters/Butterworth.h"
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#elif __GNUC__
+#pragma GCC diagnostic pop
+#endif
 
 /**
  * A simple bandpass filter which can process mono or stereo signals.

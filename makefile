@@ -27,7 +27,7 @@ default: WECoreTest
 
 
 # Build test objects
-TEST_OBJS = $(addprefix $(OBJDIR)/, catchMain.o CarveDSPUnitTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o MONSTRCrossoverTests.o)
+TEST_OBJS = $(addprefix $(OBJDIR)/, catchMain.o CarveDSPUnitTests.o CarveNoiseFilterTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o MONSTRCrossoverTests.o)
 
 $(OBJDIR)/%.o: $(WECORE_SRC)/Tests/%.cpp
 	$(CXX) -c $< -o $@ -I$(CATCH_PATH) -I$(WECORE_SRC) -I$(DSPFILTERS_PATH)/include/ $(CXXFLAGS)
