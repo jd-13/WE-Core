@@ -32,6 +32,6 @@ script:
   - if [ "$CXX" = "g++-5" ]; then ./get_code_cov.sh; fi
 
 after_success:
-  - ./WECoreTest
+  - valgrind/coregrind/valgrind ./WECoreTest --tool=callgrind
   - if [ "$CXX" = "g++-5" ]; then bash <(curl -s https://codecov.io/bash); fi
   - cppcheck -iDSPFilters -ivalgrind --quiet --error-exitcode=1 .
