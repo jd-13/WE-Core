@@ -24,6 +24,7 @@
 #ifndef CoreMath_h
 #define CoreMath_h
 
+#include <cmath>
 #include <limits>
 
 /**
