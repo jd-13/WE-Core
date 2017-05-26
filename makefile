@@ -25,9 +25,11 @@ OBJDIR = obj
 # Build rules start here
 default: WECoreTest
 
+perf: WECorePerfTest
 
 # Build test objects
 TEST_OBJS = $(addprefix $(OBJDIR)/, catchMain.o CarveDSPUnitTests.o CarveNoiseFilterTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o MONSTRCrossoverTests.o)
+PERF_TEST_OBJS = $(addprefix $(OBJDIR)/, catchMain.o PerformanceTests.o)
 
 $(OBJDIR)/%.o: $(WECORE_SRC)/Tests/%.cpp
 	$(CXX) -c $< -o $@ -I$(CATCH_PATH) -I$(WECORE_SRC) -I$(DSPFILTERS_PATH)/include/ $(CXXFLAGS)
@@ -45,6 +47,10 @@ createDir:
 WECoreTest: createDir $(DSP_OBJS) $(TEST_OBJS)
 	mkdir -p $(OBJDIR)
 	$(CXX) $(DSP_OBJS) $(TEST_OBJS) -o WECoreTest $(GCOVFLAGS)
+
+WECorePerfTest: createDir $(DSP_OBJS) $(PERF_TEST_OBJS)
+	mkdir -p $(OBJDIR)
+	$(CXX) $(DSP_OBJS) $(PERF_TEST_OBJS) -o WECorePerfTest $(GCOVFLAGS)
 
 clean:
 	rm -r $(OBJDIR)
