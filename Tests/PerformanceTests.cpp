@@ -26,6 +26,7 @@
 #include <algorithm>
 #include <iostream>
 #include "CarveDSP/CarveDSPUnit.h"
+#include "MONSTRFilters/MONSTRCrossover.h"
 
 /**
  * Contains performance stats
@@ -70,7 +71,7 @@ inline Stats calcAverageAndJitter(const std::vector<double>& executionTimes) {
 /*** TEST BEGIN HERE ***/
 
 SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
-    GIVEN("A CarveDSPUnit and a buffer of silent samples") {
+    GIVEN("A CarveDSPUnit and a buffer of samples") {
 
         const int NUM_BUFFERS {100};
         std::vector<double> buffer(1024);
@@ -82,7 +83,7 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
         // store the execution time for each buffer
         std::vector<double> executionTimes;
 
-        WHEN("The silence samples are processed") {
+        WHEN("The samples are processed") {
             // turn the unit on
             mCarve.setMode(2);
 
@@ -92,14 +93,62 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
                 int iii {0};
                 std::generate(buffer.begin(), buffer.end(), [&iii]{ return std::sin(iii++); });
 
-                size_t startTime {clock()};
                 
                 // do processing
+                const size_t startTime {clock()};
                 for (size_t jjj {0}; jjj < buffer.size(); jjj++) {
                     buffer[jjj] = mCarve.process(buffer[jjj]);
                 }
+                const size_t endTime {clock()};
+
+                // calculate the execution time
+                const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
+                const double executionTime {(endTime - startTime) / CLOCKS_PER_MICROSEC};
+                executionTimes.push_back(executionTime);
+                CHECK(executionTime < mLimits.INDIVIDUAL);
+            }
+            
+            THEN("The average and variance are within limits") {
+                Stats mStats = calcAverageAndJitter(executionTimes);
+                CHECK(mStats.average < mLimits.AVERAGE);
+                CHECK(mStats.deviation < mLimits.DEVIATION);
+            }
+        }
+    }
+}
+
+SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
+    GIVEN("A MONSTRCrossover and a buffer of  samples") {
+        
+        const int NUM_BUFFERS {100};
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+        MONSTRCrossover mCrossover;
+        
+        // set the performance limits
+        Limits mLimits{1.0, 0.8, 0.08};
+        
+        // store the execution time for each buffer
+        std::vector<double> executionTimes;
+        
+        WHEN("The silence samples are processed") {
+            // turn the crossover on
+            mCrossover.band1.setIsActive(true);
+            mCrossover.band2.setIsActive(true);
+            mCrossover.band3.setIsActive(true);
+
+            for (int nbuf {0}; nbuf < NUM_BUFFERS; nbuf++) {
+
+                // fill the buffer with a sine wave
+                int iii {0};
+                std::generate(leftBuffer.begin(), leftBuffer.end(), [&iii]{ return std::sin(iii++); });
+                rightBuffer = leftBuffer;
                 
-                size_t endTime {clock()};
+                
+                // do processing
+                const size_t startTime {clock()};
+                mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+                const size_t endTime {clock()};
 
                 // calculate the execution time
                 const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
