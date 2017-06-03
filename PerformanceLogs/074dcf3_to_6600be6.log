@@ -1,0 +1,84 @@
+
+After commit 074dcf3:
+**** New Test Run: 2017-06-03 13:32:50
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.0653 Deviation: 0.00617178
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.7171 Deviation: 0.114106
+
+**** New Test Run: 2017-06-03 13:32:58
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.0703 Deviation: 0.00451149
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.68622 Deviation: 0.068144
+
+**** New Test Run: 2017-06-03 13:32:59
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.07055 Deviation: 0.00516862
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.66179 Deviation: 0.0454698
+
+**** New Test Run: 2017-06-03 13:33:00
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.07063 Deviation: 0.00545441
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.70494 Deviation: 0.12455
+
+
+After removing making MONSTR vectors static:
+**** New Test Run: 2017-06-03 13:35:24
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.06646 Deviation: 0.00381761
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.45164 Deviation: 0.0254561
+
+**** New Test Run: 2017-06-03 13:38:28
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.06546 Deviation: 0.00400106
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.46164 Deviation: 0.0324235
+
+**** New Test Run: 2017-06-03 13:38:29
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.0712 Deviation: 0.00626357
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.46671 Deviation: 0.0313653
+
+**** New Test Run: 2017-06-03 13:38:31
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.08019 Deviation: 0.0198706
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.48185 Deviation: 0.0501092
+
+**** New Test Run: 2017-06-03 13:38:33
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.0697 Deviation: 0.00634767
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.47767 Deviation: 0.0470912
+
+**** New Test Run: 2017-06-03 13:38:34
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.06977 Deviation: 0.00741804
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.47802 Deviation: 0.0425389
+
+**** New Test Run: 2017-06-03 13:38:37
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.07032 Deviation: 0.0071561
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.48156 Deviation: 0.0491323
+
+After swapping vectors for double*'s:
+**** New Test Run: 2017-06-03 13:51:02
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.0648 Deviation: 0.00514634
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.44672 Deviation: 0.0812017
+
+**** New Test Run: 2017-06-03 13:51:03
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.07023 Deviation: 0.00759167
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.43127 Deviation: 0.0314517
+
+**** New Test Run: 2017-06-03 13:51:04
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.06902 Deviation: 0.00698046
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.43227 Deviation: 0.0289865
+
+**** New Test Run: 2017-06-03 13:51:05
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.07135 Deviation: 0.00641711
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.42754 Deviation: 0.0324029
+
+**** New Test Run: 2017-06-03 14:24:35
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.06528 Deviation: 0.00556156
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.45609 Deviation: 0.0874974
+
+**** New Test Run: 2017-06-03 14:24:53
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.06905 Deviation: 0.00546684
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.44807 Deviation: 0.0430762
+
+**** New Test Run: 2017-06-03 14:24:54
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.06766 Deviation: 0.0072254
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.43608 Deviation: 0.0494041
+
+**** New Test Run: 2017-06-03 14:24:55
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.06698 Deviation: 0.00412428
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.43688 Deviation: 0.0589618
+
+**** New Test Run: 2017-06-03 14:24:56
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.0674 Deviation: 0.00357036
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.45207 Deviation: 0.0776501
