@@ -25,50 +25,85 @@
 #include <ctime>
 #include <algorithm>
 #include <iostream>
+#include <fstream>
+#include <chrono>
 #include "CarveDSP/CarveDSPUnit.h"
 #include "MONSTRFilters/MONSTRCrossover.h"
 
 /**
- * Contains performance stats
+ * Contains most of the useful stuff for the performance tests.
+ * If it gets much larger then it's probably more useful to do some refactoring and move this
+ * elsewhere.
  */
-struct Stats {
-    double average;
-    double deviation;
-};
-
-/**
- * Contains limits for multiple performance critera
- */
-struct Limits {
-    const double INDIVIDUAL;
-    const double AVERAGE;
-    const double DEVIATION;
-};
-
-// clang complains if this isn't inlined
-inline Stats calcAverageAndJitter(const std::vector<double>& executionTimes) {
-    Stats retVal;
-    
-    // calculate the average first
-    retVal.average = 0;
-    for (double time : executionTimes) {
-        retVal.average += time;
+namespace {
+    /**
+     * Contains performance stats
+     */
+    struct Stats {
+        double average;
+        double deviation;
+    };
+    std::ostream& operator<< (std::ostream& stream, const Stats& stats) {
+        stream << "Average: " << stats.average << " Deviation: " << stats.deviation;
+        return stream;
     }
-    retVal.average = retVal.average / executionTimes.size();
 
-    // now calculate deviation
-    retVal.deviation = 0;
-    for (const double& time : executionTimes) {
-        retVal.deviation += std::pow((time - retVal.average), 2);
+    /**
+     * Contains limits for multiple performance critera
+     */
+    struct Limits {
+        const double INDIVIDUAL;
+        const double AVERAGE;
+        const double DEVIATION;
+    };
+
+    /** 
+     * Does pretty much what it says.
+     * clang complains if this isn't inlined
+     */
+    inline Stats calcAverageAndDeviation(const std::vector<double>& executionTimes) {
+        Stats retVal;
+        
+        // calculate the average first
+        retVal.average = 0;
+        for (double time : executionTimes) {
+            retVal.average += time;
+        }
+        retVal.average = retVal.average / executionTimes.size();
+
+        // now calculate deviation
+        retVal.deviation = 0;
+        for (const double& time : executionTimes) {
+            retVal.deviation += std::pow((time - retVal.average), 2);
+        }
+        retVal.deviation = retVal.deviation / (executionTimes.size() - 1);
+        retVal.deviation = std::sqrt(retVal.deviation);
+        
+        return retVal;
     }
-    retVal.deviation = retVal.deviation / (executionTimes.size() - 1);
-    retVal.deviation = std::sqrt(retVal.deviation);
     
-    return retVal;
+    bool isNewRun {true};
+    inline void appendToResultsFile(const Stats& stats, const std::string& testName) {
+        const std::string FILE_PATH("wecore_performance.log");
+        std::ofstream outStream;
+        outStream.open(FILE_PATH, std::ios_base::app);
+        
+        if (isNewRun) {
+            isNewRun = false;
+            
+            std::time_t now {std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())};
+            outStream << std::endl << std::endl << "**** New Test Run: "
+                      << std::put_time(std::localtime(&now), "%F %T");
+            
+            ;
+        }
+        outStream << std::endl << testName << ":     " << stats;
+        
+    }
 }
 
 
-/*** TEST BEGIN HERE ***/
+/*** TESTS BEGIN HERE ***/
 
 SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
     GIVEN("A CarveDSPUnit and a buffer of samples") {
@@ -109,9 +144,11 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
             }
             
             THEN("The average and variance are within limits") {
-                Stats mStats = calcAverageAndJitter(executionTimes);
+                Stats mStats = calcAverageAndDeviation(executionTimes);
                 CHECK(mStats.average < mLimits.AVERAGE);
                 CHECK(mStats.deviation < mLimits.DEVIATION);
+                
+                appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());
             }
         }
     }
@@ -158,9 +195,11 @@ SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
             }
             
             THEN("The average and variance are within limits") {
-                Stats mStats = calcAverageAndJitter(executionTimes);
+                Stats mStats = calcAverageAndDeviation(executionTimes);
                 CHECK(mStats.average < mLimits.AVERAGE);
                 CHECK(mStats.deviation < mLimits.DEVIATION);
+                
+                appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());
             }
         }
     }

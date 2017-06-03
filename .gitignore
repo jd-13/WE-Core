@@ -2,3 +2,4 @@
 WECoreTest
 WECorePerfTest
 obj/*
+wecore_performance.log
