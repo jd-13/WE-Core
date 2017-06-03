@@ -28,7 +28,7 @@ default: WECoreTest
 perf: WECorePerfTest
 
 # Build test objects
-TEST_OBJS = $(addprefix $(OBJDIR)/, catchMain.o CarveDSPUnitTests.o CarveNoiseFilterTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o MONSTRCrossoverTests.o)
+TEST_OBJS = $(addprefix $(OBJDIR)/, catchMain.o CarveDSPUnitTests.o CarveNoiseFilterTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o MONSTRCrossoverTests.o AREnvelopeFollowerTests.o)
 PERF_TEST_OBJS = $(addprefix $(OBJDIR)/, catchMain.o PerformanceTests.o)
 
 $(OBJDIR)/%.o: $(WECORE_SRC)/Tests/%.cpp
