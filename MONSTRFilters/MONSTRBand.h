@@ -256,32 +256,31 @@ private:
     float getHighCutoff() const { return highCutoffHz; }
     
     /**
-     * Performs the effect processing on inLeftSample and inRightSample. Use for
+     * Performs the effect processing on leftSample and rightSample. Use for
      * stereo in->stereo out signals.
      *
-     * @param[out]   inLeftSamples   Reference to a vector of left samples to be processed
-     * @param[out]   inRightSamples  Reference to a vector of right samples to be processed
+     * @param[out]   leftSample   Pointer to the first sample of the left channel's buffer
+     * @param[out]   rightSample  Pointer to the first sample of the right channel's buffer
+     * @param[in]    numSamples   Number of samples in the buffer. The left and right buffers
+     *                            must be the same size.
      */
-    void process2in2out(std::vector<double>& inLeftSamples,
-                        std::vector<double>& inRightSamples) {
+    void process2in2out(double* leftSample, double* rightSample, size_t numSamples) {
         
-        if (inLeftSamples.size() == inRightSamples.size()) {
-            // Apply the filtering before processing
-            filterSamples(&inLeftSamples[0], &inRightSamples[0], static_cast<int>(inLeftSamples.size()));
+        // Apply the filtering before processing
+        filterSamples(leftSample, rightSample, static_cast<int>(numSamples));
+        
+        if (isActive) {
+            // Do the actual stereo widening or narrowing
+            // Based on: http://musicdsp.org/showArchiveComment.php?ArchiveID=256
+            double coef_S {width * 0.5};
             
-            if (isActive) {
-                // Do the actual stereo widening or narrowing
-                // Based on: http://musicdsp.org/showArchiveComment.php?ArchiveID=256
-                double coef_S {width * 0.5};
+            for (size_t iii {0}; iii < numSamples; iii++) {
                 
-                for (size_t iii {0}; iii < inLeftSamples.size(); iii++) {
-                    
-                    double mid {(inLeftSamples[iii] + inRightSamples[iii]) * 0.5};
-                    double side {(inRightSamples[iii] - inLeftSamples[iii]) * coef_S};
-                    
-                    inLeftSamples[iii] = mid - side;
-                    inRightSamples[iii] = mid + side;
-                }
+                double mid {(leftSample[iii] + rightSample[iii]) * 0.5};
+                double side {(rightSample[iii] - leftSample[iii]) * coef_S};
+                
+                leftSample[iii] = mid - side;
+                rightSample[iii] = mid + side;
             }
         }
     }

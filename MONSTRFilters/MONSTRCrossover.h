@@ -73,12 +73,12 @@ public:
      */
     void Process2in2out(double* leftSample, double* rightSample, size_t numSamples) {
         // make a copy of the buffers for each band to process in parallel
-        std::vector<double> band1LeftBuffer(numSamples);
-        std::vector<double> band1RightBuffer(numSamples);
-        std::vector<double> band2LeftBuffer(numSamples);
-        std::vector<double> band2RightBuffer(numSamples);
-        std::vector<double> band3LeftBuffer(numSamples);
-        std::vector<double> band3RightBuffer(numSamples);
+        double* band1LeftBuffer {new double[numSamples]};
+        double* band1RightBuffer {new double[numSamples]};
+        double* band2LeftBuffer {new double[numSamples]};
+        double* band2RightBuffer {new double[numSamples]};
+        double* band3LeftBuffer {new double[numSamples]};
+        double* band3RightBuffer {new double[numSamples]};
         
         for (size_t iii {0}; iii < numSamples; iii++) {
             band1LeftBuffer[iii] = leftSample[iii];
@@ -91,15 +91,22 @@ public:
         }
         
         // let each band do its processing
-        band1.process2in2out(band1LeftBuffer, band1RightBuffer);
-        band2.process2in2out(band2LeftBuffer, band2RightBuffer);
-        band3.process2in2out(band3LeftBuffer, band3RightBuffer);
+        band1.process2in2out(band1LeftBuffer, band1RightBuffer, numSamples);
+        band2.process2in2out(band2LeftBuffer, band2RightBuffer, numSamples);
+        band3.process2in2out(band3LeftBuffer, band3RightBuffer, numSamples);
         
         // combine the output from each band, and write to output
         for (size_t iii {0}; iii < numSamples; iii++) {
             leftSample[iii] = band1LeftBuffer[iii] + band2LeftBuffer[iii] + band3LeftBuffer[iii];
             rightSample[iii] = band1RightBuffer[iii] + band2RightBuffer[iii] + band3RightBuffer[iii];
         }
+        
+        delete[] band1LeftBuffer;
+        delete[] band1RightBuffer;
+        delete[] band2LeftBuffer;
+        delete[] band2RightBuffer;
+        delete[] band3LeftBuffer;
+        delete[] band3RightBuffer;
     }
     
     /**
