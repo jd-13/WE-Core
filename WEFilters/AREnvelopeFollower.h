@@ -43,23 +43,64 @@ public:
     /** @name Setter Methods */
     /** @{ */
     
+    /**
+     * Sets the sample rate the envelope will operate at.
+     * It is recommended that you call this at some point before calling clockUpdateEnvelope.
+     *
+     * @param[in]   sampleRate  The sample rate in Hz
+     */
     void setSampleRate(double sampleRate) {
         _sampleRate = sampleRate;
         _attackCoef = _calcCoef(_attackTimeMs);
         _releaseCoef = _calcCoef(_releaseTimeMs);
     }
     
+    /**
+     * Sets the attack time of the envelope.
+     *
+     * @see ATTACK_MS for valid values
+     *
+     * @param[in]   time    Attack time in milliseconds
+     */
     void setAttackTimeMs(double time) {
-        _attackTimeMs = time;
+        _attackTimeMs = AREnvelopeFollowerParameters::ATTACK_MS.BoundsCheck(time);
         _attackCoef = _calcCoef(_attackTimeMs);
-        
     }
+    
+    /**
+     * Sets the release time of the envelope.
+     *
+     * @see RELEASE_MS for valid values
+     *
+     * @param[in]   time    Release time in milliseconds
+     */
     void setReleaseTimeMs(double time) {
-        _releaseTimeMs = time;
+        _releaseTimeMs = AREnvelopeFollowerParameters::RELEASE_MS.BoundsCheck(time);
         _releaseCoef = _calcCoef(_releaseTimeMs);
     }
     
     /** @} */
+    
+    /** @name Getter Methods */
+    /** @{ */
+    
+    /**
+     * @see     setAttackTimeMs
+     */
+    double getAttackTimeMs() const { return _attackTimeMs; }
+    
+    /**
+     * @see     setReleaseTimeMs
+     */
+    double getReleaseTimeMs() const { return _releaseTimeMs; }
+    
+    /**
+     * Returns the latest envelope value without modifying it.
+     */
+    double getEnvelope() { return _envVal; }
+    
+    /** @} */
+
     
     /**
      * Updates the envelope with the current sample and returns the updated envelope value. Must be
@@ -79,12 +120,6 @@ public:
         return _envVal;
     }
     
-    /**
-     * Returns the latest envelope value without modifying it.
-     */
-    double getEnvelope() { return _envVal; }
-    
-    
 private:
     double _envVal;
     
@@ -97,7 +132,7 @@ private:
     double _sampleRate;
     
     double _calcCoef(double timeMs) {
-        return exp(log(0.01)/( timeMs * _sampleRate * 0.001));
+        return exp(log(0.01) / (timeMs * _sampleRate * 0.001));
     }
 };
 
