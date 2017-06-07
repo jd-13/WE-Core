@@ -53,8 +53,8 @@ public:
      * Applies the filtering to a buffer of samples.
      * Expect seg faults or other memory issues if arguements passed are incorrect. 
      *
-     * @param   inSamples     Pointer to the first sample of the left channel's buffer
-     * @param   numSamples    Number of samples in the buffer
+     * @param[out]  inSamples   Pointer to the first sample of the left channel's buffer
+     * @param[in]   numSamples  Number of samples in the buffer
      */
     void processBlock(double* inSamples, size_t numSamples) {
         
