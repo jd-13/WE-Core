@@ -32,11 +32,11 @@
  */
 class AREnvelopeFollower {
 public:
-    AREnvelopeFollower() : _envVal(0),
-                           _attackTimeMs(AREnvelopeFollowerParameters::ATTACK_MS.defaultValue),
+    AREnvelopeFollower() : _attackTimeMs(AREnvelopeFollowerParameters::ATTACK_MS.defaultValue),
                            _releaseTimeMs(AREnvelopeFollowerParameters::RELEASE_MS.defaultValue) {
         // call this here rather than setting it in initialiser list so that the coefficients get
         // setup
+        reset();
         setSampleRate(44100);
     }
     
@@ -101,6 +101,10 @@ public:
     
     /** @} */
 
+    /**
+     * Resets the envelope state.
+     */
+    void reset() { _envVal = 0; }
     
     /**
      * Updates the envelope with the current sample and returns the updated envelope value. Must be
