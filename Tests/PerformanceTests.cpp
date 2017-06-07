@@ -27,8 +27,11 @@
 #include <iostream>
 #include <fstream>
 #include <chrono>
+
 #include "CarveDSP/CarveDSPUnit.h"
 #include "MONSTRFilters/MONSTRCrossover.h"
+#include "SongbirdFilters/SongbirdFilterModule.h"
+
 
 /**
  * Contains most of the useful stuff for the performance tests.
@@ -155,7 +158,7 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
 }
 
 SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
-    GIVEN("A MONSTRCrossover and a buffer of  samples") {
+    GIVEN("A MONSTRCrossover and a buffer of samples") {
         
         const int NUM_BUFFERS {100};
         std::vector<double> leftBuffer(1024);
@@ -168,7 +171,7 @@ SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
         // store the execution time for each buffer
         std::vector<double> executionTimes;
         
-        WHEN("The silence samples are processed") {
+        WHEN("The samples are processed") {
             // turn the crossover on
             mCrossover.band1.setIsActive(true);
             mCrossover.band2.setIsActive(true);
@@ -187,6 +190,104 @@ SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
                 mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
                 const size_t endTime {clock()};
 
+                // calculate the execution time
+                const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
+                const double executionTime {(endTime - startTime) / CLOCKS_PER_MICROSEC};
+                executionTimes.push_back(executionTime);
+                CHECK(executionTime < mLimits.INDIVIDUAL);
+            }
+            
+            THEN("The average and variance are within limits") {
+                Stats mStats = calcAverageAndDeviation(executionTimes);
+                CHECK(mStats.average < mLimits.AVERAGE);
+                CHECK(mStats.deviation < mLimits.DEVIATION);
+                
+                appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());
+            }
+        }
+    }
+}
+
+SCENARIO("Performance: SongbirdFilterModule (blend mode), 100 buffers of 1024 samples each") {
+    GIVEN("A SongbirdFilterModule and a buffer of samples") {
+        
+        const int NUM_BUFFERS {100};
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+        SongbirdFilterModule mSongbird;
+        mSongbird.setModMode(false);
+        
+        // set the performance limits
+        Limits mLimits{1.8, 1.5, 0.12};
+        
+        // store the execution time for each buffer
+        std::vector<double> executionTimes;
+        
+        WHEN("The samples are processed") {
+            // turn the crossover on
+            
+            for (int nbuf {0}; nbuf < NUM_BUFFERS; nbuf++) {
+                
+                // fill the buffer with a sine wave
+                int iii {0};
+                std::generate(leftBuffer.begin(), leftBuffer.end(), [&iii]{ return std::sin(iii++); });
+                rightBuffer = leftBuffer;
+                
+                
+                // do processing
+                const size_t startTime {clock()};
+                mSongbird.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+                const size_t endTime {clock()};
+                
+                // calculate the execution time
+                const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
+                const double executionTime {(endTime - startTime) / CLOCKS_PER_MICROSEC};
+                executionTimes.push_back(executionTime);
+                CHECK(executionTime < mLimits.INDIVIDUAL);
+            }
+            
+            THEN("The average and variance are within limits") {
+                Stats mStats = calcAverageAndDeviation(executionTimes);
+                CHECK(mStats.average < mLimits.AVERAGE);
+                CHECK(mStats.deviation < mLimits.DEVIATION);
+                
+                appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());
+            }
+        }
+    }
+}
+
+SCENARIO("Performance: SongbirdFilterModule (freq mode), 100 buffers of 1024 samples each") {
+    GIVEN("A SongbirdFilterModule and a buffer of samples") {
+        
+        const int NUM_BUFFERS {100};
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+        SongbirdFilterModule mSongbird;
+        mSongbird.setModMode(true);
+        
+        // set the performance limits
+        Limits mLimits{1.8, 1.5, 0.12};
+        
+        // store the execution time for each buffer
+        std::vector<double> executionTimes;
+        
+        WHEN("The samples are processed") {
+            // turn the crossover on
+            
+            for (int nbuf {0}; nbuf < NUM_BUFFERS; nbuf++) {
+                
+                // fill the buffer with a sine wave
+                int iii {0};
+                std::generate(leftBuffer.begin(), leftBuffer.end(), [&iii]{ return std::sin(iii++); });
+                rightBuffer = leftBuffer;
+                
+                
+                // do processing
+                const size_t startTime {clock()};
+                mSongbird.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+                const size_t endTime {clock()};
+                
                 // calculate the execution time
                 const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
                 const double executionTime {(endTime - startTime) / CLOCKS_PER_MICROSEC};
