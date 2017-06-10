@@ -35,8 +35,19 @@ public:
     CoreAudioProcessor() = default;
     virtual ~CoreAudioProcessor() = default;
     
+    /**
+     * Returns true if there are updates which need to be applied to the UI.
+     */
     bool needsUIUpdate() { return _UIUpdateFlag; }
+    
+    /**
+     * Sets the UI update flag to true.
+     */
     void requestUIUpdate() { _UIUpdateFlag = true; }
+    
+    /**
+     * Clears the UI update flag.
+     */
     void clearUIUpdate() { _UIUpdateFlag = false; }
     
 protected:
