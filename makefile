@@ -5,7 +5,7 @@ CXXFLAGS_COMMON = -std=c++11 -g -Wall -Werror -Wextra -Wconversion -Wshadow $(GC
 
 # Set the GCC and Clang flags
 # TODO: work on removing the need for the below Wno flags
-CXXFLAGS_CLANG = $(CXXFLAGS_COMMON) -Weverything -Wpedantic -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion -Wno-unknown-warning-option
+CXXFLAGS_CLANG = $(CXXFLAGS_COMMON) -Weverything -Wpedantic -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion -Wno-unknown-warning-option -Wno-c++98-compat
 CXXFLAGS_GCC = $(CXXFLAGS_COMMON) -pedantic
 
 # Set # Set the GCC and Clang flags for the DSPFilters library
@@ -24,8 +24,6 @@ OBJDIR = obj
 
 # Build rules start here
 default: WECoreTest
-
-perf: WECorePerfTest
 
 # Build test objects
 TEST_OBJS = $(addprefix $(OBJDIR)/, catchMain.o CarveDSPUnitTests.o CarveNoiseFilterTests.o RichterLFOPairTests.o SongbirdFilterModuleTests.o TPTSVFilterTests.o MONSTRCrossoverTests.o AREnvelopeFollowerTests.o)
@@ -48,7 +46,7 @@ WECoreTest: createDir $(DSP_OBJS) $(TEST_OBJS)
 	mkdir -p $(OBJDIR)
 	$(CXX) $(DSP_OBJS) $(TEST_OBJS) -o WECoreTest $(GCOVFLAGS)
 
-WECorePerfTest: createDir $(DSP_OBJS) $(PERF_TEST_OBJS)
+perf: createDir $(DSP_OBJS) $(PERF_TEST_OBJS)
 	mkdir -p $(OBJDIR)
 	$(CXX) $(DSP_OBJS) $(PERF_TEST_OBJS) -o WECorePerfTest $(GCOVFLAGS)
 
