@@ -44,4 +44,4 @@ deploy:
   file: callgrind.out.$TRAVIS_BUILD_NUMBER
   skip_cleanup: true
   on:
-    tags: true
+    repo: jd-13/WE-Core
