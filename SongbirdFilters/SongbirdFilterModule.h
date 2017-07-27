@@ -60,14 +60,27 @@ enum class Channels {
  * To use this class, simply call reset, and the process methods as necessary, using the provided
  * getter and setter methods to manipulate parameters.
  *
- * It is recommended to set all available parameters explicitly by calling their setter methods
- * before attempting to process any audio.
+ * You must call setSampleRate before beginning any processing as the default sample rate might not
+ * be the one you want.
  *
  * Internally relies on the parameters provided in SongbirdFiltersParameters.h
  *
  * @see SongbirdFormantFilter   - SongbirdFilterModule is composed of two pairs of
  *                                SongbirdFormantFilters (pairs to allow stereo processing), each
  *                                pair is assigned one of the five supported vowels at any time
+ *
+ * A SongbirdFilterModule can be created and used to process a buffer as follows:
+ * @code
+ * SongbirdFilterModule filter;
+ * filter.setSampleRate(44100);
+ * filter.setVowel1(VOWEL.VOWEL_O);
+ * filter.setVowel2(VOWEL.VOWEL_I);
+ * ...
+ * set any other parameters you need
+ * ...
+ *
+ * filter.Process2in2out(leftSamples, rightSamples, numSamples);
+ * @endcode
  */
 class SongbirdFilterModule {
 public:

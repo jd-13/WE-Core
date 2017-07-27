@@ -41,6 +41,17 @@
  * required.
  *
  * @see MONSTRBand
+ *
+ * The below example shows how to prepare a MONSTRCrossover object to process audio:
+ * @code
+ * MONSTRCrossover crossover;
+ * crossover.setSampleRate(44100);
+ * @endcode
+ *
+ * Then when you have a buffer ready:
+ * @code
+ * crossover.Process2in2out(leftSample, rightSample, numSamples);
+ * @endcode
  */
 class MONSTRCrossover {
 public:

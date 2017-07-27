@@ -37,6 +37,24 @@
  * This class has been created as the LFO relies on the MOD being ready before
  * it can perform certain operations, which means there are method calls to 
  * each oscillator which must be interleaved carefully.
+ *
+ * The following example shows how to set up this object for audio at 120bpm and 44.1kHz:
+ * @code
+ * RichterLFOPair lfoPair;
+ * lfoPair.prepareForNextBuffer(120, 0, 44100);
+ * @endcode
+ *
+ * Then the class can be used to process a buffer as follows:
+ * (where numSamples is the size of the buffer)
+ * @code
+ * for (size_t iii {0}; iii < numSamples; iii++) {
+ *     buffer[iii] = buffer[iii] * lfoPair.calcGainInLoop();
+ * }
+ * @endcode
+ *
+ * calcGainInLoop must be called once for each sample. Even if there is a sample in the buffer which
+ * you do not wish to apply processing to,calcGainInLoop must still be called otherwise subsequent
+ * samples will have the wrong gain calculation applied.
  */
  
 class RichterLFOPair {

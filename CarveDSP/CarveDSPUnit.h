@@ -40,6 +40,19 @@
  * single object can be reused for multiple audio streams if so desired.
  *
  * Internally relies on the parameters provided in CarveParameters.h
+ *
+ * The process method must be called once for each sample you wish to process:
+ * @code
+ * CarveDSPUnit unit;
+ * unit.setMode(CarveParameters::MODE.SINE);
+ * ...
+ * set any other parameters you need
+ * ...
+ * 
+ * for (size_t iii {0}; iii < buffer.size(); iii++) {
+ *     buffer[iii] = unit.process(buffer[iii]);
+ * }
+ * @endcode
  */
 class CarveDSPUnit {
 public:
@@ -59,9 +72,9 @@ public:
     /**
      * Sets the wave shape which will be applied to the signal.
      *
-     * @see     ModeParameter for valid values
+     * @param[in]   val Value the mode should be set to
      *
-     * @param   val Value the mode should be set to
+     * @see         ModeParameter for valid values
      */
     void setMode(int val) { mode = CarveParameters::MODE.BoundsCheck(val); }
     
@@ -69,9 +82,9 @@ public:
      * Sets the gain to be applied to the signal before processing.
      * More pre-gain = more distortion.
      *
-     * @param   val Pre-gain value that should be used
+     * @param[in]   val Pre-gain value that should be used
      *
-     * @see     PREGAIN for valid values
+     * @see         PREGAIN for valid values
      */
     void setPreGain(double val) { preGain = CarveParameters::PREGAIN.BoundsCheck(val); }
     
@@ -79,9 +92,9 @@ public:
      * Sets the gain to be applied to the signal after processing.
      * More post-gain = more volume.
      *     
-     * @param   val Post-gain value that should be used
+     * @param[in]   val Post-gain value that should be used
      *
-     * @see     POSTGAIN for valid values
+     * @see         POSTGAIN for valid values
      */
     void setPostGain(double val) { postGain = CarveParameters::POSTGAIN.BoundsCheck(val); }
     
@@ -90,9 +103,9 @@ public:
      * This behaves differently for each mode, and modifies the shape of
      * the wave applied to the signal
      *
-     * @param   val Tweak value that should be used
+     * @param[in]   val Tweak value that should be used
      *
-     * @see     TWEAK for valid values
+     * @see         TWEAK for valid values
      */
     void setTweak(double val) { tweak = CarveParameters::TWEAK.BoundsCheck(val); }
     
@@ -127,11 +140,11 @@ public:
      * Performs the processing on the sample, by calling the appropriate
      * private processing methods.
      *
-     * @param   inSample    The sample to be processed
+     * @param[in]   inSample    The sample to be processed
      *
-     * @return  The value of inSample after processing
+     * @return      The value of inSample after processing
      */
-    double process (double inSample) const {
+    double process(double inSample) const {
         switch (mode) {
             case CarveParameters::MODE.OFF:
                 return 0;
