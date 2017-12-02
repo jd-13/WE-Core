@@ -6,6 +6,7 @@ update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
 
 git submodule init
 git submodule update
+export WECORE_SRC=/home/WE-Core
 
 make
 if [ "$CXX" = "g++-5" ]; then scripts/get_code_cov.sh; fi

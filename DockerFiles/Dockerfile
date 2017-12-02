@@ -2,7 +2,7 @@ FROM ubuntu:zesty
 
 ENV PATH /opt/llvm/bin:$PATH
 ENV CXX clang++-5.0
-ENV CATCH_PATH /home/catch/single_include/catch.hpp
+ENV CATCH_PATH /home/catch/single_include/
 ENV VALGRIND_PATH /home/valgrind
 
 CMD bash
