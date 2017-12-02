@@ -1,7 +1,7 @@
 DSPFILTERS_PATH = DSPFilters/shared/DSPFilters
 
 GCOVFLAGS = -fprofile-arcs -ftest-coverage
-CXXFLAGS_COMMON = -std=c++11 -g -Wall -Werror -Wextra -Wconversion -Wshadow $(GCOVFLAGS)
+CXXFLAGS_COMMON = -std=c++17 -g -Wall -Werror -Wextra -Wconversion -Wshadow $(GCOVFLAGS)
 
 # Set the GCC and Clang flags
 # TODO: work on removing the need for the below Wno flags
