@@ -7,7 +7,7 @@ services:
 
 before_install:
   - docker pull jackd13/audioplugins:clang5
-  - docker run jackd13/audioplugins:clang5 /bin/bash -c "cd /home/ && git clone -b docker-ci https://github.com/jd-13/WE-Core/ && cd WE-Core && ./CIBuild.sh"
+  - docker run jackd13/audioplugins:clang5 /bin/bash -c "cd /home/ && git clone -b docker-ci https://github.com/jd-13/WE-Core/ && cd WE-Core && scripts/CIBuild.sh"
 
 install:
 
