@@ -4,7 +4,6 @@ if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
 if [ "$CXX" = "clang++" ]; then export CXX="clang++-5.0" CC="clang-5.0"; fi
 update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
 
-curl "https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp" --create-dirs -o "single_include/catch.hpp"
 scripts/valgrind_setup.sh
 git submodule init
 git submodule update
