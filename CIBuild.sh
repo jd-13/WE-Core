@@ -16,4 +16,4 @@ if [ "$CXX" = "g++-5" ]; then scripts/get_code_cov.sh; fi
 valgrind/coregrind/valgrind --tool=callgrind ./WECoreTest
 if [ "$CXX" = "g++-5" ]; then bash <(curl -s https://codecov.io/bash); fi
 cppcheck -iDSPFilters -ivalgrind --quiet --error-exitcode=1 .
-mv callgrind.out.* callgrind.out.$TRAVIS_BUILD_NUMBER
+#mv callgrind.out.* callgrind.out.$TRAVIS_BUILD_NUMBER
