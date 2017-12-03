@@ -38,7 +38,7 @@ SCENARIO("CarveNoiseFilter: Silence in = silence out") {
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(buffer[iii] == Approx(0.0));
+                    CHECK(buffer[iii] == Approx(0.0f).margin(0.00001));
                 }
             }
         }

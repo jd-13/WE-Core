@@ -110,8 +110,8 @@ SCENARIO("MONSTRCrossover: Silence in = silence out") {
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
-                    CHECK(leftBuffer[iii] == Approx(0.0));
-                    CHECK(rightBuffer[iii] == Approx(0.0));
+                    CHECK(leftBuffer[iii] == Approx(0.0).margin(0.00001));
+                    CHECK(rightBuffer[iii] == Approx(0.0).margin(0.00001));
                 }
             }
         }
