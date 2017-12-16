@@ -8,10 +8,11 @@ git submodule init
 git submodule update
 export WECORE_SRC=/home/WE-Core
 
-make
-if [ "$CXX" = "g++-5" ]; then scripts/get_code_cov.sh; fi
+mkdir build && cd build
+cmake .. && make
+if [ "$CXX" = "g++-5" ]; then $WECORE_SRC/scripts/get_code_cov.sh; fi
 
 $VALGRIND_PATH/coregrind/valgrind --tool=callgrind ./WECoreTest
 if [ "$CXX" = "g++-5" ]; then bash <(curl -s https://codecov.io/bash); fi
-cppcheck -iDSPFilters -ivalgrind --quiet --error-exitcode=1 .
+cppcheck -i$WECORE_SRC/DSPFilters -i$WECORE_SRC/valgrind --quiet --error-exitcode=1 .
 mv callgrind.out.* callgrind.out.$TRAVIS_BUILD_NUMBER
