@@ -142,7 +142,7 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
 
                 // calculate the execution time
                 const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
-                const double executionTime {(endTime - startTime) / static_cast<double>(CLOCKS_PER_MICROSEC)};
+                const double executionTime {static_cast<double>(endTime - startTime) / CLOCKS_PER_MICROSEC};
                 executionTimes.push_back(executionTime);
                 CHECK(executionTime < mLimits.INDIVIDUAL);
             }
@@ -193,7 +193,7 @@ SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
 
                 // calculate the execution time
                 const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
-                const double executionTime {(endTime - startTime) / static_cast<double>(CLOCKS_PER_MICROSEC)};
+                const double executionTime {static_cast<double>(endTime - startTime) / CLOCKS_PER_MICROSEC};
                 executionTimes.push_back(executionTime);
                 CHECK(executionTime < mLimits.INDIVIDUAL);
             }
@@ -242,7 +242,7 @@ SCENARIO("Performance: SongbirdFilterModule (blend mode), 100 buffers of 1024 sa
                 
                 // calculate the execution time
                 const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
-                const double executionTime {(endTime - startTime) / static_cast<double>(CLOCKS_PER_MICROSEC)};
+                const double executionTime {static_cast<double>(endTime - startTime) / CLOCKS_PER_MICROSEC};
                 executionTimes.push_back(executionTime);
                 CHECK(executionTime < mLimits.INDIVIDUAL);
             }
@@ -291,7 +291,7 @@ SCENARIO("Performance: SongbirdFilterModule (freq mode), 100 buffers of 1024 sam
                 
                 // calculate the execution time
                 const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
-                const double executionTime {(endTime - startTime) / static_cast<double>(CLOCKS_PER_MICROSEC)};
+                const double executionTime {static_cast<double>(endTime - startTime) / CLOCKS_PER_MICROSEC};
                 executionTimes.push_back(executionTime);
                 CHECK(executionTime < mLimits.INDIVIDUAL);
             }
