@@ -25,6 +25,7 @@
 #include <ctime>
 #include <algorithm>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <chrono>
 
@@ -72,14 +73,14 @@ namespace {
         for (double time : executionTimes) {
             retVal.average += time;
         }
-        retVal.average = retVal.average / executionTimes.size();
+        retVal.average = retVal.average / static_cast<double>(executionTimes.size());
 
         // now calculate deviation
         retVal.deviation = 0;
         for (const double& time : executionTimes) {
             retVal.deviation += std::pow((time - retVal.average), 2);
         }
-        retVal.deviation = retVal.deviation / (executionTimes.size() - 1);
+        retVal.deviation = retVal.deviation / (static_cast<double>(executionTimes.size()) - 1);
         retVal.deviation = std::sqrt(retVal.deviation);
         
         return retVal;
@@ -133,15 +134,15 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
 
                 
                 // do processing
-                const size_t startTime {clock()};
+                const clock_t startTime {clock()};
                 for (size_t jjj {0}; jjj < buffer.size(); jjj++) {
                     buffer[jjj] = mCarve.process(buffer[jjj]);
                 }
-                const size_t endTime {clock()};
+                const clock_t endTime {clock()};
 
                 // calculate the execution time
                 const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
-                const double executionTime {(endTime - startTime) / CLOCKS_PER_MICROSEC};
+                const double executionTime {static_cast<double>(endTime - startTime) / CLOCKS_PER_MICROSEC};
                 executionTimes.push_back(executionTime);
                 CHECK(executionTime < mLimits.INDIVIDUAL);
             }
@@ -186,13 +187,13 @@ SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
                 
                 
                 // do processing
-                const size_t startTime {clock()};
+                const clock_t startTime {clock()};
                 mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
-                const size_t endTime {clock()};
+                const clock_t endTime {clock()};
 
                 // calculate the execution time
                 const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
-                const double executionTime {(endTime - startTime) / CLOCKS_PER_MICROSEC};
+                const double executionTime {static_cast<double>(endTime - startTime) / CLOCKS_PER_MICROSEC};
                 executionTimes.push_back(executionTime);
                 CHECK(executionTime < mLimits.INDIVIDUAL);
             }
@@ -235,13 +236,13 @@ SCENARIO("Performance: SongbirdFilterModule (blend mode), 100 buffers of 1024 sa
                 
                 
                 // do processing
-                const size_t startTime {clock()};
+                const clock_t startTime {clock()};
                 mSongbird.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
-                const size_t endTime {clock()};
+                const clock_t endTime {clock()};
                 
                 // calculate the execution time
                 const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
-                const double executionTime {(endTime - startTime) / CLOCKS_PER_MICROSEC};
+                const double executionTime {static_cast<double>(endTime - startTime) / CLOCKS_PER_MICROSEC};
                 executionTimes.push_back(executionTime);
                 CHECK(executionTime < mLimits.INDIVIDUAL);
             }
@@ -284,13 +285,13 @@ SCENARIO("Performance: SongbirdFilterModule (freq mode), 100 buffers of 1024 sam
                 
                 
                 // do processing
-                const size_t startTime {clock()};
+                const clock_t startTime {clock()};
                 mSongbird.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
-                const size_t endTime {clock()};
+                const clock_t endTime {clock()};
                 
                 // calculate the execution time
                 const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
-                const double executionTime {(endTime - startTime) / CLOCKS_PER_MICROSEC};
+                const double executionTime {static_cast<double>(endTime - startTime) / CLOCKS_PER_MICROSEC};
                 executionTimes.push_back(executionTime);
                 CHECK(executionTime < mLimits.INDIVIDUAL);
             }
