@@ -1,7 +1,5 @@
 *.swift
-WECoreTest
-WECorePerfTest
-obj/*
 wecore_performance.log
 doxygen/html/*
 doxygen/doxygen*
+build/*
