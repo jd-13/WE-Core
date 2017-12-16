@@ -28,7 +28,8 @@ before_script:
   - git submodule update
 
 script:
-  - make
+  - mkdir build && cd build
+  - cmake .. && make
   - if [ "$CXX" = "g++-5" ]; then scripts/get_code_cov.sh; fi
 
 after_success:
