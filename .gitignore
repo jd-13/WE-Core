@@ -3,3 +3,4 @@ wecore_performance.log
 doxygen/html/*
 doxygen/doxygen*
 build/*
+.vscode/*
