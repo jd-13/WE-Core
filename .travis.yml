@@ -33,9 +33,9 @@ script:
   - if [ "$CXX" = "g++-5" ]; then $WECORE_SRC/scripts/get_code_cov.sh; fi
 
 after_success:
-  - valgrind/coregrind/valgrind --tool=callgrind ./WECoreTest
+  - $WECORE_SRC/valgrind/coregrind/valgrind --tool=callgrind ./WECoreTest
   - if [ "$CXX" = "g++-5" ]; then bash <(curl -s https://codecov.io/bash); fi
-  - cppcheck -iDSPFilters -ivalgrind --quiet --error-exitcode=1 .
+  - cppcheck -i$WECORE_SRC/DSPFilters -i$WECORE_SRC/valgrind --quiet --error-exitcode=1 .
   - mv callgrind.out.* callgrind.out.$TRAVIS_BUILD_NUMBER
 
 deploy:
