@@ -20,7 +20,7 @@ set(CXXFLAGS_GCC "${CXXFLAGS_COMMON} -pedantic")
 
 # Set the GCC and Clang flags for the DSPFilters library
 set(CXXFLAGS_CLANG_DSP "${CXXFLAGS_CLANG} -Wno-float-equal -Wno-ignored-qualifiers -Wno-unused-parameter -Wno-old-style-cast -Wno-padded -Wno-unused-variable -Wno-sign-conversion -Wno-missing-noreturn")
-set(CXXFLAGS_GCC_DSP "${CXXFLAGS_COMMON} -Wno-ignored-qualifiers -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-sign-conversion -Wno-unknown-warning-option -Wno-missing-noreturn")
+set(CXXFLAGS_GCC_DSP "${CXXFLAGS_COMMON} -Wno-ignored-qualifiers -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-sign-conversion -Wno-missing-noreturn")
 
 # Set the flags we'll actually use based on the compiler
 set(CXXFLAGS ${CXXFLAGS_CLANG})
