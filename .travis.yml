@@ -30,7 +30,7 @@ before_script:
 script:
   - mkdir build && cd build
   - cmake .. && make
-  - if [ "$CXX" = "g++-5" ]; then scripts/get_code_cov.sh; fi
+  - if [ "$CXX" = "g++-5" ]; then $WECORE_SRC/scripts/get_code_cov.sh; fi
 
 after_success:
   - valgrind/coregrind/valgrind --tool=callgrind ./WECoreTest
