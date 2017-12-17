@@ -13,7 +13,7 @@ install:
 before_script:
 
 script:
-  - docker run --mount source=.,target=/home/travisDir -e TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER jackd13/audioplugins:clang5 /bin/bash -c "cd /home/ && git clone -b $TRAVIS_BRANCH https://github.com/jd-13/WE-Core/ && cd WE-Core && scripts/CIBuild.sh"
+  - docker run --mount type=bind,source="$(pwd)",target=/home/travisDir -e TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER jackd13/audioplugins:clang5 /bin/bash -c "cd /home/ && git clone -b $TRAVIS_BRANCH https://github.com/jd-13/WE-Core/ && cd WE-Core && scripts/CIBuild.sh"
 
 after_success:
 
