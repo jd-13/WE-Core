@@ -23,6 +23,7 @@ script:
   - docker run --mount type=bind,source="$(pwd)",target=/home/travisDir $CODE_COV_ENVS -e TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER $DOCKER_IMG /bin/bash -c "cd /home/travisDir && scripts/CIBuild.sh"
 
 after_success:
+  - sudo chown -R travis:travis /home/travis/
 
 deploy:
   provider: releases
