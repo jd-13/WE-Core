@@ -19,7 +19,7 @@ RUN apt-get install -y software-properties-common python-software-properties
 
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
 RUN apt-get update
-RUN apt-get install -y gcc-7
+RUN apt-get install -y g++-7
 
 RUN svn co svn://svn.valgrind.org/valgrind/trunk /home/valgrind && cd /home/valgrind && ./autogen.sh && ./configure && make && make install
 
