@@ -10,7 +10,7 @@ CMD bash
 RUN apt-get update
 
 RUN apt-get install -y apt-utils libasound2-dev webkit2gtk-4.0 x11proto-xinerama-dev
-RUN apt-get install -y wget unzip git subversion curl libcurl4-gnutls-dev cppcheck
+RUN apt-get install -y wget unzip git subversion curl libcurl4-gnutls-dev cppcheck cmake
 RUN curl "https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp" --create-dirs -o "/home/catch/single_include/catch.hpp"
 RUN apt-get install -y software-properties-common python-software-properties
 
