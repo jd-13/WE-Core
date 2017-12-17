@@ -1,42 +1,28 @@
 language: cpp
 
-dist: trusty
+sudo: required
 
-addons:
-  apt:
-    sources:
-      - llvm-toolchain-trusty-5.0
-      - ubuntu-toolchain-r-test
-    packages:
-      - clang-5.0
-      - g++-5
+matrix:
+  include:
+    - env: DOCKER_IMG=jackd13/audioplugins:clang5
+    - env: DOCKER_IMG=jackd13/audioplugins:gcc7
+  fast_finish: true
 
-compiler:
-  - g++
-  - clang
+services:
+  - docker
+
+before_install:
 
 install:
-  - if [ "$CXX" = "g++" ]; then export CXX="g++-5" CC="gcc-5"; fi
-  - if [ "$CXX" = "clang++" ]; then export CXX="clang++-5.0" CC="clang-5.0"; fi
-  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
-  - sudo apt-get install -qq cppcheck
+  - docker pull $DOCKER_IMG
 
 before_script:
-  - curl "https://raw.githubusercontent.com/philsquared/Catch/master/single_include/catch.hpp" --create-dirs -o "single_include/catch.hpp"
-  - scripts/valgrind_setup.sh
-  - git submodule init
-  - git submodule update
 
 script:
-  - mkdir build && cd build
-  - cmake .. && make
-  - if [ "$CXX" = "g++-5" ]; then $WECORE_SRC/scripts/get_code_cov.sh; fi
+  - CODE_COV_ENVS=`bash <(curl -s https://codecov.io/env)`
+  - docker run --mount type=bind,source="$(pwd)",target=/home/travisDir $CODE_COV_ENVS -e TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER $DOCKER_IMG /bin/bash -c "cd /home/ && git clone -b $TRAVIS_BRANCH https://github.com/jd-13/WE-Core/ && cd WE-Core && scripts/CIBuild.sh"
 
 after_success:
-  - $WECORE_SRC/valgrind/coregrind/valgrind --tool=callgrind ./WECoreTest
-  - if [ "$CXX" = "g++-5" ]; then bash <(curl -s https://codecov.io/bash); fi
-  - cppcheck -i$WECORE_SRC/DSPFilters -i$WECORE_SRC/valgrind --quiet --error-exitcode=1 .
-  - mv callgrind.out.* callgrind.out.$TRAVIS_BUILD_NUMBER
 
 deploy:
   provider: releases
