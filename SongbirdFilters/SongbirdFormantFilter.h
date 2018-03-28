@@ -50,22 +50,17 @@ public:
      */
     SongbirdFormantFilter(int numFormants = 5) {
         for (int iii {0}; iii < numFormants; iii++) {
-            TPTSVFilter* tempFilter = new TPTSVFilter();
-            tempFilter->setMode(TPTSVFilterParameters::FILTER_MODE.PEAK);
-            tempFilter->setQ(15);
-            filters.push_back(tempFilter);
+            TPTSVFilter tempFilter;
+            tempFilter.setMode(TPTSVFilterParameters::FILTER_MODE.PEAK);
+            tempFilter.setQ(15);
+            _filters.push_back(tempFilter);
         }
     }
     
     /**
-     * Deallocates each filter in the vector.
+     * Default.
      */
-    virtual ~SongbirdFormantFilter() {
-        for (size_t iii {0}; iii < filters.size(); iii++) {
-            TPTSVFilter* tempFilter {filters[iii]};
-            delete tempFilter;
-        }
-    }
+    virtual ~SongbirdFormantFilter() = default;
     
     /**
      * Applies the filtering to a mono buffer of samples.
@@ -81,11 +76,11 @@ public:
             std::vector<double> outputBuffer(numSamples, 0);
             
             // perform the filtering for each formant peak
-            for (size_t iii {0}; iii < filters.size(); iii++) {
+            for (size_t iii {0}; iii < _filters.size(); iii++) {
                 // copy the input samples to a new buffer
                 std::vector<double> tempBuffer(inSamples, inSamples + numSamples);
                 
-                filters[iii]->processBlock(&tempBuffer[0], numSamples);
+                _filters[iii].processBlock(&tempBuffer[0], numSamples);
                 
                 // add the processed samples to the output buffer
                 for (size_t jjj {0}; jjj < tempBuffer.size(); jjj++) {
@@ -118,14 +113,14 @@ public:
         
         // if the correct number of formants have been supplied,
         // apply them to each filter in turn
-        if (filters.size() == formants.size()) {
+        if (_filters.size() == formants.size()) {
             retVal = true;
             
-            for (size_t iii {0}; iii < filters.size(); iii++) {
-                filters[iii]->setCutoff(formants[iii].frequency);
+            for (size_t iii {0}; iii < _filters.size(); iii++) {
+                _filters[iii].setCutoff(formants[iii].frequency);
                 
                 double gainAbs = pow(10, formants[iii].gaindB / 20.0);
-                filters[iii]->setGain(gainAbs);
+                _filters[iii].setGain(gainAbs);
             }
         }
         
@@ -136,8 +131,8 @@ public:
      * Sets the sample rate which the filters will be operating on.
      */
     void setSampleRate(double val) {
-        for (TPTSVFilter* filter : filters) {
-            filter->setSampleRate(val);
+        for (TPTSVFilter& filter : _filters) {
+            filter.setSampleRate(val);
         }
     }
     
@@ -146,13 +141,13 @@ public:
      * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
      */
     void reset() {
-        for (TPTSVFilter* filter : filters) {
-            filter->reset();
+        for (TPTSVFilter& filter : _filters) {
+            filter.reset();
         }
     }
     
 private:
-    std::vector<TPTSVFilter*> filters;
+    std::vector<TPTSVFilter> _filters;
 };
 
 
