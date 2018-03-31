@@ -25,7 +25,6 @@
 #ifndef MONSTRBAND_H_INCLUDED
 #define MONSTRBAND_H_INCLUDED
 
-#include <vector>
 #include "MONSTRParameters.h"
 #include "General/CoreMath.h"
 
