@@ -25,7 +25,6 @@
 #include "MONSTRFilters/MONSTRCrossover.h"
 #include "General/CoreMath.h"
 #include "Tests/TestData.h"
-#include <iostream>
 
 SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
     GIVEN("A new MONSTRCrossover object") {
