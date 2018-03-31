@@ -23,6 +23,7 @@
 
 #include "catch.hpp"
 #include "SongbirdFilters/SongbirdFilterModule.h"
+#include "Tests/TestData.h"
 
 SCENARIO("SongbirdFilterModule: Parameters can be set and retrieved correctly") {
     GIVEN("A new SongbirdFilterModule object") {
@@ -95,11 +96,12 @@ SCENARIO("SongbirdFilterModule: Silence in = silence out") {
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
         SongbirdFilterModule mSongbird;
+
+        // fill the buffer
+        std::fill(leftBuffer.begin(), leftBuffer.end(), 0);
+        std::fill(rightBuffer.begin(), rightBuffer.end(), 0);
         
         WHEN("The silence samples are processed") {
-            // fill the buffer
-            std::fill(leftBuffer.begin(), leftBuffer.end(), 0);
-            std::fill(rightBuffer.begin(), rightBuffer.end(), 0);
             
             // do processing
             mSongbird.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
@@ -108,6 +110,88 @@ SCENARIO("SongbirdFilterModule: Silence in = silence out") {
                 for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
                     CHECK(leftBuffer[iii] == Approx(0.0));
                     CHECK(rightBuffer[iii] == Approx(0.0));
+                }
+            }
+        }
+    }
+}
+
+SCENARIO("SongbirdFilterModule: Freq mode") {
+    GIVEN("A SongbirdFilterModule and a buffer of sine samples") {
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+        const std::vector<double>& expectedOutputLeft =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
+        const std::vector<double>& expectedOutputRight =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
+
+        SongbirdFilterModule mSongbird;
+
+        // Set some parameters for the input signal
+        constexpr size_t SAMPLE_RATE {44100};
+        constexpr size_t SINE_FREQ {1000};
+        constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
+
+        // fill the buffers, phase shift the right one so that they're not identical
+        std::generate(leftBuffer.begin(),
+                      leftBuffer.end(),
+                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+        std::generate(rightBuffer.begin(),
+                      rightBuffer.end(),
+                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + CoreMath::LONG_PI);} );          
+        WHEN("The parameters are set and samples are processed") {
+            // Set freq mode
+            mSongbird.setVowel1(1);
+            mSongbird.setVowel2(2);
+            mSongbird.setModMode(true);
+
+            mSongbird.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+
+            THEN("The output is as expected") {
+                for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
+                    CHECK(leftBuffer[iii] == Approx(expectedOutputLeft[iii]).margin(0.00001));
+                    CHECK(rightBuffer[iii] == Approx(expectedOutputRight[iii]).margin(0.00001));
+                }
+            }
+        }
+    }
+}
+
+SCENARIO("SongbirdFilterModule: Blend mode") {
+    GIVEN("A SongbirdFilterModule and a buffer of sine samples") {
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+        const std::vector<double>& expectedOutputLeft =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
+        const std::vector<double>& expectedOutputRight =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
+
+        SongbirdFilterModule mSongbird;
+
+        // Set some parameters for the input signal
+        constexpr size_t SAMPLE_RATE {44100};
+        constexpr size_t SINE_FREQ {1000};
+        constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
+
+        // fill the buffers, phase shift the right one so that they're not identical
+        std::generate(leftBuffer.begin(),
+                      leftBuffer.end(),
+                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+        std::generate(rightBuffer.begin(),
+                      rightBuffer.end(),
+                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + CoreMath::LONG_PI);} );        
+        WHEN("The parameters are set and samples are processed") {
+            // Set blend mode
+            mSongbird.setVowel1(1);
+            mSongbird.setVowel2(2);
+            mSongbird.setModMode(false);
+
+            mSongbird.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+
+            THEN("The output is as expected") {
+                for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
+                    CHECK(leftBuffer[iii] == Approx(expectedOutputLeft[iii]).margin(0.00001));
+                    CHECK(rightBuffer[iii] == Approx(expectedOutputRight[iii]).margin(0.00001));
                 }
             }
         }
