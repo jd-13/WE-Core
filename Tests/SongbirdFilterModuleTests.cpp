@@ -25,6 +25,8 @@
 #include "SongbirdFilters/SongbirdFilterModule.h"
 #include "Tests/TestData.h"
 
+#include <algorithm>
+
 SCENARIO("SongbirdFilterModule: Parameters can be set and retrieved correctly") {
     GIVEN("A new SongbirdFilterModule object") {
         SongbirdFilterModule mSongbird;
