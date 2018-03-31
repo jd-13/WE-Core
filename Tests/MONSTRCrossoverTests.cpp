@@ -25,6 +25,7 @@
 #include "MONSTRFilters/MONSTRCrossover.h"
 #include "General/CoreMath.h"
 #include "Tests/TestData.h"
+#include <iostream>
 
 SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
     GIVEN("A new MONSTRCrossover object") {
@@ -248,6 +249,47 @@ SCENARIO("MONSTRCrossover: All bands narrowed") {
             mCrossover.band1.setWidth(-1);
             mCrossover.band2.setWidth(-1);
             mCrossover.band3.setWidth(-1);
+
+            // do processing
+            mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+            
+            THEN("The expected output is produced") {
+                for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
+                    CHECK(leftBuffer[iii] == Approx(expectedOutputLeft[iii]).margin(0.00001));
+                    CHECK(rightBuffer[iii] == Approx(expectedOutputRight[iii]).margin(0.00001));
+                }
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: Small buffer") {
+    GIVEN("A MONSTRCrossover and a buffer of sine samples smaller than the internal buffer") {
+        std::vector<double> leftBuffer(100);
+        std::vector<double> rightBuffer(100);
+        const std::vector<double>& expectedOutputLeft =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName());
+        const std::vector<double>& expectedOutputRight =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName());
+        
+        MONSTRCrossover mCrossover;
+
+        // Set some parameters for the input signal
+        constexpr size_t SAMPLE_RATE {44100};
+        constexpr size_t SINE_FREQ {1000};
+        constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
+
+        // fill the buffers
+        std::generate(leftBuffer.begin(),
+                      leftBuffer.end(),
+                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+        std::copy(leftBuffer.begin(), leftBuffer.end() , rightBuffer.begin());
+
+        WHEN("The bands are all active and fully widened (to do some arbitrary processing)") {
+            // configure the bands
+            mCrossover.band1.setWidth(1);
+            mCrossover.band2.setWidth(1);
+            mCrossover.band3.setWidth(1);
 
             // do processing
             mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
