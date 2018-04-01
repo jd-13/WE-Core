@@ -264,23 +264,35 @@ public:
                         double* rightSamples,
                         size_t numSamples) {
 
-        if (leftSamples != nullptr && rightSamples != nullptr && numSamples > 0) {
+        // If the buffer we've been passed is bigger than our static internal buffer, then we need
+        // to break it into chunks
+        const size_t numBuffersRequired {static_cast<size_t>(
+            std::ceil(static_cast<double>(numSamples) / INTERNAL_BUFFER_SIZE)
+            )};
 
-            // create two buffers of dry samples
-            std::map<Channels, std::vector<double>> outputBuffer1;
-            outputBuffer1[Channels::LEFT] = std::vector<double>(leftSamples,
-                                                               leftSamples + numSamples);
-            outputBuffer1[Channels::RIGHT] = std::vector<double>(rightSamples,
-                                                                rightSamples + numSamples);
+        for (size_t bufferNumber {0}; bufferNumber < numBuffersRequired; bufferNumber++) {
 
-            std::map<Channels, std::vector<double>> outputBuffer2(outputBuffer1);
+            // Calculate how many samples need to be processed in this chunk
+            const size_t numSamplesRemaining {numSamples - (bufferNumber * INTERNAL_BUFFER_SIZE)};
+            const size_t numSamplesToCopy {std::min(numSamplesRemaining,
+                                            static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
 
+            // Get a pointer to the start of this chunk
+            double* const leftBufferInputStart {&leftSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
+            double* const rightBufferInputStart {&rightSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
 
-            // figure out the modulation here. We have two ways to modulation between
-            // two formant filters. For MODMODE_BLEND we modulation the filter position
-            // to blend between the two filters. For MODMOD_FREQ we set the filter
-            // position to 0 so that we're only using filter 1, and then modulate the
-            // freqency of filter 1 between the two vowels
+            // Copy the samples we need to process in this chunk into the internal buffers
+            std::copy(leftBufferInputStart, &leftBufferInputStart[numSamplesToCopy], _leftOutputBuffer1);
+            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _rightOutputBuffer1);
+
+            std::copy(leftBufferInputStart, &leftBufferInputStart[numSamplesToCopy], _leftOutputBuffer2);
+            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _rightOutputBuffer2);
+
+            // Figure out the modulation here. We have two ways to modulation between
+            // two formant filters.
+            // For MODMODE_BLEND we modulation the filter position to blend between the two filters.
+            // For MODMOD_FREQ we set the filter position to 0 so that we're only using filter 1,
+            // and then modulate the freqency of filter 1 between the two vowels
             double blendFilterPosition;
             if (modMode == MODMODE_BLEND) {
                 blendFilterPosition = filterPosition + modulationSrc;
@@ -289,23 +301,23 @@ public:
                 setVowel1(calcVowelForFreqMode());
             }
 
-            // do the processing for each filter
-            filters1[Channels::LEFT].process(&outputBuffer1[Channels::LEFT][0], numSamples);
-            filters1[Channels::RIGHT].process(&outputBuffer1[Channels::RIGHT][0], numSamples);
+            // Do the processing for each filter
+            filters1[Channels::LEFT].process(_leftOutputBuffer1, numSamplesToCopy);
+            filters1[Channels::RIGHT].process(_rightOutputBuffer1, numSamplesToCopy);
 
-            filters2[Channels::LEFT].process(&outputBuffer2[Channels::LEFT][0], numSamples);
-            filters2[Channels::RIGHT].process(&outputBuffer2[Channels::RIGHT][0], numSamples);
+            filters2[Channels::LEFT].process(_leftOutputBuffer2, numSamplesToCopy);
+            filters2[Channels::RIGHT].process(_rightOutputBuffer2, numSamplesToCopy);
 
-            // write to output, applying filter position and mix level
+            // Write to output, applying filter position and mix level
             // always use modFilterPosition as this will take into account any modulation
-            for (size_t iii {0}; iii < numSamples; iii++) {
-                leftSamples[iii] =  leftSamples[iii] * (1 - mix)
-                + outputBuffer1[Channels::LEFT][iii] * (1 - blendFilterPosition) * mix
-                + outputBuffer2[Channels::LEFT][iii] * blendFilterPosition * mix;
+            for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
+                leftBufferInputStart[iii] = leftBufferInputStart[iii] * (1 - mix)
+                                            + _leftOutputBuffer1[iii] * (1 - blendFilterPosition) * mix
+                                            + _leftOutputBuffer2[iii] * blendFilterPosition * mix;
 
-                rightSamples[iii] = rightSamples[iii] * (1 - mix)
-                + outputBuffer1[Channels::RIGHT][iii] * (1 - blendFilterPosition) * mix
-                + outputBuffer2[Channels::RIGHT][iii] * blendFilterPosition * mix;
+                rightBufferInputStart[iii] = rightBufferInputStart[iii] * (1 - mix)
+                                             + _rightOutputBuffer1[iii] * (1 - blendFilterPosition) * mix
+                                             + _rightOutputBuffer2[iii] * blendFilterPosition * mix;
             }
         }
     }
@@ -326,6 +338,13 @@ private:
 
     std::map<Channels, SongbirdFormantFilter> filters1;
     std::map<Channels, SongbirdFormantFilter> filters2;
+
+    static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
+
+    double _leftOutputBuffer1[INTERNAL_BUFFER_SIZE];
+    double _rightOutputBuffer1[INTERNAL_BUFFER_SIZE];
+    double _leftOutputBuffer2[INTERNAL_BUFFER_SIZE];
+    double _rightOutputBuffer2[INTERNAL_BUFFER_SIZE];
 
     /**
      * Sets the vowel sound that should be created by filter 1 using a Vowel object provided by the
