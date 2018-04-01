@@ -23,6 +23,8 @@
 
 #include "catch.hpp"
 #include "MONSTRFilters/MONSTRCrossover.h"
+#include "General/CoreMath.h"
+#include "Tests/TestData.h"
 
 SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
     GIVEN("A new MONSTRCrossover object") {
@@ -51,7 +53,6 @@ SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
             mCrossover.band1.setWidth(0.1f);
             mCrossover.band1.setIsActive(1);
 
-            
             THEN("They all get their correct unique values") {
                 CHECK(mCrossover.getCrossoverLower() == Approx(41.0f));
                 CHECK(mCrossover.getCrossoverUpper() == Approx(3001.0f));
@@ -112,6 +113,190 @@ SCENARIO("MONSTRCrossover: Silence in = silence out") {
                 for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
                     CHECK(leftBuffer[iii] == Approx(0.0).margin(0.00001));
                     CHECK(rightBuffer[iii] == Approx(0.0).margin(0.00001));
+                }
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: Sine in = sine out") {
+    GIVEN("A MONSTRCrossover and a buffer of sine samples") {
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+        const std::vector<double>& expectedOutput =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName());
+        
+        MONSTRCrossover mCrossover;
+
+        // Set some parameters for the input signal
+        constexpr size_t SAMPLE_RATE {44100};
+        constexpr size_t SINE_FREQ {1000};
+        constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
+
+        WHEN("The bands are all active in a neutral position") {
+            // fill the buffer
+            std::generate(leftBuffer.begin(),
+                          leftBuffer.end(),
+                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+            std::copy(leftBuffer.begin(), leftBuffer.end() , rightBuffer.begin());
+            
+            // do processing
+            mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+            
+            THEN("The expected output is produced") {
+                for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
+                    CHECK(leftBuffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
+                    CHECK(rightBuffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
+                }
+            }
+        }
+
+        WHEN("The bands are all bypassed") {
+            // bypass the bands
+            mCrossover.band1.setIsActive(0);
+            mCrossover.band2.setIsActive(0);
+            mCrossover.band3.setIsActive(0);
+
+            // fill the buffer
+            std::generate(leftBuffer.begin(),
+                          leftBuffer.end(),
+                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+            std::copy(leftBuffer.begin(), leftBuffer.end() , rightBuffer.begin());
+
+            // do processing
+            mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+            
+            THEN("The expected output is produced") {
+                for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
+                    CHECK(leftBuffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
+                    CHECK(rightBuffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
+                }
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: All bands widened") {
+    GIVEN("A MONSTRCrossover and a buffer of sine samples") {
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+        const std::vector<double>& expectedOutputLeft =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
+        const std::vector<double>& expectedOutputRight =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
+        
+        MONSTRCrossover mCrossover;
+
+        // Set some parameters for the input signal
+        constexpr size_t SAMPLE_RATE {44100};
+        constexpr size_t SINE_FREQ {1000};
+        constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
+
+        // fill the buffers, phase shift the right one so that they're not identical
+        std::generate(leftBuffer.begin(),
+                      leftBuffer.end(),
+                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+        std::generate(rightBuffer.begin(),
+                      rightBuffer.end(),
+                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + CoreMath::LONG_PI);} );
+
+        WHEN("The bands are all active and fully widened") {
+            // configure the bands
+            mCrossover.band1.setWidth(1);
+            mCrossover.band2.setWidth(1);
+            mCrossover.band3.setWidth(1);
+
+            // do processing
+            mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+            
+            THEN("The expected output is produced") {
+                for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
+                    CHECK(leftBuffer[iii] == Approx(expectedOutputLeft[iii]).margin(0.00001));
+                    CHECK(rightBuffer[iii] == Approx(expectedOutputRight[iii]).margin(0.00001));
+                }
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: All bands narrowed") {
+    GIVEN("A MONSTRCrossover and a buffer of sine samples") {
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+        const std::vector<double>& expectedOutputLeft =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
+        const std::vector<double>& expectedOutputRight =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
+        
+        MONSTRCrossover mCrossover;
+
+        // Set some parameters for the input signal
+        constexpr size_t SAMPLE_RATE {44100};
+        constexpr size_t SINE_FREQ {1000};
+        constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
+
+        // fill the buffers, phase shift the right one so that they're not identical
+        std::generate(leftBuffer.begin(),
+                      leftBuffer.end(),
+                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+        std::generate(rightBuffer.begin(),
+                      rightBuffer.end(),
+                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + CoreMath::LONG_PI);} );
+
+        WHEN("The bands are all active and fully widened") {
+            // configure the bands
+            mCrossover.band1.setWidth(-1);
+            mCrossover.band2.setWidth(-1);
+            mCrossover.band3.setWidth(-1);
+
+            // do processing
+            mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+            
+            THEN("The expected output is produced") {
+                for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
+                    CHECK(leftBuffer[iii] == Approx(expectedOutputLeft[iii]).margin(0.00001));
+                    CHECK(rightBuffer[iii] == Approx(expectedOutputRight[iii]).margin(0.00001));
+                }
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: Small buffer") {
+    GIVEN("A MONSTRCrossover and a buffer of sine samples smaller than the internal buffer") {
+        std::vector<double> leftBuffer(100);
+        std::vector<double> rightBuffer(100);
+        const std::vector<double>& expectedOutputLeft =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName());
+        const std::vector<double>& expectedOutputRight =
+                TestData::Data.at(Catch::getResultCapture().getCurrentTestName());
+        
+        MONSTRCrossover mCrossover;
+
+        // Set some parameters for the input signal
+        constexpr size_t SAMPLE_RATE {44100};
+        constexpr size_t SINE_FREQ {1000};
+        constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
+
+        // fill the buffers
+        std::generate(leftBuffer.begin(),
+                      leftBuffer.end(),
+                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+        std::copy(leftBuffer.begin(), leftBuffer.end() , rightBuffer.begin());
+
+        WHEN("The bands are all active and fully widened (to do some arbitrary processing)") {
+            // configure the bands
+            mCrossover.band1.setWidth(1);
+            mCrossover.band2.setWidth(1);
+            mCrossover.band3.setWidth(1);
+
+            // do processing
+            mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+            
+            THEN("The expected output is produced") {
+                for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
+                    CHECK(leftBuffer[iii] == Approx(expectedOutputLeft[iii]).margin(0.00001));
+                    CHECK(rightBuffer[iii] == Approx(expectedOutputRight[iii]).margin(0.00001));
                 }
             }
         }

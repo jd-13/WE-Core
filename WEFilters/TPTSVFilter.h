@@ -47,6 +47,7 @@ public:
                     _s2(0),
                     _mode(TPTSVFilterParameters::FILTER_MODE.BYPASS) {}
     
+    TPTSVFilter(const TPTSVFilter& other) = default;
     virtual ~TPTSVFilter() = default;
     
     /**

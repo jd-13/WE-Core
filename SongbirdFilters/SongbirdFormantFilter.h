@@ -50,22 +50,17 @@ public:
      */
     SongbirdFormantFilter(int numFormants = 5) {
         for (int iii {0}; iii < numFormants; iii++) {
-            TPTSVFilter* tempFilter = new TPTSVFilter();
-            tempFilter->setMode(TPTSVFilterParameters::FILTER_MODE.PEAK);
-            tempFilter->setQ(15);
-            filters.push_back(tempFilter);
+            TPTSVFilter tempFilter;
+            tempFilter.setMode(TPTSVFilterParameters::FILTER_MODE.PEAK);
+            tempFilter.setQ(15);
+            _filters.push_back(tempFilter);
         }
     }
     
     /**
-     * Deallocates each filter in the vector.
+     * Default.
      */
-    virtual ~SongbirdFormantFilter() {
-        for (size_t iii {0}; iii < filters.size(); iii++) {
-            TPTSVFilter* tempFilter {filters[iii]};
-            delete tempFilter;
-        }
-    }
+    virtual ~SongbirdFormantFilter() = default;
     
     /**
      * Applies the filtering to a mono buffer of samples.
@@ -75,28 +70,42 @@ public:
      * @param   numSamples  Number of samples in the buffer
      */
     void process(double* inSamples, size_t numSamples) {
-        if (numSamples > 0 && inSamples != nullptr) {
-            
-            // initialise the empty output buffer
-            std::vector<double> outputBuffer(numSamples, 0);
-            
-            // perform the filtering for each formant peak
-            for (size_t iii {0}; iii < filters.size(); iii++) {
-                // copy the input samples to a new buffer
-                std::vector<double> tempBuffer(inSamples, inSamples + numSamples);
-                
-                filters[iii]->processBlock(&tempBuffer[0], numSamples);
-                
-                // add the processed samples to the output buffer
-                for (size_t jjj {0}; jjj < tempBuffer.size(); jjj++) {
-                    outputBuffer[jjj] += tempBuffer[jjj];
+
+        // If the buffer we've been passed is bigger than our static internal buffer, then we need
+        // to break it into chunks
+        const size_t numBuffersRequired {static_cast<size_t>(
+            std::ceil(static_cast<double>(numSamples) / INTERNAL_BUFFER_SIZE)
+            )};
+
+        for (size_t bufferNumber {0}; bufferNumber < numBuffersRequired; bufferNumber++) {
+
+            // Calculate how many samples need to be processed in this chunk
+            const size_t numSamplesRemaining {numSamples - (bufferNumber * INTERNAL_BUFFER_SIZE)};
+            const size_t numSamplesToCopy {std::min(numSamplesRemaining,
+                                            static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
+
+            // Empty the output buffer
+            std::fill(_outputBuffer, &_outputBuffer[numSamplesToCopy], 0);
+
+            // Get a pointer to the start of this chunk
+            double* const bufferInputStart {&inSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
+
+            // Perform the filtering for each formant peak
+            for (size_t filterNumber {0}; filterNumber < _filters.size(); filterNumber++) {
+
+                // Copy the input samples to the temp buffer
+                std::copy(bufferInputStart, &bufferInputStart[numSamplesToCopy], _tempInputBuffer);
+
+                _filters[filterNumber].processBlock(_tempInputBuffer, numSamplesToCopy);
+
+                // Add the processed samples to the output buffer
+                for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
+                    _outputBuffer[iii] += _tempInputBuffer[iii];
                 }
             }
-            
-            // write the buffer to output
-            for (size_t iii {0}; iii < numSamples; iii++) {
-                inSamples[iii] = outputBuffer[iii];
-            }
+
+            // Write the buffer to output
+            std::copy(_outputBuffer, &_outputBuffer[numSamplesToCopy], bufferInputStart);
         }
     }
     
@@ -118,14 +127,14 @@ public:
         
         // if the correct number of formants have been supplied,
         // apply them to each filter in turn
-        if (filters.size() == formants.size()) {
+        if (_filters.size() == formants.size()) {
             retVal = true;
             
-            for (size_t iii {0}; iii < filters.size(); iii++) {
-                filters[iii]->setCutoff(formants[iii].frequency);
+            for (size_t iii {0}; iii < _filters.size(); iii++) {
+                _filters[iii].setCutoff(formants[iii].frequency);
                 
                 double gainAbs = pow(10, formants[iii].gaindB / 20.0);
-                filters[iii]->setGain(gainAbs);
+                _filters[iii].setGain(gainAbs);
             }
         }
         
@@ -136,8 +145,8 @@ public:
      * Sets the sample rate which the filters will be operating on.
      */
     void setSampleRate(double val) {
-        for (TPTSVFilter* filter : filters) {
-            filter->setSampleRate(val);
+        for (TPTSVFilter& filter : _filters) {
+            filter.setSampleRate(val);
         }
     }
     
@@ -146,13 +155,18 @@ public:
      * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
      */
     void reset() {
-        for (TPTSVFilter* filter : filters) {
-            filter->reset();
+        for (TPTSVFilter& filter : _filters) {
+            filter.reset();
         }
     }
     
 private:
-    std::vector<TPTSVFilter*> filters;
+    std::vector<TPTSVFilter> _filters;
+
+    static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
+
+    double _outputBuffer[INTERNAL_BUFFER_SIZE];
+    double _tempInputBuffer[INTERNAL_BUFFER_SIZE];
 };
 
 

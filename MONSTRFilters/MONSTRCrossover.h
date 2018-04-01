@@ -24,7 +24,6 @@
 #ifndef MONSTRCrossover_h
 #define MONSTRCrossover_h
 
-#include <vector>
 #include "MONSTRBand.h"
 
 
@@ -59,7 +58,7 @@ public:
     MONSTRBand  band1,
                 band2,
                 band3;
-    
+
     /**
      * Makes each band aware of its position, and therefore which of their internal filters
      * they each need to activate.
@@ -70,9 +69,9 @@ public:
         setCrossoverLower(CROSSOVERLOWER.defaultValue);
         setCrossoverUpper(CROSSOVERUPPER.defaultValue);
     }
-    
+
     virtual ~MONSTRCrossover() {}
-    
+
     /**
      * Applies the filtering to a stereo buffer of samples.
      * Expect seg faults or other memory issues if arguements passed are incorrect.
@@ -83,43 +82,48 @@ public:
      *                               must be the same size.
      */
     void Process2in2out(double* leftSample, double* rightSample, size_t numSamples) {
-        // make a copy of the buffers for each band to process in parallel
-        double* band1LeftBuffer {new double[numSamples]};
-        double* band1RightBuffer {new double[numSamples]};
-        double* band2LeftBuffer {new double[numSamples]};
-        double* band2RightBuffer {new double[numSamples]};
-        double* band3LeftBuffer {new double[numSamples]};
-        double* band3RightBuffer {new double[numSamples]};
-        
-        for (size_t iii {0}; iii < numSamples; iii++) {
-            band1LeftBuffer[iii] = leftSample[iii];
-            band2LeftBuffer[iii] = leftSample[iii];
-            band3LeftBuffer[iii] = leftSample[iii];
-            
-            band1RightBuffer[iii] = rightSample[iii];
-            band2RightBuffer[iii] = rightSample[iii];
-            band3RightBuffer[iii] = rightSample[iii];
+
+        // If the buffer we've been passed is bigger than our static internal buffer, then we need
+        // to break it into chunks
+        const size_t numBuffersRequired {static_cast<size_t>(
+            std::ceil(static_cast<double>(numSamples) / INTERNAL_BUFFER_SIZE)
+            )};
+
+        for (size_t bufferNumber {0}; bufferNumber < numBuffersRequired; bufferNumber++) {
+
+            // Calculate how many samples need to be processed in this chunk
+            const size_t numSamplesRemaining {numSamples - (bufferNumber * INTERNAL_BUFFER_SIZE)};
+            const size_t numSamplesToCopy {std::min(numSamplesRemaining,
+                                           static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
+
+            double* const leftBufferInputStart {&leftSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
+            double* const rightBufferInputStart {&rightSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
+
+            std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band1LeftBuffer);
+            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band1RightBuffer);
+            std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band2LeftBuffer);
+            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band2RightBuffer);
+            std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band3LeftBuffer);
+            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band3RightBuffer);
+
+            // let each band do its processing
+            band1.process2in2out(_band1LeftBuffer, _band1RightBuffer, numSamplesToCopy);
+            band2.process2in2out(_band2LeftBuffer, _band2RightBuffer, numSamplesToCopy);
+            band3.process2in2out(_band3LeftBuffer, _band3RightBuffer, numSamplesToCopy);
+
+            // combine the output from each band, and write to output
+            for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
+                leftBufferInputStart[iii] = _band1LeftBuffer[iii]
+                                            + _band2LeftBuffer[iii]
+                                            + _band3LeftBuffer[iii];
+
+                rightBufferInputStart[iii] = _band1RightBuffer[iii]
+                                             + _band2RightBuffer[iii]
+                                             + _band3RightBuffer[iii];
+            }
         }
-        
-        // let each band do its processing
-        band1.process2in2out(band1LeftBuffer, band1RightBuffer, numSamples);
-        band2.process2in2out(band2LeftBuffer, band2RightBuffer, numSamples);
-        band3.process2in2out(band3LeftBuffer, band3RightBuffer, numSamples);
-        
-        // combine the output from each band, and write to output
-        for (size_t iii {0}; iii < numSamples; iii++) {
-            leftSample[iii] = band1LeftBuffer[iii] + band2LeftBuffer[iii] + band3LeftBuffer[iii];
-            rightSample[iii] = band1RightBuffer[iii] + band2RightBuffer[iii] + band3RightBuffer[iii];
-        }
-        
-        delete[] band1LeftBuffer;
-        delete[] band1RightBuffer;
-        delete[] band2LeftBuffer;
-        delete[] band2RightBuffer;
-        delete[] band3LeftBuffer;
-        delete[] band3RightBuffer;
     }
-    
+
     /**
      * Sets the crossover frequency of the lower (band1) and middle (band2) bands.
      *
@@ -132,7 +136,7 @@ public:
         band1.setHighCutoff(val);
         band2.setLowCutoff(val);
     }
-    
+
     /**
      * Sets the crossover frequency of the middle (band2) and upper (band3) bands.
      *
@@ -145,7 +149,7 @@ public:
         band2.setHighCutoff(val);
         band3.setLowCutoff(val);
     }
-    
+
     /**
      * Gets the crossover frequency of the lower (band1) and middle (band2) bands.
      *
@@ -154,7 +158,7 @@ public:
      * @see     CROSSOVERLOWER for valid values
      */
     float getCrossoverLower() { return band1.getHighCutoff(); }
-    
+
     /**
      * Gets the crossover frequency of the middle (band2) and upper (band3) bands.
      *
@@ -163,7 +167,7 @@ public:
      * @see     CROSSOVERUPPER for valid values
      */
     float getCrossoverUpper() { return band2.getHighCutoff(); }
-    
+
     /**
      * Configures the filters for the correct sample rate. Ensure this is
      * called before attempting to process audio.
@@ -175,7 +179,7 @@ public:
         band2.setSampleRate(newSampleRate);
         band3.setSampleRate(newSampleRate);
     }
-    
+
     /**
      * Resets all filters.
      * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
@@ -185,8 +189,16 @@ public:
         band2.reset();
         band3.reset();
     }
+
+private:
+    static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
+
+    double _band1LeftBuffer[INTERNAL_BUFFER_SIZE];
+    double _band1RightBuffer[INTERNAL_BUFFER_SIZE];
+    double _band2LeftBuffer[INTERNAL_BUFFER_SIZE];
+    double _band2RightBuffer[INTERNAL_BUFFER_SIZE];
+    double _band3LeftBuffer[INTERNAL_BUFFER_SIZE];
+    double _band3RightBuffer[INTERNAL_BUFFER_SIZE];
 };
-
-
 
 #endif /* MONSTRCrossover_h */
