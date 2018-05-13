@@ -26,6 +26,7 @@
 
 #include "SongbirdFilters/Formant.h"
 #include "WEFilters/TPTSVFilter.h"
+#include <algorithm>
 #include <vector>
 
 /**
