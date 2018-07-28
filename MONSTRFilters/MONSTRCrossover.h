@@ -24,6 +24,7 @@
 #ifndef MONSTRCrossover_h
 #define MONSTRCrossover_h
 
+#include <algorithm>
 #include "MONSTRBand.h"
 
 
