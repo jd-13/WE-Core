@@ -26,7 +26,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-namespace WECore::CoreJUCEPlugin {
+namespace WECore::JUCEPlugin {
 
     /**
      * This class provides basic functionality that is commonly used by an AudioProcessor in a

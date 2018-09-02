@@ -27,7 +27,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "General/CoreMath.h"
 
-namespace WECore::CoreJUCEPlugin {
+namespace WECore::JUCEPlugin {
 
     /**
      * A class which contains most of the basic design elements which the white elephant audio plugins
