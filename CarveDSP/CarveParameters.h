@@ -33,13 +33,13 @@ namespace WECore::Carve::Parameters {
         ModeParameter() : ParameterDefinition::BaseParameter<int>::BaseParameter(
             OFF, CLIPPER, OFF) { }
         
-        static constexpr int OFF = 1,
-                             SINE = 2,
-                             PARABOLIC_SOFT = 3,
-                             PARABOLIC_HARD = 4,
-                             ASYMMETRIC_SINE = 5,
-                             EXPONENT = 6,
-                             CLIPPER = 7;
+        static const int OFF = 1,
+                         SINE = 2,
+                         PARABOLIC_SOFT = 3,
+                         PARABOLIC_HARD = 4,
+                         ASYMMETRIC_SINE = 5,
+                         EXPONENT = 6,
+                         CLIPPER = 7;
     };
 
     const ModeParameter MODE;
