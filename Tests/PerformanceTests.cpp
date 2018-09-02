@@ -164,7 +164,7 @@ SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
         const int NUM_BUFFERS {100};
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
-        MONSTRCrossover mCrossover;
+        WECore::MONSTR::MONSTRCrossover mCrossover;
         
         // set the performance limits
         Limits mLimits{1.0, 0.8, 0.08};
