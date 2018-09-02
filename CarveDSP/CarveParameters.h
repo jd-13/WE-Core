@@ -21,40 +21,41 @@
  *  along with WECore.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CarveParameters_h
-#define CarveParameters_h
+#pragma once
 
 #include "General/ParameterDefinition.h"
 
-namespace CarveParameters {
+namespace WECore {
+    namespace Carve {
+        namespace Parameters {
     
-    class ModeParameter : public ParameterDefinition::BaseParameter<int> {
-    public:
-        using ParameterDefinition::BaseParameter<int>::BaseParameter;
-        
-        static const int    OFF = 1,
-                            SINE = 2,
-                            PARABOLIC_SOFT = 3,
-                            PARABOLIC_HARD = 4,
-                            ASYMMETRIC_SINE = 5,
-                            EXPONENT = 6,
-                            CLIPPER = 7;
-    };
+            class ModeParameter : public ParameterDefinition::BaseParameter<int> {
+            public:
+                using ParameterDefinition::BaseParameter<int>::BaseParameter;
+                
+                static const int    OFF = 1,
+                                    SINE = 2,
+                                    PARABOLIC_SOFT = 3,
+                                    PARABOLIC_HARD = 4,
+                                    ASYMMETRIC_SINE = 5,
+                                    EXPONENT = 6,
+                                    CLIPPER = 7;
+            };
 
-    //@{
-    /**
-     * A parameter which can take any float value between the ranges defined.
-     * The values passed on construction are in the following order:
-     *      minimum value,
-     *      maximum value,
-     *      default value
-     */
-    const ParameterDefinition::RangedParameter<double>   PREGAIN(0, 2, 1),
-                                                        POSTGAIN(0, 2, 0.5),
-                                                        TWEAK(-1, 1, 0);
-    //@}
+            //@{
+            /**
+             * A parameter which can take any float value between the ranges defined.
+             * The values passed on construction are in the following order:
+             *      minimum value,
+             *      maximum value,
+             *      default value
+             */
+            const ParameterDefinition::RangedParameter<double>   PREGAIN(0, 2, 1),
+                                                                POSTGAIN(0, 2, 0.5),
+                                                                TWEAK(-1, 1, 0);
+            //@}
 
-    const ModeParameter MODE(1, 7, 1);
+            const ModeParameter MODE(1, 7, 1);
+        }
+    }
 }
-
-#endif /* CarveParameters_h */

@@ -21,12 +21,10 @@
  *  along with WECore.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ParameterDefinition_h
-#define ParameterDefinition_h
+#pragma once
 
 #include <unordered_map>
 #include <string>
-
 
 /**
  * Contains classes that are used for defining parameters. Note that these are not
@@ -46,8 +44,8 @@ namespace ParameterDefinition {
      *
      * @return  Clipped value
      */
-    template <class A_Type>
-    A_Type BoundsCheck(A_Type val, A_Type min, A_Type max) {
+    template <class T>
+    T BoundsCheck(T val, T min, T max) {
         if (val < min) val = min;
         if (val > max) val = max;
         
@@ -64,18 +62,22 @@ namespace ParameterDefinition {
     /**
      * Provides basic functionality that may be useful for building other parameters from.
      */
-    template <class A_Type>
+    template <class T>
     class BaseParameter {
     public:
-        BaseParameter(A_Type newMinValue,
-                      A_Type newMaxValue,
-                      A_Type newDefaultValue) : minValue(newMinValue),
-                                                maxValue(newMaxValue),
-                                                defaultValue(newDefaultValue) {}
-        
-        A_Type  minValue,
-                maxValue,
-                defaultValue;
+
+        const T minValue;
+        const T maxValue;
+        const T defaultValue;
+
+        BaseParameter() = delete;
+        virtual ~BaseParameter() = default;
+
+        BaseParameter(T newMinValue,
+                      T newMaxValue,
+                      T newDefaultValue) : minValue(newMinValue),
+                                           maxValue(newMaxValue),
+                                           defaultValue(newDefaultValue) {}
         
         /**
          * If the given value is between the minimum and maximum values for this parameter,
@@ -87,7 +89,7 @@ namespace ParameterDefinition {
          *
          * @return  Clipped value
          */
-        A_Type BoundsCheck(A_Type val) const {
+        T BoundsCheck(T val) const {
             return ParameterDefinition::BoundsCheck(val, minValue, maxValue);
         }
     };
@@ -97,10 +99,12 @@ namespace ParameterDefinition {
      * which can contain a continuous value (such as a slider), as well as methods to convert
      * between the normalised and internal ranges, and clip a value to the appropriate range.
      */
-    template <class A_Type>
-    class RangedParameter: public BaseParameter<A_Type> {
+    template <class T>
+    class RangedParameter: public BaseParameter<T> {
     public:
-        using BaseParameter<A_Type>::BaseParameter;
+
+        // Inherit the constructor
+        using BaseParameter<T>::BaseParameter;
 
         /**
          * Translates parameter values from the normalised (0 to 1) range as required
@@ -110,7 +114,7 @@ namespace ParameterDefinition {
          *
          * @return  The value of the parameter in the internal range for that parameter
          */
-        A_Type NormalisedToInteral(A_Type val) const {
+        T NormalisedToInteral(T val) const {
             return val * (this->maxValue - this->minValue) + this->minValue;
         }
         
@@ -122,13 +126,8 @@ namespace ParameterDefinition {
          *
          * @return  The normalised value of the parameter
          */
-        A_Type InteralToNormalised(A_Type val) const {
+        T InteralToNormalised(T val) const {
             return (val - this->minValue) / (this->maxValue - this->minValue);
         }
     };
 }
-
-
-
-
-#endif /* ParameterDefinition_h */

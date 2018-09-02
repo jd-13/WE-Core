@@ -114,7 +114,7 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
 
         const int NUM_BUFFERS {100};
         std::vector<double> buffer(1024);
-        CarveDSPUnit mCarve;
+        WECore::Carve::CarveDSPUnit mCarve;
         
         // set the performance limits
         Limits mLimits{0.11, 0.07, 0.005};

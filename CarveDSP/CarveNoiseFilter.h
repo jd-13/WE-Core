@@ -22,8 +22,7 @@
  *
  */
 
-#ifndef CARVENOISEFILTER_H_INCLUDED
-#define CARVENOISEFILTER_H_INCLUDED
+#pragma once
 
 // DSPFilters sets off a lot of clang warnings - disable them for Butterworth.h only
 #ifdef __clang__
@@ -81,23 +80,13 @@ public:
      *
      * @param   sampleRate  The sample rate the filter should be configured for
      */
-    void setSampleRate(double sampleRate) {
-        monoLowCutFilter.setup(FILTER_ORDER, sampleRate, _lowCutHz);
-        stereoLowCutFilter.setup(FILTER_ORDER, sampleRate, _lowCutHz);
-        monoHighCutFilter.setup(FILTER_ORDER, sampleRate, _highCutHz);
-        stereoHighCutFilter.setup(FILTER_ORDER, sampleRate, _highCutHz);
-    }
+    void setSampleRate(double sampleRate);
     
     /**
      * Resets all filters.
      * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
      */
-    void reset() {
-        monoLowCutFilter.reset();
-        monoHighCutFilter.reset();
-        stereoLowCutFilter.reset();
-        stereoHighCutFilter.reset();
-    }
+    void reset();
     
     /**
      * Applies the filtering to a mono buffer of samples.
@@ -106,10 +95,7 @@ public:
      * @param   inSample    Pointer to the first sample of the buffer
      * @param   numSamples  Number of samples in the buffer
      */
-    void ApplyMonoFiltering(float* inSample, int numSamples) {
-        monoLowCutFilter.process(numSamples, &inSample);
-        monoHighCutFilter.process(numSamples, &inSample);
-    }
+    void ApplyMonoFiltering(float* inSample, int numSamples);
     
     /**
      * Applies the filtering to a stereo buffer of samples.
@@ -120,27 +106,44 @@ public:
      * @param   numSamples      Number of samples in the buffer. The left and right buffers
      *                          must be the same size.
      */
-    void ApplyStereoFiltering(float *inLeftSample, float *inRightSample, int numSamples) {
-        float** channelsArray = new float*[2];
-        channelsArray[0] = inLeftSample;
-        channelsArray[1] = inRightSample;
-        stereoLowCutFilter.process(numSamples, channelsArray);
-        stereoHighCutFilter.process(numSamples, channelsArray);
-        delete [] channelsArray;
-    }
+    void ApplyStereoFiltering(float *inLeftSample, float *inRightSample, int numSamples);
     
 private:
     static const int FILTER_ORDER {4};
-    Dsp::SimpleFilter<Dsp::Butterworth::LowPass<4>, 1> monoHighCutFilter;
-    Dsp::SimpleFilter<Dsp::Butterworth::LowPass<4>, 2> stereoHighCutFilter;
+    Dsp::SimpleFilter<Dsp::Butterworth::LowPass<4>, 1> _monoHighCutFilter;
+    Dsp::SimpleFilter<Dsp::Butterworth::LowPass<4>, 2> _stereoHighCutFilter;
     
-    Dsp::SimpleFilter<Dsp::Butterworth::HighPass<4>, 1> monoLowCutFilter;
-    Dsp::SimpleFilter<Dsp::Butterworth::HighPass<4>, 2> stereoLowCutFilter;
+    Dsp::SimpleFilter<Dsp::Butterworth::HighPass<4>, 1> _monoLowCutFilter;
+    Dsp::SimpleFilter<Dsp::Butterworth::HighPass<4>, 2> _stereoLowCutFilter;
     
     float   _lowCutHz,
             _highCutHz;
 };
 
+void CarveNoiseFilter::setSampleRate(double sampleRate) {
+    _monoLowCutFilter.setup(FILTER_ORDER, sampleRate, _lowCutHz);
+    _stereoLowCutFilter.setup(FILTER_ORDER, sampleRate, _lowCutHz);
+    _monoHighCutFilter.setup(FILTER_ORDER, sampleRate, _highCutHz);
+    _stereoHighCutFilter.setup(FILTER_ORDER, sampleRate, _highCutHz);
+}
 
+void CarveNoiseFilter::reset() {
+    _monoLowCutFilter.reset();
+    _monoHighCutFilter.reset();
+    _stereoLowCutFilter.reset();
+    _stereoHighCutFilter.reset();
+}
 
-#endif  // CARVENOISEFILTER_H_INCLUDED
+void CarveNoiseFilter::ApplyMonoFiltering(float* inSample, int numSamples) {
+    _monoLowCutFilter.process(numSamples, &inSample);
+    _monoHighCutFilter.process(numSamples, &inSample);
+}
+
+void CarveNoiseFilter::ApplyStereoFiltering(float *inLeftSample, float *inRightSample, int numSamples) {
+    float** channelsArray = new float*[2];
+    channelsArray[0] = inLeftSample;
+    channelsArray[1] = inRightSample;
+    _stereoLowCutFilter.process(numSamples, channelsArray);
+    _stereoHighCutFilter.process(numSamples, channelsArray);
+    delete [] channelsArray;
+}
