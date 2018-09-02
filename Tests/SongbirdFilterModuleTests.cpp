@@ -29,7 +29,7 @@
 
 SCENARIO("SongbirdFilterModule: Parameters can be set and retrieved correctly") {
     GIVEN("A new SongbirdFilterModule object") {
-        SongbirdFilterModule mSongbird;
+        WECore::Songbird::SongbirdFilterModule mSongbird;
 
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
@@ -61,7 +61,7 @@ SCENARIO("SongbirdFilterModule: Parameters can be set and retrieved correctly") 
 
 SCENARIO("SongbirdFilterModule: Parameters enforce their bounds correctly") {
     GIVEN("A new SongbirdFilterModule object") {
-        SongbirdFilterModule mSongbird;
+        WECore::Songbird::SongbirdFilterModule mSongbird;
         
         WHEN("All parameter values are too low") {
             mSongbird.setVowel1(-5);
@@ -97,7 +97,7 @@ SCENARIO("SongbirdFilterModule: Silence in = silence out") {
     GIVEN("A SongbirdFilterModule and a buffer of silent samples") {
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
-        SongbirdFilterModule mSongbird;
+        WECore::Songbird::SongbirdFilterModule mSongbird;
 
         // fill the buffer
         std::fill(leftBuffer.begin(), leftBuffer.end(), 0);
@@ -127,7 +127,7 @@ SCENARIO("SongbirdFilterModule: Freq mode") {
         const std::vector<double>& expectedOutputRight =
                 TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
 
-        SongbirdFilterModule mSongbird;
+        WECore::Songbird::SongbirdFilterModule mSongbird;
 
         // Set some parameters for the input signal
         constexpr size_t SAMPLE_RATE {44100};
@@ -168,7 +168,7 @@ SCENARIO("SongbirdFilterModule: Blend mode") {
         const std::vector<double>& expectedOutputRight =
                 TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
 
-        SongbirdFilterModule mSongbird;
+        WECore::Songbird::SongbirdFilterModule mSongbird;
 
         // Set some parameters for the input signal
         constexpr size_t SAMPLE_RATE {44100};

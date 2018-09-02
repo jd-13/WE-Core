@@ -21,56 +21,90 @@
  *  along with WECore.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SONGBIRDFORMANTFILTER_H_INCLUDED
-#define SONGBIRDFORMANTFILTER_H_INCLUDED
+#pragma once
 
 #include "SongbirdFilters/Formant.h"
 #include "WEFilters/TPTSVFilter.h"
 #include <algorithm>
 #include <vector>
 
-/**
- * A class containing a vector of bandpass filters to produce a vowel sound.
- *
- * Supports only mono audio processing. For stereo processing, you must create
- * two objects of this type. (Do not reuse a single object for both channels)
- *
- * To use this class, simply call setFormants, reset, and process as necessary.
- *
- * @see setFormants - must be called before performing any processing
- * @see Formant     - Formant objects are required for operation of this class
- */
-class SongbirdFormantFilter {
-public:
+namespace WECore::Songbird {
     /**
-     * Creates and stores the appropriate number of filters.
+     * A class containing a vector of bandpass filters to produce a vowel sound.
      *
-     * @param   numFormants The number of formant peaks the filter should produce
-     *                      (therefore the number of bandpass filters it will need to
-     *                      contain), defaults to 5
+     * Supports only mono audio processing. For stereo processing, you must create
+     * two objects of this type. (Do not reuse a single object for both channels)
+     *
+     * To use this class, simply call setFormants, reset, and process as necessary.
+     *
+     * @see setFormants - must be called before performing any processing
+     * @see Formant     - Formant objects are required for operation of this class
      */
-    SongbirdFormantFilter(int numFormants = 5) {
-        for (int iii {0}; iii < numFormants; iii++) {
-            TPTSVFilter tempFilter;
-            tempFilter.setMode(TPTSVFilterParameters::FILTER_MODE.PEAK);
-            tempFilter.setQ(15);
-            _filters.push_back(tempFilter);
+    class SongbirdFormantFilter {
+    public:
+        /**
+         * Creates and stores the appropriate number of filters.
+         *
+         * @param   numFormants The number of formant peaks the filter should produce
+         *                      (therefore the number of bandpass filters it will need to
+         *                      contain), defaults to 5
+         */
+        SongbirdFormantFilter(int numFormants = 5) {
+            for (int iii {0}; iii < numFormants; iii++) {
+                TPTSVFilter tempFilter;
+                tempFilter.setMode(TPTSVFilterParameters::FILTER_MODE.PEAK);
+                tempFilter.setQ(15);
+                _filters.push_back(tempFilter);
+            }
         }
-    }
-    
-    /**
-     * Default.
-     */
-    virtual ~SongbirdFormantFilter() = default;
-    
-    /**
-     * Applies the filtering to a mono buffer of samples.
-     * Expect seg faults or other memory issues if arguements passed are incorrect.
-     *
-     * @param   inSamples   Pointer to the first sample of the buffer
-     * @param   numSamples  Number of samples in the buffer
-     */
-    void process(double* inSamples, size_t numSamples) {
+        
+        virtual ~SongbirdFormantFilter() = default;
+        
+        /**
+         * Applies the filtering to a mono buffer of samples.
+         * Expect seg faults or other memory issues if arguements passed are incorrect.
+         *
+         * @param   inSamples   Pointer to the first sample of the buffer
+         * @param   numSamples  Number of samples in the buffer
+         */
+        void process(double* inSamples, size_t numSamples);
+        
+        /**
+         * Sets the properties of each bandpass filter contained in the object.
+         *
+         * @param   formants    A vector of Formants, the size of which must equal the 
+         *                      number of bandpass filters in the object, as a single Formant
+         *                      is applied to single bandpass filter in a one-to-one fashion
+         *
+         * @return  A boolean value, true if the formants have been applied to the filters
+         *          correctly, false if the operation failed
+         *
+         * @see     Formant - This object is used to as a convenient container of all the
+         *                    parameters which can be supplied to a bandpass filter.
+         */
+        bool setFormants(std::vector<Formant> formants);
+        
+        /**
+         * Sets the sample rate which the filters will be operating on.
+         */
+        void setSampleRate(double val);
+        
+        /**
+         * Resets all filters.
+         * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
+         */
+        void reset();
+        
+    private:
+        std::vector<TPTSVFilter> _filters;
+
+        static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
+
+        double _outputBuffer[INTERNAL_BUFFER_SIZE];
+        double _tempInputBuffer[INTERNAL_BUFFER_SIZE];
+    };
+
+    void SongbirdFormantFilter::process(double* inSamples, size_t numSamples) {
 
         // If the buffer we've been passed is bigger than our static internal buffer, then we need
         // to break it into chunks
@@ -109,21 +143,8 @@ public:
             std::copy(_outputBuffer, &_outputBuffer[numSamplesToCopy], bufferInputStart);
         }
     }
-    
-    /**
-     * Sets the properties of each bandpass filter contained in the object.
-     *
-     * @param   formants    A vector of Formants, the size of which must equal the 
-     *                      number of bandpass filters in the object, as a single Formant
-     *                      is applied to single bandpass filter in a one-to-one fashion
-     *
-     * @return  A boolean value, true if the formants have been applied to the filters
-     *          correctly, false if the operation failed
-     *
-     * @see     Formant - This object is used to as a convenient container of all the
-     *                    parameters which can be supplied to a bandpass filter.
-     */
-    bool setFormants(std::vector<Formant> formants) {
+
+    bool SongbirdFormantFilter::setFormants(std::vector<Formant> formants) {
         bool retVal {false};
         
         // if the correct number of formants have been supplied,
@@ -141,35 +162,16 @@ public:
         
         return retVal;
     }
-    
-    /**
-     * Sets the sample rate which the filters will be operating on.
-     */
-    void setSampleRate(double val) {
+
+    void SongbirdFormantFilter::setSampleRate(double val) {
         for (TPTSVFilter& filter : _filters) {
             filter.setSampleRate(val);
         }
     }
-    
-    /**
-     * Resets all filters.
-     * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
-     */
-    void reset() {
+
+    void SongbirdFormantFilter::reset() {
         for (TPTSVFilter& filter : _filters) {
             filter.reset();
         }
     }
-    
-private:
-    std::vector<TPTSVFilter> _filters;
-
-    static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
-
-    double _outputBuffer[INTERNAL_BUFFER_SIZE];
-    double _tempInputBuffer[INTERNAL_BUFFER_SIZE];
-};
-
-
-
-#endif  // SONGBIRDFORMANTFILTER_H_INCLUDED
+}
