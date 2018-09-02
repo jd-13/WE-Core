@@ -27,14 +27,14 @@
 SCENARIO("CarveNoiseFilter: Silence in = silence out") {
     GIVEN("A CarveNoiseFilter and a buffer of silent samples") {
         std::vector<float> buffer(1024);
-        CarveNoiseFilter mFilter(20, 20000);
+        WECore::Carve::NoiseFilter mFilter(20, 20000);
         mFilter.setSampleRate(48000);
         
         WHEN("The silence samples are processed") {
             // fill the buffer
             std::fill(buffer.begin(), buffer.end(), 0);
             
-            mFilter.ApplyMonoFiltering(&buffer[0], static_cast<int>(buffer.size()));
+            mFilter.Process1in1out(&buffer[0], static_cast<int>(buffer.size()));
             
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
