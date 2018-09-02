@@ -40,7 +40,7 @@
  *
  * The process method must be called once for each sample you wish to process:
  * @code
- * CarveDSPUnit unit;
+ * CarveDSPUnit<double> unit;
  * unit.setMode(WECore::Carve::Parameters::MODE.SINE);
  * ...
  * set any other parameters you need
@@ -54,7 +54,11 @@
 
 namespace WECore::Carve {
 
+    template <typename T>
     class CarveDSPUnit {
+        static_assert(std::is_floating_point<T>::value,
+                      "Must be provided with a floating point template type");
+
     public:
         /**
          * Sets all parameters to their default values.
@@ -144,7 +148,7 @@ namespace WECore::Carve {
          *
          * @return      The value of inSample after processing
          */
-        double process(double inSample) const;
+        T process(T inSample) const;
         
     private:
         double  _preGain,
@@ -153,20 +157,21 @@ namespace WECore::Carve {
         
         int _mode;
 
-        double _processSine(double inSample) const;
+        T _processSine(T inSample) const;
         
-        double _processParabolicSoft(double inSample) const;
+        T _processParabolicSoft(T inSample) const;
         
-        double _processParabolicHard(double inSample) const;
+        T _processParabolicHard(T inSample) const;
         
-        double _processAsymmetricSine(double inSample) const;
+        T _processAsymmetricSine(T inSample) const;
         
-        double _processExponent(double inSample) const;
+        T _processExponent(T inSample) const;
         
-        double _processClipper(double inSample) const;
+        T _processClipper(T inSample) const;
     };
 
-    double CarveDSPUnit::process(double inSample) const {
+    template <typename T>
+    T CarveDSPUnit<T>::process(T inSample) const {
         switch (_mode) {
             case Parameters::MODE.OFF:
                 return 0;
@@ -194,7 +199,8 @@ namespace WECore::Carve {
         }
     }
 
-    double CarveDSPUnit::_processSine(double inSample) const {
+    template <typename T>
+    T CarveDSPUnit<T>::_processSine(T inSample) const {
         return  (
                     (((1 - std::abs(_tweak/2)) * sin(CoreMath::DOUBLE_PI * inSample * _preGain)))
                     + ((_tweak/2) * sin(4 * CoreMath::DOUBLE_PI * inSample * _preGain))
@@ -202,7 +208,8 @@ namespace WECore::Carve {
                 * _postGain;
     }
 
-    double CarveDSPUnit::_processParabolicSoft(double inSample) const {
+    template <typename T>
+    T CarveDSPUnit<T>::_processParabolicSoft(T inSample) const {
         return (
                 CoreMath::DOUBLE_PI * inSample * _preGain * ((4 * _tweak)
                 - sqrt(4 * pow(inSample * CoreMath::DOUBLE_PI * _preGain, 2))) * 0.5
@@ -210,7 +217,8 @@ namespace WECore::Carve {
             * _postGain;
     }
 
-    double CarveDSPUnit::_processParabolicHard(double inSample) const {
+    template <typename T>
+    T CarveDSPUnit<T>::_processParabolicHard(T inSample) const {
         return  (
                     ((1 - std::abs(_tweak/10)) * (atan(_preGain * 4 * CoreMath::DOUBLE_PI * inSample) / 1.5))
                     + ((_tweak/10) * sin(CoreMath::DOUBLE_PI * inSample * _preGain))
@@ -218,7 +226,8 @@ namespace WECore::Carve {
                 * _postGain;
     }
 
-    double CarveDSPUnit::_processAsymmetricSine(double inSample) const {
+    template <typename T>
+    T CarveDSPUnit<T>::_processAsymmetricSine(T inSample) const {
         return (
                 cos(CoreMath::DOUBLE_PI * inSample * (_tweak + 1))
                 * atan(4 * CoreMath::DOUBLE_PI * inSample * _preGain)
@@ -226,14 +235,16 @@ namespace WECore::Carve {
                * _postGain;
     }
 
-    double CarveDSPUnit::_processExponent(double inSample) const {
+    template <typename T>
+    T CarveDSPUnit<T>::_processExponent(T inSample) const {
         return  (
                     sin(-0.25 * pow(2 * CoreMath::DOUBLE_E, (inSample * _preGain + 1.5)))
                 )
                 * _postGain;
     }
 
-    double CarveDSPUnit::_processClipper(double inSample) const {
+    template <typename T>
+    T CarveDSPUnit<T>::_processClipper(T inSample) const {
         inSample *= CoreMath::DOUBLE_PI * _preGain;
         
         return (

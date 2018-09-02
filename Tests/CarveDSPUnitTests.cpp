@@ -26,7 +26,7 @@
 
 SCENARIO("CarveDSPUnit: Parameters can be set and retrieved correctly") {
     GIVEN("A new CarveDSPUnit object") {
-        WECore::Carve::CarveDSPUnit mCarve;
+        WECore::Carve::CarveDSPUnit<double> mCarve;
         
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
@@ -55,7 +55,7 @@ SCENARIO("CarveDSPUnit: Parameters can be set and retrieved correctly") {
 
 SCENARIO("CarveDSPUnit: Parameters enforce their bounds correctly") {
     GIVEN("A new CarveDSPUnit object") {
-        WECore::Carve::CarveDSPUnit mCarve;
+        WECore::Carve::CarveDSPUnit<double> mCarve;
         
         WHEN("All parameter values are too low") {
             mCarve.setMode(-5);
@@ -90,7 +90,7 @@ SCENARIO("CarveDSPUnit: Parameters enforce their bounds correctly") {
 SCENARIO("CarveDSPUnit: Parameter combinations that should result in silence output for any input") {
     GIVEN("A new CarveDSPUnit object and a buffer of 0.5fs") {
         std::vector<double> buffer(1024);
-        WECore::Carve::CarveDSPUnit mCarve;
+        WECore::Carve::CarveDSPUnit<double> mCarve;
         
         WHEN("The unit is turned off") {
             // fill the buffer
@@ -157,7 +157,7 @@ SCENARIO("CarveDSPUnit: Parameter combinations that should result in silence out
 SCENARIO("CarveDSPUnit: Silence in = silence out") {
     GIVEN("A CarveDSPUnit and a buffer of silent samples") {
         std::vector<double> buffer(1024);
-        WECore::Carve::CarveDSPUnit mCarve;
+        WECore::Carve::CarveDSPUnit<double> mCarve;
         
         WHEN("The silence samples are processed") {
             // fill the buffer
