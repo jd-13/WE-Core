@@ -55,11 +55,11 @@ namespace WECore::JUCEPlugin {
     protected:
         bool _UIUpdateFlag;
         
-        String floatVectorToString(const std::vector<float>& fData) const;
+        inline String floatVectorToString(const std::vector<float>& fData) const;
         
-        int stringToFloatVector(const String sFloatCSV,
-                                std::vector<float>& fData,
-                                int maxNumFloat) const;
+        inline int stringToFloatVector(const String sFloatCSV,
+                                       std::vector<float>& fData,
+                                       int maxNumFloat) const;
         
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreAudioProcessor)
     };

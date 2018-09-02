@@ -81,13 +81,13 @@ namespace WECore::Carve {
          *
          * @param   sampleRate  The sample rate the filter should be configured for
          */
-        void setSampleRate(double sampleRate);
+        inline void setSampleRate(double sampleRate);
         
         /**
          * Resets all filters.
          * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
          */
-        void reset();
+        inline void reset();
         
         /**
          * Applies the filtering to a mono buffer of samples.
@@ -96,7 +96,7 @@ namespace WECore::Carve {
          * @param   inSample    Pointer to the first sample of the buffer
          * @param   numSamples  Number of samples in the buffer
          */
-        void Process1in1out(float* inSample, int numSamples);
+        inline void Process1in1out(float* inSample, int numSamples);
         
         /**
          * Applies the filtering to a stereo buffer of samples.
@@ -107,7 +107,7 @@ namespace WECore::Carve {
          * @param   numSamples      Number of samples in the buffer. The left and right buffers
          *                          must be the same size.
          */
-        void Process2in2out(float *inLeftSample, float *inRightSample, int numSamples);
+        inline void Process2in2out(float *inLeftSample, float *inRightSample, int numSamples);
         
     private:
         static constexpr int FILTER_ORDER {4};

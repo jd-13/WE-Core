@@ -51,63 +51,63 @@ namespace WECore::JUCEPlugin {
         CoreLookAndFeel operator=(CoreLookAndFeel&) = delete;
         CoreLookAndFeel(CoreLookAndFeel&) = delete;
         
-        virtual void drawRotarySlider(Graphics& g,
-                                    int /*x*/,
-                                    int /*y*/,
-                                    int width,
-                                    int height,
-                                    float /*sliderPosProportional*/,
-                                    float /*rotaryStartAngle*/,
-                                    float /*rotaryEndAngle*/,
-                                    Slider &slider) override;
+        virtual inline void drawRotarySlider(Graphics& g,
+                                             int /*x*/,
+                                             int /*y*/,
+                                             int width,
+                                             int height,
+                                             float /*sliderPosProportional*/,
+                                             float /*rotaryStartAngle*/,
+                                             float /*rotaryEndAngle*/,
+                                             Slider &slider) override;
         
-        virtual void drawLinearSliderThumb(Graphics& g,
-                                        int x,
-                                        int y,
-                                        int width,
-                                        int height,
-                                        float sliderPos,
-                                        float /*minSliderPos*/,
-                                        float /*maxSliderPos*/,
-                                        const Slider::SliderStyle style,
-                                        Slider& slider) override;
+        virtual inline void drawLinearSliderThumb(Graphics& g,
+                                                  int x,
+                                                  int y,
+                                                  int width,
+                                                  int height,
+                                                  float sliderPos,
+                                                  float /*minSliderPos*/,
+                                                  float /*maxSliderPos*/,
+                                                  const Slider::SliderStyle style,
+                                                  Slider& slider) override;
         
-        virtual void drawButtonBackground(Graphics& g,
+        virtual inline void drawButtonBackground(Graphics& g,
                                                     Button& button,
                                                     const Colour& /*backgroundColour*/,
                                                     bool /*isMouseOverButton*/,
                                                     bool /*isButtonDown*/) override;
         
-        virtual void drawButtonText(Graphics& g,
-                                    TextButton& textButton,
-                                    bool /*isMouseOverButton*/,
-                                    bool /*isButtonDown*/) override;
+        virtual inline void drawButtonText(Graphics& g,
+                                           TextButton& textButton,
+                                           bool /*isMouseOverButton*/,
+                                           bool /*isButtonDown*/) override;
         
-        virtual void drawComboBox(Graphics& g,
-                                int /*width*/,
-                                int /*height*/,
-                                const bool /*isButtonDown*/,
-                                int buttonX,
-                                int buttonY,
-                                int buttonW,
-                                int buttonH,
-                                ComboBox& box) override;
+        virtual inline void drawComboBox(Graphics& g,
+                                         int /*width*/,
+                                         int /*height*/,
+                                         const bool /*isButtonDown*/,
+                                         int buttonX,
+                                         int buttonY,
+                                         int buttonW,
+                                         int buttonH,
+                                         ComboBox& box) override;
         
-        virtual void drawLinearSliderBackground(Graphics& g,
-                                                int x,
-                                                int y,
-                                                int width,
-                                                int height,
-                                                float /*sliderPos*/,
-                                                float /*minSliderPos*/,
-                                                float /*maxSliderPos*/,
-                                                const Slider::SliderStyle /*style*/,
-                                                Slider& slider) override;
+        virtual inline void drawLinearSliderBackground(Graphics& g,
+                                                       int x,
+                                                       int y,
+                                                       int width,
+                                                       int height,
+                                                       float /*sliderPos*/,
+                                                       float /*minSliderPos*/,
+                                                       float /*maxSliderPos*/,
+                                                       const Slider::SliderStyle /*style*/,
+                                                       Slider& slider) override;
         
-        virtual void drawTooltip(Graphics& g,
-                                const String& text,
-                                int width,
-                                int height) override;
+        virtual inline void drawTooltip(Graphics& g,
+                                        const String& text,
+                                        int width,
+                                        int height) override;
         
         virtual void setHighlightColour(Colour newColour) {
             highlightColour = newColour;
@@ -130,15 +130,15 @@ namespace WECore::JUCEPlugin {
         
     };
 
-    virtual void CoreLookAndFeel::drawRotarySlider(Graphics& g,
-                                                   int /*x*/,
-                                                   int /*y*/,
-                                                   int width,
-                                                   int height,
-                                                   float /*sliderPosProportional*/,
-                                                   float /*rotaryStartAngle*/,
-                                                   float /*rotaryEndAngle*/,
-                                                   Slider &slider) override {
+    void CoreLookAndFeel::drawRotarySlider(Graphics& g,
+                                           int /*x*/,
+                                           int /*y*/,
+                                           int width,
+                                           int height,
+                                           float /*sliderPosProportional*/,
+                                           float /*rotaryStartAngle*/,
+                                           float /*rotaryEndAngle*/,
+                                           Slider &slider) {
 
         // calculate useful constants
         const double rangeOfMotion {260 * (CoreMath::DOUBLE_PI / 180)};
@@ -168,16 +168,16 @@ namespace WECore::JUCEPlugin {
         g.strokePath(p, PathStrokeType(2.0f));
     }
         
-    virtual void CoreLookAndFeel::drawLinearSliderThumb(Graphics& g,
-                                                        int x,
-                                                        int y,
-                                                        int width,
-                                                        int height,
-                                                        float sliderPos,
-                                                        float /*minSliderPos*/,
-                                                        float /*maxSliderPos*/,
-                                                        const Slider::SliderStyle style,
-                                                        Slider& slider) override {
+    void CoreLookAndFeel::drawLinearSliderThumb(Graphics& g,
+                                                int x,
+                                                int y,
+                                                int width,
+                                                int height,
+                                                float sliderPos,
+                                                float /*minSliderPos*/,
+                                                float /*maxSliderPos*/,
+                                                const Slider::SliderStyle style,
+                                                Slider& slider) {
         
         const float sliderRadius = static_cast<float>(getSliderThumbRadius(slider) - 2);
         
@@ -216,11 +216,11 @@ namespace WECore::JUCEPlugin {
         
     }
     
-    virtual void CoreLookAndFeel::drawButtonBackground(Graphics& g,
-                                                       Button& button,
-                                                       const Colour& /*backgroundColour*/,
-                                                       bool /*isMouseOverButton*/,
-                                                       bool /*isButtonDown*/) override {
+    void CoreLookAndFeel::drawButtonBackground(Graphics& g,
+                                               Button& button,
+                                               const Colour& /*backgroundColour*/,
+                                               bool /*isMouseOverButton*/,
+                                               bool /*isButtonDown*/) {
         const int width {button.getWidth()};
         const int height {button.getHeight()};
         
@@ -252,10 +252,10 @@ namespace WECore::JUCEPlugin {
         g.strokePath(p, pStroke);
     }
     
-    virtual void CoreLookAndFeel::drawButtonText(Graphics& g,
-                                                 TextButton& textButton,
-                                                 bool /*isMouseOverButton*/,
-                                                 bool /*isButtonDown*/) override {
+    void CoreLookAndFeel::drawButtonText(Graphics& g,
+                                         TextButton& textButton,
+                                         bool /*isMouseOverButton*/,
+                                         bool /*isButtonDown*/) {
         
         Colour* textColour {nullptr};
         
@@ -280,15 +280,15 @@ namespace WECore::JUCEPlugin {
         g.drawFittedText(textButton.getButtonText(), margin, 0, textButton.getWidth() - 2 * margin, textButton.getHeight(), Justification::centred, 0);
     }
     
-    virtual void CoreLookAndFeel::drawComboBox(Graphics& g,
-                                               int /*width*/,
-                                               int /*height*/,
-                                               const bool /*isButtonDown*/,
-                                               int buttonX,
-                                               int buttonY,
-                                               int buttonW,
-                                               int buttonH,
-                                               ComboBox& box) override {
+    void CoreLookAndFeel::drawComboBox(Graphics& g,
+                                       int /*width*/,
+                                       int /*height*/,
+                                       const bool /*isButtonDown*/,
+                                       int buttonX,
+                                       int buttonY,
+                                       int buttonW,
+                                       int buttonH,
+                                       ComboBox& box) {
         
         g.fillAll(lightColour);
         g.setColour(darkColour);
@@ -313,16 +313,16 @@ namespace WECore::JUCEPlugin {
         }
     }
     
-    virtual void CoreLookAndFeel::drawLinearSliderBackground(Graphics& g,
-                                                             int x,
-                                                             int y,
-                                                             int width,
-                                                             int height,
-                                                             float /*sliderPos*/,
-                                                             float /*minSliderPos*/,
-                                                             float /*maxSliderPos*/,
-                                                             const Slider::SliderStyle /*style*/,
-                                                             Slider& slider) override {
+    void CoreLookAndFeel::drawLinearSliderBackground(Graphics& g,
+                                                     int x,
+                                                     int y,
+                                                     int width,
+                                                     int height,
+                                                     float /*sliderPos*/,
+                                                     float /*minSliderPos*/,
+                                                     float /*maxSliderPos*/,
+                                                     const Slider::SliderStyle /*style*/,
+                                                     Slider& slider) {
         g.setColour(lightColour);
         
         if (slider.isHorizontal()) {
@@ -330,10 +330,10 @@ namespace WECore::JUCEPlugin {
         }
     }
     
-    virtual void CoreLookAndFeel::drawTooltip(Graphics& g,
-                                              const String& text,
-                                              int width,
-                                              int height) override {
+    void CoreLookAndFeel::drawTooltip(Graphics& g,
+                                      const String& text,
+                                      int width,
+                                      int height) {
         g.setColour(lightColour);
         g.fillRect(0, 0, width, height);
         
@@ -341,3 +341,4 @@ namespace WECore::JUCEPlugin {
         g.drawFittedText(text, 0, 0, width, height, Justification::centred, 3);
     }
 }
+       
