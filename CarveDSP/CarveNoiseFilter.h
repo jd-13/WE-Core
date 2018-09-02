@@ -111,11 +111,11 @@ namespace WECore::Carve {
         
     private:
         static constexpr int FILTER_ORDER {4};
-        Dsp::SimpleFilter<Dsp::Butterworth::LowPass<4>, 1> _monoHighCutFilter;
-        Dsp::SimpleFilter<Dsp::Butterworth::LowPass<4>, 2> _stereoHighCutFilter;
+        Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 1> _monoHighCutFilter;
+        Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 2> _stereoHighCutFilter;
         
-        Dsp::SimpleFilter<Dsp::Butterworth::HighPass<4>, 1> _monoLowCutFilter;
-        Dsp::SimpleFilter<Dsp::Butterworth::HighPass<4>, 2> _stereoLowCutFilter;
+        Dsp::SimpleFilter<Dsp::Butterworth::HighPass<FILTER_ORDER>, 1> _monoLowCutFilter;
+        Dsp::SimpleFilter<Dsp::Butterworth::HighPass<FILTER_ORDER>, 2> _stereoLowCutFilter;
         
         float   _lowCutHz,
                 _highCutHz;
