@@ -7,11 +7,11 @@ include_directories($ENV{CATCH_PATH}
                     $ENV{WECORE_SRC}
                     ${DSPFILTERS_PATH}/include)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(GCOVFLAGS "-fprofile-arcs -ftest-coverage")
-set(CXXFLAGS_COMMON "-std=c++14 -g -Wall -Werror -Wextra -Wconversion -Wshadow ${GCOVFLAGS}")
+set(CXXFLAGS_COMMON "-std=c++17 -g -Wall -Werror -Wextra -Wconversion -Wshadow ${GCOVFLAGS}")
 
 # Set the GCC and Clang flags
 # TODO: work on removing the need for the below Wno flags
