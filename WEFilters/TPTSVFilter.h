@@ -37,7 +37,11 @@ namespace WECore::TPTSVF {
      *
      * Based on a talk given by Ivan Cohen: https://www.youtube.com/watch?v=esjHXGPyrhg
      */
+    template <typename T>
     class TPTSVFilter {
+        static_assert(std::is_floating_point<T>::value,
+                      "Must be provided with a floating point template type");
+
     public:
         TPTSVFilter() : _sampleRate(44100),
                         _cutoffHz(Parameters::CUTOFF.defaultValue),
@@ -57,7 +61,7 @@ namespace WECore::TPTSVF {
          * @param[out]  inSamples   Pointer to the first sample of the left channel's buffer
          * @param[in]   numSamples  Number of samples in the buffer
          */
-        inline void processBlock(double* inSamples, size_t numSamples);
+        void processBlock(T* inSamples, size_t numSamples);
         
         /**
          * Resets filter coefficients.
@@ -101,21 +105,22 @@ namespace WECore::TPTSVF {
         int _mode;
     };
 
-    void TPTSVFilter::processBlock(double* inSamples, size_t numSamples) {
+    template <typename T>
+    void TPTSVFilter<T>::processBlock(T* inSamples, size_t numSamples) {
         
         if (_mode != Parameters::FILTER_MODE.BYPASS) {
-            const double g {std::tan(CoreMath::DOUBLE_PI * _cutoffHz / _sampleRate)};
-            const double h {1.0f / (1 + g / _Q + g * g)};
+            const T g {std::tan(CoreMath::DOUBLE_PI * _cutoffHz / _sampleRate)};
+            const T h {1.0f / (1 + g / _Q + g * g)};
             
             for (size_t idx {0}; idx < numSamples; idx++) {
-                const double sample {inSamples[idx]};
+                const T sample {inSamples[idx]};
                 
-                const double yH {h * (sample - (1.0f / _Q + g) * _s1 - _s2)};
+                const T yH {h * (sample - (1.0f / _Q + g) * _s1 - _s2)};
                 
-                const double yB {g * yH + _s1};
+                const T yB {g * yH + _s1};
                 _s1 = g * yH + yB;
                 
-                const double yL {g * yB + _s2};
+                const T yL {g * yB + _s2};
                 _s2 = g * yB + yL;
                 
                 switch (_mode) {
