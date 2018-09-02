@@ -51,8 +51,8 @@ namespace WECore::Songbird {
          */
         SongbirdFormantFilter(int numFormants = 5) {
             for (int iii {0}; iii < numFormants; iii++) {
-                TPTSVFilter tempFilter;
-                tempFilter.setMode(TPTSVFilterParameters::FILTER_MODE.PEAK);
+                TPTSVF::TPTSVFilter tempFilter;
+                tempFilter.setMode(TPTSVF::Parameters::FILTER_MODE.PEAK);
                 tempFilter.setQ(15);
                 _filters.push_back(tempFilter);
             }
@@ -96,7 +96,7 @@ namespace WECore::Songbird {
         void reset();
         
     private:
-        std::vector<TPTSVFilter> _filters;
+        std::vector<TPTSVF::TPTSVFilter> _filters;
 
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
 
@@ -164,13 +164,13 @@ namespace WECore::Songbird {
     }
 
     void SongbirdFormantFilter::setSampleRate(double val) {
-        for (TPTSVFilter& filter : _filters) {
+        for (TPTSVF::TPTSVFilter& filter : _filters) {
             filter.setSampleRate(val);
         }
     }
 
     void SongbirdFormantFilter::reset() {
-        for (TPTSVFilter& filter : _filters) {
+        for (TPTSVF::TPTSVFilter& filter : _filters) {
             filter.reset();
         }
     }

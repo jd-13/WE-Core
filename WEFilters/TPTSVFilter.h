@@ -21,50 +21,94 @@
  *  along with WECore.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TPTSVFILTER_H_INCLUDED
-#define TPTSVFILTER_H_INCLUDED
+#pragma once
 
 #include "General/CoreMath.h"
 #include "WEFilters/TPTSVFilterParameters.h"
 
-/**
- * A state variable filter from a topology-preserving transform.
- *
- * To use this class, simply call reset, and the process methods as necessary, using the provided
- * getter and setter methods to manipulate parameters.
- *
- * Internally relies on the parameters provided in TPTSVFilterParameters.h
- *
- * Based on a talk given by Ivan Cohen: https://www.youtube.com/watch?v=esjHXGPyrhg
- */
-class TPTSVFilter {
-public:
-    TPTSVFilter() : _sampleRate(44100),
-                    _cutoffHz(TPTSVFilterParameters::CUTOFF.defaultValue),
-                    _Q(TPTSVFilterParameters::Q.defaultValue),
-                    _gain(TPTSVFilterParameters::GAIN.defaultValue),
-                    _s1(0),
-                    _s2(0),
-                    _mode(TPTSVFilterParameters::FILTER_MODE.BYPASS) {}
-    
-    TPTSVFilter(const TPTSVFilter& other) = default;
-    virtual ~TPTSVFilter() = default;
-    
+namespace WECore::TPTSVF {
     /**
-     * Applies the filtering to a buffer of samples.
-     * Expect seg faults or other memory issues if arguements passed are incorrect. 
+     * A state variable filter from a topology-preserving transform.
      *
-     * @param[out]  inSamples   Pointer to the first sample of the left channel's buffer
-     * @param[in]   numSamples  Number of samples in the buffer
+     * To use this class, simply call reset, and the process methods as necessary, using the provided
+     * getter and setter methods to manipulate parameters.
+     *
+     * Internally relies on the parameters provided in TPTSVFilterParameters.h
+     *
+     * Based on a talk given by Ivan Cohen: https://www.youtube.com/watch?v=esjHXGPyrhg
      */
-    void processBlock(double* inSamples, size_t numSamples) {
+    class TPTSVFilter {
+    public:
+        TPTSVFilter() : _sampleRate(44100),
+                        _cutoffHz(Parameters::CUTOFF.defaultValue),
+                        _Q(Parameters::Q.defaultValue),
+                        _gain(Parameters::GAIN.defaultValue),
+                        _s1(0),
+                        _s2(0),
+                        _mode(Parameters::FILTER_MODE.BYPASS) {}
         
-        if (_mode != TPTSVFilterParameters::FILTER_MODE.BYPASS) {
+        TPTSVFilter(const TPTSVFilter& other) = default;
+        virtual ~TPTSVFilter() = default;
+        
+        /**
+         * Applies the filtering to a buffer of samples.
+         * Expect seg faults or other memory issues if arguements passed are incorrect. 
+         *
+         * @param[out]  inSamples   Pointer to the first sample of the left channel's buffer
+         * @param[in]   numSamples  Number of samples in the buffer
+         */
+        inline void processBlock(double* inSamples, size_t numSamples);
+        
+        /**
+         * Resets filter coefficients.
+         * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
+         */
+        void reset() {
+            _s1 = 0;
+            _s2 = 0;
+        }
+        
+        /** @name Getter Methods */
+        /** @{ */
+        
+        int getMode() const {return _mode;}
+        double getCutoff() const {return _cutoffHz;}
+        double getQ() const {return _Q;}
+        double getGain() const {return _gain;}
+        
+        /** @} */
+        
+        /** @name Setter Methods */
+        /** @{ */
+
+        void setMode(int val) {_mode = Parameters::FILTER_MODE.BoundsCheck(val);}
+        void setCutoff(double val) {_cutoffHz = Parameters::CUTOFF.BoundsCheck(val);}
+        void setQ(double val) {_Q = Parameters::Q.BoundsCheck(val);}
+        void setGain(double val) {_gain = Parameters::GAIN.BoundsCheck(val);}
+        void setSampleRate(double val) {_sampleRate = val;}
+        
+        /** @} */
+
+        
+    private:
+        double  _sampleRate,
+                _cutoffHz,
+                _Q,
+                _gain,
+                _s1,
+                _s2;
+        
+        int _mode;
+    };
+
+    void TPTSVFilter::processBlock(double* inSamples, size_t numSamples) {
+        
+        if (_mode != Parameters::FILTER_MODE.BYPASS) {
             const double g {std::tan(CoreMath::DOUBLE_PI * _cutoffHz / _sampleRate)};
             const double h {1.0f / (1 + g / _Q + g * g)};
             
-            for (size_t iii {0}; iii < numSamples; iii++) {
-                const double sample {inSamples[iii]};
+            for (size_t idx {0}; idx < numSamples; idx++) {
+                const double sample {inSamples[idx]};
                 
                 const double yH {h * (sample - (1.0f / _Q + g) * _s1 - _s2)};
                 
@@ -75,64 +119,19 @@ public:
                 _s2 = g * yB + yL;
                 
                 switch (_mode) {
-                    case TPTSVFilterParameters::FILTER_MODE.PEAK:
-                        inSamples[iii] = yB * _gain;
+                    case Parameters::ModeParameter::PEAK:
+                        inSamples[idx] = yB * _gain;
                         break;
                         
-                    case TPTSVFilterParameters::FILTER_MODE.HIGHPASS:
-                        inSamples[iii] = yH * _gain;
+                    case Parameters::ModeParameter::HIGHPASS:
+                        inSamples[idx] = yH * _gain;
                         break;
                         
                     default:
-                        inSamples[iii] = yL * _gain;
+                        inSamples[idx] = yL * _gain;
                         break;
                 }
             }
         }
     }
-    
-    /**
-     * Resets filter coefficients.
-     * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
-     */
-    void reset() {
-        _s1 = 0;
-        _s2 = 0;
-    }
-    
-    /** @name Getter Methods */
-    /** @{ */
-    
-    int getMode() const {return _mode;}
-    double getCutoff() const {return _cutoffHz;}
-    double getQ() const {return _Q;}
-    double getGain() const {return _gain;}
-    
-    /** @} */
-    
-    /** @name Setter Methods */
-    /** @{ */
-
-    void setMode(int val) {_mode = TPTSVFilterParameters::FILTER_MODE.BoundsCheck(val);}
-    void setCutoff(double val) {_cutoffHz = TPTSVFilterParameters::CUTOFF.BoundsCheck(val);}
-    void setQ(double val) {_Q = TPTSVFilterParameters::Q.BoundsCheck(val);}
-    void setGain(double val) {_gain = TPTSVFilterParameters::GAIN.BoundsCheck(val);}
-    void setSampleRate(double val) {_sampleRate = val;}
-    
-    /** @} */
-
-    
-private:
-    double  _sampleRate,
-            _cutoffHz,
-            _Q,
-            _gain,
-            _s1,
-            _s2;
-    
-    int _mode;
-};
-
-
-
-#endif  // TPTSVFILTER_H_INCLUDED
+}
