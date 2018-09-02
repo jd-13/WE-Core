@@ -31,9 +31,7 @@ namespace WECore::Carve::Parameters {
     public:
 
         ModeParameter() : ParameterDefinition::BaseParameter<int>::BaseParameter(
-            ModeParameter::OFF,
-            ModeParameter::CLIPPER,
-            ModeParameter::OFF) { }
+            OFF, CLIPPER, OFF) { }
         
         static constexpr int OFF = 1,
                              SINE = 2,
