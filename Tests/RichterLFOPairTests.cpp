@@ -26,7 +26,7 @@
 
 SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
     GIVEN("A new RichterLFOPair object") {
-        RichterLFOPair mLFOPair;
+        WECore::Richter::RichterLFOPair mLFOPair;
         
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
@@ -106,7 +106,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
 
 SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
     GIVEN("A new RichterLFOPair object") {
-        RichterLFOPair mLFOPair;
+        WECore::Richter::RichterLFOPair mLFOPair;
         
         WHEN("All parameter values are too low") {
             mLFOPair.LFO.setWave(-5);
