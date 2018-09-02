@@ -29,16 +29,22 @@ namespace WECore::Carve::Parameters {
     
     class ModeParameter : public ParameterDefinition::BaseParameter<int> {
     public:
-        using ParameterDefinition::BaseParameter<int>::BaseParameter;
+
+        ModeParameter() : ParameterDefinition::BaseParameter<int>::BaseParameter(
+            ModeParameter::OFF,
+            ModeParameter::CLIPPER,
+            ModeParameter::OFF) { }
         
-        static const int    OFF = 1,
-                            SINE = 2,
-                            PARABOLIC_SOFT = 3,
-                            PARABOLIC_HARD = 4,
-                            ASYMMETRIC_SINE = 5,
-                            EXPONENT = 6,
-                            CLIPPER = 7;
+        static constexpr int OFF = 1,
+                             SINE = 2,
+                             PARABOLIC_SOFT = 3,
+                             PARABOLIC_HARD = 4,
+                             ASYMMETRIC_SINE = 5,
+                             EXPONENT = 6,
+                             CLIPPER = 7;
     };
+
+    const ModeParameter MODE;
 
     //@{
     /**
@@ -48,10 +54,8 @@ namespace WECore::Carve::Parameters {
      *      maximum value,
      *      default value
      */
-    const ParameterDefinition::RangedParameter<double>   PREGAIN(0, 2, 1),
+    const ParameterDefinition::RangedParameter<double>  PREGAIN(0, 2, 1),
                                                         POSTGAIN(0, 2, 0.5),
                                                         TWEAK(-1, 1, 0);
     //@}
-
-    const ModeParameter MODE(1, 7, 1);
 }

@@ -68,9 +68,8 @@ namespace WECore::Carve {
          * @param   lowCutHz    Everything below this frequency will be cut
          * @param   highCutHz   Everything above this frequency will be cut
          */
-        NoiseFilter(float lowCutHz,
-                        float highCutHz) : _lowCutHz(lowCutHz),
-                                            _highCutHz(highCutHz) {
+        NoiseFilter(float lowCutHz, float highCutHz) : _lowCutHz(lowCutHz),
+                                                       _highCutHz(highCutHz) {
             setSampleRate(44100);
         }
         
@@ -111,7 +110,7 @@ namespace WECore::Carve {
         void Process2in2out(float *inLeftSample, float *inRightSample, int numSamples);
         
     private:
-        static const int FILTER_ORDER {4};
+        static constexpr int FILTER_ORDER {4};
         Dsp::SimpleFilter<Dsp::Butterworth::LowPass<4>, 1> _monoHighCutFilter;
         Dsp::SimpleFilter<Dsp::Butterworth::LowPass<4>, 2> _stereoHighCutFilter;
         
