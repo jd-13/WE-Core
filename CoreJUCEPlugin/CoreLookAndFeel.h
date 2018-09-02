@@ -22,43 +22,124 @@
  *
  */
 
-#ifndef CORELOOKANDFEEL_H_INCLUDED
-#define CORELOOKANDFEEL_H_INCLUDED
+#pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "General/CoreMath.h"
 
-/**
- * A class which contains most of the basic design elements which the white elephant audio plugins
- * have in common.
- *
- * Not all drawing methods are defined, and so methods inherited from LookAndFeel_V2 may be used.
- *
- * By default the three colours which are used are dark grey, light grey, and neon blue. These can
- * be changed using the provided setter methods.
- */
-class CoreLookAndFeel : public LookAndFeel_V2 {
-public:
-    CoreLookAndFeel() :    LookAndFeel_V2(),
-                            lightColour(200, 200, 200),
-                            darkColour(107, 107, 107),
-                            highlightColour(34, 252, 255) {
-        setColour(PopupMenu::highlightedBackgroundColourId, darkColour);
-        setColour(PopupMenu::backgroundColourId, lightColour);
-    }
-    
-    CoreLookAndFeel operator=(CoreLookAndFeel&) = delete;
-    CoreLookAndFeel(CoreLookAndFeel&) = delete;
-    
-    virtual void drawRotarySlider(Graphics& g,
-                                  int /*x*/,
-                                  int /*y*/,
-                                  int width,
-                                  int height,
-                                  float /*sliderPosProportional*/,
-                                  float /*rotaryStartAngle*/,
-                                  float /*rotaryEndAngle*/,
-                                  Slider &slider) override {
+namespace WECore::CoreJUCEPlugin {
+
+    /**
+     * A class which contains most of the basic design elements which the white elephant audio plugins
+     * have in common.
+     *
+     * Not all drawing methods are defined, and so methods inherited from LookAndFeel_V2 may be used.
+     *
+     * By default the three colours which are used are dark grey, light grey, and neon blue. These can
+     * be changed using the provided setter methods.
+     */
+    class CoreLookAndFeel : public LookAndFeel_V2 {
+    public:
+        CoreLookAndFeel() :    LookAndFeel_V2(),
+                                lightColour(200, 200, 200),
+                                darkColour(107, 107, 107),
+                                highlightColour(34, 252, 255) {
+            setColour(PopupMenu::highlightedBackgroundColourId, darkColour);
+            setColour(PopupMenu::backgroundColourId, lightColour);
+        }
+        
+        CoreLookAndFeel operator=(CoreLookAndFeel&) = delete;
+        CoreLookAndFeel(CoreLookAndFeel&) = delete;
+        
+        virtual void drawRotarySlider(Graphics& g,
+                                    int /*x*/,
+                                    int /*y*/,
+                                    int width,
+                                    int height,
+                                    float /*sliderPosProportional*/,
+                                    float /*rotaryStartAngle*/,
+                                    float /*rotaryEndAngle*/,
+                                    Slider &slider) override;
+        
+        virtual void drawLinearSliderThumb(Graphics& g,
+                                        int x,
+                                        int y,
+                                        int width,
+                                        int height,
+                                        float sliderPos,
+                                        float /*minSliderPos*/,
+                                        float /*maxSliderPos*/,
+                                        const Slider::SliderStyle style,
+                                        Slider& slider) override;
+        
+        virtual void drawButtonBackground(Graphics& g,
+                                                    Button& button,
+                                                    const Colour& /*backgroundColour*/,
+                                                    bool /*isMouseOverButton*/,
+                                                    bool /*isButtonDown*/) override;
+        
+        virtual void drawButtonText(Graphics& g,
+                                    TextButton& textButton,
+                                    bool /*isMouseOverButton*/,
+                                    bool /*isButtonDown*/) override;
+        
+        virtual void drawComboBox(Graphics& g,
+                                int /*width*/,
+                                int /*height*/,
+                                const bool /*isButtonDown*/,
+                                int buttonX,
+                                int buttonY,
+                                int buttonW,
+                                int buttonH,
+                                ComboBox& box) override;
+        
+        virtual void drawLinearSliderBackground(Graphics& g,
+                                                int x,
+                                                int y,
+                                                int width,
+                                                int height,
+                                                float /*sliderPos*/,
+                                                float /*minSliderPos*/,
+                                                float /*maxSliderPos*/,
+                                                const Slider::SliderStyle /*style*/,
+                                                Slider& slider) override;
+        
+        virtual void drawTooltip(Graphics& g,
+                                const String& text,
+                                int width,
+                                int height) override;
+        
+        virtual void setHighlightColour(Colour newColour) {
+            highlightColour = newColour;
+        }
+        
+        virtual void setLightColour(Colour newColour) {
+            lightColour = newColour;
+        }
+        
+        virtual void setDarkColour(Colour newColour) {
+            darkColour = newColour;
+        }
+        
+    protected:
+        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreLookAndFeel)
+        
+        Colour  lightColour,
+                darkColour,
+                highlightColour;
+        
+    };
+
+    virtual void CoreLookAndFeel::drawRotarySlider(Graphics& g,
+                                                   int /*x*/,
+                                                   int /*y*/,
+                                                   int width,
+                                                   int height,
+                                                   float /*sliderPosProportional*/,
+                                                   float /*rotaryStartAngle*/,
+                                                   float /*rotaryEndAngle*/,
+                                                   Slider &slider) override {
+
         // calculate useful constants
         const double rangeOfMotion {260 * (CoreMath::DOUBLE_PI / 180)};
         const double rotation {((slider.getValue() - slider.getMinimum()) / (slider.getMaximum() - slider.getMinimum())) * rangeOfMotion - rangeOfMotion / 2};
@@ -86,17 +167,17 @@ public:
         
         g.strokePath(p, PathStrokeType(2.0f));
     }
-    
-    virtual void drawLinearSliderThumb(Graphics& g,
-                                       int x,
-                                       int y,
-                                       int width,
-                                       int height,
-                                       float sliderPos,
-                                       float /*minSliderPos*/,
-                                       float /*maxSliderPos*/,
-                                       const Slider::SliderStyle style,
-                                       Slider& slider) override {
+        
+    virtual void CoreLookAndFeel::drawLinearSliderThumb(Graphics& g,
+                                                        int x,
+                                                        int y,
+                                                        int width,
+                                                        int height,
+                                                        float sliderPos,
+                                                        float /*minSliderPos*/,
+                                                        float /*maxSliderPos*/,
+                                                        const Slider::SliderStyle style,
+                                                        Slider& slider) override {
         
         const float sliderRadius = static_cast<float>(getSliderThumbRadius(slider) - 2);
         
@@ -135,11 +216,11 @@ public:
         
     }
     
-    virtual void drawButtonBackground(Graphics& g,
-                                                  Button& button,
-                                                  const Colour& /*backgroundColour*/,
-                                                  bool /*isMouseOverButton*/,
-                                                  bool /*isButtonDown*/) override {
+    virtual void CoreLookAndFeel::drawButtonBackground(Graphics& g,
+                                                       Button& button,
+                                                       const Colour& /*backgroundColour*/,
+                                                       bool /*isMouseOverButton*/,
+                                                       bool /*isButtonDown*/) override {
         const int width {button.getWidth()};
         const int height {button.getHeight()};
         
@@ -171,10 +252,10 @@ public:
         g.strokePath(p, pStroke);
     }
     
-    virtual void drawButtonText(Graphics& g,
-                                TextButton& textButton,
-                                bool /*isMouseOverButton*/,
-                                bool /*isButtonDown*/) override {
+    virtual void CoreLookAndFeel::drawButtonText(Graphics& g,
+                                                 TextButton& textButton,
+                                                 bool /*isMouseOverButton*/,
+                                                 bool /*isButtonDown*/) override {
         
         Colour* textColour {nullptr};
         
@@ -199,15 +280,15 @@ public:
         g.drawFittedText(textButton.getButtonText(), margin, 0, textButton.getWidth() - 2 * margin, textButton.getHeight(), Justification::centred, 0);
     }
     
-    virtual void drawComboBox(Graphics& g,
-                              int /*width*/,
-                              int /*height*/,
-                              const bool /*isButtonDown*/,
-                              int buttonX,
-                              int buttonY,
-                              int buttonW,
-                              int buttonH,
-                              ComboBox& box) override {
+    virtual void CoreLookAndFeel::drawComboBox(Graphics& g,
+                                               int /*width*/,
+                                               int /*height*/,
+                                               const bool /*isButtonDown*/,
+                                               int buttonX,
+                                               int buttonY,
+                                               int buttonW,
+                                               int buttonH,
+                                               ComboBox& box) override {
         
         g.fillAll(lightColour);
         g.setColour(darkColour);
@@ -218,13 +299,13 @@ public:
         
         if (box.isEnabled()) {
             Path p;
-            p.addTriangle(buttonX + buttonW * 0.5f,                 buttonY + buttonH * (0.45f - arrowH),
-                          buttonX + buttonW * (1.0f - arrowX),      buttonY + buttonH * 0.45f,
-                          buttonX + buttonW * arrowX,               buttonY + buttonH * 0.45f);
+            p.addTriangle(buttonX + buttonW * 0.5f,            buttonY + buttonH * (0.45f - arrowH),
+                          buttonX + buttonW * (1.0f - arrowX), buttonY + buttonH * 0.45f,
+                          buttonX + buttonW * arrowX,          buttonY + buttonH * 0.45f);
             
-            p.addTriangle(buttonX + buttonW * 0.5f,                 buttonY + buttonH * (0.55f + arrowH),
-                          buttonX + buttonW * (1.0f - arrowX),      buttonY + buttonH * 0.55f,
-                          buttonX + buttonW * arrowX,               buttonY + buttonH * 0.55f);
+            p.addTriangle(buttonX + buttonW * 0.5f,            buttonY + buttonH * (0.55f + arrowH),
+                          buttonX + buttonW * (1.0f - arrowX), buttonY + buttonH * 0.55f,
+                          buttonX + buttonW * arrowX,          buttonY + buttonH * 0.55f);
             
             g.setColour(box.isPopupActive() ? highlightColour : lightColour);
             
@@ -232,16 +313,16 @@ public:
         }
     }
     
-    virtual void drawLinearSliderBackground(Graphics& g,
-                                            int x,
-                                            int y,
-                                            int width,
-                                            int height,
-                                            float /*sliderPos*/,
-                                            float /*minSliderPos*/,
-                                            float /*maxSliderPos*/,
-                                            const Slider::SliderStyle /*style*/,
-                                            Slider& slider) override {
+    virtual void CoreLookAndFeel::drawLinearSliderBackground(Graphics& g,
+                                                             int x,
+                                                             int y,
+                                                             int width,
+                                                             int height,
+                                                             float /*sliderPos*/,
+                                                             float /*minSliderPos*/,
+                                                             float /*maxSliderPos*/,
+                                                             const Slider::SliderStyle /*style*/,
+                                                             Slider& slider) override {
         g.setColour(lightColour);
         
         if (slider.isHorizontal()) {
@@ -249,37 +330,14 @@ public:
         }
     }
     
-    virtual void drawTooltip(Graphics& g,
-                             const String& text,
-                             int width,
-                             int height) override {
+    virtual void CoreLookAndFeel::drawTooltip(Graphics& g,
+                                              const String& text,
+                                              int width,
+                                              int height) override {
         g.setColour(lightColour);
         g.fillRect(0, 0, width, height);
         
         g.setColour(darkColour);
         g.drawFittedText(text, 0, 0, width, height, Justification::centred, 3);
     }
-    
-    virtual void setHighlightColour(Colour newColour) {
-        highlightColour = newColour;
-    }
-    
-    virtual void setLightColour(Colour newColour) {
-        lightColour = newColour;
-    }
-    
-    virtual void setDarkColour(Colour newColour) {
-        darkColour = newColour;
-    }
-    
-protected:
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreLookAndFeel)
-    
-    Colour  lightColour,
-            darkColour,
-            highlightColour;
-    
-};
-
-
-#endif  // CoreLOOKANDFEEL_H_INCLUDED
+}
