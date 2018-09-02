@@ -222,8 +222,8 @@ namespace WECore::Carve {
         return (
                 cos(CoreMath::DOUBLE_PI * inSample * (_tweak + 1))
                 * atan(4 * CoreMath::DOUBLE_PI * inSample * _preGain)
-            )
-            * _postGain;
+               )
+               * _postGain;
     }
 
     double CarveDSPUnit::_processExponent(double inSample) const {
@@ -237,14 +237,14 @@ namespace WECore::Carve {
         inSample *= CoreMath::DOUBLE_PI * _preGain;
         
         return (
-                sin(0.5 * inSample) +
-                0.3 * sin(1.5 * inSample) +
-                0.15 * sin(2.5 * inSample) *
-                0.075 * sin(3.5 * inSample) +
-                0.0375 * sin(4.5 * inSample) +
-                0.01875 * sin(5.5 * inSample) +
-                0.009375 * sin(6.5 * inSample)
-            )
-            * _postGain / 1.5;
+                   sin(0.5 * inSample) +
+                   0.3 * sin(1.5 * inSample) +
+                   0.15 * sin(2.5 * inSample) *
+                   0.075 * sin(3.5 * inSample) +
+                   0.0375 * sin(4.5 * inSample) +
+                   0.01875 * sin(5.5 * inSample) +
+                   0.009375 * sin(6.5 * inSample)
+               )
+               * _postGain / 1.5;
     }
 }
