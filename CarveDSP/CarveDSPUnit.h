@@ -173,25 +173,25 @@ namespace WECore::Carve {
     template <typename T>
     T CarveDSPUnit<T>::process(T inSample) const {
         switch (_mode) {
-            case Parameters::MODE.OFF:
+            case Parameters::ModeParameter::OFF:
                 return 0;
                 
-            case Parameters::MODE.SINE:
+            case Parameters::ModeParameter::SINE:
                 return _processSine(inSample);
                 
-            case Parameters::MODE.PARABOLIC_SOFT:
+            case Parameters::ModeParameter::PARABOLIC_SOFT:
                 return _processParabolicSoft(inSample);
                 
-            case Parameters::MODE.PARABOLIC_HARD:
+            case Parameters::ModeParameter::PARABOLIC_HARD:
                 return _processParabolicHard(inSample);
                 
-            case Parameters::MODE.ASYMMETRIC_SINE:
+            case Parameters::ModeParameter::ASYMMETRIC_SINE:
                 return _processAsymmetricSine(inSample);
                 
-            case Parameters::MODE.EXPONENT:
+            case Parameters::ModeParameter::EXPONENT:
                 return _processExponent(inSample);
                 
-            case Parameters::MODE.CLIPPER:
+            case Parameters::ModeParameter::CLIPPER:
                 return _processClipper(inSample);
                 
             default:
