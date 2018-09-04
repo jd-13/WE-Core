@@ -21,22 +21,21 @@
  *  along with WECore.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FORMANT_H_INCLUDED
-#define FORMANT_H_INCLUDED
+#pragma once
 
-/**
- * Simple class to hold the data about an individual formant peak.
- */
-class Formant {
-public:
-    Formant() : frequency(0), gaindB(0) {}
-    
-    Formant(double newFreq,
-            double newGaindB) : frequency(newFreq),
-                                gaindB(newGaindB) {}
-    
-    double frequency;
-    double gaindB;
-};
-
-#endif  // FORMANT_H_INCLUDED
+namespace WECore::Songbird {
+    /**
+     * Simple class to hold the data about an individual formant peak.
+     */
+    class Formant {
+    public:
+        Formant() : frequency(0), gaindB(0) {}
+        
+        Formant(double newFreq,
+                double newGaindB) : frequency(newFreq),
+                                    gaindB(newGaindB) {}
+        
+        double frequency;
+        double gaindB;
+    };
+}

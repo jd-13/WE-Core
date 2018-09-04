@@ -21,43 +21,44 @@
  *  along with WECore.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef RichterParameters_h
-#define RichterParameters_h
+#pragma once
 
 #include "General/ParameterDefinition.h"
 
-const int kWaveArraySize {2000};
+namespace WECore::Richter::Parameters {
 
-class WaveParameter : public ParameterDefinition::BaseParameter<int> {
-public:
-    using ParameterDefinition::BaseParameter<int>::BaseParameter;
-    
-    static const int    SINE = 1,
-                        SQUARE = 2,
-                        SAW = 3;
-};
+    constexpr int kWaveArraySize {2000};
 
-const WaveParameter WAVE(1, 3, 1);
+    class WaveParameter : public ParameterDefinition::BaseParameter<int> {
+    public:
+        WaveParameter() : ParameterDefinition::BaseParameter<int>(SINE, SAW, SINE) {}
+        
+        static constexpr int SINE {1},
+                             SQUARE {2},
+                             SAW {3};
+    };
 
-const ParameterDefinition::RangedParameter<int> TEMPONUMER(1, 4, 1),
-                                                TEMPODENOM(1, 32, 1);
+    const WaveParameter WAVE;
 
-const ParameterDefinition::RangedParameter<double>  DEPTH(0, 1, 0.5),
-                                                    DEPTHMOD(0, 1, 0),
-                                                    FREQ(0.5, 20, 2),
-                                                    FREQMOD(0, 1, 0),
-                                                    PHASE(0, kWaveArraySize, 0);
+    const ParameterDefinition::RangedParameter<int> TEMPONUMER(1, 4, 1),
+                                                    TEMPODENOM(1, 32, 1);
 
-const bool  LFOSWITCH_OFF = false,
-            LFOSWITCH_ON = true,
-            LFOSWITCH_DEFAULT = LFOSWITCH_OFF,
+    const ParameterDefinition::RangedParameter<double>  DEPTH(0, 1, 0.5),
+                                                        DEPTHMOD(0, 1, 0),
+                                                        FREQ(0.5, 20, 2),
+                                                        FREQMOD(0, 1, 0),
+                                                        PHASE(0, kWaveArraySize, 0);
 
-            TEMPOSYNC_OFF = false,
-            TEMPOSYNC_ON = true,
-            TEMPOSYNC_DEFAULT = TEMPOSYNC_OFF,
+    constexpr bool LFOSWITCH_OFF = false,
+                   LFOSWITCH_ON = true,
+                   LFOSWITCH_DEFAULT = LFOSWITCH_OFF,
 
-            PHASESYNC_OFF = false,
-            PHASESYNC_ON = true,
-            PHASESYNC_DEFAULT = PHASESYNC_OFF;
+                   TEMPOSYNC_OFF = false,
+                   TEMPOSYNC_ON = true,
+                   TEMPOSYNC_DEFAULT = TEMPOSYNC_OFF,
 
-#endif /* RichterParameters_h */
+                   PHASESYNC_OFF = false,
+                   PHASESYNC_ON = true,
+                   PHASESYNC_DEFAULT = PHASESYNC_OFF;
+
+}

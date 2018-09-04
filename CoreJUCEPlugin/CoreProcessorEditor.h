@@ -22,44 +22,44 @@
  *
  */
 
-#ifndef COREPROCESSOREDITOR_H_INCLUDED
-#define COREPROCESSOREDITOR_H_INCLUDED
+#pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-/**
- * This class provides basic functionality that is commonly used by an AudioProcessorEditor in a
- * White Elephant plugin.
- */
-class CoreProcessorEditor : public AudioProcessorEditor {
-public:
-    
-    CoreProcessorEditor() = delete;
-    
-    ~CoreProcessorEditor() = default;
-    
-protected:
-    CoreProcessorEditor(AudioProcessor& ownerFilter) : AudioProcessorEditor(ownerFilter) {}
 
-    
-    SharedResourcePointer<TooltipWindow> _tooltipWindow;
-    
+namespace WECore::JUCEPlugin {
+
     /**
-     * Sets the look and feel for all child components.
-     *
-     * Previously LookAndFeel::setDefaultLookAndFeel(&defaultLookAndFeel); was used but this
-     * resulted in a bug where upon opening two instances of the same plugin simultaneously, when
-     * one is closed the other will stop applying defaultLookAndFeel.
+     * This class provides basic functionality that is commonly used by an AudioProcessorEditor in a
+     * White Elephant plugin.
      */
-    void _assignLookAndFeelToAllChildren(LookAndFeel& defaultLookAndFeel) {
-        _tooltipWindow->setLookAndFeel(&defaultLookAndFeel);
-        for (int iii {0}; iii < getNumChildComponents(); iii++) {
-            getChildComponent(iii)->setLookAndFeel(&defaultLookAndFeel);
+    class CoreProcessorEditor : public AudioProcessorEditor {
+    public:
+        
+        CoreProcessorEditor() = delete;
+        
+        ~CoreProcessorEditor() = default;
+        
+    protected:
+        CoreProcessorEditor(AudioProcessor& ownerFilter) : AudioProcessorEditor(ownerFilter) {}
+
+        
+        SharedResourcePointer<TooltipWindow> _tooltipWindow;
+        
+        /**
+         * Sets the look and feel for all child components.
+         *
+         * Previously LookAndFeel::setDefaultLookAndFeel(&defaultLookAndFeel); was used but this
+         * resulted in a bug where upon opening two instances of the same plugin simultaneously, when
+         * one is closed the other will stop applying defaultLookAndFeel.
+         */
+        void _assignLookAndFeelToAllChildren(LookAndFeel& defaultLookAndFeel) {
+            _tooltipWindow->setLookAndFeel(&defaultLookAndFeel);
+            for (int iii {0}; iii < getNumChildComponents(); iii++) {
+                getChildComponent(iii)->setLookAndFeel(&defaultLookAndFeel);
+            }
         }
-    }
-    
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreProcessorEditor)
-};
-
-
-#endif  // COREPROCESSOREDITOR_H_INCLUDED
+        
+        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreProcessorEditor)
+    };
+}

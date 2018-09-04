@@ -26,34 +26,45 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-/**
- * This class provides basic functionality that is commonly used by an AudioProcessor in a
- * White Elephant plugin.
- */
-class CoreAudioProcessor : public AudioProcessor {
-public:
-    CoreAudioProcessor() = default;
-    virtual ~CoreAudioProcessor() = default;
-    
+namespace WECore::JUCEPlugin {
+
     /**
-     * Returns true if there are updates which need to be applied to the UI.
+     * This class provides basic functionality that is commonly used by an AudioProcessor in a
+     * White Elephant plugin.
      */
-    bool needsUIUpdate() { return _UIUpdateFlag; }
-    
-    /**
-     * Sets the UI update flag to true.
-     */
-    void requestUIUpdate() { _UIUpdateFlag = true; }
-    
-    /**
-     * Clears the UI update flag.
-     */
-    void clearUIUpdate() { _UIUpdateFlag = false; }
-    
-protected:
-    bool _UIUpdateFlag;
-    
-    String floatVectorToString(const std::vector<float>& fData) const {
+    class CoreAudioProcessor : public AudioProcessor {
+    public:
+        CoreAudioProcessor() = default;
+        virtual ~CoreAudioProcessor() = default;
+        
+        /**
+         * Returns true if there are updates which need to be applied to the UI.
+         */
+        bool needsUIUpdate() { return _UIUpdateFlag; }
+        
+        /**
+         * Sets the UI update flag to true.
+         */
+        void requestUIUpdate() { _UIUpdateFlag = true; }
+        
+        /**
+         * Clears the UI update flag.
+         */
+        void clearUIUpdate() { _UIUpdateFlag = false; }
+        
+    protected:
+        bool _UIUpdateFlag;
+        
+        inline String floatVectorToString(const std::vector<float>& fData) const;
+        
+        inline int stringToFloatVector(const String sFloatCSV,
+                                       std::vector<float>& fData,
+                                       int maxNumFloat) const;
+        
+        JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreAudioProcessor)
+    };
+
+    String CoreAudioProcessor::floatVectorToString(const std::vector<float>& fData) const {
         String result {""};
         
         if (fData.size() < 1) {
@@ -69,7 +80,9 @@ protected:
         return result;
     }
     
-    int stringToFloatVector(const String sFloatCSV, std::vector<float>& fData, int maxNumFloat) const {
+    int CoreAudioProcessor::stringToFloatVector(const String sFloatCSV,
+                                                std::vector<float>& fData,
+                                                int maxNumFloat) const {
         StringArray tokenizer;
         int tokenCount {tokenizer.addTokens(sFloatCSV, ",","")};
         int resultCount {(maxNumFloat <= tokenCount) ? maxNumFloat : tokenCount};
@@ -80,6 +93,4 @@ protected:
         
         return ((tokenCount <= maxNumFloat) ? resultCount : -1);
     }
-    
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreAudioProcessor)
-};
+}

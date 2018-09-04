@@ -21,21 +21,23 @@
  *  along with WECore.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TPTSVFILTERParameters_h
-#define TPTSVFILTERParameters_h
+#pragma once
 
 #include "General/ParameterDefinition.h"
 
-namespace TPTSVFilterParameters {
-    class FilterModeParameter : public ParameterDefinition::BaseParameter<int> {
+namespace WECore::TPTSVF::Parameters {
+
+    class ModeParameter : public ParameterDefinition::BaseParameter<int> {
     public:
-        using ParameterDefinition::BaseParameter<int>::BaseParameter;
+        ModeParameter() : ParameterDefinition::BaseParameter<int>::BaseParameter(
+            BYPASS, HIGHPASS, BYPASS) { }
         
-        static const int    BYPASS = 1,
-                            LOWPASS = 2,
-                            PEAK = 3,
-                            HIGHPASS = 4;
+        static constexpr int BYPASS = 1,
+                             LOWPASS = 2,
+                             PEAK = 3,
+                             HIGHPASS = 4;
     };
+    const ModeParameter FILTER_MODE;
 
     //@{
     /**
@@ -50,7 +52,4 @@ namespace TPTSVFilterParameters {
                                                         GAIN(0, 2, 1);
     //@}
 
-    const FilterModeParameter FILTER_MODE(1, 4, 1);
 }
-
-#endif /* TPTSVFILTERParameters_h */

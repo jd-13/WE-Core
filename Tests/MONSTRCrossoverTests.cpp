@@ -28,7 +28,7 @@
 
 SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
     GIVEN("A new MONSTRCrossover object") {
-        MONSTRCrossover mCrossover;
+        WECore::MONSTR::MONSTRCrossover mCrossover;
         
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
@@ -66,7 +66,7 @@ SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
 
 SCENARIO("MONSTRCrossover: Parameters enforce their bounds correctly") {
     GIVEN("A new MONSTRCrossover object") {
-        MONSTRCrossover mCrossover;
+        WECore::MONSTR::MONSTRCrossover mCrossover;
         
         WHEN("All parameter values are too low") {
             mCrossover.setCrossoverLower(39);
@@ -99,7 +99,7 @@ SCENARIO("MONSTRCrossover: Silence in = silence out") {
     GIVEN("A MONSTRCrossover and a buffer of silent samples") {
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
-        MONSTRCrossover mCrossover;
+        WECore::MONSTR::MONSTRCrossover mCrossover;
         
         WHEN("The silence samples are processed") {
             // fill the buffer
@@ -126,7 +126,7 @@ SCENARIO("MONSTRCrossover: Sine in = sine out") {
         const std::vector<double>& expectedOutput =
                 TestData::Data.at(Catch::getResultCapture().getCurrentTestName());
         
-        MONSTRCrossover mCrossover;
+        WECore::MONSTR::MONSTRCrossover mCrossover;
 
         // Set some parameters for the input signal
         constexpr size_t SAMPLE_RATE {44100};
@@ -185,7 +185,7 @@ SCENARIO("MONSTRCrossover: All bands widened") {
         const std::vector<double>& expectedOutputRight =
                 TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
         
-        MONSTRCrossover mCrossover;
+        WECore::MONSTR::MONSTRCrossover mCrossover;
 
         // Set some parameters for the input signal
         constexpr size_t SAMPLE_RATE {44100};
@@ -228,7 +228,7 @@ SCENARIO("MONSTRCrossover: All bands narrowed") {
         const std::vector<double>& expectedOutputRight =
                 TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
         
-        MONSTRCrossover mCrossover;
+        WECore::MONSTR::MONSTRCrossover mCrossover;
 
         // Set some parameters for the input signal
         constexpr size_t SAMPLE_RATE {44100};
@@ -271,7 +271,7 @@ SCENARIO("MONSTRCrossover: Small buffer") {
         const std::vector<double>& expectedOutputRight =
                 TestData::Data.at(Catch::getResultCapture().getCurrentTestName());
         
-        MONSTRCrossover mCrossover;
+        WECore::MONSTR::MONSTRCrossover mCrossover;
 
         // Set some parameters for the input signal
         constexpr size_t SAMPLE_RATE {44100};

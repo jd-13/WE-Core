@@ -26,7 +26,7 @@
 
 SCENARIO("TPTSVFilter: Parameters can be set and retrieved correctly") {
     GIVEN("A new TPTSVFilter object") {
-        TPTSVFilter mFilter;
+        WECore::TPTSVF::TPTSVFilter<double> mFilter;
 
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
@@ -55,7 +55,7 @@ SCENARIO("TPTSVFilter: Parameters can be set and retrieved correctly") {
 
 SCENARIO("TPTSVFilter: Parameters enforce their bounds correctly") {
     GIVEN("A new TPTSVFilter object") {
-        TPTSVFilter mFilter;
+        WECore::TPTSVF::TPTSVFilter<double> mFilter;
         
         WHEN("All parameter values are too low") {
             mFilter.setMode(-1);
@@ -90,7 +90,7 @@ SCENARIO("TPTSVFilter: Parameters enforce their bounds correctly") {
 SCENARIO("TPTSVFilter: Silence in = silence out") {
     GIVEN("A TPTSVFilter and a buffer of silent samples") {
         std::vector<double> buffer(1024);
-        TPTSVFilter mFilter;
+        WECore::TPTSVF::TPTSVFilter<double> mFilter;
         
         WHEN("The silence samples are processed") {
             // fill the buffer

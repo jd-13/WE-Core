@@ -22,8 +22,7 @@
  *
  */
 
-#ifndef CARVENOISEFILTER_H_INCLUDED
-#define CARVENOISEFILTER_H_INCLUDED
+#pragma once
 
 // DSPFilters sets off a lot of clang warnings - disable them for Butterworth.h only
 #ifdef __clang__
@@ -57,90 +56,96 @@
  *
  * @see setSampleRate   - recommended to call before performing any processing
  */
-class CarveNoiseFilter {
-public:
-    
-    /**
-     * Defaults the sample rate. It is recommended to call setSampleRate manually
-     * before attempting any processing.
-     *
-     * @param   lowCutHz    Everything below this frequency will be cut
-     * @param   highCutHz   Everything above this frequency will be cut
-     */
-    CarveNoiseFilter(float lowCutHz,
-                     float highCutHz) : _lowCutHz(lowCutHz),
-                                        _highCutHz(highCutHz) {
-        setSampleRate(44100);
+namespace WECore::Carve {
+
+    class NoiseFilter {
+    public:
+        
+        /**
+         * Defaults the sample rate. It is recommended to call setSampleRate manually
+         * before attempting any processing.
+         *
+         * @param   lowCutHz    Everything below this frequency will be cut
+         * @param   highCutHz   Everything above this frequency will be cut
+         */
+        NoiseFilter(float lowCutHz, float highCutHz) : _lowCutHz(lowCutHz),
+                                                       _highCutHz(highCutHz) {
+            setSampleRate(44100);
+        }
+        
+        virtual ~NoiseFilter() {}
+        
+        /**
+         * Configures the filters for the correct sample rate. Ensure this is
+         * called before attempting to process audio.
+         *
+         * @param   sampleRate  The sample rate the filter should be configured for
+         */
+        inline void setSampleRate(double sampleRate);
+        
+        /**
+         * Resets all filters.
+         * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
+         */
+        inline void reset();
+        
+        /**
+         * Applies the filtering to a mono buffer of samples.
+         * Expect seg faults or other memory issues if arguements passed are incorrect.
+         *
+         * @param   inSample    Pointer to the first sample of the buffer
+         * @param   numSamples  Number of samples in the buffer
+         */
+        inline void Process1in1out(float* inSample, int numSamples);
+        
+        /**
+         * Applies the filtering to a stereo buffer of samples.
+         * Expect seg faults or other memory issues if arguements passed are incorrect.
+         *
+         * @param   inLeftSample    Pointer to the first sample of the left channel's buffer
+         * @param   inRightSample   Pointer to the first sample of the right channel's buffer
+         * @param   numSamples      Number of samples in the buffer. The left and right buffers
+         *                          must be the same size.
+         */
+        inline void Process2in2out(float *inLeftSample, float *inRightSample, int numSamples);
+        
+    private:
+        static constexpr int FILTER_ORDER {4};
+        Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 1> _monoHighCutFilter;
+        Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 2> _stereoHighCutFilter;
+        
+        Dsp::SimpleFilter<Dsp::Butterworth::HighPass<FILTER_ORDER>, 1> _monoLowCutFilter;
+        Dsp::SimpleFilter<Dsp::Butterworth::HighPass<FILTER_ORDER>, 2> _stereoLowCutFilter;
+        
+        float   _lowCutHz,
+                _highCutHz;
+    };
+
+    void NoiseFilter::setSampleRate(double sampleRate) {
+        _monoLowCutFilter.setup(FILTER_ORDER, sampleRate, _lowCutHz);
+        _stereoLowCutFilter.setup(FILTER_ORDER, sampleRate, _lowCutHz);
+        _monoHighCutFilter.setup(FILTER_ORDER, sampleRate, _highCutHz);
+        _stereoHighCutFilter.setup(FILTER_ORDER, sampleRate, _highCutHz);
     }
-    
-    virtual ~CarveNoiseFilter() {}
-    
-    /**
-     * Configures the filters for the correct sample rate. Ensure this is
-     * called before attempting to process audio.
-     *
-     * @param   sampleRate  The sample rate the filter should be configured for
-     */
-    void setSampleRate(double sampleRate) {
-        monoLowCutFilter.setup(FILTER_ORDER, sampleRate, _lowCutHz);
-        stereoLowCutFilter.setup(FILTER_ORDER, sampleRate, _lowCutHz);
-        monoHighCutFilter.setup(FILTER_ORDER, sampleRate, _highCutHz);
-        stereoHighCutFilter.setup(FILTER_ORDER, sampleRate, _highCutHz);
+
+    void NoiseFilter::reset() {
+        _monoLowCutFilter.reset();
+        _monoHighCutFilter.reset();
+        _stereoLowCutFilter.reset();
+        _stereoHighCutFilter.reset();
     }
-    
-    /**
-     * Resets all filters.
-     * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
-     */
-    void reset() {
-        monoLowCutFilter.reset();
-        monoHighCutFilter.reset();
-        stereoLowCutFilter.reset();
-        stereoHighCutFilter.reset();
+
+    void NoiseFilter::Process1in1out(float* inSample, int numSamples) {
+        _monoLowCutFilter.process(numSamples, &inSample);
+        _monoHighCutFilter.process(numSamples, &inSample);
     }
-    
-    /**
-     * Applies the filtering to a mono buffer of samples.
-     * Expect seg faults or other memory issues if arguements passed are incorrect.
-     *
-     * @param   inSample    Pointer to the first sample of the buffer
-     * @param   numSamples  Number of samples in the buffer
-     */
-    void ApplyMonoFiltering(float* inSample, int numSamples) {
-        monoLowCutFilter.process(numSamples, &inSample);
-        monoHighCutFilter.process(numSamples, &inSample);
-    }
-    
-    /**
-     * Applies the filtering to a stereo buffer of samples.
-     * Expect seg faults or other memory issues if arguements passed are incorrect.
-     *
-     * @param   inLeftSample    Pointer to the first sample of the left channel's buffer
-     * @param   inRightSample   Pointer to the first sample of the right channel's buffer
-     * @param   numSamples      Number of samples in the buffer. The left and right buffers
-     *                          must be the same size.
-     */
-    void ApplyStereoFiltering(float *inLeftSample, float *inRightSample, int numSamples) {
+
+    void NoiseFilter::Process2in2out(float *inLeftSample, float *inRightSample, int numSamples) {
         float** channelsArray = new float*[2];
         channelsArray[0] = inLeftSample;
         channelsArray[1] = inRightSample;
-        stereoLowCutFilter.process(numSamples, channelsArray);
-        stereoHighCutFilter.process(numSamples, channelsArray);
+        _stereoLowCutFilter.process(numSamples, channelsArray);
+        _stereoHighCutFilter.process(numSamples, channelsArray);
         delete [] channelsArray;
     }
-    
-private:
-    static const int FILTER_ORDER {4};
-    Dsp::SimpleFilter<Dsp::Butterworth::LowPass<4>, 1> monoHighCutFilter;
-    Dsp::SimpleFilter<Dsp::Butterworth::LowPass<4>, 2> stereoHighCutFilter;
-    
-    Dsp::SimpleFilter<Dsp::Butterworth::HighPass<4>, 1> monoLowCutFilter;
-    Dsp::SimpleFilter<Dsp::Butterworth::HighPass<4>, 2> stereoLowCutFilter;
-    
-    float   _lowCutHz,
-            _highCutHz;
-};
-
-
-
-#endif  // CARVENOISEFILTER_H_INCLUDED
+}

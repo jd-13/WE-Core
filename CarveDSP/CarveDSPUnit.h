@@ -22,13 +22,10 @@
  *
  */
 
-
-#ifndef Carve_CarveDSPUnit_h
-#define Carve_CarveDSPUnit_h
+#pragma once
 
 #include "CarveParameters.h"
 #include "General/CoreMath.h"
-
 
 /**
  * A class for applying waveshaping functions to samples.
@@ -43,8 +40,8 @@
  *
  * The process method must be called once for each sample you wish to process:
  * @code
- * CarveDSPUnit unit;
- * unit.setMode(CarveParameters::MODE.SINE);
+ * CarveDSPUnit<double> unit;
+ * unit.setMode(WECore::Carve::Parameters::MODE.SINE);
  * ...
  * set any other parameters you need
  * ...
@@ -54,168 +51,211 @@
  * }
  * @endcode
  */
-class CarveDSPUnit {
-public:
-    /**
-     * Sets all parameters to their default values.
-     */
-    CarveDSPUnit() :    preGain(CarveParameters::PREGAIN.defaultValue),
-                        postGain(CarveParameters::POSTGAIN.defaultValue),
-                        tweak(CarveParameters::TWEAK.defaultValue),
-                        mode(CarveParameters::MODE.defaultValue) { }
-    
-    virtual ~CarveDSPUnit() {}
-    
-    /** @name Setter Methods */
-    /** @{ */
-    
-    /**
-     * Sets the wave shape which will be applied to the signal.
-     *
-     * @param[in]   val Value the mode should be set to
-     *
-     * @see         ModeParameter for valid values
-     */
-    void setMode(int val) { mode = CarveParameters::MODE.BoundsCheck(val); }
-    
-    /**
-     * Sets the gain to be applied to the signal before processing.
-     * More pre-gain = more distortion.
-     *
-     * @param[in]   val Pre-gain value that should be used
-     *
-     * @see         PREGAIN for valid values
-     */
-    void setPreGain(double val) { preGain = CarveParameters::PREGAIN.BoundsCheck(val); }
-    
-    /**
-     * Sets the gain to be applied to the signal after processing.
-     * More post-gain = more volume.
-     *     
-     * @param[in]   val Post-gain value that should be used
-     *
-     * @see         POSTGAIN for valid values
-     */
-    void setPostGain(double val) { postGain = CarveParameters::POSTGAIN.BoundsCheck(val); }
-    
-    /**
-     * Sets the tweak value to be applied to the signal during processing.
-     * This behaves differently for each mode, and modifies the shape of
-     * the wave applied to the signal
-     *
-     * @param[in]   val Tweak value that should be used
-     *
-     * @see         TWEAK for valid values
-     */
-    void setTweak(double val) { tweak = CarveParameters::TWEAK.BoundsCheck(val); }
-    
-    /** @} */
-    
-    /** @name Getter Methods */
-    /** @{ */
-    
-    /**
-     * @see     setMode
-     */
-    int getMode() { return mode; }
-    
-    /**
-     * @see     setPreGain
-     */
-    double getPreGain() { return preGain; }
-    
-    /**
-     * @see     setPostGain
-     */
-    double getPostGain() { return postGain; }
-    
-    /**
-     * @see     setTweak
-     */
-    double getTweak() { return tweak; }
-    
-    /** @} */
-    
-    /**
-     * Performs the processing on the sample, by calling the appropriate
-     * private processing methods.
-     *
-     * @param[in]   inSample    The sample to be processed
-     *
-     * @return      The value of inSample after processing
-     */
-    double process(double inSample) const {
-        switch (mode) {
-            case CarveParameters::MODE.OFF:
+
+namespace WECore::Carve {
+
+    template <typename T>
+    class CarveDSPUnit {
+        static_assert(std::is_floating_point<T>::value,
+                      "Must be provided with a floating point template type");
+
+    public:
+        /**
+         * Sets all parameters to their default values.
+         */
+        CarveDSPUnit() : _preGain(Parameters::PREGAIN.defaultValue),
+                         _postGain(Parameters::POSTGAIN.defaultValue),
+                         _tweak(Parameters::TWEAK.defaultValue),
+                         _mode(Parameters::MODE.defaultValue) { }
+        
+        virtual ~CarveDSPUnit() {}
+        
+        /** @name Setter Methods */
+        /** @{ */
+        
+        /**
+         * Sets the wave shape which will be applied to the signal.
+         *
+         * @param[in]   val Value the mode should be set to
+         *
+         * @see         ModeParameter for valid values
+         */
+        void setMode(int val) { _mode = Parameters::MODE.BoundsCheck(val); }
+        
+        /**
+         * Sets the gain to be applied to the signal before processing.
+         * More pre-gain = more distortion.
+         *
+         * @param[in]   val Pre-gain value that should be used
+         *
+         * @see         PREGAIN for valid values
+         */
+        void setPreGain(double val) { _preGain = Parameters::PREGAIN.BoundsCheck(val); }
+        
+        /**
+         * Sets the gain to be applied to the signal after processing.
+         * More post-gain = more volume.
+         *     
+         * @param[in]   val Post-gain value that should be used
+         *
+         * @see         POSTGAIN for valid values
+         */
+        void setPostGain(double val) { _postGain = Parameters::POSTGAIN.BoundsCheck(val); }
+        
+        /**
+         * Sets the tweak value to be applied to the signal during processing.
+         * This behaves differently for each mode, and modifies the shape of
+         * the wave applied to the signal
+         *
+         * @param[in]   val Tweak value that should be used
+         *
+         * @see         TWEAK for valid values
+         */
+        void setTweak(double val) { _tweak = Parameters::TWEAK.BoundsCheck(val); }
+        
+        /** @} */
+        
+        /** @name Getter Methods */
+        /** @{ */
+        
+        /**
+         * @see     setMode
+         */
+        int getMode() { return _mode; }
+        
+        /**
+         * @see     setPreGain
+         */
+        double getPreGain() { return _preGain; }
+        
+        /**
+         * @see     setPostGain
+         */
+        double getPostGain() { return _postGain; }
+        
+        /**
+         * @see     setTweak
+         */
+        double getTweak() { return _tweak; }
+        
+        /** @} */
+        
+        /**
+         * Performs the processing on the sample, by calling the appropriate
+         * private processing methods.
+         *
+         * @param[in]   inSample    The sample to be processed
+         *
+         * @return      The value of inSample after processing
+         */
+        T process(T inSample) const;
+        
+    private:
+        double  _preGain,
+                _postGain,
+                _tweak;
+        
+        int _mode;
+
+        T _processSine(T inSample) const;
+        
+        T _processParabolicSoft(T inSample) const;
+        
+        T _processParabolicHard(T inSample) const;
+        
+        T _processAsymmetricSine(T inSample) const;
+        
+        T _processExponent(T inSample) const;
+        
+        T _processClipper(T inSample) const;
+    };
+
+    template <typename T>
+    T CarveDSPUnit<T>::process(T inSample) const {
+        switch (_mode) {
+            case Parameters::ModeParameter::OFF:
                 return 0;
                 
-            case CarveParameters::MODE.SINE:
-                return processSine(inSample);
+            case Parameters::ModeParameter::SINE:
+                return _processSine(inSample);
                 
-            case CarveParameters::MODE.PARABOLIC_SOFT:
-                return processParabolicSoft(inSample);
+            case Parameters::ModeParameter::PARABOLIC_SOFT:
+                return _processParabolicSoft(inSample);
                 
-            case CarveParameters::MODE.PARABOLIC_HARD:
-                return processParabolicHard(inSample);
+            case Parameters::ModeParameter::PARABOLIC_HARD:
+                return _processParabolicHard(inSample);
                 
-            case CarveParameters::MODE.ASYMMETRIC_SINE:
-                return processAsymmetricSine(inSample);
+            case Parameters::ModeParameter::ASYMMETRIC_SINE:
+                return _processAsymmetricSine(inSample);
                 
-            case CarveParameters::MODE.EXPONENT:
-                return processExponent(inSample);
+            case Parameters::ModeParameter::EXPONENT:
+                return _processExponent(inSample);
                 
-            case CarveParameters::MODE.CLIPPER:
-                return processClipper(inSample);
+            case Parameters::ModeParameter::CLIPPER:
+                return _processClipper(inSample);
                 
             default:
-                return processSine(inSample);
+                return _processSine(inSample);
         }
     }
-    
-private:
-    double  preGain,
-            postGain,
-            tweak;
-    
-    int mode;
 
-    inline double processSine(double inSample) const {
-        return  ((((1 - std::abs(tweak/2)) * sin(CoreMath::DOUBLE_PI * inSample * preGain)))
-                + ((tweak/2) * sin(4 * CoreMath::DOUBLE_PI * inSample * preGain)))
-                * postGain;
+    template <typename T>
+    T CarveDSPUnit<T>::_processSine(T inSample) const {
+        return  (
+                    (((1 - std::abs(_tweak/2)) * sin(CoreMath::DOUBLE_PI * inSample * _preGain)))
+                    + ((_tweak/2) * sin(4 * CoreMath::DOUBLE_PI * inSample * _preGain))
+                )
+                * _postGain;
     }
-    
-    inline double processParabolicSoft(double inSample) const {
-        return (CoreMath::DOUBLE_PI * inSample * preGain * ((4 * tweak) - sqrt(4 * pow(inSample * CoreMath::DOUBLE_PI * preGain, 2))) * 0.5) * postGain;
+
+    template <typename T>
+    T CarveDSPUnit<T>::_processParabolicSoft(T inSample) const {
+        return (
+                CoreMath::DOUBLE_PI * inSample * _preGain * ((4 * _tweak)
+                - sqrt(4 * pow(inSample * CoreMath::DOUBLE_PI * _preGain, 2))) * 0.5
+            )
+            * _postGain;
     }
-    
-    inline double processParabolicHard(double inSample) const {
-        return  (((1 - std::abs(tweak/10)) * (atan(preGain * 4 * CoreMath::DOUBLE_PI * inSample) / 1.5))
-                + ((tweak/10) * sin(CoreMath::DOUBLE_PI * inSample * preGain)))
-                * postGain;
+
+    template <typename T>
+    T CarveDSPUnit<T>::_processParabolicHard(T inSample) const {
+        return  (
+                    ((1 - std::abs(_tweak/10)) * (atan(_preGain * 4 * CoreMath::DOUBLE_PI * inSample) / 1.5))
+                    + ((_tweak/10) * sin(CoreMath::DOUBLE_PI * inSample * _preGain))
+                )
+                * _postGain;
     }
-    
-    inline double processAsymmetricSine(double inSample) const {
-        return (cos(CoreMath::DOUBLE_PI * inSample * (tweak + 1)) * atan(4 * CoreMath::DOUBLE_PI * inSample * preGain)) * postGain;
+
+    template <typename T>
+    T CarveDSPUnit<T>::_processAsymmetricSine(T inSample) const {
+        return (
+                cos(CoreMath::DOUBLE_PI * inSample * (_tweak + 1))
+                * atan(4 * CoreMath::DOUBLE_PI * inSample * _preGain)
+               )
+               * _postGain;
     }
-    
-    inline double processExponent(double inSample) const {
-        return  (sin(-0.25 *
-                     pow(2 * CoreMath::DOUBLE_E, (inSample * preGain + 1.5))))
-                * postGain;
+
+    template <typename T>
+    T CarveDSPUnit<T>::_processExponent(T inSample) const {
+        return  (
+                    sin(-0.25 * pow(2 * CoreMath::DOUBLE_E, (inSample * _preGain + 1.5)))
+                )
+                * _postGain;
     }
-    
-    inline double processClipper(double inSample) const {
-        inSample *= CoreMath::DOUBLE_PI * preGain;
+
+    template <typename T>
+    T CarveDSPUnit<T>::_processClipper(T inSample) const {
+        inSample *= CoreMath::DOUBLE_PI * _preGain;
         
-        return (sin(0.5 * inSample) +
-                0.3 * sin(1.5 * inSample) +
-                0.15 * sin(2.5 * inSample) *
-                0.075 * sin(3.5 * inSample) +
-                0.0375 * sin(4.5 * inSample) +
-                0.01875 * sin(5.5 * inSample) +
-                0.009375 * sin(6.5 * inSample)) * postGain / 1.5;
+        return (
+                   sin(0.5 * inSample) +
+                   0.3 * sin(1.5 * inSample) +
+                   0.15 * sin(2.5 * inSample) *
+                   0.075 * sin(3.5 * inSample) +
+                   0.0375 * sin(4.5 * inSample) +
+                   0.01875 * sin(5.5 * inSample) +
+                   0.009375 * sin(6.5 * inSample)
+               )
+               * _postGain / 1.5;
     }
-};
-
-#endif
+}

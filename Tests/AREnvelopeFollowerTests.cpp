@@ -26,7 +26,7 @@
 
 SCENARIO("AREnvelopeFollower: Parameters can be set and retrieved correctly") {
     GIVEN("A new AREnvelopeFollower object") {
-        AREnvelopeFollower mEnv;
+        WECore::AREnv::AREnvelopeFollower mEnv;
         
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
@@ -49,7 +49,7 @@ SCENARIO("AREnvelopeFollower: Parameters can be set and retrieved correctly") {
 
 SCENARIO("AREnvelopeFollower: Parameters enforce their bounds correctly") {
     GIVEN("A new AREnvelopeFollower object") {
-        AREnvelopeFollower mEnv;
+        WECore::AREnv::AREnvelopeFollower mEnv;
         
         WHEN("All parameter values are too low") {
             mEnv.setAttackTimeMs(0);

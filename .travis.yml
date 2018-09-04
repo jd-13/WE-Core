@@ -4,8 +4,8 @@ sudo: required
 
 matrix:
   include:
-    - env: DOCKER_IMG=jackd13/audioplugins:clang5
-    - env: DOCKER_IMG=jackd13/audioplugins:gcc7
+    - env: DOCKER_IMG=jackd13/audioplugins:clang6
+    - env: DOCKER_IMG=jackd13/audioplugins:gcc8
   fast_finish: true
 
 services:

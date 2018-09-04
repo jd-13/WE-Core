@@ -21,26 +21,26 @@
  *  along with WECore.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MONSTRParameters_h
-#define MONSTRParameters_h
+#pragma once
 
 #include "General/ParameterDefinition.h"
 
-const bool  BANDSWITCH_OFF {false},
-            BANDSWITCH_ON {true},
-            BANDSWITCH_DEFAULT {BANDSWITCH_ON};
+namespace WECore::MONSTR::Parameters {
+    constexpr bool BANDSWITCH_OFF {false},
+                   BANDSWITCH_ON {true},
+                   BANDSWITCH_DEFAULT {BANDSWITCH_ON};
 
-//@{
-/**
- * A parameter which can take any float value between the ranges defined.
- * The values passed on construction are in the following order:
- *      minimum value,
- *      maximum value,
- *      default value
- */
-const ParameterDefinition::RangedParameter<float>   CROSSOVERLOWER(40, 500, 100),
-                                                    CROSSOVERUPPER(3000, 19500, 5000),
-                                                    WIDTH(0, 2, 1);
-//@}
+    //@{
+    /**
+     * A parameter which can take any float value between the ranges defined.
+     * The values passed on construction are in the following order:
+     *      minimum value,
+     *      maximum value,
+     *      default value
+     */
+    const ParameterDefinition::RangedParameter<float>   CROSSOVERLOWER(40, 500, 100),
+                                                        CROSSOVERUPPER(3000, 19500, 5000),
+                                                        WIDTH(0, 2, 1);
+    //@}
 
-#endif /* MONSTRParameters_h */
+}

@@ -21,12 +21,11 @@
  *  along with WECore.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ARENVELOPEFOLLOWERPARAMTERS_H_INCLUDED
-#define ARENVELOPEFOLLOWERPARAMTERS_H_INCLUDED
+#pragma once
 
 #include "General/ParameterDefinition.h"
 
-namespace AREnvelopeFollowerParameters {
+namespace WECore::AREnv::Parameters {
     //@{
     /**
      * A parameter which can take any float value between the ranges defined.
@@ -39,6 +38,3 @@ namespace AREnvelopeFollowerParameters {
                                                         RELEASE_MS(0.1, 10000, 20);
     //@}
 }
-
-
-#endif  // ARENVELOPEFOLLOWERPARAMTERS_H_INCLUDED
