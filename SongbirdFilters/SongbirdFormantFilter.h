@@ -67,7 +67,7 @@ namespace WECore::Songbird {
          * @param   inSamples   Pointer to the first sample of the buffer
          * @param   numSamples  Number of samples in the buffer
          */
-        void process(double* inSamples, size_t numSamples);
+        inline void process(double* inSamples, size_t numSamples);
         
         /**
          * Sets the properties of each bandpass filter contained in the object.
@@ -82,18 +82,18 @@ namespace WECore::Songbird {
          * @see     Formant - This object is used to as a convenient container of all the
          *                    parameters which can be supplied to a bandpass filter.
          */
-        bool setFormants(std::vector<Formant> formants);
+        inline bool setFormants(std::vector<Formant> formants);
         
         /**
          * Sets the sample rate which the filters will be operating on.
          */
-        void setSampleRate(double val);
+        inline void setSampleRate(double val);
         
         /**
          * Resets all filters.
          * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
          */
-        void reset();
+        inline void reset();
         
     private:
         std::vector<TPTSVF::TPTSVFilter<double>> _filters;

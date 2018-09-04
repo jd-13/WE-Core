@@ -66,7 +66,7 @@ namespace WECore::Richter {
         /**
          * Call each oscillator's reset method.
          */
-        void reset();
+        inline void reset();
         
         /**
          * Prepares for processing the next buffer of samples. For example if using JUCE, you
@@ -80,7 +80,7 @@ namespace WECore::Richter {
          *                          playback.
          * @param   sampleRate      Current sample rate of the host
          */
-        void prepareForNextBuffer(double bpm, double timeInSeconds, double sampleRate);
+        inline void prepareForNextBuffer(double bpm, double timeInSeconds, double sampleRate);
         
         /**
          * Use this in your processing loop. Returns a gain value which is intended to be
@@ -91,7 +91,7 @@ namespace WECore::Richter {
          *
          * @return  The value of the RichterLFO's output at this moment, a value between 0 and 1.
          */
-        double calcGainInLoop();
+        inline double calcGainInLoop();
         
         
         RichterLFO LFO;

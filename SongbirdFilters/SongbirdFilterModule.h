@@ -115,7 +115,7 @@ namespace WECore::Songbird {
          *
          * @see         VowelParameter for valid values
          */
-        void setVowel1(int val);
+        inline void setVowel1(int val);
 
         /**
          * Sets the vowel sound that should be created by filter 2.
@@ -124,7 +124,7 @@ namespace WECore::Songbird {
          *
          * @see         VowelParameter for valid values
          */
-        void setVowel2(int val);
+        inline void setVowel2(int val);
 
         /**
          * Sets the position between the two filters that have been selected.
@@ -142,7 +142,7 @@ namespace WECore::Songbird {
          *
          * @param[in]   val The sample rate to set the filters to
          */
-        void setSampleRate(double val);
+        inline void setSampleRate(double val);
 
         /**
          * Sets the dry/wet mix level.
@@ -176,7 +176,7 @@ namespace WECore::Songbird {
          * Resets all filters.
          * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
          */
-        void reset();
+        inline void reset();
 
         /** @name Getter Methods */
         /** @{ */
@@ -196,7 +196,7 @@ namespace WECore::Songbird {
          *
          * @see     VowelParameter for valid values
          */
-        Vowel getVowelDescription(int val);
+        inline Vowel getVowelDescription(int val);
 
         /**
          * @see setFilterPosition
@@ -224,9 +224,9 @@ namespace WECore::Songbird {
          * @param   numSamples     Number of samples in the buffer. The left and right buffers
          *                         must be the same size.
          */
-        void Process2in2out(double* leftSamples,
-                            double* rightSamples,
-                            size_t numSamples);
+        inline void Process2in2out(double* leftSamples,
+                                   double* rightSamples,
+                                   size_t numSamples);
 
         SongbirdFilterModule operator=(SongbirdFilterModule& other) = delete;
         SongbirdFilterModule(SongbirdFilterModule& other) = delete;
@@ -258,14 +258,14 @@ namespace WECore::Songbird {
          *
          * @param   val Value that should be used for Vowel 1
          */
-        void _setVowel1(Vowel val);
+        inline void _setVowel1(Vowel val);
 
         /**
          * Uses the filterPosition parameter and the modulation source to calculate the vowel that
          * should be used when in MODMODE_FREQ, as this vowel will sit somewhere between the two vowels
          * that have been selected by the user.
          */
-        Vowel _calcVowelForFreqMode();
+        inline Vowel _calcVowelForFreqMode();
 
         /**
          * An array which defines all the formants that will be needed.
