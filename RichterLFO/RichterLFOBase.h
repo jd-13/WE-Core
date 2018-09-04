@@ -64,7 +64,7 @@ namespace WECore::Richter {
                             _offset(0),
                             _currentScale(0),
                             _nextScale(0),
-                            _waveArrayPointer(&_mSine[0]) {
+                            _waveArrayPointer(&_sineTable[0]) {
         }
         
         virtual ~RichterLFOBase() {}
@@ -119,7 +119,7 @@ namespace WECore::Richter {
         
         void setWave(int val) { _wave = Parameters::WAVE.BoundsCheck(val); }
         
-        void setWaveTablePointers();
+        inline void setWaveTablePointers();
         
         void setIndexOffset(int val) { _indexOffset = val; }
         
@@ -134,13 +134,13 @@ namespace WECore::Richter {
          *                          playback.
          * @param   sampleRate      Current sample rate of the host
          */
-        void prepareForNextBuffer(double bpm, double timeInSeconds, double sampleRate);
+        inline void prepareForNextBuffer(double bpm, double timeInSeconds, double sampleRate);
         
         /**
          * Must be called before beginning a new buffer of samples.
          * Resets internal counters including indexOffset and currentScale.
          */
-        void reset();
+        inline void reset();
         
         RichterLFOBase operator=(RichterLFOBase& other) = delete;
         RichterLFOBase(RichterLFOBase& other) = delete;
@@ -171,9 +171,9 @@ namespace WECore::Richter {
         
         double* _waveArrayPointer;
         
-        double _mSine[Parameters::kWaveArraySize];
-        double _mSquare[Parameters::kWaveArraySize];
-        double _mSaw[Parameters::kWaveArraySize];
+        double _sineTable[Parameters::kWaveArraySize];
+        double _squareTable[Parameters::kWaveArraySize];
+        double _sawTable[Parameters::kWaveArraySize];
         
         /**
          * Calculates the phase offset to be applied to the oscillator, including any
@@ -220,9 +220,9 @@ namespace WECore::Richter {
     };
 
     void RichterLFOBase::setWaveTablePointers() {
-        if (_wave == Parameters::WAVE.SINE) { _waveArrayPointer = &_mSine[0]; }
-        if (_wave == Parameters::WAVE.SQUARE) { _waveArrayPointer = &_mSquare[0]; }
-        if (_wave == Parameters::WAVE.SAW) { _waveArrayPointer = &_mSaw[0]; }
+        if (_wave == Parameters::WAVE.SINE) { _waveArrayPointer = &_sineTable[0]; }
+        if (_wave == Parameters::WAVE.SQUARE) { _waveArrayPointer = &_squareTable[0]; }
+        if (_wave == Parameters::WAVE.SAW) { _waveArrayPointer = &_sawTable[0]; }
     }
 
 

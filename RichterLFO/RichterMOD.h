@@ -61,7 +61,7 @@ namespace WECore::Richter {
          *
          * @return  The value of the LFO's output at this moment, a value between -1 and 1.
          */
-        double calcGainInLoop();
+        inline double calcGainInLoop();
         
         RichterMOD operator=(RichterMOD& other) = delete;
         RichterMOD(RichterMOD& other) = delete;
@@ -72,22 +72,22 @@ namespace WECore::Richter {
          * parameter of another oscillator) which the oscillator is operating on.
          * Outputs a value between -0.5 and 0.5. Always outputs 0 if bypassed.
          */
-        double _calcGain();
+        inline double _calcGain();
     };
 
     RichterMOD::RichterMOD() {
-        
+
         // mod wavetables below (no correction, move below 0)
-        
+
         for (int i = 0; i < Parameters::kWaveArraySize; ++i) {
             
             // sine wavetable
             double radians {i * 2.0 * CoreMath::DOUBLE_PI / Parameters::kWaveArraySize};
-            _mSine[i] = (sin (radians)) * 0.5;
+            _sineTable[i] = (sin (radians)) * 0.5;
             
             // square wavetable
             double squareRadians {radians + 0.32};
-            _mSquare[i] =
+            _squareTable[i] =
             (
             sin (radians) +
             0.3 * sin (3 * squareRadians) +
@@ -100,7 +100,7 @@ namespace WECore::Richter {
             
             // saw wavetable
             double sawRadians {radians + CoreMath::DOUBLE_PI};
-            _mSaw[i] =
+            _sawTable[i] =
             (1/CoreMath::DOUBLE_PI) *
             (
             sin (sawRadians) -
@@ -119,6 +119,7 @@ namespace WECore::Richter {
             (1.0/14.0) * sin (14 * sawRadians)
             );
         }
+
     }
 
     double RichterMOD::calcGainInLoop() {

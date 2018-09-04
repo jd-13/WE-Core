@@ -99,7 +99,7 @@ namespace WECore::Richter {
          *
          * @return  The value of the LFO's output at this moment, a value between 0 and 1.
          */
-        double calcGainInLoop(int modBypassSwitch, double modGain);
+        inline double calcGainInLoop(int modBypassSwitch, double modGain);
         
         RichterLFO operator= (RichterLFO& other) = delete;
         RichterLFO(RichterLFO&) = delete;
@@ -119,7 +119,7 @@ namespace WECore::Richter {
          *                              the effect of modGain will be applied.
          * @param   modGain             The gain output from the modulation oscillator.
          */
-        void _calcFreqInLoop(int modBypassSwitch, double modGain);
+        inline void _calcFreqInLoop(int modBypassSwitch, double modGain);
         
         /**
          * Applies depth modulation to the oscillator. Performed in the processing
@@ -129,7 +129,7 @@ namespace WECore::Richter {
          *                         whether modGain is applied to the calculation
          *       modGain           The gain output from the modulation oscillator
          */
-        void _calcDepthInLoop(int modBypassSwitch, double modGain);
+        inline void _calcDepthInLoop(int modBypassSwitch, double modGain);
         
         
         /**
@@ -140,7 +140,7 @@ namespace WECore::Richter {
          *                         whether modGain is applied to the calculation
          *       modGain           The gain output from the modulation oscillator
          */
-        double _calcGain(int modBypassSwitch, double modGain);
+        inline double _calcGain(int modBypassSwitch, double modGain);
     };
 
     RichterLFO::RichterLFO() : RichterLFOBase(),
@@ -151,16 +151,16 @@ namespace WECore::Richter {
         
         
         // initialise wavetable array values
-        
+
         for (int i = 0; i < Parameters::kWaveArraySize; ++i) {
             
             // sine wavetable
             double radians {i * 2.0 * CoreMath::DOUBLE_PI / Parameters::kWaveArraySize};
-            _mSine[i] = (sin (radians) + 1.0) * 0.5;
+            _sineTable[i] = (sin (radians) + 1.0) * 0.5;
             
             // square wavetable
             double squareRadians {radians + 0.32};
-            _mSquare[i] =
+            _squareTable[i] =
             (
             sin (radians) +
             0.3 * sin (3 * squareRadians) +
@@ -174,7 +174,7 @@ namespace WECore::Richter {
             
             // saw wavetable
             double sawRadians {radians + CoreMath::DOUBLE_PI};
-            _mSaw[i] =
+            _sawTable[i] =
             (1/CoreMath::DOUBLE_PI) *
             (
             sin (sawRadians) -
