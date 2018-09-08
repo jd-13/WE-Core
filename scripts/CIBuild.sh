@@ -2,7 +2,8 @@
 
 update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-7 90
 
-export WECORE_SRC=`pwd`
+export WECORE_HOME=`pwd`
+export WECORE_SRC="$WECORE_HOME/WECore"
 
 cd $WECORE_SRC
 mkdir build && cd build

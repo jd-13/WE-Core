@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project(WECore)
 
-set(DSPFILTERS_PATH $ENV{WECORE_SRC}/DSPFilters/shared/DSPFilters)
+set(DSPFILTERS_PATH $ENV{WECORE_HOME}/DSPFilters/shared/DSPFilters)
 
 include_directories($ENV{CATCH_PATH}
                     $ENV{WECORE_SRC}
