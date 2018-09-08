@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/jd-13/WE-Core.svg?branch=master)](https://travis-ci.org/jd-13/WE-Core)
 [![codecov](https://codecov.io/gh/jd-13/WE-Core/branch/master/graph/badge.svg)](https://codecov.io/gh/jd-13/WE-Core)
+![](https://img.shields.io/badge/C%2B%2B-17-brightgreen.svg)
 
 # WE-Core
 A set of core libraries for useful DSP related classes that are used by multiple White Elephant
@@ -12,22 +13,22 @@ This is a headers only library, to use the DSP classes in your own projects add 
 The naming convention is that each class is prefixed with the product it was developed for.  
 
 ### LFOs:  
-RichterLFO and RichterMOD - substantial functionality with tempo sync, and multiple wave types and
+* __RichterLFO__ and __RichterMOD__ - substantial functionality with tempo sync, and multiple wave types and
 parameters  
 
 ### Filters:  
-CarveNoiseFilter - a simple filter to remove noise at the extremes of human hearing  
-SongbirdFormantFilter - Contains multiple SongbirdBandPassFilters, designed to create vowel sounds  
-SongbirdFilterModule - Contains two SongbirdFormantFilters which can be blended between, with
+* __CarveNoiseFilter__ - a simple filter to remove noise at the extremes of human hearing  
+* __SongbirdFormantFilter__ - Contains multiple SongbirdBandPassFilters, designed to create vowel sounds  
+* __SongbirdFilterModule__ - Contains two SongbirdFormantFilters which can be blended between, with
 multiple supported vowel sounds built in  
-TPTSVFilter - Topology preserving filter, configurable as high pass, low pass, or peak  
+* __TPTSVFilter__ - Topology preserving filter, configurable as high pass, low pass, or peak  
 
 ### Distortions:  
-CarveDSPUnit - A waveshaping distortion module with multiple wave shapes, pre and post gain control,
+* __CarveDSPUnit__ - A waveshaping distortion module with multiple wave shapes, pre and post gain control,
 and a "tweak" control which morphs the selected wave shape  
 
 ### Stereo Processing:  
-MONSTRCrossover - A crossover filter made of several MONSTRBand units. Uses the MONSTRBand units to
+* __MONSTRCrossover__ - A crossover filter made of several MONSTRBand units. Uses the MONSTRBand units to
 provide multiband stereo width control 
 
 ## Documentation  
