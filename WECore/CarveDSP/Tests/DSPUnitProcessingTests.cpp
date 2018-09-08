@@ -25,8 +25,6 @@
 #include "CarveDSP/CarveDSPUnit.h"
 #include "CarveDSP/Tests/TestData.h"
 
-#include <iostream>
-
 SCENARIO("CarveDSPUnit: Silence in = silence out") {
     GIVEN("A CarveDSPUnit and a buffer of silent samples") {
         std::vector<double> buffer(1024);
