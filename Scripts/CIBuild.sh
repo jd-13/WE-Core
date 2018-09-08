@@ -5,7 +5,7 @@ update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-7 90
 export WECORE_HOME=`pwd`
 export WECORE_SRC="$WECORE_HOME/WECore"
 
-cd $WECORE_SRC
+cd $WECORE_HOME
 mkdir build && cd build
 cmake .. && make
 if [ "$CXX" = "g++-7" ]; then $WECORE_SRC/Scripts/get_code_cov.sh; fi
