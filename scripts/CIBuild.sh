@@ -8,7 +8,7 @@ export WECORE_SRC="$WECORE_HOME/WECore"
 cd $WECORE_SRC
 mkdir build && cd build
 cmake .. && make
-if [ "$CXX" = "g++-7" ]; then $WECORE_SRC/scripts/get_code_cov.sh; fi
+if [ "$CXX" = "g++-7" ]; then $WECORE_SRC/Scripts/get_code_cov.sh; fi
 
 $VALGRIND_PATH/coregrind/valgrind --tool=callgrind ./WECoreTest
 if [ "$CXX" = "g++-7" ]; then bash <(curl -s https://codecov.io/bash); fi
