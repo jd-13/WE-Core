@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.0)
 project(WECore)
 
-set(DSPFILTERS_PATH $ENV{WECORE_SRC}/DSPFilters/shared/DSPFilters)
+set(DSPFILTERS_PATH $ENV{WECORE_HOME}/DSPFilters/shared/DSPFilters)
 
 include_directories($ENV{CATCH_PATH}
                     $ENV{WECORE_SRC}
@@ -35,7 +35,6 @@ endif()
 set(CMAKE_CXX_FLAGS ${CXXFLAGS_DSP})
 
 # Set the source files
-set(TEST_PATH "$ENV{WECORE_SRC}/Tests")
 set(DSPFILTERS_CPP ${DSPFILTERS_PATH}/source/Biquad.cpp
                    ${DSPFILTERS_PATH}/source/Butterworth.cpp
                    ${DSPFILTERS_PATH}/source/Cascade.cpp
@@ -44,16 +43,16 @@ set(DSPFILTERS_CPP ${DSPFILTERS_PATH}/source/Biquad.cpp
                    ${DSPFILTERS_PATH}/source/PoleFilter.cpp)
 
 
-add_executable(WECoreTest ${TEST_PATH}/catchMain.cpp
-                          ${TEST_PATH}/AREnvelopeFollowerTests.cpp
-                          ${TEST_PATH}/CarveDSPUnitTests.cpp
-                          ${TEST_PATH}/CarveNoiseFilterTests.cpp
-                          ${TEST_PATH}/MONSTRCrossoverTests.cpp
-                          ${TEST_PATH}/RichterLFOPairTests.cpp
-                          ${TEST_PATH}/SongbirdFilterModuleTests.cpp
-                          ${TEST_PATH}/TPTSVFilterTests.cpp
+add_executable(WECoreTest $ENV{WECORE_SRC}/Tests/catchMain.cpp
+                          $ENV{WECORE_SRC}/CarveDSP/Tests/CarveDSPUnitTests.cpp
+                          $ENV{WECORE_SRC}/CarveDSP/Tests/CarveNoiseFilterTests.cpp
+                          $ENV{WECORE_SRC}/MONSTRFilters/Tests/MONSTRCrossoverTests.cpp
+                          $ENV{WECORE_SRC}/RichterLFO/Tests/RichterLFOPairTests.cpp
+                          $ENV{WECORE_SRC}/SongbirdFilters/Tests/SongbirdFilterModuleTests.cpp
+                          $ENV{WECORE_SRC}/WEFilters/Tests/AREnvelopeFollowerTests.cpp
+                          $ENV{WECORE_SRC}/WEFilters/Tests/TPTSVFilterTests.cpp
                           ${DSPFILTERS_CPP})
 
-add_executable(WECoreTestPerf ${TEST_PATH}/catchMain.cpp
-                              ${TEST_PATH}/PerformanceTests.cpp
+add_executable(WECoreTestPerf $ENV{WECORE_SRC}/Tests/catchMain.cpp
+                              $ENV{WECORE_SRC}/Tests/PerformanceTests.cpp
                               ${DSPFILTERS_CPP})

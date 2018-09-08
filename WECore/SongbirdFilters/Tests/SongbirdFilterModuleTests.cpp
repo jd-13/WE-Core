@@ -23,7 +23,7 @@
 
 #include "catch.hpp"
 #include "SongbirdFilters/SongbirdFilterModule.h"
-#include "Tests/TestData.h"
+#include "SongbirdFilters/Tests/TestData.h"
 
 #include <algorithm>
 
@@ -123,9 +123,9 @@ SCENARIO("SongbirdFilterModule: Freq mode") {
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
         const std::vector<double>& expectedOutputLeft =
-                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
+                TestData::Songbird::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
         const std::vector<double>& expectedOutputRight =
-                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
+                TestData::Songbird::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
 
         WECore::Songbird::SongbirdFilterModule mSongbird;
 
@@ -164,9 +164,9 @@ SCENARIO("SongbirdFilterModule: Blend mode") {
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
         const std::vector<double>& expectedOutputLeft =
-                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
+                TestData::Songbird::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
         const std::vector<double>& expectedOutputRight =
-                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
+                TestData::Songbird::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
 
         WECore::Songbird::SongbirdFilterModule mSongbird;
 

@@ -24,7 +24,7 @@
 #include "catch.hpp"
 #include "MONSTRFilters/MONSTRCrossover.h"
 #include "General/CoreMath.h"
-#include "Tests/TestData.h"
+#include "MONSTRFilters/Tests/TestData.h"
 
 SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
     GIVEN("A new MONSTRCrossover object") {
@@ -124,7 +124,7 @@ SCENARIO("MONSTRCrossover: Sine in = sine out") {
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
         const std::vector<double>& expectedOutput =
-                TestData::Data.at(Catch::getResultCapture().getCurrentTestName());
+                TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName());
         
         WECore::MONSTR::MONSTRCrossover mCrossover;
 
@@ -181,9 +181,9 @@ SCENARIO("MONSTRCrossover: All bands widened") {
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
         const std::vector<double>& expectedOutputLeft =
-                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
+                TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
         const std::vector<double>& expectedOutputRight =
-                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
+                TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
         
         WECore::MONSTR::MONSTRCrossover mCrossover;
 
@@ -224,9 +224,9 @@ SCENARIO("MONSTRCrossover: All bands narrowed") {
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
         const std::vector<double>& expectedOutputLeft =
-                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
+                TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
         const std::vector<double>& expectedOutputRight =
-                TestData::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
+                TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
         
         WECore::MONSTR::MONSTRCrossover mCrossover;
 
@@ -267,9 +267,9 @@ SCENARIO("MONSTRCrossover: Small buffer") {
         std::vector<double> leftBuffer(100);
         std::vector<double> rightBuffer(100);
         const std::vector<double>& expectedOutputLeft =
-                TestData::Data.at(Catch::getResultCapture().getCurrentTestName());
+                TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName());
         const std::vector<double>& expectedOutputRight =
-                TestData::Data.at(Catch::getResultCapture().getCurrentTestName());
+                TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName());
         
         WECore::MONSTR::MONSTRCrossover mCrossover;
 
