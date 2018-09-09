@@ -154,28 +154,3 @@ SCENARIO("CarveDSPUnit: Parameter combinations that should result in silence out
     }
 }
 
-SCENARIO("CarveDSPUnit: Silence in = silence out") {
-    GIVEN("A CarveDSPUnit and a buffer of silent samples") {
-        std::vector<double> buffer(1024);
-        WECore::Carve::CarveDSPUnit<double> mCarve;
-        
-        WHEN("The silence samples are processed") {
-            // fill the buffer
-            std::fill(buffer.begin(), buffer.end(), 0);
-            
-            // turn the unit on
-            mCarve.setMode(2);
-            
-            // do processing
-            for (size_t iii {0}; iii < buffer.size(); iii++) {
-                buffer[iii] = mCarve.process(buffer[iii]);
-            }
-            
-            THEN("The output is silence") {
-                for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(buffer[iii] == Approx(0.0));
-                }
-            }
-        }
-    }
-}
