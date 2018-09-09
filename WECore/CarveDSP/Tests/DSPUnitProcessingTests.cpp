@@ -80,7 +80,7 @@ SCENARIO("CarveDSPUnit: Sine Default") {
             
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(buffer[iii] == Approx(expectedOutput[iii]));
+                    CHECK(buffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
                 }
             }
         }
@@ -116,7 +116,7 @@ SCENARIO("CarveDSPUnit: Parabolic Soft Default") {
             
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(buffer[iii] == Approx(expectedOutput[iii]));
+                    CHECK(buffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
                 }
             }
         }
@@ -152,7 +152,7 @@ SCENARIO("CarveDSPUnit: Parabolic Hard Default") {
             
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(buffer[iii] == Approx(expectedOutput[iii]));
+                    CHECK(buffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
                 }
             }
         }
@@ -188,7 +188,7 @@ SCENARIO("CarveDSPUnit: Asymetric Sine Default") {
             
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(buffer[iii] == Approx(expectedOutput[iii]));
+                    CHECK(buffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
                 }
             }
         }
@@ -224,7 +224,7 @@ SCENARIO("CarveDSPUnit: Exponent Default") {
             
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(buffer[iii] == Approx(expectedOutput[iii]));
+                    CHECK(buffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
                 }
             }
         }
@@ -260,7 +260,7 @@ SCENARIO("CarveDSPUnit: Clipper Default") {
             
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
-                    CHECK(buffer[iii] == Approx(expectedOutput[iii]));
+                    CHECK(buffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
                 }
             }
         }
