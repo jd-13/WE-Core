@@ -1,12 +1,12 @@
 FROM ubuntu:bionic
 
 # Envs
-ENV CC /usr/bin/gcc-8
-ENV CXX g++-8
+ENV CC /usr/bin/gcc-7
+ENV CXX g++-7
 ENV CATCH_PATH /home/catch/
 ENV VALGRIND_PATH /home/valgrind
 
-ENV COVERAGE_COMMAND /usr/bin/gcov-8
+ENV COVERAGE_COMMAND /usr/bin/gcov-7
 ENV COVERAGE_FLAGS --coverage
 
 CMD bash
@@ -23,7 +23,7 @@ COPY catch.hpp "/home/catch/catch.hpp"
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
 RUN apt-get update
-RUN apt-get install -y g++-8
+RUN apt-get install -y g++-7
 
 # Valgrind
 RUN svn co svn://svn.valgrind.org/valgrind/trunk /home/valgrind && cd /home/valgrind && ./autogen.sh && ./configure && make && make install
