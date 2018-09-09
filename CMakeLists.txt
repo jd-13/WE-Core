@@ -44,7 +44,8 @@ set(DSPFILTERS_CPP ${DSPFILTERS_PATH}/source/Biquad.cpp
 
 
 add_executable(WECoreTest $ENV{WECORE_SRC}/Tests/catchMain.cpp
-                          $ENV{WECORE_SRC}/CarveDSP/Tests/CarveDSPUnitTests.cpp
+                          $ENV{WECORE_SRC}/CarveDSP/Tests/DSPUnitParameterTests.cpp
+                          $ENV{WECORE_SRC}/CarveDSP/Tests/DSPUnitProcessingTests.cpp
                           $ENV{WECORE_SRC}/CarveDSP/Tests/CarveNoiseFilterTests.cpp
                           $ENV{WECORE_SRC}/MONSTRFilters/Tests/MONSTRCrossoverTests.cpp
                           $ENV{WECORE_SRC}/RichterLFO/Tests/RichterLFOPairTests.cpp
