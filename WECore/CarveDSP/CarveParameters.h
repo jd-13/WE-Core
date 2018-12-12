@@ -54,6 +54,6 @@ namespace WECore::Carve::Parameters {
      */
     const ParameterDefinition::RangedParameter<double>  PREGAIN(0, 2, 1),
                                                         POSTGAIN(0, 2, 0.5),
-                                                        TWEAK(-1, 1, 0);
+                                                        TWEAK(0, 1, 0);
     //@}
 }
