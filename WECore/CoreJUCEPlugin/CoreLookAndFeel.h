@@ -40,10 +40,9 @@ namespace WECore::JUCEPlugin {
      */
     class CoreLookAndFeel : public LookAndFeel_V2 {
     public:
-        CoreLookAndFeel() :    LookAndFeel_V2(),
-                                lightColour(200, 200, 200),
-                                darkColour(107, 107, 107),
-                                highlightColour(34, 252, 255) {
+        CoreLookAndFeel() : lightColour(200, 200, 200),
+                            darkColour(107, 107, 107),
+                            highlightColour(34, 252, 255) {
             setColour(PopupMenu::highlightedBackgroundColourId, darkColour);
             setColour(PopupMenu::backgroundColourId, lightColour);
         }

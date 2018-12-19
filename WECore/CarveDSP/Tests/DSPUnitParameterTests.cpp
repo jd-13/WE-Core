@@ -67,7 +67,7 @@ SCENARIO("CarveDSPUnit: Parameters enforce their bounds correctly") {
                 CHECK(mCarve.getMode() == 1);
                 CHECK(mCarve.getPreGain() == Approx(0.0));
                 CHECK(mCarve.getPostGain() == Approx(0.0));
-                CHECK(mCarve.getTweak() == Approx(-1.0));
+                CHECK(mCarve.getTweak() == Approx(0.0));
             }
         }
         

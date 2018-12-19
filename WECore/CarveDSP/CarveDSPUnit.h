@@ -211,17 +211,17 @@ namespace WECore::Carve {
     template <typename T>
     T CarveDSPUnit<T>::_processParabolicSoft(T inSample) const {
         return (
-                CoreMath::DOUBLE_PI * inSample * _preGain * ((4 * _tweak)
-                - sqrt(4 * pow(inSample * CoreMath::DOUBLE_PI * _preGain, 2))) * 0.5
-            )
-            * _postGain;
+                   CoreMath::DOUBLE_PI * inSample * _preGain * ((4 * _tweak)
+                   - sqrt(4 * pow(inSample * CoreMath::DOUBLE_PI * _preGain, 2))) * 0.5
+               )
+               * _postGain;
     }
 
     template <typename T>
     T CarveDSPUnit<T>::_processParabolicHard(T inSample) const {
         return  (
                     ((1 - std::abs(_tweak/10)) * (atan(_preGain * 4 * CoreMath::DOUBLE_PI * inSample) / 1.5))
-                    + ((_tweak/10) * sin(CoreMath::DOUBLE_PI * inSample * _preGain))
+                    + ((_tweak/5) * sin(CoreMath::DOUBLE_PI * inSample * _preGain))
                 )
                 * _postGain;
     }
@@ -246,16 +246,17 @@ namespace WECore::Carve {
     template <typename T>
     T CarveDSPUnit<T>::_processClipper(T inSample) const {
         inSample *= CoreMath::DOUBLE_PI * _preGain;
+
+        const T tweakInverted {1 - _tweak};
         
         return (
-                   sin(0.5 * inSample) +
-                   0.3 * sin(1.5 * inSample) +
-                   0.15 * sin(2.5 * inSample) *
-                   0.075 * sin(3.5 * inSample) +
-                   0.0375 * sin(4.5 * inSample) +
-                   0.01875 * sin(5.5 * inSample) +
-                   0.009375 * sin(6.5 * inSample)
+                   sin(inSample) +
+                   0.3 * sin(3 * inSample) * tweakInverted +
+                   0.15 * sin(5 * inSample) * tweakInverted +
+                   0.075 * sin(7 * inSample) * tweakInverted +
+                   0.0375 * sin(9 * inSample) * tweakInverted +
+                   0.01875 * sin(11 * inSample) * tweakInverted
                )
-               * _postGain / 1.5;
+               * _postGain / 1.5 * -1;
     }
 }
