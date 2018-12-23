@@ -50,10 +50,10 @@ namespace WECore::TPTSVF {
                         _s1(0),
                         _s2(0),
                         _mode(Parameters::FILTER_MODE.BYPASS) {}
-        
+
         TPTSVFilter(const TPTSVFilter& other) = default;
         virtual ~TPTSVFilter() = default;
-        
+
         /**
          * Applies the filtering to a buffer of samples.
          * Expect seg faults or other memory issues if arguements passed are incorrect. 
@@ -62,7 +62,7 @@ namespace WECore::TPTSVF {
          * @param[in]   numSamples  Number of samples in the buffer
          */
         void processBlock(T* inSamples, size_t numSamples);
-        
+
         /**
          * Resets filter coefficients.
          * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
@@ -71,17 +71,17 @@ namespace WECore::TPTSVF {
             _s1 = 0;
             _s2 = 0;
         }
-        
+
         /** @name Getter Methods */
         /** @{ */
-        
+
         int getMode() const {return _mode;}
         double getCutoff() const {return _cutoffHz;}
         double getQ() const {return _Q;}
         double getGain() const {return _gain;}
-        
+
         /** @} */
-        
+
         /** @name Setter Methods */
         /** @{ */
 
@@ -90,10 +90,9 @@ namespace WECore::TPTSVF {
         void setQ(double val) {_Q = Parameters::Q.BoundsCheck(val);}
         void setGain(double val) {_gain = Parameters::GAIN.BoundsCheck(val);}
         void setSampleRate(double val) {_sampleRate = val;}
-        
+
         /** @} */
 
-        
     private:
         double  _sampleRate,
                 _cutoffHz,
@@ -107,33 +106,33 @@ namespace WECore::TPTSVF {
 
     template <typename T>
     void TPTSVFilter<T>::processBlock(T* inSamples, size_t numSamples) {
-        
+
         if (_mode != Parameters::FILTER_MODE.BYPASS) {
-            const T g {std::tan(CoreMath::DOUBLE_PI * _cutoffHz / _sampleRate)};
-            const T h {1.0f / (1 + g / _Q + g * g)};
-            
+            const T g {static_cast<T>(std::tan(CoreMath::DOUBLE_PI * _cutoffHz / _sampleRate))};
+            const T h {static_cast<T>(1.0 / (1 + g / _Q + g * g))};
+
             for (size_t idx {0}; idx < numSamples; idx++) {
                 const T sample {inSamples[idx]};
-                
-                const T yH {h * (sample - (1.0f / _Q + g) * _s1 - _s2)};
-                
-                const T yB {g * yH + _s1};
+
+                const T yH {static_cast<T>(h * (sample - (1.0f / _Q + g) * _s1 - _s2))};
+
+                const T yB {static_cast<T>(g * yH + _s1)};
                 _s1 = g * yH + yB;
-                
-                const T yL {g * yB + _s2};
+
+                const T yL {static_cast<T>(g * yB + _s2)};
                 _s2 = g * yB + yL;
-                
+
                 switch (_mode) {
                     case Parameters::ModeParameter::PEAK:
-                        inSamples[idx] = yB * _gain;
+                        inSamples[idx] = yB * static_cast<T>(_gain);
                         break;
-                        
+
                     case Parameters::ModeParameter::HIGHPASS:
-                        inSamples[idx] = yH * _gain;
+                        inSamples[idx] = yH * static_cast<T>(_gain);
                         break;
-                        
+
                     default:
-                        inSamples[idx] = yL * _gain;
+                        inSamples[idx] = yL * static_cast<T>(_gain);
                         break;
                 }
             }

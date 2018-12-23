@@ -27,7 +27,7 @@
 SCENARIO("CarveNoiseFilter: Silence in = silence out") {
     GIVEN("A CarveNoiseFilter and a buffer of silent samples") {
         std::vector<float> buffer(1024);
-        WECore::Carve::NoiseFilter mFilter(20, 20000);
+        WECore::Carve::NoiseFilter<float> mFilter(20, 20000);
         mFilter.setSampleRate(48000);
         
         WHEN("The silence samples are processed") {
