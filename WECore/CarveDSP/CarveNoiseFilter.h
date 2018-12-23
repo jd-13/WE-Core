@@ -24,25 +24,7 @@
 
 #pragma once
 
-// DSPFilters sets off a lot of clang warnings - disable them for Butterworth.h only
-#ifdef __clang__
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wfloat-equal"
-#pragma clang diagnostic ignored "-Wunused-parameter"
-#pragma clang diagnostic ignored "-Wignored-qualifiers"
-#pragma clang diagnostic ignored "-Wold-style-cast"
-#elif __GNUC__
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wignored-qualifiers"
-#endif
-
-#include "DspFilters/Butterworth.h"
-
-#ifdef __clang__
-#pragma clang diagnostic pop
-#elif __GNUC__
-#pragma GCC diagnostic pop
-#endif
+#include "WEFilters/TPTSVFilter.h"
 
 /**
  * A simple bandpass filter which can process mono or stereo signals.
@@ -58,6 +40,7 @@
  */
 namespace WECore::Carve {
 
+    template <typename T>
     class NoiseFilter {
     public:
         
@@ -68,10 +51,7 @@ namespace WECore::Carve {
          * @param   lowCutHz    Everything below this frequency will be cut
          * @param   highCutHz   Everything above this frequency will be cut
          */
-        NoiseFilter(float lowCutHz, float highCutHz) : _lowCutHz(lowCutHz),
-                                                       _highCutHz(highCutHz) {
-            setSampleRate(44100);
-        }
+        NoiseFilter(double lowCutHz, double highCutHz);
         
         virtual ~NoiseFilter() {}
         
@@ -96,7 +76,7 @@ namespace WECore::Carve {
          * @param   inSample    Pointer to the first sample of the buffer
          * @param   numSamples  Number of samples in the buffer
          */
-        inline void Process1in1out(float* inSample, int numSamples);
+        inline void Process1in1out(T* inSample, int numSamples);
         
         /**
          * Applies the filtering to a stereo buffer of samples.
@@ -107,45 +87,83 @@ namespace WECore::Carve {
          * @param   numSamples      Number of samples in the buffer. The left and right buffers
          *                          must be the same size.
          */
-        inline void Process2in2out(float *inLeftSample, float *inRightSample, int numSamples);
+        inline void Process2in2out(T *inLeftSample, T *inRightSample, int numSamples);
         
-    private:
-        static constexpr int FILTER_ORDER {4};
-        Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 1> _monoHighCutFilter;
-        Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 2> _stereoHighCutFilter;
+    private:        
+        WECore::TPTSVF::TPTSVFilter<T> _monoLowCutFilter;
+        WECore::TPTSVF::TPTSVFilter<T> _leftLowCutFilter;
+        WECore::TPTSVF::TPTSVFilter<T> _rightLowCutFilter;
+
+        WECore::TPTSVF::TPTSVFilter<T> _monoHighCutFilter;
+        WECore::TPTSVF::TPTSVFilter<T> _leftHighCutFilter;
+        WECore::TPTSVF::TPTSVFilter<T> _rightHighCutFilter;
         
-        Dsp::SimpleFilter<Dsp::Butterworth::HighPass<FILTER_ORDER>, 1> _monoLowCutFilter;
-        Dsp::SimpleFilter<Dsp::Butterworth::HighPass<FILTER_ORDER>, 2> _stereoLowCutFilter;
-        
-        float   _lowCutHz,
-                _highCutHz;
+        double _lowCutHz,
+               _highCutHz;
     };
 
-    void NoiseFilter::setSampleRate(double sampleRate) {
-        _monoLowCutFilter.setup(FILTER_ORDER, sampleRate, _lowCutHz);
-        _stereoLowCutFilter.setup(FILTER_ORDER, sampleRate, _lowCutHz);
-        _monoHighCutFilter.setup(FILTER_ORDER, sampleRate, _highCutHz);
-        _stereoHighCutFilter.setup(FILTER_ORDER, sampleRate, _highCutHz);
+    template <typename T>
+    NoiseFilter<T>::NoiseFilter(double lowCutHz, double highCutHz) : _lowCutHz(lowCutHz),
+                                                                     _highCutHz(highCutHz) {
+        setSampleRate(44100);
+
+        auto setupLowCutFilter = [lowCutHz](TPTSVF::TPTSVFilter<T>& filter) {
+            filter.setMode(WECore::TPTSVF::Parameters::ModeParameter::HIGHPASS);
+            filter.setCutoff(lowCutHz);
+            filter.setQ(1);
+            filter.setGain(1);
+        };
+
+        auto setupHighCutFilter = [highCutHz](TPTSVF::TPTSVFilter<T>& filter) {
+            filter.setMode(WECore::TPTSVF::Parameters::ModeParameter::LOWPASS);
+            filter.setCutoff(highCutHz);
+            filter.setQ(1);
+            filter.setGain(1);
+        };
+
+        setupLowCutFilter(_monoLowCutFilter);
+        setupLowCutFilter(_leftLowCutFilter);
+        setupLowCutFilter(_rightLowCutFilter);
+        
+        setupHighCutFilter(_monoHighCutFilter);
+        setupHighCutFilter(_leftHighCutFilter);
+        setupHighCutFilter(_rightHighCutFilter);
     }
 
-    void NoiseFilter::reset() {
+    template <typename T>
+    void NoiseFilter<T>::setSampleRate(double sampleRate) {
+        _monoLowCutFilter.setSampleRate(sampleRate);
+        _leftLowCutFilter.setSampleRate(sampleRate);
+        _rightLowCutFilter.setSampleRate(sampleRate);
+
+        _monoHighCutFilter.setSampleRate(sampleRate);
+        _leftHighCutFilter.setSampleRate(sampleRate);
+        _rightHighCutFilter.setSampleRate(sampleRate);
+    }
+
+    template <typename T>
+    void NoiseFilter<T>::reset() {
         _monoLowCutFilter.reset();
+        _leftLowCutFilter.reset();
+        _rightLowCutFilter.reset();
+
         _monoHighCutFilter.reset();
-        _stereoLowCutFilter.reset();
-        _stereoHighCutFilter.reset();
+        _leftHighCutFilter.reset();
+        _rightHighCutFilter.reset();
     }
 
-    void NoiseFilter::Process1in1out(float* inSample, int numSamples) {
-        _monoLowCutFilter.process(numSamples, &inSample);
-        _monoHighCutFilter.process(numSamples, &inSample);
+    template <typename T>
+    void NoiseFilter<T>::Process1in1out(T* inSample, int numSamples) {
+        _monoLowCutFilter.processBlock(inSample, numSamples);
+        _monoHighCutFilter.processBlock(inSample, numSamples);
     }
 
-    void NoiseFilter::Process2in2out(float *inLeftSample, float *inRightSample, int numSamples) {
-        float** channelsArray = new float*[2];
-        channelsArray[0] = inLeftSample;
-        channelsArray[1] = inRightSample;
-        _stereoLowCutFilter.process(numSamples, channelsArray);
-        _stereoHighCutFilter.process(numSamples, channelsArray);
-        delete [] channelsArray;
+    template <typename T>
+    void NoiseFilter<T>::Process2in2out(T *inLeftSample, T *inRightSample, int numSamples) {
+        _leftLowCutFilter.processBlock(inLeftSample, numSamples);
+        _leftHighCutFilter.processBlock(inLeftSample, numSamples);
+
+        _rightLowCutFilter.processBlock(inRightSample, numSamples);
+        _rightHighCutFilter.processBlock(inRightSample, numSamples);
     }
 }
