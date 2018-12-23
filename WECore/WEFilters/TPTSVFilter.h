@@ -124,15 +124,15 @@ namespace WECore::TPTSVF {
 
                 switch (_mode) {
                     case Parameters::ModeParameter::PEAK:
-                        inSamples[idx] = yB * _gain;
+                        inSamples[idx] = yB * static_cast<T>(_gain);
                         break;
 
                     case Parameters::ModeParameter::HIGHPASS:
-                        inSamples[idx] = yH * _gain;
+                        inSamples[idx] = yH * static_cast<T>(_gain);
                         break;
 
                     default:
-                        inSamples[idx] = yL * _gain;
+                        inSamples[idx] = yL * static_cast<T>(_gain);
                         break;
                 }
             }
