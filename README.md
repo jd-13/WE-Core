@@ -32,7 +32,7 @@ and a "tweak" control which morphs the selected wave shape
 provide multiband stereo width control 
 
 ## Documentation  
-Documentation is available at: https://www.whiteelephantaudio.com/doxygen/WECore/  
+Documentation is available at: https://jd-13.github.io/WE-Core/
 
 ## Required Libraries  
 Some classes within this library require:  
