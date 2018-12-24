@@ -38,6 +38,7 @@ script:
 after_success:
   - sudo chown -R travis:travis /home/travis/
   - cd doxygen && doxygen Doxyfile
+  - touch doxygen/html/.nojekyll
 
 deploy:
   - provider: releases
@@ -50,7 +51,7 @@ deploy:
       repo: jd-13/WE-Core
 
   - provider: pages
-    local_dir: doxygen
+    local_dir: doxygen/html
     github_token: $GH_REPO_TOKEN
     skip_cleanup: true
     on:
