@@ -37,8 +37,7 @@ script:
 
 after_success:
   - sudo chown -R travis:travis /home/travis/
-  - cd doxygen && doxygen Doxyfile
-  - touch doxygen/html/.nojekyll
+  - cd doxygen && doxygen Doxyfile && touch .nojekyll
 
 deploy:
   - provider: releases
