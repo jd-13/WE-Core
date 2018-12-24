@@ -49,7 +49,7 @@ deploy:
     on:
       repo: jd-13/WE-Core
 
-  - provider: gh-pages
+  - provider: pages
     local_dir: doxygen
     github_token: $GH_REPO_TOKEN
     skip_cleanup: true
