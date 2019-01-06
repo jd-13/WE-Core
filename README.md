@@ -49,7 +49,7 @@ Each DSP module has its own set of tests, found under the `WECore` directory. Th
 follows:  
 
     export WECORE_HOME=<path to your WECore>
-    export WECORE_SRC=$WECORE_SRC/WECore
+    export WECORE_SRC=$WECORE_HOME/WECore
     cd $WECORE_HOME
     mkdir build
     cd build
