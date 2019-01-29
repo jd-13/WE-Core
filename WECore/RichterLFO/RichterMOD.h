@@ -47,7 +47,7 @@ namespace WECore::Richter {
          * Generates the wave tables on initialsation, while running gain values
          * are simply looked up from these wave tables.
          */
-        RichterMOD();
+        inline RichterMOD();
         
         virtual ~RichterMOD() = default;
         

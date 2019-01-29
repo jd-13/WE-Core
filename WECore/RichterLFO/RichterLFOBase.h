@@ -182,7 +182,7 @@ namespace WECore::Richter {
          * @param   timeInSeconds   Position of the host DAW's playhead at the start of
          *                          playback.
          */
-        void _calcPhaseOffset(double timeInSeconds);
+        inline void _calcPhaseOffset(double timeInSeconds);
         
         /**
          * Calculates the frequency of the oscillator. Will use either the frequency
@@ -190,7 +190,7 @@ namespace WECore::Richter {
          *
          * @param   bpm   Current bpm of the host DAW
          */
-        void _calcFreq(double bpm);
+        inline void _calcFreq(double bpm);
         
         /**
          * Calculates the number of samples which pass in the same time as one cycle
@@ -216,7 +216,7 @@ namespace WECore::Richter {
          * samples processed
          *
          */
-        void calcIndexAndScaleInLoop();
+        inline void calcIndexAndScaleInLoop();
     };
 
     void RichterLFOBase::setWaveTablePointers() {

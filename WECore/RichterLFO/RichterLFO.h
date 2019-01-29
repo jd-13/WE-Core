@@ -54,7 +54,7 @@ namespace WECore::Richter {
          *
          * Also initialises parameters (that are not part of RichterLFOBase) to default values.
          */
-        RichterLFO();
+        inline RichterLFO();
         
         virtual ~RichterLFO() = default;
         
