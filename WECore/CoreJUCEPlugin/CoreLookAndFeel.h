@@ -52,6 +52,8 @@ namespace WECore::JUCEPlugin {
             setColour(PopupMenu::backgroundColourId, lightColour);
         }
 
+        virtual ~CoreLookAndFeel() = default;
+
         CoreLookAndFeel operator=(CoreLookAndFeel&) = delete;
         CoreLookAndFeel(CoreLookAndFeel&) = delete;
 
@@ -114,10 +116,16 @@ namespace WECore::JUCEPlugin {
                                         int height) override;
 
         virtual void setHighlightColour(Colour newColour) {
+            setColour(TextButton::buttonOnColourId, newColour);
+            setColour(TextButton::textColourOnId, newColour);
+
             highlightColour = newColour;
         }
 
         virtual void setLightColour(Colour newColour) {
+            setColour(TextButton::buttonColourId, newColour);
+            setColour(TextButton::textColourOffId, newColour);
+
             lightColour = newColour;
         }
 
