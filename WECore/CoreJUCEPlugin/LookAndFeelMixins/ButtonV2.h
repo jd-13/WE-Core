@@ -50,7 +50,7 @@ namespace WECore::LookAndFeelMixins {
                                            bool isButtonDown) override;
 
     private:
-        static constexpr double _disabledDarker {0.5};
+        static constexpr double _disabledDarker {0.7};
     };
 
     template <typename BASE>
