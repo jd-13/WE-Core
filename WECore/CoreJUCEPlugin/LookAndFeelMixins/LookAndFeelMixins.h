@@ -26,6 +26,7 @@
 
 #include "ButtonV2.h"
 #include "ComboBoxV2.h"
+#include "PopupMenuV2.h"
 #include "RotarySliderV2.h"
 
 /**
@@ -91,5 +92,5 @@ namespace WECore::LookAndFeelMixins {
     /**
      * typedef'd all V2 mixins over the CoreLookAndFeel for convenience.
      */
-    typedef RotarySliderV2<ComboBoxV2<ButtonV2<WECore::JUCEPlugin::CoreLookAndFeel>>> WEV2LookAndFeel;
+    typedef RotarySliderV2<PopupMenuV2<ComboBoxV2<ButtonV2<WECore::JUCEPlugin::CoreLookAndFeel>>>> WEV2LookAndFeel;
 }
