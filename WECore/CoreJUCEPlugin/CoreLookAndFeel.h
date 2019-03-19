@@ -43,13 +43,10 @@ namespace WECore::JUCEPlugin {
      */
     class CoreLookAndFeel : public LookAndFeel_V2 {
     public:
-        CoreLookAndFeel() : lightColour(200, 200, 200),
-                            darkColour(107, 107, 107),
-                            highlightColour(34, 252, 255),
-                            _fontName("Courier New") {
-            // TODO: hook these values into setHighlightColour etc
-            setColour(PopupMenu::highlightedBackgroundColourId, darkColour);
-            setColour(PopupMenu::backgroundColourId, lightColour);
+        CoreLookAndFeel() : _fontName("Courier New") {
+            setHighlightColour(Colour(34, 252, 255));
+            setLightColour(Colour(200, 200, 200));
+            setDarkColour(Colour(107, 107, 107));
         }
 
         virtual ~CoreLookAndFeel() = default;
@@ -123,6 +120,7 @@ namespace WECore::JUCEPlugin {
         }
 
         virtual void setLightColour(Colour newColour) {
+            setColour(PopupMenu::backgroundColourId, newColour);
             setColour(TextButton::buttonColourId, newColour);
             setColour(TextButton::textColourOffId, newColour);
 
@@ -130,6 +128,8 @@ namespace WECore::JUCEPlugin {
         }
 
         virtual void setDarkColour(Colour newColour) {
+            setColour(PopupMenu::highlightedBackgroundColourId, newColour);
+
             darkColour = newColour;
         }
 
