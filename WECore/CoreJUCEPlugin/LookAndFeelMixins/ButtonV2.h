@@ -36,6 +36,7 @@ namespace WECore::LookAndFeelMixins {
     class ButtonV2 : public BASE {
 
     public:
+        ButtonV2() : _buttonFontName("Courier New") {}
         virtual ~ButtonV2() = default;
 
         inline virtual void drawButtonBackground(Graphics& g,
@@ -49,8 +50,11 @@ namespace WECore::LookAndFeelMixins {
                                            bool isMouseOverButton,
                                            bool isButtonDown) override;
 
+        void setButtonFontName(const char* fontName) { _buttonFontName = fontName; }
+
     private:
-        static constexpr double _disabledDarker {0.7};
+        static constexpr float _disabledDarker {0.7f};
+        const char* _buttonFontName;
     };
 
     template <typename BASE>
@@ -106,7 +110,7 @@ namespace WECore::LookAndFeelMixins {
         constexpr int MARGIN {0};
 
         Font font;
-        font.setTypefaceName(BASE::getDefaultFontName());
+        font.setTypefaceName(_buttonFontName);
         g.setFont(font);
 
         g.drawFittedText(textButton.getButtonText(),

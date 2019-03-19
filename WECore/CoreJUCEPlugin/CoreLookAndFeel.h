@@ -43,7 +43,7 @@ namespace WECore::JUCEPlugin {
      */
     class CoreLookAndFeel : public LookAndFeel_V2 {
     public:
-        CoreLookAndFeel() : _fontName("Courier New") {
+        CoreLookAndFeel() {
             setHighlightColour(Colour(34, 252, 255));
             setLightColour(Colour(200, 200, 200));
             setDarkColour(Colour(107, 107, 107));
@@ -133,17 +133,12 @@ namespace WECore::JUCEPlugin {
             darkColour = newColour;
         }
 
-        const char* getDefaultFontName() { return _fontName; }
-        void setDefaultFontName(const char* fontName) { _fontName = fontName; }
-
     protected:
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreLookAndFeel)
 
         Colour  lightColour,
                 darkColour,
                 highlightColour;
-
-        const char* _fontName;
     };
 
     void CoreLookAndFeel::drawRotarySlider(Graphics& g,
