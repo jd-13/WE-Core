@@ -30,6 +30,9 @@ namespace WECore::LookAndFeelMixins {
 
     /**
      * V2 (December 2018) style lookandfeel combo box mixin.
+     *
+     * Uses the following colours:
+     * -# ** ComboBox::arrowColourId **
      */
     template <typename BASE>
     class ComboBoxV2 : public BASE {

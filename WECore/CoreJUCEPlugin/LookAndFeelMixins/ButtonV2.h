@@ -30,6 +30,12 @@ namespace WECore::LookAndFeelMixins {
 
     /**
      * V2 (December 2018) style lookandfeel button mixin.
+     *
+     * Uses the following colours:
+     * -# ** TextButton::buttonOnColourId **
+     * -# ** TextButton::buttonColourId **
+     * -# ** TextButton::textColourOnId **
+     * -# ** TextButton::textColourOffId **
      */
     template <typename BASE>
     class ButtonV2 : public BASE {
