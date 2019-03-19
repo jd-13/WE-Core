@@ -1,5 +1,5 @@
 /*
- *	File:		LookAndFeelMixinsV2.h
+ *	File:		ButtonV2.h
  *
  *	Version:	1.0.0
  *
@@ -39,6 +39,7 @@ namespace WECore::LookAndFeelMixins {
         ButtonV2() : _buttonFontName("Courier New") {}
         virtual ~ButtonV2() = default;
 
+        /** @{ LookAndFeel overrides */
         inline virtual void drawButtonBackground(Graphics& g,
                                                  Button& button,
                                                  const Colour& backgroundColour,
@@ -49,6 +50,7 @@ namespace WECore::LookAndFeelMixins {
                                            TextButton& textButton,
                                            bool isMouseOverButton,
                                            bool isButtonDown) override;
+        /** @} */
 
         void setButtonFontName(const char* fontName) { _buttonFontName = fontName; }
 
