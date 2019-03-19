@@ -26,6 +26,7 @@
 
 #include "ButtonV2.h"
 #include "ComboBoxV2.h"
+#include "RotarySliderV2.h"
 
 /**
  * Mixin LookAndFeel classes that can be used to augment any existing class derived from
@@ -87,5 +88,8 @@
  * @endcode
  */
 namespace WECore::LookAndFeelMixins {
-    typedef ComboBoxV2<ButtonV2<WECore::JUCEPlugin::CoreLookAndFeel>> WEV2LookAndFeel;
+    /**
+     * typedef'd all V2 mixins over the CoreLookAndFeel for convenience.
+     */
+    typedef RotarySliderV2<ComboBoxV2<ButtonV2<WECore::JUCEPlugin::CoreLookAndFeel>>> WEV2LookAndFeel;
 }

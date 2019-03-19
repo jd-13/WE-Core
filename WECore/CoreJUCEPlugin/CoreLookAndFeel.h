@@ -113,6 +113,8 @@ namespace WECore::JUCEPlugin {
                                         int height) override;
 
         virtual void setHighlightColour(Colour newColour) {
+            setColour(ComboBox::arrowColourId, newColour);
+            setColour(Slider::rotarySliderFillColourId, newColour);
             setColour(TextButton::buttonOnColourId, newColour);
             setColour(TextButton::textColourOnId, newColour);
 
@@ -121,6 +123,7 @@ namespace WECore::JUCEPlugin {
 
         virtual void setLightColour(Colour newColour) {
             setColour(PopupMenu::backgroundColourId, newColour);
+            setColour(Slider::rotarySliderOutlineColourId, newColour);
             setColour(TextButton::buttonColourId, newColour);
             setColour(TextButton::textColourOffId, newColour);
 
