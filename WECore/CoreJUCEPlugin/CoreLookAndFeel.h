@@ -114,6 +114,7 @@ namespace WECore::JUCEPlugin {
 
         virtual void setHighlightColour(Colour newColour) {
             setColour(ComboBox::arrowColourId, newColour);
+            setColour(GroupComponent::textColourId, newColour);
             setColour(Slider::rotarySliderFillColourId, newColour);
             setColour(TextButton::buttonOnColourId, newColour);
             setColour(TextButton::textColourOnId, newColour);
