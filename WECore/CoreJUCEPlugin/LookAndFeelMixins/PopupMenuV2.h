@@ -78,7 +78,7 @@ namespace WECore::LookAndFeelMixins {
                                               const Drawable* /*icon*/,
                                               const Colour* /*textColour*/) {
 
-        Rectangle r = area.reduced(1);
+        Rectangle<int> r = area.reduced(1);
 
         if (isHighlighted) {
             g.setColour(BASE::findColour(PopupMenu::highlightedBackgroundColourId));
