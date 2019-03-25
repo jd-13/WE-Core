@@ -28,7 +28,7 @@
 
 namespace WECore::MONSTR {
     /**
-     * Class which provides three band stereo width control. 
+     * Class which provides three band stereo width control.
      *
      * This class contains three MONSTRBand objects, and may later be expanded
      * to support a variable number of bands.
@@ -54,10 +54,10 @@ namespace WECore::MONSTR {
      */
     class MONSTRCrossover {
     public:
-        
-        MONSTRBand  band1,
-                    band2,
-                    band3;
+
+        MONSTRBand<double>  band1,
+                            band2,
+                            band3;
 
         /**
          * Makes each band aware of its position, and therefore which of their internal filters
@@ -131,7 +131,7 @@ namespace WECore::MONSTR {
          *
          * @see     CROSSOVERLOWER for valid values
          */
-        void setCrossoverLower(float val) {
+        void setCrossoverLower(double val) {
             val = Parameters::CROSSOVERLOWER.BoundsCheck(val);
             band1.setHighCutoff(val);
             band2.setLowCutoff(val);
@@ -144,7 +144,7 @@ namespace WECore::MONSTR {
          *
          * @see     CROSSOVERUPPER for valid values
          */
-        void setCrossoverUpper(float val) {
+        void setCrossoverUpper(double val) {
             val = Parameters::CROSSOVERUPPER.BoundsCheck(val);
             band2.setHighCutoff(val);
             band3.setLowCutoff(val);
@@ -157,7 +157,7 @@ namespace WECore::MONSTR {
          *
          * @see     CROSSOVERLOWER for valid values
          */
-        float getCrossoverLower() { return band1.getHighCutoff(); }
+        double getCrossoverLower() { return band1.getHighCutoff(); }
 
         /**
          * Gets the crossover frequency of the middle (band2) and upper (band3) bands.
@@ -166,7 +166,7 @@ namespace WECore::MONSTR {
          *
          * @see     CROSSOVERUPPER for valid values
          */
-        float getCrossoverUpper() { return band2.getHighCutoff(); }
+        double getCrossoverUpper() { return band2.getHighCutoff(); }
 
         /**
          * Configures the filters for the correct sample rate. Ensure this is

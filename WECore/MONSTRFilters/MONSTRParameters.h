@@ -38,9 +38,9 @@ namespace WECore::MONSTR::Parameters {
      *      maximum value,
      *      default value
      */
-    const ParameterDefinition::RangedParameter<float>   CROSSOVERLOWER(40, 500, 100),
-                                                        CROSSOVERUPPER(3000, 19500, 5000),
-                                                        WIDTH(0, 2, 1);
+    const ParameterDefinition::RangedParameter<double>   CROSSOVERLOWER(40, 500, 100),
+                                                         CROSSOVERUPPER(3000, 19500, 5000),
+                                                         WIDTH(0, 2, 1);
     //@}
 
 }

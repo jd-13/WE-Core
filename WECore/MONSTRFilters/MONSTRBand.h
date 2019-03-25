@@ -65,9 +65,13 @@ namespace WECore::MONSTR {
      *
      * @see MONSTRCrossover
      */
+    template <typename T>
     class MONSTRBand {
+        static_assert(std::is_floating_point<T>::value,
+                "Must be provided with a floating point template type");
+
     public:
-        
+
         /**
          * Performs setup of the filters using default settings. The arguments are
          * used to tell the MONSTRBand object which part of the frequency spectrum
@@ -101,7 +105,7 @@ namespace WECore::MONSTR {
         }
 
         virtual ~MONSTRBand() {}
-                
+
         /**
          * Sets the stereo width of this band.
          * Higher value = more width
@@ -110,12 +114,12 @@ namespace WECore::MONSTR {
          *
          * @see     WIDTH for valid values
          */
-        void setWidth(float val) { _width = Parameters::WIDTH.BoundsCheck(val); }
+        void setWidth(double val) { _width = Parameters::WIDTH.BoundsCheck(val); }
 
         /**
          * Sets whether this band will modify the stereo width of the signal it receives or not.
          *
-         * If the band is deactivated filtering will still be performed. This is so that a 
+         * If the band is deactivated filtering will still be performed. This is so that a
          * crossover containing multiple MONSTRBands will always be able easily to sum the
          * output of the bands to unity gain, whether some of the MONSTRBands are bypassed
          * or not.
@@ -127,7 +131,7 @@ namespace WECore::MONSTR {
         /**
          * @see setWidth
          */
-        float getWidth() const { return _width; }
+        double getWidth() const { return _width; }
 
         /**
          * @see setIsActive
@@ -135,38 +139,37 @@ namespace WECore::MONSTR {
         bool getIsActive() const { return _isActive; }
 
         /**
-         * Lets the band know if it covers the lowest frequencies, so will
-         * apply only a high cut filter.
+         * Lets the band know if it covers the lowest frequencies, so will apply only a high cut
+         * filter.
          */
         void makeBandLower();
-        
+
         /**
-         * Lets the band know if it covers the middle frequencies, so will
-         * apply both a low and high cut filter.
+         * Lets the band know if it covers the middle frequencies, so will apply both a low and
+         * high cut filter.
          */
         void makeBandMiddle();
-        
+
         /**
-         * Lets the band know if it covers the highest frequencies, so will
-         * apply only a low cut filter.
+         * Lets the band know if it covers the highest frequencies, so will apply only a low cut
+         * filter.
          */
         void makeBandUpper();
-        
+
         /**
-         * Resets filter states. Call before beginning a new buffer of
-         * samples.
+         * Resets filter states. Call before beginning a new buffer of samples.
          */
         void reset();
-        
+
         void setSampleRate(double newSampleRate);
-        
-        void setLowCutoff(float val);
-        
-        void setHighCutoff(float val);
-        
-        float getLowCutoff() const { return _lowCutoffHz; }
-        
-        float getHighCutoff() const { return _highCutoffHz; }
+
+        void setLowCutoff(double val);
+
+        void setHighCutoff(double val);
+
+        double getLowCutoff() const { return _lowCutoffHz; }
+
+        double getHighCutoff() const { return _highCutoffHz; }
 
         /**
          * Performs the effect processing on leftSample and rightSample. Use for
@@ -177,16 +180,16 @@ namespace WECore::MONSTR {
          * @param[in]    numSamples   Number of samples in the buffer. The left and right buffers
          *                            must be the same size.
          */
-        void process2in2out(double* leftSample, double* rightSample, size_t numSamples);
+        void process2in2out(T* leftSample, T* rightSample, size_t numSamples);
 
     private:
         bool    _isActive,
                 _isLower,
                 _isUpper;
 
-        float   _width,
-                _lowCutoffHz,
-                _highCutoffHz;
+        double   _width,
+                 _lowCutoffHz,
+                 _highCutoffHz;
 
         double _sampleRate;
         static constexpr int FILTER_ORDER {2};
@@ -196,40 +199,37 @@ namespace WECore::MONSTR {
         Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 2> _highCut1;
         Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 2> _highCut2;
 
-        void _filterSamples(double *inLeftSamples, double *inRightSamples, int numSamples);
+        void _filterSamples(T* inLeftSamples, T* inRightSamples, int numSamples);
     };
 
-    void MONSTRBand::makeBandLower() {
+    template <typename T>
+    void MONSTRBand<T>::makeBandLower() {
         _isLower = true;
         _isUpper = false;
     }
-    
-    void MONSTRBand::makeBandMiddle() {
+
+    template <typename T>
+    void MONSTRBand<T>::makeBandMiddle() {
         _isLower = false;
         _isUpper = false;
     }
-    
-    /**
-     * Lets the band know if it covers the highest frequencies, so will
-     * apply only a low cut filter.
-     */
-    void MONSTRBand::makeBandUpper() {
+
+    template <typename T>
+    void MONSTRBand<T>::makeBandUpper() {
         _isLower = false;
         _isUpper = true;
     }
-    
-    /**
-     * Resets filter states. Call before beginning a new buffer of
-     * samples.
-     */
-    void MONSTRBand::reset() {
+
+    template <typename T>
+    void MONSTRBand<T>::reset() {
         _lowCut1.reset();
         _lowCut2.reset();
         _highCut1.reset();
         _highCut2.reset();
     }
-    
-    void MONSTRBand::setSampleRate(double newSampleRate) {
+
+    template <typename T>
+    void MONSTRBand<T>::setSampleRate(double newSampleRate) {
         // if the new sample rate is different, recalculate the filter coefficients
         if (!CoreMath::compareFloatsEqual(newSampleRate, _sampleRate)) {
             _sampleRate = newSampleRate;
@@ -237,8 +237,9 @@ namespace WECore::MONSTR {
             setHighCutoff(_highCutoffHz);
         }
     }
-    
-    void MONSTRBand::setLowCutoff(float val) {
+
+    template <typename T>
+    void MONSTRBand<T>::setLowCutoff(double val) {
         // if this is the lowest band, then do not cut the low frequencies
         if (!_isLower && !_isUpper) {
             _lowCutoffHz = Parameters::CROSSOVERLOWER.BoundsCheck(val);
@@ -250,8 +251,9 @@ namespace WECore::MONSTR {
             _lowCut2.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
         }
     }
-    
-    void MONSTRBand::setHighCutoff(float val) {
+
+    template <typename T>
+    void MONSTRBand<T>::setHighCutoff(double val) {
         // if this is the highest band, then do not cut the high frequencies
         if (!_isLower && !_isUpper) {
             _highCutoffHz = Parameters::CROSSOVERUPPER.BoundsCheck(val);
@@ -264,30 +266,31 @@ namespace WECore::MONSTR {
         }
     }
 
-    void MONSTRBand::process2in2out(double* leftSample, double* rightSample, size_t numSamples) {
-        
+    template <typename T>
+    void MONSTRBand<T>::process2in2out(T* leftSample, T* rightSample, size_t numSamples) {
+
         // Apply the filtering before processing
         _filterSamples(leftSample, rightSample, static_cast<int>(numSamples));
-        
+
         if (_isActive) {
             // Do the actual stereo widening or narrowing
             // Based on: http://musicdsp.org/showArchiveComment.php?ArchiveID=256
             double coef_S {_width * 0.5};
-            
+
             for (size_t iii {0}; iii < numSamples; iii++) {
-                
+
                 double mid {(leftSample[iii] + rightSample[iii]) * 0.5};
                 double side {(rightSample[iii] - leftSample[iii]) * coef_S};
-                
+
                 leftSample[iii] = mid - side;
                 rightSample[iii] = mid + side;
             }
         }
     }
 
-    
-    void MONSTRBand::_filterSamples(double *inLeftSamples, double *inRightSamples, int numSamples) {
-        double** channelsArray = new double*[2];
+    template <typename T>
+    void MONSTRBand<T>::_filterSamples(T* inLeftSamples, T* inRightSamples, int numSamples) {
+        T** channelsArray = new T*[2];
         channelsArray[0] = inLeftSamples;
         channelsArray[1] = inRightSamples;
 
