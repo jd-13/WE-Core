@@ -165,11 +165,11 @@ namespace WECore::Songbird {
 
         /**
          * Sets the modulation mode to apply to the filters.
-         * 
+         *
          * @param[in]   val Chooses the modulation mode
          */
         void setModMode(bool val) { _modMode = val; }
-        
+
         /** @} */
 
         /**
@@ -212,7 +212,7 @@ namespace WECore::Songbird {
          * @see modMode
          */
         bool getModMode() { return _modMode; }
-        
+
         /** @} */
 
         /**
@@ -242,8 +242,8 @@ namespace WECore::Songbird {
 
         bool _modMode;
 
-        std::map<Channels, SongbirdFormantFilter> _filters1;
-        std::map<Channels, SongbirdFormantFilter> _filters2;
+        std::map<Channels, SongbirdFormantFilter<double>> _filters1;
+        std::map<Channels, SongbirdFormantFilter<double>> _filters2;
 
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
 
