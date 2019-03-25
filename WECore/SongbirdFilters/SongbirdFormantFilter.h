@@ -55,7 +55,7 @@ namespace WECore::Songbird {
          */
         SongbirdFormantFilter(int numFormants = 5) {
             for (int iii {0}; iii < numFormants; iii++) {
-                TPTSVF::TPTSVFilter<double> tempFilter;
+                TPTSVF::TPTSVFilter<T> tempFilter;
                 tempFilter.setMode(TPTSVF::Parameters::FILTER_MODE.PEAK);
                 tempFilter.setQ(15);
                 _filters.push_back(tempFilter);
