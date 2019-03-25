@@ -104,7 +104,7 @@ namespace WECore::MONSTR {
             _highCut2.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
         }
 
-        virtual ~MONSTRBand() {}
+        virtual ~MONSTRBand() = default;
 
         /**
          * Sets the stereo width of this band.
@@ -142,30 +142,30 @@ namespace WECore::MONSTR {
          * Lets the band know if it covers the lowest frequencies, so will apply only a high cut
          * filter.
          */
-        void makeBandLower();
+        inline void makeBandLower();
 
         /**
          * Lets the band know if it covers the middle frequencies, so will apply both a low and
          * high cut filter.
          */
-        void makeBandMiddle();
+        inline void makeBandMiddle();
 
         /**
          * Lets the band know if it covers the highest frequencies, so will apply only a low cut
          * filter.
          */
-        void makeBandUpper();
+        inline void makeBandUpper();
 
         /**
          * Resets filter states. Call before beginning a new buffer of samples.
          */
-        void reset();
+        inline void reset();
 
-        void setSampleRate(double newSampleRate);
+        inline void setSampleRate(double newSampleRate);
 
-        void setLowCutoff(double val);
+        inline void setLowCutoff(double val);
 
-        void setHighCutoff(double val);
+        inline void setHighCutoff(double val);
 
         double getLowCutoff() const { return _lowCutoffHz; }
 
@@ -180,7 +180,7 @@ namespace WECore::MONSTR {
          * @param[in]    numSamples   Number of samples in the buffer. The left and right buffers
          *                            must be the same size.
          */
-        void process2in2out(T* leftSample, T* rightSample, size_t numSamples);
+        inline void process2in2out(T* leftSample, T* rightSample, size_t numSamples);
 
     private:
         bool    _isActive,
@@ -199,7 +199,7 @@ namespace WECore::MONSTR {
         Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 2> _highCut1;
         Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 2> _highCut2;
 
-        void _filterSamples(T* inLeftSamples, T* inRightSamples, int numSamples);
+        inline void _filterSamples(T* inLeftSamples, T* inRightSamples, int numSamples);
     };
 
     template <typename T>
