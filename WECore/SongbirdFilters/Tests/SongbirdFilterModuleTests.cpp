@@ -29,7 +29,7 @@
 
 SCENARIO("SongbirdFilterModule: Parameters can be set and retrieved correctly") {
     GIVEN("A new SongbirdFilterModule object") {
-        WECore::Songbird::SongbirdFilterModule mSongbird;
+        WECore::Songbird::SongbirdFilterModule<double> mSongbird;
 
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
@@ -61,14 +61,14 @@ SCENARIO("SongbirdFilterModule: Parameters can be set and retrieved correctly") 
 
 SCENARIO("SongbirdFilterModule: Parameters enforce their bounds correctly") {
     GIVEN("A new SongbirdFilterModule object") {
-        WECore::Songbird::SongbirdFilterModule mSongbird;
-        
+        WECore::Songbird::SongbirdFilterModule<double> mSongbird;
+
         WHEN("All parameter values are too low") {
             mSongbird.setVowel1(-5);
             mSongbird.setVowel2(-5);
             mSongbird.setFilterPosition(-5);
             mSongbird.setMix(-5);
-            
+
             THEN("Parameters enforce their lower bounds") {
                 CHECK(mSongbird.getVowel1() == 1);
                 CHECK(mSongbird.getVowel2() == 1);
@@ -76,13 +76,13 @@ SCENARIO("SongbirdFilterModule: Parameters enforce their bounds correctly") {
                 CHECK(mSongbird.getMix() == Approx(0.0));
             }
         }
-        
+
         WHEN("All parameter values are too high") {
             mSongbird.setVowel1(1000);
             mSongbird.setVowel2(1000);
             mSongbird.setFilterPosition(1000);
             mSongbird.setMix(1000);
-            
+
             THEN("Parameters enforce their upper bounds") {
                 CHECK(mSongbird.getVowel1() == 5);
                 CHECK(mSongbird.getVowel2() == 5);
@@ -97,17 +97,17 @@ SCENARIO("SongbirdFilterModule: Silence in = silence out") {
     GIVEN("A SongbirdFilterModule and a buffer of silent samples") {
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
-        WECore::Songbird::SongbirdFilterModule mSongbird;
+        WECore::Songbird::SongbirdFilterModule<double> mSongbird;
 
         // fill the buffer
         std::fill(leftBuffer.begin(), leftBuffer.end(), 0);
         std::fill(rightBuffer.begin(), rightBuffer.end(), 0);
-        
+
         WHEN("The silence samples are processed") {
-            
+
             // do processing
             mSongbird.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
-            
+
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
                     CHECK(leftBuffer[iii] == Approx(0.0));
@@ -127,7 +127,7 @@ SCENARIO("SongbirdFilterModule: Freq mode") {
         const std::vector<double>& expectedOutputRight =
                 TestData::Songbird::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
 
-        WECore::Songbird::SongbirdFilterModule mSongbird;
+        WECore::Songbird::SongbirdFilterModule<double> mSongbird;
 
         // Set some parameters for the input signal
         constexpr size_t SAMPLE_RATE {44100};
@@ -140,7 +140,7 @@ SCENARIO("SongbirdFilterModule: Freq mode") {
                       [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
         std::generate(rightBuffer.begin(),
                       rightBuffer.end(),
-                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + CoreMath::LONG_PI);} );          
+                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + CoreMath::LONG_PI);} );
         WHEN("The parameters are set and samples are processed") {
             // Set freq mode
             mSongbird.setVowel1(1);
@@ -168,7 +168,7 @@ SCENARIO("SongbirdFilterModule: Blend mode") {
         const std::vector<double>& expectedOutputRight =
                 TestData::Songbird::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
 
-        WECore::Songbird::SongbirdFilterModule mSongbird;
+        WECore::Songbird::SongbirdFilterModule<double> mSongbird;
 
         // Set some parameters for the input signal
         constexpr size_t SAMPLE_RATE {44100};
@@ -181,7 +181,7 @@ SCENARIO("SongbirdFilterModule: Blend mode") {
                       [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
         std::generate(rightBuffer.begin(),
                       rightBuffer.end(),
-                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + CoreMath::LONG_PI);} );        
+                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + CoreMath::LONG_PI);} );
         WHEN("The parameters are set and samples are processed") {
             // Set blend mode
             mSongbird.setVowel1(1);

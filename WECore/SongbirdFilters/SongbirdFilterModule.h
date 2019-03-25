@@ -83,7 +83,11 @@ namespace WECore::Songbird {
      * filter.Process2in2out(leftSamples, rightSamples, numSamples);
      * @endcode
      */
+    template <typename T>
     class SongbirdFilterModule {
+        static_assert(std::is_floating_point<T>::value,
+                "Must be provided with a floating point template type");
+
     public:
         /**
          * Does some basic setup and defaulting of parameters, though do not rely on this
@@ -161,15 +165,15 @@ namespace WECore::Songbird {
          *
          * @param[in]   val The output of the modulation source (LFO, envelope, etc)
          */
-        void setModulation(float val) { _modulationSrc = Parameters::MODULATION.BoundsCheck(val); }
+        void setModulation(double val) { _modulationSrc = Parameters::MODULATION.BoundsCheck(val); }
 
         /**
          * Sets the modulation mode to apply to the filters.
-         * 
+         *
          * @param[in]   val Chooses the modulation mode
          */
         void setModMode(bool val) { _modMode = val; }
-        
+
         /** @} */
 
         /**
@@ -212,7 +216,7 @@ namespace WECore::Songbird {
          * @see modMode
          */
         bool getModMode() { return _modMode; }
-        
+
         /** @} */
 
         /**
@@ -224,9 +228,7 @@ namespace WECore::Songbird {
          * @param   numSamples     Number of samples in the buffer. The left and right buffers
          *                         must be the same size.
          */
-        inline void Process2in2out(double* leftSamples,
-                                   double* rightSamples,
-                                   size_t numSamples);
+        inline void Process2in2out(T* leftSamples, T* rightSamples, size_t numSamples);
 
         SongbirdFilterModule operator=(SongbirdFilterModule& other) = delete;
         SongbirdFilterModule(SongbirdFilterModule& other) = delete;
@@ -242,15 +244,15 @@ namespace WECore::Songbird {
 
         bool _modMode;
 
-        std::map<Channels, SongbirdFormantFilter> _filters1;
-        std::map<Channels, SongbirdFormantFilter> _filters2;
+        std::map<Channels, SongbirdFormantFilter<T>> _filters1;
+        std::map<Channels, SongbirdFormantFilter<T>> _filters2;
 
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
 
-        double _leftOutputBuffer1[INTERNAL_BUFFER_SIZE];
-        double _rightOutputBuffer1[INTERNAL_BUFFER_SIZE];
-        double _leftOutputBuffer2[INTERNAL_BUFFER_SIZE];
-        double _rightOutputBuffer2[INTERNAL_BUFFER_SIZE];
+        T _leftOutputBuffer1[INTERNAL_BUFFER_SIZE];
+        T _rightOutputBuffer1[INTERNAL_BUFFER_SIZE];
+        T _leftOutputBuffer2[INTERNAL_BUFFER_SIZE];
+        T _rightOutputBuffer2[INTERNAL_BUFFER_SIZE];
 
         /**
          * Sets the vowel sound that should be created by filter 1 using a Vowel object provided by the
@@ -280,7 +282,8 @@ namespace WECore::Songbird {
         };
     };
 
-    void SongbirdFilterModule::setVowel1(int val) {
+    template <typename T>
+    void SongbirdFilterModule<T>::setVowel1(int val) {
         // perform a bounds check, then apply the appropriate formants
         _vowel1 = Parameters::VOWEL.BoundsCheck(val);
 
@@ -291,7 +294,8 @@ namespace WECore::Songbird {
         _filters1[Channels::RIGHT].setFormants(tempFormants);
     }
 
-    void SongbirdFilterModule::setVowel2(int val) {
+    template <typename T>
+    void SongbirdFilterModule<T>::setVowel2(int val) {
         // perform a bounds check, then apply the appropriate formants
         _vowel2 = Parameters::VOWEL.BoundsCheck(val);
 
@@ -301,7 +305,8 @@ namespace WECore::Songbird {
         _filters2[Channels::RIGHT].setFormants(tempFormants);
     }
 
-    void SongbirdFilterModule::setSampleRate(double val) {
+    template <typename T>
+    void SongbirdFilterModule<T>::setSampleRate(double val) {
         _sampleRate = val;
 
         _filters1[Channels::LEFT].setSampleRate(val);
@@ -310,14 +315,16 @@ namespace WECore::Songbird {
         _filters2[Channels::RIGHT].setSampleRate(val);
     }
 
-    void SongbirdFilterModule::reset() {
+    template <typename T>
+    void SongbirdFilterModule<T>::reset() {
         _filters1[Channels::LEFT].reset();
         _filters1[Channels::RIGHT].reset();
         _filters2[Channels::LEFT].reset();
         _filters2[Channels::RIGHT].reset();
     }
 
-    Vowel SongbirdFilterModule::getVowelDescription(int val) {
+    template <typename T>
+    Vowel SongbirdFilterModule<T>::getVowelDescription(int val) {
         Vowel tempVowel;
 
         std::copy(&_allFormants[val - 1][0],
@@ -327,9 +334,10 @@ namespace WECore::Songbird {
         return tempVowel;
     }
 
-    void SongbirdFilterModule::Process2in2out(double* leftSamples,
-                                              double* rightSamples,
-                                              size_t numSamples) {
+    template <typename T>
+    void SongbirdFilterModule<T>::Process2in2out(T* leftSamples,
+                                                 T* rightSamples,
+                                                 size_t numSamples) {
 
         // If the buffer we've been passed is bigger than our static internal buffer, then we need
         // to break it into chunks
@@ -345,8 +353,8 @@ namespace WECore::Songbird {
                                             static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
 
             // Get a pointer to the start of this chunk
-            double* const leftBufferInputStart {&leftSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
-            double* const rightBufferInputStart {&rightSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
+            T* const leftBufferInputStart {&leftSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
+            T* const rightBufferInputStart {&rightSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
 
             // Copy the samples we need to process in this chunk into the internal buffers
             std::copy(leftBufferInputStart, &leftBufferInputStart[numSamplesToCopy], _leftOutputBuffer1);
@@ -389,14 +397,16 @@ namespace WECore::Songbird {
         }
     }
 
-    void SongbirdFilterModule::_setVowel1(Vowel val) {
+    template <typename T>
+    void SongbirdFilterModule<T>::_setVowel1(Vowel val) {
         const std::vector<Formant> tempFormants(val.begin(), val.end());
 
         _filters1[Channels::LEFT].setFormants(tempFormants);
         _filters1[Channels::RIGHT].setFormants(tempFormants);
     }
 
-    Vowel SongbirdFilterModule::_calcVowelForFreqMode() {
+    template <typename T>
+    Vowel SongbirdFilterModule<T>::_calcVowelForFreqMode() {
         // get the first and second vowels
         Vowel tempVowel1(getVowelDescription(getVowel1()));
         Vowel tempVowel2(getVowelDescription(getVowel2()));

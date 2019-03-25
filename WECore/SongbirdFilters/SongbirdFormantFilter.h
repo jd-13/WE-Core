@@ -40,7 +40,11 @@ namespace WECore::Songbird {
      * @see setFormants - must be called before performing any processing
      * @see Formant     - Formant objects are required for operation of this class
      */
+    template <typename T>
     class SongbirdFormantFilter {
+        static_assert(std::is_floating_point<T>::value,
+                "Must be provided with a floating point template type");
+
     public:
         /**
          * Creates and stores the appropriate number of filters.
@@ -57,9 +61,9 @@ namespace WECore::Songbird {
                 _filters.push_back(tempFilter);
             }
         }
-        
+
         virtual ~SongbirdFormantFilter() = default;
-        
+
         /**
          * Applies the filtering to a mono buffer of samples.
          * Expect seg faults or other memory issues if arguements passed are incorrect.
@@ -67,12 +71,12 @@ namespace WECore::Songbird {
          * @param   inSamples   Pointer to the first sample of the buffer
          * @param   numSamples  Number of samples in the buffer
          */
-        inline void process(double* inSamples, size_t numSamples);
-        
+        inline void process(T* inSamples, size_t numSamples);
+
         /**
          * Sets the properties of each bandpass filter contained in the object.
          *
-         * @param   formants    A vector of Formants, the size of which must equal the 
+         * @param   formants    A vector of Formants, the size of which must equal the
          *                      number of bandpass filters in the object, as a single Formant
          *                      is applied to single bandpass filter in a one-to-one fashion
          *
@@ -83,28 +87,29 @@ namespace WECore::Songbird {
          *                    parameters which can be supplied to a bandpass filter.
          */
         inline bool setFormants(std::vector<Formant> formants);
-        
+
         /**
          * Sets the sample rate which the filters will be operating on.
          */
         inline void setSampleRate(double val);
-        
+
         /**
          * Resets all filters.
          * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
          */
         inline void reset();
-        
+
     private:
-        std::vector<TPTSVF::TPTSVFilter<double>> _filters;
+        std::vector<TPTSVF::TPTSVFilter<T>> _filters;
 
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
 
-        double _outputBuffer[INTERNAL_BUFFER_SIZE];
-        double _tempInputBuffer[INTERNAL_BUFFER_SIZE];
+        T _outputBuffer[INTERNAL_BUFFER_SIZE];
+        T _tempInputBuffer[INTERNAL_BUFFER_SIZE];
     };
 
-    void SongbirdFormantFilter::process(double* inSamples, size_t numSamples) {
+    template <typename T>
+    void SongbirdFormantFilter<T>::process(T* inSamples, size_t numSamples) {
 
         // If the buffer we've been passed is bigger than our static internal buffer, then we need
         // to break it into chunks
@@ -123,7 +128,7 @@ namespace WECore::Songbird {
             std::fill(_outputBuffer, &_outputBuffer[numSamplesToCopy], 0);
 
             // Get a pointer to the start of this chunk
-            double* const bufferInputStart {&inSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
+            T* const bufferInputStart {&inSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
 
             // Perform the filtering for each formant peak
             for (size_t filterNumber {0}; filterNumber < _filters.size(); filterNumber++) {
@@ -144,33 +149,36 @@ namespace WECore::Songbird {
         }
     }
 
-    bool SongbirdFormantFilter::setFormants(std::vector<Formant> formants) {
+    template <typename T>
+    bool SongbirdFormantFilter<T>::setFormants(std::vector<Formant> formants) {
         bool retVal {false};
-        
+
         // if the correct number of formants have been supplied,
         // apply them to each filter in turn
         if (_filters.size() == formants.size()) {
             retVal = true;
-            
+
             for (size_t iii {0}; iii < _filters.size(); iii++) {
                 _filters[iii].setCutoff(formants[iii].frequency);
-                
+
                 double gainAbs = pow(10, formants[iii].gaindB / 20.0);
                 _filters[iii].setGain(gainAbs);
             }
         }
-        
+
         return retVal;
     }
 
-    void SongbirdFormantFilter::setSampleRate(double val) {
-        for (TPTSVF::TPTSVFilter<double>& filter : _filters) {
+    template <typename T>
+    void SongbirdFormantFilter<T>::setSampleRate(double val) {
+        for (TPTSVF::TPTSVFilter<T>& filter : _filters) {
             filter.setSampleRate(val);
         }
     }
 
-    void SongbirdFormantFilter::reset() {
-        for (TPTSVF::TPTSVFilter<double>& filter : _filters) {
+    template <typename T>
+    void SongbirdFormantFilter<T>::reset() {
+        for (TPTSVF::TPTSVFilter<T>& filter : _filters) {
             filter.reset();
         }
     }
