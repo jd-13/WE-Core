@@ -28,19 +28,19 @@
 
 SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
     GIVEN("A new MONSTRCrossover object") {
-        WECore::MONSTR::MONSTRCrossover mCrossover;
-        
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
                 CHECK(mCrossover.getCrossoverLower() == Approx(100.0f));
                 CHECK(mCrossover.getCrossoverUpper() == Approx(5000.0f));
-                
+
                 CHECK(mCrossover.band1.getWidth() == Approx(1.0f));
                 CHECK(mCrossover.band1.getIsActive() == true);
-                
+
                 CHECK(mCrossover.band2.getWidth() == Approx(1.0f));
                 CHECK(mCrossover.band2.getIsActive() == true);
-                
+
                 CHECK(mCrossover.band3.getWidth() == Approx(1.0f));
                 CHECK(mCrossover.band2.getIsActive() == true);
             }
@@ -49,14 +49,14 @@ SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
         WHEN("All parameters are changed to unique values") {
             mCrossover.setCrossoverLower(41);
             mCrossover.setCrossoverUpper(3001);
-            
+
             mCrossover.band1.setWidth(0.1f);
             mCrossover.band1.setIsActive(1);
 
             THEN("They all get their correct unique values") {
                 CHECK(mCrossover.getCrossoverLower() == Approx(41.0f));
                 CHECK(mCrossover.getCrossoverUpper() == Approx(3001.0f));
-                
+
                 CHECK(mCrossover.band1.getWidth() == Approx(0.1f));
                 CHECK(mCrossover.band1.getIsActive() == 1);
             }
@@ -66,14 +66,14 @@ SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
 
 SCENARIO("MONSTRCrossover: Parameters enforce their bounds correctly") {
     GIVEN("A new MONSTRCrossover object") {
-        WECore::MONSTR::MONSTRCrossover mCrossover;
-        
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+
         WHEN("All parameter values are too low") {
             mCrossover.setCrossoverLower(39);
             mCrossover.setCrossoverUpper(2999);
             mCrossover.band1.setWidth(-1);
 
-            
+
             THEN("Parameters enforce their lower bounds") {
                 CHECK(mCrossover.getCrossoverLower() == Approx(40.0f));
                 CHECK(mCrossover.getCrossoverUpper() == Approx(3000.0f));
@@ -85,7 +85,7 @@ SCENARIO("MONSTRCrossover: Parameters enforce their bounds correctly") {
             mCrossover.setCrossoverLower(39);
             mCrossover.setCrossoverUpper(2999);
             mCrossover.band1.setWidth(-1);
-            
+
             THEN("Parameters enforce their upper bounds") {
                 CHECK(mCrossover.getCrossoverLower() == Approx(40.0f));
                 CHECK(mCrossover.getCrossoverUpper() == Approx(3000.0f));
@@ -99,16 +99,16 @@ SCENARIO("MONSTRCrossover: Silence in = silence out") {
     GIVEN("A MONSTRCrossover and a buffer of silent samples") {
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
-        WECore::MONSTR::MONSTRCrossover mCrossover;
-        
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+
         WHEN("The silence samples are processed") {
             // fill the buffer
             std::fill(leftBuffer.begin(), leftBuffer.end(), 0);
             std::fill(rightBuffer.begin(), rightBuffer.end(), 0);
-            
+
             // do processing
             mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
-            
+
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
                     CHECK(leftBuffer[iii] == Approx(0.0).margin(0.00001));
@@ -125,8 +125,8 @@ SCENARIO("MONSTRCrossover: Sine in = sine out") {
         std::vector<double> rightBuffer(1024);
         const std::vector<double>& expectedOutput =
                 TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName());
-        
-        WECore::MONSTR::MONSTRCrossover mCrossover;
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
 
         // Set some parameters for the input signal
         constexpr size_t SAMPLE_RATE {44100};
@@ -139,10 +139,10 @@ SCENARIO("MONSTRCrossover: Sine in = sine out") {
                           leftBuffer.end(),
                           [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
             std::copy(leftBuffer.begin(), leftBuffer.end() , rightBuffer.begin());
-            
+
             // do processing
             mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
-            
+
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
                     CHECK(leftBuffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
@@ -165,7 +165,7 @@ SCENARIO("MONSTRCrossover: Sine in = sine out") {
 
             // do processing
             mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
-            
+
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
                     CHECK(leftBuffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
@@ -184,8 +184,8 @@ SCENARIO("MONSTRCrossover: All bands widened") {
                 TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
         const std::vector<double>& expectedOutputRight =
                 TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
-        
-        WECore::MONSTR::MONSTRCrossover mCrossover;
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
 
         // Set some parameters for the input signal
         constexpr size_t SAMPLE_RATE {44100};
@@ -208,7 +208,7 @@ SCENARIO("MONSTRCrossover: All bands widened") {
 
             // do processing
             mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
-            
+
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
                     CHECK(leftBuffer[iii] == Approx(expectedOutputLeft[iii]).margin(0.00001));
@@ -227,8 +227,8 @@ SCENARIO("MONSTRCrossover: All bands narrowed") {
                 TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName() + "-left");
         const std::vector<double>& expectedOutputRight =
                 TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName() + "-right");
-        
-        WECore::MONSTR::MONSTRCrossover mCrossover;
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
 
         // Set some parameters for the input signal
         constexpr size_t SAMPLE_RATE {44100};
@@ -251,7 +251,7 @@ SCENARIO("MONSTRCrossover: All bands narrowed") {
 
             // do processing
             mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
-            
+
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
                     CHECK(leftBuffer[iii] == Approx(expectedOutputLeft[iii]).margin(0.00001));
@@ -270,8 +270,8 @@ SCENARIO("MONSTRCrossover: Small buffer") {
                 TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName());
         const std::vector<double>& expectedOutputRight =
                 TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName());
-        
-        WECore::MONSTR::MONSTRCrossover mCrossover;
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
 
         // Set some parameters for the input signal
         constexpr size_t SAMPLE_RATE {44100};
@@ -292,7 +292,7 @@ SCENARIO("MONSTRCrossover: Small buffer") {
 
             // do processing
             mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
-            
+
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < leftBuffer.size(); iii++) {
                     CHECK(leftBuffer[iii] == Approx(expectedOutputLeft[iii]).margin(0.00001));
