@@ -52,12 +52,15 @@ namespace WECore::MONSTR {
      * crossover.Process2in2out(leftSample, rightSample, numSamples);
      * @endcode
      */
+    template <typename T>
     class MONSTRCrossover {
-    public:
+        static_assert(std::is_floating_point<T>::value,
+                      "Must be provided with a floating point template type");
 
-        MONSTRBand<double>  band1,
-                            band2,
-                            band3;
+    public:
+        MONSTRBand<T>  band1,
+                       band2,
+                       band3;
 
         /**
          * Makes each band aware of its position, and therefore which of their internal filters
@@ -81,7 +84,7 @@ namespace WECore::MONSTR {
          * @param[in]    numSamples      Number of samples in the buffer. The left and right buffers
          *                               must be the same size.
          */
-        inline void Process2in2out(double* leftSample, double* rightSample, size_t numSamples);
+        inline void Process2in2out(T* leftSample, T* rightSample, size_t numSamples);
 
         /**
          * Sets the crossover frequency of the lower (band1) and middle (band2) bands.
@@ -136,17 +139,16 @@ namespace WECore::MONSTR {
     private:
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
 
-        double _band1LeftBuffer[INTERNAL_BUFFER_SIZE];
-        double _band1RightBuffer[INTERNAL_BUFFER_SIZE];
-        double _band2LeftBuffer[INTERNAL_BUFFER_SIZE];
-        double _band2RightBuffer[INTERNAL_BUFFER_SIZE];
-        double _band3LeftBuffer[INTERNAL_BUFFER_SIZE];
-        double _band3RightBuffer[INTERNAL_BUFFER_SIZE];
+        T _band1LeftBuffer[INTERNAL_BUFFER_SIZE];
+        T _band1RightBuffer[INTERNAL_BUFFER_SIZE];
+        T _band2LeftBuffer[INTERNAL_BUFFER_SIZE];
+        T _band2RightBuffer[INTERNAL_BUFFER_SIZE];
+        T _band3LeftBuffer[INTERNAL_BUFFER_SIZE];
+        T _band3RightBuffer[INTERNAL_BUFFER_SIZE];
     };
 
-    void MONSTRCrossover::Process2in2out(double* leftSample,
-                                         double* rightSample,
-                                         size_t numSamples) {
+    template <typename T>
+    void MONSTRCrossover<T>::Process2in2out(T* leftSample,  T* rightSample, size_t numSamples) {
 
         // If the buffer we've been passed is bigger than our static internal buffer, then we need
         // to break it into chunks
@@ -189,25 +191,29 @@ namespace WECore::MONSTR {
         }
     }
 
-    void MONSTRCrossover::setCrossoverLower(double val) {
+    template <typename T>
+    void MONSTRCrossover<T>::setCrossoverLower(double val) {
         val = Parameters::CROSSOVERLOWER.BoundsCheck(val);
         band1.setHighCutoff(val);
         band2.setLowCutoff(val);
     }
 
-    void MONSTRCrossover::setCrossoverUpper(double val) {
+    template <typename T>
+    void MONSTRCrossover<T>::setCrossoverUpper(double val) {
         val = Parameters::CROSSOVERUPPER.BoundsCheck(val);
         band2.setHighCutoff(val);
         band3.setLowCutoff(val);
     }
 
-    void MONSTRCrossover::setSampleRate(double newSampleRate) {
+    template <typename T>
+    void MONSTRCrossover<T>::setSampleRate(double newSampleRate) {
         band1.setSampleRate(newSampleRate);
         band2.setSampleRate(newSampleRate);
         band3.setSampleRate(newSampleRate);
     }
 
-    void MONSTRCrossover::reset() {
+    template <typename T>
+    void MONSTRCrossover<T>::reset() {
         band1.reset();
         band2.reset();
         band3.reset();

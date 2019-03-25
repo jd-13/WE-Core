@@ -49,6 +49,7 @@
 
 namespace WECore::MONSTR {
     // forward declaration to allow friend class
+    template <typename T>
     class MONSTRCrossover;
 
     /**

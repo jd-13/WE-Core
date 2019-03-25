@@ -61,13 +61,13 @@ namespace {
         const double DEVIATION;
     };
 
-    /** 
+    /**
      * Does pretty much what it says.
      * clang complains if this isn't inlined
      */
     inline Stats calcAverageAndDeviation(const std::vector<double>& executionTimes) {
         Stats retVal;
-        
+
         // calculate the average first
         retVal.average = 0;
         for (double time : executionTimes) {
@@ -82,27 +82,27 @@ namespace {
         }
         retVal.deviation = retVal.deviation / (static_cast<double>(executionTimes.size()) - 1);
         retVal.deviation = std::sqrt(retVal.deviation);
-        
+
         return retVal;
     }
-    
+
     bool isNewRun {true};
     inline void appendToResultsFile(const Stats& stats, const std::string& testName) {
         const std::string FILE_PATH("wecore_performance.log");
         std::ofstream outStream;
         outStream.open(FILE_PATH, std::ios_base::app);
-        
+
         if (isNewRun) {
             isNewRun = false;
-            
+
             std::time_t now {std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())};
             outStream << std::endl << std::endl << "**** New Test Run: "
                       << std::put_time(std::localtime(&now), "%F %T");
-            
+
             ;
         }
         outStream << std::endl << testName << ":     " << stats;
-        
+
     }
 }
 
@@ -115,10 +115,10 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
         const int NUM_BUFFERS {100};
         std::vector<double> buffer(1024);
         WECore::Carve::CarveDSPUnit<double> mCarve;
-        
+
         // set the performance limits
         Limits mLimits{0.11, 0.07, 0.005};
-        
+
         // store the execution time for each buffer
         std::vector<double> executionTimes;
 
@@ -132,7 +132,7 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
                 int iii {0};
                 std::generate(buffer.begin(), buffer.end(), [&iii]{ return std::sin(iii++); });
 
-                
+
                 // do processing
                 const clock_t startTime {clock()};
                 for (size_t jjj {0}; jjj < buffer.size(); jjj++) {
@@ -146,12 +146,12 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
                 executionTimes.push_back(executionTime);
                 CHECK(executionTime < mLimits.INDIVIDUAL);
             }
-            
+
             THEN("The average and variance are within limits") {
                 Stats mStats = calcAverageAndDeviation(executionTimes);
                 CHECK(mStats.average < mLimits.AVERAGE);
                 CHECK(mStats.deviation < mLimits.DEVIATION);
-                
+
                 appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());
             }
         }
@@ -160,18 +160,18 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
 
 SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
     GIVEN("A MONSTRCrossover and a buffer of samples") {
-        
+
         const int NUM_BUFFERS {100};
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
-        WECore::MONSTR::MONSTRCrossover mCrossover;
-        
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+
         // set the performance limits
         Limits mLimits{1.0, 0.8, 0.08};
-        
+
         // store the execution time for each buffer
         std::vector<double> executionTimes;
-        
+
         WHEN("The samples are processed") {
             // turn the crossover on
             mCrossover.band1.setIsActive(true);
@@ -184,8 +184,8 @@ SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
                 int iii {0};
                 std::generate(leftBuffer.begin(), leftBuffer.end(), [&iii]{ return std::sin(iii++); });
                 rightBuffer = leftBuffer;
-                
-                
+
+
                 // do processing
                 const clock_t startTime {clock()};
                 mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
@@ -197,12 +197,12 @@ SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
                 executionTimes.push_back(executionTime);
                 CHECK(executionTime < mLimits.INDIVIDUAL);
             }
-            
+
             THEN("The average and variance are within limits") {
                 Stats mStats = calcAverageAndDeviation(executionTimes);
                 CHECK(mStats.average < mLimits.AVERAGE);
                 CHECK(mStats.deviation < mLimits.DEVIATION);
-                
+
                 appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());
             }
         }
@@ -211,47 +211,47 @@ SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
 
 SCENARIO("Performance: SongbirdFilterModule (blend mode), 100 buffers of 1024 samples each") {
     GIVEN("A SongbirdFilterModule and a buffer of samples") {
-        
+
         const int NUM_BUFFERS {100};
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
         WECore::Songbird::SongbirdFilterModule mSongbird;
         mSongbird.setModMode(false);
-        
+
         // set the performance limits
         Limits mLimits{1.8, 1.5, 0.12};
-        
+
         // store the execution time for each buffer
         std::vector<double> executionTimes;
-        
+
         WHEN("The samples are processed") {
             // turn the crossover on
-            
+
             for (int nbuf {0}; nbuf < NUM_BUFFERS; nbuf++) {
-                
+
                 // fill the buffer with a sine wave
                 int iii {0};
                 std::generate(leftBuffer.begin(), leftBuffer.end(), [&iii]{ return std::sin(iii++); });
                 rightBuffer = leftBuffer;
-                
-                
+
+
                 // do processing
                 const clock_t startTime {clock()};
                 mSongbird.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
                 const clock_t endTime {clock()};
-                
+
                 // calculate the execution time
                 const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
                 const double executionTime {static_cast<double>(endTime - startTime) / CLOCKS_PER_MICROSEC};
                 executionTimes.push_back(executionTime);
                 CHECK(executionTime < mLimits.INDIVIDUAL);
             }
-            
+
             THEN("The average and variance are within limits") {
                 Stats mStats = calcAverageAndDeviation(executionTimes);
                 CHECK(mStats.average < mLimits.AVERAGE);
                 CHECK(mStats.deviation < mLimits.DEVIATION);
-                
+
                 appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());
             }
         }
@@ -260,47 +260,47 @@ SCENARIO("Performance: SongbirdFilterModule (blend mode), 100 buffers of 1024 sa
 
 SCENARIO("Performance: SongbirdFilterModule (freq mode), 100 buffers of 1024 samples each") {
     GIVEN("A SongbirdFilterModule and a buffer of samples") {
-        
+
         const int NUM_BUFFERS {100};
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
         WECore::Songbird::SongbirdFilterModule mSongbird;
         mSongbird.setModMode(true);
-        
+
         // set the performance limits
         Limits mLimits{1.8, 1.5, 0.12};
-        
+
         // store the execution time for each buffer
         std::vector<double> executionTimes;
-        
+
         WHEN("The samples are processed") {
             // turn the crossover on
-            
+
             for (int nbuf {0}; nbuf < NUM_BUFFERS; nbuf++) {
-                
+
                 // fill the buffer with a sine wave
                 int iii {0};
                 std::generate(leftBuffer.begin(), leftBuffer.end(), [&iii]{ return std::sin(iii++); });
                 rightBuffer = leftBuffer;
-                
-                
+
+
                 // do processing
                 const clock_t startTime {clock()};
                 mSongbird.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
                 const clock_t endTime {clock()};
-                
+
                 // calculate the execution time
                 const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
                 const double executionTime {static_cast<double>(endTime - startTime) / CLOCKS_PER_MICROSEC};
                 executionTimes.push_back(executionTime);
                 CHECK(executionTime < mLimits.INDIVIDUAL);
             }
-            
+
             THEN("The average and variance are within limits") {
                 Stats mStats = calcAverageAndDeviation(executionTimes);
                 CHECK(mStats.average < mLimits.AVERAGE);
                 CHECK(mStats.deviation < mLimits.DEVIATION);
-                
+
                 appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());
             }
         }
