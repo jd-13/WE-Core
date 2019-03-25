@@ -215,7 +215,7 @@ SCENARIO("Performance: SongbirdFilterModule (blend mode), 100 buffers of 1024 sa
         const int NUM_BUFFERS {100};
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
-        WECore::Songbird::SongbirdFilterModule mSongbird;
+        WECore::Songbird::SongbirdFilterModule<double> mSongbird;
         mSongbird.setModMode(false);
 
         // set the performance limits
@@ -264,7 +264,7 @@ SCENARIO("Performance: SongbirdFilterModule (freq mode), 100 buffers of 1024 sam
         const int NUM_BUFFERS {100};
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
-        WECore::Songbird::SongbirdFilterModule mSongbird;
+        WECore::Songbird::SongbirdFilterModule<double> mSongbird;
         mSongbird.setModMode(true);
 
         // set the performance limits
