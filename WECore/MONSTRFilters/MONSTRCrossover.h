@@ -81,48 +81,7 @@ namespace WECore::MONSTR {
          * @param[in]    numSamples      Number of samples in the buffer. The left and right buffers
          *                               must be the same size.
          */
-        void Process2in2out(double* leftSample, double* rightSample, size_t numSamples) {
-
-            // If the buffer we've been passed is bigger than our static internal buffer, then we need
-            // to break it into chunks
-            const size_t numBuffersRequired {static_cast<size_t>(
-                std::ceil(static_cast<double>(numSamples) / INTERNAL_BUFFER_SIZE)
-                )};
-
-            for (size_t bufferNumber {0}; bufferNumber < numBuffersRequired; bufferNumber++) {
-
-                // Calculate how many samples need to be processed in this chunk
-                const size_t numSamplesRemaining {numSamples - (bufferNumber * INTERNAL_BUFFER_SIZE)};
-                const size_t numSamplesToCopy {std::min(numSamplesRemaining,
-                                            static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
-
-                double* const leftBufferInputStart {&leftSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
-                double* const rightBufferInputStart {&rightSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
-
-                std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band1LeftBuffer);
-                std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band1RightBuffer);
-                std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band2LeftBuffer);
-                std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band2RightBuffer);
-                std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band3LeftBuffer);
-                std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band3RightBuffer);
-
-                // let each band do its processing
-                band1.process2in2out(_band1LeftBuffer, _band1RightBuffer, numSamplesToCopy);
-                band2.process2in2out(_band2LeftBuffer, _band2RightBuffer, numSamplesToCopy);
-                band3.process2in2out(_band3LeftBuffer, _band3RightBuffer, numSamplesToCopy);
-
-                // combine the output from each band, and write to output
-                for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
-                    leftBufferInputStart[iii] = _band1LeftBuffer[iii]
-                                                + _band2LeftBuffer[iii]
-                                                + _band3LeftBuffer[iii];
-
-                    rightBufferInputStart[iii] = _band1RightBuffer[iii]
-                                                + _band2RightBuffer[iii]
-                                                + _band3RightBuffer[iii];
-                }
-            }
-        }
+        inline void Process2in2out(double* leftSample, double* rightSample, size_t numSamples);
 
         /**
          * Sets the crossover frequency of the lower (band1) and middle (band2) bands.
@@ -131,11 +90,7 @@ namespace WECore::MONSTR {
          *
          * @see     CROSSOVERLOWER for valid values
          */
-        void setCrossoverLower(double val) {
-            val = Parameters::CROSSOVERLOWER.BoundsCheck(val);
-            band1.setHighCutoff(val);
-            band2.setLowCutoff(val);
-        }
+        inline void setCrossoverLower(double val);
 
         /**
          * Sets the crossover frequency of the middle (band2) and upper (band3) bands.
@@ -144,11 +99,7 @@ namespace WECore::MONSTR {
          *
          * @see     CROSSOVERUPPER for valid values
          */
-        void setCrossoverUpper(double val) {
-            val = Parameters::CROSSOVERUPPER.BoundsCheck(val);
-            band2.setHighCutoff(val);
-            band3.setLowCutoff(val);
-        }
+        inline void setCrossoverUpper(double val);
 
         /**
          * Gets the crossover frequency of the lower (band1) and middle (band2) bands.
@@ -174,21 +125,13 @@ namespace WECore::MONSTR {
          *
          * @param   newSampleRate  The sample rate the filter should be configured for
          */
-        void setSampleRate(double newSampleRate) {
-            band1.setSampleRate(newSampleRate);
-            band2.setSampleRate(newSampleRate);
-            band3.setSampleRate(newSampleRate);
-        }
+        inline void setSampleRate(double newSampleRate);
 
         /**
          * Resets all filters.
          * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
          */
-        void reset() {
-            band1.reset();
-            band2.reset();
-            band3.reset();
-        }
+        inline void reset();
 
     private:
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
@@ -200,4 +143,73 @@ namespace WECore::MONSTR {
         double _band3LeftBuffer[INTERNAL_BUFFER_SIZE];
         double _band3RightBuffer[INTERNAL_BUFFER_SIZE];
     };
+
+    void MONSTRCrossover::Process2in2out(double* leftSample,
+                                         double* rightSample,
+                                         size_t numSamples) {
+
+        // If the buffer we've been passed is bigger than our static internal buffer, then we need
+        // to break it into chunks
+        const size_t numBuffersRequired {static_cast<size_t>(
+            std::ceil(static_cast<double>(numSamples) / INTERNAL_BUFFER_SIZE)
+            )};
+
+        for (size_t bufferNumber {0}; bufferNumber < numBuffersRequired; bufferNumber++) {
+
+            // Calculate how many samples need to be processed in this chunk
+            const size_t numSamplesRemaining {numSamples - (bufferNumber * INTERNAL_BUFFER_SIZE)};
+            const size_t numSamplesToCopy {std::min(numSamplesRemaining,
+                                        static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
+
+            double* const leftBufferInputStart {&leftSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
+            double* const rightBufferInputStart {&rightSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
+
+            std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band1LeftBuffer);
+            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band1RightBuffer);
+            std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band2LeftBuffer);
+            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band2RightBuffer);
+            std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band3LeftBuffer);
+            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band3RightBuffer);
+
+            // let each band do its processing
+            band1.process2in2out(_band1LeftBuffer, _band1RightBuffer, numSamplesToCopy);
+            band2.process2in2out(_band2LeftBuffer, _band2RightBuffer, numSamplesToCopy);
+            band3.process2in2out(_band3LeftBuffer, _band3RightBuffer, numSamplesToCopy);
+
+            // combine the output from each band, and write to output
+            for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
+                leftBufferInputStart[iii] = _band1LeftBuffer[iii]
+                                            + _band2LeftBuffer[iii]
+                                            + _band3LeftBuffer[iii];
+
+                rightBufferInputStart[iii] = _band1RightBuffer[iii]
+                                            + _band2RightBuffer[iii]
+                                            + _band3RightBuffer[iii];
+            }
+        }
+    }
+
+    void MONSTRCrossover::setCrossoverLower(double val) {
+        val = Parameters::CROSSOVERLOWER.BoundsCheck(val);
+        band1.setHighCutoff(val);
+        band2.setLowCutoff(val);
+    }
+
+    void MONSTRCrossover::setCrossoverUpper(double val) {
+        val = Parameters::CROSSOVERUPPER.BoundsCheck(val);
+        band2.setHighCutoff(val);
+        band3.setLowCutoff(val);
+    }
+
+    void MONSTRCrossover::setSampleRate(double newSampleRate) {
+        band1.setSampleRate(newSampleRate);
+        band2.setSampleRate(newSampleRate);
+        band3.setSampleRate(newSampleRate);
+    }
+
+    void MONSTRCrossover::reset() {
+        band1.reset();
+        band2.reset();
+        band3.reset();
+    }
 }
