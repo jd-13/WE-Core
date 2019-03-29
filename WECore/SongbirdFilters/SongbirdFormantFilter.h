@@ -51,10 +51,8 @@ namespace WECore::Songbird {
          */
         SongbirdFormantFilter() {
             for (size_t iii {0}; iii < NUM_FORMANTS; iii++) {
-                TPTSVF::TPTSVFilter<T> tempFilter;
-                tempFilter.setMode(TPTSVF::Parameters::FILTER_MODE.PEAK);
-                tempFilter.setQ(15);
-                _filters[iii] = tempFilter;
+                _filters[iii].setMode(TPTSVF::Parameters::FILTER_MODE.PEAK);
+                _filters[iii].setQ(15);
             }
         }
 
