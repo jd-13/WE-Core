@@ -50,7 +50,7 @@ namespace WECore::Songbird {
          * Creates and stores the appropriate number of filters.
          */
         SongbirdFormantFilter() {
-            for (int iii {0}; iii < NUM_FORMANTS; iii++) {
+            for (size_t iii {0}; iii < NUM_FORMANTS; iii++) {
                 TPTSVF::TPTSVFilter<T> tempFilter;
                 tempFilter.setMode(TPTSVF::Parameters::FILTER_MODE.PEAK);
                 tempFilter.setQ(15);
