@@ -193,6 +193,13 @@ namespace WECore::MONSTR {
                  _highCutoffHz;
 
         double _sampleRate;
+        
+        /**
+         * Statically allocate an array of pointers to point to the left and right channel buffers.
+         * Required by the DspFilters API.
+         */
+        T* _channelsArray[2];
+        
         static constexpr int FILTER_ORDER {2};
 
         Dsp::SimpleFilter<Dsp::Butterworth::HighPass<FILTER_ORDER>, 2> _lowCut1;
@@ -291,23 +298,20 @@ namespace WECore::MONSTR {
 
     template <typename T>
     void MONSTRBand<T>::_filterSamples(T* inLeftSamples, T* inRightSamples, int numSamples) {
-        T** channelsArray = new T*[2];
-        channelsArray[0] = inLeftSamples;
-        channelsArray[1] = inRightSamples;
+        _channelsArray[0] = inLeftSamples;
+        _channelsArray[1] = inRightSamples;
 
         if (_isLower) {
-            _highCut1.process(numSamples, channelsArray);
-            _highCut2.process(numSamples, channelsArray);
+            _highCut1.process(numSamples, _channelsArray);
+            _highCut2.process(numSamples, _channelsArray);
         } else if (_isUpper) {
-            _lowCut1.process(numSamples, channelsArray);
-            _lowCut2.process(numSamples, channelsArray);
+            _lowCut1.process(numSamples, _channelsArray);
+            _lowCut2.process(numSamples, _channelsArray);
         } else {
-            _lowCut1.process(numSamples, channelsArray);
-            _lowCut2.process(numSamples, channelsArray);
-            _highCut1.process(numSamples, channelsArray);
-            _highCut2.process(numSamples, channelsArray);
+            _lowCut1.process(numSamples, _channelsArray);
+            _lowCut2.process(numSamples, _channelsArray);
+            _highCut1.process(numSamples, _channelsArray);
+            _highCut2.process(numSamples, _channelsArray);
         }
-
-        delete[] channelsArray;
     }
 }
