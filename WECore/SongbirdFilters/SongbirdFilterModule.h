@@ -32,19 +32,19 @@ namespace {
     /**
      * The number of formants (bandpass filters) which are used in a single vowel.
      */
-    static const int NUM_FORMANTS_PER_VOWEL {5};
+    constexpr int NUM_FORMANTS_PER_VOWEL {5};
 
     /**
      * The number of vowels supported.
      */
-    static const int NUM_VOWELS {5};
+    constexpr int NUM_VOWELS {5};
 }
 
 namespace WECore::Songbird {
     /**
      * A type to make refering to a group of formants easier.
      */
-    typedef std::array<Formant, NUM_VOWELS> Vowel;
+    typedef std::array<Formant, NUM_FORMANTS_PER_VOWEL> Vowel;
 
     /**
      * Enums used to make identifing left or right channel filters easier
@@ -244,8 +244,8 @@ namespace WECore::Songbird {
 
         bool _modMode;
 
-        std::map<Channels, SongbirdFormantFilter<T>> _filters1;
-        std::map<Channels, SongbirdFormantFilter<T>> _filters2;
+        std::map<Channels, SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL>> _filters1;
+        std::map<Channels, SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL>> _filters2;
 
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
 
@@ -255,17 +255,17 @@ namespace WECore::Songbird {
         T _rightOutputBuffer2[INTERNAL_BUFFER_SIZE];
 
         /**
-         * Sets the vowel sound that should be created by filter 1 using a Vowel object provided by the
-         * caller rather than one of the built in Vowel objects stored in this class.
+         * Sets the vowel sound that should be created by filter 1 using a Vowel object provided by
+         * the caller rather than one of the built in Vowel objects stored in this class.
          *
          * @param   val Value that should be used for Vowel 1
          */
-        inline void _setVowel1(Vowel val);
+        inline void _setVowel1(const Vowel& val);
 
         /**
          * Uses the filterPosition parameter and the modulation source to calculate the vowel that
-         * should be used when in MODMODE_FREQ, as this vowel will sit somewhere between the two vowels
-         * that have been selected by the user.
+         * should be used when in MODMODE_FREQ, as this vowel will sit somewhere between the two
+         * vowels that have been selected by the user.
          */
         inline Vowel _calcVowelForFreqMode();
 
@@ -273,7 +273,7 @@ namespace WECore::Songbird {
          * An array which defines all the formants that will be needed.
          */
         // (TODO: could be made static again)
-        const Formant _allFormants[NUM_VOWELS][NUM_FORMANTS_PER_VOWEL] {
+        const Vowel _allFormants[NUM_VOWELS] {
             {Formant(800, 0), Formant(1150, -4), Formant(2800, -20), Formant(3500, -36), Formant(4950, -60)},
             {Formant(400, 0), Formant(1600, -24), Formant(2700, -30), Formant(3300, -35), Formant(4950, -60)},
             {Formant(350, 0), Formant(1700, -20), Formant(2700, -30), Formant(3700, -36), Formant(4950, -60)},
@@ -287,11 +287,8 @@ namespace WECore::Songbird {
         // perform a bounds check, then apply the appropriate formants
         _vowel1 = Parameters::VOWEL.BoundsCheck(val);
 
-        const std::vector<Formant> tempFormants(&_allFormants[_vowel1 - 1][0],
-                                                &_allFormants[_vowel1 - 1][NUM_FORMANTS_PER_VOWEL]);
-
-        _filters1[Channels::LEFT].setFormants(tempFormants);
-        _filters1[Channels::RIGHT].setFormants(tempFormants);
+        _filters1[Channels::LEFT].setFormants(_allFormants[_vowel1 - 1]);
+        _filters1[Channels::RIGHT].setFormants(_allFormants[_vowel1 - 1]);
     }
 
     template <typename T>
@@ -299,10 +296,8 @@ namespace WECore::Songbird {
         // perform a bounds check, then apply the appropriate formants
         _vowel2 = Parameters::VOWEL.BoundsCheck(val);
 
-        const std::vector<Formant> tempFormants(&_allFormants[_vowel2 - 1][0],
-                                                &_allFormants[_vowel2 - 1][NUM_FORMANTS_PER_VOWEL]);
-        _filters2[Channels::LEFT].setFormants(tempFormants);
-        _filters2[Channels::RIGHT].setFormants(tempFormants);
+        _filters2[Channels::LEFT].setFormants(_allFormants[_vowel2 - 1]);
+        _filters2[Channels::RIGHT].setFormants(_allFormants[_vowel2 - 1]);
     }
 
     template <typename T>
@@ -398,11 +393,9 @@ namespace WECore::Songbird {
     }
 
     template <typename T>
-    void SongbirdFilterModule<T>::_setVowel1(Vowel val) {
-        const std::vector<Formant> tempFormants(val.begin(), val.end());
-
-        _filters1[Channels::LEFT].setFormants(tempFormants);
-        _filters1[Channels::RIGHT].setFormants(tempFormants);
+    void SongbirdFilterModule<T>::_setVowel1(const Vowel& val) {
+        _filters1[Channels::LEFT].setFormants(val);
+        _filters1[Channels::RIGHT].setFormants(val);
     }
 
     template <typename T>

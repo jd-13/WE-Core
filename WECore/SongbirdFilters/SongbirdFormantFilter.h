@@ -40,7 +40,7 @@ namespace WECore::Songbird {
      * @see setFormants - must be called before performing any processing
      * @see Formant     - Formant objects are required for operation of this class
      */
-    template <typename T>
+    template <typename T, size_t NUM_FORMANTS>
     class SongbirdFormantFilter {
         static_assert(std::is_floating_point<T>::value,
                 "Must be provided with a floating point template type");
@@ -48,13 +48,9 @@ namespace WECore::Songbird {
     public:
         /**
          * Creates and stores the appropriate number of filters.
-         *
-         * @param   numFormants The number of formant peaks the filter should produce
-         *                      (therefore the number of bandpass filters it will need to
-         *                      contain), defaults to 5
          */
-        SongbirdFormantFilter(int numFormants = 5) {
-            for (int iii {0}; iii < numFormants; iii++) {
+        SongbirdFormantFilter() {
+            for (int iii {0}; iii < NUM_FORMANTS; iii++) {
                 TPTSVF::TPTSVFilter<T> tempFilter;
                 tempFilter.setMode(TPTSVF::Parameters::FILTER_MODE.PEAK);
                 tempFilter.setQ(15);
@@ -76,9 +72,8 @@ namespace WECore::Songbird {
         /**
          * Sets the properties of each bandpass filter contained in the object.
          *
-         * @param   formants    A vector of Formants, the size of which must equal the
-         *                      number of bandpass filters in the object, as a single Formant
-         *                      is applied to single bandpass filter in a one-to-one fashion
+         * @param   formants    An array of Formants, the size of which must equal the
+         *                      number of bandpass filters in the object.
          *
          * @return  A boolean value, true if the formants have been applied to the filters
          *          correctly, false if the operation failed
@@ -86,7 +81,7 @@ namespace WECore::Songbird {
          * @see     Formant - This object is used to as a convenient container of all the
          *                    parameters which can be supplied to a bandpass filter.
          */
-        inline bool setFormants(std::vector<Formant> formants);
+        inline bool setFormants(const std::array<Formant, NUM_FORMANTS>& formants);
 
         /**
          * Sets the sample rate which the filters will be operating on.
@@ -108,8 +103,8 @@ namespace WECore::Songbird {
         T _tempInputBuffer[INTERNAL_BUFFER_SIZE];
     };
 
-    template <typename T>
-    void SongbirdFormantFilter<T>::process(T* inSamples, size_t numSamples) {
+    template <typename T, size_t NUM_FORMANTS>
+    void SongbirdFormantFilter<T, NUM_FORMANTS>::process(T* inSamples, size_t numSamples) {
 
         // If the buffer we've been passed is bigger than our static internal buffer, then we need
         // to break it into chunks
@@ -149,8 +144,10 @@ namespace WECore::Songbird {
         }
     }
 
-    template <typename T>
-    bool SongbirdFormantFilter<T>::setFormants(std::vector<Formant> formants) {
+    template <typename T, size_t NUM_FORMANTS>
+    bool SongbirdFormantFilter<T, NUM_FORMANTS>::setFormants(
+            const std::array<Formant, NUM_FORMANTS>& formants) {
+
         bool retVal {false};
 
         // if the correct number of formants have been supplied,
@@ -169,15 +166,15 @@ namespace WECore::Songbird {
         return retVal;
     }
 
-    template <typename T>
-    void SongbirdFormantFilter<T>::setSampleRate(double val) {
+    template <typename T, size_t NUM_FORMANTS>
+    void SongbirdFormantFilter<T, NUM_FORMANTS>::setSampleRate(double val) {
         for (TPTSVF::TPTSVFilter<T>& filter : _filters) {
             filter.setSampleRate(val);
         }
     }
 
-    template <typename T>
-    void SongbirdFormantFilter<T>::reset() {
+    template <typename T, size_t NUM_FORMANTS>
+    void SongbirdFormantFilter<T, NUM_FORMANTS>::reset() {
         for (TPTSVF::TPTSVFilter<T>& filter : _filters) {
             filter.reset();
         }
