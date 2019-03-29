@@ -54,7 +54,7 @@ namespace WECore::Songbird {
                 TPTSVF::TPTSVFilter<T> tempFilter;
                 tempFilter.setMode(TPTSVF::Parameters::FILTER_MODE.PEAK);
                 tempFilter.setQ(15);
-                _filters.push_back(tempFilter);
+                _filters[iii] = tempFilter;
             }
         }
 
@@ -95,7 +95,7 @@ namespace WECore::Songbird {
         inline void reset();
 
     private:
-        std::vector<TPTSVF::TPTSVFilter<T>> _filters;
+        std::array<TPTSVF::TPTSVFilter<T>, NUM_FORMANTS> _filters;
 
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
 
