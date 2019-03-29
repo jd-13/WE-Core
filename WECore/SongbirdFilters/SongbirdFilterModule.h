@@ -220,6 +220,17 @@ namespace WECore::Songbird {
         /** @} */
 
         /**
+         * Applies the filtering to a mono buffer of samples.
+         * Expect seg faults or other memory issues if arguements passed are incorrect.
+         *
+         *
+         * @param   inSamples      Pointer to the first sample of the buffer
+         * @param   numSamples     Number of samples in the buffer. The left and right buffers
+         *                         must be the same size.
+         */
+        inline void Process1in1out(T* inSamples, size_t numSamples);
+
+        /**
          * Applies the filtering to a stereo buffer of samples.
          * Expect seg faults or other memory issues if arguements passed are incorrect.
          *
@@ -327,6 +338,59 @@ namespace WECore::Songbird {
                   std::begin(tempVowel));
 
         return tempVowel;
+    }
+
+    template <typename T>
+    void SongbirdFilterModule<T>::Process1in1out(T* inSamples,
+                                                 size_t numSamples) {
+
+        // If the buffer we've been passed is bigger than our static internal buffer, then we need
+        // to break it into chunks
+        const size_t numBuffersRequired {static_cast<size_t>(
+            std::ceil(static_cast<double>(numSamples) / INTERNAL_BUFFER_SIZE)
+            )};
+
+        for (size_t bufferNumber {0}; bufferNumber < numBuffersRequired; bufferNumber++) {
+
+            // Calculate how many samples need to be processed in this chunk
+            const size_t numSamplesRemaining {numSamples - (bufferNumber * INTERNAL_BUFFER_SIZE)};
+            const size_t numSamplesToCopy {std::min(numSamplesRemaining,
+                                            static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
+
+            // Get a pointer to the start of this chunk
+            T* const bufferInputStart {&inSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
+
+            // Copy the samples we need to process in this chunk into the internal buffers
+            std::copy(bufferInputStart, &bufferInputStart[numSamplesToCopy], _leftOutputBuffer1);
+
+            std::copy(bufferInputStart, &bufferInputStart[numSamplesToCopy], _leftOutputBuffer2);
+
+            // Figure out the modulation here. We have two ways to modulation between
+            // two formant filters.
+            // For MODMODE_BLEND we modulation the filter position to blend between the two filters.
+            // For MODMOD_FREQ we set the filter position to 0 so that we're only using filter 1,
+            // and then modulate the freqency of filter 1 between the two vowels
+            double blendFilterPosition;
+            if (_modMode == Parameters::MODMODE_BLEND) {
+                blendFilterPosition = _filterPosition + _modulationSrc;
+            } else {
+                blendFilterPosition = 0;
+                _setVowel1(_calcVowelForFreqMode());
+            }
+
+            // Do the processing for each filter
+            _filters1[Channels::LEFT].process(_leftOutputBuffer1, numSamplesToCopy);
+
+            _filters2[Channels::LEFT].process(_leftOutputBuffer2, numSamplesToCopy);
+
+            // Write to output, applying filter position and mix level
+            // always use modFilterPosition as this will take into account any modulation
+            for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
+                bufferInputStart[iii] = bufferInputStart[iii] * (1 - _mix)
+                                        + _leftOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
+                                        + _leftOutputBuffer2[iii] * blendFilterPosition * _mix;
+            }
+        }
     }
 
     template <typename T>
