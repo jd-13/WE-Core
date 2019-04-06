@@ -60,6 +60,20 @@ namespace WECore::JUCEPlugin {
             }
         }
         
+        /**
+         * Sets the LookAndFeel for all child components to nullptr.
+         *
+         * Must be called before the LookAndFeel is deallocated, normally this is in the derived
+         * editor's destructor.
+         */
+        void _removeLookAndFeelFromAllChildren() {
+            _tooltipWindow->setLookAndFeel(nullptr);
+
+            for (int iii {0}; iii < getNumChildComponents(); iii++) {
+                getChildComponent(iii)->setLookAndFeel(nullptr);
+            }
+        }
+        
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreProcessorEditor)
     };
 }
