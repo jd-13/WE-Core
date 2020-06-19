@@ -4,3 +4,4 @@ doxygen/html/*
 doxygen/doxygen*
 build/*
 .vscode/*
+.DS_Store
