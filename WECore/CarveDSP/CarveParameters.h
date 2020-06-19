@@ -26,13 +26,13 @@
 #include "General/ParameterDefinition.h"
 
 namespace WECore::Carve::Parameters {
-    
+
     class ModeParameter : public ParameterDefinition::BaseParameter<int> {
     public:
 
         ModeParameter() : ParameterDefinition::BaseParameter<int>::BaseParameter(
-            OFF, CLIPPER, OFF) { }
-        
+            OFF, CLIPPER, SINE) { }
+
         static constexpr int OFF = 1,
                              SINE = 2,
                              PARABOLIC_SOFT = 3,
