@@ -32,7 +32,7 @@ namespace WECore::Richter::Parameters {
     class WaveParameter : public ParameterDefinition::BaseParameter<int> {
     public:
         WaveParameter() : ParameterDefinition::BaseParameter<int>(SINE, SAW, SINE) {}
-        
+
         static constexpr int SINE {1},
                              SQUARE {2},
                              SAW {3};
@@ -59,6 +59,6 @@ namespace WECore::Richter::Parameters {
 
                    PHASESYNC_OFF = false,
                    PHASESYNC_ON = true,
-                   PHASESYNC_DEFAULT = PHASESYNC_OFF;
+                   PHASESYNC_DEFAULT = PHASESYNC_ON;
 
 }
