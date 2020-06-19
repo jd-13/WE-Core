@@ -38,7 +38,7 @@ namespace WECore::LookAndFeelMixins {
     class ComboBoxV2 : public BASE {
 
     public:
-        ComboBoxV2() : _comboBoxFontName("Courier New") {}
+        ComboBoxV2() = default;
         virtual ~ComboBoxV2() = default;
 
         /** @{ LookAndFeel overrides */
@@ -51,14 +51,7 @@ namespace WECore::LookAndFeelMixins {
                                          int buttonW,
                                          int buttonH,
                                          ComboBox& box) override;
-
-        inline virtual Font getComboBoxFont(ComboBox& comboBox) override;
         /** @} */
-
-        void setComboBoxFontName(const char* fontName) { _comboBoxFontName = fontName; }
-
-    private:
-        const char* _comboBoxFontName;
     };
 
     template <typename BASE>
@@ -96,12 +89,5 @@ namespace WECore::LookAndFeelMixins {
                         LINE_WIDTH);
 
         g.strokePath(p, PathStrokeType(1));
-    }
-
-    template <typename BASE>
-    Font ComboBoxV2<BASE>::getComboBoxFont(ComboBox& /*comboBox*/) {
-        Font comboFont;
-        comboFont.setTypefaceName(_comboBoxFontName);
-        return comboFont;
     }
 }
