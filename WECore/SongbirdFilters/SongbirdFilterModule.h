@@ -168,6 +168,15 @@ namespace WECore::Songbird {
         void setModulation(double val) { _modulationSrc = Parameters::MODULATION.BoundsCheck(val); }
 
         /**
+         * Sets the output gain.
+         *
+         * @param[in]   val The output gain that should be used
+         *
+         * @see         OUTPUTGAIN for valid values
+         */
+        void setOutputGain(double val) { _outputGain = Parameters::OUTPUTGAIN.BoundsCheck(val); }
+
+        /**
          * Sets the modulation mode to apply to the filters.
          *
          * @param[in]   val Chooses the modulation mode
@@ -217,6 +226,11 @@ namespace WECore::Songbird {
          */
         bool getModMode() { return _modMode; }
 
+        /**
+         * @see setOutputGain
+         */
+        double getOutputGain() { return _outputGain; }
+
         /** @} */
 
         /**
@@ -251,7 +265,8 @@ namespace WECore::Songbird {
         double  _filterPosition,
                 _sampleRate,
                 _mix,
-                _modulationSrc;
+                _modulationSrc,
+                _outputGain;
 
         bool _modMode;
 
@@ -386,9 +401,12 @@ namespace WECore::Songbird {
             // Write to output, applying filter position and mix level
             // always use modFilterPosition as this will take into account any modulation
             for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
-                bufferInputStart[iii] = bufferInputStart[iii] * (1 - _mix)
-                                        + _leftOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
-                                        + _leftOutputBuffer2[iii] * blendFilterPosition * _mix;
+                bufferInputStart[iii] = (
+                                            bufferInputStart[iii] * (1 - _mix)
+                                            + _leftOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
+                                            + _leftOutputBuffer2[iii] * blendFilterPosition * _mix
+                                        )
+                                        * _outputGain;
             }
         }
     }
@@ -445,13 +463,19 @@ namespace WECore::Songbird {
             // Write to output, applying filter position and mix level
             // always use modFilterPosition as this will take into account any modulation
             for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
-                leftBufferInputStart[iii] = leftBufferInputStart[iii] * (1 - _mix)
-                                            + _leftOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
-                                            + _leftOutputBuffer2[iii] * blendFilterPosition * _mix;
+                leftBufferInputStart[iii] = (
+                                                leftBufferInputStart[iii] * (1 - _mix)
+                                                + _leftOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
+                                                + _leftOutputBuffer2[iii] * blendFilterPosition * _mix
+                                            )
+                                            * _outputGain;
 
-                rightBufferInputStart[iii] = rightBufferInputStart[iii] * (1 - _mix)
-                                            + _rightOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
-                                            + _rightOutputBuffer2[iii] * blendFilterPosition * _mix;
+                rightBufferInputStart[iii] = (
+                                                rightBufferInputStart[iii] * (1 - _mix)
+                                                + _rightOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
+                                                + _rightOutputBuffer2[iii] * blendFilterPosition * _mix
+                                            )
+                                            * _outputGain;
             }
         }
     }

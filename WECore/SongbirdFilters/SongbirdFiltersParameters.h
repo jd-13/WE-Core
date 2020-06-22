@@ -30,7 +30,7 @@ namespace WECore::Songbird::Parameters {
     class VowelParameter : public ParameterDefinition::BaseParameter<int> {
     public:
         VowelParameter() : ParameterDefinition::BaseParameter<int>(VOWEL_A, VOWEL_U, VOWEL_A) { }
-        
+
         static constexpr int VOWEL_A {1},
                              VOWEL_E {2},
                              VOWEL_I {3},
@@ -49,7 +49,8 @@ namespace WECore::Songbird::Parameters {
      */
     const ParameterDefinition::RangedParameter<double>  FILTER_POSITION(0, 1, 0.5),
                                                         MIX(0, 1, 1),
-                                                        MODULATION(-1, 1, 0);
+                                                        MODULATION(-1, 1, 0),
+                                                        OUTPUTGAIN(0, 2, 1);
     //@}
 
     constexpr bool MODMODE_BLEND = false,
