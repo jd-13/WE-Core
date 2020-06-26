@@ -35,7 +35,7 @@ namespace WECore::Richter {
      * LFOs for anything other than getting or setting parameter values.
      *
      * This class has been created as the LFO relies on the MOD being ready before
-     * it can perform certain operations, which means there are method calls to 
+     * it can perform certain operations, which means there are method calls to
      * each oscillator which must be interleaved carefully.
      *
      * The following example shows how to set up this object for audio at 120bpm and 44.1kHz:
@@ -56,18 +56,19 @@ namespace WECore::Richter {
      * you do not wish to apply processing to,calcGainInLoop must still be called otherwise subsequent
      * samples will have the wrong gain calculation applied.
      */
-    
+
     class RichterLFOPair {
     public:
-        RichterLFOPair() : LFO(), MOD() {}
-        
+        RichterLFOPair() : _lfoGain(0), _modGain(0) {}
         virtual ~RichterLFOPair() = default;
-        
+        RichterLFOPair operator= (RichterLFOPair& other) = delete;
+        RichterLFOPair(RichterLFOPair& other) = delete;
+
         /**
          * Call each oscillator's reset method.
          */
         inline void reset();
-        
+
         /**
          * Prepares for processing the next buffer of samples. For example if using JUCE, you
          * would call this in your processBlock() method before doing any processing.
@@ -81,7 +82,7 @@ namespace WECore::Richter {
          * @param   sampleRate      Current sample rate of the host
          */
         inline void prepareForNextBuffer(double bpm, double timeInSeconds, double sampleRate);
-        
+
         /**
          * Use this in your processing loop. Returns a gain value which is intended to be
          * multiplied with a single sample to apply the tremolo effect.
@@ -92,14 +93,23 @@ namespace WECore::Richter {
          * @return  The value of the RichterLFO's output at this moment, a value between 0 and 1.
          */
         inline double calcGainInLoop();
-        
-        
+
+        /**
+         * Returns the most recent gain value without advancing the LFOs.
+         */
+        double getGain() { return _lfoGain; }
+
+        /**
+         * Returns the most recent mod value without advancing the LFOs.
+         */
+        double getMod() { return _modGain; }
+
         RichterLFO LFO;
         RichterMOD MOD;
-        
-        RichterLFOPair operator= (RichterLFOPair& other) = delete;
-        RichterLFOPair(RichterLFOPair& other) = delete;
-        
+
+    private:
+        double _lfoGain;
+        double _modGain;
     };
 
     void RichterLFOPair::reset() {
@@ -112,16 +122,16 @@ namespace WECore::Richter {
                                               double sampleRate) {
         LFO.setWaveTablePointers();
         MOD.setWaveTablePointers();
-        
+
         MOD._calcFreq(bpm);
         MOD._calcPhaseOffset(timeInSeconds);
-        
+
         LFO._calcFreq(bpm);
         LFO._calcPhaseOffset(timeInSeconds);
-        
+
         LFO._calcSamplesPerTremoloCycle(sampleRate);
         MOD._calcSamplesPerTremoloCycle(sampleRate);
-        
+
         LFO._calcNextScale();
         MOD._calcNextScale();
     }
@@ -130,7 +140,10 @@ namespace WECore::Richter {
     double RichterLFOPair::calcGainInLoop() {
         LFO.calcIndexAndScaleInLoop();
         MOD.calcIndexAndScaleInLoop();
-        
-        return LFO._calcGain(MOD.getBypassSwitch(), MOD._calcGain());
+
+        _modGain = MOD._calcGain();
+        _lfoGain = LFO._calcGain(MOD.getBypassSwitch(), _modGain);
+
+        return _lfoGain;
     }
 }
