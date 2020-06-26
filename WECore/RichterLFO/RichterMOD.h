@@ -41,31 +41,31 @@ namespace WECore::Richter {
      * Completes the implementation of RichterLFO.
      */
     class RichterMOD : public RichterLFOBase {
-        
+
     public:
         /**
          * Generates the wave tables on initialsation, while running gain values
          * are simply looked up from these wave tables.
          */
         inline RichterMOD();
-        
+
         virtual ~RichterMOD() = default;
-        
+
         friend class RichterLFOPair;
-        
+
         /**
          * Use this in your processing loop.
          *
          * Note: Calling this method will advance the oscillators internal counters by one
          *       sample. Calling this method will return a different value each time.
          *
-         * @return  The value of the LFO's output at this moment, a value between -1 and 1.
+         * @return  The value of the LFO's output at this moment, a value between -0.5 and 0.5.
          */
         inline double calcGainInLoop();
-        
+
         RichterMOD operator=(RichterMOD& other) = delete;
         RichterMOD(RichterMOD& other) = delete;
-        
+
     private:
         /**
          * Calculates the gain value to be applied to a signal (in this case a
@@ -80,11 +80,11 @@ namespace WECore::Richter {
         // mod wavetables below (no correction, move below 0)
 
         for (int i = 0; i < Parameters::kWaveArraySize; ++i) {
-            
+
             // sine wavetable
             double radians {i * 2.0 * CoreMath::DOUBLE_PI / Parameters::kWaveArraySize};
             _sineTable[i] = (sin (radians)) * 0.5;
-            
+
             // square wavetable
             double squareRadians {radians + 0.32};
             _squareTable[i] =
@@ -97,7 +97,7 @@ namespace WECore::Richter {
             0.01875 * sin (11 * squareRadians) +
             0.009375 * sin (13 * squareRadians)
             );
-            
+
             // saw wavetable
             double sawRadians {radians + CoreMath::DOUBLE_PI};
             _sawTable[i] =
