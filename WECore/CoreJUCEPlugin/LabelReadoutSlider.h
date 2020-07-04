@@ -26,10 +26,10 @@
 
 namespace WECore::JUCEPlugin {
 
-    template <class T>
     /**
      * Outputs the value of the Slider to a label while hovering over the slider.
      */
+    template <class T>
     class LabelReadoutSlider : public Slider {
     public:
         explicit LabelReadoutSlider (const String& componentName) : Slider(componentName),
@@ -59,6 +59,8 @@ namespace WECore::JUCEPlugin {
         inline virtual void mouseEnter(const MouseEvent& event) override;
 
         inline virtual void mouseExit(const MouseEvent& event) override;
+
+        inline virtual void mouseDoubleClick(const MouseEvent& event) override;
 
         inline virtual void mouseDrag(const MouseEvent& event) override;
 
@@ -101,6 +103,12 @@ namespace WECore::JUCEPlugin {
     template <class T>
     void LabelReadoutSlider<T>::mouseExit (const MouseEvent& /*event*/) {
         _resetLabel();
+    }
+
+    template <class T>
+    void LabelReadoutSlider<T>::mouseDoubleClick(const MouseEvent& event) {
+        Slider::mouseDoubleClick(event);
+        _updateLabel();
     }
 
     template <class T>
