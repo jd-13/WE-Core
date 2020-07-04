@@ -96,12 +96,14 @@ namespace WECore::JUCEPlugin {
     }
 
     template <class T>
-    void LabelReadoutSlider<T>::mouseEnter (const MouseEvent& /*event*/) {
+    void LabelReadoutSlider<T>::mouseEnter(const MouseEvent& event) {
+        Slider::mouseEnter(event);
         _updateLabel();
     }
 
     template <class T>
-    void LabelReadoutSlider<T>::mouseExit (const MouseEvent& /*event*/) {
+    void LabelReadoutSlider<T>::mouseExit(const MouseEvent& event) {
+        Slider::mouseExit(event);
         _resetLabel();
     }
 
