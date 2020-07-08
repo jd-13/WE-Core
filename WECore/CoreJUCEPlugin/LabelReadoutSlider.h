@@ -30,15 +30,66 @@
 namespace WECore::JUCEPlugin {
 
     /**
+     * Handles mouse events that may indicate that the Slider value has changed.
+     */
+    class SliderLabelUpdater : public Slider {
+    public:
+        explicit SliderLabelUpdater(const String& componentName) : Slider(componentName) {}
+        virtual ~SliderLabelUpdater() = default;
+
+        /** @name Mouse event handlers */
+        /** @{ */
+        virtual void mouseEnter(const MouseEvent& event) override {
+            Slider::mouseEnter(event);
+            _updateLabel();
+        }
+
+        virtual void mouseExit(const MouseEvent& event) override {
+            Slider::mouseExit(event);
+            _resetLabel();
+        }
+
+        virtual void mouseDoubleClick(const MouseEvent& event) override {
+            Slider::mouseDoubleClick(event);
+            _updateLabel();
+        }
+
+        virtual void mouseDrag(const MouseEvent& event) override {
+            Slider::mouseDrag(event);
+            _updateLabel();
+        }
+
+        virtual void mouseWheelMove(const MouseEvent& event,
+                                    const MouseWheelDetails& wheel) override {
+            Slider::mouseWheelMove(event, wheel);
+            _updateLabel();
+        }
+        /** @} */
+
+    private:
+        /**
+         * Called when the Slider value may have changed and the Label(s) should be updated.
+         */
+        virtual void _updateLabel() = 0;
+
+        /**
+         * Called when the mouse is no longer over the Slider, so the Label(s) can be reset.
+         */
+        virtual void _resetLabel() = 0;
+    };
+
+    /**
      * Outputs the value of the Slider to a label while hovering over the slider.
      */
     template <class T>
-    class LabelReadoutSlider : public Slider {
+    class LabelReadoutSlider : public SliderLabelUpdater {
     public:
-        explicit LabelReadoutSlider (const String& componentName) : Slider(componentName),
-                                                                  _targetLabel(nullptr),
-                                                                  _parameter(nullptr),
-                                                                  _isRunning(false) {}
+        explicit LabelReadoutSlider(const String& componentName) : SliderLabelUpdater(componentName),
+                                                                   _targetLabel(nullptr),
+                                                                   _parameter(nullptr),
+                                                                   _isRunning(false) {}
+
+        virtual ~LabelReadoutSlider() = default;
 
         /**
          * Tells the slider to start writing to the label on mouse enter events.
@@ -57,30 +108,15 @@ namespace WECore::JUCEPlugin {
          */
         inline void stop();
 
-        /** @name Mouse event handlers */
-        /** @{ */
-        inline virtual void mouseEnter(const MouseEvent& event) override;
-
-        inline virtual void mouseExit(const MouseEvent& event) override;
-
-        inline virtual void mouseDoubleClick(const MouseEvent& event) override;
-
-        inline virtual void mouseDrag(const MouseEvent& event) override;
-
-        inline virtual void mouseWheelMove(const MouseEvent& event,
-                                           const MouseWheelDetails& wheel) override;
-        /** @} */
-
-
     private:
         Label* _targetLabel;
         String _labelText;
         ParameterDefinition::RangedParameter<T>* _parameter;
         bool _isRunning;
 
-        inline void _updateLabel();
+        inline virtual void _updateLabel() override;
 
-        inline void _resetLabel();
+        inline virtual void _resetLabel() override;
     };
 
     template <class T>
@@ -96,37 +132,6 @@ namespace WECore::JUCEPlugin {
     template <class T>
     void LabelReadoutSlider<T>::stop() {
         _isRunning = false;
-    }
-
-    template <class T>
-    void LabelReadoutSlider<T>::mouseEnter(const MouseEvent& event) {
-        Slider::mouseEnter(event);
-        _updateLabel();
-    }
-
-    template <class T>
-    void LabelReadoutSlider<T>::mouseExit(const MouseEvent& event) {
-        Slider::mouseExit(event);
-        _resetLabel();
-    }
-
-    template <class T>
-    void LabelReadoutSlider<T>::mouseDoubleClick(const MouseEvent& event) {
-        Slider::mouseDoubleClick(event);
-        _updateLabel();
-    }
-
-    template <class T>
-    void LabelReadoutSlider<T>::mouseDrag(const MouseEvent& event) {
-        Slider::mouseDrag(event);
-        _updateLabel();
-    }
-
-    template <class T>
-    void LabelReadoutSlider<T>::mouseWheelMove(const MouseEvent& event,
-                                               const MouseWheelDetails& wheel) {
-        Slider::mouseWheelMove(event, wheel);
-        _updateLabel();
     }
 
     template <class T>
