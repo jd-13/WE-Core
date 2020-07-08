@@ -22,6 +22,8 @@
  *
  */
 
+#pragma once
+
 #include "../JuceLibraryCode/JuceHeader.h"
 
 namespace WECore::JUCEPlugin {
