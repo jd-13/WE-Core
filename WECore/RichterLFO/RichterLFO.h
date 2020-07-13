@@ -45,9 +45,9 @@ namespace WECore::Richter {
      * Completes the implementation of RichterLFO.
      */
     class RichterLFO : public RichterLFOBase {
-        
+
     public:
-        
+
         /**
          * Generates the wave tables on initialsation, while running gain values
          * are simply looked up from these wave tables.
@@ -55,37 +55,37 @@ namespace WECore::Richter {
          * Also initialises parameters (that are not part of RichterLFOBase) to default values.
          */
         inline RichterLFO();
-        
+
         virtual ~RichterLFO() = default;
-        
+
         friend class RichterLFOPair;
 
         /** @name Getter Methods */
         /** @{ */
-        
+
         double getRawDepth() { return _rawDepth; }
-        
+
         double getDepthMod() { return _depthMod; }
-        
+
         double getRawFreq() { return _rawFreq; }
-        
+
         double getFreqMod() { return _freqMod; }
 
         /** @} */
-        
+
         /** @name Setter Methods */
         /** @{ */
-        
+
         void setRawFreq(double val) { _rawFreq = Parameters::FREQ.BoundsCheck(val); }
-        
+
         void setFreqMod(double val) { _freqMod = Parameters::FREQMOD.BoundsCheck(val); }
-        
+
         void setRawDepth(double val) { _rawDepth = Parameters::DEPTH.BoundsCheck(val); }
-        
+
         void setDepthMod(double val) { _depthMod = Parameters::DEPTHMOD.BoundsCheck(val); }
-        
+
         /** @} */
-        
+
         /**
          * Use this in your processing loop. Returns a gain value which is intended to be
          * multiplied with a single sample to apply the tremolo effect.
@@ -100,17 +100,17 @@ namespace WECore::Richter {
          * @return  The value of the LFO's output at this moment, a value between 0 and 1.
          */
         inline double calcGainInLoop(int modBypassSwitch, double modGain);
-        
+
         RichterLFO operator= (RichterLFO& other) = delete;
         RichterLFO(RichterLFO&) = delete;
-        
+
     private:
-        
+
         double  _rawFreq,
                 _freqMod,
                 _rawDepth,
                 _depthMod;
-        
+
         /**
          * Applies frequency modulation to the oscillator. Performed in the processing
          * loop so that the frequency can be updated before processing each sample.
@@ -120,7 +120,7 @@ namespace WECore::Richter {
          * @param   modGain             The gain output from the modulation oscillator.
          */
         inline void _calcFreqInLoop(int modBypassSwitch, double modGain);
-        
+
         /**
          * Applies depth modulation to the oscillator. Performed in the processing
          * loop so that the frequency can be updated before processing each sample.
@@ -130,8 +130,8 @@ namespace WECore::Richter {
          *       modGain           The gain output from the modulation oscillator
          */
         inline void _calcDepthInLoop(int modBypassSwitch, double modGain);
-        
-        
+
+
         /**
          * Calculates the gain value to be applied to a signal which the oscillator
          * is operating on. Outputs a value between 0 and 1. Always outputs 1 if bypassed.
@@ -143,21 +143,20 @@ namespace WECore::Richter {
         inline double _calcGain(int modBypassSwitch, double modGain);
     };
 
-    RichterLFO::RichterLFO() : RichterLFOBase(),
-                               _rawFreq(Parameters::FREQ.defaultValue),
+    RichterLFO::RichterLFO() : _rawFreq(Parameters::FREQ.defaultValue),
                                _freqMod(Parameters::FREQMOD.defaultValue),
                                _rawDepth(Parameters::DEPTH.defaultValue),
                                _depthMod(Parameters::DEPTHMOD.defaultValue) {
-        
-        
+
+
         // initialise wavetable array values
 
         for (int i = 0; i < Parameters::kWaveArraySize; ++i) {
-            
+
             // sine wavetable
             double radians {i * 2.0 * CoreMath::DOUBLE_PI / Parameters::kWaveArraySize};
             _sineTable[i] = (sin (radians) + 1.0) * 0.5;
-            
+
             // square wavetable
             double squareRadians {radians + 0.32};
             _squareTable[i] =
@@ -171,7 +170,7 @@ namespace WECore::Richter {
             0.009375 * sin (13 * squareRadians) +
             0.8
             ) * 0.63;
-            
+
             // saw wavetable
             double sawRadians {radians + CoreMath::DOUBLE_PI};
             _sawTable[i] =
@@ -203,7 +202,7 @@ namespace WECore::Richter {
 
     void RichterLFO::_calcFreqInLoop(int modBypassSwitch, double modGain) {
         // calculate the frequency based on whether tempo sync or frequency modulation is active
-        
+
         if (!_tempoSyncSwitch) {
             if (modBypassSwitch) {
                 _freq = _rawFreq + (_freqMod * (Parameters::FREQ.maxValue / 2) * modGain);
@@ -211,29 +210,29 @@ namespace WECore::Richter {
                 _freq = _rawFreq;
             }
         }
-        
+
         // Bounds check frequency after the modulation is applied to it
         _freq = Parameters::FREQ.BoundsCheck(_freq);
-        
+
     }
 
     void RichterLFO::_calcDepthInLoop(int modBypassSwitch, double modGain) {
         // Check whether MOD oscs are activated and apply depth parameter modulation accordingly
-        
+
         if (modBypassSwitch) {
             _depth = _rawDepth + (_depthMod * Parameters::DEPTH.maxValue * modGain);
         } else {
             _depth = _rawDepth;
         }
-        
+
         _depth = Parameters::DEPTH.BoundsCheck(_depth);
-        
+
     }
 
     double RichterLFO::_calcGain(int modBypassSwitch, double modGain) {
         _calcFreqInLoop(modBypassSwitch, modGain);
         _calcDepthInLoop(modBypassSwitch, modGain);
-        
+
         if (_bypassSwitch) {
             return ((_gain * _depth - _depth + 1));
         } else {
