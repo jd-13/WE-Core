@@ -111,7 +111,7 @@ namespace WECore::JUCEPlugin {
     private:
         Label* _targetLabel;
         String _labelText;
-        ParameterDefinition::RangedParameter<T>* _parameter;
+        const ParameterDefinition::RangedParameter<T>* _parameter;
         bool _isRunning;
 
         inline virtual void _updateLabel() override;
@@ -125,7 +125,7 @@ namespace WECore::JUCEPlugin {
                                     const ParameterDefinition::RangedParameter<T>* parameter) {
         _targetLabel = targetLabel;
         _labelText = labelText;
-        _parameter = const_cast<ParameterDefinition::RangedParameter<T>*>(parameter);
+        _parameter = parameter;
         _isRunning = true;
     }
 
