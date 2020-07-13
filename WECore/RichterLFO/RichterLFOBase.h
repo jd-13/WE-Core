@@ -24,7 +24,7 @@
 #pragma once
 
 #include "RichterParameters.h"
-#include "General/CoreMath.h"
+#include "RichterWavetables.h"
 
 namespace WECore::Richter {
 
@@ -64,7 +64,7 @@ namespace WECore::Richter {
                             _offset(0),
                             _currentScale(0),
                             _nextScale(0),
-                            _waveArrayPointer(&_sineTable[0]) {
+                            _waveArrayPointer(Wavetables::getInstance()->getSine()) {
         }
 
         virtual ~RichterLFOBase() {}
@@ -91,8 +91,6 @@ namespace WECore::Richter {
         double getTempoNumer() const { return _tempoNumer; }
 
         double getTempoDenom() const { return _tempoDenom; }
-
-        float getWaveArraySize() const { return Parameters::kWaveArraySize; }
 
         int getIndexOffset() { return _indexOffset; }
 
@@ -169,11 +167,7 @@ namespace WECore::Richter {
                 _currentScale,
                 _nextScale;
 
-        double* _waveArrayPointer;
-
-        double _sineTable[Parameters::kWaveArraySize];
-        double _squareTable[Parameters::kWaveArraySize];
-        double _sawTable[Parameters::kWaveArraySize];
+        const double* _waveArrayPointer;
 
         /**
          * Calculates the phase offset to be applied to the oscillator, including any
@@ -206,7 +200,7 @@ namespace WECore::Richter {
          * Calculates the scale factor to be applied when calculating the index.
          */
         void _calcNextScale() {
-            _nextScale = Parameters::kWaveArraySize / _samplesPerTremoloCycle;
+            _nextScale = Wavetables::SIZE / _samplesPerTremoloCycle;
         }
 
         /**
@@ -220,9 +214,13 @@ namespace WECore::Richter {
     };
 
     void RichterLFOBase::setWaveTablePointers() {
-        if (_wave == Parameters::WAVE.SINE) { _waveArrayPointer = &_sineTable[0]; }
-        if (_wave == Parameters::WAVE.SQUARE) { _waveArrayPointer = &_squareTable[0]; }
-        if (_wave == Parameters::WAVE.SAW) { _waveArrayPointer = &_sawTable[0]; }
+        if (_wave == Parameters::WAVE.SINE) {
+            _waveArrayPointer = Wavetables::getInstance()->getSine();
+        } else if (_wave == Parameters::WAVE.SQUARE) {
+            _waveArrayPointer = Wavetables::getInstance()->getSquare();
+        } else if (_wave == Parameters::WAVE.SAW) {
+            _waveArrayPointer = Wavetables::getInstance()->getSaw();
+        }
     }
 
 
@@ -256,7 +254,7 @@ namespace WECore::Richter {
             } else {
                 waveTimePosition = timeInSeconds;
             }
-            _indexOffset = static_cast<int>(waveTimePosition / waveLength) * Parameters::kWaveArraySize + _manualPhase;
+            _indexOffset = static_cast<int>(waveTimePosition / waveLength) * Wavetables::SIZE + _manualPhase;
         }
 
         if (!_phaseSyncSwitch && _needsPhaseCalc) {
@@ -280,7 +278,7 @@ namespace WECore::Richter {
 
     void RichterLFOBase::calcIndexAndScaleInLoop() {
         // calculate the current index within the wave table
-        _index = static_cast<int>(static_cast<long>(_samplesProcessed * static_cast<long double>(_currentScale)) % Parameters::kWaveArraySize);
+        _index = static_cast<int>(static_cast<long>(_samplesProcessed * static_cast<long double>(_currentScale)) % Wavetables::SIZE);
 
         if ((!CoreMath::compareFloatsEqual(_nextScale, _currentScale)) && (_index == 0)) {
             _currentScale = _nextScale;
@@ -288,12 +286,14 @@ namespace WECore::Richter {
         }
 
 
-        // Must provide two possibilities for each index lookup in order to protect the array from being overflowed by the indexOffset, the first if statement uses the standard index lookup while second if statement deals with the overflow possibility
+        // Must provide two possibilities for each index lookup in order to protect the array from
+        // being overflowed by the indexOffset, the first if statement uses the standard index
+        // lookup while second if statement deals with the overflow possibility
 
-        if ((_index + _indexOffset) < Parameters::kWaveArraySize) {
+        if ((_index + _indexOffset) < Wavetables::SIZE) {
             _gain = _waveArrayPointer[_index + _indexOffset];
-        } else if ((_index + _indexOffset) >= Parameters::kWaveArraySize) {
-            _gain = _waveArrayPointer[(_index + _indexOffset) % Parameters::kWaveArraySize];
+        } else if ((_index + _indexOffset) >= Wavetables::SIZE) {
+            _gain = _waveArrayPointer[(_index + _indexOffset) % Wavetables::SIZE];
         }
 
         _samplesProcessed++;

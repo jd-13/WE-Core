@@ -24,10 +24,9 @@
 #pragma once
 
 #include "General/ParameterDefinition.h"
+#include "RichterWavetables.h"
 
 namespace WECore::Richter::Parameters {
-
-    constexpr int kWaveArraySize {2000};
 
     class WaveParameter : public ParameterDefinition::BaseParameter<int> {
     public:
@@ -47,7 +46,7 @@ namespace WECore::Richter::Parameters {
                                                         DEPTHMOD(0, 1, 0),
                                                         FREQ(0.5, 20, 2),
                                                         FREQMOD(0, 1, 0),
-                                                        PHASE(0, kWaveArraySize, 0);
+                                                        PHASE(0, Wavetables::SIZE, 0);
 
     constexpr bool LFOSWITCH_OFF = false,
                    LFOSWITCH_ON = true,
