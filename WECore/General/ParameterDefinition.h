@@ -48,17 +48,17 @@ namespace ParameterDefinition {
     T BoundsCheck(T val, T min, T max) {
         if (val < min) val = min;
         if (val > max) val = max;
-        
+
         return val;
     }
-    
+
     class BooleanParameter {
     public:
         BooleanParameter(bool newDefaultValue) :  defaultValue(newDefaultValue) {}
-        
+
         bool defaultValue;
     };
-    
+
     /**
      * Provides basic functionality that may be useful for building other parameters from.
      */
@@ -78,7 +78,7 @@ namespace ParameterDefinition {
                       T newDefaultValue) : minValue(newMinValue),
                                            maxValue(newMaxValue),
                                            defaultValue(newDefaultValue) {}
-        
+
         /**
          * If the given value is between the minimum and maximum values for this parameter,
          * then the value is returned unchanged. If the given value is outside the minimum
@@ -93,7 +93,7 @@ namespace ParameterDefinition {
             return ParameterDefinition::BoundsCheck(val, minValue, maxValue);
         }
     };
-    
+
     /**
      * Provides storage for minimum, maximum and default values for a  parameter
      * which can contain a continuous value (such as a slider), as well as methods to convert
@@ -114,10 +114,10 @@ namespace ParameterDefinition {
          *
          * @return  The value of the parameter in the internal range for that parameter
          */
-        T NormalisedToInteral(T val) const {
+        T NormalisedToInternal(T val) const {
             return val * (this->maxValue - this->minValue) + this->minValue;
         }
-        
+
         /**
          * Translates parameter values from the range used internally for that
          * parameter, to the normalised range (0 to 1) as required by VSTs.
@@ -126,7 +126,7 @@ namespace ParameterDefinition {
          *
          * @return  The normalised value of the parameter
          */
-        T InteralToNormalised(T val) const {
+        T InternalToNormalised(T val) const {
             return (val - this->minValue) / (this->maxValue - this->minValue);
         }
     };
