@@ -1,0 +1,26 @@
+name: C/C++ CI
+
+on:
+    push:
+        branches: [ master ]
+    pull_request:
+        branches: [ master ]
+
+jobs:
+    buildClang:
+        runs-on: ubuntu-latest
+        container: jackd13/audioplugins:clang6
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: RunBuild
+              run: Scripts/CIBuild.sh
+  
+    buildGCC:
+        runs-on: ubuntu-latest
+        container: jackd13/audioplugins:gcc7
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: RunBuild
+              run: Scripts/CIBuild.sh
