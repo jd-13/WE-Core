@@ -9,14 +9,14 @@ on:
 jobs:
     buildClang:
         runs-on: ubuntu-latest
-        container: jackd13/audioplugins:clang6
+        container: jackd13/audioplugins:clang10
 
         steps:
             - uses: actions/checkout@v2
               with:
                 submodules: true
             - name: RunBuild
-              run: Scripts/CIBuild.sh
+              run: Scripts/CIBuild.sh $GITHUB_RUN_NUMBER
 
     buildGCC:
         runs-on: ubuntu-latest
@@ -27,4 +27,4 @@ jobs:
               with:
                 submodules: true
             - name: RunBuild
-              run: Scripts/CIBuild.sh
+              run: Scripts/CIBuild.sh $GITHUB_RUN_NUMBER
