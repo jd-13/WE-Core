@@ -37,7 +37,7 @@ SCENARIO("SongbirdFilterModule: Parameters can be set and retrieved correctly") 
                 CHECK(mSongbird.getVowel2() == 2);
                 CHECK(mSongbird.getFilterPosition() == 0.5);
                 CHECK(mSongbird.getMix() == 1.0);
-                CHECK(mSongbird.getModMode() == false);
+                CHECK(mSongbird.getModMode() == true);
             }
         }
 
