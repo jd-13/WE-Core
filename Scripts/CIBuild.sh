@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 BUILD_NUMBER=$1
 
 update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-7 90
