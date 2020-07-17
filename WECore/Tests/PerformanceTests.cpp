@@ -98,8 +98,6 @@ namespace {
             std::time_t now {std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())};
             outStream << std::endl << std::endl << "**** New Test Run: "
                       << std::put_time(std::localtime(&now), "%F %T");
-
-            ;
         }
         outStream << std::endl << testName << ":     " << stats;
 
