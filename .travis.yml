@@ -33,7 +33,7 @@ before_script:
 
 script:
   - CODE_COV_ENVS=`bash <(curl -s https://codecov.io/env)`
-  - docker run --mount type=bind,source="$(pwd)",target=/home/travisDir $CODE_COV_ENVS -e TRAVIS_BUILD_NUMBER=$TRAVIS_BUILD_NUMBER $DOCKER_IMG /bin/bash -c "cd /home/travisDir && Scripts/CIBuild.sh"
+  - docker run --mount type=bind,source="$(pwd)",target=/home/travisDir $CODE_COV_ENVS -e BUILD_NUMBER=$TRAVIS_BUILD_NUMBER $DOCKER_IMG /bin/bash -c "cd /home/travisDir && Scripts/CIBuild.sh"
 
 after_success:
   - sudo chown -R travis:travis /home/travis/

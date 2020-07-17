@@ -13,14 +13,18 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
+              with:
+                submodules: true
             - name: RunBuild
               run: Scripts/CIBuild.sh
-  
+
     buildGCC:
         runs-on: ubuntu-latest
         container: jackd13/audioplugins:gcc7
 
         steps:
             - uses: actions/checkout@v2
+              with:
+                submodules: true
             - name: RunBuild
               run: Scripts/CIBuild.sh
