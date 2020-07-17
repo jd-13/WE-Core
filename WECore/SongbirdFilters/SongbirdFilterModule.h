@@ -99,8 +99,8 @@ namespace WECore::Songbird {
                                  _sampleRate(44100),
                                  _mix(Parameters::MIX.defaultValue),
                                  _modulationSrc(Parameters::MODULATION.defaultValue),
-                                 _modMode(Parameters::MODMODE_DEFAULT),
-                                 _outputGain(Parameters::OUTPUTGAIN.defaultValue) {
+                                 _outputGain(Parameters::OUTPUTGAIN.defaultValue),
+                                 _modMode(Parameters::MODMODE_DEFAULT) {
 
             // initialise the filters to some default values
             setVowel1(_vowel1);
