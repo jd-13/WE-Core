@@ -2,7 +2,7 @@ FROM ubuntu:focal
 
 # Envs
 ENV PATH /opt/llvm/bin:$PATH
-ENV CXX clang++-10.0
+ENV CXX clang++-10
 ENV CATCH_PATH /home/catch/
 ENV VALGRIND_PATH /home/valgrind
 
