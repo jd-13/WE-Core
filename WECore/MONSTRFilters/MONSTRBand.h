@@ -34,6 +34,7 @@
 #pragma clang diagnostic ignored "-Wunused-parameter"
 #pragma clang diagnostic ignored "-Wignored-qualifiers"
 #pragma clang diagnostic ignored "-Wold-style-cast"
+#pragma clang diagnostic ignored "-Wextra-semi-stmt"
 #elif __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wignored-qualifiers"
@@ -193,7 +194,7 @@ namespace WECore::MONSTR {
                  _highCutoffHz;
 
         double _sampleRate;
-        
+
         static constexpr int FILTER_ORDER {2};
 
         Dsp::SimpleFilter<Dsp::Butterworth::HighPass<FILTER_ORDER>, 2> _lowCut1;
@@ -293,7 +294,7 @@ namespace WECore::MONSTR {
     template <typename T>
     void MONSTRBand<T>::_filterSamples(T* inLeftSamples, T* inRightSamples, int numSamples) {
         T* channelsArray[2];
-        
+
         channelsArray[0] = inLeftSamples;
         channelsArray[1] = inRightSamples;
 
