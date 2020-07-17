@@ -45,7 +45,7 @@ namespace WECore::Richter {
         /**
          * Initialises parameters to default values.
          */
-        RichterLFOBase() :  _manualPhase(Parameters::PHASE.defaultValue),
+        RichterLFOBase() :  _manualPhase(static_cast<int>(Parameters::PHASE.defaultValue)),
                             _wave(Parameters::WAVE.defaultValue),
                             _index(0),
                             _indexOffset(0),
