@@ -31,17 +31,14 @@ if (CMAKE_COMPILER_IS_GNUCXX)
     set(CXXFLAGS_DSP ${CXXFLAGS_GCC_DSP})
 endif()
 
-# TODO: For now we have to use the DSP flags, as everything will be able to build using them
-set(CMAKE_CXX_FLAGS ${CXXFLAGS_DSP})
-
-# Set the source files
-set(DSPFILTERS_CPP ${DSPFILTERS_PATH}/source/Biquad.cpp
-                   ${DSPFILTERS_PATH}/source/Butterworth.cpp
-                   ${DSPFILTERS_PATH}/source/Cascade.cpp
-                   ${DSPFILTERS_PATH}/source/Filter.cpp
-                   ${DSPFILTERS_PATH}/source/Param.cpp
-                   ${DSPFILTERS_PATH}/source/PoleFilter.cpp)
-
+add_library(dspfilters STATIC
+            ${DSPFILTERS_PATH}/source/Biquad.cpp
+            ${DSPFILTERS_PATH}/source/Butterworth.cpp
+            ${DSPFILTERS_PATH}/source/Cascade.cpp
+            ${DSPFILTERS_PATH}/source/Filter.cpp
+            ${DSPFILTERS_PATH}/source/Param.cpp
+            ${DSPFILTERS_PATH}/source/PoleFilter.cpp)
+set_target_properties(dspfilters PROPERTIES COMPILE_OPTIONS ${CXXFLAGS_DSP})
 
 add_executable(WECoreTest $ENV{WECORE_SRC}/Tests/catchMain.cpp
                           $ENV{WECORE_SRC}/CarveDSP/Tests/DSPUnitParameterTests.cpp
@@ -51,9 +48,11 @@ add_executable(WECoreTest $ENV{WECORE_SRC}/Tests/catchMain.cpp
                           $ENV{WECORE_SRC}/RichterLFO/Tests/RichterLFOPairTests.cpp
                           $ENV{WECORE_SRC}/SongbirdFilters/Tests/SongbirdFilterModuleTests.cpp
                           $ENV{WECORE_SRC}/WEFilters/Tests/AREnvelopeFollowerTests.cpp
-                          $ENV{WECORE_SRC}/WEFilters/Tests/TPTSVFilterTests.cpp
-                          ${DSPFILTERS_CPP})
+                          $ENV{WECORE_SRC}/WEFilters/Tests/TPTSVFilterTests.cpp)
+target_link_libraries(WECoreTest dspfilters)
+set_target_properties(WECoreTest PROPERTIES COMPILE_OPTIONS ${CXXFLAGS})
 
 add_executable(WECoreTestPerf $ENV{WECORE_SRC}/Tests/catchMain.cpp
-                              $ENV{WECORE_SRC}/Tests/PerformanceTests.cpp
-                              ${DSPFILTERS_CPP})
+                              $ENV{WECORE_SRC}/Tests/PerformanceTests.cpp)
+target_link_libraries(WECoreTestPerf dspfilters)
+set_target_properties(WECoreTestPerf PROPERTIES COMPILE_OPTIONS ${CXXFLAGS})
