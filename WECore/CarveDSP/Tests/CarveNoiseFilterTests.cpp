@@ -29,13 +29,13 @@ SCENARIO("CarveNoiseFilter: Silence in = silence out") {
         std::vector<float> buffer(1024);
         WECore::Carve::NoiseFilter<float> mFilter(20, 20000);
         mFilter.setSampleRate(48000);
-        
+
         WHEN("The silence samples are processed") {
             // fill the buffer
             std::fill(buffer.begin(), buffer.end(), 0);
-            
-            mFilter.Process1in1out(&buffer[0], static_cast<int>(buffer.size()));
-            
+
+            mFilter.Process1in1out(&buffer[0], buffer.size());
+
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
                     CHECK(buffer[iii] == Approx(0.0f).margin(0.00001));

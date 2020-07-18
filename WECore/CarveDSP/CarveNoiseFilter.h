@@ -32,7 +32,7 @@
  * hearing range to clean up audio but can fulfil any typical bandpass
  * filter purpose.
  *
- * The cutoff frequencies cannot be changed once the object is constructed. 
+ * The cutoff frequencies cannot be changed once the object is constructed.
  *
  * Has methods for processing either a mono or stereo buffer of samples.
  *
@@ -43,7 +43,7 @@ namespace WECore::Carve {
     template <typename T>
     class NoiseFilter {
     public:
-        
+
         /**
          * Defaults the sample rate. It is recommended to call setSampleRate manually
          * before attempting any processing.
@@ -52,9 +52,9 @@ namespace WECore::Carve {
          * @param   highCutHz   Everything above this frequency will be cut
          */
         NoiseFilter(double lowCutHz, double highCutHz);
-        
+
         virtual ~NoiseFilter() {}
-        
+
         /**
          * Configures the filters for the correct sample rate. Ensure this is
          * called before attempting to process audio.
@@ -62,13 +62,13 @@ namespace WECore::Carve {
          * @param   sampleRate  The sample rate the filter should be configured for
          */
         inline void setSampleRate(double sampleRate);
-        
+
         /**
          * Resets all filters.
          * Call this whenever the audio stream is interrupted (ie. the playhead is moved)
          */
         inline void reset();
-        
+
         /**
          * Applies the filtering to a mono buffer of samples.
          * Expect seg faults or other memory issues if arguements passed are incorrect.
@@ -76,8 +76,8 @@ namespace WECore::Carve {
          * @param   inSample    Pointer to the first sample of the buffer
          * @param   numSamples  Number of samples in the buffer
          */
-        inline void Process1in1out(T* inSample, int numSamples);
-        
+        inline void Process1in1out(T* inSample, size_t numSamples);
+
         /**
          * Applies the filtering to a stereo buffer of samples.
          * Expect seg faults or other memory issues if arguements passed are incorrect.
@@ -87,9 +87,9 @@ namespace WECore::Carve {
          * @param   numSamples      Number of samples in the buffer. The left and right buffers
          *                          must be the same size.
          */
-        inline void Process2in2out(T *inLeftSample, T *inRightSample, int numSamples);
-        
-    private:        
+        inline void Process2in2out(T *inLeftSample, T *inRightSample, size_t numSamples);
+
+    private:
         WECore::TPTSVF::TPTSVFilter<T> _monoLowCutFilter;
         WECore::TPTSVF::TPTSVFilter<T> _leftLowCutFilter;
         WECore::TPTSVF::TPTSVFilter<T> _rightLowCutFilter;
@@ -97,7 +97,7 @@ namespace WECore::Carve {
         WECore::TPTSVF::TPTSVFilter<T> _monoHighCutFilter;
         WECore::TPTSVF::TPTSVFilter<T> _leftHighCutFilter;
         WECore::TPTSVF::TPTSVFilter<T> _rightHighCutFilter;
-        
+
         double _lowCutHz,
                _highCutHz;
     };
@@ -124,7 +124,7 @@ namespace WECore::Carve {
         setupLowCutFilter(_monoLowCutFilter);
         setupLowCutFilter(_leftLowCutFilter);
         setupLowCutFilter(_rightLowCutFilter);
-        
+
         setupHighCutFilter(_monoHighCutFilter);
         setupHighCutFilter(_leftHighCutFilter);
         setupHighCutFilter(_rightHighCutFilter);
@@ -153,13 +153,13 @@ namespace WECore::Carve {
     }
 
     template <typename T>
-    void NoiseFilter<T>::Process1in1out(T* inSample, int numSamples) {
+    void NoiseFilter<T>::Process1in1out(T* inSample, size_t numSamples) {
         _monoLowCutFilter.processBlock(inSample, numSamples);
         _monoHighCutFilter.processBlock(inSample, numSamples);
     }
 
     template <typename T>
-    void NoiseFilter<T>::Process2in2out(T *inLeftSample, T *inRightSample, int numSamples) {
+    void NoiseFilter<T>::Process2in2out(T *inLeftSample, T *inRightSample, size_t numSamples) {
         _leftLowCutFilter.processBlock(inLeftSample, numSamples);
         _leftHighCutFilter.processBlock(inLeftSample, numSamples);
 
