@@ -58,8 +58,8 @@ target_link_libraries(WECoreTestPerf dspfilters)
 target_compile_options(WECoreTestPerf PRIVATE ${CXXFLAGS})
 
 if (CMAKE_COMPILER_IS_GNUCXX)
-    target_compile_options(dspfilters PRIVATE ${GCOV_LINK_FLAGS})
-    target_compile_options(WECoreTest PRIVATE ${GCOV_LINK_FLAGS})
-    target_compile_options(WECoreTestPerf PRIVATE ${GCOV_LINK_FLAGS})
+    target_link_options(dspfilters PRIVATE ${GCOV_LINK_FLAGS})
+    target_link_options(WECoreTest PRIVATE ${GCOV_LINK_FLAGS})
+    target_link_options(WECoreTestPerf PRIVATE ${GCOV_LINK_FLAGS})
 endif()
 
