@@ -1,11 +1,19 @@
 var searchData=
 [
-  ['vowel',['VOWEL',['../namespace_w_e_core_1_1_songbird_1_1_parameters.html#a4426102c5467f146719ddeb0137f3009',1,'WECore::Songbird::Parameters::VOWEL()'],['../namespace_w_e_core_1_1_songbird.html#a3a3ef6451fa968c851e21391558ef016',1,'WECore::Songbird::Vowel()']]],
-  ['vowel_5fa',['VOWEL_A',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#afd699d949179341df342101bd60913be',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowel_5fe',['VOWEL_E',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a2e250d46e05e3f4d3bd8fbc41f77b8c6',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowel_5fi',['VOWEL_I',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a7e7b93324b8888cb91c687a0c93a615e',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowel_5fo',['VOWEL_O',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#af3a55a94f872f08fb4f8b1e115e29c1d',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowel_5fu',['VOWEL_U',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#ac727a655b71d33afae056f13c8c6c29b',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowelparameter',['VowelParameter',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html',1,'WECore::Songbird::Parameters']]],
-  ['vowelparameter',['VowelParameter',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a499a67bea77069d2c97f70caf76a1e24',1,'WECore::Songbird::Parameters::VowelParameter']]]
+  ['arenv_413',['AREnv',['../namespace_w_e_core_1_1_a_r_env.html',1,'WECore']]],
+  ['carve_414',['Carve',['../namespace_w_e_core_1_1_carve.html',1,'WECore']]],
+  ['juceplugin_415',['JUCEPlugin',['../namespace_w_e_core_1_1_j_u_c_e_plugin.html',1,'WECore']]],
+  ['lookandfeelmixins_416',['LookAndFeelMixins',['../namespace_w_e_core_1_1_look_and_feel_mixins.html',1,'WECore']]],
+  ['monstr_417',['MONSTR',['../namespace_w_e_core_1_1_m_o_n_s_t_r.html',1,'WECore']]],
+  ['parameters_418',['Parameters',['../namespace_w_e_core_1_1_a_r_env_1_1_parameters.html',1,'WECore::AREnv::Parameters'],['../namespace_w_e_core_1_1_carve_1_1_parameters.html',1,'WECore::Carve::Parameters'],['../namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html',1,'WECore::MONSTR::Parameters'],['../namespace_w_e_core_1_1_richter_1_1_parameters.html',1,'WECore::Richter::Parameters'],['../namespace_w_e_core_1_1_songbird_1_1_parameters.html',1,'WECore::Songbird::Parameters'],['../namespace_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters.html',1,'WECore::TPTSVF::Parameters']]],
+  ['richter_419',['Richter',['../namespace_w_e_core_1_1_richter.html',1,'WECore']]],
+  ['songbird_420',['Songbird',['../namespace_w_e_core_1_1_songbird.html',1,'WECore']]],
+  ['tptsvf_421',['TPTSVF',['../namespace_w_e_core_1_1_t_p_t_s_v_f.html',1,'WECore']]],
+  ['wave_422',['WAVE',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#aacabf35f04b78caa684d5bde03eaa1cf',1,'WECore::Richter::Parameters']]],
+  ['waveparameter_423',['WaveParameter',['../class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html',1,'WECore::Richter::Parameters::WaveParameter'],['../class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html#abf06d7c7348d3c5411de0b3cfed879a1',1,'WECore::Richter::Parameters::WaveParameter::WaveParameter()']]],
+  ['wavetables_424',['Wavetables',['../class_w_e_core_1_1_richter_1_1_wavetables.html',1,'WECore::Richter::Wavetables'],['../class_w_e_core_1_1_richter_1_1_wavetables.html#ab8868304cc416fdc905f57543b518603',1,'WECore::Richter::Wavetables::Wavetables()']]],
+  ['waveviewer_425',['WaveViewer',['../class_w_e_core_1_1_richter_1_1_wave_viewer.html',1,'WECore::Richter::WaveViewer'],['../class_w_e_core_1_1_richter_1_1_wave_viewer.html#a8f3e45ec22584ccc7b59b9c5fd493d0a',1,'WECore::Richter::WaveViewer::WaveViewer()']]],
+  ['wecore_426',['WECore',['../namespace_w_e_core.html',1,'']]],
+  ['wev2lookandfeel_427',['WEV2LookAndFeel',['../namespace_w_e_core_1_1_look_and_feel_mixins.html#a73cd2e994f19cbc49ad9cdb8a88fadcc',1,'WECore::LookAndFeelMixins']]],
+  ['width_428',['WIDTH',['../namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#af101f22f258ca63afbc5d331845ff181',1,'WECore::MONSTR::Parameters']]]
 ];

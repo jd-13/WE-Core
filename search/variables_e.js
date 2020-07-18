@@ -1,9 +1,7 @@
 var searchData=
 [
-  ['parabolic_5fhard',['PARABOLIC_HARD',['../class_w_e_core_1_1_carve_1_1_parameters_1_1_mode_parameter.html#ad6532bde7b37516eb27af0e6aaeadd45',1,'WECore::Carve::Parameters::ModeParameter']]],
-  ['parabolic_5fsoft',['PARABOLIC_SOFT',['../class_w_e_core_1_1_carve_1_1_parameters_1_1_mode_parameter.html#a2f493ca0f5a67c1d0e4fb574ffbc41c6',1,'WECore::Carve::Parameters::ModeParameter']]],
-  ['peak',['PEAK',['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters_1_1_mode_parameter.html#aeafd5f0563d3dd13d2f517e8a8966138',1,'WECore::TPTSVF::Parameters::ModeParameter']]],
-  ['phasesync_5fdefault',['PHASESYNC_DEFAULT',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#ad646f623936bcca06c959e83af7d736b',1,'WECore::Richter::Parameters']]],
-  ['phasesync_5foff',['PHASESYNC_OFF',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a7cfdd76edbd74a8e7ed790df141cc4eb',1,'WECore::Richter::Parameters']]],
-  ['phasesync_5fon',['PHASESYNC_ON',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a852d9ae55168f85ce45a050b29f44c40',1,'WECore::Richter::Parameters']]]
+  ['saw_911',['SAW',['../class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html#a57340bbebc38380c6e67ba6dd22d372a',1,'WECore::Richter::Parameters::WaveParameter']]],
+  ['sine_912',['SINE',['../class_w_e_core_1_1_carve_1_1_parameters_1_1_mode_parameter.html#a44f6bd027da91c83d6d136be96b3be42',1,'WECore::Carve::Parameters::ModeParameter::SINE()'],['../class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html#a8b7c3010bc690840a053f434657fe61a',1,'WECore::Richter::Parameters::WaveParameter::SINE()']]],
+  ['size_913',['SIZE',['../class_w_e_core_1_1_richter_1_1_wavetables.html#a239ed04e97a55aea3c8cfffa2d5bc13a',1,'WECore::Richter::Wavetables']]],
+  ['square_914',['SQUARE',['../class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html#ab4586e068bcfadfe45667f4bf34b5e25',1,'WECore::Richter::Parameters::WaveParameter']]]
 ];

@@ -1,8 +1,7 @@
-var annotated =
+var annotated_dup =
 [
-    [ "CoreMath", "namespace_core_math.html", null ],
     [ "ParameterDefinition", "namespace_parameter_definition.html", "namespace_parameter_definition" ],
-    [ "TestData", "namespace_test_data.html", "namespace_test_data" ],
+    [ "TestData", "namespace_test_data.html", null ],
     [ "WECore", "namespace_w_e_core.html", "namespace_w_e_core" ],
     [ "UpdateChecker", "class_update_checker.html", "class_update_checker" ]
 ];

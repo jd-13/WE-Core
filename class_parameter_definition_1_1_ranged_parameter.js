@@ -1,5 +1,5 @@
 var class_parameter_definition_1_1_ranged_parameter =
 [
-    [ "InteralToNormalised", "class_parameter_definition_1_1_ranged_parameter.html#afaf3dac9d17209f4ba4f2b3092f4536b", null ],
-    [ "NormalisedToInteral", "class_parameter_definition_1_1_ranged_parameter.html#a2559e6d32821783d5a189f1dd41c48f3", null ]
+    [ "InternalToNormalised", "class_parameter_definition_1_1_ranged_parameter.html#afee4a4afe69e12d42aa94d0b530b502f", null ],
+    [ "NormalisedToInternal", "class_parameter_definition_1_1_ranged_parameter.html#a19171f82b90b6a1ed0e6c9b8d1692813", null ]
 ];

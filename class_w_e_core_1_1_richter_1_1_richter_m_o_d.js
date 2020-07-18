@@ -1,6 +1,6 @@
 var class_w_e_core_1_1_richter_1_1_richter_m_o_d =
 [
-    [ "RichterMOD", "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html#ae7e2bbe04f2dd8566c3b8efca0ef7506", null ],
+    [ "RichterMOD", "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html#abad75772ccfffe241cb980ffe48c2e77", null ],
     [ "~RichterMOD", "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html#aaf3acce46cf3a8b6f2fd2a906975de30", null ],
     [ "RichterMOD", "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html#addae24bce37e641e8d62476662173d6e", null ],
     [ "_calcGain", "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html#a08268341d0b34298f3973fe8ab98d11f", null ],

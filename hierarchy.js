@@ -25,6 +25,9 @@ var hierarchy =
     ] ],
     [ "ParameterDefinition::BooleanParameter", "class_parameter_definition_1_1_boolean_parameter.html", null ],
     [ "WECore::Carve::CarveDSPUnit< T >", "class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html", null ],
+    [ "Component", null, [
+      [ "WECore::Richter::WaveViewer", "class_w_e_core_1_1_richter_1_1_wave_viewer.html", null ]
+    ] ],
     [ "WECore::Songbird::Formant", "class_w_e_core_1_1_songbird_1_1_formant.html", null ],
     [ "LookAndFeel_V2", null, [
       [ "WECore::JUCEPlugin::CoreLookAndFeel", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html", null ]
@@ -37,8 +40,14 @@ var hierarchy =
       [ "WECore::Richter::RichterMOD", "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html", null ]
     ] ],
     [ "WECore::Richter::RichterLFOPair", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html", null ],
+    [ "Slider", null, [
+      [ "WECore::JUCEPlugin::SliderLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html", [
+        [ "WECore::JUCEPlugin::LabelReadoutSlider< T >", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html", null ]
+      ] ]
+    ] ],
     [ "WECore::Songbird::SongbirdFilterModule< T >", "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html", null ],
     [ "WECore::Songbird::SongbirdFormantFilter< T, NUM_FORMANTS >", "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html", null ],
     [ "WECore::TPTSVF::TPTSVFilter< T >", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html", null ],
-    [ "UpdateChecker", "class_update_checker.html", null ]
+    [ "UpdateChecker", "class_update_checker.html", null ],
+    [ "WECore::Richter::Wavetables", "class_w_e_core_1_1_richter_1_1_wavetables.html", null ]
 ];

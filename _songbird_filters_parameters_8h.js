@@ -4,6 +4,7 @@ var _songbird_filters_parameters_8h =
     [ "FILTER_POSITION", "_songbird_filters_parameters_8h.html#a266ff9073edfbf6a74636b86096b907a", null ],
     [ "MIX", "_songbird_filters_parameters_8h.html#aed304a25b66b3b5dfa7aaea78d36de4d", null ],
     [ "MODULATION", "_songbird_filters_parameters_8h.html#af0df165baeb052c01770df50d0a53589", null ],
+    [ "OUTPUTGAIN", "_songbird_filters_parameters_8h.html#ae59c42c047712554c4cf49b37872b1fa", null ],
     [ "FILTER_ORDER", "_songbird_filters_parameters_8h.html#a7e8bb55b0967bc72f47bfc7aa58c3ec3", null ],
     [ "MODMODE_BLEND", "_songbird_filters_parameters_8h.html#a1d5282f11aceb45acb4fab7ab748f506", null ],
     [ "MODMODE_DEFAULT", "_songbird_filters_parameters_8h.html#a296bc7b6d794b489b9f1b1ec49577500", null ],

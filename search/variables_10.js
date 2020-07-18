@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['target_5furl',['TARGET_URL',['../class_update_checker.html#ad4fdd2ca0a51cb332437551be7d10bf8',1,'UpdateChecker']]],
-  ['temposync_5fdefault',['TEMPOSYNC_DEFAULT',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a9ea97c4aa596c44e6ad444722082ff59',1,'WECore::Richter::Parameters']]],
-  ['temposync_5foff',['TEMPOSYNC_OFF',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a525c6cb3dee1231100a60c33e46bba2f',1,'WECore::Richter::Parameters']]],
-  ['temposync_5fon',['TEMPOSYNC_ON',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#abb790e91de27592cafe4b6d0c36e6ba8',1,'WECore::Richter::Parameters']]]
+  ['vowel_919',['VOWEL',['../namespace_w_e_core_1_1_songbird_1_1_parameters.html#a4426102c5467f146719ddeb0137f3009',1,'WECore::Songbird::Parameters']]],
+  ['vowel_5fa_920',['VOWEL_A',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#afd699d949179341df342101bd60913be',1,'WECore::Songbird::Parameters::VowelParameter']]],
+  ['vowel_5fe_921',['VOWEL_E',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a2e250d46e05e3f4d3bd8fbc41f77b8c6',1,'WECore::Songbird::Parameters::VowelParameter']]],
+  ['vowel_5fi_922',['VOWEL_I',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a7e7b93324b8888cb91c687a0c93a615e',1,'WECore::Songbird::Parameters::VowelParameter']]],
+  ['vowel_5fo_923',['VOWEL_O',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#af3a55a94f872f08fb4f8b1e115e29c1d',1,'WECore::Songbird::Parameters::VowelParameter']]],
+  ['vowel_5fu_924',['VOWEL_U',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#ac727a655b71d33afae056f13c8c6c29b',1,'WECore::Songbird::Parameters::VowelParameter']]]
 ];

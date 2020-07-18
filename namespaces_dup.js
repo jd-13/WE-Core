@@ -1,4 +1,4 @@
-var namespaces =
+var namespaces_dup =
 [
     [ "CoreMath", "namespace_core_math.html", null ],
     [ "ParameterDefinition", "namespace_parameter_definition.html", null ],

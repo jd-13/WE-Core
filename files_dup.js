@@ -1,4 +1,4 @@
-var files =
+var files_dup =
 [
     [ "AREnvelopeFollower.h", "_a_r_envelope_follower_8h.html", [
       [ "AREnvelopeFollower", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower.html", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower" ]
@@ -38,6 +38,10 @@ var files =
     [ "GroupComponentV2.h", "_group_component_v2_8h.html", [
       [ "GroupComponentV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_group_component_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_group_component_v2" ]
     ] ],
+    [ "LabelReadoutSlider.h", "_label_readout_slider_8h.html", [
+      [ "SliderLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater" ],
+      [ "LabelReadoutSlider", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider" ]
+    ] ],
     [ "LookAndFeelMixins.h", "_look_and_feel_mixins_8h.html", "_look_and_feel_mixins_8h" ],
     [ "MONSTRBand.h", "_m_o_n_s_t_r_band_8h.html", [
       [ "MONSTRCrossover", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover" ],
@@ -67,6 +71,12 @@ var files =
       [ "RichterMOD", "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html", "class_w_e_core_1_1_richter_1_1_richter_m_o_d" ]
     ] ],
     [ "RichterParameters.h", "_richter_parameters_8h.html", "_richter_parameters_8h" ],
+    [ "RichterWavetables.h", "_richter_wavetables_8h.html", [
+      [ "Wavetables", "class_w_e_core_1_1_richter_1_1_wavetables.html", "class_w_e_core_1_1_richter_1_1_wavetables" ]
+    ] ],
+    [ "RichterWaveViewer.h", "_richter_wave_viewer_8h.html", [
+      [ "WaveViewer", "class_w_e_core_1_1_richter_1_1_wave_viewer.html", "class_w_e_core_1_1_richter_1_1_wave_viewer" ]
+    ] ],
     [ "RotarySliderV2.h", "_rotary_slider_v2_8h.html", [
       [ "RotarySliderV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2" ]
     ] ],
