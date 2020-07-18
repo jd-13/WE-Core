@@ -2,8 +2,8 @@ var class_w_e_core_1_1_carve_1_1_noise_filter =
 [
     [ "NoiseFilter", "class_w_e_core_1_1_carve_1_1_noise_filter.html#a3e7b9516644c13c5be0d8bfada40a801", null ],
     [ "~NoiseFilter", "class_w_e_core_1_1_carve_1_1_noise_filter.html#a9c267cb3a73d1c8040932af65fd329dd", null ],
-    [ "Process1in1out", "class_w_e_core_1_1_carve_1_1_noise_filter.html#add06690cc874e65a263d61378a45da4e", null ],
-    [ "Process2in2out", "class_w_e_core_1_1_carve_1_1_noise_filter.html#a11c33d436dcc4ce3d982d40978b94b53", null ],
+    [ "Process1in1out", "class_w_e_core_1_1_carve_1_1_noise_filter.html#a64d11b418af981bd7344924c63007c72", null ],
+    [ "Process2in2out", "class_w_e_core_1_1_carve_1_1_noise_filter.html#a63a73db7e2e4c9844092f25d41c898d7", null ],
     [ "reset", "class_w_e_core_1_1_carve_1_1_noise_filter.html#a3b2e4bc279afb81ef7516e6e37024820", null ],
     [ "setSampleRate", "class_w_e_core_1_1_carve_1_1_noise_filter.html#a0d0023d5bba48804a810ab1b74b9ffc9", null ],
     [ "_highCutHz", "class_w_e_core_1_1_carve_1_1_noise_filter.html#a9c67bf8022562a18c6c2bff9ab6dff86", null ],

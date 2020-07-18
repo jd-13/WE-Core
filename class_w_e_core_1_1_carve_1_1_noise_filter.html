@@ -102,10 +102,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a0d0023d5bba48804a810ab1b74b9ffc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b2e4bc279afb81ef7516e6e37024820"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_carve_1_1_noise_filter.html#a3b2e4bc279afb81ef7516e6e37024820">reset</a> ()</td></tr>
 <tr class="separator:a3b2e4bc279afb81ef7516e6e37024820"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:add06690cc874e65a263d61378a45da4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_carve_1_1_noise_filter.html#add06690cc874e65a263d61378a45da4e">Process1in1out</a> (T *inSample, int numSamples)</td></tr>
-<tr class="separator:add06690cc874e65a263d61378a45da4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11c33d436dcc4ce3d982d40978b94b53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_carve_1_1_noise_filter.html#a11c33d436dcc4ce3d982d40978b94b53">Process2in2out</a> (T *inLeftSample, T *inRightSample, int numSamples)</td></tr>
-<tr class="separator:a11c33d436dcc4ce3d982d40978b94b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a64d11b418af981bd7344924c63007c72"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_carve_1_1_noise_filter.html#a64d11b418af981bd7344924c63007c72">Process1in1out</a> (T *inSample, size_t numSamples)</td></tr>
+<tr class="separator:a64d11b418af981bd7344924c63007c72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63a73db7e2e4c9844092f25d41c898d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_carve_1_1_noise_filter.html#a63a73db7e2e4c9844092f25d41c898d7">Process2in2out</a> (T *inLeftSample, T *inRightSample, size_t numSamples)</td></tr>
+<tr class="separator:a63a73db7e2e4c9844092f25d41c898d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -205,8 +205,8 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="add06690cc874e65a263d61378a45da4e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add06690cc874e65a263d61378a45da4e">&#9670;&nbsp;</a></span>Process1in1out()</h2>
+<a id="a64d11b418af981bd7344924c63007c72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64d11b418af981bd7344924c63007c72">&#9670;&nbsp;</a></span>Process1in1out()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,7 +225,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>numSamples</em>&#160;</td>
         </tr>
         <tr>
@@ -255,8 +255,8 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a id="a11c33d436dcc4ce3d982d40978b94b53"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11c33d436dcc4ce3d982d40978b94b53">&#9670;&nbsp;</a></span>Process2in2out()</h2>
+<a id="a63a73db7e2e4c9844092f25d41c898d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63a73db7e2e4c9844092f25d41c898d7">&#9670;&nbsp;</a></span>Process2in2out()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -281,7 +281,7 @@ template&lt;typename T &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">size_t&#160;</td>
           <td class="paramname"><em>numSamples</em>&#160;</td>
         </tr>
         <tr>

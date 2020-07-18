@@ -116,13 +116,13 @@ $(document).ready(function(){initNavTree('_carve_noise_filter_tests_8cpp_source.
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        std::vector&lt;float&gt; buffer(1024);</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <a class="code" href="class_w_e_core_1_1_carve_1_1_noise_filter.html">WECore::Carve::NoiseFilter&lt;float&gt;</a> mFilter(20, 20000);</div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;        mFilter.<a class="code" href="class_w_e_core_1_1_carve_1_1_noise_filter.html#a0d0023d5bba48804a810ab1b74b9ffc9">setSampleRate</a>(48000);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        WHEN(<span class="stringliteral">&quot;The silence samples are processed&quot;</span>) {</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="comment">// fill the buffer</span></div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            std::fill(buffer.begin(), buffer.end(), 0);</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            mFilter.<a class="code" href="class_w_e_core_1_1_carve_1_1_noise_filter.html#add06690cc874e65a263d61378a45da4e">Process1in1out</a>(&amp;buffer[0], <span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(buffer.size()));</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;            </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            mFilter.<a class="code" href="class_w_e_core_1_1_carve_1_1_noise_filter.html#a64d11b418af981bd7344924c63007c72">Process1in1out</a>(&amp;buffer[0], buffer.size());</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            THEN(<span class="stringliteral">&quot;The output is silence&quot;</span>) {</div>
 <div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> iii {0}; iii &lt; buffer.size(); iii++) {</div>
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                    CHECK(buffer[iii] == Approx(0.0f).margin(0.00001));</div>
@@ -134,10 +134,10 @@ $(document).ready(function(){initNavTree('_carve_noise_filter_tests_8cpp_source.
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_carve_noise_filter_tests_8cpp_html_a158463538c694c989167d7da05071da1"><div class="ttname"><a href="_carve_noise_filter_tests_8cpp.html#a158463538c694c989167d7da05071da1">SCENARIO</a></div><div class="ttdeci">SCENARIO(&quot;CarveNoiseFilter: Silence in = silence out&quot;)</div><div class="ttdef"><b>Definition:</b> <a href="_carve_noise_filter_tests_8cpp_source.html#l00027">CarveNoiseFilterTests.cpp:27</a></div></div>
-<div class="ttc" id="aclass_w_e_core_1_1_carve_1_1_noise_filter_html_add06690cc874e65a263d61378a45da4e"><div class="ttname"><a href="class_w_e_core_1_1_carve_1_1_noise_filter.html#add06690cc874e65a263d61378a45da4e">WECore::Carve::NoiseFilter::Process1in1out</a></div><div class="ttdeci">void Process1in1out(T *inSample, int numSamples)</div><div class="ttdef"><b>Definition:</b> <a href="_carve_noise_filter_8h_source.html#l00156">CarveNoiseFilter.h:156</a></div></div>
 <div class="ttc" id="a_carve_noise_filter_8h_html"><div class="ttname"><a href="_carve_noise_filter_8h.html">CarveNoiseFilter.h</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_carve_1_1_noise_filter_html"><div class="ttname"><a href="class_w_e_core_1_1_carve_1_1_noise_filter.html">WECore::Carve::NoiseFilter</a></div><div class="ttdef"><b>Definition:</b> <a href="_carve_noise_filter_8h_source.html#l00044">CarveNoiseFilter.h:44</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_carve_1_1_noise_filter_html_a0d0023d5bba48804a810ab1b74b9ffc9"><div class="ttname"><a href="class_w_e_core_1_1_carve_1_1_noise_filter.html#a0d0023d5bba48804a810ab1b74b9ffc9">WECore::Carve::NoiseFilter::setSampleRate</a></div><div class="ttdeci">void setSampleRate(double sampleRate)</div><div class="ttdef"><b>Definition:</b> <a href="_carve_noise_filter_8h_source.html#l00134">CarveNoiseFilter.h:134</a></div></div>
+<div class="ttc" id="aclass_w_e_core_1_1_carve_1_1_noise_filter_html_a64d11b418af981bd7344924c63007c72"><div class="ttname"><a href="class_w_e_core_1_1_carve_1_1_noise_filter.html#a64d11b418af981bd7344924c63007c72">WECore::Carve::NoiseFilter::Process1in1out</a></div><div class="ttdeci">void Process1in1out(T *inSample, size_t numSamples)</div><div class="ttdef"><b>Definition:</b> <a href="_carve_noise_filter_8h_source.html#l00156">CarveNoiseFilter.h:156</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

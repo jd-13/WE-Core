@@ -62,7 +62,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_r_envelope_follower_8h.html",
-"class_w_e_core_1_1_carve_1_1_noise_filter.html#a56909278d14e4999231b3bfa3aa9e8cd",
+"class_w_e_core_1_1_carve_1_1_noise_filter.html#a63a73db7e2e4c9844092f25d41c898d7",
 "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html#abad75772ccfffe241cb980ffe48c2e77"
 ];
 
