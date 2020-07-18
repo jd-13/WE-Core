@@ -30,6 +30,8 @@ if (CMAKE_COMPILER_IS_GNUCXX)
     set(CXXFLAGS_DSP ${CXXFLAGS_GCC_DSP})
 endif()
 
+set(CMAKE_CXX_FLAGS ${CXXFLAGS})
+
 add_library(dspfilters STATIC
             ${DSPFILTERS_PATH}/source/Biquad.cpp
             ${DSPFILTERS_PATH}/source/Butterworth.cpp
