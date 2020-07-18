@@ -30,8 +30,6 @@ if (CMAKE_COMPILER_IS_GNUCXX)
     set(CXXFLAGS_DSP ${CXXFLAGS_GCC_DSP})
 endif()
 
-set(CMAKE_CXX_FLAGS ${CXXFLAGS})
-
 add_library(dspfilters STATIC
             ${DSPFILTERS_PATH}/source/Biquad.cpp
             ${DSPFILTERS_PATH}/source/Butterworth.cpp
@@ -39,7 +37,7 @@ add_library(dspfilters STATIC
             ${DSPFILTERS_PATH}/source/Filter.cpp
             ${DSPFILTERS_PATH}/source/Param.cpp
             ${DSPFILTERS_PATH}/source/PoleFilter.cpp)
-set_target_properties(dspfilters PROPERTIES COMPILE_OPTIONS ${CXXFLAGS_DSP})
+target_compile_options(dspfilters PRIVATE ${CXXFLAGS_DSP})
 
 add_executable(WECoreTest $ENV{WECORE_SRC}/Tests/catchMain.cpp
                           $ENV{WECORE_SRC}/CarveDSP/Tests/DSPUnitParameterTests.cpp
@@ -51,7 +49,9 @@ add_executable(WECoreTest $ENV{WECORE_SRC}/Tests/catchMain.cpp
                           $ENV{WECORE_SRC}/WEFilters/Tests/AREnvelopeFollowerTests.cpp
                           $ENV{WECORE_SRC}/WEFilters/Tests/TPTSVFilterTests.cpp)
 target_link_libraries(WECoreTest dspfilters)
+target_compile_options(WECoreTest PRIVATE ${CXXFLAGS})
 
 add_executable(WECoreTestPerf $ENV{WECORE_SRC}/Tests/catchMain.cpp
                               $ENV{WECORE_SRC}/Tests/PerformanceTests.cpp)
 target_link_libraries(WECoreTestPerf dspfilters)
+target_compile_options(WECoreTestPerf PRIVATE  ${CXXFLAGS})
