@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(GCOV_CXX_FLAGS -fprofile-arcs -ftest-coverage)
-set(GCOV_LINK_FLAGS -lgcov --coverage)
+set(GCOV_LINK_FLAGS -lgcov)
 
 # Set the GCC and Clang flags
 # TODO: work on removing the need for the below Wno flags
@@ -58,6 +58,7 @@ target_link_libraries(WECoreTestPerf dspfilters)
 target_compile_options(WECoreTestPerf PRIVATE ${CXXFLAGS})
 
 if (CMAKE_COMPILER_IS_GNUCXX)
+    target_compile_options(dspfilters PRIVATE ${GCOV_LINK_FLAGS})
     target_compile_options(WECoreTest PRIVATE ${GCOV_LINK_FLAGS})
     target_compile_options(WECoreTestPerf PRIVATE ${GCOV_LINK_FLAGS})
 endif()
