@@ -1,6 +1,8 @@
-![CI Main](https://github.com/jd-13/WE-Core/workflows/CI%20Main/badge.svg)
+[![CI Main](https://github.com/jd-13/WE-Core/workflows/CI%20Main/badge.svg)](https://github.com/jd-13/WE-Core/actions?query=workflow%3A%22CI+Main%22)
 [![codecov](https://codecov.io/gh/jd-13/WE-Core/branch/master/graph/badge.svg)](https://codecov.io/gh/jd-13/WE-Core)
-![](https://img.shields.io/badge/C%2B%2B-17-brightgreen.svg)
+[![](https://img.shields.io/badge/Docs-Over_here!-blueviolet)](https://jd-13.github.io/WE-Core/)
+![](https://img.shields.io/badge/C%2B%2B-17-informational)
+![](https://img.shields.io/badge/license-GPLv3-informational)
 
 # WE-Core
 A set of core libraries for useful DSP related classes that are used by multiple White Elephant
