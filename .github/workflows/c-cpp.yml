@@ -16,7 +16,7 @@ jobs:
         with:
           submodules: true
       - name: RunBuild
-          run: Scripts/CIBuild.sh $GITHUB_RUN_NUMBER
+        run: Scripts/CIBuild.sh $GITHUB_RUN_NUMBER
 
   BuildGCC:
     runs-on: ubuntu-latest
