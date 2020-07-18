@@ -11,16 +11,16 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(GCOVFLAGS "-fprofile-arcs -ftest-coverage")
-set(CXXFLAGS_COMMON "-std=c++17 -g -Wall -Werror -Wextra -Wconversion -Wshadow ${GCOVFLAGS}")
+set(CXXFLAGS_COMMON "-g -Wall -Werror -Wextra -Wconversion -Wshadow ${GCOVFLAGS}")
 
 # Set the GCC and Clang flags
 # TODO: work on removing the need for the below Wno flags
-set(CXXFLAGS_CLANG "${CXXFLAGS_COMMON} -Weverything -Wpedantic -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion -Wno-unknown-warning-option -Wno-c++98-compat -Wno-padded -Wno-global-constructors")
-set(CXXFLAGS_GCC "${CXXFLAGS_COMMON} -pedantic")
+set(CXXFLAGS_CLANG "${CXXFLAGS_COMMON} -std=c++17 -Weverything -Wpedantic -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion -Wno-unknown-warning-option -Wno-c++98-compat -Wno-padded -Wno-global-constructors")
+set(CXXFLAGS_GCC "${CXXFLAGS_COMMON} -std=c++1z -pedantic")
 
 # Set the GCC and Clang flags for the DSPFilters library
 set(CXXFLAGS_CLANG_DSP "${CXXFLAGS_CLANG} -Wno-float-equal -Wno-ignored-qualifiers -Wno-unused-parameter -Wno-old-style-cast -Wno-padded -Wno-unused-variable -Wno-sign-conversion -Wno-missing-noreturn -Wno-zero-as-null-pointer-constant -Wno-extra-semi-stmt")
-set(CXXFLAGS_GCC_DSP "${CXXFLAGS_COMMON} -Wno-ignored-qualifiers -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-sign-conversion -Wno-missing-noreturn")
+set(CXXFLAGS_GCC_DSP "${CXXFLAGS_GCC} -Wno-ignored-qualifiers -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-sign-conversion -Wno-missing-noreturn")
 
 # Set the flags we'll actually use based on the compiler
 set(CXXFLAGS ${CXXFLAGS_CLANG})
