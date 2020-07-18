@@ -10,12 +10,13 @@ include_directories($ENV{CATCH_PATH}
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(GCOVFLAGS -fprofile-arcs -ftest-coverage)
+set(GCOV_CXX_FLAGS -fprofile-arcs -ftest-coverage)
+set(GCOV_LINK_FLAGS -lgcov --coverage)
 
 # Set the GCC and Clang flags
 # TODO: work on removing the need for the below Wno flags
 set(CXXFLAGS_CLANG -std=c++17 -g -Wall -Werror -Wextra -Wconversion -Wshadow -Weverything -Wpedantic -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion -Wno-unknown-warning-option -Wno-c++98-compat -Wno-padded -Wno-global-constructors)
-set(CXXFLAGS_GCC   -std=c++17 -g -Wall -Werror -Wextra -Wconversion -Wshadow -pedantic -fprofile-arcs -ftest-coverage)
+set(CXXFLAGS_GCC   -std=c++17 -g -Wall -Werror -Wextra -Wconversion -Wshadow -pedantic ${GCOV_CXX_FLAGS})
 
 # Set the GCC and Clang flags for the DSPFilters library
 set(CXXFLAGS_CLANG_DSP ${CXXFLAGS_CLANG} -Wno-float-equal -Wno-ignored-qualifiers -Wno-unused-parameter -Wno-old-style-cast -Wno-padded -Wno-unused-variable -Wno-sign-conversion -Wno-missing-noreturn -Wno-zero-as-null-pointer-constant -Wno-extra-semi-stmt)
@@ -54,4 +55,10 @@ target_compile_options(WECoreTest PRIVATE ${CXXFLAGS})
 add_executable(WECoreTestPerf $ENV{WECORE_SRC}/Tests/catchMain.cpp
                               $ENV{WECORE_SRC}/Tests/PerformanceTests.cpp)
 target_link_libraries(WECoreTestPerf dspfilters)
-target_compile_options(WECoreTestPerf PRIVATE  ${CXXFLAGS})
+target_compile_options(WECoreTestPerf PRIVATE ${CXXFLAGS})
+
+if (CMAKE_COMPILER_IS_GNUCXX)
+    target_compile_options(WECoreTest PRIVATE ${GCOV_LINK_FLAGS})
+    target_compile_options(WECoreTestPerf PRIVATE ${GCOV_LINK_FLAGS})
+endif()
+
