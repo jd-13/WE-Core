@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jd-13/WE-Core.svg?branch=master)](https://travis-ci.org/jd-13/WE-Core)
+![Unit Tests](https://github.com/jd-13/WE-Core/workflows/Unit%20Tests/badge.svg)
 [![codecov](https://codecov.io/gh/jd-13/WE-Core/branch/master/graph/badge.svg)](https://codecov.io/gh/jd-13/WE-Core)
 ![](https://img.shields.io/badge/C%2B%2B-17-brightgreen.svg)
 
