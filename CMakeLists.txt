@@ -19,7 +19,7 @@ set(CXXFLAGS_GCC   -std=c++17 -g -Wall -Werror -Wextra -Wconversion -Wshadow -pe
 
 # Set the GCC and Clang flags for the DSPFilters library
 set(CXXFLAGS_CLANG_DSP ${CXXFLAGS_CLANG} -Wno-float-equal -Wno-ignored-qualifiers -Wno-unused-parameter -Wno-old-style-cast -Wno-padded -Wno-unused-variable -Wno-sign-conversion -Wno-missing-noreturn -Wno-zero-as-null-pointer-constant -Wno-extra-semi-stmt)
-set(CXXFLAGS_GCC_DSP ${CXXFLAGS_GCC})
+set(CXXFLAGS_GCC_DSP ${CXXFLAGS_GCC} -Wno-ignored-qualifiers -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-sign-conversion -Wno-missing-noreturn)
 
 # Set the flags we'll actually use based on the compiler
 set(CXXFLAGS ${CXXFLAGS_CLANG})
