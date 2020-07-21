@@ -32,20 +32,46 @@ namespace WECore::JUCEPlugin {
     /**
      * This class provides basic functionality that is commonly used by an AudioProcessorEditor in a
      * White Elephant plugin.
+     *
+     * Classes inheriting from this should:
+     *   - Override _onParameterUpdate and call it in the constructor
      */
     class CoreProcessorEditor : public AudioProcessorEditor {
     public:
-        
-        CoreProcessorEditor() = delete;
-        
-        ~CoreProcessorEditor() = default;
-        
-    protected:
-        CoreProcessorEditor(AudioProcessor& ownerFilter) : AudioProcessorEditor(ownerFilter) {}
+        ~CoreProcessorEditor() {
+            dynamic_cast<CoreAudioProcessor&>(processor).
+                removeParameterChangeListener(&_parameterListener);
+        }
 
-        
+    protected:
+
+        /**
+         * Is notified when a parameter has changed and calls _onParameterUpdate.
+         */
+        class ParameterChangeListener : public ChangeListener {
+        public:
+            ParameterChangeListener(CoreProcessorEditor* parent) : _parent(parent) {};
+            virtual ~ParameterChangeListener() = default;
+
+            virtual void changeListenerCallback(ChangeBroadcaster* /*source*/) {
+                _parent->_onParameterUpdate();
+            }
+
+        private:
+            CoreProcessorEditor* _parent;
+        };
+
+        ParameterChangeListener _parameterListener;
+
         SharedResourcePointer<TooltipWindow> _tooltipWindow;
-        
+
+        CoreProcessorEditor(CoreAudioProcessor& ownerFilter)
+                : AudioProcessorEditor(ownerFilter),
+                  _parameterListener(this) {
+            dynamic_cast<CoreAudioProcessor&>(processor).
+                addParameterChangeListener(&_parameterListener);
+        }
+
         /**
          * Sets the look and feel for all child components.
          *
@@ -59,7 +85,7 @@ namespace WECore::JUCEPlugin {
                 getChildComponent(iii)->setLookAndFeel(&defaultLookAndFeel);
             }
         }
-        
+
         /**
          * Sets the LookAndFeel for all child components to nullptr.
          *
@@ -73,7 +99,12 @@ namespace WECore::JUCEPlugin {
                 getChildComponent(iii)->setLookAndFeel(nullptr);
             }
         }
-        
+
+        /**
+         * This will be called whenever a parameter has been updated.
+         */
+        virtual void _onParameterUpdate() = 0;
+
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreProcessorEditor)
     };
 }
