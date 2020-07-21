@@ -25,16 +25,26 @@ var hierarchy =
     ] ],
     [ "ParameterDefinition::BooleanParameter", "class_parameter_definition_1_1_boolean_parameter.html", null ],
     [ "WECore::Carve::CarveDSPUnit< T >", "class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html", null ],
+    [ "ChangeBroadcaster", null, [
+      [ "WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html", null ]
+    ] ],
+    [ "ChangeListener", null, [
+      [ "WECore::JUCEPlugin::CoreProcessorEditor::ParameterChangeListener", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor_1_1_parameter_change_listener.html", null ]
+    ] ],
     [ "Component", null, [
       [ "WECore::Richter::WaveViewer", "class_w_e_core_1_1_richter_1_1_wave_viewer.html", null ]
     ] ],
     [ "WECore::Songbird::Formant", "class_w_e_core_1_1_songbird_1_1_formant.html", null ],
+    [ "Listener", null, [
+      [ "WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html", null ]
+    ] ],
     [ "LookAndFeel_V2", null, [
       [ "WECore::JUCEPlugin::CoreLookAndFeel", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html", null ]
     ] ],
     [ "WECore::MONSTR::MONSTRBand< T >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", null ],
     [ "WECore::MONSTR::MONSTRCrossover< T >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", null ],
     [ "WECore::Carve::NoiseFilter< T >", "class_w_e_core_1_1_carve_1_1_noise_filter.html", null ],
+    [ "WECore::JUCEPlugin::CoreAudioProcessor::ParameterInterface", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html", null ],
     [ "WECore::Richter::RichterLFOBase", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_base.html", [
       [ "WECore::Richter::RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html", null ],
       [ "WECore::Richter::RichterMOD", "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html", null ]

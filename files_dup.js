@@ -21,14 +21,17 @@ var files_dup =
       [ "ComboBoxV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_combo_box_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_combo_box_v2" ]
     ] ],
     [ "CoreAudioProcessor.h", "_core_audio_processor_8h.html", [
-      [ "CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor" ]
+      [ "CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor" ],
+      [ "ParameterInterface", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface" ],
+      [ "ParameterBroadcaster", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster" ]
     ] ],
     [ "CoreLookAndFeel.h", "_core_look_and_feel_8h.html", [
       [ "CoreLookAndFeel", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel" ]
     ] ],
     [ "CoreMath.h", "_core_math_8h.html", "_core_math_8h" ],
     [ "CoreProcessorEditor.h", "_core_processor_editor_8h.html", [
-      [ "CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor" ]
+      [ "CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor" ],
+      [ "ParameterChangeListener", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor_1_1_parameter_change_listener.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor_1_1_parameter_change_listener" ]
     ] ],
     [ "DSPUnitParameterTests.cpp", "_d_s_p_unit_parameter_tests_8cpp.html", "_d_s_p_unit_parameter_tests_8cpp" ],
     [ "DSPUnitProcessingTests.cpp", "_d_s_p_unit_processing_tests_8cpp.html", "_d_s_p_unit_processing_tests_8cpp" ],

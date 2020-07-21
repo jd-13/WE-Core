@@ -82,9 +82,10 @@ $(document).ready(function(){initNavTree('class_w_e_core_1_1_j_u_c_e_plugin_1_1_
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">WECore::JUCEPlugin::CoreAudioProcessor Class Reference</div>  </div>
@@ -99,35 +100,59 @@ Inheritance diagram for WECore::JUCEPlugin::CoreAudioProcessor:</div>
   <img src="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.png" alt=""/>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html">ParameterBroadcaster</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html">ParameterInterface</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae41ff5c0c6c4a8251cd58253265740c8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ae41ff5c0c6c4a8251cd58253265740c8">CoreAudioProcessor</a> ()=default</td></tr>
 <tr class="separator:ae41ff5c0c6c4a8251cd58253265740c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8e63ae813147c265387c17500ade197b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a8e63ae813147c265387c17500ade197b">~CoreAudioProcessor</a> ()=default</td></tr>
 <tr class="separator:a8e63ae813147c265387c17500ade197b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64aef96465e35e317ceaa3dccbcf0615"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a64aef96465e35e317ceaa3dccbcf0615">needsUIUpdate</a> ()</td></tr>
-<tr class="separator:a64aef96465e35e317ceaa3dccbcf0615"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac78dc4f53d3cc878708d8e3c9b7a25dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac78dc4f53d3cc878708d8e3c9b7a25dc">requestUIUpdate</a> ()</td></tr>
-<tr class="separator:ac78dc4f53d3cc878708d8e3c9b7a25dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a897dc434de182d0f4ce5ba426d65e80b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a897dc434de182d0f4ce5ba426d65e80b">clearUIUpdate</a> ()</td></tr>
-<tr class="separator:a897dc434de182d0f4ce5ba426d65e80b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac710aa916da1f7b12905216f15505c07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac710aa916da1f7b12905216f15505c07">getStateInformation</a> (MemoryBlock &amp;destData) override</td></tr>
+<tr class="separator:ac710aa916da1f7b12905216f15505c07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e8e26d808c96cdeca23e3f8b8ff08ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a6e8e26d808c96cdeca23e3f8b8ff08ad">setStateInformation</a> (const void *data, int sizeInBytes) override</td></tr>
+<tr class="separator:a6e8e26d808c96cdeca23e3f8b8ff08ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab20e32b692a37265ee74c29e39f9017c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ab20e32b692a37265ee74c29e39f9017c">addParameterChangeListener</a> (ChangeListener *listener)</td></tr>
+<tr class="separator:ab20e32b692a37265ee74c29e39f9017c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b5c7bd59543ada92e2777e0b3c8d1a5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a6b5c7bd59543ada92e2777e0b3c8d1a5">removeParameterChangeListener</a> (ChangeListener *listener)</td></tr>
+<tr class="separator:a6b5c7bd59543ada92e2777e0b3c8d1a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a02315d85ff407d0e80e38152b3bf5a3f"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a02315d85ff407d0e80e38152b3bf5a3f">floatVectorToString</a> (const std::vector&lt; float &gt; &amp;fData) const</td></tr>
-<tr class="separator:a02315d85ff407d0e80e38152b3bf5a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88c3bea24b1ef1133f06ed2fabff3052"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a88c3bea24b1ef1133f06ed2fabff3052">stringToFloatVector</a> (const String sFloatCSV, std::vector&lt; float &gt; &amp;fData, int maxNumFloat) const</td></tr>
-<tr class="separator:a88c3bea24b1ef1133f06ed2fabff3052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:ae3e824d4d66cbdc370ea17860a01a727"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ae3e824d4d66cbdc370ea17860a01a727">registerParameter</a> (AudioParameterFloat *&amp;param, const String &amp;name, float defaultValue, std::function&lt; void(float)&gt; setter)</td></tr>
+<tr class="separator:ae3e824d4d66cbdc370ea17860a01a727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a42bac44281cf9ba81fad2e94843196"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a8a42bac44281cf9ba81fad2e94843196">registerParameter</a> (AudioParameterInt *&amp;param, const String &amp;name, const <a class="el" href="class_parameter_definition_1_1_base_parameter.html">ParameterDefinition::BaseParameter</a>&lt; int &gt; *range, int defaultValue, std::function&lt; void(int)&gt; setter)</td></tr>
+<tr class="separator:a8a42bac44281cf9ba81fad2e94843196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a016f7f1155a89a8c52d7f5d70b570401"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a016f7f1155a89a8c52d7f5d70b570401">registerParameter</a> (AudioParameterBool *&amp;param, const String &amp;name, float defaultValue, std::function&lt; void(bool)&gt; setter)</td></tr>
+<tr class="separator:a016f7f1155a89a8c52d7f5d70b570401"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a93e98a197abfc678e967b5170e80333c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a93e98a197abfc678e967b5170e80333c">_UIUpdateFlag</a></td></tr>
-<tr class="separator:a93e98a197abfc678e967b5170e80333c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:acf54e7a6b027497a1d9370876f75e6d9"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#acf54e7a6b027497a1d9370876f75e6d9">_floatVectorToString</a> (const std::vector&lt; float &gt; &amp;fData) const</td></tr>
+<tr class="separator:acf54e7a6b027497a1d9370876f75e6d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae224d87be60256218d8917322b38ea14"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ae224d87be60256218d8917322b38ea14">_stringToFloatVector</a> (const String sFloatCSV, std::vector&lt; float &gt; &amp;fData, int maxNumFloat) const</td></tr>
+<tr class="separator:ae224d87be60256218d8917322b38ea14"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a94d9ce99230197aed71dbfc1eee0ffa5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html">ParameterBroadcaster</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a94d9ce99230197aed71dbfc1eee0ffa5">_parameterBroadcaster</a></td></tr>
+<tr class="separator:a94d9ce99230197aed71dbfc1eee0ffa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35b1755619a623a3ea970a3c538ed270"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html">ParameterInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a35b1755619a623a3ea970a3c538ed270">_paramsList</a></td></tr>
+<tr class="separator:a35b1755619a623a3ea970a3c538ed270"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class provides basic functionality that is commonly used by an AudioProcessor in a White Elephant plugin. </p>
+<div class="textblock"><p>This class provides basic functionality that is commonly used by an AudioProcessor in a White Elephant plugin.</p>
+<p>Classes inheriting from this should:</p><ul>
+<li>Call registerParameter to declare parameters </li>
+</ul>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00035">35</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00038">38</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ae41ff5c0c6c4a8251cd58253265740c8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae41ff5c0c6c4a8251cd58253265740c8">&#9670;&nbsp;</a></span>CoreAudioProcessor()</h2>
@@ -180,8 +205,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a897dc434de182d0f4ce5ba426d65e80b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a897dc434de182d0f4ce5ba426d65e80b">&#9670;&nbsp;</a></span>clearUIUpdate()</h2>
+<a id="acf54e7a6b027497a1d9370876f75e6d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf54e7a6b027497a1d9370876f75e6d9">&#9670;&nbsp;</a></span>_floatVectorToString()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -190,37 +215,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void WECore::JUCEPlugin::CoreAudioProcessor::clearUIUpdate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Clears the UI update flag. </p>
-
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00053">53</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
-
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00056">_UIUpdateFlag</a>.</p>
-
-</div>
-</div>
-<a id="a02315d85ff407d0e80e38152b3bf5a3f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a02315d85ff407d0e80e38152b3bf5a3f">&#9670;&nbsp;</a></span>floatVectorToString()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">String WECore::JUCEPlugin::CoreAudioProcessor::floatVectorToString </td>
+          <td class="memname">String WECore::JUCEPlugin::CoreAudioProcessor::_floatVectorToString </td>
           <td>(</td>
           <td class="paramtype">const std::vector&lt; float &gt; &amp;&#160;</td>
           <td class="paramname"><em>fData</em></td><td>)</td>
@@ -229,17 +224,19 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00067">67</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00228">228</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00150">getStateInformation()</a>.</p>
 
 </div>
 </div>
-<a id="a64aef96465e35e317ceaa3dccbcf0615"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64aef96465e35e317ceaa3dccbcf0615">&#9670;&nbsp;</a></span>needsUIUpdate()</h2>
+<a id="ae224d87be60256218d8917322b38ea14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae224d87be60256218d8917322b38ea14">&#9670;&nbsp;</a></span>_stringToFloatVector()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -248,67 +245,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool WECore::JUCEPlugin::CoreAudioProcessor::needsUIUpdate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Returns true if there are updates which need to be applied to the UI. </p>
-
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00043">43</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
-
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00056">_UIUpdateFlag</a>.</p>
-
-</div>
-</div>
-<a id="ac78dc4f53d3cc878708d8e3c9b7a25dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac78dc4f53d3cc878708d8e3c9b7a25dc">&#9670;&nbsp;</a></span>requestUIUpdate()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void WECore::JUCEPlugin::CoreAudioProcessor::requestUIUpdate </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Sets the UI update flag to true. </p>
-
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00048">48</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
-
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00056">_UIUpdateFlag</a>.</p>
-
-</div>
-</div>
-<a id="a88c3bea24b1ef1133f06ed2fabff3052"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88c3bea24b1ef1133f06ed2fabff3052">&#9670;&nbsp;</a></span>stringToFloatVector()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int WECore::JUCEPlugin::CoreAudioProcessor::stringToFloatVector </td>
+          <td class="memname">int WECore::JUCEPlugin::CoreAudioProcessor::_stringToFloatVector </td>
           <td>(</td>
           <td class="paramtype">const String&#160;</td>
           <td class="paramname"><em>sFloatCSV</em>, </td>
@@ -333,18 +270,19 @@ Protected Attributes</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00083">83</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00244">244</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00166">setStateInformation()</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a93e98a197abfc678e967b5170e80333c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93e98a197abfc678e967b5170e80333c">&#9670;&nbsp;</a></span>_UIUpdateFlag</h2>
+<a id="ab20e32b692a37265ee74c29e39f9017c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab20e32b692a37265ee74c29e39f9017c">&#9670;&nbsp;</a></span>addParameterChangeListener()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -353,19 +291,361 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool WECore::JUCEPlugin::CoreAudioProcessor::_UIUpdateFlag</td>
+          <td class="memname">void WECore::JUCEPlugin::CoreAudioProcessor::addParameterChangeListener </td>
+          <td>(</td>
+          <td class="paramtype">ChangeListener *&#160;</td>
+          <td class="paramname"><em>listener</em></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Adds a listener that will be notified whenever a parameter is changed. </p>
+
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00062">62</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00134">_parameterBroadcaster</a>.</p>
+
+</div>
+</div>
+<a id="ac710aa916da1f7b12905216f15505c07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac710aa916da1f7b12905216f15505c07">&#9670;&nbsp;</a></span>getStateInformation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WECore::JUCEPlugin::CoreAudioProcessor::getStateInformation </td>
+          <td>(</td>
+          <td class="paramtype">MemoryBlock &amp;&#160;</td>
+          <td class="paramname"><em>destData</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Collects the registered parameter values and writes them to XML.</p>
+<p>Float parameters are written in their normalised 0 to 1 range.</p>
+<p>Int parameters are written as a float representation of their real (not normalised) value.</p>
+<p>Bool parameters are written as a float representation of true or false. </p>
+
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00150">150</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00228">_floatVectorToString()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00139">_paramsList</a>.</p>
+
+</div>
+</div>
+<a id="a016f7f1155a89a8c52d7f5d70b570401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a016f7f1155a89a8c52d7f5d70b570401">&#9670;&nbsp;</a></span>registerParameter() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WECore::JUCEPlugin::CoreAudioProcessor::registerParameter </td>
+          <td>(</td>
+          <td class="paramtype">AudioParameterBool *&amp;&#160;</td>
+          <td class="paramname"><em>param</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const String &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>defaultValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(bool)&gt;&#160;</td>
+          <td class="paramname"><em>setter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Used to register parameters.</p>
+<p>Float parameters are created with the normalised 0 to 1 range.</p>
+<p>Int parameters are created with their real (not normalised) ranges.</p>
+<p>(Bool parameters don't have a meaningful range.)</p>
+<p>The order parameters are registered in determines the order they are persisted to XML and read from XML when restoring previous values. If this order changes between versions then a plugin restoring parameter data from XML written by a previous version will assign values to the wrong parameters. </p>
+
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00214">214</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00134">_parameterBroadcaster</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00139">_paramsList</a>.</p>
+
+</div>
+</div>
+<a id="ae3e824d4d66cbdc370ea17860a01a727"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3e824d4d66cbdc370ea17860a01a727">&#9670;&nbsp;</a></span>registerParameter() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WECore::JUCEPlugin::CoreAudioProcessor::registerParameter </td>
+          <td>(</td>
+          <td class="paramtype">AudioParameterFloat *&amp;&#160;</td>
+          <td class="paramname"><em>param</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const String &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>defaultValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(float)&gt;&#160;</td>
+          <td class="paramname"><em>setter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Used to register parameters.</p>
+<p>Float parameters are created with the normalised 0 to 1 range.</p>
+<p>Int parameters are created with their real (not normalised) ranges.</p>
+<p>(Bool parameters don't have a meaningful range.)</p>
+<p>The order parameters are registered in determines the order they are persisted to XML and read from XML when restoring previous values. If this order changes between versions then a plugin restoring parameter data from XML written by a previous version will assign values to the wrong parameters. </p>
+
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00185">185</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00134">_parameterBroadcaster</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00139">_paramsList</a>.</p>
+
+</div>
+</div>
+<a id="a8a42bac44281cf9ba81fad2e94843196"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a42bac44281cf9ba81fad2e94843196">&#9670;&nbsp;</a></span>registerParameter() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WECore::JUCEPlugin::CoreAudioProcessor::registerParameter </td>
+          <td>(</td>
+          <td class="paramtype">AudioParameterInt *&amp;&#160;</td>
+          <td class="paramname"><em>param</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const String &amp;&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="class_parameter_definition_1_1_base_parameter.html">ParameterDefinition::BaseParameter</a>&lt; int &gt; *&#160;</td>
+          <td class="paramname"><em>range</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>defaultValue</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::function&lt; void(int)&gt;&#160;</td>
+          <td class="paramname"><em>setter</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Used to register parameters.</p>
+<p>Float parameters are created with the normalised 0 to 1 range.</p>
+<p>Int parameters are created with their real (not normalised) ranges.</p>
+<p>(Bool parameters don't have a meaningful range.)</p>
+<p>The order parameters are registered in determines the order they are persisted to XML and read from XML when restoring previous values. If this order changes between versions then a plugin restoring parameter data from XML written by a previous version will assign values to the wrong parameters. </p>
+
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00199">199</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00134">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00139">_paramsList</a>, <a class="el" href="_parameter_definition_8h_source.html#l00070">ParameterDefinition::BaseParameter&lt; T &gt;::maxValue</a>, and <a class="el" href="_parameter_definition_8h_source.html#l00069">ParameterDefinition::BaseParameter&lt; T &gt;::minValue</a>.</p>
+
+</div>
+</div>
+<a id="a6b5c7bd59543ada92e2777e0b3c8d1a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b5c7bd59543ada92e2777e0b3c8d1a5">&#9670;&nbsp;</a></span>removeParameterChangeListener()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WECore::JUCEPlugin::CoreAudioProcessor::removeParameterChangeListener </td>
+          <td>(</td>
+          <td class="paramtype">ChangeListener *&#160;</td>
+          <td class="paramname"><em>listener</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Removes a previously added listener. </p>
+
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00069">69</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00134">_parameterBroadcaster</a>.</p>
+
+</div>
+</div>
+<a id="a6e8e26d808c96cdeca23e3f8b8ff08ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e8e26d808c96cdeca23e3f8b8ff08ad">&#9670;&nbsp;</a></span>setStateInformation()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WECore::JUCEPlugin::CoreAudioProcessor::setStateInformation </td>
+          <td>(</td>
+          <td class="paramtype">const void *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizeInBytes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Restores parameter values from previously written XML. </p>
+
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00166">166</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00139">_paramsList</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00244">_stringToFloatVector()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a94d9ce99230197aed71dbfc1eee0ffa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94d9ce99230197aed71dbfc1eee0ffa5">&#9670;&nbsp;</a></span>_parameterBroadcaster</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html">ParameterBroadcaster</a> WECore::JUCEPlugin::CoreAudioProcessor::_parameterBroadcaster</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00056">56</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00134">134</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00053">clearUIUpdate()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00043">needsUIUpdate()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00048">requestUIUpdate()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00062">addParameterChangeListener()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00185">registerParameter()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00069">removeParameterChangeListener()</a>.</p>
+
+</div>
+</div>
+<a id="a35b1755619a623a3ea970a3c538ed270"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35b1755619a623a3ea970a3c538ed270">&#9670;&nbsp;</a></span>_paramsList</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html">ParameterInterface</a>&gt; WECore::JUCEPlugin::CoreAudioProcessor::_paramsList</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>List of parameters in the order they are registered and stored in XML. </p>
+
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00139">139</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00150">getStateInformation()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00185">registerParameter()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00166">setStateInformation()</a>.</p>
 
 </div>
 </div>
