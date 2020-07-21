@@ -137,7 +137,7 @@ namespace WECore::JUCEPlugin {
     template <class T>
     void LabelReadoutSlider<T>::_updateLabel() {
         if (_isRunning) {
-            String valueString(_parameter->NormalisedToInteral(getValue()), 2);
+            String valueString(_parameter->NormalisedToInternal(getValue()), 2);
             _targetLabel->setText(valueString, dontSendNotification);
         }
     }
