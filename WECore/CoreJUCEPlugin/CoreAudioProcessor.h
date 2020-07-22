@@ -140,9 +140,7 @@ namespace WECore::JUCEPlugin {
 
         inline String _floatVectorToString(const std::vector<float>& fData) const;
 
-        inline int _stringToFloatVector(const String sFloatCSV,
-                                        std::vector<float>& fData,
-                                        int maxNumFloat) const;
+        inline std::vector<float> _stringToFloatVector(const String sFloatCSV) const;
 
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreAudioProcessor)
     };
@@ -168,12 +166,23 @@ namespace WECore::JUCEPlugin {
         std::unique_ptr<XmlElement> pRoot(getXmlFromBinary(data, sizeInBytes));
         std::vector<float> readParamValues;
 
+        // Parse the XML
         if (pRoot != NULL) {
             forEachXmlChildElement((*pRoot), pChild) {
                 if (pChild->hasTagName("AllUserParam")) {
+                    
+                    // Read the values into a float array
                     String sFloatCSV = pChild->getAllSubText();
-                    if (_stringToFloatVector(sFloatCSV, readParamValues, _paramsList.size()) == _paramsList.size()) {
-                        for (int idx {0}; idx < _paramsList.size(); idx++) {
+                    const std::vector<float> readParamValues = _stringToFloatVector(sFloatCSV);
+                    
+                    // Pass each value read from XML to a setter, being careful not to go out of
+                    // range on either of the vectors
+                    //
+                    // For this to work it relies the order not changing between plugin versions,
+                    // otherwise parameter values written by an old version will be assigned to the
+                    // wrong parameters in a new version (new parameters are ok though)
+                    for (int idx {0}; idx < _paramsList.size(); idx++) {
+                        if (idx < readParamValues.size()) {
                             _paramsList[idx].setter(readParamValues[idx]);
                         }
                     }
@@ -241,17 +250,16 @@ namespace WECore::JUCEPlugin {
         return result;
     }
 
-    int CoreAudioProcessor::_stringToFloatVector(const String sFloatCSV,
-                                                 std::vector<float>& fData,
-                                                 int maxNumFloat) const {
+    std::vector<float> CoreAudioProcessor::_stringToFloatVector(const String sFloatCSV) const {
         StringArray tokenizer;
-        int tokenCount {tokenizer.addTokens(sFloatCSV, ",","")};
-        int resultCount {(maxNumFloat <= tokenCount) ? maxNumFloat : tokenCount};
+        tokenizer.addTokens(sFloatCSV, ",","");
+        
+        std::vector<float> values;
 
-        for (int iii {0}; iii < resultCount; iii++) {
-            fData.push_back(tokenizer[iii].getFloatValue());
+        for (int iii {0}; iii < tokenizer.size(); iii++) {
+            values.push_back(tokenizer[iii].getFloatValue());
         }
 
-        return ((tokenCount <= maxNumFloat) ? resultCount : -1);
+        return values;
     }
 }
