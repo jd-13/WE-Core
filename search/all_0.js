@@ -105,7 +105,7 @@ var searchData=
   ['_5fsetvowel1_102',['_setVowel1',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ae090fcab7f09a3e01531793a87367da5',1,'WECore::Songbird::SongbirdFilterModule']]],
   ['_5fsinetable_103',['_sineTable',['../class_w_e_core_1_1_richter_1_1_wavetables.html#a6c98fc18684f8bc5af3209c8ef9bb5c2',1,'WECore::Richter::Wavetables']]],
   ['_5fsquaretable_104',['_squareTable',['../class_w_e_core_1_1_richter_1_1_wavetables.html#a700e3b2c77328852c1bd281483e4c43e',1,'WECore::Richter::Wavetables']]],
-  ['_5fstringtofloatvector_105',['_stringToFloatVector',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ae224d87be60256218d8917322b38ea14',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
+  ['_5fstringtofloatvector_105',['_stringToFloatVector',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ae04ce809a005ae8ee3a19120048762f1',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
   ['_5ftargetlabel_106',['_targetLabel',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html#a5f4917c05137cd18781e8fa9b6f64934',1,'WECore::JUCEPlugin::LabelReadoutSlider']]],
   ['_5ftempinputbuffer_107',['_tempInputBuffer',['../class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html#a7f3b11e3edd46ba93e4d94768b09ab1f',1,'WECore::Songbird::SongbirdFormantFilter']]],
   ['_5ftempodenom_108',['_tempoDenom',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o_base.html#a254ab68f8dc86826dfb94011fdf278fe',1,'WECore::Richter::RichterLFOBase']]],

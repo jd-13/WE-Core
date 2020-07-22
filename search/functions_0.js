@@ -22,7 +22,7 @@ var searchData=
   ['_5fremovelookandfeelfromallchildren_585',['_removeLookAndFeelFromAllChildren',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html#a70cc4b3b39fef7064e38c1b46b44389b',1,'WECore::JUCEPlugin::CoreProcessorEditor']]],
   ['_5fresetlabel_586',['_resetLabel',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a1271c65df0fd62e21d34e9bf45dd2e47',1,'WECore::JUCEPlugin::SliderLabelUpdater::_resetLabel()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html#a5ac0a503ec061002d435edc97a14f4c3',1,'WECore::JUCEPlugin::LabelReadoutSlider::_resetLabel()']]],
   ['_5fsetvowel1_587',['_setVowel1',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ae090fcab7f09a3e01531793a87367da5',1,'WECore::Songbird::SongbirdFilterModule']]],
-  ['_5fstringtofloatvector_588',['_stringToFloatVector',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ae224d87be60256218d8917322b38ea14',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
+  ['_5fstringtofloatvector_588',['_stringToFloatVector',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ae04ce809a005ae8ee3a19120048762f1',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
   ['_5fupdatelabel_589',['_updateLabel',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ac7d9db0e9a534371310ca6f89eae9453',1,'WECore::JUCEPlugin::SliderLabelUpdater::_updateLabel()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html#aabe24d895e9a72785d655887c9d884bb',1,'WECore::JUCEPlugin::LabelReadoutSlider::_updateLabel()']]],
   ['_5fwritetostring_590',['_writeToString',['../class_update_checker.html#a2b37dc7aefeaf3922522b34044f1210d',1,'UpdateChecker']]]
 ];

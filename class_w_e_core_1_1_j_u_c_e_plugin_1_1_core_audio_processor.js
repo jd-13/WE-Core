@@ -5,7 +5,7 @@ var class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor =
     [ "CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ae41ff5c0c6c4a8251cd58253265740c8", null ],
     [ "~CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a8e63ae813147c265387c17500ade197b", null ],
     [ "_floatVectorToString", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#acf54e7a6b027497a1d9370876f75e6d9", null ],
-    [ "_stringToFloatVector", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ae224d87be60256218d8917322b38ea14", null ],
+    [ "_stringToFloatVector", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ae04ce809a005ae8ee3a19120048762f1", null ],
     [ "addParameterChangeListener", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ab20e32b692a37265ee74c29e39f9017c", null ],
     [ "getStateInformation", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac710aa916da1f7b12905216f15505c07", null ],
     [ "registerParameter", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a016f7f1155a89a8c52d7f5d70b570401", null ],
