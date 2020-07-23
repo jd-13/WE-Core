@@ -25,7 +25,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-
+#include "General/ParameterDefinition.h"
 namespace WECore::JUCEPlugin {
 
     /**
@@ -170,11 +170,11 @@ namespace WECore::JUCEPlugin {
         if (pRoot != NULL) {
             forEachXmlChildElement((*pRoot), pChild) {
                 if (pChild->hasTagName("AllUserParam")) {
-                    
+
                     // Read the values into a float array
                     String sFloatCSV = pChild->getAllSubText();
                     const std::vector<float> readParamValues = _stringToFloatVector(sFloatCSV);
-                    
+
                     // Pass each value read from XML to a setter, being careful not to go out of
                     // range on either of the vectors
                     //
@@ -253,7 +253,7 @@ namespace WECore::JUCEPlugin {
     std::vector<float> CoreAudioProcessor::_stringToFloatVector(const String sFloatCSV) const {
         StringArray tokenizer;
         tokenizer.addTokens(sFloatCSV, ",","");
-        
+
         std::vector<float> values;
 
         for (int iii {0}; iii < tokenizer.size(); iii++) {
