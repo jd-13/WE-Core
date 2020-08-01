@@ -88,6 +88,7 @@ namespace WECore::JUCEPlugin {
         /** @{ */
         inline void registerParameter(AudioParameterFloat*& param,
                                       const String& name,
+                                      const ParameterDefinition::RangedParameter<double>* range,
                                       float defaultValue,
                                       std::function<void(float)> setter);
 
@@ -193,9 +194,10 @@ namespace WECore::JUCEPlugin {
 
     void CoreAudioProcessor::registerParameter(AudioParameterFloat*& param,
                                                const String& name,
+                                               const ParameterDefinition::RangedParameter<double>* range,
                                                float defaultValue,
                                                std::function<void(float)> setter) {
-        param = new AudioParameterFloat(name, name, 0.0f, 1.0f, defaultValue);
+        param = new AudioParameterFloat(name, name, 0.0f, 1.0f, range->InternalToNormalised(defaultValue));
 
         ParameterInterface interface = {[&param]() { return param->get(); },
                                         setter};
