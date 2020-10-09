@@ -35,9 +35,9 @@ ENV VALGRIND_PATH /home/valgrind
 
 # VST SDK
 RUN wget http://www.steinberg.net/sdk_downloads/vstsdk367_03_03_2017_build_352.zip
-RUN mkdir -p ~/SDKs && unzip vstsdk367_03_03_2017_build_352.zip -d ~/SDKs/
+RUN unzip vstsdk367_03_03_2017_build_352.zip -d /home
 
 # JUCE SDK
 RUN wget https://github.com/juce-framework/JUCE/releases/download/6.0.1/juce-6.0.1-linux.zip
-RUN mkdir -p ~/SDKs && unzip juce-6.0.1-linux.zip -d ~/SDKs/
-ENV JUCE_PATH /home/SDKs/JUCE
+RUN unzip juce-6.0.1-linux.zip -d /home
+ENV JUCE_PATH /home/JUCE
