@@ -47,7 +47,6 @@ var files_dup =
     ] ],
     [ "LookAndFeelMixins.h", "_look_and_feel_mixins_8h.html", "_look_and_feel_mixins_8h" ],
     [ "MONSTRBand.h", "_m_o_n_s_t_r_band_8h.html", [
-      [ "MONSTRCrossover", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover" ],
       [ "MONSTRBand", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band" ]
     ] ],
     [ "MONSTRCrossover.h", "_m_o_n_s_t_r_crossover_8h.html", [
