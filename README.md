@@ -61,3 +61,14 @@ follows:
 This produces the binaries:
 * `WECoreTest` - Contains the standard set of unit tests
 * `WECoreTestPerf` - Contains unit tests for measuring performance
+
+### Docker
+Docker containers are available on Docker hub for clang and gcc which are able to build and run the tests for this project. They are available at the tags:
+* jackd13/audioplugins:clang10
+* jackd13/audioplugins:gcc7
+
+To build a container locally and push to Docker hub (using the clang example):
+
+    cd DockerFiles/clang10
+    docker build --tag audioplugins:clang10 .
+    docker push <user id>/audioplugins:clang10
