@@ -3,8 +3,6 @@ FROM ubuntu:focal
 # Envs
 ENV PATH /opt/llvm/bin:$PATH
 ENV CXX clang++-10
-ENV CATCH_PATH /home/catch/
-ENV VALGRIND_PATH /home/valgrind
 
 # Prevents "Configuring tzdata" dialog from stalling build
 ENV DEBIAN_FRONTEND=noninteractive
@@ -18,6 +16,7 @@ RUN apt-get install -y wget unzip git subversion curl libcurl4-gnutls-dev cppche
 
 # Catch
 RUN wget https://github.com/catchorg/Catch2/releases/download/v2.13.0/catch.hpp -P "/home/catch/"
+ENV CATCH_PATH /home/catch/
 
 # Clang
 RUN apt-get install -y software-properties-common
@@ -32,6 +31,7 @@ RUN wget https://sourceware.org/pub/valgrind/valgrind-3.16.1.tar.bz2 -P "/home"
 RUN mkdir -p /home/valgrind && tar -xf /home/valgrind-3.16.1.tar.bz2 -C /home/valgrind
 RUN mv /home/valgrind/valgrind-3.16.1/* /home/valgrind && rm -rf /home/valgrind/valgrind-3.16.1
 RUN cd /home/valgrind && ./autogen.sh && ./configure && make && make install
+ENV VALGRIND_PATH /home/valgrind
 
 # VST SDK
 RUN wget http://www.steinberg.net/sdk_downloads/vstsdk367_03_03_2017_build_352.zip
