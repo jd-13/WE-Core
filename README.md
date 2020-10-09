@@ -70,5 +70,5 @@ Docker containers are available on Docker hub for clang and gcc which are able t
 To build a container locally and push to Docker hub (using the clang example):
 
     cd DockerFiles/clang10
-    docker build --tag audioplugins:clang10 .
+    docker build --tag <user id>/audioplugins:clang10 .
     docker push <user id>/audioplugins:clang10
