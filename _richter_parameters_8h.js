@@ -7,7 +7,7 @@ var _richter_parameters_8h =
     [ "FREQMOD", "_richter_parameters_8h.html#a5043008545468fd74eb77027852b643e", null ],
     [ "PHASE", "_richter_parameters_8h.html#adcf1413d2cc991474390aeed82410b95", null ],
     [ "TEMPODENOM", "_richter_parameters_8h.html#a695df64bf56c2e11a03c3382bb8baa7f", null ],
-    [ "TEMPONUMER", "_richter_parameters_8h.html#af011fdc8e2e3e30407fae6235c0f3042", null ],
+    [ "TEMPONUMER", "_richter_parameters_8h.html#aeda6e8b39e4f8d22a903d7d59a6656c4", null ],
     [ "LFOSWITCH_DEFAULT", "_richter_parameters_8h.html#aa63a48f4c1f6833202b5f2a38d595d65", null ],
     [ "LFOSWITCH_OFF", "_richter_parameters_8h.html#a0ee906ec53ecf1dfdb496b8ebf0b8906", null ],
     [ "LFOSWITCH_ON", "_richter_parameters_8h.html#a5e1066525cfef1818520f49b310a9a32", null ],

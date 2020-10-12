@@ -130,7 +130,7 @@ var NAVTREEINDEX0 =
 "_richter_parameters_8h.html#abb790e91de27592cafe4b6d0c36e6ba8":[2,0,32,16],
 "_richter_parameters_8h.html#ad646f623936bcca06c959e83af7d736b":[2,0,32,11],
 "_richter_parameters_8h.html#adcf1413d2cc991474390aeed82410b95":[2,0,32,5],
-"_richter_parameters_8h.html#af011fdc8e2e3e30407fae6235c0f3042":[2,0,32,7],
+"_richter_parameters_8h.html#aeda6e8b39e4f8d22a903d7d59a6656c4":[2,0,32,7],
 "_richter_parameters_8h_source.html":[2,0,32],
 "_richter_wave_viewer_8h.html":[2,0,34],
 "_richter_wave_viewer_8h_source.html":[2,0,34],
