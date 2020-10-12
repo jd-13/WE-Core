@@ -168,7 +168,7 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
                 CHECK(mLFOPair.LFO.getFreq() == Approx(20.0));
                 CHECK(mLFOPair.LFO.getFreqMod() == Approx(1.0));
                 CHECK(mLFOPair.LFO.getManualPhase() == 2000);
-                CHECK(mLFOPair.LFO.getTempoNumer() == Approx(4.0));
+                CHECK(mLFOPair.LFO.getTempoNumer() == Approx(16.0));
                 CHECK(mLFOPair.LFO.getTempoDenom() == Approx(32.0));
 
                 CHECK(mLFOPair.MOD.getWave() == 3);
