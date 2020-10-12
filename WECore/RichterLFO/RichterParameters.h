@@ -39,7 +39,7 @@ namespace WECore::Richter::Parameters {
 
     const WaveParameter WAVE;
 
-    const ParameterDefinition::RangedParameter<int> TEMPONUMER(1, 4, 1),
+    const ParameterDefinition::RangedParameter<int> TEMPONUMER(1, 16, 1),
                                                     TEMPODENOM(1, 32, 1);
 
     const ParameterDefinition::RangedParameter<double>  DEPTH(0, 1, 0.5),
