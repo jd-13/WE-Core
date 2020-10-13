@@ -162,7 +162,7 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
             mLFOPair.MOD.setTempoDenom(100);
 
             THEN("Parameters enforce their upper bounds") {
-                CHECK(mLFOPair.LFO.getWave() == 3);
+                CHECK(mLFOPair.LFO.getWave() == 4);
                 CHECK(mLFOPair.LFO.getDepth() == Approx(1.0));
                 CHECK(mLFOPair.LFO.getDepthMod() == Approx(1.0));
                 CHECK(mLFOPair.LFO.getFreq() == Approx(20.0));
@@ -171,7 +171,7 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
                 CHECK(mLFOPair.LFO.getTempoNumer() == Approx(16.0));
                 CHECK(mLFOPair.LFO.getTempoDenom() == Approx(32.0));
 
-                CHECK(mLFOPair.MOD.getWave() == 3);
+                CHECK(mLFOPair.MOD.getWave() == 4);
                 CHECK(mLFOPair.MOD.getDepth() == Approx(1.0));
                 CHECK(mLFOPair.MOD.getFreq() == Approx(20.0));
                 CHECK(mLFOPair.MOD.getManualPhase() == 2000);

@@ -46,11 +46,13 @@ namespace WECore::Richter {
         const double* getSine() const { return _sineTable; }
         const double* getSquare() const { return _squareTable; }
         const double* getSaw() const { return _sawTable; }
+        const double* getSidechain() const { return _sidechainTable; }
 
     private:
         double _sineTable[SIZE];
         double _squareTable[SIZE];
         double _sawTable[SIZE];
+        double _sidechainTable[SIZE];
 
         /**
          * Populates the available wavetables
@@ -62,7 +64,7 @@ namespace WECore::Richter {
 
         // Sine wavetable
         for (int idx = 0; idx < Wavetables::SIZE; idx++) {
-            const double radians {idx * 2.0 * CoreMath::DOUBLE_PI / Wavetables::SIZE};
+            const double radians {idx * CoreMath::DOUBLE_TAU / Wavetables::SIZE};
 
             // Just a conventional sine
             _sineTable[idx] = sin(radians);
@@ -70,7 +72,7 @@ namespace WECore::Richter {
 
         // Square wavetable
         for (int idx = 0; idx < Wavetables::SIZE; idx++) {
-            const double radians {(idx * 2.0 * CoreMath::DOUBLE_PI / Wavetables::SIZE) + 0.32};
+            const double radians {(idx * CoreMath::DOUBLE_TAU / Wavetables::SIZE) + 0.32};
 
             // The fourier series for a square wave produces a very sharp square with some overshoot
             // and ripple, so this actually uses slightly lower amplitudes for each harmonic than
@@ -92,7 +94,7 @@ namespace WECore::Richter {
 
         // Saw wavetable
         for (int idx = 0; idx < Wavetables::SIZE; idx++) {
-            const double radians {(idx * 2.0 * CoreMath::DOUBLE_PI / Wavetables::SIZE) + CoreMath::DOUBLE_PI};
+            const double radians {(idx * CoreMath::DOUBLE_TAU / Wavetables::SIZE) + CoreMath::DOUBLE_PI};
 
             // Conventional fourier series for a saw wave, scaled to fit -1 to 1
             _sawTable[idx] =
@@ -112,6 +114,17 @@ namespace WECore::Richter {
                 (1.0/96.0) * sin(13 * radians) -
                 (1.0/128.0) * sin(14 * radians)
             ) * (2.0 / 3.0);
+        }
+
+        // Sidechain wavetable
+        for (int idx = 0; idx < Wavetables::SIZE; idx++) {
+            const double radians {idx * CoreMath::DOUBLE_TAU / Wavetables::SIZE};
+
+            // y = -2sin( (0.15x - 1.21)^6 ) + 1
+            _sidechainTable[idx] =
+            (
+                -2 * sin(pow(0.15 * radians - 1.21, 6)) + 1
+            );
         }
     }
 }

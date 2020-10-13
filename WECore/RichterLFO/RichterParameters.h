@@ -30,11 +30,12 @@ namespace WECore::Richter::Parameters {
 
     class WaveParameter : public ParameterDefinition::BaseParameter<int> {
     public:
-        WaveParameter() : ParameterDefinition::BaseParameter<int>(SINE, SAW, SINE) {}
+        WaveParameter() : ParameterDefinition::BaseParameter<int>(SINE, SIDECHAIN, SINE) {}
 
         static constexpr int SINE {1},
                              SQUARE {2},
-                             SAW {3};
+                             SAW {3},
+                             SIDECHAIN {4};
     };
 
     const WaveParameter WAVE;

@@ -220,6 +220,8 @@ namespace WECore::Richter {
             _waveArrayPointer = Wavetables::getInstance()->getSquare();
         } else if (_wave == Parameters::WAVE.SAW) {
             _waveArrayPointer = Wavetables::getInstance()->getSaw();
+        } else if (_wave == Parameters::WAVE.SIDECHAIN) {
+            _waveArrayPointer = Wavetables::getInstance()->getSidechain();
         }
     }
 
