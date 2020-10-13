@@ -103,6 +103,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae68248d4633ad44a9d83a83ca1600124"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ea5bb7b1f79a88ce4c03c15b66d1be2"><td class="memItemLeft" align="right" valign="top">const double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_wavetables.html#a3ea5bb7b1f79a88ce4c03c15b66d1be2">getSaw</a> () const</td></tr>
 <tr class="separator:a3ea5bb7b1f79a88ce4c03c15b66d1be2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad28d9f9c633dc885be4ca458caa40c2d"><td class="memItemLeft" align="right" valign="top">const double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_wavetables.html#ad28d9f9c633dc885be4ca458caa40c2d">getSidechain</a> () const</td></tr>
+<tr class="separator:ad28d9f9c633dc885be4ca458caa40c2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -127,6 +129,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a700e3b2c77328852c1bd281483e4c43e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b68ba7e957a0325396ce4f38bbb11e6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_wavetables.html#a1b68ba7e957a0325396ce4f38bbb11e6">_sawTable</a> [<a class="el" href="class_w_e_core_1_1_richter_1_1_wavetables.html#a239ed04e97a55aea3c8cfffa2d5bc13a">SIZE</a>]</td></tr>
 <tr class="separator:a1b68ba7e957a0325396ce4f38bbb11e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a362aa391b2808574be04ab75a4058b15"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_wavetables.html#a362aa391b2808574be04ab75a4058b15">_sidechainTable</a> [<a class="el" href="class_w_e_core_1_1_richter_1_1_wavetables.html#a239ed04e97a55aea3c8cfffa2d5bc13a">SIZE</a>]</td></tr>
+<tr class="separator:a362aa391b2808574be04ab75a4058b15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Singleton which contains the wavetables used by the <a class="el" href="namespace_w_e_core_1_1_richter.html">Richter</a> LFOs. </p>
@@ -157,9 +161,9 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 <p>Populates the available wavetables </p>
 
-<p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00061">61</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00063">63</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_wavetables_8h_source.html#l00053">_sawTable</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00051">_sineTable</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00052">_squareTable</a>, <a class="el" href="_core_math_8h_source.html#l00038">CoreMath::DOUBLE_PI</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00039">SIZE</a>.</p>
+<p class="reference">References <a class="el" href="_richter_wavetables_8h_source.html#l00054">_sawTable</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00055">_sidechainTable</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00052">_sineTable</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00053">_squareTable</a>, <a class="el" href="_core_math_8h_source.html#l00038">CoreMath::DOUBLE_PI</a>, <a class="el" href="_core_math_8h_source.html#l00041">CoreMath::DOUBLE_TAU</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00039">SIZE</a>.</p>
 
 </div>
 </div>
@@ -218,7 +222,38 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00048">48</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_wavetables_8h_source.html#l00053">_sawTable</a>.</p>
+<p class="reference">References <a class="el" href="_richter_wavetables_8h_source.html#l00054">_sawTable</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_base_8h_source.html#l00216">WECore::Richter::RichterLFOBase::setWaveTablePointers()</a>.</p>
+
+</div>
+</div>
+<a id="ad28d9f9c633dc885be4ca458caa40c2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad28d9f9c633dc885be4ca458caa40c2d">&#9670;&nbsp;</a></span>getSidechain()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const double* WECore::Richter::Wavetables::getSidechain </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00049">49</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
+
+<p class="reference">References <a class="el" href="_richter_wavetables_8h_source.html#l00055">_sidechainTable</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_richter_l_f_o_base_8h_source.html#l00216">WECore::Richter::RichterLFOBase::setWaveTablePointers()</a>.</p>
 
@@ -249,7 +284,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00046">46</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_wavetables_8h_source.html#l00051">_sineTable</a>.</p>
+<p class="reference">References <a class="el" href="_richter_wavetables_8h_source.html#l00052">_sineTable</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_richter_l_f_o_base_8h_source.html#l00216">WECore::Richter::RichterLFOBase::setWaveTablePointers()</a>.</p>
 
@@ -280,7 +315,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00047">47</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_wavetables_8h_source.html#l00052">_squareTable</a>.</p>
+<p class="reference">References <a class="el" href="_richter_wavetables_8h_source.html#l00053">_squareTable</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_richter_l_f_o_base_8h_source.html#l00216">WECore::Richter::RichterLFOBase::setWaveTablePointers()</a>.</p>
 
@@ -307,9 +342,35 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00053">53</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00054">54</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_wavetables_8h_source.html#l00048">getSaw()</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00061">Wavetables()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_wavetables_8h_source.html#l00048">getSaw()</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00063">Wavetables()</a>.</p>
+
+</div>
+</div>
+<a id="a362aa391b2808574be04ab75a4058b15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a362aa391b2808574be04ab75a4058b15">&#9670;&nbsp;</a></span>_sidechainTable</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double WECore::Richter::Wavetables::_sidechainTable[<a class="el" href="class_w_e_core_1_1_richter_1_1_wavetables.html#a239ed04e97a55aea3c8cfffa2d5bc13a">SIZE</a>]</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00055">55</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_richter_wavetables_8h_source.html#l00049">getSidechain()</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00063">Wavetables()</a>.</p>
 
 </div>
 </div>
@@ -333,9 +394,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00051">51</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00052">52</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_wavetables_8h_source.html#l00046">getSine()</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00061">Wavetables()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_wavetables_8h_source.html#l00046">getSine()</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00063">Wavetables()</a>.</p>
 
 </div>
 </div>
@@ -359,9 +420,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00052">52</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00053">53</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_wavetables_8h_source.html#l00047">getSquare()</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00061">Wavetables()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_wavetables_8h_source.html#l00047">getSquare()</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00063">Wavetables()</a>.</p>
 
 </div>
 </div>
@@ -388,7 +449,7 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_wavetables_8h_source.html#l00039">39</a> of file <a class="el" href="_richter_wavetables_8h_source.html">RichterWavetables.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_base_8h_source.html#l00202">WECore::Richter::RichterLFOBase::_calcNextScale()</a>, <a class="el" href="_richter_l_f_o_base_8h_source.html#l00247">WECore::Richter::RichterLFOBase::_calcPhaseOffset()</a>, <a class="el" href="_richter_l_f_o_base_8h_source.html#l00279">WECore::Richter::RichterLFOBase::calcIndexAndScaleInLoop()</a>, <a class="el" href="_richter_wave_viewer_8h_source.html#l00050">WECore::Richter::WaveViewer::paint()</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00061">Wavetables()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_base_8h_source.html#l00202">WECore::Richter::RichterLFOBase::_calcNextScale()</a>, <a class="el" href="_richter_l_f_o_base_8h_source.html#l00249">WECore::Richter::RichterLFOBase::_calcPhaseOffset()</a>, <a class="el" href="_richter_l_f_o_base_8h_source.html#l00281">WECore::Richter::RichterLFOBase::calcIndexAndScaleInLoop()</a>, <a class="el" href="_richter_wave_viewer_8h_source.html#l00050">WECore::Richter::WaveViewer::paint()</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00063">Wavetables()</a>.</p>
 
 </div>
 </div>

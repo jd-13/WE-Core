@@ -63,7 +63,7 @@ var NAVTREEINDEX =
 [
 "_a_r_envelope_follower_8h.html",
 "class_w_e_core_1_1_carve_1_1_noise_filter.html#a63a73db7e2e4c9844092f25d41c898d7",
-"class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html#a5bf29d9212d4b9188bd34fff3920d3c2"
+"class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html#a4b43db4be073b58c4b60cf22d7d1e25d"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
