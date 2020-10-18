@@ -43,3 +43,8 @@ RUN unzip vstsdk367_03_03_2017_build_352.zip -d /home
 RUN wget https://github.com/juce-framework/JUCE/releases/download/6.0.1/juce-6.0.1-linux.zip
 RUN unzip juce-6.0.1-linux.zip -d /home
 ENV JUCE_PATH /home/JUCE
+
+# Pluginval
+RUN wget https://github.com/Tracktion/pluginval/releases/download/v0.2.9/pluginval_Linux.zip
+RUN unzip pluginval_Linux.zip -d /home
+ENV PLUGINVAL /home/pluginval
