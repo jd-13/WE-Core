@@ -7,7 +7,7 @@ on:
     branches: [ master ]
 
 jobs:
-  BuildClang:
+  Build clang:
     runs-on: ubuntu-latest
     container: jackd13/audioplugins:clang10
 
@@ -15,10 +15,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: RunBuild
+      - name: Run build
         run: Scripts/CIBuild.sh $GITHUB_RUN_NUMBER
 
-  BuildGCC:
+  Build gcc:
     runs-on: ubuntu-latest
     container: jackd13/audioplugins:gcc7
 
@@ -26,11 +26,11 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: RunBuild
+      - name: Run build
         run: Scripts/CIBuild.sh $GITHUB_RUN_NUMBER
 
 
-  PublishDoxygen:
+  Publish doxygen:
     runs-on: ubuntu-latest
 
     steps:
