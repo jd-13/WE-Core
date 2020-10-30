@@ -56,7 +56,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
 
         WHEN("All parameters are changed to unique values") {
             mLFOPair.LFO.setBypassSwitch(true);
-            mLFOPair.LFO.setPhaseSyncSwitch(true);
+            mLFOPair.LFO.setPhaseSyncSwitch(false);
             mLFOPair.LFO.setTempoSyncSwitch(true);
             mLFOPair.LFO.setWave(2);
             mLFOPair.LFO.setDepth(0.1);
@@ -79,7 +79,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
 
             THEN("They all get their correct unique values") {
                 CHECK(mLFOPair.LFO.getBypassSwitch() == true);
-                CHECK(mLFOPair.LFO.getPhaseSyncSwitch() == true);
+                CHECK(mLFOPair.LFO.getPhaseSyncSwitch() == false);
                 CHECK(mLFOPair.LFO.getTempoSyncSwitch() == true);
                 CHECK(mLFOPair.LFO.getWave() == 2);
                 CHECK(mLFOPair.LFO.getDepth() == Approx(0.1));
