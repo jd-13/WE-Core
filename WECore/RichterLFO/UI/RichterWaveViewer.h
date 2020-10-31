@@ -30,9 +30,9 @@ namespace WECore::Richter {
 
     class WaveViewer : public Component {
     public:
-        WaveViewer() : _waveArrayPointer(nullptr) {}
+        WaveViewer() : _waveArrayPointer(nullptr), _isInverted(false) {}
 
-        void setWave(const double* pointer) { _waveArrayPointer = pointer; }
+        inline void setWave(const double* pointer, bool isInverted);
 
         inline virtual void paint(Graphics& g);
 
@@ -45,7 +45,13 @@ namespace WECore::Richter {
 
     private:
         const double* _waveArrayPointer;
+        bool _isInverted;
     };
+
+    void WaveViewer::setWave(const double* pointer, bool isInverted) {
+        _waveArrayPointer = pointer;
+        _isInverted = isInverted;
+    }
 
     void WaveViewer::paint(Graphics &g) {
 
@@ -60,7 +66,9 @@ namespace WECore::Richter {
 
             for (size_t idx {0}; idx < NUM_SAMPLES; idx++) {
                 // Get the sample for this value
-                const double sample {_waveArrayPointer[static_cast<int>(idx * INCREMENT)]};
+                const double sample {
+                        _waveArrayPointer[static_cast<int>(idx * INCREMENT)] * (_isInverted ? -1 : 1)
+                };
 
                 // Invert the wave and scale to the height of this component
                 const double sampleX {(static_cast<double>(idx) / NUM_SAMPLES) * getWidth()};
