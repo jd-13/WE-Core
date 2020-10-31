@@ -59,6 +59,10 @@ namespace WECore::Richter::Parameters {
 
                    PHASESYNC_OFF = false,
                    PHASESYNC_ON = true,
-                   PHASESYNC_DEFAULT = PHASESYNC_ON;
+                   PHASESYNC_DEFAULT = PHASESYNC_ON,
+
+                   INVERT_OFF = false,
+                   INVERT_ON = true,
+                   INVERT_DEFAULT = INVERT_OFF;
 
 }

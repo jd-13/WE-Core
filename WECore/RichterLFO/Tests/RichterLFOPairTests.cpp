@@ -33,6 +33,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 CHECK(mLFOPair.LFO.getBypassSwitch() == false);
                 CHECK(mLFOPair.LFO.getPhaseSyncSwitch() == true);
                 CHECK(mLFOPair.LFO.getTempoSyncSwitch() == false);
+                CHECK(mLFOPair.LFO.getInvertSwitch() == false);
                 CHECK(mLFOPair.LFO.getWave() == 1);
                 CHECK(mLFOPair.LFO.getDepth() == Approx(0.5));
                 CHECK(mLFOPair.LFO.getDepthMod() == Approx(0.0));
@@ -45,6 +46,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 CHECK(mLFOPair.MOD.getBypassSwitch() == false);
                 CHECK(mLFOPair.MOD.getPhaseSyncSwitch() == true);
                 CHECK(mLFOPair.MOD.getTempoSyncSwitch() == false);
+                CHECK(mLFOPair.MOD.getInvertSwitch() == false);
                 CHECK(mLFOPair.MOD.getWave() == 1);
                 CHECK(mLFOPair.MOD.getDepth() == Approx(0.5));
                 CHECK(mLFOPair.MOD.getFreq() == Approx(2.0));
@@ -58,6 +60,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
             mLFOPair.LFO.setBypassSwitch(true);
             mLFOPair.LFO.setPhaseSyncSwitch(false);
             mLFOPair.LFO.setTempoSyncSwitch(true);
+            mLFOPair.LFO.setInvertSwitch(true);
             mLFOPair.LFO.setWave(2);
             mLFOPair.LFO.setDepth(0.1);
             mLFOPair.LFO.setDepthMod(0.2);
@@ -70,6 +73,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
             mLFOPair.MOD.setBypassSwitch(true);
             mLFOPair.MOD.setPhaseSyncSwitch(true);
             mLFOPair.MOD.setTempoSyncSwitch(true);
+            mLFOPair.MOD.setInvertSwitch(true);
             mLFOPair.MOD.setWave(3);
             mLFOPair.MOD.setDepth(0.5);
             mLFOPair.MOD.setFreq(6);
@@ -81,6 +85,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 CHECK(mLFOPair.LFO.getBypassSwitch() == true);
                 CHECK(mLFOPair.LFO.getPhaseSyncSwitch() == false);
                 CHECK(mLFOPair.LFO.getTempoSyncSwitch() == true);
+                CHECK(mLFOPair.LFO.getInvertSwitch() == true);
                 CHECK(mLFOPair.LFO.getWave() == 2);
                 CHECK(mLFOPair.LFO.getDepth() == Approx(0.1));
                 CHECK(mLFOPair.LFO.getDepthMod() == Approx(0.2));
@@ -93,6 +98,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 CHECK(mLFOPair.MOD.getBypassSwitch() == true);
                 CHECK(mLFOPair.MOD.getPhaseSyncSwitch() == true);
                 CHECK(mLFOPair.MOD.getTempoSyncSwitch() == true);
+                CHECK(mLFOPair.MOD.getInvertSwitch() == true);
                 CHECK(mLFOPair.MOD.getWave() == 3);
                 CHECK(mLFOPair.MOD.getDepth() == Approx(0.5));
                 CHECK(mLFOPair.MOD.getFreq() == Approx(6.0));

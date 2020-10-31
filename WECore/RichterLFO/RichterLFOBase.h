@@ -53,6 +53,7 @@ namespace WECore::Richter {
                             _bypassSwitch(Parameters::LFOSWITCH_DEFAULT),
                             _tempoSyncSwitch(Parameters::TEMPOSYNC_DEFAULT),
                             _phaseSyncSwitch(Parameters::PHASESYNC_DEFAULT),
+                            _invertSwitch(Parameters::INVERT_DEFAULT),
                             _needsPhaseCalc(true),
                             _tempoNumer(Parameters::TEMPONUMER.defaultValue),
                             _tempoDenom(Parameters::TEMPODENOM.defaultValue),
@@ -80,6 +81,8 @@ namespace WECore::Richter {
 
         bool getTempoSyncSwitch() const { return _tempoSyncSwitch; }
 
+        bool getInvertSwitch() const { return _invertSwitch; }
+
         int getWave() const { return _wave; }
 
         double getDepth() const { return _depth; }
@@ -104,6 +107,8 @@ namespace WECore::Richter {
         void setPhaseSyncSwitch(bool val) { _phaseSyncSwitch = val; }
 
         void setTempoSyncSwitch(bool val) { _tempoSyncSwitch = val; }
+
+        void setInvertSwitch(bool val) { _invertSwitch = val; }
 
         void setTempoNumer(int val) { _tempoNumer = Parameters::TEMPONUMER.BoundsCheck(val); }
 
@@ -154,6 +159,7 @@ namespace WECore::Richter {
         bool    _bypassSwitch,
                 _tempoSyncSwitch,
                 _phaseSyncSwitch,
+                _invertSwitch,
                 _needsPhaseCalc;
 
         double  _tempoNumer,

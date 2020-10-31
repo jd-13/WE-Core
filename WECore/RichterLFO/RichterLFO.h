@@ -188,8 +188,11 @@ namespace WECore::Richter {
         _calcDepthInLoop(modBypassSwitch, modGain);
 
         if (_bypassSwitch) {
-            // Convert range from -1:1 to 0:1
-            return 1 + (_gain * _depth / 2 - 0.5) + (1 - _depth) / 2;
+            // Invert if needed
+            const double tempGain {_gain * (_invertSwitch ? -1 : 1)};
+
+            // Convert range from -1:1 to 0:1,
+            return 1 + (tempGain * _depth / 2 - 0.5) + (1 - _depth) / 2;
         } else {
             return 1;
         }
