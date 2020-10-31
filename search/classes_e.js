@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['waveparameter_509',['WaveParameter',['../class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html',1,'WECore::Richter::Parameters']]],
-  ['wavetables_510',['Wavetables',['../class_w_e_core_1_1_richter_1_1_wavetables.html',1,'WECore::Richter']]],
-  ['waveviewer_511',['WaveViewer',['../class_w_e_core_1_1_richter_1_1_wave_viewer.html',1,'WECore::Richter']]]
+  ['waveparameter_510',['WaveParameter',['../class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html',1,'WECore::Richter::Parameters']]],
+  ['wavetables_511',['Wavetables',['../class_w_e_core_1_1_richter_1_1_wavetables.html',1,'WECore::Richter']]],
+  ['waveviewer_512',['WaveViewer',['../class_w_e_core_1_1_richter_1_1_wave_viewer.html',1,'WECore::Richter']]]
 ];
