@@ -30,9 +30,9 @@ namespace WECore::Richter {
 
     class WaveViewer : public Component {
     public:
-        WaveViewer() : _waveArrayPointer(nullptr), _isInverted(false) {}
+        WaveViewer() : _waveArrayPointer(nullptr), _depth(0), _phaseShift(0), _isInverted(false) {}
 
-        inline void setWave(const double* pointer, bool isInverted);
+        inline void setWave(const double* pointer, double depth, int phaseShift, bool isInverted);
 
         inline virtual void paint(Graphics& g);
 
@@ -45,11 +45,15 @@ namespace WECore::Richter {
 
     private:
         const double* _waveArrayPointer;
+        double _depth;
+        int _phaseShift;
         bool _isInverted;
     };
 
-    void WaveViewer::setWave(const double* pointer, bool isInverted) {
+    void WaveViewer::setWave(const double* pointer, double depth, int phaseShift, bool isInverted) {
         _waveArrayPointer = pointer;
+        _depth = depth;
+        _phaseShift = phaseShift;
         _isInverted = isInverted;
     }
 
@@ -65,10 +69,13 @@ namespace WECore::Richter {
             Path p;
 
             for (size_t idx {0}; idx < NUM_SAMPLES; idx++) {
+                // Calculate the index of the sample accounting for downsampling and phase shift
+                const int sampleIdx {(
+                    (static_cast<int>(idx * INCREMENT + _phaseShift) % Wavetables::SIZE)
+                )};
+
                 // Get the sample for this value
-                const double sample {
-                        _waveArrayPointer[static_cast<int>(idx * INCREMENT)] * (_isInverted ? -1 : 1)
-                };
+                const double sample {_waveArrayPointer[sampleIdx] * _depth * (_isInverted ? -1 : 1)};
 
                 // Invert the wave and scale to the height of this component
                 const double sampleX {(static_cast<double>(idx) / NUM_SAMPLES) * getWidth()};
