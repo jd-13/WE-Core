@@ -22,19 +22,19 @@
  */
 
 #include "catch.hpp"
-#include "WEFilters/AREnvelopeFollower.h"
+#include "WEFilters/AREnvelopeFollowerSquareLaw.h"
 
-SCENARIO("AREnvelopeFollower: Parameters can be set and retrieved correctly") {
+SCENARIO("AREnvelopeFollowerSquareLaw: Parameters can be set and retrieved correctly") {
     GIVEN("A new AREnvelopeFollower object") {
-        WECore::AREnv::AREnvelopeFollower mEnv;
-        
+        WECore::AREnv::AREnvelopeFollowerSquareLaw mEnv;
+
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
                 CHECK(mEnv.getAttackTimeMs() == Approx(20.0));
                 CHECK(mEnv.getReleaseTimeMs() == Approx(20.0));
             }
         }
-        
+
         WHEN("All parameters are changed to unique values") {
             mEnv.setAttackTimeMs(21.0);
             mEnv.setReleaseTimeMs(22.0);
@@ -47,24 +47,24 @@ SCENARIO("AREnvelopeFollower: Parameters can be set and retrieved correctly") {
     }
 }
 
-SCENARIO("AREnvelopeFollower: Parameters enforce their bounds correctly") {
+SCENARIO("AREnvelopeFollowerSquareLaw: Parameters enforce their bounds correctly") {
     GIVEN("A new AREnvelopeFollower object") {
-        WECore::AREnv::AREnvelopeFollower mEnv;
-        
+        WECore::AREnv::AREnvelopeFollowerSquareLaw mEnv;
+
         WHEN("All parameter values are too low") {
             mEnv.setAttackTimeMs(0);
             mEnv.setReleaseTimeMs(0);
-        
+
             THEN("Parameters enforce their lower bounds") {
                 CHECK(mEnv.getAttackTimeMs() == Approx(0.1));
                 CHECK(mEnv.getReleaseTimeMs() == Approx(0.1));
             }
         }
-        
+
         WHEN("All parameter values are too high") {
             mEnv.setAttackTimeMs(10001);
             mEnv.setReleaseTimeMs(10001);
-            
+
             THEN("Parameters enforce their upper bounds") {
                 CHECK(mEnv.getAttackTimeMs() == Approx(10000));
                 CHECK(mEnv.getReleaseTimeMs() == Approx(10000));

@@ -1,5 +1,5 @@
 /*
- *  File:       AREnveloperFollower.h
+ *  File:       AREnveloperFollowerBase.h
  *
  *  Version:    1.0.0
  *
@@ -23,26 +23,27 @@
 
 #pragma once
 
-#include "General/CoreMath.h"
 #include "WEFilters/AREnvelopeFollowerParameters.h"
 
 namespace WECore::AREnv {
     /**
-     * A basic envelope follower with controls for attack and release times.
+     * Base class for an envelope follower with controls for attack and release times.
      */
-    class AREnvelopeFollower {
+    class AREnvelopeFollowerBase {
     public:
-        AREnvelopeFollower() : _attackTimeMs(WECore::AREnv::Parameters::ATTACK_MS.defaultValue),
-                            _releaseTimeMs(WECore::AREnv::Parameters::RELEASE_MS.defaultValue) {
+        AREnvelopeFollowerBase() : _attackTimeMs(WECore::AREnv::Parameters::ATTACK_MS.defaultValue),
+                                   _releaseTimeMs(WECore::AREnv::Parameters::RELEASE_MS.defaultValue) {
             // call this here rather than setting it in initialiser list so that the coefficients get
             // setup
             reset();
             setSampleRate(44100);
         }
-        
+
+        virtual ~AREnvelopeFollowerBase() = default;
+
         /** @name Setter Methods */
         /** @{ */
-        
+
         /**
          * Sets the sample rate the envelope will operate at.
          * It is recommended that you call this at some point before calling clockUpdateEnvelope.
@@ -50,7 +51,7 @@ namespace WECore::AREnv {
          * @param[in]   sampleRate  The sample rate in Hz
          */
         inline void setSampleRate(double sampleRate);
-        
+
         /**
          * Sets the attack time of the envelope.
          *
@@ -59,7 +60,7 @@ namespace WECore::AREnv {
          * @param[in]   time    Attack time in milliseconds
          */
         inline void setAttackTimeMs(double time);
-        
+
         /**
          * Sets the release time of the envelope.
          *
@@ -68,83 +69,73 @@ namespace WECore::AREnv {
          * @param[in]   time    Release time in milliseconds
          */
         inline void setReleaseTimeMs(double time);
-        
+
         /** @} */
-        
+
         /** @name Getter Methods */
         /** @{ */
-        
+
         /**
          * @see     setAttackTimeMs
          */
         double getAttackTimeMs() const { return _attackTimeMs; }
-        
+
         /**
          * @see     setReleaseTimeMs
          */
         double getReleaseTimeMs() const { return _releaseTimeMs; }
-        
+
         /**
          * Returns the latest envelope value without modifying it.
          */
         double getEnvelope() { return _envVal; }
-        
+
         /** @} */
 
         /**
          * Resets the envelope state.
          */
         void reset() { _envVal = 0; }
-        
+
         /**
-         * Updates the envelope with the current sample and returns the updated envelope value. Must be
-         * called for every sample.
+         * Updates the envelope with the current sample and returns the updated envelope value. Must
+         * be called for every sample.
          *
          * @param[in]   inSample    Sample used to update the envelope state
          *
          * @return  The updated envelope value
          */
-        inline double clockUpdateEnvelope(double inSample);
-        
-    private:
+        virtual double updateEnvelope(double inSample) = 0;
+
+    protected:
         double _envVal;
-        
+
         double _attackTimeMs;
         double _releaseTimeMs;
-        
+
         double _attackCoef;
         double _releaseCoef;
-        
+
         double _sampleRate;
-        
+
         double _calcCoef(double timeMs) {
             return exp(log(0.01) / (timeMs * _sampleRate * 0.001));
         }
     };
 
-    void AREnvelopeFollower::setSampleRate(double sampleRate) {
+    void AREnvelopeFollowerBase::setSampleRate(double sampleRate) {
         _sampleRate = sampleRate;
         _attackCoef = _calcCoef(_attackTimeMs);
         _releaseCoef = _calcCoef(_releaseTimeMs);
     }
 
-    void AREnvelopeFollower::setAttackTimeMs(double time) {
+    void AREnvelopeFollowerBase::setAttackTimeMs(double time) {
         _attackTimeMs = WECore::AREnv::Parameters::ATTACK_MS.BoundsCheck(time);
         _attackCoef = _calcCoef(_attackTimeMs);
     }
 
-    void AREnvelopeFollower::setReleaseTimeMs(double time) {
+    void AREnvelopeFollowerBase::setReleaseTimeMs(double time) {
         _releaseTimeMs = WECore::AREnv::Parameters::RELEASE_MS.BoundsCheck(time);
         _releaseCoef = _calcCoef(_releaseTimeMs);
-    }
-
-    double AREnvelopeFollower::clockUpdateEnvelope(double inSample) {
-        const double tmp = std::abs(inSample);
-        if(tmp > _envVal)
-            _envVal = _attackCoef * (_envVal - tmp) + tmp;
-        else
-            _envVal = _releaseCoef * (_envVal - tmp) + tmp;
-        
-        return _envVal;
     }
 }
