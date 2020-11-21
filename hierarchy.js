@@ -1,6 +1,9 @@
 var hierarchy =
 [
-    [ "WECore::AREnv::AREnvelopeFollower", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower.html", null ],
+    [ "WECore::AREnv::AREnvelopeFollowerBase", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html", [
+      [ "WECore::AREnv::AREnvelopeFollowerFullWave", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_full_wave.html", null ],
+      [ "WECore::AREnv::AREnvelopeFollowerSquareLaw", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_square_law.html", null ]
+    ] ],
     [ "AudioProcessor", null, [
       [ "WECore::JUCEPlugin::CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html", null ]
     ] ],

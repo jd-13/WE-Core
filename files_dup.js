@@ -1,9 +1,15 @@
 var files_dup =
 [
-    [ "AREnvelopeFollower.h", "_a_r_envelope_follower_8h.html", [
-      [ "AREnvelopeFollower", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower.html", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower" ]
+    [ "AREnvelopeFollowerBase.h", "_a_r_envelope_follower_base_8h.html", [
+      [ "AREnvelopeFollowerBase", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base" ]
+    ] ],
+    [ "AREnvelopeFollowerFullWave.h", "_a_r_envelope_follower_full_wave_8h.html", [
+      [ "AREnvelopeFollowerFullWave", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_full_wave.html", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_full_wave" ]
     ] ],
     [ "AREnvelopeFollowerParameters.h", "_a_r_envelope_follower_parameters_8h.html", "_a_r_envelope_follower_parameters_8h" ],
+    [ "AREnvelopeFollowerSquareLaw.h", "_a_r_envelope_follower_square_law_8h.html", [
+      [ "AREnvelopeFollowerSquareLaw", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_square_law.html", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_square_law" ]
+    ] ],
     [ "AREnvelopeFollowerTests.cpp", "_a_r_envelope_follower_tests_8cpp.html", "_a_r_envelope_follower_tests_8cpp" ],
     [ "ButtonV2.h", "_button_v2_8h.html", [
       [ "ButtonV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2" ]

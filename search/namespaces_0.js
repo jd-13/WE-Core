@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['coremath_514',['CoreMath',['../namespace_core_math.html',1,'']]]
+  ['coremath_523',['CoreMath',['../namespace_core_math.html',1,'']]]
 ];

@@ -1,10 +1,10 @@
 var searchData=
 [
-  ['vowel_431',['VOWEL',['../namespace_w_e_core_1_1_songbird_1_1_parameters.html#a4426102c5467f146719ddeb0137f3009',1,'WECore::Songbird::Parameters::VOWEL()'],['../namespace_w_e_core_1_1_songbird.html#a3a3ef6451fa968c851e21391558ef016',1,'WECore::Songbird::Vowel()']]],
-  ['vowel_5fa_432',['VOWEL_A',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#afd699d949179341df342101bd60913be',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowel_5fe_433',['VOWEL_E',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a2e250d46e05e3f4d3bd8fbc41f77b8c6',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowel_5fi_434',['VOWEL_I',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a7e7b93324b8888cb91c687a0c93a615e',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowel_5fo_435',['VOWEL_O',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#af3a55a94f872f08fb4f8b1e115e29c1d',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowel_5fu_436',['VOWEL_U',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#ac727a655b71d33afae056f13c8c6c29b',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowelparameter_437',['VowelParameter',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html',1,'WECore::Songbird::Parameters::VowelParameter'],['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a499a67bea77069d2c97f70caf76a1e24',1,'WECore::Songbird::Parameters::VowelParameter::VowelParameter()']]]
+  ['vowel_435',['VOWEL',['../namespace_w_e_core_1_1_songbird_1_1_parameters.html#a4426102c5467f146719ddeb0137f3009',1,'WECore::Songbird::Parameters::VOWEL()'],['../namespace_w_e_core_1_1_songbird.html#a3a3ef6451fa968c851e21391558ef016',1,'WECore::Songbird::Vowel()']]],
+  ['vowel_5fa_436',['VOWEL_A',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#afd699d949179341df342101bd60913be',1,'WECore::Songbird::Parameters::VowelParameter']]],
+  ['vowel_5fe_437',['VOWEL_E',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a2e250d46e05e3f4d3bd8fbc41f77b8c6',1,'WECore::Songbird::Parameters::VowelParameter']]],
+  ['vowel_5fi_438',['VOWEL_I',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a7e7b93324b8888cb91c687a0c93a615e',1,'WECore::Songbird::Parameters::VowelParameter']]],
+  ['vowel_5fo_439',['VOWEL_O',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#af3a55a94f872f08fb4f8b1e115e29c1d',1,'WECore::Songbird::Parameters::VowelParameter']]],
+  ['vowel_5fu_440',['VOWEL_U',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#ac727a655b71d33afae056f13c8c6c29b',1,'WECore::Songbird::Parameters::VowelParameter']]],
+  ['vowelparameter_441',['VowelParameter',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html',1,'WECore::Songbird::Parameters::VowelParameter'],['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a499a67bea77069d2c97f70caf76a1e24',1,'WECore::Songbird::Parameters::VowelParameter::VowelParameter()']]]
 ];
