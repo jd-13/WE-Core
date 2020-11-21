@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.0)
 project(WECore)
 
-set(DSPFILTERS_PATH $ENV{WECORE_HOME}/DSPFilters/shared/DSPFilters)
+set(DSPFILTERS_PATH ${CMAKE_CURRENT_LIST_DIR}/DSPFilters/shared/DSPFilters)
 
 include_directories($ENV{CATCH_PATH}
-                    $ENV{WECORE_SRC}
+                    ${CMAKE_CURRENT_LIST_DIR}/WECore
                     ${DSPFILTERS_PATH}/include)
 
 set(CMAKE_CXX_STANDARD 17)
@@ -38,18 +38,18 @@ add_library(dspfilters STATIC
             ${DSPFILTERS_PATH}/source/Param.cpp
             ${DSPFILTERS_PATH}/source/PoleFilter.cpp)
 
-add_executable(WECoreTest $ENV{WECORE_SRC}/Tests/catchMain.cpp
-                          $ENV{WECORE_SRC}/CarveDSP/Tests/DSPUnitParameterTests.cpp
-                          $ENV{WECORE_SRC}/CarveDSP/Tests/DSPUnitProcessingTests.cpp
-                          $ENV{WECORE_SRC}/CarveDSP/Tests/CarveNoiseFilterTests.cpp
-                          $ENV{WECORE_SRC}/MONSTRFilters/Tests/MONSTRCrossoverTests.cpp
-                          $ENV{WECORE_SRC}/RichterLFO/Tests/RichterLFOPairTests.cpp
-                          $ENV{WECORE_SRC}/SongbirdFilters/Tests/SongbirdFilterModuleTests.cpp
-                          $ENV{WECORE_SRC}/WEFilters/Tests/AREnvelopeFollowerTests.cpp
-                          $ENV{WECORE_SRC}/WEFilters/Tests/TPTSVFilterTests.cpp)
+add_executable(WECoreTest ${CMAKE_CURRENT_LIST_DIR}/WECore/Tests/catchMain.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/WECore/CarveDSP/Tests/DSPUnitParameterTests.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/WECore/CarveDSP/Tests/DSPUnitProcessingTests.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/WECore/CarveDSP/Tests/CarveNoiseFilterTests.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/WECore/MONSTRFilters/Tests/MONSTRCrossoverTests.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/WECore/RichterLFO/Tests/RichterLFOPairTests.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/WECore/SongbirdFilters/Tests/SongbirdFilterModuleTests.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/WECore/WEFilters/Tests/AREnvelopeFollowerTests.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/WECore/WEFilters/Tests/TPTSVFilterTests.cpp)
 
-add_executable(WECoreTestPerf $ENV{WECORE_SRC}/Tests/catchMain.cpp
-                              $ENV{WECORE_SRC}/Tests/PerformanceTests.cpp)
+add_executable(WECoreTestPerf ${CMAKE_CURRENT_LIST_DIR}/WECore/Tests/catchMain.cpp
+                              ${CMAKE_CURRENT_LIST_DIR}/WECore/Tests/PerformanceTests.cpp)
 
 target_compile_options(dspfilters     PRIVATE ${CXXFLAGS_DSP})
 target_compile_options(WECoreTest     PRIVATE ${CXXFLAGS})
