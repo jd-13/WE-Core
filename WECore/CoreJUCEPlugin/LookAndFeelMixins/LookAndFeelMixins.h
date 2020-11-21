@@ -27,6 +27,7 @@
 #include "ButtonV2.h"
 #include "ComboBoxV2.h"
 #include "GroupComponentV2.h"
+#include "MidAnchoredRotarySlider.h"
 #include "PopupMenuV2.h"
 #include "RotarySliderV2.h"
 
