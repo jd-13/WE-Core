@@ -52,6 +52,9 @@ var files_dup =
       [ "LabelReadoutSlider", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider" ]
     ] ],
     [ "LookAndFeelMixins.h", "_look_and_feel_mixins_8h.html", "_look_and_feel_mixins_8h" ],
+    [ "MidAnchoredRotarySlider.h", "_mid_anchored_rotary_slider_8h.html", [
+      [ "MidAnchoredRotarySlider", "class_w_e_core_1_1_look_and_feel_mixins_1_1_mid_anchored_rotary_slider.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_mid_anchored_rotary_slider" ]
+    ] ],
     [ "MONSTRBand.h", "_m_o_n_s_t_r_band_8h.html", [
       [ "MONSTRBand", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band" ]
     ] ],

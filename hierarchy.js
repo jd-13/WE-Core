@@ -14,6 +14,7 @@ var hierarchy =
       [ "WECore::LookAndFeelMixins::ButtonV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html", null ],
       [ "WECore::LookAndFeelMixins::ComboBoxV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_combo_box_v2.html", null ],
       [ "WECore::LookAndFeelMixins::GroupComponentV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_group_component_v2.html", null ],
+      [ "WECore::LookAndFeelMixins::MidAnchoredRotarySlider< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_mid_anchored_rotary_slider.html", null ],
       [ "WECore::LookAndFeelMixins::PopupMenuV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html", null ],
       [ "WECore::LookAndFeelMixins::RotarySliderV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2.html", null ]
     ] ],
