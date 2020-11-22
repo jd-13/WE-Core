@@ -1,9 +1,5 @@
 var hierarchy =
 [
-    [ "WECore::AREnv::AREnvelopeFollowerBase", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html", [
-      [ "WECore::AREnv::AREnvelopeFollowerFullWave", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_full_wave.html", null ],
-      [ "WECore::AREnv::AREnvelopeFollowerSquareLaw", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_square_law.html", null ]
-    ] ],
     [ "AudioProcessor", null, [
       [ "WECore::JUCEPlugin::CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html", null ]
     ] ],
@@ -45,15 +41,22 @@ var hierarchy =
     [ "LookAndFeel_V2", null, [
       [ "WECore::JUCEPlugin::CoreLookAndFeel", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html", null ]
     ] ],
+    [ "WECore::ModulationSource< T >", "class_w_e_core_1_1_modulation_source.html", null ],
+    [ "WECore::ModulationSource< double >", "class_w_e_core_1_1_modulation_source.html", [
+      [ "WECore::AREnv::AREnvelopeFollowerBase", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html", [
+        [ "WECore::AREnv::AREnvelopeFollowerFullWave", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_full_wave.html", null ],
+        [ "WECore::AREnv::AREnvelopeFollowerSquareLaw", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_square_law.html", null ]
+      ] ],
+      [ "WECore::Richter::RichterLFOBase", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_base.html", [
+        [ "WECore::Richter::RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html", null ],
+        [ "WECore::Richter::RichterMOD", "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html", null ]
+      ] ],
+      [ "WECore::Richter::RichterLFOPair", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html", null ]
+    ] ],
     [ "WECore::MONSTR::MONSTRBand< T >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", null ],
     [ "WECore::MONSTR::MONSTRCrossover< T >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", null ],
     [ "WECore::Carve::NoiseFilter< T >", "class_w_e_core_1_1_carve_1_1_noise_filter.html", null ],
     [ "WECore::JUCEPlugin::CoreAudioProcessor::ParameterInterface", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html", null ],
-    [ "WECore::Richter::RichterLFOBase", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_base.html", [
-      [ "WECore::Richter::RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html", null ],
-      [ "WECore::Richter::RichterMOD", "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html", null ]
-    ] ],
-    [ "WECore::Richter::RichterLFOPair", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html", null ],
     [ "Slider", null, [
       [ "WECore::JUCEPlugin::SliderLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html", [
         [ "WECore::JUCEPlugin::LabelReadoutSlider< T >", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html", null ]
