@@ -56,7 +56,7 @@ namespace WECore::Richter {
          */
         inline RichterLFO();
 
-        virtual ~RichterLFO() = default;
+        virtual ~RichterLFO() override = default;
 
         friend class RichterLFOPair;
 
@@ -84,22 +84,9 @@ namespace WECore::Richter {
 
         void setDepthMod(double val) { _depthMod = Parameters::DEPTHMOD.BoundsCheck(val); }
 
-        /** @} */
+        void setModulationSource(std::shared_ptr<ModulationSource> val) { _modulationSource = val; }
 
-        /**
-         * Use this in your processing loop. Returns a gain value which is intended to be
-         * multiplied with a single sample to apply the tremolo effect.
-         *
-         * Note: Calling this method will advance the oscillators internal counters by one
-         *       sample. Calling this method will return a different value each time.
-         *
-         * @param   modBypassSwitch     The state of the modulation oscillator. If set to true,
-         *                              the effect of modGain will be applied.
-         * @param   modGain             The gain output from the modulation oscillator.
-         *
-         * @return  The value of the LFO's output at this moment, a value between 0 and 1.
-         */
-        inline double calcGainInLoop(int modBypassSwitch, double modGain);
+        /** @} */
 
         RichterLFO operator= (RichterLFO& other) = delete;
         RichterLFO(RichterLFO&) = delete;
@@ -111,58 +98,67 @@ namespace WECore::Richter {
                 _rawDepth,
                 _depthMod;
 
+        // It may make more sense for this to be a weak_ptr, but weak_ptr.lock() seems to come with
+        // a performance penalty
+        std::shared_ptr<ModulationSource> _modulationSource;
+
+        /**
+         * Returns a gain value which is intended to be multiplied with a single sample to apply the
+         * tremolo effect.
+         *
+         * Note: Calling this method will advance the oscillators internal counters by one
+         *       sample. Calling this method will return a different value each time.
+         *
+         * @return  The value of the LFO's output at this moment, a value between 0 and 1.
+         */
+        inline double _getNextOutputImpl(double inSample) override;
+
         /**
          * Applies frequency modulation to the oscillator. Performed in the processing
          * loop so that the frequency can be updated before processing each sample.
          *
-         * @param   modBypassSwitch     The state of the modulation oscillator. If set to true,
-         *                              the effect of modGain will be applied.
          * @param   modGain             The gain output from the modulation oscillator.
          */
-        inline void _calcFreqInLoop(int modBypassSwitch, double modGain);
+        inline void _calcFreqInLoop(double modGain);
 
         /**
          * Applies depth modulation to the oscillator. Performed in the processing
          * loop so that the frequency can be updated before processing each sample.
          *
-         * args: modBypassSwitch   The state of the modulation oscillator. Determines
-         *                         whether modGain is applied to the calculation
-         *       modGain           The gain output from the modulation oscillator
+         * args: modGain           The gain output from the modulation oscillator
          */
-        inline void _calcDepthInLoop(int modBypassSwitch, double modGain);
+        inline void _calcDepthInLoop(double modGain);
 
 
         /**
          * Calculates the gain value to be applied to a signal which the oscillator
          * is operating on. Outputs a value between 0 and 1. Always outputs 1 if bypassed.
          *
-         * args: modBypassSwitch   The state of the modulation oscillator. Determines
-         *                         whether modGain is applied to the calculation
-         *       modGain           The gain output from the modulation oscillator
+         * args: modGain           The gain output from the modulation oscillator
          */
-        inline double _calcGain(int modBypassSwitch, double modGain);
+        inline double _calcGain(double modGain);
     };
 
     RichterLFO::RichterLFO() : _rawFreq(Parameters::FREQ.defaultValue),
                                _freqMod(Parameters::FREQMOD.defaultValue),
                                _rawDepth(Parameters::DEPTH.defaultValue),
-                               _depthMod(Parameters::DEPTHMOD.defaultValue) {
+                               _depthMod(Parameters::DEPTHMOD.defaultValue),
+                               _modulationSource(nullptr) {
     }
 
-    double RichterLFO::calcGainInLoop(int modBypassSwitch, double modGain) {
+    double RichterLFO::_getNextOutputImpl(double /*inSample*/) {
         calcIndexAndScaleInLoop();
-        return _calcGain(modBypassSwitch, modGain);
+
+        const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(0) : 0};
+
+        return _calcGain(modAmount);
     }
 
-    void RichterLFO::_calcFreqInLoop(int modBypassSwitch, double modGain) {
+    void RichterLFO::_calcFreqInLoop(double modGain) {
         // calculate the frequency based on whether tempo sync or frequency modulation is active
 
         if (!_tempoSyncSwitch) {
-            if (modBypassSwitch) {
-                _freq = _rawFreq + (_freqMod * (Parameters::FREQ.maxValue / 2) * modGain);
-            } else {
-                _freq = _rawFreq;
-            }
+            _freq = _rawFreq + (_freqMod * (Parameters::FREQ.maxValue / 2) * modGain);
         }
 
         // Bounds check frequency after the modulation is applied to it
@@ -170,22 +166,15 @@ namespace WECore::Richter {
 
     }
 
-    void RichterLFO::_calcDepthInLoop(int modBypassSwitch, double modGain) {
+    void RichterLFO::_calcDepthInLoop(double modGain) {
         // Check whether MOD oscs are activated and apply depth parameter modulation accordingly
-
-        if (modBypassSwitch) {
-            _depth = _rawDepth + (_depthMod * Parameters::DEPTH.maxValue * modGain);
-        } else {
-            _depth = _rawDepth;
-        }
-
+        _depth = _rawDepth + (_depthMod * Parameters::DEPTH.maxValue * modGain);
         _depth = Parameters::DEPTH.BoundsCheck(_depth);
-
     }
 
-    double RichterLFO::_calcGain(int modBypassSwitch, double modGain) {
-        _calcFreqInLoop(modBypassSwitch, modGain);
-        _calcDepthInLoop(modBypassSwitch, modGain);
+    double RichterLFO::_calcGain(double modGain) {
+        _calcFreqInLoop(modGain);
+        _calcDepthInLoop(modGain);
 
         if (_bypassSwitch) {
             // Invert if needed

@@ -25,6 +25,7 @@
 
 #include "RichterParameters.h"
 #include "RichterWavetables.h"
+#include "WEFilters/ModulationSource.h"
 
 namespace WECore::Richter {
 
@@ -39,7 +40,7 @@ namespace WECore::Richter {
      * Supports multiple wave shapes, tempo sync, and phase sync for consistent
      * playback no matter where the host playhead started playback from.
      */
-    class RichterLFOBase {
+    class RichterLFOBase : public ModulationSource<double> {
     public:
 
         /**
@@ -68,7 +69,7 @@ namespace WECore::Richter {
                             _waveArrayPointer(Wavetables::getInstance()->getSine()) {
         }
 
-        virtual ~RichterLFOBase() {}
+        virtual ~RichterLFOBase() override = default;
 
         friend class RichterLFOPair;
 
@@ -139,15 +140,6 @@ namespace WECore::Richter {
          */
         inline void prepareForNextBuffer(double bpm, double timeInSeconds, double sampleRate);
 
-        /**
-         * Must be called before beginning a new buffer of samples.
-         * Resets internal counters including indexOffset and currentScale.
-         */
-        inline void reset();
-
-        RichterLFOBase operator=(RichterLFOBase& other) = delete;
-        RichterLFOBase(RichterLFOBase& other) = delete;
-
     protected:
         int     _manualPhase,
                 _wave,
@@ -174,6 +166,11 @@ namespace WECore::Richter {
                 _nextScale;
 
         const double* _waveArrayPointer;
+
+        /**
+         * Resets internal counters including indexOffset and currentScale.
+         */
+        virtual inline void _resetImpl() override;
 
         /**
          * Calculates the phase offset to be applied to the oscillator, including any
@@ -244,7 +241,7 @@ namespace WECore::Richter {
     }
 
 
-    void RichterLFOBase::reset() {
+    void RichterLFOBase::_resetImpl() {
         _needsPhaseCalc = true;
         _indexOffset = 0;
         _currentScale = 0;

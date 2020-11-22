@@ -23,13 +23,14 @@
 
 #pragma once
 
-#include "WEFilters/AREnvelopeFollowerParameters.h"
+#include "AREnvelopeFollowerParameters.h"
+#include "ModulationSource.h"
 
 namespace WECore::AREnv {
     /**
      * Base class for an envelope follower with controls for attack and release times.
      */
-    class AREnvelopeFollowerBase {
+    class AREnvelopeFollowerBase : public ModulationSource<double> {
     public:
         AREnvelopeFollowerBase() : _attackTimeMs(WECore::AREnv::Parameters::ATTACK_MS.defaultValue),
                                    _releaseTimeMs(WECore::AREnv::Parameters::RELEASE_MS.defaultValue) {
@@ -39,7 +40,7 @@ namespace WECore::AREnv {
             setSampleRate(44100);
         }
 
-        virtual ~AREnvelopeFollowerBase() = default;
+        virtual ~AREnvelopeFollowerBase() override = default;
 
         /** @name Setter Methods */
         /** @{ */
@@ -84,28 +85,12 @@ namespace WECore::AREnv {
          * @see     setReleaseTimeMs
          */
         double getReleaseTimeMs() const { return _releaseTimeMs; }
-
-        /**
-         * Returns the latest envelope value without modifying it.
-         */
-        double getEnvelope() { return _envVal; }
-
         /** @} */
 
         /**
          * Resets the envelope state.
          */
-        void reset() { _envVal = 0; }
-
-        /**
-         * Updates the envelope with the current sample and returns the updated envelope value. Must
-         * be called for every sample.
-         *
-         * @param[in]   inSample    Sample used to update the envelope state
-         *
-         * @return  The updated envelope value
-         */
-        virtual double updateEnvelope(double inSample) = 0;
+        void _resetImpl() override { _envVal = 0; }
 
     protected:
         double _envVal;

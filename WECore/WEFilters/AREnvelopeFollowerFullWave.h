@@ -24,8 +24,8 @@
 #pragma once
 
 #include "General/CoreMath.h"
-#include "WEFilters/AREnvelopeFollowerParameters.h"
-#include "WEFilters/AREnvelopeFollowerBase.h"
+#include "AREnvelopeFollowerParameters.h"
+#include "AREnvelopeFollowerBase.h"
 
 namespace WECore::AREnv {
     /**
@@ -37,7 +37,15 @@ namespace WECore::AREnv {
         AREnvelopeFollowerFullWave() = default;
         virtual ~AREnvelopeFollowerFullWave() = default;
 
-        virtual double updateEnvelope(double inSample) override {
+        /**
+         * Updates the envelope with the current sample and returns the updated envelope value. Must
+         * be called for every sample.
+         *
+         * @param[in]   inSample    Sample used to update the envelope state
+         *
+         * @return  The updated envelope value
+         */
+        virtual double _getNextOutputImpl(double inSample) override {
             const double tmp = std::abs(inSample);
 
             if (tmp > _envVal)

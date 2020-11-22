@@ -25,6 +25,7 @@
 
 #include "RichterLFO.h"
 #include "RichterMOD.h"
+#include "WEFilters/ModulationSource.h"
 
 namespace WECore::Richter {
     /**
@@ -48,26 +49,21 @@ namespace WECore::Richter {
      * (where numSamples is the size of the buffer)
      * @code
      * for (size_t iii {0}; iii < numSamples; iii++) {
-     *     buffer[iii] = buffer[iii] * lfoPair.calcGainInLoop();
+     *     buffer[iii] = buffer[iii] * lfoPair.getNextOutput();
      * }
      * @endcode
      *
-     * calcGainInLoop must be called once for each sample. Even if there is a sample in the buffer which
-     * you do not wish to apply processing to,calcGainInLoop must still be called otherwise subsequent
-     * samples will have the wrong gain calculation applied.
+     * getNextOutput must be called once for each sample. Even if there is a sample in the buffer
+     * which you do not wish to apply processing to, getNextOutput must still be called otherwise
+     * subsequent samples will have the wrong gain calculation applied.
      */
 
-    class RichterLFOPair {
+    class RichterLFOPair : public ModulationSource<double> {
     public:
-        RichterLFOPair() : _lfoGain(0), _modGain(0) {}
-        virtual ~RichterLFOPair() = default;
+        inline RichterLFOPair();
+        virtual ~RichterLFOPair() override = default;
         RichterLFOPair operator= (RichterLFOPair& other) = delete;
         RichterLFOPair(RichterLFOPair& other) = delete;
-
-        /**
-         * Call each oscillator's reset method.
-         */
-        inline void reset();
 
         /**
          * Prepares for processing the next buffer of samples. For example if using JUCE, you
@@ -83,67 +79,57 @@ namespace WECore::Richter {
          */
         inline void prepareForNextBuffer(double bpm, double timeInSeconds, double sampleRate);
 
+        RichterLFO LFO;
+        std::shared_ptr<RichterMOD> MOD;
+
+    private:
         /**
-         * Use this in your processing loop. Returns a gain value which is intended to be
-         * multiplied with a single sample to apply the tremolo effect.
+         * Returns a gain value which is intended to be multiplied with a single sample to apply the
+         * tremolo effect.
          *
          * Note: Calling this method will advance the oscillators internal counters by one
          *       sample. Calling this method will return a different value each time.
          *
          * @return  The value of the RichterLFO's output at this moment, a value between 0 and 1.
          */
-        inline double calcGainInLoop();
+        inline double _getNextOutputImpl(double inSample) override;
 
         /**
-         * Returns the most recent gain value without advancing the LFOs.
+         * Call each oscillator's reset method.
          */
-        double getGain() { return _lfoGain; }
-
-        /**
-         * Returns the most recent mod value without advancing the LFOs.
-         */
-        double getMod() { return _modGain; }
-
-        RichterLFO LFO;
-        RichterMOD MOD;
-
-    private:
-        double _lfoGain;
-        double _modGain;
+        inline void _resetImpl() override;
     };
 
-    void RichterLFOPair::reset() {
-        LFO.reset();
-        MOD.reset();
+    RichterLFOPair::RichterLFOPair() {
+        MOD = std::make_shared<RichterMOD>();
+        LFO.setModulationSource(MOD);
     }
 
     void RichterLFOPair::prepareForNextBuffer(double bpm,
                                               double timeInSeconds,
                                               double sampleRate) {
         LFO.setWaveTablePointers();
-        MOD.setWaveTablePointers();
+        MOD->setWaveTablePointers();
 
-        MOD._calcFreq(bpm);
-        MOD._calcPhaseOffset(timeInSeconds);
+        MOD->_calcFreq(bpm);
+        MOD->_calcPhaseOffset(timeInSeconds);
 
         LFO._calcFreq(bpm);
         LFO._calcPhaseOffset(timeInSeconds);
 
         LFO._calcSamplesPerTremoloCycle(sampleRate);
-        MOD._calcSamplesPerTremoloCycle(sampleRate);
+        MOD->_calcSamplesPerTremoloCycle(sampleRate);
 
         LFO._calcNextScale();
-        MOD._calcNextScale();
+        MOD->_calcNextScale();
     }
 
+    void RichterLFOPair::_resetImpl() {
+        LFO.reset();
+        MOD->reset();
+    }
 
-    double RichterLFOPair::calcGainInLoop() {
-        LFO.calcIndexAndScaleInLoop();
-        MOD.calcIndexAndScaleInLoop();
-
-        _modGain = MOD._calcGain();
-        _lfoGain = LFO._calcGain(MOD.getBypassSwitch(), _modGain);
-
-        return _lfoGain;
+    double RichterLFOPair::_getNextOutputImpl(double /*inSample*/) {
+        return LFO.getNextOutput(0);
     }
 }
