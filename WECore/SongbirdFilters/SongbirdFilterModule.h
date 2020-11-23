@@ -25,6 +25,7 @@
 
 #include <array>
 #include <map>
+#include <memory>
 
 #include "SongbirdFormantFilter.h"
 #include "SongbirdFiltersParameters.h"
