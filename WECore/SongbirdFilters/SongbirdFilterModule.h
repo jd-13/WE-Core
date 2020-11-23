@@ -23,10 +23,12 @@
 
 #pragma once
 
-#include "SongbirdFormantFilter.h"
-#include <map>
-#include "SongbirdFiltersParameters.h"
 #include <array>
+#include <map>
+
+#include "SongbirdFormantFilter.h"
+#include "SongbirdFiltersParameters.h"
+#include "WEFilters/ModulationSource.h"
 
 namespace {
     /**
@@ -98,7 +100,6 @@ namespace WECore::Songbird {
                                  _filterPosition(Parameters::FILTER_POSITION.defaultValue),
                                  _sampleRate(44100),
                                  _mix(Parameters::MIX.defaultValue),
-                                 _modulationSrc(Parameters::MODULATION.defaultValue),
                                  _outputGain(Parameters::OUTPUTGAIN.defaultValue),
                                  _modMode(Parameters::MODMODE_DEFAULT) {
 
@@ -161,14 +162,6 @@ namespace WECore::Songbird {
         void setMix(double val) { _mix = Parameters::MIX.BoundsCheck(val); }
 
         /**
-         * Sets the modulation position. Usually driven by an LFO or envelope, use values between -1 and
-         * 1.
-         *
-         * @param[in]   val The output of the modulation source (LFO, envelope, etc)
-         */
-        void setModulation(double val) { _modulationSrc = Parameters::MODULATION.BoundsCheck(val); }
-
-        /**
          * Sets the output gain.
          *
          * @param[in]   val The output gain that should be used
@@ -183,6 +176,13 @@ namespace WECore::Songbird {
          * @param[in]   val Chooses the modulation mode
          */
         void setModMode(bool val) { _modMode = val; }
+
+        /**
+         * Sets the modulation source that will be used to modulate the filter position.
+         *
+         * @param[in]   val The modulation source to use
+         */
+        void setModulationSource(std::shared_ptr<ModulationSource<double>> val) { _modulationSource = val; }
 
         /** @} */
 
@@ -266,10 +266,11 @@ namespace WECore::Songbird {
         double  _filterPosition,
                 _sampleRate,
                 _mix,
-                _modulationSrc,
                 _outputGain;
 
         bool _modMode;
+
+        std::shared_ptr<ModulationSource<double>> _modulationSource;
 
         std::map<Channels, SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL>> _filters1;
         std::map<Channels, SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL>> _filters2;
@@ -293,8 +294,10 @@ namespace WECore::Songbird {
          * Uses the filterPosition parameter and the modulation source to calculate the vowel that
          * should be used when in MODMODE_FREQ, as this vowel will sit somewhere between the two
          * vowels that have been selected by the user.
+         *
+         * @param   val Modulation amount to be applied
          */
-        inline Vowel _calcVowelForFreqMode();
+        inline Vowel _calcVowelForFreqMode(double modAmount);
 
         /**
          * An array which defines all the formants that will be needed.
@@ -386,12 +389,13 @@ namespace WECore::Songbird {
             // For MODMODE_BLEND we modulation the filter position to blend between the two filters.
             // For MODMOD_FREQ we set the filter position to 0 so that we're only using filter 1,
             // and then modulate the freqency of filter 1 between the two vowels
-            double blendFilterPosition;
+            double blendFilterPosition {0};
+            const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(bufferInputStart[0]) : 0};
             if (_modMode == Parameters::MODMODE_BLEND) {
-                blendFilterPosition = _filterPosition + _modulationSrc;
+                blendFilterPosition = _filterPosition + modAmount;
             } else {
                 blendFilterPosition = 0;
-                _setVowel1(_calcVowelForFreqMode());
+                _setVowel1(_calcVowelForFreqMode(modAmount));
             }
 
             // Do the processing for each filter
@@ -402,6 +406,12 @@ namespace WECore::Songbird {
             // Write to output, applying filter position and mix level
             // always use modFilterPosition as this will take into account any modulation
             for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
+
+                // Manually advance the modulation state through the rest of this buffer
+                if (_modulationSource != nullptr && iii != 0) {
+                    _modulationSource->getNextOutput(bufferInputStart[iii]);
+                }
+
                 bufferInputStart[iii] = (
                                             bufferInputStart[iii] * (1 - _mix)
                                             + _leftOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
@@ -446,12 +456,13 @@ namespace WECore::Songbird {
             // For MODMODE_BLEND we modulation the filter position to blend between the two filters.
             // For MODMOD_FREQ we set the filter position to 0 so that we're only using filter 1,
             // and then modulate the freqency of filter 1 between the two vowels
-            double blendFilterPosition;
+            double blendFilterPosition {0};
+            const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput((leftBufferInputStart[0] + rightBufferInputStart[0]) / 2) : 0};
             if (_modMode == Parameters::MODMODE_BLEND) {
-                blendFilterPosition = _filterPosition + _modulationSrc;
+                blendFilterPosition = _filterPosition + modAmount;
             } else {
                 blendFilterPosition = 0;
-                _setVowel1(_calcVowelForFreqMode());
+                _setVowel1(_calcVowelForFreqMode(modAmount));
             }
 
             // Do the processing for each filter
@@ -464,6 +475,12 @@ namespace WECore::Songbird {
             // Write to output, applying filter position and mix level
             // always use modFilterPosition as this will take into account any modulation
             for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
+
+                // Manually advance the modulation state through the rest of this buffer
+                if (_modulationSource != nullptr && iii != 0) {
+                    _modulationSource->getNextOutput((leftBufferInputStart[iii] + rightBufferInputStart[iii]) / 2);
+                }
+
                 leftBufferInputStart[iii] = (
                                                 leftBufferInputStart[iii] * (1 - _mix)
                                                 + _leftOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
@@ -488,7 +505,7 @@ namespace WECore::Songbird {
     }
 
     template <typename T>
-    Vowel SongbirdFilterModule<T>::_calcVowelForFreqMode() {
+    Vowel SongbirdFilterModule<T>::_calcVowelForFreqMode(double modAmount) {
         // get the first and second vowels
         Vowel tempVowel1(getVowelDescription(getVowel1()));
         Vowel tempVowel2(getVowelDescription(getVowel2()));
@@ -505,7 +522,7 @@ namespace WECore::Songbird {
             freqDelta *= (tempVowel1[iii].frequency > tempVowel2[iii].frequency) ? -1.0 : 1.0;
 
             retVal[iii].frequency = tempVowel1[iii].frequency + freqDelta / 2;
-            retVal[iii].frequency += (freqDelta / 2) * _modulationSrc
+            retVal[iii].frequency += (freqDelta / 2) * modAmount
                                     + (freqDelta / 2) * ((_filterPosition - 0.5) * 2);
 
             // Calculate gain modulation
@@ -514,7 +531,7 @@ namespace WECore::Songbird {
             gainDelta *= (tempVowel1[iii].gaindB > tempVowel2[iii].gaindB) ? -1.0 : 1.0;
 
             retVal[iii].gaindB = tempVowel1[iii].gaindB + gainDelta / 2;
-            retVal[iii].gaindB += (gainDelta / 2) * _modulationSrc
+            retVal[iii].gaindB += (gainDelta / 2) * modAmount
                                 + (gainDelta / 2) * ((_filterPosition - 0.5) * 2);
         }
 
