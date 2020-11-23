@@ -295,7 +295,7 @@ namespace WECore::Songbird {
          * should be used when in MODMODE_FREQ, as this vowel will sit somewhere between the two
          * vowels that have been selected by the user.
          *
-         * @param   val Modulation amount to be applied
+         * @param   modAmount Modulation amount to be applied
          */
         inline Vowel _calcVowelForFreqMode(double modAmount);
 
