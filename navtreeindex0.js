@@ -5,7 +5,7 @@ var NAVTREEINDEX0 =
 "_a_r_envelope_follower_full_wave_8h.html":[2,0,1],
 "_a_r_envelope_follower_full_wave_8h_source.html":[2,0,1],
 "_a_r_envelope_follower_parameters_8h.html":[2,0,2],
-"_a_r_envelope_follower_parameters_8h.html#ace6eb188c0e7a94471b20bc0cb4cb6f8":[2,0,2,1],
+"_a_r_envelope_follower_parameters_8h.html#a9474f3bdcb6fce6ee9e8891b5b2230c3":[2,0,2,1],
 "_a_r_envelope_follower_parameters_8h.html#ae39727d2f7d5ab98afc8e56441707190":[2,0,2,0],
 "_a_r_envelope_follower_parameters_8h_source.html":[2,0,2],
 "_a_r_envelope_follower_square_law_8h.html":[2,0,3],
