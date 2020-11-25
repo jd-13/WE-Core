@@ -434,27 +434,17 @@ $(document).ready(function(){initNavTree('_songbird_filter_module_8h_source.html
 <div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;            <span class="comment">// TODO: There&#39;s definitely some optimisation to be done below</span></div>
 <div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160; </div>
 <div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;            <span class="comment">// Calculate frequency modulation</span></div>
-<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;            <span class="keywordtype">double</span> freqDelta {std::fabs(tempVowel1[iii].frequency - tempVowel2[iii].frequency)};</div>
-<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;            <span class="comment">// Invert the delta depending on which value is largest</span></div>
-<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160;            freqDelta *= (tempVowel1[iii].frequency &gt; tempVowel2[iii].frequency) ? -1.0 : 1.0;</div>
-<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160; </div>
-<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;            retVal[iii].frequency = tempVowel1[iii].frequency + freqDelta / 2;</div>
-<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;            retVal[iii].frequency += (freqDelta / 2) * modAmount</div>
-<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;                                    + (freqDelta / 2) * ((_filterPosition - 0.5) * 2);</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> freqDelta {tempVowel2[iii].frequency - tempVowel1[iii].frequency};</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;            retVal[iii].frequency = tempVowel1[iii].frequency + freqDelta * (_filterPosition + modAmount);</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160; </div>
+<div class="line"><a name="l00524"></a><span class="lineno">  524</span>&#160;            <span class="comment">// Calculate gain modulation</span></div>
+<div class="line"><a name="l00525"></a><span class="lineno">  525</span>&#160;            <span class="keyword">const</span> <span class="keywordtype">double</span> gainDelta {tempVowel2[iii].gaindB - tempVowel1[iii].gaindB};</div>
+<div class="line"><a name="l00526"></a><span class="lineno">  526</span>&#160;            retVal[iii].gaindB = tempVowel1[iii].gaindB + gainDelta * (_filterPosition + modAmount);</div>
+<div class="line"><a name="l00527"></a><span class="lineno">  527</span>&#160;        }</div>
 <div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160; </div>
-<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;            <span class="comment">// Calculate gain modulation</span></div>
-<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;            <span class="keywordtype">double</span> gainDelta {std::fabs(tempVowel1[iii].gaindB - tempVowel2[iii].gaindB)};</div>
-<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;            <span class="comment">// Invert the delta depending on which value is largest</span></div>
-<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;            gainDelta *= (tempVowel1[iii].gaindB &gt; tempVowel2[iii].gaindB) ? -1.0 : 1.0;</div>
-<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160; </div>
-<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;            retVal[iii].gaindB = tempVowel1[iii].gaindB + gainDelta / 2;</div>
-<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;            retVal[iii].gaindB += (gainDelta / 2) * modAmount</div>
-<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;                                + (gainDelta / 2) * ((_filterPosition - 0.5) * 2);</div>
-<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;        }</div>
-<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160; </div>
-<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;        <span class="keywordflow">return</span> retVal;</div>
-<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160;    }</div>
-<div class="line"><a name="l00541"></a><span class="lineno">  541</span>&#160;}</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;        <span class="keywordflow">return</span> retVal;</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    }</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="anamespace_w_e_core_1_1_songbird_html_a3a3ef6451fa968c851e21391558ef016"><div class="ttname"><a href="namespace_w_e_core_1_1_songbird.html#a3a3ef6451fa968c851e21391558ef016">WECore::Songbird::Vowel</a></div><div class="ttdeci">std::array&lt; Formant, NUM_FORMANTS_PER_VOWEL &gt; Vowel</div><div class="ttdef"><b>Definition:</b> <a href="_songbird_filter_module_8h_source.html#l00050">SongbirdFilterModule.h:50</a></div></div>
