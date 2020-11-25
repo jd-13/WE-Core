@@ -518,22 +518,12 @@ namespace WECore::Songbird {
             // TODO: There's definitely some optimisation to be done below
 
             // Calculate frequency modulation
-            double freqDelta {std::fabs(tempVowel1[iii].frequency - tempVowel2[iii].frequency)};
-            // Invert the delta depending on which value is largest
-            freqDelta *= (tempVowel1[iii].frequency > tempVowel2[iii].frequency) ? -1.0 : 1.0;
-
-            retVal[iii].frequency = tempVowel1[iii].frequency + freqDelta / 2;
-            retVal[iii].frequency += (freqDelta / 2) * modAmount
-                                    + (freqDelta / 2) * ((_filterPosition - 0.5) * 2);
+            const double freqDelta {tempVowel2[iii].frequency - tempVowel1[iii].frequency};
+            retVal[iii].frequency = tempVowel1[iii].frequency + freqDelta * (_filterPosition + modAmount);
 
             // Calculate gain modulation
-            double gainDelta {std::fabs(tempVowel1[iii].gaindB - tempVowel2[iii].gaindB)};
-            // Invert the delta depending on which value is largest
-            gainDelta *= (tempVowel1[iii].gaindB > tempVowel2[iii].gaindB) ? -1.0 : 1.0;
-
-            retVal[iii].gaindB = tempVowel1[iii].gaindB + gainDelta / 2;
-            retVal[iii].gaindB += (gainDelta / 2) * modAmount
-                                + (gainDelta / 2) * ((_filterPosition - 0.5) * 2);
+            const double gainDelta {tempVowel2[iii].gaindB - tempVowel1[iii].gaindB};
+            retVal[iii].gaindB = tempVowel1[iii].gaindB + gainDelta * (_filterPosition + modAmount);
         }
 
         return retVal;
