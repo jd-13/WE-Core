@@ -35,6 +35,6 @@ namespace WECore::AREnv::Parameters {
      *      default value
      */
     const ParameterDefinition::RangedParameter<double>  ATTACK_MS(0.1, 10000, 20),
-                                                        RELEASE_MS(0.1, 10000, 20);
+                                                        RELEASE_MS(0.1, 10000, 200);
     //@}
 }
