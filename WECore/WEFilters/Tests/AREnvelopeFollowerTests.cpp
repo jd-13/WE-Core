@@ -31,7 +31,7 @@ SCENARIO("AREnvelopeFollowerSquareLaw: Parameters can be set and retrieved corre
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
                 CHECK(mEnv.getAttackTimeMs() == Approx(20.0));
-                CHECK(mEnv.getReleaseTimeMs() == Approx(20.0));
+                CHECK(mEnv.getReleaseTimeMs() == Approx(200.0));
             }
         }
 
