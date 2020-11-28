@@ -75,8 +75,8 @@ namespace WECore::Richter {
 
     double RichterMOD::_calcGain() {
         if (_bypassSwitch) {
-            // Divide by 2 to convert range from -1:1 to -0.5:0.5, invert if needed
-            return (_gain * _depth) / 2 * (_invertSwitch ? -1 : 1);
+            // Produce a value in the range -1:1, invert if needed
+            return (_gain * _depth) * (_invertSwitch ? -1 : 1);
         } else {
             return 0;
         }

@@ -130,6 +130,18 @@ namespace WECore::Richter {
     }
 
     double RichterLFOPair::_getNextOutputImpl(double /*inSample*/) {
-        return LFO.getNextOutput(0);
+
+        double retVal {1};
+
+        // Always call getNextOutput regardless of bypassed state
+        const double tempGain {LFO.getNextOutput(0)};
+
+        if (LFO.getBypassSwitch()) {
+            // The output of the LFO is a value in the range -1:1, we need to convert this into a
+            // gain in the range 0:1 and make sure the value is 1 when the depth is 0
+            retVal = (tempGain / 2) + (2 - LFO.getDepth()) / 2;
+        }
+
+        return retVal;
     }
 }

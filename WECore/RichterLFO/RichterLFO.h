@@ -35,14 +35,11 @@ namespace WECore::Richter {
      * modulated by an external source, with internal controls of the for the depth of this
      * modulation.
      *
-     * This LFO oscillates between 0 and 1, and so is useful for applying amplitude
-     * modulation directly to an audio signal.
+     * This LFO oscillates between -1 and 1.
      *
      * To use, you simply need to call reset, prepareForNextBuffer, and calcGainInLoop
      * as necessary (see their descriptions for details), and use the provided getter
      * and setter methods to manipulate parameters.
-     *
-     * Completes the implementation of RichterLFO.
      */
     class RichterLFO : public RichterLFOBase {
 
@@ -103,13 +100,12 @@ namespace WECore::Richter {
         std::shared_ptr<ModulationSource> _modulationSource;
 
         /**
-         * Returns a gain value which is intended to be multiplied with a single sample to apply the
-         * tremolo effect.
+         * Returns the next output of the LFO.
          *
          * Note: Calling this method will advance the oscillators internal counters by one
          *       sample. Calling this method will return a different value each time.
          *
-         * @return  The value of the LFO's output at this moment, a value between 0 and 1.
+         * @return  The value of the LFO's output at this moment, a value between -1 and 1.
          */
         inline double _getNextOutputImpl(double inSample) override;
 
@@ -129,14 +125,6 @@ namespace WECore::Richter {
          */
         inline void _calcDepthInLoop(double modGain);
 
-
-        /**
-         * Calculates the gain value to be applied to a signal which the oscillator
-         * is operating on. Outputs a value between 0 and 1. Always outputs 1 if bypassed.
-         *
-         * args: modGain           The gain output from the modulation oscillator
-         */
-        inline double _calcGain(double modGain);
     };
 
     RichterLFO::RichterLFO() : _rawFreq(Parameters::FREQ.defaultValue),
@@ -149,16 +137,25 @@ namespace WECore::Richter {
     double RichterLFO::_getNextOutputImpl(double /*inSample*/) {
         calcIndexAndScaleInLoop();
 
-        const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(0) : 0};
+        // Get the mod amount to use, divide by 2 to reduce range to -0.5:0.5
+        const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(0) / 2 : 0};
 
-        return _calcGain(modAmount);
+        _calcFreqInLoop(modAmount);
+        _calcDepthInLoop(modAmount);
+
+        if (_bypassSwitch) {
+            // Produce a value in the range -1:1, invert if needed
+            return (_gain * _depth) * (_invertSwitch ? -1 : 1);
+        } else {
+            return 0;
+        }
     }
 
-    void RichterLFO::_calcFreqInLoop(double modGain) {
+    void RichterLFO::_calcFreqInLoop(double modAmount) {
         // calculate the frequency based on whether tempo sync or frequency modulation is active
 
         if (!_tempoSyncSwitch) {
-            _freq = _rawFreq + (_freqMod * (Parameters::FREQ.maxValue / 2) * modGain);
+            _freq = _rawFreq + (_freqMod * (Parameters::FREQ.maxValue / 2) * modAmount);
         }
 
         // Bounds check frequency after the modulation is applied to it
@@ -166,24 +163,9 @@ namespace WECore::Richter {
 
     }
 
-    void RichterLFO::_calcDepthInLoop(double modGain) {
+    void RichterLFO::_calcDepthInLoop(double modAmount) {
         // Check whether MOD oscs are activated and apply depth parameter modulation accordingly
-        _depth = _rawDepth + (_depthMod * Parameters::DEPTH.maxValue * modGain);
+        _depth = _rawDepth + (_depthMod * Parameters::DEPTH.maxValue * modAmount);
         _depth = Parameters::DEPTH.BoundsCheck(_depth);
-    }
-
-    double RichterLFO::_calcGain(double modGain) {
-        _calcFreqInLoop(modGain);
-        _calcDepthInLoop(modGain);
-
-        if (_bypassSwitch) {
-            // Invert if needed
-            const double tempGain {_gain * (_invertSwitch ? -1 : 1)};
-
-            // Convert range from -1:1 to 0:1,
-            return 1 + (tempGain * _depth / 2 - 0.5) + (1 - _depth) / 2;
-        } else {
-            return 1;
-        }
     }
 }
