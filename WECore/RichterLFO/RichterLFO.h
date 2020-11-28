@@ -23,7 +23,9 @@
 
 #pragma once
 
-#include "RichterLFOBase.h"
+#include "RichterParameters.h"
+#include "RichterWavetables.h"
+#include "WEFilters/ModulationSource.h"
 
 namespace WECore::Richter {
 
@@ -37,11 +39,11 @@ namespace WECore::Richter {
      *
      * This LFO oscillates between -1 and 1.
      *
-     * To use, you simply need to call reset, prepareForNextBuffer, and calcGainInLoop
+     * To use, you simply need to call reset, prepareForNextBuffer, and getNextOutput
      * as necessary (see their descriptions for details), and use the provided getter
      * and setter methods to manipulate parameters.
      */
-    class RichterLFO : public RichterLFOBase {
+    class RichterLFO : public ModulationSource<double> {
 
     public:
 
@@ -59,45 +61,133 @@ namespace WECore::Richter {
 
         /** @name Getter Methods */
         /** @{ */
-
-        double getRawDepth() { return _rawDepth; }
-
-        double getDepthMod() { return _depthMod; }
-
-        double getRawFreq() { return _rawFreq; }
-
+        bool getBypassSwitch() const { return _bypassSwitch; }
+        bool getPhaseSyncSwitch() const { return _phaseSyncSwitch; }
+        bool getTempoSyncSwitch() const { return _tempoSyncSwitch; }
+        bool getInvertSwitch() const { return _invertSwitch; }
+        int getWave() const { return _wave; }
+        double getTempoNumer() const { return _tempoNumer; }
+        double getTempoDenom() const { return _tempoDenom; }
+        double getFreq() { return _rawFreq; }
         double getFreqMod() { return _freqMod; }
-
+        double getDepth() { return _rawDepth; }
+        double getDepthMod() { return _depthMod; }
+        int getManualPhase() const { return _manualPhase; }
+        int getIndexOffset() { return _indexOffset; }
         /** @} */
 
         /** @name Setter Methods */
         /** @{ */
-
-        void setRawFreq(double val) { _rawFreq = Parameters::FREQ.BoundsCheck(val); }
-
+        void setBypassSwitch(bool val) { _bypassSwitch = val; }
+        void setPhaseSyncSwitch(bool val) { _phaseSyncSwitch = val; }
+        void setTempoSyncSwitch(bool val) { _tempoSyncSwitch = val; }
+        void setInvertSwitch(bool val) { _invertSwitch = val; }
+        void setWave(int val) { _wave = Parameters::WAVE.BoundsCheck(val); }
+        void setTempoNumer(int val) { _tempoNumer = Parameters::TEMPONUMER.BoundsCheck(val); }
+        void setTempoDenom (int val) { _tempoDenom = Parameters::TEMPODENOM.BoundsCheck(val); }
+        void setFreq(double val) { _rawFreq = Parameters::FREQ.BoundsCheck(val); }
         void setFreqMod(double val) { _freqMod = Parameters::FREQMOD.BoundsCheck(val); }
-
-        void setRawDepth(double val) { _rawDepth = Parameters::DEPTH.BoundsCheck(val); }
-
+        void setDepth(double val) { _rawDepth = Parameters::DEPTH.BoundsCheck(val); }
         void setDepthMod(double val) { _depthMod = Parameters::DEPTHMOD.BoundsCheck(val); }
+        void setManualPhase(int val) { _manualPhase = static_cast<int>(Parameters::PHASE.BoundsCheck(val)); }
+        void setIndexOffset(int val) { _indexOffset = val; }
+
+        inline void setWaveTablePointers();
 
         void setModulationSource(std::shared_ptr<ModulationSource> val) { _modulationSource = val; }
-
         /** @} */
+
+        /**
+         * Prepares for processing the next buffer of samples. For example if using JUCE, you
+         * would call this in your processBlock() method before doing any processing.
+         *
+         * @param   bpm             Current bpm of the host
+         * @param   timeInSeconds   Position of the host DAW's playhead at the start of
+         *                          playback.
+         * @param   sampleRate      Current sample rate of the host
+         */
+        inline void prepareForNextBuffer(double bpm, double timeInSeconds, double sampleRate);
 
         RichterLFO operator= (RichterLFO& other) = delete;
         RichterLFO(RichterLFO&) = delete;
 
     private:
+        int     _manualPhase,
+                _wave,
+                _index,
+                _indexOffset;
 
-        double  _rawFreq,
+        long    _samplesProcessed;
+
+        bool    _bypassSwitch,
+                _tempoSyncSwitch,
+                _phaseSyncSwitch,
+                _invertSwitch,
+                _needsPhaseCalc;
+
+        double  _tempoNumer,
+                _tempoDenom,
+                _tempoFreq,
+                _freq,
+                _rawFreq,
                 _freqMod,
+                _depth,
                 _rawDepth,
-                _depthMod;
+                _depthMod,
+                _samplesPerTremoloCycle,
+                _gain,
+                _currentScale,
+                _nextScale;
+
+        const double* _waveArrayPointer;
+
 
         // It may make more sense for this to be a weak_ptr, but weak_ptr.lock() seems to come with
         // a performance penalty
         std::shared_ptr<ModulationSource> _modulationSource;
+
+        /**
+         * Calculates the phase offset to be applied to the oscillator, including any
+         * offset required by the phase sync and any offset applied by the user.
+         *
+         * @param   timeInSeconds   Position of the host DAW's playhead at the start of
+         *                          playback.
+         */
+        inline void _calcPhaseOffset(double timeInSeconds);
+
+        /**
+         * Calculates the frequency of the oscillator. Will use either the frequency
+         * or tempoNumer/tempoDenom depending on whether tempo sync is enabled.
+         *
+         * @param   bpm   Current bpm of the host DAW
+         */
+        inline void _calcFreq(double bpm);
+
+        /**
+         * Calculates the number of samples which pass in the same time as one cycle
+         * of the LFO. Dependant on the LFO frequency and the sample rate.
+         *
+         * @param   sampleRate   Sample rate of the host DAW
+         */
+        void _calcSamplesPerTremoloCycle(double sampleRate) {
+            _samplesPerTremoloCycle = sampleRate / _freq;
+        }
+
+        /**
+         * Calculates the scale factor to be applied when calculating the index.
+         */
+        void _calcNextScale() {
+            _nextScale = Wavetables::SIZE / _samplesPerTremoloCycle;
+        }
+
+        /**
+         * Calculates the current index of the oscillator in its wavetable. Includes
+         * protection against indexes out of range (caused by phase offset) and updates
+         * currentScale. Call from within the processing loop. Increments the number of
+         * samples processed
+         *
+         */
+        inline void calcIndexAndScaleInLoop();
 
         /**
          * Returns the next output of the LFO.
@@ -125,13 +215,121 @@ namespace WECore::Richter {
          */
         inline void _calcDepthInLoop(double modGain);
 
+        /**
+         * Resets internal counters including indexOffset and currentScale.
+         */
+        virtual inline void _resetImpl() override;
+
     };
 
-    RichterLFO::RichterLFO() : _rawFreq(Parameters::FREQ.defaultValue),
+    RichterLFO::RichterLFO() : _manualPhase(static_cast<int>(Parameters::PHASE.defaultValue)),
+                               _wave(Parameters::WAVE.defaultValue),
+                               _index(0),
+                               _indexOffset(0),
+                               _samplesProcessed(0),
+                               _bypassSwitch(Parameters::LFOSWITCH_DEFAULT),
+                               _tempoSyncSwitch(Parameters::TEMPOSYNC_DEFAULT),
+                               _phaseSyncSwitch(Parameters::PHASESYNC_DEFAULT),
+                               _invertSwitch(Parameters::INVERT_DEFAULT),
+                               _needsPhaseCalc(true),
+                               _tempoNumer(Parameters::TEMPONUMER.defaultValue),
+                               _tempoDenom(Parameters::TEMPODENOM.defaultValue),
+                               _tempoFreq(Parameters::FREQ.defaultValue),
+                               _freq(Parameters::FREQ.defaultValue),
+                               _rawFreq(Parameters::FREQ.defaultValue),
                                _freqMod(Parameters::FREQMOD.defaultValue),
+                               _depth(Parameters::DEPTH.defaultValue),
                                _rawDepth(Parameters::DEPTH.defaultValue),
                                _depthMod(Parameters::DEPTHMOD.defaultValue),
+                               _samplesPerTremoloCycle(1),
+                               _gain(1),
+                               _currentScale(0),
+                               _nextScale(0),
+                               _waveArrayPointer(Wavetables::getInstance()->getSine()),
                                _modulationSource(nullptr) {
+    }
+
+    void RichterLFO::setWaveTablePointers() {
+        if (_wave == Parameters::WAVE.SINE) {
+            _waveArrayPointer = Wavetables::getInstance()->getSine();
+        } else if (_wave == Parameters::WAVE.SQUARE) {
+            _waveArrayPointer = Wavetables::getInstance()->getSquare();
+        } else if (_wave == Parameters::WAVE.SAW) {
+            _waveArrayPointer = Wavetables::getInstance()->getSaw();
+        } else if (_wave == Parameters::WAVE.SIDECHAIN) {
+            _waveArrayPointer = Wavetables::getInstance()->getSidechain();
+        }
+    }
+
+    void RichterLFO::prepareForNextBuffer(double bpm,
+                                              double timeInSeconds,
+                                              double sampleRate) {
+        setWaveTablePointers();
+        _calcFreq(bpm);
+        _calcPhaseOffset(timeInSeconds);
+        _calcSamplesPerTremoloCycle(sampleRate);
+        _calcNextScale();
+    }
+
+    void RichterLFO::_resetImpl() {
+        _needsPhaseCalc = true;
+        _indexOffset = 0;
+        _currentScale = 0;
+        _samplesProcessed = 0;
+    }
+
+    void RichterLFO::_calcPhaseOffset(double timeInSeconds) {
+        if (_phaseSyncSwitch && _needsPhaseCalc) {
+            static double waveLength {1 / _freq};
+            static double waveTimePosition {0};
+
+            if (waveLength < timeInSeconds) {
+                waveTimePosition = fmod(timeInSeconds, waveLength);
+            } else {
+                waveTimePosition = timeInSeconds;
+            }
+            _indexOffset = static_cast<int>(waveTimePosition / waveLength) * Wavetables::SIZE + _manualPhase;
+        }
+
+        if (!_phaseSyncSwitch && _needsPhaseCalc) {
+            _indexOffset = _manualPhase;
+        }
+        _needsPhaseCalc = false;
+
+    }
+
+    void RichterLFO::_calcFreq(double bpm) {
+        // calculate the frequency based on whether tempo sync is active
+
+        _tempoFreq = (bpm / 60) * (_tempoDenom / _tempoNumer);
+
+        if (_tempoSyncSwitch) { _freq = _tempoFreq; }
+
+        _freq = Parameters::FREQ.BoundsCheck(_freq);
+
+    }
+
+    void RichterLFO::calcIndexAndScaleInLoop() {
+        // calculate the current index within the wave table
+        _index = static_cast<int>(static_cast<long>(_samplesProcessed * static_cast<long double>(_currentScale)) % Wavetables::SIZE);
+
+        if ((!CoreMath::compareFloatsEqual(_nextScale, _currentScale)) && (_index == 0)) {
+            _currentScale = _nextScale;
+            _samplesProcessed = 0;
+        }
+
+
+        // Must provide two possibilities for each index lookup in order to protect the array from
+        // being overflowed by the indexOffset, the first if statement uses the standard index
+        // lookup while second if statement deals with the overflow possibility
+
+        if ((_index + _indexOffset) < Wavetables::SIZE) {
+            _gain = _waveArrayPointer[_index + _indexOffset];
+        } else if ((_index + _indexOffset) >= Wavetables::SIZE) {
+            _gain = _waveArrayPointer[(_index + _indexOffset) % Wavetables::SIZE];
+        }
+
+        _samplesProcessed++;
     }
 
     double RichterLFO::_getNextOutputImpl(double /*inSample*/) {

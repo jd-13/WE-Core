@@ -24,7 +24,6 @@
 #pragma once
 
 #include "RichterLFO.h"
-#include "RichterMOD.h"
 #include "WEFilters/ModulationSource.h"
 
 namespace WECore::Richter {
@@ -80,7 +79,7 @@ namespace WECore::Richter {
         inline void prepareForNextBuffer(double bpm, double timeInSeconds, double sampleRate);
 
         RichterLFO LFO;
-        std::shared_ptr<RichterMOD> MOD;
+        std::shared_ptr<RichterLFO> MOD;
 
     private:
         /**
@@ -101,7 +100,7 @@ namespace WECore::Richter {
     };
 
     RichterLFOPair::RichterLFOPair() {
-        MOD = std::make_shared<RichterMOD>();
+        MOD = std::make_shared<RichterLFO>();
         LFO.setModulationSource(MOD);
     }
 
