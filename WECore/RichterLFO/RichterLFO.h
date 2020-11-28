@@ -279,8 +279,8 @@ namespace WECore::Richter {
 
     void RichterLFO::_calcPhaseOffset(double timeInSeconds) {
         if (_phaseSyncSwitch && _needsPhaseCalc) {
-            static double waveLength {1 / _freq};
-            static double waveTimePosition {0};
+            double waveLength {1 / _freq};
+            double waveTimePosition {0};
 
             if (waveLength < timeInSeconds) {
                 waveTimePosition = fmod(timeInSeconds, waveLength);
