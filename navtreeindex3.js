@@ -1,7 +1,6 @@
 var NAVTREEINDEX3 =
 {
 "namespace_w_e_core_1_1_songbird_1_1_parameters.html":[0,0,3,6,0],
-"namespace_w_e_core_1_1_songbird_1_1_parameters.html":[1,0,2,6,0],
 "namespace_w_e_core_1_1_t_p_t_s_v_f.html":[0,0,3,7],
 "namespace_w_e_core_1_1_t_p_t_s_v_f.html":[1,0,2,7],
 "namespace_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters.html":[1,0,2,7,0],

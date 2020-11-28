@@ -16,7 +16,7 @@ var searchData=
   ['_5fcalcdepthinloop_13',['_calcDepthInLoop',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#aed26227d9b5dbff2bbb393347b0d7dd3',1,'WECore::Richter::RichterLFO']]],
   ['_5fcalcfreq_14',['_calcFreq',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o_base.html#ac125c32440cf27b1ed575f98f7da25b2',1,'WECore::Richter::RichterLFOBase']]],
   ['_5fcalcfreqinloop_15',['_calcFreqInLoop',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#aed8cc18da0270a24f49f104b71b6be01',1,'WECore::Richter::RichterLFO']]],
-  ['_5fcalcgain_16',['_calcGain',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a2c7f835097887a384877d63457e849ff',1,'WECore::Richter::RichterLFO::_calcGain()'],['../class_w_e_core_1_1_richter_1_1_richter_m_o_d.html#a08268341d0b34298f3973fe8ab98d11f',1,'WECore::Richter::RichterMOD::_calcGain()']]],
+  ['_5fcalcgain_16',['_calcGain',['../class_w_e_core_1_1_richter_1_1_richter_m_o_d.html#a08268341d0b34298f3973fe8ab98d11f',1,'WECore::Richter::RichterMOD']]],
   ['_5fcalcnextscale_17',['_calcNextScale',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o_base.html#a04c1772838354be50ddd3e6beb5759aa',1,'WECore::Richter::RichterLFOBase']]],
   ['_5fcalcphaseoffset_18',['_calcPhaseOffset',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o_base.html#a60c7d8ce232049a7b5aa1d6139808b97',1,'WECore::Richter::RichterLFOBase']]],
   ['_5fcalcsamplespertremolocycle_19',['_calcSamplesPerTremoloCycle',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o_base.html#a186920a188264e7a3fe27288eb4a54c3',1,'WECore::Richter::RichterLFOBase']]],
