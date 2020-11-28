@@ -82,7 +82,7 @@ namespace WECore::Richter {
         void setPhaseSyncSwitch(bool val) { _phaseSyncSwitch = val; }
         void setTempoSyncSwitch(bool val) { _tempoSyncSwitch = val; }
         void setInvertSwitch(bool val) { _invertSwitch = val; }
-        void setWave(int val) { _wave = Parameters::WAVE.BoundsCheck(val); }
+        inline void setWave(int val);
         void setTempoNumer(int val) { _tempoNumer = Parameters::TEMPONUMER.BoundsCheck(val); }
         void setTempoDenom (int val) { _tempoDenom = Parameters::TEMPODENOM.BoundsCheck(val); }
         void setFreq(double val) { _rawFreq = Parameters::FREQ.BoundsCheck(val); }
@@ -91,8 +91,6 @@ namespace WECore::Richter {
         void setDepthMod(double val) { _depthMod = Parameters::DEPTHMOD.BoundsCheck(val); }
         void setManualPhase(int val) { _manualPhase = static_cast<int>(Parameters::PHASE.BoundsCheck(val)); }
         void setIndexOffset(int val) { _indexOffset = val; }
-
-        inline void setWaveTablePointers();
 
         void setModulationSource(std::shared_ptr<ModulationSource> val) { _modulationSource = val; }
         /** @} */
@@ -249,7 +247,9 @@ namespace WECore::Richter {
                                _modulationSource(nullptr) {
     }
 
-    void RichterLFO::setWaveTablePointers() {
+    void RichterLFO::setWave(int val) {
+        _wave = Parameters::WAVE.BoundsCheck(val);
+
         if (_wave == Parameters::WAVE.SINE) {
             _waveArrayPointer = Wavetables::getInstance()->getSine();
         } else if (_wave == Parameters::WAVE.SQUARE) {
@@ -264,7 +264,6 @@ namespace WECore::Richter {
     void RichterLFO::prepareForNextBuffer(double bpm,
                                               double timeInSeconds,
                                               double sampleRate) {
-        setWaveTablePointers();
         _calcFreq(bpm);
         _calcPhaseOffset(timeInSeconds);
         _calcSamplesPerTremoloCycle(sampleRate);

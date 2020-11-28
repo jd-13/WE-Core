@@ -107,8 +107,6 @@ namespace WECore::Richter {
     void RichterLFOPair::prepareForNextBuffer(double bpm,
                                               double timeInSeconds,
                                               double sampleRate) {
-        LFO.setWaveTablePointers();
-        MOD->setWaveTablePointers();
 
         MOD->_calcFreq(bpm);
         MOD->_calcPhaseOffset(timeInSeconds);
