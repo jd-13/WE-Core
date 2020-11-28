@@ -125,11 +125,9 @@ namespace WECore::Richter {
 
         double  _tempoNumer,
                 _tempoDenom,
-                _tempoFreq,
                 _freq,
                 _rawFreq,
                 _freqMod,
-                _depth,
                 _rawDepth,
                 _depthMod,
                 _samplesPerTremoloCycle,
@@ -206,14 +204,6 @@ namespace WECore::Richter {
         inline void _calcFreqInLoop(double modGain);
 
         /**
-         * Applies depth modulation to the oscillator. Performed in the processing
-         * loop so that the frequency can be updated before processing each sample.
-         *
-         * args: modGain           The gain output from the modulation oscillator
-         */
-        inline void _calcDepthInLoop(double modGain);
-
-        /**
          * Resets internal counters including indexOffset and currentScale.
          */
         virtual inline void _resetImpl() override;
@@ -232,11 +222,9 @@ namespace WECore::Richter {
                                _needsPhaseCalc(true),
                                _tempoNumer(Parameters::TEMPONUMER.defaultValue),
                                _tempoDenom(Parameters::TEMPODENOM.defaultValue),
-                               _tempoFreq(Parameters::FREQ.defaultValue),
                                _freq(Parameters::FREQ.defaultValue),
                                _rawFreq(Parameters::FREQ.defaultValue),
                                _freqMod(Parameters::FREQMOD.defaultValue),
-                               _depth(Parameters::DEPTH.defaultValue),
                                _rawDepth(Parameters::DEPTH.defaultValue),
                                _depthMod(Parameters::DEPTHMOD.defaultValue),
                                _samplesPerTremoloCycle(1),
@@ -294,18 +282,18 @@ namespace WECore::Richter {
             _indexOffset = _manualPhase;
         }
         _needsPhaseCalc = false;
-
     }
 
     void RichterLFO::_calcFreq(double bpm) {
         // calculate the frequency based on whether tempo sync is active
 
-        _tempoFreq = (bpm / 60) * (_tempoDenom / _tempoNumer);
+        const double tempoFreq {(bpm / 60) * (_tempoDenom / _tempoNumer)};
 
-        if (_tempoSyncSwitch) { _freq = _tempoFreq; }
+        if (_tempoSyncSwitch) {
+            _freq = tempoFreq;
+        }
 
         _freq = Parameters::FREQ.BoundsCheck(_freq);
-
     }
 
     void RichterLFO::calcIndexAndScaleInLoop() {
@@ -338,11 +326,15 @@ namespace WECore::Richter {
         const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(0) / 2 : 0};
 
         _calcFreqInLoop(modAmount);
-        _calcDepthInLoop(modAmount);
+
+        // Calculate the depth value after modulation
+        const double depth {Parameters::DEPTH.BoundsCheck(
+            _rawDepth + (_depthMod * Parameters::DEPTH.maxValue * modAmount)
+        )};
 
         if (_bypassSwitch) {
             // Produce a value in the range -1:1, invert if needed
-            return (_gain * _depth) * (_invertSwitch ? -1 : 1);
+            return (_gain * depth) * (_invertSwitch ? -1 : 1);
         } else {
             return 0;
         }
@@ -357,12 +349,5 @@ namespace WECore::Richter {
 
         // Bounds check frequency after the modulation is applied to it
         _freq = Parameters::FREQ.BoundsCheck(_freq);
-
-    }
-
-    void RichterLFO::_calcDepthInLoop(double modAmount) {
-        // Check whether MOD oscs are activated and apply depth parameter modulation accordingly
-        _depth = _rawDepth + (_depthMod * Parameters::DEPTH.maxValue * modAmount);
-        _depth = Parameters::DEPTH.BoundsCheck(_depth);
     }
 }
