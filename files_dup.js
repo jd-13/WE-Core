@@ -74,16 +74,10 @@ var files_dup =
     [ "RichterLFO.h", "_richter_l_f_o_8h.html", [
       [ "RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html", "class_w_e_core_1_1_richter_1_1_richter_l_f_o" ]
     ] ],
-    [ "RichterLFOBase.h", "_richter_l_f_o_base_8h.html", [
-      [ "RichterLFOBase", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_base.html", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_base" ]
-    ] ],
     [ "RichterLFOPair.h", "_richter_l_f_o_pair_8h.html", [
       [ "RichterLFOPair", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair" ]
     ] ],
     [ "RichterLFOPairTests.cpp", "_richter_l_f_o_pair_tests_8cpp.html", "_richter_l_f_o_pair_tests_8cpp" ],
-    [ "RichterMOD.h", "_richter_m_o_d_8h.html", [
-      [ "RichterMOD", "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html", "class_w_e_core_1_1_richter_1_1_richter_m_o_d" ]
-    ] ],
     [ "RichterParameters.h", "_richter_parameters_8h.html", "_richter_parameters_8h" ],
     [ "RichterWavetables.h", "_richter_wavetables_8h.html", [
       [ "Wavetables", "class_w_e_core_1_1_richter_1_1_wavetables.html", "class_w_e_core_1_1_richter_1_1_wavetables" ]

@@ -47,10 +47,7 @@ var hierarchy =
         [ "WECore::AREnv::AREnvelopeFollowerFullWave", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_full_wave.html", null ],
         [ "WECore::AREnv::AREnvelopeFollowerSquareLaw", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_square_law.html", null ]
       ] ],
-      [ "WECore::Richter::RichterLFOBase", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_base.html", [
-        [ "WECore::Richter::RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html", null ],
-        [ "WECore::Richter::RichterMOD", "class_w_e_core_1_1_richter_1_1_richter_m_o_d.html", null ]
-      ] ],
+      [ "WECore::Richter::RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html", null ],
       [ "WECore::Richter::RichterLFOPair", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html", null ]
     ] ],
     [ "WECore::MONSTR::MONSTRBand< T >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", null ],

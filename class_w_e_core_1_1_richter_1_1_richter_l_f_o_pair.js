@@ -8,5 +8,5 @@ var class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair =
     [ "operator=", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html#ad53bb9353d857b8812b24d37d9d96a53", null ],
     [ "prepareForNextBuffer", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html#a70c60d82c66ad31af958c3393048dacd", null ],
     [ "LFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html#ad346c53771f37ea38a61ee3795c4b365", null ],
-    [ "MOD", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html#a2bd64b00c03e03f536df8e6dd0f23319", null ]
+    [ "MOD", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html#aaa6570e85cdd21d4368d7a25f6d16074", null ]
 ];
