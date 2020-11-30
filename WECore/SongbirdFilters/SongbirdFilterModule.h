@@ -35,7 +35,7 @@ namespace {
     /**
      * The number of formants (bandpass filters) which are used in a single vowel.
      */
-    constexpr int NUM_FORMANTS_PER_VOWEL {5};
+    constexpr int NUM_FORMANTS_PER_VOWEL {4};
 
     /**
      * The number of vowels supported.
@@ -305,11 +305,11 @@ namespace WECore::Songbird {
          */
         // (TODO: could be made static again)
         const Vowel _allFormants[NUM_VOWELS] {
-            {Formant(800, 0), Formant(1150, -4), Formant(2800, -20), Formant(3500, -36), Formant(4950, -60)},
-            {Formant(400, 0), Formant(1600, -24), Formant(2700, -30), Formant(3300, -35), Formant(4950, -60)},
-            {Formant(350, 0), Formant(1700, -20), Formant(2700, -30), Formant(3700, -36), Formant(4950, -60)},
-            {Formant(450, 0), Formant(800, -9), Formant(2830, -16), Formant(3500, -28), Formant(4950, -55)},
-            {Formant(325, 0), Formant(700, -12), Formant(2530, -30), Formant(3500, -40), Formant(4950, -64)},
+            {Formant(800, 0), Formant(1150, -4), Formant(2800, -20), Formant(3500, -36)},
+            {Formant(400, 0), Formant(1600, -24), Formant(2700, -30), Formant(3500, -35)},
+            {Formant(350, 0), Formant(1700, -20), Formant(2700, -30), Formant(3500, -36)},
+            {Formant(450, 0), Formant(800, -9), Formant(2830, -16), Formant(3500, -28)},
+            {Formant(325, 0), Formant(700, -12), Formant(2530, -30), Formant(3500, -40)},
         };
     };
 
