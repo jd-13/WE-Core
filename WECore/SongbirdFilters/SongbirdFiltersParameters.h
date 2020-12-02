@@ -49,7 +49,7 @@ namespace WECore::Songbird::Parameters {
      */
     const ParameterDefinition::RangedParameter<double>  FILTER_POSITION(0, 1, 0.5),
                                                         MIX(0, 1, 1),
-                                                        MODULATION(-1, 1, 0),
+                                                        AIR_GAIN(0, 1, 0.5),
                                                         OUTPUTGAIN(0, 2, 1);
     //@}
 

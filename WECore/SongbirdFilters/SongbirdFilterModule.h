@@ -31,19 +31,22 @@
 #include "SongbirdFiltersParameters.h"
 #include "WEFilters/ModulationSource.h"
 
-namespace {
+namespace WECore::Songbird {
     /**
      * The number of formants (bandpass filters) which are used in a single vowel.
      */
-    constexpr int NUM_FORMANTS_PER_VOWEL {4};
+    constexpr int NUM_FORMANTS_PER_VOWEL {2};
 
     /**
      * The number of vowels supported.
      */
     constexpr int NUM_VOWELS {5};
-}
 
-namespace WECore::Songbird {
+    /**
+     * The number of formants that are used for the "air" filters that add brightness.
+     */
+    constexpr int NUM_AIR_FORMANTS {2};
+
     /**
      * A type to make refering to a group of formants easier.
      */
@@ -60,6 +63,9 @@ namespace WECore::Songbird {
     /**
      * A filter module providing five different vowel sounds, any two of which can be selected
      * simulaneously and blended between.
+     *
+     * Also provides an "air" function which is a pair of fixed frequency formant filters at higher
+     * frequency that can be blended into the output.
      *
      * To use this class, simply call reset, and the process methods as necessary, using the provided
      * getter and setter methods to manipulate parameters.
@@ -101,12 +107,21 @@ namespace WECore::Songbird {
                                  _filterPosition(Parameters::FILTER_POSITION.defaultValue),
                                  _sampleRate(44100),
                                  _mix(Parameters::MIX.defaultValue),
+                                 _airGain(Parameters::AIR_GAIN.defaultValue),
                                  _outputGain(Parameters::OUTPUTGAIN.defaultValue),
                                  _modMode(Parameters::MODMODE_DEFAULT) {
 
             // initialise the filters to some default values
             setVowel1(_vowel1);
             setVowel2(_vowel2);
+
+            // Set up the air filters
+            const std::array<Formant, NUM_AIR_FORMANTS> airFormants {
+                Formant(2700, -15), Formant(3500, -25)
+            };
+
+            _filtersAir[Channels::LEFT].setFormants(airFormants);
+            _filtersAir[Channels::RIGHT].setFormants(airFormants);
         }
 
         virtual ~SongbirdFilterModule() {}
@@ -179,6 +194,15 @@ namespace WECore::Songbird {
         void setModMode(bool val) { _modMode = val; }
 
         /**
+         * Sets the level of the upper formant filter peaks.
+         *
+         * @param[in]   val Gain value that should be used
+         *
+         * @see         AIR_GAIN for valid values
+         */
+        void setAirGain(double val) { _airGain = Parameters::AIR_GAIN.BoundsCheck(val); }
+
+        /**
          * Sets the modulation source that will be used to modulate the filter position.
          *
          * @param[in]   val The modulation source to use
@@ -199,39 +223,44 @@ namespace WECore::Songbird {
         /**
          * @see setVowel1
          */
-        int getVowel1() { return _vowel1; }
+        int getVowel1() const { return _vowel1; }
 
         /**
          * @see setVowel2
          */
-        int getVowel2() { return _vowel2; }
+        int getVowel2() const { return _vowel2; }
 
         /**
          * Return a vowel object describing one of the built in vowels.
          *
          * @see     VowelParameter for valid values
          */
-        inline Vowel getVowelDescription(int val);
+        inline Vowel getVowelDescription(int val) const;
 
         /**
          * @see setFilterPosition
          */
-        double getFilterPosition() { return _filterPosition; }
+        double getFilterPosition() const { return _filterPosition; }
 
         /**
          * @see setMix
          */
-        double getMix() { return _mix; }
+        double getMix() const { return _mix; }
 
         /**
          * @see modMode
          */
-        bool getModMode() { return _modMode; }
+        bool getModMode() const { return _modMode; }
+
+        /**
+         * @see setAirGain
+         */
+        double getAirGain() const { return _airGain; }
 
         /**
          * @see setOutputGain
          */
-        double getOutputGain() { return _outputGain; }
+        double getOutputGain() const { return _outputGain; }
 
         /** @} */
 
@@ -267,6 +296,7 @@ namespace WECore::Songbird {
         double  _filterPosition,
                 _sampleRate,
                 _mix,
+                _airGain,
                 _outputGain;
 
         bool _modMode;
@@ -275,6 +305,7 @@ namespace WECore::Songbird {
 
         std::map<Channels, SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL>> _filters1;
         std::map<Channels, SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL>> _filters2;
+        std::map<Channels, SongbirdFormantFilter<T, NUM_AIR_FORMANTS>> _filtersAir;
 
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
 
@@ -282,6 +313,8 @@ namespace WECore::Songbird {
         T _rightOutputBuffer1[INTERNAL_BUFFER_SIZE];
         T _leftOutputBuffer2[INTERNAL_BUFFER_SIZE];
         T _rightOutputBuffer2[INTERNAL_BUFFER_SIZE];
+        T _leftOutputBufferAir[INTERNAL_BUFFER_SIZE];
+        T _rightOutputBufferAir[INTERNAL_BUFFER_SIZE];
 
         /**
          * Sets the vowel sound that should be created by filter 1 using a Vowel object provided by
@@ -305,11 +338,11 @@ namespace WECore::Songbird {
          */
         // (TODO: could be made static again)
         const Vowel _allFormants[NUM_VOWELS] {
-            {Formant(800, 0), Formant(1150, -4), Formant(2700, -25), Formant(3500, -35)},
-            {Formant(400, 0), Formant(1600, -24), Formant(2700, -25), Formant(3500, -35)},
-            {Formant(350, 0), Formant(1700, -20), Formant(2700, -25), Formant(3500, -35)},
-            {Formant(450, 0), Formant(800, -9), Formant(2700, -25), Formant(3500, -35)},
-            {Formant(325, 0), Formant(700, -12), Formant(2700, -25), Formant(3500, -35)},
+            {Formant(800, 0), Formant(1150, -4)},
+            {Formant(400, 0), Formant(2100, -24)},
+            {Formant(350, 0), Formant(2400, -20)},
+            {Formant(450, 0), Formant(800, -9)},
+            {Formant(325, 0), Formant(700, -12)},
         };
     };
 
@@ -339,6 +372,8 @@ namespace WECore::Songbird {
         _filters1[Channels::RIGHT].setSampleRate(val);
         _filters2[Channels::LEFT].setSampleRate(val);
         _filters2[Channels::RIGHT].setSampleRate(val);
+        _filtersAir[Channels::LEFT].setSampleRate(val);
+        _filtersAir[Channels::RIGHT].setSampleRate(val);
     }
 
     template <typename T>
@@ -347,10 +382,12 @@ namespace WECore::Songbird {
         _filters1[Channels::RIGHT].reset();
         _filters2[Channels::LEFT].reset();
         _filters2[Channels::RIGHT].reset();
+        _filtersAir[Channels::LEFT].reset();
+        _filtersAir[Channels::RIGHT].reset();
     }
 
     template <typename T>
-    Vowel SongbirdFilterModule<T>::getVowelDescription(int val) {
+    Vowel SongbirdFilterModule<T>::getVowelDescription(int val) const {
         Vowel tempVowel;
 
         std::copy(&_allFormants[val - 1][0],
@@ -382,8 +419,8 @@ namespace WECore::Songbird {
 
             // Copy the samples we need to process in this chunk into the internal buffers
             std::copy(bufferInputStart, &bufferInputStart[numSamplesToCopy], _leftOutputBuffer1);
-
             std::copy(bufferInputStart, &bufferInputStart[numSamplesToCopy], _leftOutputBuffer2);
+            std::copy(bufferInputStart, &bufferInputStart[numSamplesToCopy], _leftOutputBufferAir);
 
             // Figure out the modulation here. We have two ways to modulation between
             // two formant filters.
@@ -401,8 +438,8 @@ namespace WECore::Songbird {
 
             // Do the processing for each filter
             _filters1[Channels::LEFT].process(_leftOutputBuffer1, numSamplesToCopy);
-
             _filters2[Channels::LEFT].process(_leftOutputBuffer2, numSamplesToCopy);
+            _filtersAir[Channels::LEFT].process(_leftOutputBufferAir, numSamplesToCopy);
 
             // Write to output, applying filter position and mix level
             // always use modFilterPosition as this will take into account any modulation
@@ -417,6 +454,7 @@ namespace WECore::Songbird {
                                             bufferInputStart[iii] * (1 - _mix)
                                             + _leftOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
                                             + _leftOutputBuffer2[iii] * blendFilterPosition * _mix
+                                            + _leftOutputBufferAir[iii] * _airGain * _mix
                                         )
                                         * _outputGain;
             }
@@ -452,6 +490,9 @@ namespace WECore::Songbird {
             std::copy(leftBufferInputStart, &leftBufferInputStart[numSamplesToCopy], _leftOutputBuffer2);
             std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _rightOutputBuffer2);
 
+            std::copy(leftBufferInputStart, &leftBufferInputStart[numSamplesToCopy], _leftOutputBufferAir);
+            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _rightOutputBufferAir);
+
             // Figure out the modulation here. We have two ways to modulation between
             // two formant filters.
             // For MODMODE_BLEND we modulation the filter position to blend between the two filters.
@@ -473,6 +514,9 @@ namespace WECore::Songbird {
             _filters2[Channels::LEFT].process(_leftOutputBuffer2, numSamplesToCopy);
             _filters2[Channels::RIGHT].process(_rightOutputBuffer2, numSamplesToCopy);
 
+            _filtersAir[Channels::LEFT].process(_leftOutputBufferAir, numSamplesToCopy);
+            _filtersAir[Channels::RIGHT].process(_rightOutputBufferAir, numSamplesToCopy);
+
             // Write to output, applying filter position and mix level
             // always use modFilterPosition as this will take into account any modulation
             for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
@@ -486,6 +530,7 @@ namespace WECore::Songbird {
                                                 leftBufferInputStart[iii] * (1 - _mix)
                                                 + _leftOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
                                                 + _leftOutputBuffer2[iii] * blendFilterPosition * _mix
+                                                + _leftOutputBufferAir[iii] * _airGain * _mix
                                             )
                                             * _outputGain;
 
@@ -493,6 +538,7 @@ namespace WECore::Songbird {
                                                 rightBufferInputStart[iii] * (1 - _mix)
                                                 + _rightOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
                                                 + _rightOutputBuffer2[iii] * blendFilterPosition * _mix
+                                                + _rightOutputBufferAir[iii] * _airGain * _mix
                                             )
                                             * _outputGain;
             }
