@@ -156,7 +156,7 @@ namespace WECore::Songbird {
             for (size_t iii {0}; iii < _filters.size(); iii++) {
                 _filters[iii].setCutoff(formants[iii].frequency);
 
-                double gainAbs = pow(10, formants[iii].gaindB / 20.0);
+                double gainAbs = CoreMath::dBToLinear(formants[iii].gaindB);
                 _filters[iii].setGain(gainAbs);
             }
         }
