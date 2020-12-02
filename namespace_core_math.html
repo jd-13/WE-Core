@@ -94,6 +94,10 @@ Functions</h2></td></tr>
 <tr class="memitem:aa508b26b043c8b062c5993327b62dfd6"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:aa508b26b043c8b062c5993327b62dfd6"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespace_core_math.html#aa508b26b043c8b062c5993327b62dfd6">compareFloatsEqual</a> (T x, T y, T tolerance=std::numeric_limits&lt; T &gt;::epsilon())</td></tr>
 <tr class="separator:aa508b26b043c8b062c5993327b62dfd6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa78a4f599d61d8e38085c2417709db48"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_core_math.html#aa78a4f599d61d8e38085c2417709db48">linearTodB</a> (double val)</td></tr>
+<tr class="separator:aa78a4f599d61d8e38085c2417709db48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8eb68bd34f9dcc3488368a0089e61ac"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_core_math.html#af8eb68bd34f9dcc3488368a0089e61ac">dBToLinear</a> (double val)</td></tr>
+<tr class="separator:af8eb68bd34f9dcc3488368a0089e61ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -109,6 +113,8 @@ Variables</h2></td></tr>
 <tr class="separator:a2c7d3da1be9be65882d245a8208b495f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9693cdccc5b09a4b3eee1da639aed382"><td class="memItemLeft" align="right" valign="top">constexpr double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_core_math.html#a9693cdccc5b09a4b3eee1da639aed382">DOUBLE_E</a> {static_cast&lt;double&gt;(<a class="el" href="namespace_core_math.html#a2c7d3da1be9be65882d245a8208b495f">LONG_E</a>)}</td></tr>
 <tr class="separator:a9693cdccc5b09a4b3eee1da639aed382"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cb9e7d4d09e3b34cdb5c7e2cb73074d"><td class="memItemLeft" align="right" valign="top">constexpr double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_core_math.html#a7cb9e7d4d09e3b34cdb5c7e2cb73074d">MINUS_INF_DB</a> {-200}</td></tr>
+<tr class="separator:a7cb9e7d4d09e3b34cdb5c7e2cb73074d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains generic math related consts and functions. </p>
@@ -150,6 +156,66 @@ template&lt;typename T &gt; </div>
 <p class="definition">Definition at line <a class="el" href="_core_math_8h_source.html#l00047">47</a> of file <a class="el" href="_core_math_8h_source.html">CoreMath.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00299">WECore::Richter::RichterLFO::calcIndexAndScaleInLoop()</a>, and <a class="el" href="_m_o_n_s_t_r_band_8h_source.html#l00235">WECore::MONSTR::MONSTRBand&lt; T &gt;::setSampleRate()</a>.</p>
+
+</div>
+</div>
+<a id="af8eb68bd34f9dcc3488368a0089e61ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8eb68bd34f9dcc3488368a0089e61ac">&#9670;&nbsp;</a></span>dBToLinear()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CoreMath::dBToLinear </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_core_math_8h_source.html#l00053">53</a> of file <a class="el" href="_core_math_8h_source.html">CoreMath.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_songbird_formant_filter_8h_source.html#l00146">WECore::Songbird::SongbirdFormantFilter&lt; T, NUM_FORMANTS &gt;::setFormants()</a>.</p>
+
+</div>
+</div>
+<a id="aa78a4f599d61d8e38085c2417709db48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa78a4f599d61d8e38085c2417709db48">&#9670;&nbsp;</a></span>linearTodB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double CoreMath::linearTodB </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_core_math_8h_source.html#l00052">52</a> of file <a class="el" href="_core_math_8h_source.html">CoreMath.h</a>.</p>
+
+<p class="reference">References <a class="el" href="_core_math_8h_source.html#l00051">MINUS_INF_DB</a>.</p>
 
 </div>
 </div>
@@ -302,6 +368,32 @@ template&lt;typename T &gt; </div>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_core_math_8h_source.html#l00040">40</a> of file <a class="el" href="_core_math_8h_source.html">CoreMath.h</a>.</p>
+
+</div>
+</div>
+<a id="a7cb9e7d4d09e3b34cdb5c7e2cb73074d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cb9e7d4d09e3b34cdb5c7e2cb73074d">&#9670;&nbsp;</a></span>MINUS_INF_DB</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr double CoreMath::MINUS_INF_DB {-200}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_core_math_8h_source.html#l00051">51</a> of file <a class="el" href="_core_math_8h_source.html">CoreMath.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_core_math_8h_source.html#l00052">linearTodB()</a>.</p>
 
 </div>
 </div>
