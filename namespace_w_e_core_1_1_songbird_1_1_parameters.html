@@ -101,8 +101,8 @@ Functions</h2></td></tr>
 <tr class="separator:a266ff9073edfbf6a74636b86096b907a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed304a25b66b3b5dfa7aaea78d36de4d"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_parameter_definition_1_1_ranged_parameter.html">ParameterDefinition::RangedParameter</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_w_e_core_1_1_songbird_1_1_parameters.html#aed304a25b66b3b5dfa7aaea78d36de4d">MIX</a> (0, 1, 1)</td></tr>
 <tr class="separator:aed304a25b66b3b5dfa7aaea78d36de4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0df165baeb052c01770df50d0a53589"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_parameter_definition_1_1_ranged_parameter.html">ParameterDefinition::RangedParameter</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_w_e_core_1_1_songbird_1_1_parameters.html#af0df165baeb052c01770df50d0a53589">MODULATION</a> (-1, 1, 0)</td></tr>
-<tr class="separator:af0df165baeb052c01770df50d0a53589"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a696b9d27af46debf2bfc7783c54cbbd8"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_parameter_definition_1_1_ranged_parameter.html">ParameterDefinition::RangedParameter</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_w_e_core_1_1_songbird_1_1_parameters.html#a696b9d27af46debf2bfc7783c54cbbd8">AIR_GAIN</a> (0, 1, 0.5)</td></tr>
+<tr class="separator:a696b9d27af46debf2bfc7783c54cbbd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae59c42c047712554c4cf49b37872b1fa"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_parameter_definition_1_1_ranged_parameter.html">ParameterDefinition::RangedParameter</a>&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_w_e_core_1_1_songbird_1_1_parameters.html#ae59c42c047712554c4cf49b37872b1fa">OUTPUTGAIN</a> (0, 2, 1)</td></tr>
 <tr class="separator:ae59c42c047712554c4cf49b37872b1fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -120,6 +120,42 @@ Variables</h2></td></tr>
 <tr class="separator:a7e8bb55b0967bc72f47bfc7aa58c3ec3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a696b9d27af46debf2bfc7783c54cbbd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a696b9d27af46debf2bfc7783c54cbbd8">&#9670;&nbsp;</a></span>AIR_GAIN()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_parameter_definition_1_1_ranged_parameter.html">ParameterDefinition::RangedParameter</a>&lt;double&gt; WECore::Songbird::Parameters::AIR_GAIN </td>
+          <td>(</td>
+          <td class="paramtype">0&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">1&#160;</td>
+          <td class="paramname">, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">0.&#160;</td>
+          <td class="paramname"><em>5</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="reference">Referenced by <a class="el" href="_songbird_filter_module_8h_source.html#l00203">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::setAirGain()</a>.</p>
+
+</div>
+</div>
 <a id="a266ff9073edfbf6a74636b86096b907a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a266ff9073edfbf6a74636b86096b907a">&#9670;&nbsp;</a></span>FILTER_POSITION()</h2>
 
@@ -153,7 +189,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 <p>A parameter which can take any float value between the ranges defined. The values passed on construction are in the following order: minimum value, maximum value, default value </p>
 
-<p class="reference">Referenced by <a class="el" href="_songbird_filter_module_8h_source.html#l00145">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::setFilterPosition()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_songbird_filter_module_8h_source.html#l00160">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::setFilterPosition()</a>.</p>
 
 </div>
 </div>
@@ -189,41 +225,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="_songbird_filter_module_8h_source.html#l00163">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::setMix()</a>.</p>
-
-</div>
-</div>
-<a id="af0df165baeb052c01770df50d0a53589"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af0df165baeb052c01770df50d0a53589">&#9670;&nbsp;</a></span>MODULATION()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const <a class="el" href="class_parameter_definition_1_1_ranged_parameter.html">ParameterDefinition::RangedParameter</a>&lt;double&gt; WECore::Songbird::Parameters::MODULATION </td>
-          <td>(</td>
-          <td class="paramtype">-&#160;</td>
-          <td class="paramname"><em>1</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">1&#160;</td>
-          <td class="paramname">, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">0&#160;</td>
-          <td class="paramname">&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+<p class="reference">Referenced by <a class="el" href="_songbird_filter_module_8h_source.html#l00178">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::setMix()</a>.</p>
 
 </div>
 </div>
@@ -259,7 +261,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="reference">Referenced by <a class="el" href="_songbird_filter_module_8h_source.html#l00172">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::setOutputGain()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_songbird_filter_module_8h_source.html#l00187">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::setOutputGain()</a>.</p>
 
 </div>
 </div>
@@ -312,7 +314,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_songbird_filters_parameters_8h_source.html#l00056">56</a> of file <a class="el" href="_songbird_filters_parameters_8h_source.html">SongbirdFiltersParameters.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_songbird_filter_module_8h_source.html#l00364">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::Process1in1out()</a>, and <a class="el" href="_songbird_filter_module_8h_source.html#l00427">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::Process2in2out()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_songbird_filter_module_8h_source.html#l00401">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::Process1in1out()</a>, and <a class="el" href="_songbird_filter_module_8h_source.html#l00465">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::Process2in2out()</a>.</p>
 
 </div>
 </div>
@@ -362,7 +364,7 @@ Variables</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_songbird_filters_parameters_8h_source.html#l00040">40</a> of file <a class="el" href="_songbird_filters_parameters_8h_source.html">SongbirdFiltersParameters.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_songbird_filter_module_8h_source.html#l00317">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::setVowel1()</a>, and <a class="el" href="_songbird_filter_module_8h_source.html#l00326">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::setVowel2()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_songbird_filter_module_8h_source.html#l00350">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::setVowel1()</a>, and <a class="el" href="_songbird_filter_module_8h_source.html#l00359">WECore::Songbird::SongbirdFilterModule&lt; T &gt;::setVowel2()</a>.</p>
 
 </div>
 </div>
