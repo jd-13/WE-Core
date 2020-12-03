@@ -14,9 +14,14 @@ This is a headers only library, to use the DSP classes in your own projects add 
 ## DSP Classes
 The naming convention is that each class is prefixed with the product it was developed for.  
 
+## APIs
+* __ModulationSource__ - provides a standard interface for classes which provide a modulation signal
+* __EffectsProcessor__ - provides a standard interface for classes which do audio processing on mono and
+stereo signals
+
 ### Modulation:  
 * __RichterLFO__ - substantial functionality with tempo sync, phase sync, and multiple wave types and
-parameters
+parameters, can accept a ModulationSource to modulate its parameters
 * __AREnvelopeFollowerSquareLaw__ & __AREnvelopeFollowerFullWave__ - two different attack/release envelope
 follower implementations
 
