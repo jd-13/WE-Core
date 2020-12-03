@@ -26,6 +26,7 @@
 
 #include "MONSTRParameters.h"
 #include "General/CoreMath.h"
+#include "WEFilters/EffectsProcessor.h"
 
 // DSPFilters sets off a lot of clang warnings - disable them for Butterworth.h only
 #ifdef __clang__
@@ -54,22 +55,21 @@ namespace WECore::MONSTR {
     class MONSTRCrossover;
 
     /**
-     * Provides stereo width control of a single frequency range.
+     * Provides processing for single frequency range in a crossover.
      *
      * It is recommended to use this class through the MONSTRCrossover class.
      *
-     * This class contains a highpass and a lowpass filter in series (yes
-     * this is a roundabout way of creating a bandpass but this appeared to
-     * perform better), the passband can then have its stereo width increased
-     * or reduced.
+     * This class contains a highpass and a lowpass filter in series (this is a roundabout way of
+     * creating a bandpass but this appeared to perform better), the passband can then be processed
+     * by a provided EffectsProcessor
      *
      * Internally relies on the parameters provided in MONSTRParameters.h
      *
      * @see MONSTRCrossover
      */
-    template <typename T>
+    template <typename SampleType>
     class MONSTRBand {
-        static_assert(std::is_floating_point<T>::value,
+        static_assert(std::is_floating_point<SampleType>::value,
                 "Must be provided with a floating point template type");
 
     public:
@@ -92,14 +92,10 @@ namespace WECore::MONSTR {
         MONSTRBand(bool newIsLower, bool newIsUpper) :  _isActive(Parameters::BANDSWITCH_DEFAULT),
                                                         _isLower(newIsLower),
                                                         _isUpper(newIsUpper),
-                                                        _width(Parameters::WIDTH.defaultValue),
                                                         _lowCutoffHz(Parameters::CROSSOVERLOWER.defaultValue),
                                                         _highCutoffHz(Parameters::CROSSOVERUPPER.defaultValue),
                                                         _sampleRate(44100),
-                                                        _lowCut1(),
-                                                        _lowCut2(),
-                                                        _highCut1(),
-                                                        _highCut2() {
+                                                        _processor(nullptr) {
             _lowCut1.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
             _lowCut2.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
             _highCut1.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
@@ -109,17 +105,7 @@ namespace WECore::MONSTR {
         virtual ~MONSTRBand() = default;
 
         /**
-         * Sets the stereo width of this band.
-         * Higher value = more width
-         *
-         * @param   val   The frequency in Hz to set the width to
-         *
-         * @see     WIDTH for valid values
-         */
-        void setWidth(double val) { _width = Parameters::WIDTH.BoundsCheck(val); }
-
-        /**
-         * Sets whether this band will modify the stereo width of the signal it receives or not.
+         * Sets whether this band will route audio through the EffectsProcessor.
          *
          * If the band is deactivated filtering will still be performed. This is so that a
          * crossover containing multiple MONSTRBands will always be able easily to sum the
@@ -130,10 +116,6 @@ namespace WECore::MONSTR {
          */
         void setIsActive(bool val) { _isActive = val; }
 
-        /**
-         * @see setWidth
-         */
-        double getWidth() const { return _width; }
 
         /**
          * @see setIsActive
@@ -163,6 +145,11 @@ namespace WECore::MONSTR {
          */
         inline void reset();
 
+        /**
+         * Specifies the processor that this band should pass audio through.
+         */
+        void setEffectsProcessor(std::shared_ptr<EffectsProcessor<SampleType>> processor) { _processor = processor; }
+
         inline void setSampleRate(double newSampleRate);
 
         inline void setLowCutoff(double val);
@@ -182,18 +169,19 @@ namespace WECore::MONSTR {
          * @param[in]    numSamples   Number of samples in the buffer. The left and right buffers
          *                            must be the same size.
          */
-        inline void process2in2out(T* leftSample, T* rightSample, size_t numSamples);
+        inline void process2in2out(SampleType* leftSample, SampleType* rightSample, size_t numSamples);
 
     private:
         bool    _isActive,
                 _isLower,
                 _isUpper;
 
-        double   _width,
-                 _lowCutoffHz,
+        double   _lowCutoffHz,
                  _highCutoffHz;
 
         double _sampleRate;
+
+        std::shared_ptr<EffectsProcessor<SampleType>> _processor;
 
         static constexpr int FILTER_ORDER {2};
 
@@ -202,37 +190,37 @@ namespace WECore::MONSTR {
         Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 2> _highCut1;
         Dsp::SimpleFilter<Dsp::Butterworth::LowPass<FILTER_ORDER>, 2> _highCut2;
 
-        inline void _filterSamples(T* inLeftSamples, T* inRightSamples, int numSamples);
+        inline void _filterSamples(SampleType* inLeftSamples, SampleType* inRightSamples, int numSamples);
     };
 
-    template <typename T>
-    void MONSTRBand<T>::makeBandLower() {
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::makeBandLower() {
         _isLower = true;
         _isUpper = false;
     }
 
-    template <typename T>
-    void MONSTRBand<T>::makeBandMiddle() {
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::makeBandMiddle() {
         _isLower = false;
         _isUpper = false;
     }
 
-    template <typename T>
-    void MONSTRBand<T>::makeBandUpper() {
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::makeBandUpper() {
         _isLower = false;
         _isUpper = true;
     }
 
-    template <typename T>
-    void MONSTRBand<T>::reset() {
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::reset() {
         _lowCut1.reset();
         _lowCut2.reset();
         _highCut1.reset();
         _highCut2.reset();
     }
 
-    template <typename T>
-    void MONSTRBand<T>::setSampleRate(double newSampleRate) {
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::setSampleRate(double newSampleRate) {
         // if the new sample rate is different, recalculate the filter coefficients
         if (!CoreMath::compareFloatsEqual(newSampleRate, _sampleRate)) {
             _sampleRate = newSampleRate;
@@ -241,8 +229,8 @@ namespace WECore::MONSTR {
         }
     }
 
-    template <typename T>
-    void MONSTRBand<T>::setLowCutoff(double val) {
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::setLowCutoff(double val) {
         // if this is the lowest band, then do not cut the low frequencies
         if (!_isLower && !_isUpper) {
             _lowCutoffHz = Parameters::CROSSOVERLOWER.BoundsCheck(val);
@@ -255,8 +243,8 @@ namespace WECore::MONSTR {
         }
     }
 
-    template <typename T>
-    void MONSTRBand<T>::setHighCutoff(double val) {
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::setHighCutoff(double val) {
         // if this is the highest band, then do not cut the high frequencies
         if (!_isLower && !_isUpper) {
             _highCutoffHz = Parameters::CROSSOVERUPPER.BoundsCheck(val);
@@ -269,31 +257,22 @@ namespace WECore::MONSTR {
         }
     }
 
-    template <typename T>
-    void MONSTRBand<T>::process2in2out(T* leftSample, T* rightSample, size_t numSamples) {
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::process2in2out(SampleType* leftSample, SampleType* rightSample, size_t numSamples) {
 
         // Apply the filtering before processing
         _filterSamples(leftSample, rightSample, static_cast<int>(numSamples));
 
         if (_isActive) {
-            // Do the actual stereo widening or narrowing
-            // Based on: http://musicdsp.org/showArchiveComment.php?ArchiveID=256
-            double coef_S {_width * 0.5};
-
-            for (size_t iii {0}; iii < numSamples; iii++) {
-
-                double mid {(leftSample[iii] + rightSample[iii]) * 0.5};
-                double side {(rightSample[iii] - leftSample[iii]) * coef_S};
-
-                leftSample[iii] = mid - side;
-                rightSample[iii] = mid + side;
+            if (_processor != nullptr) {
+                _processor->process2in2out(leftSample, rightSample, numSamples);
             }
         }
     }
 
-    template <typename T>
-    void MONSTRBand<T>::_filterSamples(T* inLeftSamples, T* inRightSamples, int numSamples) {
-        T* channelsArray[2];
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::_filterSamples(SampleType* inLeftSamples, SampleType* inRightSamples, int numSamples) {
+        SampleType* channelsArray[2];
 
         channelsArray[0] = inLeftSamples;
         channelsArray[1] = inRightSamples;
