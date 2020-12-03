@@ -66,9 +66,9 @@ namespace WECore::MONSTR {
          * Makes each band aware of its position, and therefore which of their internal filters
          * they each need to activate.
          */
-        MONSTRCrossover() : band1(true, false),
-                            band2(false, false),
-                            band3(false, true) {
+        MONSTRCrossover() : band1(BandType::LOWER),
+                            band2(BandType::MIDDLE),
+                            band3(BandType::UPPER) {
             setCrossoverLower(Parameters::CROSSOVERLOWER.defaultValue);
             setCrossoverUpper(Parameters::CROSSOVERUPPER.defaultValue);
         }

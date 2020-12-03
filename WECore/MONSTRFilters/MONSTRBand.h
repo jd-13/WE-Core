@@ -55,6 +55,15 @@ namespace WECore::MONSTR {
     class MONSTRCrossover;
 
     /**
+     * Possible types of MONSTRBand needed for a crossover.
+     */
+    enum class BandType {
+        LOWER,
+        MIDDLE,
+        UPPER
+    };
+
+    /**
      * Provides processing for single frequency range in a crossover.
      *
      * It is recommended to use this class through the MONSTRCrossover class.
@@ -81,21 +90,16 @@ namespace WECore::MONSTR {
          *
          * NOTE: The parameters cannot both be true. This will cause undefined behaviour.
          *
-         * @param   newIsLower  If true, this tells the MONSTRBand object it is covering
-         *                      the lowest freqency range in the crossover. This will deactivate
-         *                      its highpass (low cut) filter.
-         * @param   newIsUpper  If true, this tells the MONSTRBand object it is covering
-         *                      the highest freqency range in the crossover. This will deactivate
-         *                      its lowpass (high cut) filter.
+         * @param[in]   bandType    Tells the band whether it is at either end of the crossover or
+         *                          in the middle.
          *
          */
-        MONSTRBand(bool newIsLower, bool newIsUpper) :  _isActive(Parameters::BANDSWITCH_DEFAULT),
-                                                        _isLower(newIsLower),
-                                                        _isUpper(newIsUpper),
-                                                        _lowCutoffHz(Parameters::CROSSOVERLOWER.defaultValue),
-                                                        _highCutoffHz(Parameters::CROSSOVERUPPER.defaultValue),
-                                                        _sampleRate(44100),
-                                                        _processor(nullptr) {
+        MONSTRBand(BandType bandType) : _bandType(bandType),
+                                        _isActive(Parameters::BANDSWITCH_DEFAULT),
+                                        _lowCutoffHz(Parameters::CROSSOVERLOWER.defaultValue),
+                                        _highCutoffHz(Parameters::CROSSOVERUPPER.defaultValue),
+                                        _sampleRate(44100),
+                                        _processor(nullptr) {
             _lowCut1.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
             _lowCut2.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
             _highCut1.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
@@ -116,49 +120,30 @@ namespace WECore::MONSTR {
          */
         void setIsActive(bool val) { _isActive = val; }
 
-
-        /**
-         * @see setIsActive
-         */
-        bool getIsActive() const { return _isActive; }
-
-        /**
-         * Lets the band know if it covers the lowest frequencies, so will apply only a high cut
-         * filter.
-         */
-        inline void makeBandLower();
-
-        /**
-         * Lets the band know if it covers the middle frequencies, so will apply both a low and
-         * high cut filter.
-         */
-        inline void makeBandMiddle();
-
-        /**
-         * Lets the band know if it covers the highest frequencies, so will apply only a low cut
-         * filter.
-         */
-        inline void makeBandUpper();
-
-        /**
-         * Resets filter states. Call before beginning a new buffer of samples.
-         */
-        inline void reset();
-
-        /**
-         * Specifies the processor that this band should pass audio through.
-         */
-        void setEffectsProcessor(std::shared_ptr<EffectsProcessor<SampleType>> processor) { _processor = processor; }
-
         inline void setSampleRate(double newSampleRate);
 
         inline void setLowCutoff(double val);
 
         inline void setHighCutoff(double val);
 
+        /**
+         * Specifies the processor that this band should pass audio through.
+         */
+        void setEffectsProcessor(std::shared_ptr<EffectsProcessor<SampleType>> processor) { _processor = processor; }
+
+        /**
+         * @see setIsActive
+         */
+        bool getIsActive() const { return _isActive; }
+
         double getLowCutoff() const { return _lowCutoffHz; }
 
         double getHighCutoff() const { return _highCutoffHz; }
+
+        /**
+         * Resets filter states. Call before beginning a new buffer of samples.
+         */
+        inline void reset();
 
         /**
          * Performs the effect processing on leftSample and rightSample. Use for
@@ -172,9 +157,9 @@ namespace WECore::MONSTR {
         inline void process2in2out(SampleType* leftSample, SampleType* rightSample, size_t numSamples);
 
     private:
-        bool    _isActive,
-                _isLower,
-                _isUpper;
+        BandType _bandType;
+
+        bool _isActive;
 
         double   _lowCutoffHz,
                  _highCutoffHz;
@@ -192,24 +177,6 @@ namespace WECore::MONSTR {
 
         inline void _filterSamples(SampleType* inLeftSamples, SampleType* inRightSamples, int numSamples);
     };
-
-    template <typename SampleType>
-    void MONSTRBand<SampleType>::makeBandLower() {
-        _isLower = true;
-        _isUpper = false;
-    }
-
-    template <typename SampleType>
-    void MONSTRBand<SampleType>::makeBandMiddle() {
-        _isLower = false;
-        _isUpper = false;
-    }
-
-    template <typename SampleType>
-    void MONSTRBand<SampleType>::makeBandUpper() {
-        _isLower = false;
-        _isUpper = true;
-    }
 
     template <typename SampleType>
     void MONSTRBand<SampleType>::reset() {
@@ -232,11 +199,11 @@ namespace WECore::MONSTR {
     template <typename SampleType>
     void MONSTRBand<SampleType>::setLowCutoff(double val) {
         // if this is the lowest band, then do not cut the low frequencies
-        if (!_isLower && !_isUpper) {
+        if (_bandType == BandType::MIDDLE) {
             _lowCutoffHz = Parameters::CROSSOVERLOWER.BoundsCheck(val);
             _lowCut1.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
             _lowCut2.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
-        } else if (_isUpper) {
+        } else if (_bandType == BandType::UPPER) {
             _lowCutoffHz = Parameters::CROSSOVERUPPER.BoundsCheck(val);
             _lowCut1.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
             _lowCut2.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
@@ -246,11 +213,11 @@ namespace WECore::MONSTR {
     template <typename SampleType>
     void MONSTRBand<SampleType>::setHighCutoff(double val) {
         // if this is the highest band, then do not cut the high frequencies
-        if (!_isLower && !_isUpper) {
+        if (_bandType == BandType::MIDDLE) {
             _highCutoffHz = Parameters::CROSSOVERUPPER.BoundsCheck(val);
             _highCut1.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
             _highCut2.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
-        } else if (_isLower) {
+        } else if (_bandType == BandType::LOWER) {
             _highCutoffHz = Parameters::CROSSOVERLOWER.BoundsCheck(val);
             _highCut1.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
             _highCut2.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
@@ -277,10 +244,10 @@ namespace WECore::MONSTR {
         channelsArray[0] = inLeftSamples;
         channelsArray[1] = inRightSamples;
 
-        if (_isLower) {
+        if (_bandType == BandType::LOWER) {
             _highCut1.process(numSamples, channelsArray);
             _highCut2.process(numSamples, channelsArray);
-        } else if (_isUpper) {
+        } else if (_bandType == BandType::UPPER) {
             _lowCut1.process(numSamples, channelsArray);
             _lowCut2.process(numSamples, channelsArray);
         } else {
