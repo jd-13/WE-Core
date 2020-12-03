@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['routing_1040',['Routing',['../namespace_w_e_core.html#aa9007dffa0a50c684b4d1274b9027dff',1,'WECore']]]
+  ['channels_1035',['Channels',['../namespace_w_e_core_1_1_songbird.html#a283483b9d6f7ab451c4e5391611a70da',1,'WECore::Songbird']]],
+  ['colourids_1036',['ColourIds',['../class_w_e_core_1_1_richter_1_1_wave_viewer.html#a77db56f053d1664f9c6fc407f40ca19d',1,'WECore::Richter::WaveViewer']]]
 ];

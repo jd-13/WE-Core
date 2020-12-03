@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['channels_1038',['Channels',['../namespace_w_e_core_1_1_songbird.html#a283483b9d6f7ab451c4e5391611a70da',1,'WECore::Songbird']]],
-  ['colourids_1039',['ColourIds',['../class_w_e_core_1_1_richter_1_1_wave_viewer.html#a77db56f053d1664f9c6fc407f40ca19d',1,'WECore::Richter::WaveViewer']]]
+  ['bandtype_1034',['BandType',['../namespace_w_e_core_1_1_m_o_n_s_t_r.html#aa3dd0c471f30fc720d9d0e181cb03992',1,'WECore::MONSTR']]]
 ];
