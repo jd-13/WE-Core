@@ -32,9 +32,9 @@ namespace WECore {
      * This interface only defines how to get output from the modulation source and reset it, and
      * say nothing about setting its parameters, sample rate, etc as these will vary.
      */
-    template <typename T>
+    template <typename SampleType>
     class ModulationSource {
-        static_assert(std::is_floating_point<T>::value,
+        static_assert(std::is_floating_point<SampleType>::value,
                       "Must be provided with a floating point template type");
 
     public:
@@ -45,12 +45,12 @@ namespace WECore {
          * Given the provided audio sample, calculates the next output value and advances the
          * internal state (if applicable).
          */
-        inline T getNextOutput(T inSample);
+        inline SampleType getNextOutput(SampleType inSample);
 
         /**
          * Returns the most recent output of getNextOutput without advancing the internal state.
          */
-        T getLastOutput() const { return _cachedOutput; }
+        SampleType getLastOutput() const { return _cachedOutput; }
 
         /**
          * Resets the internal state of the modulation source.
@@ -58,7 +58,7 @@ namespace WECore {
         inline void reset();
 
     private:
-        T _cachedOutput;
+        SampleType _cachedOutput;
 
         /**
          * Must be overriden by the inheriting class to provide the specific implementation of this
@@ -66,7 +66,7 @@ namespace WECore {
          *
          * The implementation may or may not need to use the provided audio sample.
          */
-        virtual T _getNextOutputImpl(T inSample) = 0;
+        virtual SampleType _getNextOutputImpl(SampleType inSample) = 0;
 
         /**
          * Must be overriden by the inheriting class to reset the internat state as required.
@@ -74,14 +74,14 @@ namespace WECore {
         virtual void _resetImpl() = 0;
     };
 
-    template <typename T>
-    T ModulationSource<T>::getNextOutput(T inSample) {
+    template <typename SampleType>
+    SampleType ModulationSource<SampleType>::getNextOutput(SampleType inSample) {
         _cachedOutput = _getNextOutputImpl(inSample);
         return _cachedOutput;
     }
 
-    template <typename T>
-    void ModulationSource<T>::reset() {
+    template <typename SampleType>
+    void ModulationSource<SampleType>::reset() {
         _resetImpl();
         _cachedOutput = 0;
     }
