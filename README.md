@@ -14,9 +14,11 @@ This is a headers only library, to use the DSP classes in your own projects add 
 ## DSP Classes
 The naming convention is that each class is prefixed with the product it was developed for.  
 
-### LFOs:  
-* __RichterLFO__ and __RichterMOD__ - substantial functionality with tempo sync, and multiple wave types and
-parameters  
+### Modulation:  
+* __RichterLFO__ - substantial functionality with tempo sync, phase sync, and multiple wave types and
+parameters
+* __AREnvelopeFollowerSquareLaw__ & __AREnvelopeFollowerFullWave__ - two different attack/release envelope
+follower implementations
 
 ### Filters:  
 * __CarveNoiseFilter__ - a simple filter to remove noise at the extremes of human hearing  
@@ -24,14 +26,15 @@ parameters
 * __SongbirdFilterModule__ - Contains two SongbirdFormantFilters which can be blended between, with
 multiple supported vowel sounds built in  
 * __TPTSVFilter__ - Topology preserving filter, configurable as high pass, low pass, or peak  
+* __MONSTRCrossover__ - A crossover filter made of several MONSTRBand units which can be provided with an
+EffectsProcessor to do any form of audio processing on that band
 
-### Distortions:  
+### Distortion:  
 * __CarveDSPUnit__ - A waveshaping distortion module with multiple wave shapes, pre and post gain control,
 and a "tweak" control which morphs the selected wave shape  
 
 ### Stereo Processing:  
-* __MONSTRCrossover__ - A crossover filter made of several MONSTRBand units. Uses the MONSTRBand units to
-provide multiband stereo width control 
+* __StereoWidthProcessor__ - Enables narrowing or widening of the stereo image
 
 ## Documentation  
 Documentation is available at: https://jd-13.github.io/WE-Core/
