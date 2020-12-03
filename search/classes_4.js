@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['groupcomponentv2_501',['GroupComponentV2',['../class_w_e_core_1_1_look_and_feel_mixins_1_1_group_component_v2.html',1,'WECore::LookAndFeelMixins']]]
+  ['formant_518',['Formant',['../class_w_e_core_1_1_songbird_1_1_formant.html',1,'WECore::Songbird']]]
 ];

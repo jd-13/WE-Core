@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['formant_2eh_562',['Formant.h',['../_formant_8h.html',1,'']]]
+  ['effectsprocessor_2eh_583',['EffectsProcessor.h',['../_effects_processor_8h.html',1,'']]]
 ];

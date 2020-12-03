@@ -34,6 +34,9 @@ var hierarchy =
     [ "Component", null, [
       [ "WECore::Richter::WaveViewer", "class_w_e_core_1_1_richter_1_1_wave_viewer.html", null ]
     ] ],
+    [ "WECore::EffectsProcessor< SampleType >", "class_w_e_core_1_1_effects_processor.html", [
+      [ "WECore::StereoWidth::StereoWidthProcessor< SampleType >", "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html", null ]
+    ] ],
     [ "WECore::Songbird::Formant", "class_w_e_core_1_1_songbird_1_1_formant.html", null ],
     [ "Listener", null, [
       [ "WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html", null ]
@@ -41,7 +44,7 @@ var hierarchy =
     [ "LookAndFeel_V2", null, [
       [ "WECore::JUCEPlugin::CoreLookAndFeel", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html", null ]
     ] ],
-    [ "WECore::ModulationSource< T >", "class_w_e_core_1_1_modulation_source.html", null ],
+    [ "WECore::ModulationSource< SampleType >", "class_w_e_core_1_1_modulation_source.html", null ],
     [ "WECore::ModulationSource< double >", "class_w_e_core_1_1_modulation_source.html", [
       [ "WECore::AREnv::AREnvelopeFollowerBase", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html", [
         [ "WECore::AREnv::AREnvelopeFollowerFullWave", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_full_wave.html", null ],
@@ -50,6 +53,7 @@ var hierarchy =
       [ "WECore::Richter::RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html", null ],
       [ "WECore::Richter::RichterLFOPair", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html", null ]
     ] ],
+    [ "WECore::MONSTR::MONSTRBand< SampleType >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", null ],
     [ "WECore::MONSTR::MONSTRBand< T >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", null ],
     [ "WECore::MONSTR::MONSTRCrossover< T >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", null ],
     [ "WECore::Carve::NoiseFilter< T >", "class_w_e_core_1_1_carve_1_1_noise_filter.html", null ],

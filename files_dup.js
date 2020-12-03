@@ -41,6 +41,7 @@ var files_dup =
     ] ],
     [ "DSPUnitParameterTests.cpp", "_d_s_p_unit_parameter_tests_8cpp.html", "_d_s_p_unit_parameter_tests_8cpp" ],
     [ "DSPUnitProcessingTests.cpp", "_d_s_p_unit_processing_tests_8cpp.html", "_d_s_p_unit_processing_tests_8cpp" ],
+    [ "EffectsProcessor.h", "_effects_processor_8h.html", "_effects_processor_8h" ],
     [ "Formant.h", "_formant_8h.html", [
       [ "Formant", "class_w_e_core_1_1_songbird_1_1_formant.html", "class_w_e_core_1_1_songbird_1_1_formant" ]
     ] ],
@@ -94,6 +95,10 @@ var files_dup =
     [ "SongbirdFormantFilter.h", "_songbird_formant_filter_8h.html", [
       [ "SongbirdFormantFilter", "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html", "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter" ]
     ] ],
+    [ "StereoWidthProcessor.h", "_stereo_width_processor_8h.html", [
+      [ "StereoWidthProcessor", "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html", "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor" ]
+    ] ],
+    [ "StereoWidthProcessorParameters.h", "_stereo_width_processor_parameters_8h.html", "_stereo_width_processor_parameters_8h" ],
     [ "CarveDSP/Tests/TestData.h", "_carve_d_s_p_2_tests_2_test_data_8h.html", "_carve_d_s_p_2_tests_2_test_data_8h" ],
     [ "MONSTRFilters/Tests/TestData.h", "_m_o_n_s_t_r_filters_2_tests_2_test_data_8h.html", "_m_o_n_s_t_r_filters_2_tests_2_test_data_8h" ],
     [ "SongbirdFilters/Tests/TestData.h", "_songbird_filters_2_tests_2_test_data_8h.html", "_songbird_filters_2_tests_2_test_data_8h" ],

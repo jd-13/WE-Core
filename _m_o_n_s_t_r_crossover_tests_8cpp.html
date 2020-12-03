@@ -87,10 +87,12 @@ $(document).ready(function(){initNavTree('_m_o_n_s_t_r_crossover_tests_8cpp.html
 <div class="title">MONSTRCrossoverTests.cpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &quot;catch.hpp&quot;</code><br />
+<div class="textblock"><code>#include &lt;memory&gt;</code><br />
+<code>#include &quot;catch.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html">MONSTRFilters/MONSTRCrossover.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_core_math_8h_source.html">General/CoreMath.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="_m_o_n_s_t_r_filters_2_tests_2_test_data_8h_source.html">MONSTRFilters/Tests/TestData.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="_stereo_width_processor_8h_source.html">WEFilters/StereoWidthProcessor.h</a>&quot;</code><br />
 </div>
 <p><a href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -102,60 +104,12 @@ Functions</h2></td></tr>
 <tr class="separator:a9cc414a254badf7c4946de05c23f5389"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a52ba6c29b445b5aee95f078d2700de07"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp.html#a52ba6c29b445b5aee95f078d2700de07">SCENARIO</a> (&quot;MONSTRCrossover: Silence in = silence out&quot;)</td></tr>
 <tr class="separator:a52ba6c29b445b5aee95f078d2700de07"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0f3df1689a1c0c74163c332b80078888"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp.html#a0f3df1689a1c0c74163c332b80078888">SCENARIO</a> (&quot;MONSTRCrossover: All bands widened&quot;)</td></tr>
-<tr class="separator:a0f3df1689a1c0c74163c332b80078888"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f3b4c0a00415faef7c1f149347d4507"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp.html#a3f3b4c0a00415faef7c1f149347d4507">SCENARIO</a> (&quot;MONSTRCrossover: All bands narrowed&quot;)</td></tr>
-<tr class="separator:a3f3b4c0a00415faef7c1f149347d4507"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5bcd48d623700747e709567358a76a5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp.html#af5bcd48d623700747e709567358a76a5">SCENARIO</a> (&quot;MONSTRCrossover: Small buffer&quot;)</td></tr>
 <tr class="separator:af5bcd48d623700747e709567358a76a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a3f3b4c0a00415faef7c1f149347d4507"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3f3b4c0a00415faef7c1f149347d4507">&#9670;&nbsp;</a></span>SCENARIO() <span class="overload">[1/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">SCENARIO </td>
-          <td>(</td>
-          <td class="paramtype">&quot;MONSTRCrossover: All bands narrowed&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html#l00222">222</a> of file <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html">MONSTRCrossoverTests.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00058">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band1</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00062">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band2</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00063">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band3</a>, <a class="el" href="_m_o_n_s_t_r_filters_2_tests_2_test_data_8h_source.html#l00029">TestData::MONSTR::Data</a>, and <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00151">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::Process2in2out()</a>.</p>
-
-</div>
-</div>
-<a id="a0f3df1689a1c0c74163c332b80078888"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0f3df1689a1c0c74163c332b80078888">&#9670;&nbsp;</a></span>SCENARIO() <span class="overload">[2/6]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">SCENARIO </td>
-          <td>(</td>
-          <td class="paramtype">&quot;MONSTRCrossover: All bands widened&quot;&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html#l00179">179</a> of file <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html">MONSTRCrossoverTests.cpp</a>.</p>
-
-<p class="reference">References <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00058">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band1</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00062">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band2</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00063">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band3</a>, <a class="el" href="_m_o_n_s_t_r_filters_2_tests_2_test_data_8h_source.html#l00029">TestData::MONSTR::Data</a>, and <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00151">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::Process2in2out()</a>.</p>
-
-</div>
-</div>
 <a id="a47008c63e4ebd3bab82e436763be0f6d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a47008c63e4ebd3bab82e436763be0f6d">&#9670;&nbsp;</a></span>SCENARIO() <span class="overload">[3/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a47008c63e4ebd3bab82e436763be0f6d">&#9670;&nbsp;</a></span>SCENARIO() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -170,14 +124,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html#l00029">29</a> of file <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html">MONSTRCrossoverTests.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html#l00032">32</a> of file <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html">MONSTRCrossoverTests.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00058">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band1</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00062">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band2</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00063">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band3</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00114">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::getCrossoverLower()</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00123">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::getCrossoverUpper()</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00195">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::setCrossoverLower()</a>, and <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00202">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::setCrossoverUpper()</a>.</p>
+<p class="reference">References <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00058">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band1</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00062">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band2</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00114">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::getCrossoverLower()</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00123">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::getCrossoverUpper()</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00195">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::setCrossoverLower()</a>, and <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00202">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::setCrossoverUpper()</a>.</p>
 
 </div>
 </div>
 <a id="a9cc414a254badf7c4946de05c23f5389"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9cc414a254badf7c4946de05c23f5389">&#9670;&nbsp;</a></span>SCENARIO() <span class="overload">[4/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cc414a254badf7c4946de05c23f5389">&#9670;&nbsp;</a></span>SCENARIO() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -192,14 +146,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html#l00067">67</a> of file <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html">MONSTRCrossoverTests.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html#l00063">63</a> of file <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html">MONSTRCrossoverTests.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00058">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band1</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00114">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::getCrossoverLower()</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00123">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::getCrossoverUpper()</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00195">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::setCrossoverLower()</a>, and <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00202">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::setCrossoverUpper()</a>.</p>
+<p class="reference">References <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00114">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::getCrossoverLower()</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00123">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::getCrossoverUpper()</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00195">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::setCrossoverLower()</a>, and <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00202">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::setCrossoverUpper()</a>.</p>
 
 </div>
 </div>
 <a id="a52ba6c29b445b5aee95f078d2700de07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a52ba6c29b445b5aee95f078d2700de07">&#9670;&nbsp;</a></span>SCENARIO() <span class="overload">[5/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a52ba6c29b445b5aee95f078d2700de07">&#9670;&nbsp;</a></span>SCENARIO() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -213,14 +167,14 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html#l00098">98</a> of file <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html">MONSTRCrossoverTests.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html#l00089">89</a> of file <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html">MONSTRCrossoverTests.cpp</a>.</p>
 
-<p class="reference">References <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00151">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::Process2in2out()</a>.</p>
+<p class="reference">References <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00058">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band1</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00062">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band2</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00063">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band3</a>, and <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00151">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::Process2in2out()</a>.</p>
 
 </div>
 </div>
 <a id="af5bcd48d623700747e709567358a76a5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5bcd48d623700747e709567358a76a5">&#9670;&nbsp;</a></span>SCENARIO() <span class="overload">[6/6]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#af5bcd48d623700747e709567358a76a5">&#9670;&nbsp;</a></span>SCENARIO() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -235,7 +189,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html#l00265">265</a> of file <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html">MONSTRCrossoverTests.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html#l00176">176</a> of file <a class="el" href="_m_o_n_s_t_r_crossover_tests_8cpp_source.html">MONSTRCrossoverTests.cpp</a>.</p>
 
 <p class="reference">References <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00058">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band1</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00062">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band2</a>, <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00063">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::band3</a>, <a class="el" href="_m_o_n_s_t_r_filters_2_tests_2_test_data_8h_source.html#l00029">TestData::MONSTR::Data</a>, and <a class="el" href="_m_o_n_s_t_r_crossover_8h_source.html#l00151">WECore::MONSTR::MONSTRCrossover&lt; T &gt;::Process2in2out()</a>.</p>
 

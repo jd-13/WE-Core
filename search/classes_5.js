@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['labelreadoutslider_502',['LabelReadoutSlider',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html',1,'WECore::JUCEPlugin']]]
+  ['groupcomponentv2_519',['GroupComponentV2',['../class_w_e_core_1_1_look_and_feel_mixins_1_1_group_component_v2.html',1,'WECore::LookAndFeelMixins']]]
 ];

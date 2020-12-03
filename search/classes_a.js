@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['sliderlabelupdater_518',['SliderLabelUpdater',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html',1,'WECore::JUCEPlugin']]],
-  ['songbirdfiltermodule_519',['SongbirdFilterModule',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html',1,'WECore::Songbird']]],
-  ['songbirdformantfilter_520',['SongbirdFormantFilter',['../class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html',1,'WECore::Songbird']]]
+  ['rangedparameter_533',['RangedParameter',['../class_parameter_definition_1_1_ranged_parameter.html',1,'ParameterDefinition']]],
+  ['richterlfo_534',['RichterLFO',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html',1,'WECore::Richter']]],
+  ['richterlfopair_535',['RichterLFOPair',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html',1,'WECore::Richter']]],
+  ['rotarysliderv2_536',['RotarySliderV2',['../class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2.html',1,'WECore::LookAndFeelMixins']]]
 ];
