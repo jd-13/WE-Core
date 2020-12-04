@@ -24,6 +24,7 @@
 
 #pragma once
 
+#include <memory>
 #include "MONSTRParameters.h"
 #include "General/CoreMath.h"
 #include "WEFilters/EffectsProcessor.h"
