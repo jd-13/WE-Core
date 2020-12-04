@@ -1,9 +1,9 @@
 /*
- *  File:       AREnveloperFollowerParameters.h
+ *  File:       StereoWidthProcessorParameters.h
  *
  *  Version:    1.0.0
  *
- *  Created:    07/05/2017
+ *  Created:    03/12/2020
  *
  *	This file is part of WECore.
  *
