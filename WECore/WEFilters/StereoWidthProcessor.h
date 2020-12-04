@@ -23,6 +23,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include "EffectsProcessor.h"
 #include "StereoWidthProcessorParameters.h"
 
