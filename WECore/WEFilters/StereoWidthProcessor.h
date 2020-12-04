@@ -61,7 +61,7 @@ namespace WECore::StereoWidth {
                                            SampleType* inSamplesRight,
                                            size_t numSamples) override;
 
-        inline virtual std::vector<Routing> getSupportedRoutings() const override;
+        inline virtual std::vector<EffectsRouting> getSupportedRoutings() const override;
 
     private:
         double _width;
@@ -83,9 +83,9 @@ namespace WECore::StereoWidth {
     }
 
     template <typename SampleType>
-    std::vector<Routing> StereoWidthProcessor<SampleType>::getSupportedRoutings() const {
-        return std::vector<Routing>({
-            WECore::Routing::IN2_OUT2
+    std::vector<EffectsRouting> StereoWidthProcessor<SampleType>::getSupportedRoutings() const {
+        return std::vector<EffectsRouting>({
+            WECore::EffectsRouting::IN2_OUT2
         });
     }
 }

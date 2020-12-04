@@ -31,7 +31,7 @@ namespace WECore {
     /**
      * Represents the possible routing configurations a processor might support.
      */
-    enum class Routing {
+    enum class EffectsRouting {
         IN1_OUT1,
         IN1_OUT2,
         IN2_OUT2
@@ -53,7 +53,7 @@ namespace WECore {
          * Override these as required by the processor.
          *
          * Any combination can be overidden, but getSupportedRoutings must also be implemented to
-         * return a matching vector of Routing enums.
+         * return a matching vector of EffectsRouting enums.
          */
         virtual void process1in1out(SampleType* /*inSamples*/, size_t /*numSamples*/) { assert(false); }
         virtual void process1in2out(SampleType* /*inSamplesLeft*/, SampleType* /*inSamplesRight*/, size_t /*numSamples*/) { assert(false); }
@@ -64,7 +64,7 @@ namespace WECore {
          *
          * Override this to return the correct routings.
          */
-        inline virtual std::vector<Routing> getSupportedRoutings() const = 0;
+        inline virtual std::vector<EffectsRouting> getSupportedRoutings() const = 0;
 
         /**
          * Resets the internal state of the processor.
