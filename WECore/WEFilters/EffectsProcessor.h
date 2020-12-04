@@ -23,8 +23,8 @@
 
 #pragma once
 
+#include <cassert>
 #include <unordered_map>
-
 namespace WECore {
 
     /**
