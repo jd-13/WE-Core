@@ -25,6 +25,7 @@
 
 #include <cassert>
 #include <unordered_map>
+#include <vector>
 namespace WECore {
 
     /**
