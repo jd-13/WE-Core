@@ -38,8 +38,8 @@ RUN wget http://www.steinberg.net/sdk_downloads/vstsdk367_03_03_2017_build_352.z
 RUN unzip vstsdk367_03_03_2017_build_352.zip -d /home
 
 # JUCE SDK
-RUN wget https://github.com/juce-framework/JUCE/releases/download/6.0.4/juce-6.0.4-linux.zip
-RUN unzip juce-6.0.4-linux.zip -d /home
+RUN wget https://github.com/juce-framework/JUCE/releases/download/6.0.5/juce-6.0.5-linux.zip
+RUN unzip juce-6.0.5-linux.zip -d /home
 ENV JUCE_PATH /home/JUCE
 
 # Pluginval
