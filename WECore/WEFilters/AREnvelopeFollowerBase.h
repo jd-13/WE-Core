@@ -32,8 +32,8 @@ namespace WECore::AREnv {
      */
     class AREnvelopeFollowerBase : public ModulationSource<double> {
     public:
-        AREnvelopeFollowerBase() : _attackTimeMs(WECore::AREnv::Parameters::ATTACK_MS.defaultValue),
-                                   _releaseTimeMs(WECore::AREnv::Parameters::RELEASE_MS.defaultValue) {
+        AREnvelopeFollowerBase() : _attackTimeMs(Parameters::ATTACK_MS.defaultValue),
+                                   _releaseTimeMs(Parameters::RELEASE_MS.defaultValue) {
             // call this here rather than setting it in initialiser list so that the coefficients get
             // setup
             reset();
