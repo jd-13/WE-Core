@@ -97,9 +97,11 @@ var files_dup =
       [ "StereoWidthProcessor", "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html", "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor" ]
     ] ],
     [ "StereoWidthProcessorParameters.h", "_stereo_width_processor_parameters_8h.html", "_stereo_width_processor_parameters_8h" ],
+    [ "StereoWidthProcessorTests.cpp", "_stereo_width_processor_tests_8cpp.html", "_stereo_width_processor_tests_8cpp" ],
     [ "CarveDSP/Tests/TestData.h", "_carve_d_s_p_2_tests_2_test_data_8h.html", "_carve_d_s_p_2_tests_2_test_data_8h" ],
     [ "MONSTRFilters/Tests/TestData.h", "_m_o_n_s_t_r_filters_2_tests_2_test_data_8h.html", "_m_o_n_s_t_r_filters_2_tests_2_test_data_8h" ],
     [ "SongbirdFilters/Tests/TestData.h", "_songbird_filters_2_tests_2_test_data_8h.html", "_songbird_filters_2_tests_2_test_data_8h" ],
+    [ "TestUtils.h", "_test_utils_8h.html", "_test_utils_8h" ],
     [ "TPTSVFilter.h", "_t_p_t_s_v_filter_8h.html", [
       [ "TPTSVFilter", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter" ]
     ] ],

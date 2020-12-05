@@ -112,8 +112,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:abf8f11e09c408a7290cf98abdeeeafa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab8473e70904d371ffb23a8b27748708b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_effects_processor.html#ab8473e70904d371ffb23a8b27748708b">process2in2out</a> (SampleType *, SampleType *, size_t)</td></tr>
 <tr class="separator:ab8473e70904d371ffb23a8b27748708b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab82b50087df1463b73f06422832aadd5"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="namespace_w_e_core.html#aa9007dffa0a50c684b4d1274b9027dff">Routing</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_effects_processor.html#ab82b50087df1463b73f06422832aadd5">getSupportedRoutings</a> () const =0</td></tr>
-<tr class="separator:ab82b50087df1463b73f06422832aadd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af372e488a081bb0d61fcd830f9c17d29"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="namespace_w_e_core.html#a34aea9560d61ca1abba5993dd1c983c3">EffectsRouting</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_effects_processor.html#af372e488a081bb0d61fcd830f9c17d29">getSupportedRoutings</a> () const =0</td></tr>
+<tr class="separator:af372e488a081bb0d61fcd830f9c17d29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ed9197b193a81a60b20f0601248aedd"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_effects_processor.html#a5ed9197b193a81a60b20f0601248aedd">reset</a> ()</td></tr>
 <tr class="separator:a5ed9197b193a81a60b20f0601248aedd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -180,8 +180,8 @@ template&lt;typename SampleType &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ab82b50087df1463b73f06422832aadd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab82b50087df1463b73f06422832aadd5">&#9670;&nbsp;</a></span>getSupportedRoutings()</h2>
+<a id="af372e488a081bb0d61fcd830f9c17d29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af372e488a081bb0d61fcd830f9c17d29">&#9670;&nbsp;</a></span>getSupportedRoutings()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -192,7 +192,7 @@ template&lt;typename SampleType &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">virtual std::vector&lt;<a class="el" href="namespace_w_e_core.html#aa9007dffa0a50c684b4d1274b9027dff">Routing</a>&gt; <a class="el" href="class_w_e_core_1_1_effects_processor.html">WECore::EffectsProcessor</a>&lt; SampleType &gt;::getSupportedRoutings </td>
+          <td class="memname">virtual std::vector&lt;<a class="el" href="namespace_w_e_core.html#a34aea9560d61ca1abba5993dd1c983c3">EffectsRouting</a>&gt; <a class="el" href="class_w_e_core_1_1_effects_processor.html">WECore::EffectsProcessor</a>&lt; SampleType &gt;::getSupportedRoutings </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -207,7 +207,7 @@ template&lt;typename SampleType &gt; </div>
 <p>Returns the routings that are implemented by this processor.</p>
 <p>Override this to return the correct routings. </p>
 
-<p>Implemented in <a class="el" href="class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#a64e975db81958781abdd6049e32c3d01">WECore::StereoWidth::StereoWidthProcessor&lt; SampleType &gt;</a>.</p>
+<p>Implemented in <a class="el" href="class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#af0a7e9d29be9cb2cbd504def7a881842">WECore::StereoWidth::StereoWidthProcessor&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -247,7 +247,7 @@ template&lt;typename SampleType &gt; </div>
 </table>
 </div><div class="memdoc">
 <p>Override these as required by the processor.</p>
-<p>Any combination can be overidden, but getSupportedRoutings must also be implemented to return a matching vector of Routing enums. </p>
+<p>Any combination can be overidden, but getSupportedRoutings must also be implemented to return a matching vector of EffectsRouting enums. </p>
 
 <p class="definition">Definition at line <a class="el" href="_effects_processor_8h_source.html#l00058">58</a> of file <a class="el" href="_effects_processor_8h_source.html">EffectsProcessor.h</a>.</p>
 
