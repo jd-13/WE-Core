@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['labelreadoutslider_737',['LabelReadoutSlider',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html#a6e228e220ca4b92f90ad1b4430552777',1,'WECore::JUCEPlugin::LabelReadoutSlider']]],
-  ['lineartodb_738',['linearTodB',['../namespace_core_math.html#aa78a4f599d61d8e38085c2417709db48',1,'CoreMath']]]
+  ['knee_5fwidth_786',['KNEE_WIDTH',['../namespace_w_e_core_1_1_simple_compressor_1_1_parameters.html#a4b33f7329296e7c655dd24e36d3d7d76',1,'WECore::SimpleCompressor::Parameters']]]
 ];

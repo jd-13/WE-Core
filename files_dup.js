@@ -87,6 +87,9 @@ var files_dup =
     [ "RotarySliderV2.h", "_rotary_slider_v2_8h.html", [
       [ "RotarySliderV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2" ]
     ] ],
+    [ "SimpleCompressor.h", "_simple_compressor_8h.html", "_simple_compressor_8h" ],
+    [ "SimpleCompressorParameters.h", "_simple_compressor_parameters_8h.html", "_simple_compressor_parameters_8h" ],
+    [ "SimpleCompressorTests.cpp", "_simple_compressor_tests_8cpp.html", "_simple_compressor_tests_8cpp" ],
     [ "SongbirdFilterModule.h", "_songbird_filter_module_8h.html", "_songbird_filter_module_8h" ],
     [ "SongbirdFilterModuleTests.cpp", "_songbird_filter_module_tests_8cpp.html", "_songbird_filter_module_tests_8cpp" ],
     [ "SongbirdFiltersParameters.h", "_songbird_filters_parameters_8h.html", "_songbird_filters_parameters_8h" ],

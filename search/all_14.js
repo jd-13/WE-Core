@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['vowel_455',['Vowel',['../namespace_w_e_core_1_1_songbird.html#a3a3ef6451fa968c851e21391558ef016',1,'WECore::Songbird::Vowel()'],['../namespace_w_e_core_1_1_songbird_1_1_parameters.html#a4426102c5467f146719ddeb0137f3009',1,'WECore::Songbird::Parameters::VOWEL()']]],
-  ['vowel_5fa_456',['VOWEL_A',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#afd699d949179341df342101bd60913be',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowel_5fe_457',['VOWEL_E',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a2e250d46e05e3f4d3bd8fbc41f77b8c6',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowel_5fi_458',['VOWEL_I',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a7e7b93324b8888cb91c687a0c93a615e',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowel_5fo_459',['VOWEL_O',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#af3a55a94f872f08fb4f8b1e115e29c1d',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowel_5fu_460',['VOWEL_U',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#ac727a655b71d33afae056f13c8c6c29b',1,'WECore::Songbird::Parameters::VowelParameter']]],
-  ['vowelparameter_461',['VowelParameter',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html',1,'WECore::Songbird::Parameters::VowelParameter'],['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a499a67bea77069d2c97f70caf76a1e24',1,'WECore::Songbird::Parameters::VowelParameter::VowelParameter()']]]
+  ['updatechecker_484',['UpdateChecker',['../class_update_checker.html',1,'UpdateChecker'],['../class_update_checker.html#a9957cdd090fe1c06b94df450fe1a9169',1,'UpdateChecker::UpdateChecker()']]],
+  ['updatechecker_2eh_485',['UpdateChecker.h',['../_update_checker_8h.html',1,'']]],
+  ['upper_486',['UPPER',['../namespace_w_e_core_1_1_m_o_n_s_t_r.html#aa3dd0c471f30fc720d9d0e181cb03992a9e43f5291e6fcb2ad99c8e3f91acd179',1,'WECore::MONSTR']]],
+  ['upward_487',['UPWARD',['../namespace_w_e_core_1_1_simple_compressor.html#a6fa9f98ed0f3dd1a96c0be762f293bc9afb48997617f324a0afeff3ad1d1d59ad',1,'WECore::SimpleCompressor']]]
 ];

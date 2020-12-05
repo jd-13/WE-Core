@@ -96,7 +96,8 @@ Inheritance diagram for WECore::EffectsProcessor&lt; SampleType &gt;:</div>
  <div class="center">
   <img src="class_w_e_core_1_1_effects_processor.png" usemap="#WECore::EffectsProcessor_3C_20SampleType_20_3E_map" alt=""/>
   <map id="WECore::EffectsProcessor_3C_20SampleType_20_3E_map" name="WECore::EffectsProcessor_3C_20SampleType_20_3E_map">
-<area href="class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html" alt="WECore::StereoWidth::StereoWidthProcessor&lt; SampleType &gt;" shape="rect" coords="0,56,358,80"/>
+<area href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html" alt="WECore::SimpleCompressor::SimpleCompressor&lt; SampleType &gt;" shape="rect" coords="0,56,374,80"/>
+<area href="class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html" alt="WECore::StereoWidth::StereoWidthProcessor&lt; SampleType &gt;" shape="rect" coords="384,56,758,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -207,7 +208,7 @@ template&lt;typename SampleType &gt; </div>
 <p>Returns the routings that are implemented by this processor.</p>
 <p>Override this to return the correct routings. </p>
 
-<p>Implemented in <a class="el" href="class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#af0a7e9d29be9cb2cbd504def7a881842">WECore::StereoWidth::StereoWidthProcessor&lt; SampleType &gt;</a>.</p>
+<p>Implemented in <a class="el" href="class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#af0a7e9d29be9cb2cbd504def7a881842">WECore::StereoWidth::StereoWidthProcessor&lt; SampleType &gt;</a>, and <a class="el" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ab6f4329a5285ead4673610c558c025cb">WECore::SimpleCompressor::SimpleCompressor&lt; SampleType &gt;</a>.</p>
 
 </div>
 </div>
@@ -248,6 +249,8 @@ template&lt;typename SampleType &gt; </div>
 </div><div class="memdoc">
 <p>Override these as required by the processor.</p>
 <p>Any combination can be overidden, but getSupportedRoutings must also be implemented to return a matching vector of EffectsRouting enums. </p>
+
+<p>Reimplemented in <a class="el" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a62314ab6fe7e0f87590d308ae536c44c">WECore::SimpleCompressor::SimpleCompressor&lt; SampleType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_effects_processor_8h_source.html#l00058">58</a> of file <a class="el" href="_effects_processor_8h_source.html">EffectsProcessor.h</a>.</p>
 
@@ -373,6 +376,8 @@ template&lt;typename SampleType &gt; </div>
 </div><div class="memdoc">
 <p>Resets the internal state of the processor.</p>
 <p>Override this to reset everything as necessary. </p>
+
+<p>Reimplemented in <a class="el" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a818d29e46aad4f712436a92a1f445c97">WECore::SimpleCompressor::SimpleCompressor&lt; SampleType &gt;</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="_effects_processor_8h_source.html#l00074">74</a> of file <a class="el" href="_effects_processor_8h_source.html">EffectsProcessor.h</a>.</p>
 

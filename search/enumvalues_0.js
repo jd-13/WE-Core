@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['highlightcolourid_1046',['highlightColourId',['../class_w_e_core_1_1_richter_1_1_wave_viewer.html#a77db56f053d1664f9c6fc407f40ca19daf8fa592444aaca935b2c798fa4b881b5',1,'WECore::Richter::WaveViewer']]]
+  ['downward_1115',['DOWNWARD',['../namespace_w_e_core_1_1_simple_compressor.html#a6fa9f98ed0f3dd1a96c0be762f293bc9acf045327606e788dbe14630a376af70e',1,'WECore::SimpleCompressor']]]
 ];

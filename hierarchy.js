@@ -35,6 +35,7 @@ var hierarchy =
       [ "WECore::Richter::WaveViewer", "class_w_e_core_1_1_richter_1_1_wave_viewer.html", null ]
     ] ],
     [ "WECore::EffectsProcessor< SampleType >", "class_w_e_core_1_1_effects_processor.html", [
+      [ "WECore::SimpleCompressor::SimpleCompressor< SampleType >", "class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html", null ],
       [ "WECore::StereoWidth::StereoWidthProcessor< SampleType >", "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html", null ]
     ] ],
     [ "WECore::Songbird::Formant", "class_w_e_core_1_1_songbird_1_1_formant.html", null ],
