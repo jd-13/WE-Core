@@ -25,9 +25,12 @@ cmake .. && make
 
 if [ $GENERATE_COVERAGE = true ]; then
     $WECORE_HOME/Scripts/get_code_cov.sh;
-    bash <(curl -s https://codecov.io/bash);
 fi
 
 $VALGRIND_PATH/coregrind/valgrind --tool=callgrind ./WECoreTest
+
+if [ $GENERATE_COVERAGE = true ]; then
+    bash <(curl -s https://codecov.io/bash);
+fi
 
 mv callgrind.out.* callgrind.out.$BUILD_NUMBER
