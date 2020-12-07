@@ -1,14 +1,7 @@
 FROM ubuntu:focal
 
-# Envs
-ENV CC /usr/bin/gcc-7
-ENV CXX g++-7
-
 # Prevents "Configuring tzdata" dialog from stalling build
 ENV DEBIAN_FRONTEND=noninteractive
-
-ENV COVERAGE_COMMAND /usr/bin/gcov-7
-ENV COVERAGE_FLAGS --coverage
 
 CMD bash
 
@@ -25,7 +18,12 @@ ENV CATCH_PATH /home/catch/
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
 RUN apt-get update
-RUN apt-get install -y g++-7
+RUN apt-get install -y g++-10
+
+ENV CC /usr/bin/gcc-10
+ENV CXX /usr/bin/g++-10
+ENV COVERAGE_COMMAND /usr/bin/gcov-10
+ENV COVERAGE_FLAGS --coverage
 
 # Valgrind
 RUN apt-get install -y autotools-dev automake
