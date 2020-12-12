@@ -49,7 +49,7 @@ namespace CoreMath {
     }
 
     constexpr double MINUS_INF_DB {-200};
-    inline double linearTodB(double val) { return val > 0 ? std::max(20 * std::log10(val), MINUS_INF_DB) : MINUS_INF_DB; }
+    inline double linearTodB(double val) { return val > 0 ? std::fmax(20 * std::log10(val), MINUS_INF_DB) : MINUS_INF_DB; }
     inline double dBToLinear(double val) { return std::pow(10.0, val / 20.0); }
 }
 
