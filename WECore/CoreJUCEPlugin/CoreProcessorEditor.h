@@ -25,7 +25,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
-
+#include "CoreAudioProcessor.h"
 
 namespace WECore::JUCEPlugin {
 
@@ -36,7 +36,7 @@ namespace WECore::JUCEPlugin {
      * Classes inheriting from this should:
      *   - Override _onParameterUpdate and call it in the constructor
      */
-    class CoreProcessorEditor : public AudioProcessorEditor {
+class CoreProcessorEditor : public juce::AudioProcessorEditor {
     public:
         ~CoreProcessorEditor() {
             dynamic_cast<CoreAudioProcessor&>(processor).
@@ -48,12 +48,12 @@ namespace WECore::JUCEPlugin {
         /**
          * Is notified when a parameter has changed and calls _onParameterUpdate.
          */
-        class ParameterChangeListener : public ChangeListener {
+        class ParameterChangeListener : public juce::ChangeListener {
         public:
             ParameterChangeListener(CoreProcessorEditor* parent) : _parent(parent) {};
             virtual ~ParameterChangeListener() = default;
 
-            virtual void changeListenerCallback(ChangeBroadcaster* /*source*/) {
+            virtual void changeListenerCallback(juce::ChangeBroadcaster* /*source*/) {
                 _parent->_onParameterUpdate();
             }
 
@@ -63,7 +63,7 @@ namespace WECore::JUCEPlugin {
 
         ParameterChangeListener _parameterListener;
 
-        SharedResourcePointer<TooltipWindow> _tooltipWindow;
+        juce::SharedResourcePointer<juce::TooltipWindow> _tooltipWindow;
 
         CoreProcessorEditor(CoreAudioProcessor& ownerFilter)
                 : AudioProcessorEditor(ownerFilter),
@@ -79,7 +79,7 @@ namespace WECore::JUCEPlugin {
          * resulted in a bug where upon opening two instances of the same plugin simultaneously, when
          * one is closed the other will stop applying defaultLookAndFeel.
          */
-        void _assignLookAndFeelToAllChildren(LookAndFeel& defaultLookAndFeel) {
+        void _assignLookAndFeelToAllChildren(juce::LookAndFeel& defaultLookAndFeel) {
             _tooltipWindow->setLookAndFeel(&defaultLookAndFeel);
             for (int iii {0}; iii < getNumChildComponents(); iii++) {
                 getChildComponent(iii)->setLookAndFeel(&defaultLookAndFeel);

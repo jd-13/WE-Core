@@ -26,6 +26,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "General/ParameterDefinition.h"
+
 namespace WECore::JUCEPlugin {
 
     /**
@@ -35,7 +36,7 @@ namespace WECore::JUCEPlugin {
      * Classes inheriting from this should:
      *   - Call registerParameter to declare parameters
      */
-    class CoreAudioProcessor : public AudioProcessor {
+    class CoreAudioProcessor : public juce::AudioProcessor {
     public:
         CoreAudioProcessor() = default;
         virtual ~CoreAudioProcessor() = default;
@@ -49,7 +50,7 @@ namespace WECore::JUCEPlugin {
          *
          * Bool parameters are written as a float representation of true or false.
          */
-        inline void getStateInformation(MemoryBlock& destData) override;
+        inline void getStateInformation(juce::MemoryBlock& destData) override;
 
         /**
          * Restores parameter values from previously written XML.
@@ -59,14 +60,14 @@ namespace WECore::JUCEPlugin {
         /**
          * Adds a listener that will be notified whenever a parameter is changed.
          */
-        void addParameterChangeListener(ChangeListener* listener) {
+        void addParameterChangeListener(juce::ChangeListener* listener) {
             _parameterBroadcaster.addChangeListener(listener);
         }
 
         /**
          * Removes a previously added listener.
          */
-        void removeParameterChangeListener(ChangeListener* listener) {
+        void removeParameterChangeListener(juce::ChangeListener* listener) {
             _parameterBroadcaster.removeChangeListener(listener);
         }
 
@@ -86,20 +87,20 @@ namespace WECore::JUCEPlugin {
          * values to the wrong parameters.
          */
         /** @{ */
-        inline void registerParameter(AudioParameterFloat*& param,
-                                      const String& name,
+        inline void registerParameter(juce::AudioParameterFloat*& param,
+                                      const juce::String& name,
                                       const ParameterDefinition::RangedParameter<double>* range,
                                       float defaultValue,
                                       std::function<void(float)> setter);
 
-        inline void registerParameter(AudioParameterInt*& param,
-                                      const String& name,
+        inline void registerParameter(juce::AudioParameterInt*& param,
+                                      const juce::String& name,
                                       const ParameterDefinition::BaseParameter<int>* range,
                                       int defaultValue,
                                       std::function<void(int)> setter);
 
-        inline void registerParameter(AudioParameterBool*& param,
-                                      const String& name,
+        inline void registerParameter(juce::AudioParameterBool*& param,
+                                      const juce::String& name,
                                       float defaultValue,
                                       std::function<void(bool)> setter);
         /** @} */
@@ -119,8 +120,8 @@ namespace WECore::JUCEPlugin {
          * Listens for parameter changes and triggers the broadcaster so the changes can be handled
          * by another thread.
          */
-        class ParameterBroadcaster : public AudioProcessorParameter::Listener,
-                                     public ChangeBroadcaster {
+        class ParameterBroadcaster : public juce::AudioProcessorParameter::Listener,
+                                     public juce::ChangeBroadcaster {
         public:
             ParameterBroadcaster() = default;
             virtual ~ParameterBroadcaster() = default;
@@ -139,14 +140,14 @@ namespace WECore::JUCEPlugin {
          */
         std::vector<ParameterInterface> _paramsList;
 
-        inline String _floatVectorToString(const std::vector<float>& fData) const;
+        inline juce::String _floatVectorToString(const std::vector<float>& fData) const;
 
-        inline std::vector<float> _stringToFloatVector(const String sFloatCSV) const;
+        inline std::vector<float> _stringToFloatVector(const juce::String sFloatCSV) const;
 
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreAudioProcessor)
     };
 
-    void CoreAudioProcessor::getStateInformation(MemoryBlock& destData)
+    void CoreAudioProcessor::getStateInformation(juce::MemoryBlock& destData)
     {
         // Compile the list of parameter values
         std::vector<float> paramValues;
@@ -155,16 +156,16 @@ namespace WECore::JUCEPlugin {
         }
 
         // Build the XML
-        XmlElement root("Root");
-        XmlElement *el = root.createNewChildElement("AllUserParam");
+        juce::XmlElement root("Root");
+        juce::XmlElement *el = root.createNewChildElement("AllUserParam");
 
-        el->addTextElement(String(_floatVectorToString(paramValues)));
+        el->addTextElement(juce::String(_floatVectorToString(paramValues)));
         copyXmlToBinary(root, destData);
     }
 
     void CoreAudioProcessor::setStateInformation(const void* data, int sizeInBytes)
     {
-        std::unique_ptr<XmlElement> pRoot(getXmlFromBinary(data, sizeInBytes));
+        std::unique_ptr<juce::XmlElement> pRoot(getXmlFromBinary(data, sizeInBytes));
         std::vector<float> readParamValues;
 
         // Parse the XML
@@ -173,7 +174,7 @@ namespace WECore::JUCEPlugin {
                 if (pChild->hasTagName("AllUserParam")) {
 
                     // Read the values into a float array
-                    String sFloatCSV = pChild->getAllSubText();
+                    juce::String sFloatCSV = pChild->getAllSubText();
                     const std::vector<float> readParamValues = _stringToFloatVector(sFloatCSV);
 
                     // Pass each value read from XML to a setter, being careful not to go out of
@@ -192,12 +193,12 @@ namespace WECore::JUCEPlugin {
         }
     }
 
-    void CoreAudioProcessor::registerParameter(AudioParameterFloat*& param,
-                                               const String& name,
+    void CoreAudioProcessor::registerParameter(juce::AudioParameterFloat*& param,
+                                               const juce::String& name,
                                                const ParameterDefinition::RangedParameter<double>* range,
                                                float defaultValue,
                                                std::function<void(float)> setter) {
-        param = new AudioParameterFloat(name, name, 0.0f, 1.0f, range->InternalToNormalised(defaultValue));
+        param = new juce::AudioParameterFloat(name, name, 0.0f, 1.0f, range->InternalToNormalised(defaultValue));
 
         ParameterInterface interface = {[&param]() { return param->get(); },
                                         setter};
@@ -207,12 +208,12 @@ namespace WECore::JUCEPlugin {
         addParameter(param);
     }
 
-    void CoreAudioProcessor::registerParameter(AudioParameterInt*& param,
-                                               const String& name,
+    void CoreAudioProcessor::registerParameter(juce::AudioParameterInt*& param,
+                                               const juce::String& name,
                                                const ParameterDefinition::BaseParameter<int>* range,
                                                int defaultValue,
                                                std::function<void(int)> setter) {
-        param = new AudioParameterInt(name, name, range->minValue, range->maxValue, defaultValue);
+        param = new juce::AudioParameterInt(name, name, range->minValue, range->maxValue, defaultValue);
 
         ParameterInterface interface = {[&param]() { return param->get(); },
                                         [setter](float val) { setter(static_cast<int>(val)); }};
@@ -222,11 +223,11 @@ namespace WECore::JUCEPlugin {
         addParameter(param);
     }
 
-    void CoreAudioProcessor::registerParameter(AudioParameterBool*& param,
-                                               const String& name,
+    void CoreAudioProcessor::registerParameter(juce::AudioParameterBool*& param,
+                                               const juce::String& name,
                                                float defaultValue,
                                                std::function<void(bool)> setter) {
-        param = new AudioParameterBool(name, name, defaultValue);
+        param = new juce::AudioParameterBool(name, name, defaultValue);
 
         ParameterInterface interface = {[&param]() { return param->get(); },
                                         [setter](float val) { setter(static_cast<bool>(val)); }};
@@ -236,24 +237,24 @@ namespace WECore::JUCEPlugin {
         addParameter(param);
     }
 
-    String CoreAudioProcessor::_floatVectorToString(const std::vector<float>& fData) const {
-        String result {""};
+    juce::String CoreAudioProcessor::_floatVectorToString(const std::vector<float>& fData) const {
+        juce::String result {""};
 
         if (fData.size() < 1) {
             return result;
         }
 
         for (int iii {0}; iii < (fData.size() - 1); iii++) {
-            result << String(fData[iii])<<",";
+            result << juce::String(fData[iii])<<",";
         }
 
-        result << String(fData[fData.size() - 1]);
+        result << juce::String(fData[fData.size() - 1]);
 
         return result;
     }
 
-    std::vector<float> CoreAudioProcessor::_stringToFloatVector(const String sFloatCSV) const {
-        StringArray tokenizer;
+    std::vector<float> CoreAudioProcessor::_stringToFloatVector(const juce::String sFloatCSV) const {
+        juce::StringArray tokenizer;
         tokenizer.addTokens(sFloatCSV, ",","");
 
         std::vector<float> values;
