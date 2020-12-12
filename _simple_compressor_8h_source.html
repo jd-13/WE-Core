@@ -201,123 +201,127 @@ $(document).ready(function(){initNavTree('_simple_compressor_8h_source.html','')
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
 <div class="line"><a name="l00196"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a2b702a4c805af66eb4d22941d98d639f">  196</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::setSampleRate</a>(<span class="keywordtype">double</span> val) {</div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        _sampleRate = val;</div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160; </div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;        _attackCoef = _calcCoef(_attackMs);</div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;        _releaseCoef = _calcCoef(_releaseMs);</div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;        reset();</div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;    }</div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
-<div class="line"><a name="l00206"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#af1c34eb222cf07a552bda1f19d3807ff">  206</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::setDirection</a>(<a class="code" href="namespace_w_e_core_1_1_simple_compressor.html#a6fa9f98ed0f3dd1a96c0be762f293bc9">Direction</a> val) {</div>
-<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        _direction = val;</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;        reset();</div>
-<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    }</div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
-<div class="line"><a name="l00212"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a50c7724078483a97ae4474ad0e060f87">  212</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::setAttack</a>(<span class="keywordtype">double</span> val) {</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;        _attackMs = <a class="code" href="namespace_w_e_core_1_1_simple_compressor_1_1_parameters.html#a5a942e8399b7d61cde2e86428190a0d1">Parameters::ATTACK_MS</a>.BoundsCheck(val);</div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        _attackCoef = _calcCoef(_attackMs);</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    }</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160; </div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
-<div class="line"><a name="l00218"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#aff93783dffbd1949e1fbd0735c3bfc4a">  218</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::setRelease</a>(<span class="keywordtype">double</span> val) {</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        _releaseMs = <a class="code" href="namespace_w_e_core_1_1_simple_compressor_1_1_parameters.html#a28c411d796b55b4cb3361d28b6d55283">Parameters::RELEASE_MS</a>.BoundsCheck(val);</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;        _releaseCoef = _calcCoef(_releaseMs);</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    }</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
-<div class="line"><a name="l00224"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a62314ab6fe7e0f87590d308ae536c44c">  224</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::process1in1out</a>(SampleType* inSamples,</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                                                      <span class="keywordtype">size_t</span> numSamples) {</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;        <span class="keywordflow">if</span> (_sampleRate != val) {</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;            _sampleRate = val;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;            _attackCoef = _calcCoef(_attackMs);</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;            _releaseCoef = _calcCoef(_releaseMs);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;            reset();</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;        }</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;    }</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
+<div class="line"><a name="l00208"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#af1c34eb222cf07a552bda1f19d3807ff">  208</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::setDirection</a>(<a class="code" href="namespace_w_e_core_1_1_simple_compressor.html#a6fa9f98ed0f3dd1a96c0be762f293bc9">Direction</a> val) {</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        <span class="keywordflow">if</span> (_direction != val) {</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;            _direction = val;</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;            reset();</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;        }</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    }</div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160; </div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
+<div class="line"><a name="l00216"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a50c7724078483a97ae4474ad0e060f87">  216</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::setAttack</a>(<span class="keywordtype">double</span> val) {</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        _attackMs = <a class="code" href="namespace_w_e_core_1_1_simple_compressor_1_1_parameters.html#a5a942e8399b7d61cde2e86428190a0d1">Parameters::ATTACK_MS</a>.BoundsCheck(val);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        _attackCoef = _calcCoef(_attackMs);</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    }</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160; </div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
+<div class="line"><a name="l00222"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#aff93783dffbd1949e1fbd0735c3bfc4a">  222</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::setRelease</a>(<span class="keywordtype">double</span> val) {</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        _releaseMs = <a class="code" href="namespace_w_e_core_1_1_simple_compressor_1_1_parameters.html#a28c411d796b55b4cb3361d28b6d55283">Parameters::RELEASE_MS</a>.BoundsCheck(val);</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;        _releaseCoef = _calcCoef(_releaseMs);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    }</div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> index {0}; index &lt; numSamples; index++) {</div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;            <span class="comment">// Rectify the input and convert to dB</span></div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;            <span class="keyword">const</span> SampleType absdB {<span class="keyword">static_cast&lt;</span>SampleType<span class="keyword">&gt;</span>(</div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                <a class="code" href="namespace_core_math.html#aa78a4f599d61d8e38085c2417709db48">CoreMath::linearTodB</a>(std::abs(inSamples[index]))</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;            )};</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            <span class="comment">// Compute gain</span></div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;            <span class="keyword">const</span> SampleType gainComp {_computeGain(absdB)};</div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160; </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;            <span class="comment">// Take the difference and pass to the level detection</span></div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            <span class="keyword">const</span> SampleType level {_computeLevel(absdB - gainComp)};</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;            <span class="comment">// Convert to linear and apply the gain</span></div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            _gainApplied = <span class="keyword">static_cast&lt;</span>SampleType<span class="keyword">&gt;</span>(<a class="code" href="namespace_core_math.html#af8eb68bd34f9dcc3488368a0089e61ac">CoreMath::dBToLinear</a>(-level));</div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160; </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;            inSamples[index] = inSamples[index] * _gainApplied;</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;        }</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    }</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
+<div class="line"><a name="l00228"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a62314ab6fe7e0f87590d308ae536c44c">  228</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::process1in1out</a>(SampleType* inSamples,</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                                                      <span class="keywordtype">size_t</span> numSamples) {</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160; </div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> index {0}; index &lt; numSamples; index++) {</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160; </div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;            <span class="comment">// Rectify the input and convert to dB</span></div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;            <span class="keyword">const</span> SampleType absdB {<span class="keyword">static_cast&lt;</span>SampleType<span class="keyword">&gt;</span>(</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                <a class="code" href="namespace_core_math.html#aa78a4f599d61d8e38085c2417709db48">CoreMath::linearTodB</a>(std::abs(inSamples[index]))</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;            )};</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160; </div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;            <span class="comment">// Compute gain</span></div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;            <span class="keyword">const</span> SampleType gainComp {_computeGain(absdB)};</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;            <span class="comment">// Take the difference and pass to the level detection</span></div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;            <span class="keyword">const</span> SampleType level {_computeLevel(absdB - gainComp)};</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160; </div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;            <span class="comment">// Convert to linear and apply the gain</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            _gainApplied = <span class="keyword">static_cast&lt;</span>SampleType<span class="keyword">&gt;</span>(<a class="code" href="namespace_core_math.html#af8eb68bd34f9dcc3488368a0089e61ac">CoreMath::dBToLinear</a>(-level));</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
-<div class="line"><a name="l00248"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ab6f4329a5285ead4673610c558c025cb">  248</a></span>&#160;    std::vector&lt;EffectsRouting&gt; <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::getSupportedRoutings</a>()<span class="keyword"> const </span>{</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;        <span class="keywordflow">return</span> std::vector&lt;EffectsRouting&gt;({</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;            WECore::EffectsRouting::IN1_OUT1</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;        });</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    }</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160; </div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
-<div class="line"><a name="l00255"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a818d29e46aad4f712436a92a1f445c97">  255</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::reset</a>() {</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        _levelDetectorState = 0;</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;        _gainApplied = 0;</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    }</div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160; </div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
-<div class="line"><a name="l00261"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a48d1b0f8209147a395833ec28bd3445e">  261</a></span>&#160;    SampleType <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::_computeLevel</a>(SampleType inSample) {</div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160; </div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        <span class="keywordflow">if</span> (inSample &gt; _levelDetectorState) {</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;            _levelDetectorState = _attackCoef * _levelDetectorState + (1 - _attackCoef) * inSample;</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;            _levelDetectorState = _releaseCoef * _levelDetectorState + (1 - _releaseCoef) * inSample;</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        }</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        <span class="keywordflow">return</span> _levelDetectorState;</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    }</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160; </div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
-<div class="line"><a name="l00273"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ac46ff5975c67a18ffe973aaa01777d1e">  273</a></span>&#160;    SampleType <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::_computeGain</a>(SampleType inSample) {</div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        SampleType retVal {inSample};</div>
-<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;        <span class="keywordflow">if</span> (_direction == <a class="code" href="namespace_w_e_core_1_1_simple_compressor.html#a6fa9f98ed0f3dd1a96c0be762f293bc9afb48997617f324a0afeff3ad1d1d59ad">Direction::DOWNWARD</a>) {</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            inSamples[index] = inSamples[index] * _gainApplied;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        }</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    }</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160; </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
+<div class="line"><a name="l00252"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ab6f4329a5285ead4673610c558c025cb">  252</a></span>&#160;    std::vector&lt;EffectsRouting&gt; <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::getSupportedRoutings</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;        <span class="keywordflow">return</span> std::vector&lt;EffectsRouting&gt;({</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            WECore::EffectsRouting::IN1_OUT1</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        });</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    }</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
+<div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a818d29e46aad4f712436a92a1f445c97">  259</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::reset</a>() {</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        _levelDetectorState = 0;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        _gainApplied = 0;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    }</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160; </div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
+<div class="line"><a name="l00265"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a48d1b0f8209147a395833ec28bd3445e">  265</a></span>&#160;    SampleType <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::_computeLevel</a>(SampleType inSample) {</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="keywordflow">if</span> (inSample &gt; _levelDetectorState) {</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;            _levelDetectorState = _attackCoef * _levelDetectorState + (1 - _attackCoef) * inSample;</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;            _levelDetectorState = _releaseCoef * _levelDetectorState + (1 - _releaseCoef) * inSample;</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        }</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        <span class="keywordflow">return</span> _levelDetectorState;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;    }</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160; </div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
+<div class="line"><a name="l00277"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ac46ff5975c67a18ffe973aaa01777d1e">  277</a></span>&#160;    SampleType <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::_computeGain</a>(SampleType inSample) {</div>
 <div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;            <span class="comment">// Downward compression</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;            <span class="keywordflow">if</span> (inSample - _threshold &lt; -_kneeWidth / 2) {</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                <span class="comment">// Level is below threshold and knee - do nothing</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;        SampleType retVal {inSample};</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;        <span class="keywordflow">if</span> (_direction == <a class="code" href="namespace_w_e_core_1_1_simple_compressor.html#a6fa9f98ed0f3dd1a96c0be762f293bc9afb48997617f324a0afeff3ad1d1d59ad">Direction::DOWNWARD</a>) {</div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::abs(inSample - _threshold) &lt;= (_kneeWidth / 2)) {</div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                <span class="comment">// Level is within the range of the knee</span></div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                retVal = inSample + (1 / _ratio - 1)</div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                        * std::pow(inSample - _threshold + (_kneeWidth / 2), 2);</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                <span class="comment">// Level is above threshold and knee</span></div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                retVal = _threshold + (inSample - _threshold) / _ratio;</div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;            }</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160; </div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            <span class="comment">// Upward compression</span></div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;            <span class="keywordflow">if</span> (inSample - _threshold &lt; -_kneeWidth / 2) {</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                <span class="comment">// Level is below theshold and knee</span></div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                retVal = _threshold - (_threshold - inSample) / _ratio;</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::abs(inSample - _threshold) &lt;= (_kneeWidth / 2)) {</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                <span class="comment">// Level is within the range of the knee</span></div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                retVal = inSample + (1 - 1 / _ratio) \</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;                         * std::pow(inSample - _threshold - _kneeWidth / 2, 2) / (2 * _kneeWidth);</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160; </div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                <span class="comment">// Level is above threshold and knee - do nothing</span></div>
-<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;            }</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;            <span class="comment">// Downward compression</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;            <span class="keywordflow">if</span> (inSample - _threshold &lt; -_kneeWidth / 2) {</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                <span class="comment">// Level is below threshold and knee - do nothing</span></div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160; </div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::abs(inSample - _threshold) &lt;= (_kneeWidth / 2)) {</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                <span class="comment">// Level is within the range of the knee</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                retVal = inSample + (1 / _ratio - 1)</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                        * std::pow(inSample - _threshold + (_kneeWidth / 2), 2);</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160; </div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                <span class="comment">// Level is above threshold and knee</span></div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                retVal = _threshold + (inSample - _threshold) / _ratio;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            }</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160; </div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            <span class="comment">// Upward compression</span></div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            <span class="keywordflow">if</span> (inSample - _threshold &lt; -_kneeWidth / 2) {</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                <span class="comment">// Level is below theshold and knee</span></div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                retVal = _threshold - (_threshold - inSample) / _ratio;</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160; </div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (std::abs(inSample - _threshold) &lt;= (_kneeWidth / 2)) {</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                <span class="comment">// Level is within the range of the knee</span></div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;                retVal = inSample + (1 - 1 / _ratio) \</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;                         * std::pow(inSample - _threshold - _kneeWidth / 2, 2) / (2 * _kneeWidth);</div>
 <div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160; </div>
-<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        }</div>
-<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160; </div>
-<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;        <span class="keywordflow">return</span> retVal;</div>
-<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    }</div>
-<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;}</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;                <span class="comment">// Level is above threshold and knee - do nothing</span></div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;            }</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;        }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160; </div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;        <span class="keywordflow">return</span> retVal;</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;    }</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a3dc3d3a3b0d86ab25dc8774618934cc7"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a3dc3d3a3b0d86ab25dc8774618934cc7">WECore::SimpleCompressor::SimpleCompressor::getRatio</a></div><div class="ttdeci">double getRatio() const</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00137">SimpleCompressor.h:137</a></div></div>
@@ -328,7 +332,7 @@ $(document).ready(function(){initNavTree('_simple_compressor_8h_source.html','')
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a3bbd9679f40ddae1abd6d653f24d7058"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a3bbd9679f40ddae1abd6d653f24d7058">WECore::SimpleCompressor::SimpleCompressor::_attackCoef</a></div><div class="ttdeci">double _attackCoef</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00164">SimpleCompressor.h:164</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_ae692fffe248032a5e932256d02ad47cb"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ae692fffe248032a5e932256d02ad47cb">WECore::SimpleCompressor::SimpleCompressor::getGainApplied</a></div><div class="ttdeci">SampleType getGainApplied() const</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00147">SimpleCompressor.h:147</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a16a529232b72665e8fe27d7b9f9f362f"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a16a529232b72665e8fe27d7b9f9f362f">WECore::SimpleCompressor::SimpleCompressor::getThreshold</a></div><div class="ttdeci">double getThreshold() const</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00132">SimpleCompressor.h:132</a></div></div>
-<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_aff93783dffbd1949e1fbd0735c3bfc4a"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#aff93783dffbd1949e1fbd0735c3bfc4a">WECore::SimpleCompressor::SimpleCompressor::setRelease</a></div><div class="ttdeci">void setRelease(double val)</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00218">SimpleCompressor.h:218</a></div></div>
+<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_aff93783dffbd1949e1fbd0735c3bfc4a"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#aff93783dffbd1949e1fbd0735c3bfc4a">WECore::SimpleCompressor::SimpleCompressor::setRelease</a></div><div class="ttdeci">void setRelease(double val)</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00222">SimpleCompressor.h:222</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a2ac21dc1533898fa6dd284d21f692fbb"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a2ac21dc1533898fa6dd284d21f692fbb">WECore::SimpleCompressor::SimpleCompressor::getKneeWidth</a></div><div class="ttdeci">double getKneeWidth() const</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00142">SimpleCompressor.h:142</a></div></div>
 <div class="ttc" id="anamespace_w_e_core_1_1_simple_compressor_1_1_parameters_html_a4b33f7329296e7c655dd24e36d3d7d76"><div class="ttname"><a href="namespace_w_e_core_1_1_simple_compressor_1_1_parameters.html#a4b33f7329296e7c655dd24e36d3d7d76">WECore::SimpleCompressor::Parameters::KNEE_WIDTH</a></div><div class="ttdeci">const ParameterDefinition::RangedParameter&lt; double &gt; KNEE_WIDTH(1, 10, 2)</div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_af0d8d4b8f2be7712fb064b2bb8694df9"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#af0d8d4b8f2be7712fb064b2bb8694df9">WECore::SimpleCompressor::SimpleCompressor::_gainApplied</a></div><div class="ttdeci">SampleType _gainApplied</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00172">SimpleCompressor.h:172</a></div></div>
@@ -339,8 +343,8 @@ $(document).ready(function(){initNavTree('_simple_compressor_8h_source.html','')
 <div class="ttc" id="anamespace_w_e_core_1_1_simple_compressor_html_a6fa9f98ed0f3dd1a96c0be762f293bc9"><div class="ttname"><a href="namespace_w_e_core_1_1_simple_compressor.html#a6fa9f98ed0f3dd1a96c0be762f293bc9">WECore::SimpleCompressor::Direction</a></div><div class="ttdeci">Direction</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00032">SimpleCompressor.h:32</a></div></div>
 <div class="ttc" id="anamespace_core_math_html_af8eb68bd34f9dcc3488368a0089e61ac"><div class="ttname"><a href="namespace_core_math.html#af8eb68bd34f9dcc3488368a0089e61ac">CoreMath::dBToLinear</a></div><div class="ttdeci">double dBToLinear(double val)</div><div class="ttdef"><b>Definition:</b> <a href="_core_math_8h_source.html#l00053">CoreMath.h:53</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a2c8ef1e2f8f62c36e2423c92beb95074"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a2c8ef1e2f8f62c36e2423c92beb95074">WECore::SimpleCompressor::SimpleCompressor::~SimpleCompressor</a></div><div class="ttdeci">virtual ~SimpleCompressor() override=default</div></div>
-<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_ab6f4329a5285ead4673610c558c025cb"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ab6f4329a5285ead4673610c558c025cb">WECore::SimpleCompressor::SimpleCompressor::getSupportedRoutings</a></div><div class="ttdeci">virtual std::vector&lt; EffectsRouting &gt; getSupportedRoutings() const override</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00248">SimpleCompressor.h:248</a></div></div>
-<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_ac46ff5975c67a18ffe973aaa01777d1e"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ac46ff5975c67a18ffe973aaa01777d1e">WECore::SimpleCompressor::SimpleCompressor::_computeGain</a></div><div class="ttdeci">SampleType _computeGain(SampleType inSample)</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00273">SimpleCompressor.h:273</a></div></div>
+<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_ab6f4329a5285ead4673610c558c025cb"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ab6f4329a5285ead4673610c558c025cb">WECore::SimpleCompressor::SimpleCompressor::getSupportedRoutings</a></div><div class="ttdeci">virtual std::vector&lt; EffectsRouting &gt; getSupportedRoutings() const override</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00252">SimpleCompressor.h:252</a></div></div>
+<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_ac46ff5975c67a18ffe973aaa01777d1e"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ac46ff5975c67a18ffe973aaa01777d1e">WECore::SimpleCompressor::SimpleCompressor::_computeGain</a></div><div class="ttdeci">SampleType _computeGain(SampleType inSample)</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00277">SimpleCompressor.h:277</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_afeb025099948e468319eb8a8a47e5630"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#afeb025099948e468319eb8a8a47e5630">WECore::SimpleCompressor::SimpleCompressor::_releaseCoef</a></div><div class="ttdeci">double _releaseCoef</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00166">SimpleCompressor.h:166</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a1653bbe775235d586804131452549b45"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a1653bbe775235d586804131452549b45">WECore::SimpleCompressor::SimpleCompressor::_threshold</a></div><div class="ttdeci">double _threshold</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00167">SimpleCompressor.h:167</a></div></div>
 <div class="ttc" id="a_simple_compressor_parameters_8h_html"><div class="ttname"><a href="_simple_compressor_parameters_8h.html">SimpleCompressorParameters.h</a></div></div>
@@ -350,15 +354,15 @@ $(document).ready(function(){initNavTree('_simple_compressor_8h_source.html','')
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_ac26e338ef1a712835dde7e34a97b9f99"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ac26e338ef1a712835dde7e34a97b9f99">WECore::SimpleCompressor::SimpleCompressor::_direction</a></div><div class="ttdeci">Direction _direction</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00159">SimpleCompressor.h:159</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a9b431d35b1b2f1ba14a923bfa79c0b7d"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a9b431d35b1b2f1ba14a923bfa79c0b7d">WECore::SimpleCompressor::SimpleCompressor::getRelease</a></div><div class="ttdeci">double getRelease() const</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00127">SimpleCompressor.h:127</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a1c810bb47e97bfda490c702b98382578"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a1c810bb47e97bfda490c702b98382578">WECore::SimpleCompressor::SimpleCompressor::getDirection</a></div><div class="ttdeci">Direction getDirection() const</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00117">SimpleCompressor.h:117</a></div></div>
-<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a818d29e46aad4f712436a92a1f445c97"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a818d29e46aad4f712436a92a1f445c97">WECore::SimpleCompressor::SimpleCompressor::reset</a></div><div class="ttdeci">virtual void reset() override</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00255">SimpleCompressor.h:255</a></div></div>
+<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a818d29e46aad4f712436a92a1f445c97"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a818d29e46aad4f712436a92a1f445c97">WECore::SimpleCompressor::SimpleCompressor::reset</a></div><div class="ttdeci">virtual void reset() override</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00259">SimpleCompressor.h:259</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_ac2ea2e8bf1f00928b6696bbc0089ec5b"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ac2ea2e8bf1f00928b6696bbc0089ec5b">WECore::SimpleCompressor::SimpleCompressor::_sampleRate</a></div><div class="ttdeci">double _sampleRate</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00161">SimpleCompressor.h:161</a></div></div>
 <div class="ttc" id="a_effects_processor_8h_html"><div class="ttname"><a href="_effects_processor_8h.html">EffectsProcessor.h</a></div></div>
-<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a50c7724078483a97ae4474ad0e060f87"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a50c7724078483a97ae4474ad0e060f87">WECore::SimpleCompressor::SimpleCompressor::setAttack</a></div><div class="ttdeci">void setAttack(double val)</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00212">SimpleCompressor.h:212</a></div></div>
+<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a50c7724078483a97ae4474ad0e060f87"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a50c7724078483a97ae4474ad0e060f87">WECore::SimpleCompressor::SimpleCompressor::setAttack</a></div><div class="ttdeci">void setAttack(double val)</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00216">SimpleCompressor.h:216</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a3467d9330adcb45e35c9f68e9c87a30d"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a3467d9330adcb45e35c9f68e9c87a30d">WECore::SimpleCompressor::SimpleCompressor::SimpleCompressor</a></div><div class="ttdeci">SimpleCompressor()</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00182">SimpleCompressor.h:182</a></div></div>
 <div class="ttc" id="anamespace_w_e_core_1_1_simple_compressor_html_a6fa9f98ed0f3dd1a96c0be762f293bc9afb48997617f324a0afeff3ad1d1d59ad"><div class="ttname"><a href="namespace_w_e_core_1_1_simple_compressor.html#a6fa9f98ed0f3dd1a96c0be762f293bc9afb48997617f324a0afeff3ad1d1d59ad">WECore::SimpleCompressor::Direction::UPWARD</a></div><div class="ttdeci">@ UPWARD</div></div>
-<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a48d1b0f8209147a395833ec28bd3445e"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a48d1b0f8209147a395833ec28bd3445e">WECore::SimpleCompressor::SimpleCompressor::_computeLevel</a></div><div class="ttdeci">SampleType _computeLevel(SampleType inSample)</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00261">SimpleCompressor.h:261</a></div></div>
+<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a48d1b0f8209147a395833ec28bd3445e"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a48d1b0f8209147a395833ec28bd3445e">WECore::SimpleCompressor::SimpleCompressor::_computeLevel</a></div><div class="ttdeci">SampleType _computeLevel(SampleType inSample)</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00265">SimpleCompressor.h:265</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a8a6e07163f448422247175d1f271f111"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a8a6e07163f448422247175d1f271f111">WECore::SimpleCompressor::SimpleCompressor::setRatio</a></div><div class="ttdeci">void setRatio(double val)</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00098">SimpleCompressor.h:98</a></div></div>
-<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a62314ab6fe7e0f87590d308ae536c44c"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a62314ab6fe7e0f87590d308ae536c44c">WECore::SimpleCompressor::SimpleCompressor::process1in1out</a></div><div class="ttdeci">virtual void process1in1out(SampleType *inSamples, size_t numSamples) override</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00224">SimpleCompressor.h:224</a></div></div>
+<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a62314ab6fe7e0f87590d308ae536c44c"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a62314ab6fe7e0f87590d308ae536c44c">WECore::SimpleCompressor::SimpleCompressor::process1in1out</a></div><div class="ttdeci">virtual void process1in1out(SampleType *inSamples, size_t numSamples) override</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00228">SimpleCompressor.h:228</a></div></div>
 <div class="ttc" id="anamespace_w_e_core_1_1_simple_compressor_1_1_parameters_html_a5a942e8399b7d61cde2e86428190a0d1"><div class="ttname"><a href="namespace_w_e_core_1_1_simple_compressor_1_1_parameters.html#a5a942e8399b7d61cde2e86428190a0d1">WECore::SimpleCompressor::Parameters::ATTACK_MS</a></div><div class="ttdeci">const ParameterDefinition::RangedParameter&lt; double &gt; ATTACK_MS(0.1, 500, 10)</div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_adefa79cb5699d5fede4b18b1dd5bffbb"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#adefa79cb5699d5fede4b18b1dd5bffbb">WECore::SimpleCompressor::SimpleCompressor::getAttack</a></div><div class="ttdeci">double getAttack() const</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00122">SimpleCompressor.h:122</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_a943008f5d62bbef83e749b524006ba3d"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a943008f5d62bbef83e749b524006ba3d">WECore::SimpleCompressor::SimpleCompressor::_attackMs</a></div><div class="ttdeci">double _attackMs</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00163">SimpleCompressor.h:163</a></div></div>
@@ -369,7 +373,7 @@ $(document).ready(function(){initNavTree('_simple_compressor_8h_source.html','')
 <div class="ttc" id="aclass_w_e_core_1_1_effects_processor_html"><div class="ttname"><a href="class_w_e_core_1_1_effects_processor.html">WECore::EffectsProcessor</a></div><div class="ttdef"><b>Definition:</b> <a href="_effects_processor_8h_source.html#l00044">EffectsProcessor.h:44</a></div></div>
 <div class="ttc" id="a_core_math_8h_html"><div class="ttname"><a href="_core_math_8h.html">CoreMath.h</a></div></div>
 <div class="ttc" id="anamespace_w_e_core_1_1_simple_compressor_1_1_parameters_html_a44729f12b694bafb869e1a534cbea921"><div class="ttname"><a href="namespace_w_e_core_1_1_simple_compressor_1_1_parameters.html#a44729f12b694bafb869e1a534cbea921">WECore::SimpleCompressor::Parameters::THRESHOLD</a></div><div class="ttdeci">const ParameterDefinition::RangedParameter&lt; double &gt; THRESHOLD(-60, 0, 0)</div></div>
-<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_af1c34eb222cf07a552bda1f19d3807ff"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#af1c34eb222cf07a552bda1f19d3807ff">WECore::SimpleCompressor::SimpleCompressor::setDirection</a></div><div class="ttdeci">void setDirection(Direction val)</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00206">SimpleCompressor.h:206</a></div></div>
+<div class="ttc" id="aclass_w_e_core_1_1_simple_compressor_1_1_simple_compressor_html_af1c34eb222cf07a552bda1f19d3807ff"><div class="ttname"><a href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#af1c34eb222cf07a552bda1f19d3807ff">WECore::SimpleCompressor::SimpleCompressor::setDirection</a></div><div class="ttdeci">void setDirection(Direction val)</div><div class="ttdef"><b>Definition:</b> <a href="_simple_compressor_8h_source.html#l00208">SimpleCompressor.h:208</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
