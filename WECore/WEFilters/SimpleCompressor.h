@@ -194,18 +194,22 @@ namespace WECore::SimpleCompressor {
 
     template <typename SampleType>
     void SimpleCompressor<SampleType>::setSampleRate(double val) {
-        _sampleRate = val;
+        if (_sampleRate != val) {
+            _sampleRate = val;
 
-        _attackCoef = _calcCoef(_attackMs);
-        _releaseCoef = _calcCoef(_releaseMs);
+            _attackCoef = _calcCoef(_attackMs);
+            _releaseCoef = _calcCoef(_releaseMs);
 
-        reset();
+            reset();
+        }
     }
 
     template <typename SampleType>
     void SimpleCompressor<SampleType>::setDirection(Direction val) {
-        _direction = val;
-        reset();
+        if (_direction != val) {
+            _direction = val;
+            reset();
+        }
     }
 
     template <typename SampleType>
