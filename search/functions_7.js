@@ -43,7 +43,7 @@ var searchData=
   ['getsidechain_769',['getSidechain',['../class_w_e_core_1_1_richter_1_1_wavetables.html#ad28d9f9c633dc885be4ca458caa40c2d',1,'WECore::Richter::Wavetables']]],
   ['getsine_770',['getSine',['../class_w_e_core_1_1_richter_1_1_wavetables.html#a3e8e1a45de845eb5395044efe87d02a9',1,'WECore::Richter::Wavetables']]],
   ['getsquare_771',['getSquare',['../class_w_e_core_1_1_richter_1_1_wavetables.html#ae68248d4633ad44a9d83a83ca1600124',1,'WECore::Richter::Wavetables']]],
-  ['getstateinformation_772',['getStateInformation',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac710aa916da1f7b12905216f15505c07',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
+  ['getstateinformation_772',['getStateInformation',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac7c282ae8a89516085d96a1f6db7298b',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
   ['getsupportedroutings_773',['getSupportedRoutings',['../class_w_e_core_1_1_effects_processor.html#af372e488a081bb0d61fcd830f9c17d29',1,'WECore::EffectsProcessor::getSupportedRoutings()'],['../class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ab6f4329a5285ead4673610c558c025cb',1,'WECore::SimpleCompressor::SimpleCompressor::getSupportedRoutings()'],['../class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#af0a7e9d29be9cb2cbd504def7a881842',1,'WECore::StereoWidth::StereoWidthProcessor::getSupportedRoutings()']]],
   ['gettempodenom_774',['getTempoDenom',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#acd8bcf6f1b3078b8a19e791cafd014b4',1,'WECore::Richter::RichterLFO']]],
   ['gettemponumer_775',['getTempoNumer',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a8954b72b3f32981711701329645d45f2',1,'WECore::Richter::RichterLFO']]],

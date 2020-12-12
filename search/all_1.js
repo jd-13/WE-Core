@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['addparameterchangelistener_136',['addParameterChangeListener',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ab20e32b692a37265ee74c29e39f9017c',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
+  ['addparameterchangelistener_136',['addParameterChangeListener',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a8fdad0c3c094bb0f798d7f315160939c',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
   ['air_5fgain_137',['AIR_GAIN',['../namespace_w_e_core_1_1_songbird_1_1_parameters.html#a696b9d27af46debf2bfc7783c54cbbd8',1,'WECore::Songbird::Parameters']]],
   ['arenvelopefollowerbase_138',['AREnvelopeFollowerBase',['../class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html',1,'WECore::AREnv::AREnvelopeFollowerBase'],['../class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html#af3b6ea7f44de6ee60f29361cf7894f1e',1,'WECore::AREnv::AREnvelopeFollowerBase::AREnvelopeFollowerBase()']]],
   ['arenvelopefollowerbase_2eh_139',['AREnvelopeFollowerBase.h',['../_a_r_envelope_follower_base_8h.html',1,'']]],

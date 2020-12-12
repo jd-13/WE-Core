@@ -102,7 +102,7 @@ var searchData=
   ['_5ftemponumer_1027',['_tempoNumer',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ae646c90f1a2bb00daa0f8940e8d2bdec',1,'WECore::Richter::RichterLFO']]],
   ['_5ftemposyncswitch_1028',['_tempoSyncSwitch',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#aa96ed4fda4c6bb7e72b3a2a492a410c8',1,'WECore::Richter::RichterLFO']]],
   ['_5fthreshold_1029',['_threshold',['../class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a1653bbe775235d586804131452549b45',1,'WECore::SimpleCompressor::SimpleCompressor']]],
-  ['_5ftooltipwindow_1030',['_tooltipWindow',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html#afacfab46712ccf1655f0d23866dcd26a',1,'WECore::JUCEPlugin::CoreProcessorEditor']]],
+  ['_5ftooltipwindow_1030',['_tooltipWindow',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html#a802736c32b0439e023cbda6bf2cb6e08',1,'WECore::JUCEPlugin::CoreProcessorEditor']]],
   ['_5ftweak_1031',['_tweak',['../class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html#a7e4b967a203eff1ae2fdd103fb062762',1,'WECore::Carve::CarveDSPUnit']]],
   ['_5fvowel1_1032',['_vowel1',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a53a4a090d8f4c4b9eefab004faf74061',1,'WECore::Songbird::SongbirdFilterModule']]],
   ['_5fvowel2_1033',['_vowel2',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a7917076e1eb6ea31a1d9f11e9ef7fb1b',1,'WECore::Songbird::SongbirdFilterModule']]],
