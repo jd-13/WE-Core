@@ -19,6 +19,7 @@ jobs:
         run: Scripts/CIBuild.sh
       - uses: actions/upload-artifact@v2
         with:
+          name: callgrind-clang
           path: build/callgrind.out.*
 
   BuildGCC:
@@ -31,7 +32,10 @@ jobs:
           submodules: true
       - name: RunBuild
         run: Scripts/CIBuild.sh
-
+      - uses: actions/upload-artifact@v2
+        with:
+          name: callgrind-gcc
+          path: build/callgrind.out.*
 
   PublishDoxygen:
     runs-on: ubuntu-latest
