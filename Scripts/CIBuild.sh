@@ -2,8 +2,6 @@
 
 set -e
 
-BUILD_NUMBER=$1
-
 GENERATE_COVERAGE=false
 if [ "$CXX" = "/usr/bin/g++-10" ]; then
     GENERATE_COVERAGE=true
@@ -33,4 +31,4 @@ if [ $GENERATE_COVERAGE = true ]; then
     bash <(curl -s https://codecov.io/bash);
 fi
 
-mv callgrind.out.* callgrind.out.$BUILD_NUMBER
+mv callgrind.out.* callgrind.out.$(git log --pretty=format:'%h' -n 1)
