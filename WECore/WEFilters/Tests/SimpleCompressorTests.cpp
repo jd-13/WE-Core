@@ -101,23 +101,6 @@ SCENARIO("SimpleCompressor: Parameters enforce their bounds correctly") {
     }
 }
 
-SCENARIO("SimpleCompressor: Supported Routings") {
-    GIVEN("A new SimpleCompressor object") {
-
-        Comp::SimpleCompressor<double> compressor;
-
-        WHEN("The supported routings are retrieved") {
-
-            const std::vector<WECore::EffectsRouting> supportedRoutings {compressor.getSupportedRoutings()};
-
-            THEN("The routings match the expected values") {
-                CHECK(supportedRoutings.size() == 1);
-                CHECK(supportedRoutings[0] == WECore::EffectsRouting::IN1_OUT1);
-            }
-        }
-    }
-}
-
 SCENARIO("SimpleCompressor: Silence in = silence out") {
     GIVEN("A SimpleCompressor and a buffer of silent samples") {
 

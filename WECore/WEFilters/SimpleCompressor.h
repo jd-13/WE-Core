@@ -151,8 +151,6 @@ namespace WECore::SimpleCompressor {
         inline virtual void process1in1out(SampleType* inSamples,
                                            size_t numSamples) override;
 
-        inline virtual std::vector<EffectsRouting> getSupportedRoutings() const override;
-
         inline virtual void reset() override;
 
     private:
@@ -246,13 +244,6 @@ namespace WECore::SimpleCompressor {
 
             inSamples[index] = inSamples[index] * _gainApplied;
         }
-    }
-
-    template <typename SampleType>
-    std::vector<EffectsRouting> SimpleCompressor<SampleType>::getSupportedRoutings() const {
-        return std::vector<EffectsRouting>({
-            WECore::EffectsRouting::IN1_OUT1
-        });
     }
 
     template <typename SampleType>

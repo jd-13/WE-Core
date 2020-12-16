@@ -72,23 +72,6 @@ SCENARIO("StereoWidthProcessor: Parameters enforce their bounds correctly") {
     }
 }
 
-SCENARIO("StereoWidthProcessor: Supported routings") {
-    GIVEN("A new StereoWidthProcessor object") {
-
-        WECore::StereoWidth::StereoWidthProcessor<double> processor;
-
-        WHEN("The supported routings are retrieved") {
-
-            const std::vector<WECore::EffectsRouting> supportedRoutings {processor.getSupportedRoutings()};
-
-            THEN("The routings match the expected values") {
-                CHECK(supportedRoutings.size() == 1);
-                CHECK(supportedRoutings[0] == WECore::EffectsRouting::IN2_OUT2);
-            }
-        }
-    }
-}
-
 SCENARIO("StereoWidthProcessor: Silence in = silence out") {
     GIVEN("A StereoWidthProcessor and a buffer of silent samples") {
 
