@@ -115,7 +115,7 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
         WECore::Carve::CarveDSPUnit<double> mCarve;
 
         // set the performance limits
-        Limits mLimits{0.11, 0.07, 0.005};
+        Limits mLimits{0.11, 0.07, 0.01};
 
         // store the execution time for each buffer
         std::vector<double> executionTimes;
@@ -223,7 +223,6 @@ SCENARIO("Performance: SongbirdFilterModule (blend mode), 100 buffers of 1024 sa
         std::vector<double> executionTimes;
 
         WHEN("The samples are processed") {
-            // turn the crossover on
 
             for (int nbuf {0}; nbuf < NUM_BUFFERS; nbuf++) {
 
@@ -272,7 +271,6 @@ SCENARIO("Performance: SongbirdFilterModule (freq mode), 100 buffers of 1024 sam
         std::vector<double> executionTimes;
 
         WHEN("The samples are processed") {
-            // turn the crossover on
 
             for (int nbuf {0}; nbuf < NUM_BUFFERS; nbuf++) {
 
