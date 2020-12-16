@@ -17,6 +17,9 @@ jobs:
           submodules: true
       - name: RunBuild
         run: Scripts/CIBuild.sh
+      - uses: actions/upload-artifact@v2
+        with:
+          path: build/callgrind.out.*
 
   BuildGCC:
     runs-on: ubuntu-latest
