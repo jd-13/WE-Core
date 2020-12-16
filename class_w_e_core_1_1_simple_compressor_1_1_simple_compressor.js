@@ -11,7 +11,6 @@ var class_w_e_core_1_1_simple_compressor_1_1_simple_compressor =
     [ "getKneeWidth", "class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a2ac21dc1533898fa6dd284d21f692fbb", null ],
     [ "getRatio", "class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a3dc3d3a3b0d86ab25dc8774618934cc7", null ],
     [ "getRelease", "class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a9b431d35b1b2f1ba14a923bfa79c0b7d", null ],
-    [ "getSupportedRoutings", "class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#ab6f4329a5285ead4673610c558c025cb", null ],
     [ "getThreshold", "class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a16a529232b72665e8fe27d7b9f9f362f", null ],
     [ "process1in1out", "class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a62314ab6fe7e0f87590d308ae536c44c", null ],
     [ "reset", "class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a818d29e46aad4f712436a92a1f445c97", null ],
