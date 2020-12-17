@@ -49,14 +49,18 @@ namespace WECore::TPTSVF {
                         _gain(Parameters::GAIN.defaultValue),
                         _s1(0),
                         _s2(0),
-                        _mode(Parameters::FILTER_MODE.BYPASS) {}
+                        _g(0),
+                        _h(0),
+                        _mode(Parameters::FILTER_MODE.BYPASS) {
+            _calculateCoefficients();
+        }
 
         TPTSVFilter(const TPTSVFilter& other) = default;
         virtual ~TPTSVFilter() = default;
 
         /**
          * Applies the filtering to a buffer of samples.
-         * Expect seg faults or other memory issues if arguements passed are incorrect. 
+         * Expect seg faults or other memory issues if arguements passed are incorrect.
          *
          * @param[out]  inSamples   Pointer to the first sample of the left channel's buffer
          * @param[in]   numSamples  Number of samples in the buffer
@@ -75,21 +79,21 @@ namespace WECore::TPTSVF {
         /** @name Getter Methods */
         /** @{ */
 
-        int getMode() const {return _mode;}
-        double getCutoff() const {return _cutoffHz;}
-        double getQ() const {return _Q;}
-        double getGain() const {return _gain;}
+        int getMode() const { return _mode; }
+        double getCutoff() const { return _cutoffHz; }
+        double getQ() const { return _Q; }
+        double getGain() const { return _gain; }
 
         /** @} */
 
         /** @name Setter Methods */
         /** @{ */
 
-        void setMode(int val) {_mode = Parameters::FILTER_MODE.BoundsCheck(val);}
-        void setCutoff(double val) {_cutoffHz = Parameters::CUTOFF.BoundsCheck(val);}
-        void setQ(double val) {_Q = Parameters::Q.BoundsCheck(val);}
-        void setGain(double val) {_gain = Parameters::GAIN.BoundsCheck(val);}
-        void setSampleRate(double val) {_sampleRate = val;}
+        void setMode(int val) { _mode = Parameters::FILTER_MODE.BoundsCheck(val); }
+        inline void setCutoff(double val);
+        inline void setQ(double val);
+        void setGain(double val) { _gain = Parameters::GAIN.BoundsCheck(val); }
+        inline void setSampleRate(double val);
 
         /** @} */
 
@@ -97,30 +101,33 @@ namespace WECore::TPTSVF {
         double  _sampleRate,
                 _cutoffHz,
                 _Q,
-                _gain,
-                _s1,
-                _s2;
-        
+                _gain;
+
+        T _s1,
+          _s2,
+          _g,
+          _h;
+
         int _mode;
+
+        void _calculateCoefficients();
     };
 
     template <typename T>
     void TPTSVFilter<T>::processBlock(T* inSamples, size_t numSamples) {
 
         if (_mode != Parameters::FILTER_MODE.BYPASS) {
-            const T g {static_cast<T>(std::tan(CoreMath::DOUBLE_PI * _cutoffHz / _sampleRate))};
-            const T h {static_cast<T>(1.0 / (1 + g / _Q + g * g))};
 
             for (size_t idx {0}; idx < numSamples; idx++) {
                 const T sample {inSamples[idx]};
 
-                const T yH {static_cast<T>(h * (sample - (1.0f / _Q + g) * _s1 - _s2))};
+                const T yH {static_cast<T>(_h * (sample - (1.0f / _Q + _g) * _s1 - _s2))};
 
-                const T yB {static_cast<T>(g * yH + _s1)};
-                _s1 = g * yH + yB;
+                const T yB {static_cast<T>(_g * yH + _s1)};
+                _s1 = _g * yH + yB;
 
-                const T yL {static_cast<T>(g * yB + _s2)};
-                _s2 = g * yB + yL;
+                const T yL {static_cast<T>(_g * yB + _s2)};
+                _s2 = _g * yB + yL;
 
                 switch (_mode) {
                     case Parameters::ModeParameter::PEAK:
@@ -137,5 +144,29 @@ namespace WECore::TPTSVF {
                 }
             }
         }
+    }
+
+    template <typename T>
+    void TPTSVFilter<T>::setCutoff(double val) {
+        _cutoffHz = Parameters::CUTOFF.BoundsCheck(val);
+        _calculateCoefficients();
+    }
+
+    template <typename T>
+    void TPTSVFilter<T>::setQ(double val) {
+        _Q = Parameters::Q.BoundsCheck(val);
+        _calculateCoefficients();
+    }
+
+    template <typename T>
+    void TPTSVFilter<T>::setSampleRate(double val) {
+        _sampleRate = val;
+        _calculateCoefficients();
+    }
+
+    template <typename T>
+    void TPTSVFilter<T>::_calculateCoefficients() {
+        _g  = static_cast<T>(std::tan(CoreMath::DOUBLE_PI * _cutoffHz / _sampleRate));
+        _h  = static_cast<T>(1.0 / (1 + _g / _Q + _g * _g));
     }
 }
