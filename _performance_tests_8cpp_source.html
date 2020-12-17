@@ -187,7 +187,7 @@ $(document).ready(function(){initNavTree('_performance_tests_8cpp_source.html','
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;        <a class="code" href="class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html">WECore::Carve::CarveDSPUnit&lt;double&gt;</a> mCarve;</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;        <span class="comment">// set the performance limits</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        Limits mLimits{0.11, 0.07, 0.005};</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        Limits mLimits{0.11, 0.07, 0.01};</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        <span class="comment">// store the execution time for each buffer</span></div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        std::vector&lt;double&gt; executionTimes;</div>
@@ -295,87 +295,85 @@ $(document).ready(function(){initNavTree('_performance_tests_8cpp_source.html','
 <div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;        std::vector&lt;double&gt; executionTimes;</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
 <div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;        WHEN(<span class="stringliteral">&quot;The samples are processed&quot;</span>) {</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;            <span class="comment">// turn the crossover on</span></div>
-<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160; </div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> nbuf {0}; nbuf &lt; NUM_BUFFERS; nbuf++) {</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                <span class="comment">// fill the buffer with a sine wave</span></div>
-<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                <span class="keywordtype">int</span> iii {0};</div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                std::generate(leftBuffer.begin(), leftBuffer.end(), [&amp;iii]{ return std::sin(iii++); });</div>
-<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                rightBuffer = leftBuffer;</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160; </div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> nbuf {0}; nbuf &lt; NUM_BUFFERS; nbuf++) {</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160; </div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                <span class="comment">// fill the buffer with a sine wave</span></div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                <span class="keywordtype">int</span> iii {0};</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                std::generate(leftBuffer.begin(), leftBuffer.end(), [&amp;iii]{ return std::sin(iii++); });</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                rightBuffer = leftBuffer;</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160; </div>
 <div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160; </div>
-<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
-<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                <span class="comment">// do processing</span></div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                <span class="keyword">const</span> clock_t startTime {clock()};</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                mSongbird.<a class="code" href="class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a4b662dba0268fad7c1f2e96ffe399612">Process2in2out</a>(&amp;leftBuffer[0], &amp;rightBuffer[0], leftBuffer.size());</div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                <span class="keyword">const</span> clock_t endTime {clock()};</div>
-<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                <span class="comment">// calculate the execution time</span></div>
-<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">double</span> CLOCKS_PER_MICROSEC {<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(CLOCKS_PER_SEC) / 1000};</div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">double</span> executionTime {<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(endTime - startTime) / CLOCKS_PER_MICROSEC};</div>
-<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                executionTimes.push_back(executionTime);</div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                CHECK(executionTime &lt; mLimits.INDIVIDUAL);</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;            }</div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160; </div>
-<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;            THEN(<span class="stringliteral">&quot;The average and variance are within limits&quot;</span>) {</div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                Stats mStats = calcAverageAndDeviation(executionTimes);</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                CHECK(mStats.average &lt; mLimits.AVERAGE);</div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                CHECK(mStats.deviation &lt; mLimits.DEVIATION);</div>
-<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160; </div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());</div>
-<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;            }</div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;        }</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    }</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;}</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160; </div>
-<div class="line"><a name="l00259"></a><span class="lineno"><a class="line" href="_performance_tests_8cpp.html#a16a3f2aabc95fbf394c178c0e1ad8f45">  259</a></span>&#160;<a class="code" href="_performance_tests_8cpp.html#af1f6f01bd6b3ff628949263100012fba">SCENARIO</a>(<span class="stringliteral">&quot;Performance: SongbirdFilterModule (freq mode), 100 buffers of 1024 samples each&quot;</span>) {</div>
-<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    GIVEN(<span class="stringliteral">&quot;A SongbirdFilterModule and a buffer of samples&quot;</span>) {</div>
-<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">int</span> NUM_BUFFERS {100};</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        std::vector&lt;double&gt; leftBuffer(1024);</div>
-<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        std::vector&lt;double&gt; rightBuffer(1024);</div>
-<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        <a class="code" href="class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html">WECore::Songbird::SongbirdFilterModule&lt;double&gt;</a> mSongbird;</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;        mSongbird.<a class="code" href="class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a7f37e2691ea6f33120fd295a25f99b72">setModMode</a>(<span class="keyword">true</span>);</div>
-<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        <span class="comment">// set the performance limits</span></div>
-<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;        Limits mLimits{1.8, 1.5, 0.12};</div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160; </div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="comment">// store the execution time for each buffer</span></div>
-<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        std::vector&lt;double&gt; executionTimes;</div>
-<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
-<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        WHEN(<span class="stringliteral">&quot;The samples are processed&quot;</span>) {</div>
-<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            <span class="comment">// turn the crossover on</span></div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                <span class="comment">// do processing</span></div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                <span class="keyword">const</span> clock_t startTime {clock()};</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                mSongbird.<a class="code" href="class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a4b662dba0268fad7c1f2e96ffe399612">Process2in2out</a>(&amp;leftBuffer[0], &amp;rightBuffer[0], leftBuffer.size());</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                <span class="keyword">const</span> clock_t endTime {clock()};</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160; </div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                <span class="comment">// calculate the execution time</span></div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">double</span> CLOCKS_PER_MICROSEC {<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(CLOCKS_PER_SEC) / 1000};</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">double</span> executionTime {<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(endTime - startTime) / CLOCKS_PER_MICROSEC};</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                executionTimes.push_back(executionTime);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                CHECK(executionTime &lt; mLimits.INDIVIDUAL);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;            }</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160; </div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;            THEN(<span class="stringliteral">&quot;The average and variance are within limits&quot;</span>) {</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                Stats mStats = calcAverageAndDeviation(executionTimes);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                CHECK(mStats.average &lt; mLimits.AVERAGE);</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                CHECK(mStats.deviation &lt; mLimits.DEVIATION);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160; </div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;            }</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;        }</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    }</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;}</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160; </div>
+<div class="line"><a name="l00258"></a><span class="lineno"><a class="line" href="_performance_tests_8cpp.html#a16a3f2aabc95fbf394c178c0e1ad8f45">  258</a></span>&#160;<a class="code" href="_performance_tests_8cpp.html#af1f6f01bd6b3ff628949263100012fba">SCENARIO</a>(<span class="stringliteral">&quot;Performance: SongbirdFilterModule (freq mode), 100 buffers of 1024 samples each&quot;</span>) {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    GIVEN(<span class="stringliteral">&quot;A SongbirdFilterModule and a buffer of samples&quot;</span>) {</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160; </div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        <span class="keyword">const</span> <span class="keywordtype">int</span> NUM_BUFFERS {100};</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;        std::vector&lt;double&gt; leftBuffer(1024);</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;        std::vector&lt;double&gt; rightBuffer(1024);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <a class="code" href="class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html">WECore::Songbird::SongbirdFilterModule&lt;double&gt;</a> mSongbird;</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        mSongbird.<a class="code" href="class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a7f37e2691ea6f33120fd295a25f99b72">setModMode</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160; </div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        <span class="comment">// set the performance limits</span></div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;        Limits mLimits{1.8, 1.5, 0.12};</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160; </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;        <span class="comment">// store the execution time for each buffer</span></div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        std::vector&lt;double&gt; executionTimes;</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160; </div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        WHEN(<span class="stringliteral">&quot;The samples are processed&quot;</span>) {</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> nbuf {0}; nbuf &lt; NUM_BUFFERS; nbuf++) {</div>
 <div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160; </div>
-<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> nbuf {0}; nbuf &lt; NUM_BUFFERS; nbuf++) {</div>
-<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160; </div>
-<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                <span class="comment">// fill the buffer with a sine wave</span></div>
-<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                <span class="keywordtype">int</span> iii {0};</div>
-<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;                std::generate(leftBuffer.begin(), leftBuffer.end(), [&amp;iii]{ return std::sin(iii++); });</div>
-<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;                rightBuffer = leftBuffer;</div>
-<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
-<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160; </div>
-<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                <span class="comment">// do processing</span></div>
-<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                <span class="keyword">const</span> clock_t startTime {clock()};</div>
-<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;                mSongbird.<a class="code" href="class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a4b662dba0268fad7c1f2e96ffe399612">Process2in2out</a>(&amp;leftBuffer[0], &amp;rightBuffer[0], leftBuffer.size());</div>
-<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                <span class="keyword">const</span> clock_t endTime {clock()};</div>
-<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160; </div>
-<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                <span class="comment">// calculate the execution time</span></div>
-<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">double</span> CLOCKS_PER_MICROSEC {<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(CLOCKS_PER_SEC) / 1000};</div>
-<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">double</span> executionTime {<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(endTime - startTime) / CLOCKS_PER_MICROSEC};</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;                executionTimes.push_back(executionTime);</div>
-<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;                CHECK(executionTime &lt; mLimits.INDIVIDUAL);</div>
-<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            }</div>
-<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160; </div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            THEN(<span class="stringliteral">&quot;The average and variance are within limits&quot;</span>) {</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                Stats mStats = calcAverageAndDeviation(executionTimes);</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;                CHECK(mStats.average &lt; mLimits.AVERAGE);</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                CHECK(mStats.deviation &lt; mLimits.DEVIATION);</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160; </div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            }</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;        }</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    }</div>
-<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;}</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                <span class="comment">// fill the buffer with a sine wave</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                <span class="keywordtype">int</span> iii {0};</div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                std::generate(leftBuffer.begin(), leftBuffer.end(), [&amp;iii]{ return std::sin(iii++); });</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160;                rightBuffer = leftBuffer;</div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160; </div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160; </div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;                <span class="comment">// do processing</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;                <span class="keyword">const</span> clock_t startTime {clock()};</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;                mSongbird.<a class="code" href="class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a4b662dba0268fad7c1f2e96ffe399612">Process2in2out</a>(&amp;leftBuffer[0], &amp;rightBuffer[0], leftBuffer.size());</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;                <span class="keyword">const</span> clock_t endTime {clock()};</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160; </div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;                <span class="comment">// calculate the execution time</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">double</span> CLOCKS_PER_MICROSEC {<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(CLOCKS_PER_SEC) / 1000};</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                <span class="keyword">const</span> <span class="keywordtype">double</span> executionTime {<span class="keyword">static_cast&lt;</span><span class="keywordtype">double</span><span class="keyword">&gt;</span>(endTime - startTime) / CLOCKS_PER_MICROSEC};</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                executionTimes.push_back(executionTime);</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                CHECK(executionTime &lt; mLimits.INDIVIDUAL);</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;            }</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160; </div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;            THEN(<span class="stringliteral">&quot;The average and variance are within limits&quot;</span>) {</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;                Stats mStats = calcAverageAndDeviation(executionTimes);</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;                CHECK(mStats.average &lt; mLimits.AVERAGE);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;                CHECK(mStats.deviation &lt; mLimits.DEVIATION);</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160; </div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;                appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;            }</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;        }</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    }</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <div class="ttc" id="a_m_o_n_s_t_r_crossover_8h_html"><div class="ttname"><a href="_m_o_n_s_t_r_crossover_8h.html">MONSTRCrossover.h</a></div></div>
