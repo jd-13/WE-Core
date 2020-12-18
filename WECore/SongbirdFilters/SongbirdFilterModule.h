@@ -307,15 +307,6 @@ namespace WECore::Songbird {
         std::map<Channels, SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL>> _filters2;
         std::map<Channels, SongbirdFormantFilter<T, NUM_AIR_FORMANTS>> _filtersAir;
 
-        static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
-
-        T _leftOutputBuffer1[INTERNAL_BUFFER_SIZE];
-        T _rightOutputBuffer1[INTERNAL_BUFFER_SIZE];
-        T _leftOutputBuffer2[INTERNAL_BUFFER_SIZE];
-        T _rightOutputBuffer2[INTERNAL_BUFFER_SIZE];
-        T _leftOutputBufferAir[INTERNAL_BUFFER_SIZE];
-        T _rightOutputBufferAir[INTERNAL_BUFFER_SIZE];
-
         /**
          * Sets the vowel sound that should be created by filter 1 using a Vowel object provided by
          * the caller rather than one of the built in Vowel objects stored in this class.
@@ -398,61 +389,38 @@ namespace WECore::Songbird {
     }
 
     template <typename T>
-    void SongbirdFilterModule<T>::Process1in1out(T* inSamples,
-                                                 size_t numSamples) {
+    void SongbirdFilterModule<T>::Process1in1out(T* inSamples, size_t numSamples) {
 
-        // If the buffer we've been passed is bigger than our static internal buffer, then we need
-        // to break it into chunks
-        const size_t numBuffersRequired {static_cast<size_t>(
-            std::ceil(static_cast<double>(numSamples) / INTERNAL_BUFFER_SIZE)
-            )};
+        for (size_t index {0}; index < numSamples; index++) {
 
-        for (size_t bufferNumber {0}; bufferNumber < numBuffersRequired; bufferNumber++) {
+            // Figure out the modulation here. We have two ways to modulation between
+            // two formant filters.
+            // For MODMODE_BLEND we modulation the filter position to blend between the two filters.
+            // For MODMOD_FREQ we set the filter position to 0 so that we're only using filter 1,
+            // and then modulate the freqency of filter 1 between the two vowels
+            double blendFilterPosition {0};
+            const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(inSamples[index]) : 0};
+            if (_modMode == Parameters::MODMODE_BLEND) {
+                blendFilterPosition = _filterPosition + modAmount;
+            } else {
+                blendFilterPosition = 0;
+                _setVowel1(_calcVowelForFreqMode(modAmount));
+            }
 
-            // Calculate how many samples need to be processed in this chunk
-            const size_t numSamplesRemaining {numSamples - (bufferNumber * INTERNAL_BUFFER_SIZE)};
-            const size_t numSamplesToCopy {std::min(numSamplesRemaining,
-                                            static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
-
-            // Get a pointer to the start of this chunk
-            T* const bufferInputStart {&inSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
-
-            // Copy the samples we need to process in this chunk into the internal buffers
-            std::copy(bufferInputStart, &bufferInputStart[numSamplesToCopy], _leftOutputBuffer1);
-            std::copy(bufferInputStart, &bufferInputStart[numSamplesToCopy], _leftOutputBuffer2);
-            std::copy(bufferInputStart, &bufferInputStart[numSamplesToCopy], _leftOutputBufferAir);
+            // Do the processing for each filter
+            const T originalInput {inSamples[index]};
+            const T filter1Out = _filters1[Channels::LEFT].process(originalInput);
+            const T filter2Out = _filters2[Channels::LEFT].process(originalInput);
+            const T filterAirOut = _filtersAir[Channels::LEFT].process(originalInput);
 
             // Write to output, applying filter position and mix level
-            // always use modFilterPosition as this will take into account any modulation
-            for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
-
-                // Figure out the modulation here. We have two ways to modulation between
-                // two formant filters.
-                // For MODMODE_BLEND we modulation the filter position to blend between the two filters.
-                // For MODMOD_FREQ we set the filter position to 0 so that we're only using filter 1,
-                // and then modulate the freqency of filter 1 between the two vowels
-                double blendFilterPosition {0};
-                const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(bufferInputStart[iii]) : 0};
-                if (_modMode == Parameters::MODMODE_BLEND) {
-                    blendFilterPosition = _filterPosition + modAmount;
-                } else {
-                    blendFilterPosition = 0;
-                    _setVowel1(_calcVowelForFreqMode(modAmount));
-                }
-
-                // Do the processing for each filter
-                _leftOutputBuffer1[iii] = _filters1[Channels::LEFT].process(_leftOutputBuffer1[iii]);
-                _leftOutputBuffer2[iii] = _filters2[Channels::LEFT].process(_leftOutputBuffer2[iii]);
-                _leftOutputBufferAir[iii] = _filtersAir[Channels::LEFT].process(_leftOutputBufferAir[iii]);
-
-                bufferInputStart[iii] = (
-                                            bufferInputStart[iii] * (1 - _mix)
-                                            + _leftOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
-                                            + _leftOutputBuffer2[iii] * blendFilterPosition * _mix
-                                            + _leftOutputBufferAir[iii] * _airGain * _mix
-                                        )
-                                        * _outputGain;
-            }
+            inSamples[index] = (
+                                 originalInput * (1 - _mix)
+                                 + filter1Out * (1 - blendFilterPosition) * _mix
+                                 + filter2Out * blendFilterPosition * _mix
+                                 + filterAirOut * _airGain * _mix
+                             )
+                             * _outputGain;
         }
     }
 
@@ -461,80 +429,55 @@ namespace WECore::Songbird {
                                                  T* rightSamples,
                                                  size_t numSamples) {
 
-        // If the buffer we've been passed is bigger than our static internal buffer, then we need
-        // to break it into chunks
-        const size_t numBuffersRequired {static_cast<size_t>(
-            std::ceil(static_cast<double>(numSamples) / INTERNAL_BUFFER_SIZE)
-            )};
+        for (size_t index {0}; index < numSamples; index++) {
 
-        for (size_t bufferNumber {0}; bufferNumber < numBuffersRequired; bufferNumber++) {
+            // Figure out the modulation here. We have two ways to modulation between
+            // two formant filters.
+            // For MODMODE_BLEND we modulation the filter position to blend between the two filters.
+            // For MODMOD_FREQ we set the filter position to 0 so that we're only using filter 1,
+            // and then modulate the freqency of filter 1 between the two vowels
+            double blendFilterPosition {0};
+            const double modAmount {
+                _modulationSource != nullptr ? _modulationSource->getNextOutput((leftSamples[index] + rightSamples[index]) / 2) : 0
+            };
 
-            // Calculate how many samples need to be processed in this chunk
-            const size_t numSamplesRemaining {numSamples - (bufferNumber * INTERNAL_BUFFER_SIZE)};
-            const size_t numSamplesToCopy {std::min(numSamplesRemaining,
-                                            static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
+            if (_modMode == Parameters::MODMODE_BLEND) {
+                blendFilterPosition = _filterPosition + modAmount;
+            } else {
+                blendFilterPosition = 0;
+                _setVowel1(_calcVowelForFreqMode(modAmount));
+            }
 
-            // Get a pointer to the start of this chunk
-            T* const leftBufferInputStart {&leftSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
-            T* const rightBufferInputStart {&rightSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
+            // Do the processing for each filter
+            const T originalLeftIn {leftSamples[index]};
+            const T originalRightIn {rightSamples[index]};
 
-            // Copy the samples we need to process in this chunk into the internal buffers
-            std::copy(leftBufferInputStart, &leftBufferInputStart[numSamplesToCopy], _leftOutputBuffer1);
-            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _rightOutputBuffer1);
+            const T filter1LeftOut = _filters1[Channels::LEFT].process(originalLeftIn);
+            const T filter1RightOut = _filters1[Channels::RIGHT].process(originalRightIn);
 
-            std::copy(leftBufferInputStart, &leftBufferInputStart[numSamplesToCopy], _leftOutputBuffer2);
-            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _rightOutputBuffer2);
+            const T filter2LeftOut = _filters2[Channels::LEFT].process(originalLeftIn);
+            const T filter2RightOut = _filters2[Channels::RIGHT].process(originalRightIn);
 
-            std::copy(leftBufferInputStart, &leftBufferInputStart[numSamplesToCopy], _leftOutputBufferAir);
-            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _rightOutputBufferAir);
+            const T filterAirLeftOut = _filtersAir[Channels::LEFT].process(originalLeftIn);
+            const T filterAirRightOut = _filtersAir[Channels::RIGHT].process(originalRightIn);
+
 
             // Write to output, applying filter position and mix level
-            // always use modFilterPosition as this will take into account any modulation
-            for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
+            leftSamples[index] = (
+                                    originalLeftIn * (1 - _mix)
+                                    + filter1LeftOut * (1 - blendFilterPosition) * _mix
+                                    + filter2LeftOut * blendFilterPosition * _mix
+                                    + filterAirLeftOut * _airGain * _mix
+                                )
+                                * _outputGain;
 
-                // Figure out the modulation here. We have two ways to modulation between
-                // two formant filters.
-                // For MODMODE_BLEND we modulation the filter position to blend between the two filters.
-                // For MODMOD_FREQ we set the filter position to 0 so that we're only using filter 1,
-                // and then modulate the freqency of filter 1 between the two vowels
-                double blendFilterPosition {0};
-                const double modAmount {
-                    _modulationSource != nullptr ? _modulationSource->getNextOutput((leftBufferInputStart[iii] + rightBufferInputStart[iii]) / 2) : 0
-                };
-
-                if (_modMode == Parameters::MODMODE_BLEND) {
-                    blendFilterPosition = _filterPosition + modAmount;
-                } else {
-                    blendFilterPosition = 0;
-                    _setVowel1(_calcVowelForFreqMode(modAmount));
-                }
-
-                // Do the processing for each filter
-                _leftOutputBuffer1[iii] = _filters1[Channels::LEFT].process(_leftOutputBuffer1[iii]);
-                _rightOutputBuffer1[iii] = _filters1[Channels::RIGHT].process(_rightOutputBuffer1[iii]);
-
-                _leftOutputBuffer2[iii] = _filters2[Channels::LEFT].process(_leftOutputBuffer2[iii]);
-                _rightOutputBuffer2[iii] = _filters2[Channels::RIGHT].process(_rightOutputBuffer2[iii]);
-
-                _leftOutputBufferAir[iii] = _filtersAir[Channels::LEFT].process(_leftOutputBufferAir[iii]);
-                _rightOutputBufferAir[iii] = _filtersAir[Channels::RIGHT].process(_rightOutputBufferAir[iii]);
-
-                leftBufferInputStart[iii] = (
-                                                leftBufferInputStart[iii] * (1 - _mix)
-                                                + _leftOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
-                                                + _leftOutputBuffer2[iii] * blendFilterPosition * _mix
-                                                + _leftOutputBufferAir[iii] * _airGain * _mix
-                                            )
-                                            * _outputGain;
-
-                rightBufferInputStart[iii] = (
-                                                rightBufferInputStart[iii] * (1 - _mix)
-                                                + _rightOutputBuffer1[iii] * (1 - blendFilterPosition) * _mix
-                                                + _rightOutputBuffer2[iii] * blendFilterPosition * _mix
-                                                + _rightOutputBufferAir[iii] * _airGain * _mix
-                                            )
-                                            * _outputGain;
-            }
+            rightSamples[index] = (
+                                    originalRightIn * (1 - _mix)
+                                    + filter1RightOut * (1 - blendFilterPosition) * _mix
+                                    + filter2RightOut * blendFilterPosition * _mix
+                                    + filterAirRightOut * _airGain * _mix
+                                )
+                                * _outputGain;
         }
     }
 
