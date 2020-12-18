@@ -1,0 +1,23 @@
+**** New Test Run: 2020-12-18 19:39:58
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.04764 Deviation: 0.00595186
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.26356 Deviation: 0.0210892
+Scenario: Performance: SongbirdFilterModule (blend mode), 100 buffers of 1024 samples each:     Average: 0.3113 Deviation: 0.0386004
+Scenario: Performance: SongbirdFilterModule (freq mode), 100 buffers of 1024 samples each:     Average: 0.72953 Deviation: 0.0442873
+
+**** New Test Run: 2020-12-18 19:40:01
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.04466 Deviation: 0.00363268
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.28063 Deviation: 0.0555299
+Scenario: Performance: SongbirdFilterModule (blend mode), 100 buffers of 1024 samples each:     Average: 0.30172 Deviation: 0.036204
+Scenario: Performance: SongbirdFilterModule (freq mode), 100 buffers of 1024 samples each:     Average: 0.75528 Deviation: 0.0593839
+
+**** New Test Run: 2020-12-18 19:40:03
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.04695 Deviation: 0.00563427
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.26295 Deviation: 0.019233
+Scenario: Performance: SongbirdFilterModule (blend mode), 100 buffers of 1024 samples each:     Average: 0.29019 Deviation: 0.0233306
+Scenario: Performance: SongbirdFilterModule (freq mode), 100 buffers of 1024 samples each:     Average: 0.73171 Deviation: 0.04508
+
+**** New Test Run: 2020-12-18 19:40:04
+Scenario: Performance: CarveDSPUnit, 100 buffers of 1024 samples each:     Average: 0.05193 Deviation: 0.0117519
+Scenario: Performance: MONSTRCrossover, 100 buffers of 1024 samples each:     Average: 0.27418 Deviation: 0.0287091
+Scenario: Performance: SongbirdFilterModule (blend mode), 100 buffers of 1024 samples each:     Average: 0.2944 Deviation: 0.0216118
+Scenario: Performance: SongbirdFilterModule (freq mode), 100 buffers of 1024 samples each:     Average: 0.72984 Deviation: 0.0727392
