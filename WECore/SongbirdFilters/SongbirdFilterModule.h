@@ -24,7 +24,6 @@
 #pragma once
 
 #include <array>
-#include <map>
 #include <memory>
 
 #include "SongbirdFormantFilter.h"
@@ -51,14 +50,6 @@ namespace WECore::Songbird {
      * A type to make refering to a group of formants easier.
      */
     typedef std::array<Formant, NUM_FORMANTS_PER_VOWEL> Vowel;
-
-    /**
-     * Enums used to make identifing left or right channel filters easier
-     */
-    enum class Channels {
-        LEFT,
-        RIGHT
-    };
 
     /**
      * A filter module providing five different vowel sounds, any two of which can be selected
@@ -120,8 +111,8 @@ namespace WECore::Songbird {
                 Formant(2700, -15), Formant(3500, -25)
             };
 
-            _filtersAir[Channels::LEFT].setFormants(airFormants);
-            _filtersAir[Channels::RIGHT].setFormants(airFormants);
+            _filterAirLeft.setFormants(airFormants);
+            _filterAirRight.setFormants(airFormants);
         }
 
         virtual ~SongbirdFilterModule() {}
@@ -303,9 +294,14 @@ namespace WECore::Songbird {
 
         std::shared_ptr<ModulationSource<double>> _modulationSource;
 
-        std::map<Channels, SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL>> _filters1;
-        std::map<Channels, SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL>> _filters2;
-        std::map<Channels, SongbirdFormantFilter<T, NUM_AIR_FORMANTS>> _filtersAir;
+        SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL> _filter1Left;
+        SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL> _filter1Right;
+
+        SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL> _filter2Left;
+        SongbirdFormantFilter<T, NUM_FORMANTS_PER_VOWEL> _filter2Right;
+
+        SongbirdFormantFilter<T, NUM_AIR_FORMANTS> _filterAirLeft;
+        SongbirdFormantFilter<T, NUM_AIR_FORMANTS> _filterAirRight;
 
         /**
          * Sets the vowel sound that should be created by filter 1 using a Vowel object provided by
@@ -342,8 +338,8 @@ namespace WECore::Songbird {
         // perform a bounds check, then apply the appropriate formants
         _vowel1 = Parameters::VOWEL.BoundsCheck(val);
 
-        _filters1[Channels::LEFT].setFormants(_allFormants[_vowel1 - 1]);
-        _filters1[Channels::RIGHT].setFormants(_allFormants[_vowel1 - 1]);
+        _filter1Left.setFormants(_allFormants[_vowel1 - 1]);
+        _filter1Right.setFormants(_allFormants[_vowel1 - 1]);
     }
 
     template <typename T>
@@ -351,30 +347,30 @@ namespace WECore::Songbird {
         // perform a bounds check, then apply the appropriate formants
         _vowel2 = Parameters::VOWEL.BoundsCheck(val);
 
-        _filters2[Channels::LEFT].setFormants(_allFormants[_vowel2 - 1]);
-        _filters2[Channels::RIGHT].setFormants(_allFormants[_vowel2 - 1]);
+        _filter2Left.setFormants(_allFormants[_vowel2 - 1]);
+        _filter2Right.setFormants(_allFormants[_vowel2 - 1]);
     }
 
     template <typename T>
     void SongbirdFilterModule<T>::setSampleRate(double val) {
         _sampleRate = val;
 
-        _filters1[Channels::LEFT].setSampleRate(val);
-        _filters1[Channels::RIGHT].setSampleRate(val);
-        _filters2[Channels::LEFT].setSampleRate(val);
-        _filters2[Channels::RIGHT].setSampleRate(val);
-        _filtersAir[Channels::LEFT].setSampleRate(val);
-        _filtersAir[Channels::RIGHT].setSampleRate(val);
+        _filter1Left.setSampleRate(val);
+        _filter1Right.setSampleRate(val);
+        _filter2Left.setSampleRate(val);
+        _filter2Right.setSampleRate(val);
+        _filterAirLeft.setSampleRate(val);
+        _filterAirRight.setSampleRate(val);
     }
 
     template <typename T>
     void SongbirdFilterModule<T>::reset() {
-        _filters1[Channels::LEFT].reset();
-        _filters1[Channels::RIGHT].reset();
-        _filters2[Channels::LEFT].reset();
-        _filters2[Channels::RIGHT].reset();
-        _filtersAir[Channels::LEFT].reset();
-        _filtersAir[Channels::RIGHT].reset();
+        _filter1Left.reset();
+        _filter1Right.reset();
+        _filter2Left.reset();
+        _filter2Right.reset();
+        _filterAirLeft.reset();
+        _filterAirRight.reset();
     }
 
     template <typename T>
@@ -409,9 +405,9 @@ namespace WECore::Songbird {
 
             // Do the processing for each filter
             const T originalInput {inSamples[index]};
-            const T filter1Out = _filters1[Channels::LEFT].process(originalInput);
-            const T filter2Out = _filters2[Channels::LEFT].process(originalInput);
-            const T filterAirOut = _filtersAir[Channels::LEFT].process(originalInput);
+            const T filter1Out = _filter1Left.process(originalInput);
+            const T filter2Out = _filter2Left.process(originalInput);
+            const T filterAirOut = _filterAirLeft.process(originalInput);
 
             // Write to output, applying filter position and mix level
             inSamples[index] = (
@@ -452,14 +448,14 @@ namespace WECore::Songbird {
             const T originalLeftIn {leftSamples[index]};
             const T originalRightIn {rightSamples[index]};
 
-            const T filter1LeftOut = _filters1[Channels::LEFT].process(originalLeftIn);
-            const T filter1RightOut = _filters1[Channels::RIGHT].process(originalRightIn);
+            const T filter1LeftOut = _filter1Left.process(originalLeftIn);
+            const T filter1RightOut = _filter1Right.process(originalRightIn);
 
-            const T filter2LeftOut = _filters2[Channels::LEFT].process(originalLeftIn);
-            const T filter2RightOut = _filters2[Channels::RIGHT].process(originalRightIn);
+            const T filter2LeftOut = _filter2Left.process(originalLeftIn);
+            const T filter2RightOut = _filter2Right.process(originalRightIn);
 
-            const T filterAirLeftOut = _filtersAir[Channels::LEFT].process(originalLeftIn);
-            const T filterAirRightOut = _filtersAir[Channels::RIGHT].process(originalRightIn);
+            const T filterAirLeftOut = _filterAirLeft.process(originalLeftIn);
+            const T filterAirRightOut = _filterAirRight.process(originalRightIn);
 
 
             // Write to output, applying filter position and mix level
@@ -483,8 +479,8 @@ namespace WECore::Songbird {
 
     template <typename T>
     void SongbirdFilterModule<T>::_setVowel1(const Vowel& val) {
-        _filters1[Channels::LEFT].setFormants(val);
-        _filters1[Channels::RIGHT].setFormants(val);
+        _filter1Left.setFormants(val);
+        _filter1Right.setFormants(val);
     }
 
     template <typename T>
