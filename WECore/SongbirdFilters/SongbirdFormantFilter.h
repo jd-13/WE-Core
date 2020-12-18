@@ -62,10 +62,9 @@ namespace WECore::Songbird {
          * Applies the filtering to a mono buffer of samples.
          * Expect seg faults or other memory issues if arguements passed are incorrect.
          *
-         * @param   inSamples   Pointer to the first sample of the buffer
-         * @param   numSamples  Number of samples in the buffer
+         * @param   inSample   Sample to process
          */
-        inline void process(T* inSamples, size_t numSamples);
+        inline T process(T inSample);
 
         /**
          * Sets the properties of each bandpass filter contained in the object.
@@ -94,52 +93,24 @@ namespace WECore::Songbird {
 
     private:
         std::array<TPTSVF::TPTSVFilter<T>, NUM_FORMANTS> _filters;
-
-        static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
-
-        T _outputBuffer[INTERNAL_BUFFER_SIZE];
-        T _tempInputBuffer[INTERNAL_BUFFER_SIZE];
     };
 
     template <typename T, size_t NUM_FORMANTS>
-    void SongbirdFormantFilter<T, NUM_FORMANTS>::process(T* inSamples, size_t numSamples) {
+    T SongbirdFormantFilter<T, NUM_FORMANTS>::process(T inSample) {
 
-        // If the buffer we've been passed is bigger than our static internal buffer, then we need
-        // to break it into chunks
-        const size_t numBuffersRequired {static_cast<size_t>(
-            std::ceil(static_cast<double>(numSamples) / INTERNAL_BUFFER_SIZE)
-            )};
+        T outSample {0};
 
-        for (size_t bufferNumber {0}; bufferNumber < numBuffersRequired; bufferNumber++) {
+        // Perform the filtering for each formant peak
+        for (size_t filterNumber {0}; filterNumber < _filters.size(); filterNumber++) {
 
-            // Calculate how many samples need to be processed in this chunk
-            const size_t numSamplesRemaining {numSamples - (bufferNumber * INTERNAL_BUFFER_SIZE)};
-            const size_t numSamplesToCopy {std::min(numSamplesRemaining,
-                                            static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
+            T tempSample {inSample};
 
-            // Empty the output buffer
-            std::fill(_outputBuffer, &_outputBuffer[numSamplesToCopy], 0);
+            _filters[filterNumber].processBlock(&tempSample, 1);
 
-            // Get a pointer to the start of this chunk
-            T* const bufferInputStart {&inSamples[bufferNumber * INTERNAL_BUFFER_SIZE]};
-
-            // Perform the filtering for each formant peak
-            for (size_t filterNumber {0}; filterNumber < _filters.size(); filterNumber++) {
-
-                // Copy the input samples to the temp buffer
-                std::copy(bufferInputStart, &bufferInputStart[numSamplesToCopy], _tempInputBuffer);
-
-                _filters[filterNumber].processBlock(_tempInputBuffer, numSamplesToCopy);
-
-                // Add the processed samples to the output buffer
-                for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
-                    _outputBuffer[iii] += _tempInputBuffer[iii];
-                }
-            }
-
-            // Write the buffer to output
-            std::copy(_outputBuffer, &_outputBuffer[numSamplesToCopy], bufferInputStart);
+            outSample += tempSample;
         }
+
+        return outSample;
     }
 
     template <typename T, size_t NUM_FORMANTS>

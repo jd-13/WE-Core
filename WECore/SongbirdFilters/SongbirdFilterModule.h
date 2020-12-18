@@ -441,9 +441,9 @@ namespace WECore::Songbird {
                 }
 
                 // Do the processing for each filter
-                _filters1[Channels::LEFT].process(&_leftOutputBuffer1[iii], 1);
-                _filters2[Channels::LEFT].process(&_leftOutputBuffer2[iii], 1);
-                _filtersAir[Channels::LEFT].process(&_leftOutputBufferAir[iii], 1);
+                _leftOutputBuffer1[iii] = _filters1[Channels::LEFT].process(_leftOutputBuffer1[iii]);
+                _leftOutputBuffer2[iii] = _filters2[Channels::LEFT].process(_leftOutputBuffer2[iii]);
+                _leftOutputBufferAir[iii] = _filtersAir[Channels::LEFT].process(_leftOutputBufferAir[iii]);
 
                 bufferInputStart[iii] = (
                                             bufferInputStart[iii] * (1 - _mix)
@@ -510,14 +510,14 @@ namespace WECore::Songbird {
                 }
 
                 // Do the processing for each filter
-                _filters1[Channels::LEFT].process(&_leftOutputBuffer1[iii], 1);
-                _filters1[Channels::RIGHT].process(&_rightOutputBuffer1[iii], 1);
+                _leftOutputBuffer1[iii] = _filters1[Channels::LEFT].process(_leftOutputBuffer1[iii]);
+                _rightOutputBuffer1[iii] = _filters1[Channels::RIGHT].process(_rightOutputBuffer1[iii]);
 
-                _filters2[Channels::LEFT].process(&_leftOutputBuffer2[iii], 1);
-                _filters2[Channels::RIGHT].process(&_rightOutputBuffer2[iii], 1);
+                _leftOutputBuffer2[iii] = _filters2[Channels::LEFT].process(_leftOutputBuffer2[iii]);
+                _rightOutputBuffer2[iii] = _filters2[Channels::RIGHT].process(_rightOutputBuffer2[iii]);
 
-                _filtersAir[Channels::LEFT].process(&_leftOutputBufferAir[iii], 1);
-                _filtersAir[Channels::RIGHT].process(&_rightOutputBufferAir[iii], 1);
+                _leftOutputBufferAir[iii] = _filtersAir[Channels::LEFT].process(_leftOutputBufferAir[iii]);
+                _rightOutputBufferAir[iii] = _filtersAir[Channels::RIGHT].process(_rightOutputBufferAir[iii]);
 
                 leftBufferInputStart[iii] = (
                                                 leftBufferInputStart[iii] * (1 - _mix)
