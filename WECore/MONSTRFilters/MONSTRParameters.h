@@ -30,6 +30,10 @@ namespace WECore::MONSTR::Parameters {
                    BANDSWITCH_ON {true},
                    BANDSWITCH_DEFAULT {BANDSWITCH_ON};
 
+    // constexpr as it initialises some internal memebers
+    constexpr int _MAX_NUM_BANDS {6};
+    constexpr int _DEFAULT_NUM_BANDS {3};
+
     //@{
     /**
      * A parameter which can take any float value between the ranges defined.
@@ -39,6 +43,7 @@ namespace WECore::MONSTR::Parameters {
      *      default value
      */
     const ParameterDefinition::RangedParameter<double> CROSSOVER_FREQUENCY(40, 19500, 500);
+    const ParameterDefinition::RangedParameter<int> NUM_BANDS(2, _MAX_NUM_BANDS, _DEFAULT_NUM_BANDS);
     //@}
 
 }

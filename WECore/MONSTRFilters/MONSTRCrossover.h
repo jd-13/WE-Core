@@ -126,7 +126,27 @@ namespace WECore::MONSTR {
          */
         inline double getCrossoverFrequency(size_t index) const;
 
+        /**
+         * Returns the number of bands available. Increased or decreased using addBand() and
+         * removeBand().
+         *
+         * @return  Number of bands
+         *
+         * @see     NUM_BANDS for valid values
+         */
+        size_t getNumBands() { return _numBands; }
+
         /** @} */
+
+        /**
+         * Increments the number of bands (if currently below the maximum number)
+         */
+        inline void addBand();
+
+        /**
+         * Decrements the number of bands (if currently above the minimum)
+         */
+        inline void removeBand();
 
         /**
          * Applies the filtering to a stereo buffer of samples.
@@ -162,14 +182,18 @@ namespace WECore::MONSTR {
             SampleType* rightBuffer;
         };
 
-        std::array<BandWrapper, 3> _bands;
+        size_t _numBands;
+        std::array<BandWrapper, Parameters::_MAX_NUM_BANDS> _bands;
     };
 
     template <typename SampleType>
-    MONSTRCrossover<SampleType>::MONSTRCrossover() {
+    MONSTRCrossover<SampleType>::MONSTRCrossover() : _numBands(Parameters::_DEFAULT_NUM_BANDS) {
 
-        _bands[1].band.setBandType(BandType::MIDDLE, 100, 100);
-        _bands[2].band.setBandType(BandType::UPPER, 100, 100);
+        // The bands are defaulted to lower, set them correctly
+        static_assert(Parameters::_DEFAULT_NUM_BANDS == 3,
+                      "This constructor code needs to be updated if the default changes");
+        _bands[1].band.setBandType(BandType::MIDDLE);
+        _bands[2].band.setBandType(BandType::UPPER);
 
         setCrossoverFrequency(0, 100);
         setCrossoverFrequency(1, 5000);
@@ -256,6 +280,51 @@ namespace WECore::MONSTR {
     }
 
     template <typename SampleType>
+    void MONSTRCrossover<SampleType>::addBand() {
+
+        if (static_cast<int>(_numBands) < Parameters::NUM_BANDS.maxValue) {
+
+            // Convert the current highest band to a middle band
+            _bands[_numBands - 1].band.setBandType(BandType::MIDDLE);
+
+            // Set the next band up to be an upper band
+            _bands[_numBands].band.setBandType(BandType::UPPER);
+
+            const double oldHighestCrossover {getCrossoverFrequency(_numBands - 2)};
+
+            if (oldHighestCrossover < Parameters::CROSSOVER_FREQUENCY.maxValue) {
+                // The old highest crossover frequency is below the maximum, insert the new one halfway
+                // between it and the maximum
+                const double topBandWidth {Parameters::CROSSOVER_FREQUENCY.maxValue - oldHighestCrossover};
+                setCrossoverFrequency(_numBands - 1, oldHighestCrossover + (topBandWidth / 2));
+            } else {
+                // The old highest crossover is at the maximum, move it halfway down to the one below
+                // and place the new one at the maximum
+                const double secondHighestCrossover {getCrossoverFrequency(_numBands - 3)};
+                const double bandWidth {Parameters::CROSSOVER_FREQUENCY.maxValue - secondHighestCrossover};
+
+                setCrossoverFrequency(_numBands - 2, secondHighestCrossover + (bandWidth / 2));
+                setCrossoverFrequency(_numBands - 1, Parameters::CROSSOVER_FREQUENCY.maxValue);
+            }
+
+            _numBands++;
+        }
+
+        reset();
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::removeBand() {
+
+        if (static_cast<int>(_numBands) > Parameters::NUM_BANDS.minValue) {
+            _numBands--;
+            _bands[_numBands - 1].band.setBandType(BandType::UPPER);
+        }
+
+        reset();
+    }
+
+    template <typename SampleType>
     void MONSTRCrossover<SampleType>::Process2in2out(SampleType* leftSample,
                                                      SampleType* rightSample,
                                                      size_t numSamples) {
@@ -278,7 +347,7 @@ namespace WECore::MONSTR {
             SampleType* const rightBufferInputStart {&rightSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
 
             // Populate the band specific buffers, and do the processing
-            for (size_t bandIndex {0}; bandIndex < _bands.size(); bandIndex++) {
+            for (size_t bandIndex {0}; bandIndex < _numBands; bandIndex++) {
                 std::copy(leftBufferInputStart,
                           &leftBufferInputStart[numSamplesToCopy],
                           _bands[bandIndex].leftBuffer);
@@ -299,7 +368,7 @@ namespace WECore::MONSTR {
                 leftBufferInputStart[sampleIndex] = 0;
                 rightBufferInputStart[sampleIndex] = 0;
 
-                for (size_t bandIndex {0}; bandIndex < _bands.size(); bandIndex++) {
+                for (size_t bandIndex {0}; bandIndex < _numBands; bandIndex++) {
                     leftBufferInputStart[sampleIndex] += _bands[bandIndex].leftBuffer[sampleIndex];
                     rightBufferInputStart[sampleIndex] += _bands[bandIndex].rightBuffer[sampleIndex];
                 }

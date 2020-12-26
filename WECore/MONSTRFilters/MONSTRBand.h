@@ -128,7 +128,7 @@ namespace WECore::MONSTR {
 
         inline void setHighCutoff(double val);
 
-        inline void setBandType(BandType bandType, double lowCutoff, double highCutoff);
+        inline void setBandType(BandType bandType);
 
         inline void setSampleRate(double newSampleRate);
 
@@ -216,13 +216,8 @@ namespace WECore::MONSTR {
     }
 
     template <typename SampleType>
-    void MONSTRBand<SampleType>::setBandType(BandType bandType,
-                                             double lowCutoff,
-                                             double highCutoff) {
+    void MONSTRBand<SampleType>::setBandType(BandType bandType) {
         _bandType = bandType;
-        setLowCutoff(lowCutoff);
-        setHighCutoff(highCutoff);
-        reset();
     }
 
     template <typename SampleType>

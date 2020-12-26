@@ -215,3 +215,106 @@ SCENARIO("MONSTRCrossover: Small buffer") {
         }
     }
 }
+
+SCENARIO("MONSTRCrossover: Adding a band - existing crossover frequency below maximum") {
+    GIVEN("A MONSTRCrossover with 3 bands and the highest crossover frequency below the maximum") {
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+
+        WHEN("A new band is added") {
+
+            mCrossover.addBand();
+
+            THEN("The new crossover freq is halfway between the old one and the maximum") {
+                CHECK(mCrossover.getNumBands() == 4);
+                CHECK(mCrossover.getCrossoverFrequency(0) == Approx(100.0));
+                CHECK(mCrossover.getCrossoverFrequency(1) == Approx(5000.0));
+                CHECK(mCrossover.getCrossoverFrequency(2) == Approx(12250.0));
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: Adding a band - existing crossover at maximum") {
+    GIVEN("A MONSTRCrossover with 3 bands and the highest crossover frequency at the maximum") {
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+        mCrossover.setCrossoverFrequency(1, WECore::MONSTR::Parameters::CROSSOVER_FREQUENCY.maxValue);
+
+        WHEN("A new band is added") {
+
+            mCrossover.addBand();
+
+            THEN("The old highest crossover frequency is moved down to halfway between the one below and the maximum") {
+                CHECK(mCrossover.getNumBands() == 4);
+                CHECK(mCrossover.getCrossoverFrequency(0) == Approx(100.0));
+                CHECK(mCrossover.getCrossoverFrequency(1) == Approx(9800.0));
+                CHECK(mCrossover.getCrossoverFrequency(2) == Approx(19500.0));
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: Adding a band - existing crossover at maximum and only 2 bands") {
+    GIVEN("A MONSTRCrossover with 2 bands and the crossover at the maximum") {
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+        mCrossover.removeBand();
+        mCrossover.setCrossoverFrequency(0, 19500);
+
+        WHEN("A new band is added") {
+
+            mCrossover.addBand();
+
+            THEN("The old highest crossover is moved down half of the maximum, the new one is at the maximum") {
+                CHECK(mCrossover.getNumBands() == 3);
+                CHECK(mCrossover.getCrossoverFrequency(0) == Approx(9750.0));
+                CHECK(mCrossover.getCrossoverFrequency(1) == Approx(19500.0));
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: Adding a band - at maximum number of bands") {
+    GIVEN("A MONSTRCrossover with 6 bands") {
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+        mCrossover.addBand();
+        mCrossover.addBand();
+        mCrossover.addBand();
+
+        WHEN("A new band is added") {
+
+            mCrossover.addBand();
+
+            THEN("The band isn't actually added") {
+                CHECK(mCrossover.getNumBands() == 6);
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: Removing bands") {
+    GIVEN("A MONSTRCrossover with 3 bands") {
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+
+        WHEN("A band is removed") {
+
+            mCrossover.removeBand();
+
+            THEN("The band is actually removed") {
+                CHECK(mCrossover.getNumBands() == 2);
+            }
+        }
+
+        WHEN("Another band is removed") {
+
+            mCrossover.removeBand();
+
+            THEN("The band isn't removed as it is already at the minimum number") {
+                CHECK(mCrossover.getNumBands() == 2);
+            }
+        }
+    }
+}
