@@ -24,6 +24,7 @@
 #pragma once
 
 #include <algorithm>
+#include <array>
 #include "MONSTRBand.h"
 
 namespace WECore::MONSTR {
@@ -134,7 +135,7 @@ namespace WECore::MONSTR {
          * @param[out]   leftSample      Pointer to the first sample of the left channel's buffer
          * @param[out]   rightSample     Pointer to the first sample of the right channel's buffer
          * @param[in]    numSamples      Number of samples in the buffer. The left and right buffers
-         *                               must be the same size.
+         *                               must be the same size
          */
         inline void Process2in2out(SampleType* leftSample,
                                    SampleType* rightSample,
@@ -149,87 +150,95 @@ namespace WECore::MONSTR {
     private:
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
 
-        MONSTRBand<SampleType>  _band1,
-                                _band2,
-                                _band3;
+        class BandWrapper {
+        public:
+            BandWrapper() : band(BandType::LOWER) {
+                leftBuffer = new SampleType[INTERNAL_BUFFER_SIZE];
+                rightBuffer = new SampleType[INTERNAL_BUFFER_SIZE];
+            }
 
-        SampleType _band1LeftBuffer[INTERNAL_BUFFER_SIZE];
-        SampleType _band1RightBuffer[INTERNAL_BUFFER_SIZE];
-        SampleType _band2LeftBuffer[INTERNAL_BUFFER_SIZE];
-        SampleType _band2RightBuffer[INTERNAL_BUFFER_SIZE];
-        SampleType _band3LeftBuffer[INTERNAL_BUFFER_SIZE];
-        SampleType _band3RightBuffer[INTERNAL_BUFFER_SIZE];
+            MONSTRBand<SampleType> band;
+            SampleType* leftBuffer;
+            SampleType* rightBuffer;
+        };
+
+        std::array<BandWrapper, 3> _bands;
     };
 
     template <typename SampleType>
-    MONSTRCrossover<SampleType>::MONSTRCrossover() : _band1(BandType::LOWER),
-                                                     _band2(BandType::MIDDLE),
-                                                     _band3(BandType::UPPER) {
+    MONSTRCrossover<SampleType>::MONSTRCrossover() {
+
+        _bands[1].band.setBandType(BandType::MIDDLE, 100, 100);
+        _bands[2].band.setBandType(BandType::UPPER, 100, 100);
+
         setCrossoverFrequency(0, 100);
         setCrossoverFrequency(1, 5000);
     }
 
     template <typename SampleType>
     void MONSTRCrossover<SampleType>::setIsActive(size_t index, bool isActive) {
-        if (index == 0) {
-            _band1.setIsActive(isActive);
-        } else if (index == 1) {
-            _band2.setIsActive(isActive);
-        } else if (index == 2) {
-            _band3.setIsActive(isActive);
+        if (index < _bands.size()) {
+            _bands[index].band.setIsActive(isActive);
         }
     }
 
     template <typename SampleType>
     void MONSTRCrossover<SampleType>::setCrossoverFrequency(size_t index, double val) {
-        val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
 
-        if (index == 0) {
-            _band1.setHighCutoff(val);
-            _band2.setLowCutoff(val);
-        } else if (index == 1) {
-            _band2.setHighCutoff(val);
-            _band3.setLowCutoff(val);
-        }
+        if (index < _bands.size() - 1) {
 
-        // Move the other crossovers if needed as they should never swap places
-        if (getCrossoverFrequency(0) > getCrossoverFrequency(1)) {
-            if (index == 0) {
-                setCrossoverFrequency(1, val);
-            } else if (index == 1) {
-                setCrossoverFrequency(0, val);
+            // Set the crossover frequency
+            val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
+            _bands[index].band.setHighCutoff(val);
+            _bands[index + 1].band.setLowCutoff(val);
+
+            // Make sure the crossover frequencies are still in the correct order
+            for (size_t otherCrossoverIndex {0}; otherCrossoverIndex < _bands.size() - 1; otherCrossoverIndex++) {
+
+                const double otherCrossoverFrequency {getCrossoverFrequency(otherCrossoverIndex)};
+
+                const bool needsCrossoverUpdate {
+                    // We've moved the crossover frequency of index below another one that should be
+                    // below it - move the other one to the new value
+                    (val < otherCrossoverFrequency && otherCrossoverIndex < index) ||
+
+                    // We've moved the crossover frequency of index above another one that should be
+                    // above it - move the other one to the new value
+                    (otherCrossoverFrequency > val && index > otherCrossoverIndex)
+                };
+
+                if (needsCrossoverUpdate) {
+                    // We've moved the crossover frequency of index below another one that should be
+                    // below it - move the other one to the new value
+                    setCrossoverFrequency(otherCrossoverIndex, val);
+
+                }
             }
         }
     }
 
     template <typename SampleType>
     void MONSTRCrossover<SampleType>::setEffectsProcessor(size_t index, std::shared_ptr<EffectsProcessor<SampleType>> processor) {
-        if (index == 0) {
-            _band1.setEffectsProcessor(processor);
-        } else if (index == 1) {
-            _band2.setEffectsProcessor(processor);
-        } else if (index == 2) {
-            _band3.setEffectsProcessor(processor);
+
+        if (index < _bands.size()) {
+            _bands[index].band.setEffectsProcessor(processor);
         }
     }
 
+
     template <typename SampleType>
     void MONSTRCrossover<SampleType>::setSampleRate(double newSampleRate) {
-        _band1.setSampleRate(newSampleRate);
-        _band2.setSampleRate(newSampleRate);
-        _band3.setSampleRate(newSampleRate);
+        for (BandWrapper band : _bands) {
+            band.band.setSampleRate(newSampleRate);
+        }
     }
 
     template <typename SampleType>
     bool MONSTRCrossover<SampleType>::getIsActive(size_t index) const {
         bool retVal {false};
 
-        if (index == 0) {
-            retVal = _band1.getIsActive();
-        } else if (index == 1) {
-            retVal = _band2.getIsActive();
-        } else if (index == 2) {
-            retVal = _band3.getIsActive();
+        if (index < _bands.size()) {
+            retVal = _bands[index].band.getIsActive();
         }
 
         return retVal;
@@ -239,10 +248,8 @@ namespace WECore::MONSTR {
     double MONSTRCrossover<SampleType>::getCrossoverFrequency(size_t index) const {
         double retVal {0};
 
-        if (index == 0) {
-            retVal = _band1.getHighCutoff();
-        } else if (index == 1) {
-            retVal = _band2.getHighCutoff();
+        if (index < _bands.size()) {
+            retVal = _bands[index].band.getHighCutoff();
         }
 
         return retVal;
@@ -263,41 +270,47 @@ namespace WECore::MONSTR {
 
             // Calculate how many samples need to be processed in this chunk
             const size_t numSamplesRemaining {numSamples - (bufferNumber * INTERNAL_BUFFER_SIZE)};
-            const size_t numSamplesToCopy {std::min(numSamplesRemaining,
-                                        static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
+            const size_t numSamplesToCopy {
+                std::min(numSamplesRemaining, static_cast<size_t>(INTERNAL_BUFFER_SIZE))
+            };
 
             SampleType* const leftBufferInputStart {&leftSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
             SampleType* const rightBufferInputStart {&rightSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
 
-            std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band1LeftBuffer);
-            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band1RightBuffer);
-            std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band2LeftBuffer);
-            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band2RightBuffer);
-            std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band3LeftBuffer);
-            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band3RightBuffer);
+            // Populate the band specific buffers, and do the processing
+            for (size_t bandIndex {0}; bandIndex < _bands.size(); bandIndex++) {
+                std::copy(leftBufferInputStart,
+                          &leftBufferInputStart[numSamplesToCopy],
+                          _bands[bandIndex].leftBuffer);
 
-            // let each band do its processing
-            _band1.process2in2out(_band1LeftBuffer, _band1RightBuffer, numSamplesToCopy);
-            _band2.process2in2out(_band2LeftBuffer, _band2RightBuffer, numSamplesToCopy);
-            _band3.process2in2out(_band3LeftBuffer, _band3RightBuffer, numSamplesToCopy);
+                std::copy(rightBufferInputStart,
+                          &rightBufferInputStart[numSamplesToCopy],
+                          _bands[bandIndex].rightBuffer);
 
-            // combine the output from each band, and write to output
-            for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
-                leftBufferInputStart[iii] = _band1LeftBuffer[iii]
-                                            + _band2LeftBuffer[iii]
-                                            + _band3LeftBuffer[iii];
+                _bands[bandIndex].band.process2in2out(_bands[bandIndex].leftBuffer,
+                                                      _bands[bandIndex].rightBuffer,
+                                                      numSamplesToCopy);
+            }
 
-                rightBufferInputStart[iii] = _band1RightBuffer[iii]
-                                            + _band2RightBuffer[iii]
-                                            + _band3RightBuffer[iii];
+            // Combine the output from each band, and write to output
+            for (size_t sampleIndex {0}; sampleIndex < numSamplesToCopy; sampleIndex++) {
+
+                // Reset the sample to zero first
+                leftBufferInputStart[sampleIndex] = 0;
+                rightBufferInputStart[sampleIndex] = 0;
+
+                for (size_t bandIndex {0}; bandIndex < _bands.size(); bandIndex++) {
+                    leftBufferInputStart[sampleIndex] += _bands[bandIndex].leftBuffer[sampleIndex];
+                    rightBufferInputStart[sampleIndex] += _bands[bandIndex].rightBuffer[sampleIndex];
+                }
             }
         }
     }
 
     template <typename SampleType>
     void MONSTRCrossover<SampleType>::reset() {
-        _band1.reset();
-        _band2.reset();
-        _band3.reset();
+        for (BandWrapper& band : _bands) {
+            band.band.reset();
+        }
     }
 }
