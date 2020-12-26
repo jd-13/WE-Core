@@ -39,9 +39,9 @@ SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
                 CHECK(mCrossover.getCrossoverLower() == Approx(100.0));
                 CHECK(mCrossover.getCrossoverUpper() == Approx(5000.0));
 
-                CHECK(mCrossover.band1.getIsActive() == true);
-                CHECK(mCrossover.band2.getIsActive() == true);
-                CHECK(mCrossover.band2.getIsActive() == true);
+                CHECK(mCrossover.getIsActive(0) == true);
+                CHECK(mCrossover.getIsActive(1) == true);
+                CHECK(mCrossover.getIsActive(2) == true);
             }
         }
 
@@ -49,13 +49,13 @@ SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
             mCrossover.setCrossoverLower(41);
             mCrossover.setCrossoverUpper(3001);
 
-            mCrossover.band1.setIsActive(1);
+            mCrossover.setIsActive(0, true);
 
             THEN("They all get their correct unique values") {
                 CHECK(mCrossover.getCrossoverLower() == Approx(41.0));
                 CHECK(mCrossover.getCrossoverUpper() == Approx(3001.0));
 
-                CHECK(mCrossover.band1.getIsActive() == 1);
+                CHECK(mCrossover.getIsActive(0) == true);
             }
         }
     }
@@ -112,9 +112,9 @@ SCENARIO("MONSTRCrossover: Silence in = silence out") {
         std::vector<double> leftBuffer(1024);
         std::vector<double> rightBuffer(1024);
         WECore::MONSTR::MONSTRCrossover<double> mCrossover;
-        mCrossover.band1.setEffectsProcessor(std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
-        mCrossover.band2.setEffectsProcessor(std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
-        mCrossover.band3.setEffectsProcessor(std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
+        mCrossover.setEffectsProcessor(0, std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
+        mCrossover.setEffectsProcessor(1, std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
+        mCrossover.setEffectsProcessor(2, std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
 
         WHEN("The silence samples are processed") {
             // fill the buffer
@@ -142,9 +142,9 @@ SCENARIO("MONSTRCrossover: Sine in = sine out") {
                 TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName());
 
         WECore::MONSTR::MONSTRCrossover<double> mCrossover;
-        mCrossover.band1.setEffectsProcessor(std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
-        mCrossover.band2.setEffectsProcessor(std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
-        mCrossover.band3.setEffectsProcessor(std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
+        mCrossover.setEffectsProcessor(0, std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
+        mCrossover.setEffectsProcessor(1, std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
+        mCrossover.setEffectsProcessor(2, std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
 
         WHEN("The bands are all active with neutral processing") {
             // Fill the buffer
@@ -164,9 +164,9 @@ SCENARIO("MONSTRCrossover: Sine in = sine out") {
 
         WHEN("The bands are all bypassed") {
             // Bypass the bands
-            mCrossover.band1.setIsActive(0);
-            mCrossover.band2.setIsActive(0);
-            mCrossover.band3.setIsActive(0);
+            mCrossover.setIsActive(0, false);
+            mCrossover.setIsActive(1, false);
+            mCrossover.setIsActive(2, false);
 
             // Fill the buffer
             WECore::TestUtils::generateSine(leftBuffer, 44100, 1000);
@@ -193,9 +193,9 @@ SCENARIO("MONSTRCrossover: Small buffer") {
                 TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName());
 
         WECore::MONSTR::MONSTRCrossover<double> mCrossover;
-        mCrossover.band1.setEffectsProcessor(std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
-        mCrossover.band2.setEffectsProcessor(std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
-        mCrossover.band3.setEffectsProcessor(std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
+        mCrossover.setEffectsProcessor(0, std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
+        mCrossover.setEffectsProcessor(1, std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
+        mCrossover.setEffectsProcessor(2, std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
 
         // Fill the buffers
         WECore::TestUtils::generateSine(leftBuffer, 44100, 1000);

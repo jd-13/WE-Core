@@ -58,15 +58,20 @@ namespace WECore::MONSTR {
                       "Must be provided with a floating point template type");
 
     public:
-        MONSTRBand<SampleType>  band1,
-                                band2,
-                                band3;
 
         MONSTRCrossover();
         virtual ~MONSTRCrossover() = default;
 
         /** @name Setter Methods */
         /** @{ */
+
+        /**
+         * Activates or bypasses the processing of the given band.
+         *
+         * @param   index       The band to set
+         * @param   isActive    Set to true if the band's processing should be active
+         */
+        inline void setIsActive(size_t index, bool isActive);
 
         /**
          * Sets the crossover frequency of the lower (band1) and middle (band2) bands.
@@ -87,6 +92,15 @@ namespace WECore::MONSTR {
         inline void setCrossoverUpper(double val);
 
         /**
+         * Sets the effects processor which will be used by the given band.
+         *
+         * @param   index       The band to set
+         * @param   processor   EffectsProcessor to use
+         */
+        inline void setEffectsProcessor(
+            size_t index, std::shared_ptr<EffectsProcessor<SampleType>> processor);
+
+        /**
          * Configures the filters for the correct sample rate. Ensure this is
          * called before attempting to process audio.
          *
@@ -100,13 +114,22 @@ namespace WECore::MONSTR {
         /** @{ */
 
         /**
+         * Gets whether the given band is applying processing.
+         *
+         * @param   index The band to get
+         *
+         * @return  True if the band is applying processing, false if bypassed
+         */
+        inline bool getIsActive(size_t index) const;
+
+        /**
          * Gets the crossover frequency of the lower (band1) and middle (band2) bands.
          *
          * @return  val The frequency in Hz of the lower crossover point.
          *
          * @see     CROSSOVERLOWER for valid values
          */
-        double getCrossoverLower() { return band1.getHighCutoff(); }
+        double getCrossoverLower() { return _band1.getHighCutoff(); }
 
         /**
          * Gets the crossover frequency of the middle (band2) and upper (band3) bands.
@@ -115,7 +138,7 @@ namespace WECore::MONSTR {
          *
          * @see     CROSSOVERUPPER for valid values
          */
-        double getCrossoverUpper() { return band2.getHighCutoff(); }
+        double getCrossoverUpper() { return _band2.getHighCutoff(); }
 
         /** @} */
 
@@ -141,6 +164,10 @@ namespace WECore::MONSTR {
     private:
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
 
+        MONSTRBand<SampleType>  _band1,
+                                _band2,
+                                _band3;
+
         SampleType _band1LeftBuffer[INTERNAL_BUFFER_SIZE];
         SampleType _band1RightBuffer[INTERNAL_BUFFER_SIZE];
         SampleType _band2LeftBuffer[INTERNAL_BUFFER_SIZE];
@@ -150,18 +177,29 @@ namespace WECore::MONSTR {
     };
 
     template <typename SampleType>
-    MONSTRCrossover<SampleType>::MONSTRCrossover() : band1(BandType::LOWER),
-                                                     band2(BandType::MIDDLE),
-                                                     band3(BandType::UPPER) {
+    MONSTRCrossover<SampleType>::MONSTRCrossover() : _band1(BandType::LOWER),
+                                                     _band2(BandType::MIDDLE),
+                                                     _band3(BandType::UPPER) {
         setCrossoverLower(100);
         setCrossoverUpper(5000);
     }
 
     template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setIsActive(size_t index, bool isActive) {
+        if (index == 0) {
+            _band1.setIsActive(isActive);
+        } else if (index == 1) {
+            _band2.setIsActive(isActive);
+        } else if (index == 2) {
+            _band3.setIsActive(isActive);
+        }
+    }
+
+    template <typename SampleType>
     void MONSTRCrossover<SampleType>::setCrossoverLower(double val) {
         val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
-        band1.setHighCutoff(val);
-        band2.setLowCutoff(val);
+        _band1.setHighCutoff(val);
+        _band2.setLowCutoff(val);
 
         // Move the high crossover up if necessary as they shouldn't swap places
         if (val > getCrossoverUpper()) {
@@ -172,8 +210,8 @@ namespace WECore::MONSTR {
     template <typename SampleType>
     void MONSTRCrossover<SampleType>::setCrossoverUpper(double val) {
         val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
-        band2.setHighCutoff(val);
-        band3.setLowCutoff(val);
+        _band2.setHighCutoff(val);
+        _band3.setLowCutoff(val);
 
         // Move the low crossover down if necessary as they shouldn't swap places
         if (val < getCrossoverLower()) {
@@ -182,10 +220,36 @@ namespace WECore::MONSTR {
     }
 
     template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setEffectsProcessor(size_t index, std::shared_ptr<EffectsProcessor<SampleType>> processor) {
+        if (index == 0) {
+            _band1.setEffectsProcessor(processor);
+        } else if (index == 1) {
+            _band2.setEffectsProcessor(processor);
+        } else if (index == 2) {
+            _band3.setEffectsProcessor(processor);
+        }
+    }
+
+    template <typename SampleType>
     void MONSTRCrossover<SampleType>::setSampleRate(double newSampleRate) {
-        band1.setSampleRate(newSampleRate);
-        band2.setSampleRate(newSampleRate);
-        band3.setSampleRate(newSampleRate);
+        _band1.setSampleRate(newSampleRate);
+        _band2.setSampleRate(newSampleRate);
+        _band3.setSampleRate(newSampleRate);
+    }
+
+    template <typename SampleType>
+    bool MONSTRCrossover<SampleType>::getIsActive(size_t index) const {
+        bool retVal {false};
+
+        if (index == 0) {
+            retVal = _band1.getIsActive();
+        } else if (index == 1) {
+            retVal = _band2.getIsActive();
+        } else if (index == 2) {
+            retVal = _band3.getIsActive();
+        }
+
+        return retVal;
     }
 
     template <typename SampleType>
@@ -217,9 +281,9 @@ namespace WECore::MONSTR {
             std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band3RightBuffer);
 
             // let each band do its processing
-            band1.process2in2out(_band1LeftBuffer, _band1RightBuffer, numSamplesToCopy);
-            band2.process2in2out(_band2LeftBuffer, _band2RightBuffer, numSamplesToCopy);
-            band3.process2in2out(_band3LeftBuffer, _band3RightBuffer, numSamplesToCopy);
+            _band1.process2in2out(_band1LeftBuffer, _band1RightBuffer, numSamplesToCopy);
+            _band2.process2in2out(_band2LeftBuffer, _band2RightBuffer, numSamplesToCopy);
+            _band3.process2in2out(_band3LeftBuffer, _band3RightBuffer, numSamplesToCopy);
 
             // combine the output from each band, and write to output
             for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
@@ -236,8 +300,8 @@ namespace WECore::MONSTR {
 
     template <typename SampleType>
     void MONSTRCrossover<SampleType>::reset() {
-        band1.reset();
-        band2.reset();
-        band3.reset();
+        _band1.reset();
+        _band2.reset();
+        _band3.reset();
     }
 }
