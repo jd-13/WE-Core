@@ -109,6 +109,9 @@ namespace WECore::MONSTR {
 
         virtual ~MONSTRBand() = default;
 
+        /** @name Setter Methods */
+        /** @{ */
+
         /**
          * Sets whether this band will route audio through the EffectsProcessor.
          *
@@ -121,16 +124,23 @@ namespace WECore::MONSTR {
          */
         void setIsActive(bool val) { _isActive = val; }
 
-        inline void setSampleRate(double newSampleRate);
-
         inline void setLowCutoff(double val);
 
         inline void setHighCutoff(double val);
+
+        inline void setBandType(BandType bandType, double lowCutoff, double highCutoff);
+
+        inline void setSampleRate(double newSampleRate);
 
         /**
          * Specifies the processor that this band should pass audio through.
          */
         void setEffectsProcessor(std::shared_ptr<EffectsProcessor<SampleType>> processor) { _processor = processor; }
+
+        /** @} */
+
+        /** @name Getter Methods */
+        /** @{ */
 
         /**
          * @see setIsActive
@@ -141,10 +151,7 @@ namespace WECore::MONSTR {
 
         double getHighCutoff() const { return _highCutoffHz; }
 
-        /**
-         * Resets filter states. Call before beginning a new buffer of samples.
-         */
-        inline void reset();
+        /** @} */
 
         /**
          * Performs the effect processing on leftSample and rightSample. Use for
@@ -156,6 +163,11 @@ namespace WECore::MONSTR {
          *                            must be the same size.
          */
         inline void process2in2out(SampleType* leftSample, SampleType* rightSample, size_t numSamples);
+
+        /**
+         * Resets filter states. Call before beginning a new buffer of samples.
+         */
+        inline void reset();
 
     private:
         BandType _bandType;
@@ -178,24 +190,6 @@ namespace WECore::MONSTR {
 
         inline void _filterSamples(SampleType* inLeftSamples, SampleType* inRightSamples, int numSamples);
     };
-
-    template <typename SampleType>
-    void MONSTRBand<SampleType>::reset() {
-        _lowCut1.reset();
-        _lowCut2.reset();
-        _highCut1.reset();
-        _highCut2.reset();
-    }
-
-    template <typename SampleType>
-    void MONSTRBand<SampleType>::setSampleRate(double newSampleRate) {
-        // if the new sample rate is different, recalculate the filter coefficients
-        if (!CoreMath::compareFloatsEqual(newSampleRate, _sampleRate)) {
-            _sampleRate = newSampleRate;
-            setLowCutoff(_lowCutoffHz);
-            setHighCutoff(_highCutoffHz);
-        }
-    }
 
     template <typename SampleType>
     void MONSTRBand<SampleType>::setLowCutoff(double val) {
@@ -226,7 +220,29 @@ namespace WECore::MONSTR {
     }
 
     template <typename SampleType>
-    void MONSTRBand<SampleType>::process2in2out(SampleType* leftSample, SampleType* rightSample, size_t numSamples) {
+    void MONSTRBand<SampleType>::setBandType(BandType bandType,
+                                             double lowCutoff,
+                                             double highCutoff) {
+        _bandType = bandType;
+        setLowCutoff(lowCutoff);
+        setHighCutoff(highCutoff);
+        reset();
+    }
+
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::setSampleRate(double newSampleRate) {
+        // if the new sample rate is different, recalculate the filter coefficients
+        if (!CoreMath::compareFloatsEqual(newSampleRate, _sampleRate)) {
+            _sampleRate = newSampleRate;
+            setLowCutoff(_lowCutoffHz);
+            setHighCutoff(_highCutoffHz);
+        }
+    }
+
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::process2in2out(SampleType* leftSample,
+                                                SampleType* rightSample,
+                                                size_t numSamples) {
 
         // Apply the filtering before processing
         _filterSamples(leftSample, rightSample, static_cast<int>(numSamples));
@@ -236,6 +252,14 @@ namespace WECore::MONSTR {
                 _processor->process2in2out(leftSample, rightSample, numSamples);
             }
         }
+    }
+
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::reset() {
+        _lowCut1.reset();
+        _lowCut2.reset();
+        _highCut1.reset();
+        _highCut2.reset();
     }
 
     template <typename SampleType>
