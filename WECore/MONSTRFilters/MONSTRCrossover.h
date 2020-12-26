@@ -52,39 +52,21 @@ namespace WECore::MONSTR {
      * crossover.Process2in2out(leftSample, rightSample, numSamples);
      * @endcode
      */
-    template <typename T>
+    template <typename SampleType>
     class MONSTRCrossover {
-        static_assert(std::is_floating_point<T>::value,
+        static_assert(std::is_floating_point<SampleType>::value,
                       "Must be provided with a floating point template type");
 
     public:
-        MONSTRBand<T>  band1,
-                       band2,
-                       band3;
+        MONSTRBand<SampleType>  band1,
+                                band2,
+                                band3;
 
-        /**
-         * Makes each band aware of its position, and therefore which of their internal filters
-         * they each need to activate.
-         */
-        MONSTRCrossover() : band1(BandType::LOWER),
-                            band2(BandType::MIDDLE),
-                            band3(BandType::UPPER) {
-            setCrossoverLower(100);
-            setCrossoverUpper(5000);
-        }
+        MONSTRCrossover();
+        virtual ~MONSTRCrossover() = default;
 
-        virtual ~MONSTRCrossover() {}
-
-        /**
-         * Applies the filtering to a stereo buffer of samples.
-         * Expect seg faults or other memory issues if arguements passed are incorrect.
-         *
-         * @param[out]   leftSample      Pointer to the first sample of the left channel's buffer
-         * @param[out]   rightSample     Pointer to the first sample of the right channel's buffer
-         * @param[in]    numSamples      Number of samples in the buffer. The left and right buffers
-         *                               must be the same size.
-         */
-        inline void Process2in2out(T* leftSample, T* rightSample, size_t numSamples);
+        /** @name Setter Methods */
+        /** @{ */
 
         /**
          * Sets the crossover frequency of the lower (band1) and middle (band2) bands.
@@ -105,6 +87,19 @@ namespace WECore::MONSTR {
         inline void setCrossoverUpper(double val);
 
         /**
+         * Configures the filters for the correct sample rate. Ensure this is
+         * called before attempting to process audio.
+         *
+         * @param   newSampleRate  The sample rate the filter should be configured for
+         */
+        inline void setSampleRate(double newSampleRate);
+
+        /** @} */
+
+        /** @name Getter Methods */
+        /** @{ */
+
+        /**
          * Gets the crossover frequency of the lower (band1) and middle (band2) bands.
          *
          * @return  val The frequency in Hz of the lower crossover point.
@@ -122,13 +117,20 @@ namespace WECore::MONSTR {
          */
         double getCrossoverUpper() { return band2.getHighCutoff(); }
 
+        /** @} */
+
         /**
-         * Configures the filters for the correct sample rate. Ensure this is
-         * called before attempting to process audio.
+         * Applies the filtering to a stereo buffer of samples.
+         * Expect seg faults or other memory issues if arguements passed are incorrect.
          *
-         * @param   newSampleRate  The sample rate the filter should be configured for
+         * @param[out]   leftSample      Pointer to the first sample of the left channel's buffer
+         * @param[out]   rightSample     Pointer to the first sample of the right channel's buffer
+         * @param[in]    numSamples      Number of samples in the buffer. The left and right buffers
+         *                               must be the same size.
          */
-        inline void setSampleRate(double newSampleRate);
+        inline void Process2in2out(SampleType* leftSample,
+                                   SampleType* rightSample,
+                                   size_t numSamples);
 
         /**
          * Resets all filters.
@@ -139,16 +141,57 @@ namespace WECore::MONSTR {
     private:
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
 
-        T _band1LeftBuffer[INTERNAL_BUFFER_SIZE];
-        T _band1RightBuffer[INTERNAL_BUFFER_SIZE];
-        T _band2LeftBuffer[INTERNAL_BUFFER_SIZE];
-        T _band2RightBuffer[INTERNAL_BUFFER_SIZE];
-        T _band3LeftBuffer[INTERNAL_BUFFER_SIZE];
-        T _band3RightBuffer[INTERNAL_BUFFER_SIZE];
+        SampleType _band1LeftBuffer[INTERNAL_BUFFER_SIZE];
+        SampleType _band1RightBuffer[INTERNAL_BUFFER_SIZE];
+        SampleType _band2LeftBuffer[INTERNAL_BUFFER_SIZE];
+        SampleType _band2RightBuffer[INTERNAL_BUFFER_SIZE];
+        SampleType _band3LeftBuffer[INTERNAL_BUFFER_SIZE];
+        SampleType _band3RightBuffer[INTERNAL_BUFFER_SIZE];
     };
 
-    template <typename T>
-    void MONSTRCrossover<T>::Process2in2out(T* leftSample,  T* rightSample, size_t numSamples) {
+    template <typename SampleType>
+    MONSTRCrossover<SampleType>::MONSTRCrossover() : band1(BandType::LOWER),
+                                                     band2(BandType::MIDDLE),
+                                                     band3(BandType::UPPER) {
+        setCrossoverLower(100);
+        setCrossoverUpper(5000);
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setCrossoverLower(double val) {
+        val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
+        band1.setHighCutoff(val);
+        band2.setLowCutoff(val);
+
+        // Move the high crossover up if necessary as they shouldn't swap places
+        if (val > getCrossoverUpper()) {
+            setCrossoverUpper(val);
+        }
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setCrossoverUpper(double val) {
+        val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
+        band2.setHighCutoff(val);
+        band3.setLowCutoff(val);
+
+        // Move the low crossover down if necessary as they shouldn't swap places
+        if (val < getCrossoverLower()) {
+            setCrossoverLower(val);
+        }
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setSampleRate(double newSampleRate) {
+        band1.setSampleRate(newSampleRate);
+        band2.setSampleRate(newSampleRate);
+        band3.setSampleRate(newSampleRate);
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::Process2in2out(SampleType* leftSample,
+                                                     SampleType* rightSample,
+                                                     size_t numSamples) {
 
         // If the buffer we've been passed is bigger than our static internal buffer, then we need
         // to break it into chunks
@@ -163,8 +206,8 @@ namespace WECore::MONSTR {
             const size_t numSamplesToCopy {std::min(numSamplesRemaining,
                                         static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
 
-            T* const leftBufferInputStart {&leftSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
-            T* const rightBufferInputStart {&rightSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
+            SampleType* const leftBufferInputStart {&leftSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
+            SampleType* const rightBufferInputStart {&rightSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
 
             std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band1LeftBuffer);
             std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band1RightBuffer);
@@ -191,39 +234,8 @@ namespace WECore::MONSTR {
         }
     }
 
-    template <typename T>
-    void MONSTRCrossover<T>::setCrossoverLower(double val) {
-        val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
-        band1.setHighCutoff(val);
-        band2.setLowCutoff(val);
-
-        // Move the high crossover up if necessary as they shouldn't swap places
-        if (val > getCrossoverUpper()) {
-            setCrossoverUpper(val);
-        }
-    }
-
-    template <typename T>
-    void MONSTRCrossover<T>::setCrossoverUpper(double val) {
-        val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
-        band2.setHighCutoff(val);
-        band3.setLowCutoff(val);
-
-        // Move the low crossover down if necessary as they shouldn't swap places
-        if (val < getCrossoverLower()) {
-            setCrossoverLower(val);
-        }
-    }
-
-    template <typename T>
-    void MONSTRCrossover<T>::setSampleRate(double newSampleRate) {
-        band1.setSampleRate(newSampleRate);
-        band2.setSampleRate(newSampleRate);
-        band3.setSampleRate(newSampleRate);
-    }
-
-    template <typename T>
-    void MONSTRCrossover<T>::reset() {
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::reset() {
         band1.reset();
         band2.reset();
         band3.reset();
