@@ -36,8 +36,8 @@ SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
 
         WHEN("Nothing is changed") {
             THEN("Parameters have their default values") {
-                CHECK(mCrossover.getCrossoverLower() == Approx(100.0));
-                CHECK(mCrossover.getCrossoverUpper() == Approx(5000.0));
+                CHECK(mCrossover.getCrossoverFrequency(0) == Approx(100.0));
+                CHECK(mCrossover.getCrossoverFrequency(1) == Approx(5000.0));
 
                 CHECK(mCrossover.getIsActive(0) == true);
                 CHECK(mCrossover.getIsActive(1) == true);
@@ -46,14 +46,14 @@ SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
         }
 
         WHEN("All parameters are changed to unique values") {
-            mCrossover.setCrossoverLower(41);
-            mCrossover.setCrossoverUpper(3001);
+            mCrossover.setCrossoverFrequency(0, 41);
+            mCrossover.setCrossoverFrequency(1, 3001);
 
             mCrossover.setIsActive(0, true);
 
             THEN("They all get their correct unique values") {
-                CHECK(mCrossover.getCrossoverLower() == Approx(41.0));
-                CHECK(mCrossover.getCrossoverUpper() == Approx(3001.0));
+                CHECK(mCrossover.getCrossoverFrequency(0) == Approx(41.0));
+                CHECK(mCrossover.getCrossoverFrequency(1) == Approx(3001.0));
 
                 CHECK(mCrossover.getIsActive(0) == true);
             }
@@ -66,42 +66,42 @@ SCENARIO("MONSTRCrossover: Parameters enforce their bounds correctly") {
         WECore::MONSTR::MONSTRCrossover<double> mCrossover;
 
         WHEN("All parameter values are too low") {
-            mCrossover.setCrossoverLower(39);
-            mCrossover.setCrossoverUpper(39);
+            mCrossover.setCrossoverFrequency(0, 39);
+            mCrossover.setCrossoverFrequency(1, 39);
 
             THEN("Parameters enforce their lower bounds") {
-                CHECK(mCrossover.getCrossoverLower() == Approx(40.0));
-                CHECK(mCrossover.getCrossoverUpper() == Approx(40.0));
+                CHECK(mCrossover.getCrossoverFrequency(0) == Approx(40.0));
+                CHECK(mCrossover.getCrossoverFrequency(1) == Approx(40.0));
             }
         }
 
         WHEN("All parameter values are too high") {
-            mCrossover.setCrossoverLower(20000);
-            mCrossover.setCrossoverUpper(20000);
+            mCrossover.setCrossoverFrequency(0, 20000);
+            mCrossover.setCrossoverFrequency(1, 20000);
 
             THEN("Parameters enforce their upper bounds") {
-                CHECK(mCrossover.getCrossoverLower() == Approx(19500.0));
-                CHECK(mCrossover.getCrossoverUpper() == Approx(19500.0));
+                CHECK(mCrossover.getCrossoverFrequency(0) == Approx(19500.0));
+                CHECK(mCrossover.getCrossoverFrequency(1) == Approx(19500.0));
             }
         }
 
         WHEN("A higher crossover frequency is set below a lower one") {
-            mCrossover.setCrossoverLower(4000);
-            mCrossover.setCrossoverUpper(2000);
+            mCrossover.setCrossoverFrequency(0, 4000);
+            mCrossover.setCrossoverFrequency(1, 2000);
 
             THEN("Both frequencies move to the lower value") {
-                CHECK(mCrossover.getCrossoverLower() == Approx(2000.0));
-                CHECK(mCrossover.getCrossoverUpper() == Approx(2000.0));
+                CHECK(mCrossover.getCrossoverFrequency(0) == Approx(2000.0));
+                CHECK(mCrossover.getCrossoverFrequency(1) == Approx(2000.0));
             }
         }
 
         WHEN("A lower crossover frequency is set above a higher one") {
-            mCrossover.setCrossoverUpper(2000);
-            mCrossover.setCrossoverLower(4000);
+            mCrossover.setCrossoverFrequency(1, 2000);
+            mCrossover.setCrossoverFrequency(0, 4000);
 
             THEN("Both frequencies move to the higher") {
-                CHECK(mCrossover.getCrossoverLower() == Approx(4000.0));
-                CHECK(mCrossover.getCrossoverUpper() == Approx(4000.0));
+                CHECK(mCrossover.getCrossoverFrequency(0) == Approx(4000.0));
+                CHECK(mCrossover.getCrossoverFrequency(1) == Approx(4000.0));
             }
         }
     }

@@ -74,22 +74,14 @@ namespace WECore::MONSTR {
         inline void setIsActive(size_t index, bool isActive);
 
         /**
-         * Sets the crossover frequency of the lower (band1) and middle (band2) bands.
+         * Sets the crossover frequency of the band at the provided index.
          *
-         * @param   val   The frequency in Hz to set the lower crossover point to.
+         * @param   index The crossover to set
+         * @param   val   The frequency in Hz to set the crossover point to
          *
-         * @see     CROSSOVERLOWER for valid values
+         * @see     CROSSOVER_FREQUENCY for valid values
          */
-        inline void setCrossoverLower(double val);
-
-        /**
-         * Sets the crossover frequency of the middle (band2) and upper (band3) bands.
-         *
-         * @param   val   The frequency in Hz to set the upper crossover point to.
-         *
-         * @see     CROSSOVERUPPER for valid values
-         */
-        inline void setCrossoverUpper(double val);
+        inline void setCrossoverFrequency(size_t index, double val);
 
         /**
          * Sets the effects processor which will be used by the given band.
@@ -123,22 +115,15 @@ namespace WECore::MONSTR {
         inline bool getIsActive(size_t index) const;
 
         /**
-         * Gets the crossover frequency of the lower (band1) and middle (band2) bands.
+         * Gets the crossover frequency of the band at the provided index.
          *
-         * @return  val The frequency in Hz of the lower crossover point.
+         * @param   index The crossover to get.
          *
-         * @see     CROSSOVERLOWER for valid values
+         * @return  The frequency in Hz of the lower crossover point
+         *
+         * @see     CROSSOVER_FREQUENCY for valid values
          */
-        double getCrossoverLower() { return _band1.getHighCutoff(); }
-
-        /**
-         * Gets the crossover frequency of the middle (band2) and upper (band3) bands.
-         *
-         * @return  val The frequency in Hz of the upper crossover point.
-         *
-         * @see     CROSSOVERUPPER for valid values
-         */
-        double getCrossoverUpper() { return _band2.getHighCutoff(); }
+        inline double getCrossoverFrequency(size_t index) const;
 
         /** @} */
 
@@ -180,8 +165,8 @@ namespace WECore::MONSTR {
     MONSTRCrossover<SampleType>::MONSTRCrossover() : _band1(BandType::LOWER),
                                                      _band2(BandType::MIDDLE),
                                                      _band3(BandType::UPPER) {
-        setCrossoverLower(100);
-        setCrossoverUpper(5000);
+        setCrossoverFrequency(0, 100);
+        setCrossoverFrequency(1, 5000);
     }
 
     template <typename SampleType>
@@ -196,26 +181,24 @@ namespace WECore::MONSTR {
     }
 
     template <typename SampleType>
-    void MONSTRCrossover<SampleType>::setCrossoverLower(double val) {
+    void MONSTRCrossover<SampleType>::setCrossoverFrequency(size_t index, double val) {
         val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
-        _band1.setHighCutoff(val);
-        _band2.setLowCutoff(val);
 
-        // Move the high crossover up if necessary as they shouldn't swap places
-        if (val > getCrossoverUpper()) {
-            setCrossoverUpper(val);
+        if (index == 0) {
+            _band1.setHighCutoff(val);
+            _band2.setLowCutoff(val);
+        } else if (index == 1) {
+            _band2.setHighCutoff(val);
+            _band3.setLowCutoff(val);
         }
-    }
 
-    template <typename SampleType>
-    void MONSTRCrossover<SampleType>::setCrossoverUpper(double val) {
-        val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
-        _band2.setHighCutoff(val);
-        _band3.setLowCutoff(val);
-
-        // Move the low crossover down if necessary as they shouldn't swap places
-        if (val < getCrossoverLower()) {
-            setCrossoverLower(val);
+        // Move the other crossovers if needed as they should never swap places
+        if (getCrossoverFrequency(0) > getCrossoverFrequency(1)) {
+            if (index == 0) {
+                setCrossoverFrequency(1, val);
+            } else if (index == 1) {
+                setCrossoverFrequency(0, val);
+            }
         }
     }
 
@@ -247,6 +230,19 @@ namespace WECore::MONSTR {
             retVal = _band2.getIsActive();
         } else if (index == 2) {
             retVal = _band3.getIsActive();
+        }
+
+        return retVal;
+    }
+
+    template <typename SampleType>
+    double MONSTRCrossover<SampleType>::getCrossoverFrequency(size_t index) const {
+        double retVal {0};
+
+        if (index == 0) {
+            retVal = _band1.getHighCutoff();
+        } else if (index == 1) {
+            retVal = _band2.getHighCutoff();
         }
 
         return retVal;
