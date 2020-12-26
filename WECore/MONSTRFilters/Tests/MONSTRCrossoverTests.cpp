@@ -67,21 +67,41 @@ SCENARIO("MONSTRCrossover: Parameters enforce their bounds correctly") {
 
         WHEN("All parameter values are too low") {
             mCrossover.setCrossoverLower(39);
-            mCrossover.setCrossoverUpper(2999);
+            mCrossover.setCrossoverUpper(39);
 
             THEN("Parameters enforce their lower bounds") {
                 CHECK(mCrossover.getCrossoverLower() == Approx(40.0));
-                CHECK(mCrossover.getCrossoverUpper() == Approx(3000.0));
+                CHECK(mCrossover.getCrossoverUpper() == Approx(40.0));
             }
         }
 
         WHEN("All parameter values are too high") {
-            mCrossover.setCrossoverLower(39);
-            mCrossover.setCrossoverUpper(2999);
+            mCrossover.setCrossoverLower(20000);
+            mCrossover.setCrossoverUpper(20000);
 
             THEN("Parameters enforce their upper bounds") {
-                CHECK(mCrossover.getCrossoverLower() == Approx(40.0));
-                CHECK(mCrossover.getCrossoverUpper() == Approx(3000.0));
+                CHECK(mCrossover.getCrossoverLower() == Approx(19500.0));
+                CHECK(mCrossover.getCrossoverUpper() == Approx(19500.0));
+            }
+        }
+
+        WHEN("A higher crossover frequency is set below a lower one") {
+            mCrossover.setCrossoverLower(4000);
+            mCrossover.setCrossoverUpper(2000);
+
+            THEN("Both frequencies move to the lower value") {
+                CHECK(mCrossover.getCrossoverLower() == Approx(2000.0));
+                CHECK(mCrossover.getCrossoverUpper() == Approx(2000.0));
+            }
+        }
+
+        WHEN("A lower crossover frequency is set above a higher one") {
+            mCrossover.setCrossoverUpper(2000);
+            mCrossover.setCrossoverLower(4000);
+
+            THEN("Both frequencies move to the higher") {
+                CHECK(mCrossover.getCrossoverLower() == Approx(4000.0));
+                CHECK(mCrossover.getCrossoverUpper() == Approx(4000.0));
             }
         }
     }

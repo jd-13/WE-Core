@@ -97,8 +97,8 @@ namespace WECore::MONSTR {
          */
         MONSTRBand(BandType bandType) : _bandType(bandType),
                                         _isActive(Parameters::BANDSWITCH_DEFAULT),
-                                        _lowCutoffHz(Parameters::CROSSOVERLOWER.defaultValue),
-                                        _highCutoffHz(Parameters::CROSSOVERUPPER.defaultValue),
+                                        _lowCutoffHz(100),
+                                        _highCutoffHz(5000),
                                         _sampleRate(44100),
                                         _processor(nullptr) {
             _lowCut1.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
@@ -193,29 +193,25 @@ namespace WECore::MONSTR {
 
     template <typename SampleType>
     void MONSTRBand<SampleType>::setLowCutoff(double val) {
-        // if this is the lowest band, then do not cut the low frequencies
-        if (_bandType == BandType::MIDDLE) {
-            _lowCutoffHz = Parameters::CROSSOVERLOWER.BoundsCheck(val);
-            _lowCut1.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
-            _lowCut2.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
-        } else if (_bandType == BandType::UPPER) {
-            _lowCutoffHz = Parameters::CROSSOVERUPPER.BoundsCheck(val);
-            _lowCut1.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
-            _lowCut2.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
+        _lowCutoffHz = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
+        _lowCut1.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
+        _lowCut2.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
+
+        // Move the high cutoff up if necessary as they shouldn't swap places
+        if (_lowCutoffHz > _highCutoffHz) {
+            setHighCutoff(_lowCutoffHz);
         }
     }
 
     template <typename SampleType>
     void MONSTRBand<SampleType>::setHighCutoff(double val) {
-        // if this is the highest band, then do not cut the high frequencies
-        if (_bandType == BandType::MIDDLE) {
-            _highCutoffHz = Parameters::CROSSOVERUPPER.BoundsCheck(val);
-            _highCut1.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
-            _highCut2.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
-        } else if (_bandType == BandType::LOWER) {
-            _highCutoffHz = Parameters::CROSSOVERLOWER.BoundsCheck(val);
-            _highCut1.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
-            _highCut2.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
+        _highCutoffHz = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
+        _highCut1.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
+        _highCut2.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
+
+        // Move the low cutoff down if necessary as they shouldn't swap places
+        if (_lowCutoffHz > _highCutoffHz) {
+            setLowCutoff(_highCutoffHz);
         }
     }
 

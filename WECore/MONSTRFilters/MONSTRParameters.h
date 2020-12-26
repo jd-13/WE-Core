@@ -38,8 +38,7 @@ namespace WECore::MONSTR::Parameters {
      *      maximum value,
      *      default value
      */
-    const ParameterDefinition::RangedParameter<double>   CROSSOVERLOWER(40, 500, 100),
-                                                         CROSSOVERUPPER(3000, 19500, 5000);
+    const ParameterDefinition::RangedParameter<double> CROSSOVER_FREQUENCY(40, 19500, 500);
     //@}
 
 }

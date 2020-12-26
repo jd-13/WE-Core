@@ -69,8 +69,8 @@ namespace WECore::MONSTR {
         MONSTRCrossover() : band1(BandType::LOWER),
                             band2(BandType::MIDDLE),
                             band3(BandType::UPPER) {
-            setCrossoverLower(Parameters::CROSSOVERLOWER.defaultValue);
-            setCrossoverUpper(Parameters::CROSSOVERUPPER.defaultValue);
+            setCrossoverLower(100);
+            setCrossoverUpper(5000);
         }
 
         virtual ~MONSTRCrossover() {}
@@ -193,16 +193,26 @@ namespace WECore::MONSTR {
 
     template <typename T>
     void MONSTRCrossover<T>::setCrossoverLower(double val) {
-        val = Parameters::CROSSOVERLOWER.BoundsCheck(val);
+        val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
         band1.setHighCutoff(val);
         band2.setLowCutoff(val);
+
+        // Move the high crossover up if necessary as they shouldn't swap places
+        if (val > getCrossoverUpper()) {
+            setCrossoverUpper(val);
+        }
     }
 
     template <typename T>
     void MONSTRCrossover<T>::setCrossoverUpper(double val) {
-        val = Parameters::CROSSOVERUPPER.BoundsCheck(val);
+        val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
         band2.setHighCutoff(val);
         band3.setLowCutoff(val);
+
+        // Move the low crossover down if necessary as they shouldn't swap places
+        if (val < getCrossoverLower()) {
+            setCrossoverLower(val);
+        }
     }
 
     template <typename T>
