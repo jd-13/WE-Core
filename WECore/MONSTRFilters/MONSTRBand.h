@@ -97,6 +97,7 @@ namespace WECore::MONSTR {
          */
         MONSTRBand(BandType bandType) : _bandType(bandType),
                                         _isActive(Parameters::BANDSWITCH_DEFAULT),
+                                        _isMuted(Parameters::BANDMUTED_DEFAULT),
                                         _lowCutoffHz(100),
                                         _highCutoffHz(5000),
                                         _sampleRate(44100),
@@ -124,6 +125,8 @@ namespace WECore::MONSTR {
          */
         void setIsActive(bool val) { _isActive = val; }
 
+        void setIsMuted(bool val) { _isMuted = val; }
+
         inline void setLowCutoff(double val);
 
         inline void setHighCutoff(double val);
@@ -146,6 +149,8 @@ namespace WECore::MONSTR {
          * @see setIsActive
          */
         bool getIsActive() const { return _isActive; }
+
+        bool getIsMuted() const { return _isMuted; }
 
         double getLowCutoff() const { return _lowCutoffHz; }
 
@@ -172,7 +177,8 @@ namespace WECore::MONSTR {
     private:
         BandType _bandType;
 
-        bool _isActive;
+        bool _isActive,
+             _isMuted;
 
         double   _lowCutoffHz,
                  _highCutoffHz;
@@ -235,12 +241,20 @@ namespace WECore::MONSTR {
                                                 SampleType* rightSample,
                                                 size_t numSamples) {
 
-        // Apply the filtering before processing
-        _filterSamples(leftSample, rightSample, static_cast<int>(numSamples));
+        if (_isMuted) {
+            // Muted - set the output to 0 for this band
+            for (size_t sampleIndex {0}; sampleIndex < numSamples; sampleIndex++) {
+                leftSample[sampleIndex] = 0;
+                rightSample[sampleIndex] = 0;
+            }
+        } else {
+            // Apply the filtering before processing
+            _filterSamples(leftSample, rightSample, static_cast<int>(numSamples));
 
-        if (_isActive) {
-            if (_processor != nullptr) {
-                _processor->process2in2out(leftSample, rightSample, numSamples);
+            if (_isActive) {
+                if (_processor != nullptr) {
+                    _processor->process2in2out(leftSample, rightSample, numSamples);
+                }
             }
         }
     }

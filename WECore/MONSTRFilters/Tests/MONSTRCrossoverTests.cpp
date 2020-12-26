@@ -99,7 +99,7 @@ SCENARIO("MONSTRCrossover: Parameters enforce their bounds correctly") {
             mCrossover.setCrossoverFrequency(1, 2000);
             mCrossover.setCrossoverFrequency(0, 4000);
 
-            THEN("Both frequencies move to the higher") {
+            THEN("Both frequencies move to the higher value") {
                 CHECK(mCrossover.getCrossoverFrequency(0) == Approx(4000.0));
                 CHECK(mCrossover.getCrossoverFrequency(1) == Approx(4000.0));
             }
@@ -314,6 +314,61 @@ SCENARIO("MONSTRCrossover: Removing bands") {
 
             THEN("The band isn't removed as it is already at the minimum number") {
                 CHECK(mCrossover.getNumBands() == 2);
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: All bands muted") {
+    GIVEN("A MONSTRCrossover and a buffer of sine samples") {
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+
+        WHEN("All bands are muted and the samples processeed") {
+
+            mCrossover.setIsMuted(0, true);
+            mCrossover.setIsMuted(1, true);
+            mCrossover.setIsMuted(2, true);
+
+            // Fill the buffer
+            WECore::TestUtils::generateSine(leftBuffer, 44100, 1000);
+            std::copy(leftBuffer.begin(), leftBuffer.end() , rightBuffer.begin());
+
+            // Do processing
+            mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+
+            THEN("The output is silence") {
+                for (size_t index {0}; index < leftBuffer.size(); index++) {
+                    CHECK(leftBuffer[index] == Approx(0.0));
+                    CHECK(rightBuffer[index] == Approx(0.0));
+                }
+            }
+        }
+
+        WHEN("All bands are muted, effects processors are provided, and the samples processed") {
+
+            mCrossover.setIsMuted(0, true);
+            mCrossover.setIsMuted(1, true);
+            mCrossover.setIsMuted(2, true);
+
+            mCrossover.setEffectsProcessor(0, std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
+            mCrossover.setEffectsProcessor(1, std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
+            mCrossover.setEffectsProcessor(2, std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>());
+
+            // Fill the buffer
+            WECore::TestUtils::generateSine(leftBuffer, 44100, 1000);
+            std::copy(leftBuffer.begin(), leftBuffer.end() , rightBuffer.begin());
+
+            // Do processing
+            mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+
+            THEN("The output is still silence") {
+                for (size_t index {0}; index < leftBuffer.size(); index++) {
+                    CHECK(leftBuffer[index] == Approx(0.0));
+                    CHECK(rightBuffer[index] == Approx(0.0));
+                }
             }
         }
     }

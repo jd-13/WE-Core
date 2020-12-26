@@ -30,6 +30,10 @@ namespace WECore::MONSTR::Parameters {
                    BANDSWITCH_ON {true},
                    BANDSWITCH_DEFAULT {BANDSWITCH_ON};
 
+    constexpr bool BANDMUTED_OFF {false},
+                   BANDMUTED_ON {true},
+                   BANDMUTED_DEFAULT {BANDMUTED_OFF};
+
     // constexpr as it initialises some internal memebers
     constexpr int _MAX_NUM_BANDS {6};
     constexpr int _DEFAULT_NUM_BANDS {3};

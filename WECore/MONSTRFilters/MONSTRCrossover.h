@@ -75,6 +75,14 @@ namespace WECore::MONSTR {
         inline void setIsActive(size_t index, bool isActive);
 
         /**
+         * Mutes the given band.
+         *
+         * @param   index       The band to set
+         * @param   isMuted    Set to true if the band should be muted
+         */
+        inline void setIsMuted(size_t index, bool isMuted);
+
+        /**
          * Sets the crossover frequency of the band at the provided index.
          *
          * @param   index The crossover to set
@@ -114,6 +122,15 @@ namespace WECore::MONSTR {
          * @return  True if the band is applying processing, false if bypassed
          */
         inline bool getIsActive(size_t index) const;
+
+        /**
+         * Gets whether the given band is muted.
+         *
+         * @param   index The band to get
+         *
+         * @return  True if the band is muted, false if unmuted
+         */
+        inline bool getIsMuted(size_t index) const;
 
         /**
          * Gets the crossover frequency of the band at the provided index.
@@ -207,6 +224,13 @@ namespace WECore::MONSTR {
     }
 
     template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setIsMuted(size_t index, bool isMuted) {
+        if (index < _bands.size()) {
+            _bands[index].band.setIsMuted(isMuted);
+        }
+    }
+
+    template <typename SampleType>
     void MONSTRCrossover<SampleType>::setCrossoverFrequency(size_t index, double val) {
 
         if (index < _bands.size() - 1) {
@@ -263,6 +287,17 @@ namespace WECore::MONSTR {
 
         if (index < _bands.size()) {
             retVal = _bands[index].band.getIsActive();
+        }
+
+        return retVal;
+    }
+
+    template <typename SampleType>
+    bool MONSTRCrossover<SampleType>::getIsMuted(size_t index) const {
+        bool retVal {false};
+
+        if (index < _bands.size()) {
+            retVal = _bands[index].band.getIsMuted();
         }
 
         return retVal;
