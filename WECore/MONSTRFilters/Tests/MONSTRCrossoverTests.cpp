@@ -319,6 +319,37 @@ SCENARIO("MONSTRCrossover: Removing bands") {
     }
 }
 
+SCENARIO("MONSTRCrossover: Added band has clean configuration") {
+    GIVEN("A MONSTRCrossover with 4 bands, and non-default parameters on the 4th band") {
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+        mCrossover.addBand();
+        mCrossover.setIsActive(3, false);
+        mCrossover.setIsMuted(3, true);
+        mCrossover.setCrossoverFrequency(2, 15000);
+
+        auto processorStrong = std::make_shared<WECore::StereoWidth::StereoWidthProcessor<double>>();
+        mCrossover.setEffectsProcessor(3, processorStrong);
+
+        // Take a weak pointer to the effects processor and reset the original shared (strong)
+        // pointer - this will be expired if the shared pointer held by the band is correctly reset
+        std::weak_ptr<WECore::StereoWidth::StereoWidthProcessor<double>> processorWeak = processorStrong;
+        processorStrong.reset();
+
+        WHEN("The 4th band is removed and added again") {
+            mCrossover.removeBand();
+            mCrossover.addBand();
+
+            THEN("The band has the default parameters") {
+                CHECK(mCrossover.getIsActive(3) == true);
+                CHECK(mCrossover.getIsMuted(3) == false);
+                CHECK(mCrossover.getCrossoverFrequency(2) == Approx(12250));
+                CHECK(processorWeak.expired() == true);
+            }
+        }
+    }
+}
+
 SCENARIO("MONSTRCrossover: All bands muted") {
     GIVEN("A MONSTRCrossover and a buffer of sine samples") {
         std::vector<double> leftBuffer(1024);
@@ -327,7 +358,6 @@ SCENARIO("MONSTRCrossover: All bands muted") {
         WECore::MONSTR::MONSTRCrossover<double> mCrossover;
 
         WHEN("All bands are muted and the samples processeed") {
-
             mCrossover.setIsMuted(0, true);
             mCrossover.setIsMuted(1, true);
             mCrossover.setIsMuted(2, true);

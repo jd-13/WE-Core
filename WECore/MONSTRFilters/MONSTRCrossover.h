@@ -273,7 +273,6 @@ namespace WECore::MONSTR {
         }
     }
 
-
     template <typename SampleType>
     void MONSTRCrossover<SampleType>::setSampleRate(double newSampleRate) {
         for (BandWrapper band : _bands) {
@@ -352,6 +351,12 @@ namespace WECore::MONSTR {
     void MONSTRCrossover<SampleType>::removeBand() {
 
         if (static_cast<int>(_numBands) > Parameters::NUM_BANDS.minValue) {
+            // Make sure the band's parameters are reset to their default values
+            setIsActive(_numBands - 1, true);
+            setIsMuted(_numBands - 1, false);
+            setEffectsProcessor(_numBands - 1, nullptr);
+
+            // Decrement the counter and make the new highest band the upper band
             _numBands--;
             _bands[_numBands - 1].band.setBandType(BandType::UPPER);
         }
