@@ -172,9 +172,9 @@ SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
 
         WHEN("The samples are processed") {
             // turn the crossover on
-            mCrossover.band1.setIsActive(true);
-            mCrossover.band2.setIsActive(true);
-            mCrossover.band3.setIsActive(true);
+            mCrossover.setIsActive(0, true);
+            mCrossover.setIsActive(1, true);
+            mCrossover.setIsActive(2, true);
 
             for (int nbuf {0}; nbuf < NUM_BUFFERS; nbuf++) {
 

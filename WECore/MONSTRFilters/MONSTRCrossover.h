@@ -24,6 +24,7 @@
 #pragma once
 
 #include <algorithm>
+#include <array>
 #include "MONSTRBand.h"
 
 namespace WECore::MONSTR {
@@ -52,75 +53,61 @@ namespace WECore::MONSTR {
      * crossover.Process2in2out(leftSample, rightSample, numSamples);
      * @endcode
      */
-    template <typename T>
+    template <typename SampleType>
     class MONSTRCrossover {
-        static_assert(std::is_floating_point<T>::value,
+        static_assert(std::is_floating_point<SampleType>::value,
                       "Must be provided with a floating point template type");
 
     public:
-        MONSTRBand<T>  band1,
-                       band2,
-                       band3;
+
+        MONSTRCrossover();
+        virtual ~MONSTRCrossover() = default;
+
+        /** @name Setter Methods */
+        /** @{ */
 
         /**
-         * Makes each band aware of its position, and therefore which of their internal filters
-         * they each need to activate.
+         * Activates or bypasses the processing of the given band.
+         *
+         * @param   index       The band to set
+         * @param   isActive    Set to true if the band's processing should be active
          */
-        MONSTRCrossover() : band1(BandType::LOWER),
-                            band2(BandType::MIDDLE),
-                            band3(BandType::UPPER) {
-            setCrossoverLower(Parameters::CROSSOVERLOWER.defaultValue);
-            setCrossoverUpper(Parameters::CROSSOVERUPPER.defaultValue);
-        }
-
-        virtual ~MONSTRCrossover() {}
+        inline void setIsActive(size_t index, bool isActive);
 
         /**
-         * Applies the filtering to a stereo buffer of samples.
-         * Expect seg faults or other memory issues if arguements passed are incorrect.
+         * Mutes the given band.
          *
-         * @param[out]   leftSample      Pointer to the first sample of the left channel's buffer
-         * @param[out]   rightSample     Pointer to the first sample of the right channel's buffer
-         * @param[in]    numSamples      Number of samples in the buffer. The left and right buffers
-         *                               must be the same size.
+         * @param   index       The band to set
+         * @param   isMuted    Set to true if the band should be muted
          */
-        inline void Process2in2out(T* leftSample, T* rightSample, size_t numSamples);
+        inline void setIsMuted(size_t index, bool isMuted);
 
         /**
-         * Sets the crossover frequency of the lower (band1) and middle (band2) bands.
+         * Solos the given band.
          *
-         * @param   val   The frequency in Hz to set the lower crossover point to.
-         *
-         * @see     CROSSOVERLOWER for valid values
+         * @param   index       The band to set
+         * @param   isSoloed    Set to true if the band should be soloed
          */
-        inline void setCrossoverLower(double val);
+        inline void setIsSoloed(size_t index, bool isSoloed);
 
         /**
-         * Sets the crossover frequency of the middle (band2) and upper (band3) bands.
+         * Sets the crossover frequency of the band at the provided index.
          *
-         * @param   val   The frequency in Hz to set the upper crossover point to.
+         * @param   index The crossover to set
+         * @param   val   The frequency in Hz to set the crossover point to
          *
-         * @see     CROSSOVERUPPER for valid values
+         * @see     CROSSOVER_FREQUENCY for valid values
          */
-        inline void setCrossoverUpper(double val);
+        inline void setCrossoverFrequency(size_t index, double val);
 
         /**
-         * Gets the crossover frequency of the lower (band1) and middle (band2) bands.
+         * Sets the effects processor which will be used by the given band.
          *
-         * @return  val The frequency in Hz of the lower crossover point.
-         *
-         * @see     CROSSOVERLOWER for valid values
+         * @param   index       The band to set
+         * @param   processor   EffectsProcessor to use
          */
-        double getCrossoverLower() { return band1.getHighCutoff(); }
-
-        /**
-         * Gets the crossover frequency of the middle (band2) and upper (band3) bands.
-         *
-         * @return  val The frequency in Hz of the upper crossover point.
-         *
-         * @see     CROSSOVERUPPER for valid values
-         */
-        double getCrossoverUpper() { return band2.getHighCutoff(); }
+        inline void setEffectsProcessor(
+            size_t index, std::shared_ptr<EffectsProcessor<SampleType>> processor);
 
         /**
          * Configures the filters for the correct sample rate. Ensure this is
@@ -129,6 +116,84 @@ namespace WECore::MONSTR {
          * @param   newSampleRate  The sample rate the filter should be configured for
          */
         inline void setSampleRate(double newSampleRate);
+
+        /** @} */
+
+        /** @name Getter Methods */
+        /** @{ */
+
+        /**
+         * Gets whether the given band is applying processing.
+         *
+         * @param   index The band to get
+         *
+         * @return  True if the band is applying processing, false if bypassed
+         */
+        inline bool getIsActive(size_t index) const;
+
+        /**
+         * Gets whether the given band is muted.
+         *
+         * @param   index The band to get
+         *
+         * @return  True if the band is muted, false if unmuted
+         */
+        inline bool getIsMuted(size_t index) const;
+
+        /**
+         * Gets whether the given band is soloed.
+         *
+         * @param   index The band to get
+         *
+         * @return  True if the band is soloed, false if unsoloed
+         */
+        inline bool getIsSoloed(size_t index) const;
+
+        /**
+         * Gets the crossover frequency of the band at the provided index.
+         *
+         * @param   index The crossover to get.
+         *
+         * @return  The frequency in Hz of the lower crossover point
+         *
+         * @see     CROSSOVER_FREQUENCY for valid values
+         */
+        inline double getCrossoverFrequency(size_t index) const;
+
+        /**
+         * Returns the number of bands available. Increased or decreased using addBand() and
+         * removeBand().
+         *
+         * @return  Number of bands
+         *
+         * @see     NUM_BANDS for valid values
+         */
+        size_t getNumBands() { return _numBands; }
+
+        /** @} */
+
+        /**
+         * Increments the number of bands (if currently below the maximum number)
+         */
+        inline void addBand();
+
+        /**
+         * Decrements the number of bands (if currently above the minimum)
+         */
+        inline void removeBand();
+
+        /**
+         * Applies the filtering to a stereo buffer of samples.
+         * Expect seg faults or other memory issues if arguements passed are incorrect.
+         *
+         * @param[out]   leftSample      Pointer to the first sample of the left channel's buffer
+         * @param[out]   rightSample     Pointer to the first sample of the right channel's buffer
+         * @param[in]    numSamples      Number of samples in the buffer. The left and right buffers
+         *                               must be the same size
+         */
+        inline void Process2in2out(SampleType* leftSample,
+                                   SampleType* rightSample,
+                                   size_t numSamples);
 
         /**
          * Resets all filters.
@@ -139,16 +204,219 @@ namespace WECore::MONSTR {
     private:
         static constexpr unsigned int INTERNAL_BUFFER_SIZE = 512;
 
-        T _band1LeftBuffer[INTERNAL_BUFFER_SIZE];
-        T _band1RightBuffer[INTERNAL_BUFFER_SIZE];
-        T _band2LeftBuffer[INTERNAL_BUFFER_SIZE];
-        T _band2RightBuffer[INTERNAL_BUFFER_SIZE];
-        T _band3LeftBuffer[INTERNAL_BUFFER_SIZE];
-        T _band3RightBuffer[INTERNAL_BUFFER_SIZE];
+        class BandWrapper {
+        public:
+            BandWrapper() : band(BandType::LOWER), isSoloed(Parameters::BANDSOLO_DEFAULT) {
+                leftBuffer = new SampleType[INTERNAL_BUFFER_SIZE];
+                rightBuffer = new SampleType[INTERNAL_BUFFER_SIZE];
+            }
+
+            MONSTRBand<SampleType> band;
+            bool isSoloed;
+            SampleType* leftBuffer;
+            SampleType* rightBuffer;
+        };
+
+        size_t _numBands;
+        size_t _numBandsSoloed;
+        std::array<BandWrapper, Parameters::_MAX_NUM_BANDS> _bands;
     };
 
-    template <typename T>
-    void MONSTRCrossover<T>::Process2in2out(T* leftSample,  T* rightSample, size_t numSamples) {
+    template <typename SampleType>
+    MONSTRCrossover<SampleType>::MONSTRCrossover() : _numBands(Parameters::_DEFAULT_NUM_BANDS),
+                                                     _numBandsSoloed(0) {
+
+        // The bands are defaulted to lower, set them correctly
+        static_assert(Parameters::_DEFAULT_NUM_BANDS == 3,
+                      "This constructor code needs to be updated if the default changes");
+        _bands[1].band.setBandType(BandType::MIDDLE);
+        _bands[2].band.setBandType(BandType::UPPER);
+
+        setCrossoverFrequency(0, Parameters::CROSSOVER_LOWER_DEFAULT);
+        setCrossoverFrequency(1, Parameters::CROSSOVER_UPPER_DEFAULT);
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setIsActive(size_t index, bool isActive) {
+        if (index < _bands.size()) {
+            _bands[index].band.setIsActive(isActive);
+        }
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setIsMuted(size_t index, bool isMuted) {
+        if (index < _bands.size()) {
+            _bands[index].band.setIsMuted(isMuted);
+        }
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setIsSoloed(size_t index, bool isSoloed) {
+        if (index < _bands.size()) {
+
+            // If the new value is different to the existing one, update it and the counter
+            if (isSoloed != _bands[index].isSoloed) {
+
+                _bands[index].isSoloed = isSoloed;
+
+                if (isSoloed) {
+                    _numBandsSoloed++;
+                } else {
+                    _numBandsSoloed--;
+                }
+            }
+        }
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setCrossoverFrequency(size_t index, double val) {
+
+        if (index < _bands.size() - 1) {
+
+            // Set the crossover frequency
+            val = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
+            _bands[index].band.setHighCutoff(val);
+            _bands[index + 1].band.setLowCutoff(val);
+
+            // Make sure the crossover frequencies are still in the correct order
+            for (size_t otherCrossoverIndex {0}; otherCrossoverIndex < _bands.size() - 1; otherCrossoverIndex++) {
+
+                const double otherCrossoverFrequency {getCrossoverFrequency(otherCrossoverIndex)};
+
+                const bool needsCrossoverUpdate {
+                    // We've moved the crossover frequency of index below another one that should be
+                    // below it - move the other one to the new value
+                    (val < otherCrossoverFrequency && otherCrossoverIndex < index) ||
+
+                    // We've moved the crossover frequency of index above another one that should be
+                    // above it - move the other one to the new value
+                    (otherCrossoverFrequency > val && index > otherCrossoverIndex)
+                };
+
+                if (needsCrossoverUpdate) {
+                    // We've moved the crossover frequency of index below another one that should be
+                    // below it - move the other one to the new value
+                    setCrossoverFrequency(otherCrossoverIndex, val);
+
+                }
+            }
+        }
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setEffectsProcessor(size_t index, std::shared_ptr<EffectsProcessor<SampleType>> processor) {
+
+        if (index < _bands.size()) {
+            _bands[index].band.setEffectsProcessor(processor);
+        }
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setSampleRate(double newSampleRate) {
+        for (BandWrapper band : _bands) {
+            band.band.setSampleRate(newSampleRate);
+        }
+    }
+
+    template <typename SampleType>
+    bool MONSTRCrossover<SampleType>::getIsActive(size_t index) const {
+        bool retVal {false};
+
+        if (index < _bands.size()) {
+            retVal = _bands[index].band.getIsActive();
+        }
+
+        return retVal;
+    }
+
+    template <typename SampleType>
+    bool MONSTRCrossover<SampleType>::getIsMuted(size_t index) const {
+        bool retVal {false};
+
+        if (index < _bands.size()) {
+            retVal = _bands[index].band.getIsMuted();
+        }
+
+        return retVal;
+    }
+
+    template <typename SampleType>
+    bool MONSTRCrossover<SampleType>::getIsSoloed(size_t index) const {
+        bool retVal {false};
+
+        if (index < _bands.size()) {
+            retVal = _bands[index].isSoloed;
+        }
+
+        return retVal;
+    }
+
+    template <typename SampleType>
+    double MONSTRCrossover<SampleType>::getCrossoverFrequency(size_t index) const {
+        double retVal {0};
+
+        if (index < _bands.size()) {
+            retVal = _bands[index].band.getHighCutoff();
+        }
+
+        return retVal;
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::addBand() {
+
+        if (static_cast<int>(_numBands) < Parameters::NUM_BANDS.maxValue) {
+
+            // Convert the current highest band to a middle band
+            _bands[_numBands - 1].band.setBandType(BandType::MIDDLE);
+
+            // Set the next band up to be an upper band
+            _bands[_numBands].band.setBandType(BandType::UPPER);
+
+            const double oldHighestCrossover {getCrossoverFrequency(_numBands - 2)};
+
+            if (oldHighestCrossover < Parameters::CROSSOVER_FREQUENCY.maxValue) {
+                // The old highest crossover frequency is below the maximum, insert the new one halfway
+                // between it and the maximum
+                const double topBandWidth {Parameters::CROSSOVER_FREQUENCY.maxValue - oldHighestCrossover};
+                setCrossoverFrequency(_numBands - 1, oldHighestCrossover + (topBandWidth / 2));
+            } else {
+                // The old highest crossover is at the maximum, move it halfway down to the one below
+                // and place the new one at the maximum
+                const double secondHighestCrossover {getCrossoverFrequency(_numBands - 3)};
+                const double bandWidth {Parameters::CROSSOVER_FREQUENCY.maxValue - secondHighestCrossover};
+
+                setCrossoverFrequency(_numBands - 2, secondHighestCrossover + (bandWidth / 2));
+                setCrossoverFrequency(_numBands - 1, Parameters::CROSSOVER_FREQUENCY.maxValue);
+            }
+
+            _numBands++;
+        }
+
+        reset();
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::removeBand() {
+
+        if (static_cast<int>(_numBands) > Parameters::NUM_BANDS.minValue) {
+            // Make sure the band's parameters are reset to their default values
+            setIsActive(_numBands - 1, true);
+            setIsMuted(_numBands - 1, false);
+            setEffectsProcessor(_numBands - 1, nullptr);
+
+            // Decrement the counter and make the new highest band the upper band
+            _numBands--;
+            _bands[_numBands - 1].band.setBandType(BandType::UPPER);
+        }
+
+        reset();
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::Process2in2out(SampleType* leftSample,
+                                                     SampleType* rightSample,
+                                                     size_t numSamples) {
 
         // If the buffer we've been passed is bigger than our static internal buffer, then we need
         // to break it into chunks
@@ -160,62 +428,55 @@ namespace WECore::MONSTR {
 
             // Calculate how many samples need to be processed in this chunk
             const size_t numSamplesRemaining {numSamples - (bufferNumber * INTERNAL_BUFFER_SIZE)};
-            const size_t numSamplesToCopy {std::min(numSamplesRemaining,
-                                        static_cast<size_t>(INTERNAL_BUFFER_SIZE))};
+            const size_t numSamplesToCopy {
+                std::min(numSamplesRemaining, static_cast<size_t>(INTERNAL_BUFFER_SIZE))
+            };
 
-            T* const leftBufferInputStart {&leftSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
-            T* const rightBufferInputStart {&rightSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
+            SampleType* const leftBufferInputStart {&leftSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
+            SampleType* const rightBufferInputStart {&rightSample[bufferNumber * INTERNAL_BUFFER_SIZE]};
 
-            std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band1LeftBuffer);
-            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band1RightBuffer);
-            std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band2LeftBuffer);
-            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band2RightBuffer);
-            std::copy(leftBufferInputStart,  &leftBufferInputStart[numSamplesToCopy],  _band3LeftBuffer);
-            std::copy(rightBufferInputStart, &rightBufferInputStart[numSamplesToCopy], _band3RightBuffer);
+            // Populate the band specific buffers, and do the processing
+            for (size_t bandIndex {0}; bandIndex < _numBands; bandIndex++) {
 
-            // let each band do its processing
-            band1.process2in2out(_band1LeftBuffer, _band1RightBuffer, numSamplesToCopy);
-            band2.process2in2out(_band2LeftBuffer, _band2RightBuffer, numSamplesToCopy);
-            band3.process2in2out(_band3LeftBuffer, _band3RightBuffer, numSamplesToCopy);
+                // Only do processing no bands are soloed or if this band is soloed
+                if (_numBandsSoloed == 0 || _bands[bandIndex].isSoloed) {
+                    std::copy(leftBufferInputStart,
+                              &leftBufferInputStart[numSamplesToCopy],
+                              _bands[bandIndex].leftBuffer);
 
-            // combine the output from each band, and write to output
-            for (size_t iii {0}; iii < numSamplesToCopy; iii++) {
-                leftBufferInputStart[iii] = _band1LeftBuffer[iii]
-                                            + _band2LeftBuffer[iii]
-                                            + _band3LeftBuffer[iii];
+                    std::copy(rightBufferInputStart,
+                              &rightBufferInputStart[numSamplesToCopy],
+                              _bands[bandIndex].rightBuffer);
 
-                rightBufferInputStart[iii] = _band1RightBuffer[iii]
-                                            + _band2RightBuffer[iii]
-                                            + _band3RightBuffer[iii];
+                    _bands[bandIndex].band.process2in2out(_bands[bandIndex].leftBuffer,
+                                                          _bands[bandIndex].rightBuffer,
+                                                          numSamplesToCopy);
+                }
+            }
+
+            // Combine the output from each band, and write to output
+            for (size_t sampleIndex {0}; sampleIndex < numSamplesToCopy; sampleIndex++) {
+
+                // Reset the sample to zero first
+                leftBufferInputStart[sampleIndex] = 0;
+                rightBufferInputStart[sampleIndex] = 0;
+
+                for (size_t bandIndex {0}; bandIndex < _numBands; bandIndex++) {
+
+                    // Only do processing no bands are soloed or if this band is soloed
+                    if (_numBandsSoloed == 0 || _bands[bandIndex].isSoloed) {
+                        leftBufferInputStart[sampleIndex] += _bands[bandIndex].leftBuffer[sampleIndex];
+                        rightBufferInputStart[sampleIndex] += _bands[bandIndex].rightBuffer[sampleIndex];
+                    }
+                }
             }
         }
     }
 
-    template <typename T>
-    void MONSTRCrossover<T>::setCrossoverLower(double val) {
-        val = Parameters::CROSSOVERLOWER.BoundsCheck(val);
-        band1.setHighCutoff(val);
-        band2.setLowCutoff(val);
-    }
-
-    template <typename T>
-    void MONSTRCrossover<T>::setCrossoverUpper(double val) {
-        val = Parameters::CROSSOVERUPPER.BoundsCheck(val);
-        band2.setHighCutoff(val);
-        band3.setLowCutoff(val);
-    }
-
-    template <typename T>
-    void MONSTRCrossover<T>::setSampleRate(double newSampleRate) {
-        band1.setSampleRate(newSampleRate);
-        band2.setSampleRate(newSampleRate);
-        band3.setSampleRate(newSampleRate);
-    }
-
-    template <typename T>
-    void MONSTRCrossover<T>::reset() {
-        band1.reset();
-        band2.reset();
-        band3.reset();
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::reset() {
+        for (BandWrapper& band : _bands) {
+            band.band.reset();
+        }
     }
 }

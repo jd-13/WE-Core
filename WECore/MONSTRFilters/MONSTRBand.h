@@ -97,8 +97,9 @@ namespace WECore::MONSTR {
          */
         MONSTRBand(BandType bandType) : _bandType(bandType),
                                         _isActive(Parameters::BANDSWITCH_DEFAULT),
-                                        _lowCutoffHz(Parameters::CROSSOVERLOWER.defaultValue),
-                                        _highCutoffHz(Parameters::CROSSOVERUPPER.defaultValue),
+                                        _isMuted(Parameters::BANDMUTED_DEFAULT),
+                                        _lowCutoffHz(100),
+                                        _highCutoffHz(5000),
                                         _sampleRate(44100),
                                         _processor(nullptr) {
             _lowCut1.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
@@ -108,6 +109,9 @@ namespace WECore::MONSTR {
         }
 
         virtual ~MONSTRBand() = default;
+
+        /** @name Setter Methods */
+        /** @{ */
 
         /**
          * Sets whether this band will route audio through the EffectsProcessor.
@@ -121,30 +125,38 @@ namespace WECore::MONSTR {
          */
         void setIsActive(bool val) { _isActive = val; }
 
-        inline void setSampleRate(double newSampleRate);
+        void setIsMuted(bool val) { _isMuted = val; }
 
         inline void setLowCutoff(double val);
 
         inline void setHighCutoff(double val);
+
+        inline void setBandType(BandType bandType);
+
+        inline void setSampleRate(double newSampleRate);
 
         /**
          * Specifies the processor that this band should pass audio through.
          */
         void setEffectsProcessor(std::shared_ptr<EffectsProcessor<SampleType>> processor) { _processor = processor; }
 
+        /** @} */
+
+        /** @name Getter Methods */
+        /** @{ */
+
         /**
          * @see setIsActive
          */
         bool getIsActive() const { return _isActive; }
 
+        bool getIsMuted() const { return _isMuted; }
+
         double getLowCutoff() const { return _lowCutoffHz; }
 
         double getHighCutoff() const { return _highCutoffHz; }
 
-        /**
-         * Resets filter states. Call before beginning a new buffer of samples.
-         */
-        inline void reset();
+        /** @} */
 
         /**
          * Performs the effect processing on leftSample and rightSample. Use for
@@ -157,10 +169,16 @@ namespace WECore::MONSTR {
          */
         inline void process2in2out(SampleType* leftSample, SampleType* rightSample, size_t numSamples);
 
+        /**
+         * Resets filter states. Call before beginning a new buffer of samples.
+         */
+        inline void reset();
+
     private:
         BandType _bandType;
 
-        bool _isActive;
+        bool _isActive,
+             _isMuted;
 
         double   _lowCutoffHz,
                  _highCutoffHz;
@@ -180,11 +198,32 @@ namespace WECore::MONSTR {
     };
 
     template <typename SampleType>
-    void MONSTRBand<SampleType>::reset() {
-        _lowCut1.reset();
-        _lowCut2.reset();
-        _highCut1.reset();
-        _highCut2.reset();
+    void MONSTRBand<SampleType>::setLowCutoff(double val) {
+        _lowCutoffHz = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
+        _lowCut1.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
+        _lowCut2.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
+
+        // Move the high cutoff up if necessary as they shouldn't swap places
+        if (_lowCutoffHz > _highCutoffHz) {
+            setHighCutoff(_lowCutoffHz);
+        }
+    }
+
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::setHighCutoff(double val) {
+        _highCutoffHz = Parameters::CROSSOVER_FREQUENCY.BoundsCheck(val);
+        _highCut1.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
+        _highCut2.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
+
+        // Move the low cutoff down if necessary as they shouldn't swap places
+        if (_lowCutoffHz > _highCutoffHz) {
+            setLowCutoff(_highCutoffHz);
+        }
+    }
+
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::setBandType(BandType bandType) {
+        _bandType = bandType;
     }
 
     template <typename SampleType>
@@ -198,44 +237,34 @@ namespace WECore::MONSTR {
     }
 
     template <typename SampleType>
-    void MONSTRBand<SampleType>::setLowCutoff(double val) {
-        // if this is the lowest band, then do not cut the low frequencies
-        if (_bandType == BandType::MIDDLE) {
-            _lowCutoffHz = Parameters::CROSSOVERLOWER.BoundsCheck(val);
-            _lowCut1.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
-            _lowCut2.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
-        } else if (_bandType == BandType::UPPER) {
-            _lowCutoffHz = Parameters::CROSSOVERUPPER.BoundsCheck(val);
-            _lowCut1.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
-            _lowCut2.setup(FILTER_ORDER, _sampleRate, _lowCutoffHz);
-        }
-    }
+    void MONSTRBand<SampleType>::process2in2out(SampleType* leftSample,
+                                                SampleType* rightSample,
+                                                size_t numSamples) {
 
-    template <typename SampleType>
-    void MONSTRBand<SampleType>::setHighCutoff(double val) {
-        // if this is the highest band, then do not cut the high frequencies
-        if (_bandType == BandType::MIDDLE) {
-            _highCutoffHz = Parameters::CROSSOVERUPPER.BoundsCheck(val);
-            _highCut1.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
-            _highCut2.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
-        } else if (_bandType == BandType::LOWER) {
-            _highCutoffHz = Parameters::CROSSOVERLOWER.BoundsCheck(val);
-            _highCut1.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
-            _highCut2.setup(FILTER_ORDER, _sampleRate, _highCutoffHz);
-        }
-    }
+        if (_isMuted) {
+            // Muted - set the output to 0 for this band
+            for (size_t sampleIndex {0}; sampleIndex < numSamples; sampleIndex++) {
+                leftSample[sampleIndex] = 0;
+                rightSample[sampleIndex] = 0;
+            }
+        } else {
+            // Apply the filtering before processing
+            _filterSamples(leftSample, rightSample, static_cast<int>(numSamples));
 
-    template <typename SampleType>
-    void MONSTRBand<SampleType>::process2in2out(SampleType* leftSample, SampleType* rightSample, size_t numSamples) {
-
-        // Apply the filtering before processing
-        _filterSamples(leftSample, rightSample, static_cast<int>(numSamples));
-
-        if (_isActive) {
-            if (_processor != nullptr) {
-                _processor->process2in2out(leftSample, rightSample, numSamples);
+            if (_isActive) {
+                if (_processor != nullptr) {
+                    _processor->process2in2out(leftSample, rightSample, numSamples);
+                }
             }
         }
+    }
+
+    template <typename SampleType>
+    void MONSTRBand<SampleType>::reset() {
+        _lowCut1.reset();
+        _lowCut2.reset();
+        _highCut1.reset();
+        _highCut2.reset();
     }
 
     template <typename SampleType>

@@ -28,7 +28,22 @@
 namespace WECore::MONSTR::Parameters {
     constexpr bool BANDSWITCH_OFF {false},
                    BANDSWITCH_ON {true},
-                   BANDSWITCH_DEFAULT {BANDSWITCH_ON};
+                   BANDSWITCH_DEFAULT {BANDSWITCH_ON},
+
+                   BANDMUTED_OFF {false},
+                   BANDMUTED_ON {true},
+                   BANDMUTED_DEFAULT {BANDMUTED_OFF},
+
+                   BANDSOLO_OFF {false},
+                   BANDSOLO_ON {true},
+                   BANDSOLO_DEFAULT {BANDSOLO_OFF};
+
+    // constexpr as it initialises some internal memebers
+    constexpr int _MAX_NUM_BANDS {6};
+    constexpr int _DEFAULT_NUM_BANDS {3};
+
+    constexpr double CROSSOVER_LOWER_DEFAULT {100};
+    constexpr double CROSSOVER_UPPER_DEFAULT {5000};
 
     //@{
     /**
@@ -38,8 +53,8 @@ namespace WECore::MONSTR::Parameters {
      *      maximum value,
      *      default value
      */
-    const ParameterDefinition::RangedParameter<double>   CROSSOVERLOWER(40, 500, 100),
-                                                         CROSSOVERUPPER(3000, 19500, 5000);
+    const ParameterDefinition::RangedParameter<double> CROSSOVER_FREQUENCY(40, 19500, 500);
+    const ParameterDefinition::RangedParameter<int> NUM_BANDS(2, _MAX_NUM_BANDS, _DEFAULT_NUM_BANDS);
     //@}
 
 }

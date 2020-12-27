@@ -42,6 +42,7 @@ add_executable(WECoreTest ${CMAKE_CURRENT_LIST_DIR}/WECore/Tests/catchMain.cpp
                           ${CMAKE_CURRENT_LIST_DIR}/WECore/CarveDSP/Tests/DSPUnitParameterTests.cpp
                           ${CMAKE_CURRENT_LIST_DIR}/WECore/CarveDSP/Tests/DSPUnitProcessingTests.cpp
                           ${CMAKE_CURRENT_LIST_DIR}/WECore/CarveDSP/Tests/CarveNoiseFilterTests.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/WECore/MONSTRFilters/Tests/MONSTRBandTests.cpp
                           ${CMAKE_CURRENT_LIST_DIR}/WECore/MONSTRFilters/Tests/MONSTRCrossoverTests.cpp
                           ${CMAKE_CURRENT_LIST_DIR}/WECore/RichterLFO/Tests/RichterLFOPairTests.cpp
                           ${CMAKE_CURRENT_LIST_DIR}/WECore/SongbirdFilters/Tests/SongbirdFilterModuleTests.cpp
