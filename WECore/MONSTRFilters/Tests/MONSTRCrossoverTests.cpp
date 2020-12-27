@@ -42,6 +42,14 @@ SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
                 CHECK(mCrossover.getIsActive(0) == true);
                 CHECK(mCrossover.getIsActive(1) == true);
                 CHECK(mCrossover.getIsActive(2) == true);
+
+                CHECK(mCrossover.getIsMuted(0) == false);
+                CHECK(mCrossover.getIsMuted(1) == false);
+                CHECK(mCrossover.getIsMuted(2) == false);
+
+                CHECK(mCrossover.getIsSoloed(0) == false);
+                CHECK(mCrossover.getIsSoloed(1) == false);
+                CHECK(mCrossover.getIsSoloed(2) == false);
             }
         }
 
@@ -49,13 +57,17 @@ SCENARIO("MONSTRCrossover: Parameters can be set and retrieved correctly") {
             mCrossover.setCrossoverFrequency(0, 41);
             mCrossover.setCrossoverFrequency(1, 3001);
 
-            mCrossover.setIsActive(0, true);
+            mCrossover.setIsActive(0, false);
+            mCrossover.setIsMuted(0, true);
+            mCrossover.setIsSoloed(1, true);
 
             THEN("They all get their correct unique values") {
                 CHECK(mCrossover.getCrossoverFrequency(0) == Approx(41.0));
                 CHECK(mCrossover.getCrossoverFrequency(1) == Approx(3001.0));
 
-                CHECK(mCrossover.getIsActive(0) == true);
+                CHECK(mCrossover.getIsActive(0) == false);
+                CHECK(mCrossover.getIsMuted(0) == true);
+                CHECK(mCrossover.getIsSoloed(1) == true);
             }
         }
     }
@@ -399,6 +411,132 @@ SCENARIO("MONSTRCrossover: All bands muted") {
                     CHECK(leftBuffer[index] == Approx(0.0));
                     CHECK(rightBuffer[index] == Approx(0.0));
                 }
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: A band is soloed and muted") {
+    GIVEN("A MONSTRCrossover and a buffer of sine samples") {
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+
+        WHEN("A band is soloed and muted, and the samples processeed") {
+            mCrossover.setIsMuted(0, true);
+            mCrossover.setIsSoloed(0, true);
+
+            // Fill the buffer
+            WECore::TestUtils::generateSine(leftBuffer, 44100, 1000);
+            std::copy(leftBuffer.begin(), leftBuffer.end() , rightBuffer.begin());
+
+            // Do processing
+            mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+
+            THEN("The output is silence") {
+                for (size_t index {0}; index < leftBuffer.size(); index++) {
+                    CHECK(leftBuffer[index] == Approx(0.0));
+                    CHECK(rightBuffer[index] == Approx(0.0));
+                }
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: All bands are soloed") {
+    GIVEN("A MONSTRCrossover and a buffer of sine samples") {
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+        const std::vector<double>& expectedOutput =
+                TestData::MONSTR::Data.at(Catch::getResultCapture().getCurrentTestName());
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+
+        WHEN("All bands are soloed, and the samples processeed") {
+            mCrossover.setIsSoloed(0, true);
+            mCrossover.setIsSoloed(1, true);
+            mCrossover.setIsSoloed(2, true);
+
+            // Fill the buffer
+            WECore::TestUtils::generateSine(leftBuffer, 44100, 1000);
+            std::copy(leftBuffer.begin(), leftBuffer.end() , rightBuffer.begin());
+
+            // Do processing
+            mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+
+            THEN("The expected output is produced") {
+                for (size_t index {0}; index < leftBuffer.size(); index++) {
+                    CHECK(leftBuffer[index] == Approx(expectedOutput[index]).margin(0.00001));
+                    CHECK(rightBuffer[index] == Approx(expectedOutput[index]).margin(0.00001));
+                }
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: EffectsProcessors are not called for muted bands") {
+    GIVEN("A MONSTRCrossover and a buffer of sine samples") {
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+
+        // Create a processor that will fail the test if called
+        class TestProcessor : public WECore::EffectsProcessor<double> {
+        public:
+            void process2in2out(double* /*inSamplesLeft*/,
+                                double* /*inSamplesRight*/,
+                                size_t /*numSamples*/) {
+                FAIL_CHECK("Processor should not have been called");
+            }
+        };
+
+        WHEN("A processor is assigned to a band which is muted") {
+            mCrossover.setIsMuted(0, true);
+            mCrossover.setEffectsProcessor(0, std::make_shared<TestProcessor>());
+
+            // Fill the buffer
+            WECore::TestUtils::generateSine(leftBuffer, 44100, 1000);
+            std::copy(leftBuffer.begin(), leftBuffer.end() , rightBuffer.begin());
+
+            THEN("The processor is not called during processing") {
+                // Do processing
+                mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
+            }
+        }
+    }
+}
+
+SCENARIO("MONSTRCrossover: EffectsProcessors are not called for bands that aren't soloed") {
+    GIVEN("A MONSTRCrossover and a buffer of sine samples") {
+        std::vector<double> leftBuffer(1024);
+        std::vector<double> rightBuffer(1024);
+
+        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
+
+        // Create a processor that will fail the test if called
+        class TestProcessor : public WECore::EffectsProcessor<double> {
+        public:
+            void process2in2out(double* /*inSamplesLeft*/,
+                                double* /*inSamplesRight*/,
+                                size_t /*numSamples*/) {
+                FAIL_CHECK("Processor should not have been called");
+            }
+        };
+
+        WHEN("A processor is assigned to a band but another is soloed") {
+            mCrossover.setIsSoloed(1, true);
+            mCrossover.setEffectsProcessor(0, std::make_shared<TestProcessor>());
+            mCrossover.setEffectsProcessor(2, std::make_shared<TestProcessor>());
+
+            // Fill the buffer
+            WECore::TestUtils::generateSine(leftBuffer, 44100, 1000);
+            std::copy(leftBuffer.begin(), leftBuffer.end() , rightBuffer.begin());
+
+            THEN("The processor is not called during processing") {
+                // Do processing
+                mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
             }
         }
     }

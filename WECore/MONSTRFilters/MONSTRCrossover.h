@@ -83,6 +83,14 @@ namespace WECore::MONSTR {
         inline void setIsMuted(size_t index, bool isMuted);
 
         /**
+         * Solos the given band.
+         *
+         * @param   index       The band to set
+         * @param   isSoloed    Set to true if the band should be soloed
+         */
+        inline void setIsSoloed(size_t index, bool isSoloed);
+
+        /**
          * Sets the crossover frequency of the band at the provided index.
          *
          * @param   index The crossover to set
@@ -131,6 +139,15 @@ namespace WECore::MONSTR {
          * @return  True if the band is muted, false if unmuted
          */
         inline bool getIsMuted(size_t index) const;
+
+        /**
+         * Gets whether the given band is soloed.
+         *
+         * @param   index The band to get
+         *
+         * @return  True if the band is soloed, false if unsoloed
+         */
+        inline bool getIsSoloed(size_t index) const;
 
         /**
          * Gets the crossover frequency of the band at the provided index.
@@ -189,22 +206,25 @@ namespace WECore::MONSTR {
 
         class BandWrapper {
         public:
-            BandWrapper() : band(BandType::LOWER) {
+            BandWrapper() : band(BandType::LOWER), isSoloed(Parameters::BANDSOLO_DEFAULT) {
                 leftBuffer = new SampleType[INTERNAL_BUFFER_SIZE];
                 rightBuffer = new SampleType[INTERNAL_BUFFER_SIZE];
             }
 
             MONSTRBand<SampleType> band;
+            bool isSoloed;
             SampleType* leftBuffer;
             SampleType* rightBuffer;
         };
 
         size_t _numBands;
+        size_t _numBandsSoloed;
         std::array<BandWrapper, Parameters::_MAX_NUM_BANDS> _bands;
     };
 
     template <typename SampleType>
-    MONSTRCrossover<SampleType>::MONSTRCrossover() : _numBands(Parameters::_DEFAULT_NUM_BANDS) {
+    MONSTRCrossover<SampleType>::MONSTRCrossover() : _numBands(Parameters::_DEFAULT_NUM_BANDS),
+                                                     _numBandsSoloed(0) {
 
         // The bands are defaulted to lower, set them correctly
         static_assert(Parameters::_DEFAULT_NUM_BANDS == 3,
@@ -227,6 +247,24 @@ namespace WECore::MONSTR {
     void MONSTRCrossover<SampleType>::setIsMuted(size_t index, bool isMuted) {
         if (index < _bands.size()) {
             _bands[index].band.setIsMuted(isMuted);
+        }
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setIsSoloed(size_t index, bool isSoloed) {
+        if (index < _bands.size()) {
+
+            // If the new value is different to the existing one, update it and the counter
+            if (isSoloed != _bands[index].isSoloed) {
+
+                _bands[index].isSoloed = isSoloed;
+
+                if (isSoloed) {
+                    _numBandsSoloed++;
+                } else {
+                    _numBandsSoloed--;
+                }
+            }
         }
     }
 
@@ -297,6 +335,17 @@ namespace WECore::MONSTR {
 
         if (index < _bands.size()) {
             retVal = _bands[index].band.getIsMuted();
+        }
+
+        return retVal;
+    }
+
+    template <typename SampleType>
+    bool MONSTRCrossover<SampleType>::getIsSoloed(size_t index) const {
+        bool retVal {false};
+
+        if (index < _bands.size()) {
+            retVal = _bands[index].isSoloed;
         }
 
         return retVal;
@@ -388,17 +437,21 @@ namespace WECore::MONSTR {
 
             // Populate the band specific buffers, and do the processing
             for (size_t bandIndex {0}; bandIndex < _numBands; bandIndex++) {
-                std::copy(leftBufferInputStart,
-                          &leftBufferInputStart[numSamplesToCopy],
-                          _bands[bandIndex].leftBuffer);
 
-                std::copy(rightBufferInputStart,
-                          &rightBufferInputStart[numSamplesToCopy],
-                          _bands[bandIndex].rightBuffer);
+                // Only do processing no bands are soloed or if this band is soloed
+                if (_numBandsSoloed == 0 || _bands[bandIndex].isSoloed) {
+                    std::copy(leftBufferInputStart,
+                              &leftBufferInputStart[numSamplesToCopy],
+                              _bands[bandIndex].leftBuffer);
 
-                _bands[bandIndex].band.process2in2out(_bands[bandIndex].leftBuffer,
-                                                      _bands[bandIndex].rightBuffer,
-                                                      numSamplesToCopy);
+                    std::copy(rightBufferInputStart,
+                              &rightBufferInputStart[numSamplesToCopy],
+                              _bands[bandIndex].rightBuffer);
+
+                    _bands[bandIndex].band.process2in2out(_bands[bandIndex].leftBuffer,
+                                                          _bands[bandIndex].rightBuffer,
+                                                          numSamplesToCopy);
+                }
             }
 
             // Combine the output from each band, and write to output
@@ -409,8 +462,12 @@ namespace WECore::MONSTR {
                 rightBufferInputStart[sampleIndex] = 0;
 
                 for (size_t bandIndex {0}; bandIndex < _numBands; bandIndex++) {
-                    leftBufferInputStart[sampleIndex] += _bands[bandIndex].leftBuffer[sampleIndex];
-                    rightBufferInputStart[sampleIndex] += _bands[bandIndex].rightBuffer[sampleIndex];
+
+                    // Only do processing no bands are soloed or if this band is soloed
+                    if (_numBandsSoloed == 0 || _bands[bandIndex].isSoloed) {
+                        leftBufferInputStart[sampleIndex] += _bands[bandIndex].leftBuffer[sampleIndex];
+                        rightBufferInputStart[sampleIndex] += _bands[bandIndex].rightBuffer[sampleIndex];
+                    }
                 }
             }
         }
