@@ -66,7 +66,7 @@ SCENARIO("CarveDSPUnit: Sine Default") {
             // fill the buffer
             std::generate(buffer.begin(),
                           buffer.end(),
-                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+                          [iii = 0]() mutable {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
 
             // turn the unit on
             mCarve.setMode(2);
@@ -102,7 +102,7 @@ SCENARIO("CarveDSPUnit: Parabolic Soft Default") {
             // fill the buffer
             std::generate(buffer.begin(),
                           buffer.end(),
-                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+                          [iii = 0]() mutable {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
 
             // turn the unit on
             mCarve.setMode(3);
@@ -138,7 +138,7 @@ SCENARIO("CarveDSPUnit: Parabolic Hard Default") {
             // fill the buffer
             std::generate(buffer.begin(),
                           buffer.end(),
-                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+                          [iii = 0]() mutable {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
 
             // turn the unit on
             mCarve.setMode(4);
@@ -174,7 +174,7 @@ SCENARIO("CarveDSPUnit: Asymetric Sine Default") {
             // fill the buffer
             std::generate(buffer.begin(),
                           buffer.end(),
-                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+                          [iii = 0]() mutable {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
 
             // turn the unit on
             mCarve.setMode(5);
@@ -210,7 +210,7 @@ SCENARIO("CarveDSPUnit: Exponent Default") {
             // fill the buffer
             std::generate(buffer.begin(),
                           buffer.end(),
-                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+                          [iii = 0]() mutable {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
 
             // turn the unit on
             mCarve.setMode(6);
@@ -246,7 +246,7 @@ SCENARIO("CarveDSPUnit: Clipper Default") {
             // fill the buffer
             std::generate(buffer.begin(),
                           buffer.end(),
-                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+                          [iii = 0]() mutable {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
 
             // turn the unit on
             mCarve.setMode(7);

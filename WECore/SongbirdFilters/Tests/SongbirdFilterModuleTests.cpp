@@ -142,10 +142,10 @@ SCENARIO("SongbirdFilterModule: Freq mode") {
         // fill the buffers, phase shift the right one so that they're not identical
         std::generate(leftBuffer.begin(),
                       leftBuffer.end(),
-                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+                      [iii = 0]() mutable {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
         std::generate(rightBuffer.begin(),
                       rightBuffer.end(),
-                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + CoreMath::LONG_PI);} );
+                      [iii = 0]() mutable {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + WECore::CoreMath::LONG_PI);} );
         WHEN("The parameters are set and samples are processed") {
             // Set freq mode
             mSongbird.setVowel1(1);
@@ -184,10 +184,10 @@ SCENARIO("SongbirdFilterModule: Blend mode") {
         // fill the buffers, phase shift the right one so that they're not identical
         std::generate(leftBuffer.begin(),
                       leftBuffer.end(),
-                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
+                      [iii = 0]() mutable {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
         std::generate(rightBuffer.begin(),
                       rightBuffer.end(),
-                      [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + CoreMath::LONG_PI);} );
+                      [iii = 0]() mutable {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + WECore::CoreMath::LONG_PI);} );
         WHEN("The parameters are set and samples are processed") {
             // Set blend mode
             mSongbird.setVowel1(1);

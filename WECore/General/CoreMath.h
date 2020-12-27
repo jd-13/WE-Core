@@ -28,7 +28,7 @@
 /**
  * Contains generic math related consts and functions.
  */
-namespace CoreMath {
+namespace WECore::CoreMath {
     /**
      * Used for portability since Visual Studio has a different implementation of math.h
      */
