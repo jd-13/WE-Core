@@ -42,6 +42,9 @@ namespace WECore::MONSTR::Parameters {
     constexpr int _MAX_NUM_BANDS {6};
     constexpr int _DEFAULT_NUM_BANDS {3};
 
+    constexpr double CROSSOVER_LOWER_DEFAULT {100};
+    constexpr double CROSSOVER_UPPER_DEFAULT {5000};
+
     //@{
     /**
      * A parameter which can take any float value between the ranges defined.

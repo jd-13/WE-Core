@@ -232,8 +232,8 @@ namespace WECore::MONSTR {
         _bands[1].band.setBandType(BandType::MIDDLE);
         _bands[2].band.setBandType(BandType::UPPER);
 
-        setCrossoverFrequency(0, 100);
-        setCrossoverFrequency(1, 5000);
+        setCrossoverFrequency(0, Parameters::CROSSOVER_LOWER_DEFAULT);
+        setCrossoverFrequency(1, Parameters::CROSSOVER_UPPER_DEFAULT);
     }
 
     template <typename SampleType>
