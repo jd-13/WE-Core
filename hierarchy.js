@@ -6,6 +6,7 @@ var hierarchy =
     [ "AudioProcessorEditor", null, [
       [ "WECore::JUCEPlugin::CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", null ]
     ] ],
+    [ "WECore::MONSTR::MONSTRCrossover< SampleType >::BandWrapper", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover_1_1_band_wrapper.html", null ],
     [ "BASE", null, [
       [ "WECore::LookAndFeelMixins::ButtonV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html", null ],
       [ "WECore::LookAndFeelMixins::ComboBoxV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_combo_box_v2.html", null ],
@@ -55,8 +56,7 @@ var hierarchy =
       [ "WECore::Richter::RichterLFOPair", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html", null ]
     ] ],
     [ "WECore::MONSTR::MONSTRBand< SampleType >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", null ],
-    [ "WECore::MONSTR::MONSTRBand< T >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", null ],
-    [ "WECore::MONSTR::MONSTRCrossover< T >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", null ],
+    [ "WECore::MONSTR::MONSTRCrossover< SampleType >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", null ],
     [ "WECore::Carve::NoiseFilter< T >", "class_w_e_core_1_1_carve_1_1_noise_filter.html", null ],
     [ "WECore::JUCEPlugin::CoreAudioProcessor::ParameterInterface", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html", null ],
     [ "Slider", null, [

@@ -62,8 +62,10 @@ var files_dup =
       [ "ModulationSource", "class_w_e_core_1_1_modulation_source.html", "class_w_e_core_1_1_modulation_source" ]
     ] ],
     [ "MONSTRBand.h", "_m_o_n_s_t_r_band_8h.html", "_m_o_n_s_t_r_band_8h" ],
+    [ "MONSTRBandTests.cpp", "_m_o_n_s_t_r_band_tests_8cpp.html", "_m_o_n_s_t_r_band_tests_8cpp" ],
     [ "MONSTRCrossover.h", "_m_o_n_s_t_r_crossover_8h.html", [
-      [ "MONSTRCrossover", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover" ]
+      [ "MONSTRCrossover", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover" ],
+      [ "BandWrapper", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover_1_1_band_wrapper.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover_1_1_band_wrapper" ]
     ] ],
     [ "MONSTRCrossoverTests.cpp", "_m_o_n_s_t_r_crossover_tests_8cpp.html", "_m_o_n_s_t_r_crossover_tests_8cpp" ],
     [ "MONSTRParameters.h", "_m_o_n_s_t_r_parameters_8h.html", "_m_o_n_s_t_r_parameters_8h" ],
