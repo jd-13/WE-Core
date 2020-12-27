@@ -1,8 +1,6 @@
 /*
  *  File:       SongbirdFiltersParameters.h
  *
- *  Version:    1.0.0
- *
  *  Created:    02/10/2016
  *
  *	This file is part of WECore.

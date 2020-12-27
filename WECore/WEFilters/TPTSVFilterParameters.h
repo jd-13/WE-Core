@@ -1,8 +1,6 @@
 /*
  *  File:       TPTSVFilterParameters.h
  *
- *  Version:    1.0.0
- *
  *  Created:    25/12/2016
  *
  *	This file is part of WECore.
@@ -31,7 +29,7 @@ namespace WECore::TPTSVF::Parameters {
     public:
         ModeParameter() : ParameterDefinition::BaseParameter<int>::BaseParameter(
             BYPASS, HIGHPASS, BYPASS) { }
-        
+
         static constexpr int BYPASS = 1,
                              LOWPASS = 2,
                              PEAK = 3,

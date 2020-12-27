@@ -1,8 +1,6 @@
 /*
  *  File:       TestData.h
  *
- *  Version:    1.0.0
- *
  *  Created:    08/09/2018
  *
  *	This file is part of WECore.

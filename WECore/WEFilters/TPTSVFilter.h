@@ -1,8 +1,6 @@
 /*
  *  File:       TPTSVFilter.h
  *
- *  Version:    1.0.0
- *
  *  Created:    22/12/2016
  *
  *	This file is part of WECore.

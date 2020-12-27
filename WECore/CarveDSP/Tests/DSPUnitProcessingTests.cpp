@@ -1,8 +1,6 @@
 /*
  *  File:       DSPUnitProcessingTests.cpp
  *
- *  Version:    1.0.0
- *
  *  Created:    08/09/2018
  *
  *	This file is part of WECore.
@@ -29,19 +27,19 @@ SCENARIO("CarveDSPUnit: Silence in = silence out") {
     GIVEN("A CarveDSPUnit and a buffer of silent samples") {
         std::vector<double> buffer(1024);
         WECore::Carve::CarveDSPUnit<double> mCarve;
-        
+
         WHEN("The silence samples are processed") {
             // fill the buffer
             std::fill(buffer.begin(), buffer.end(), 0);
-            
+
             // turn the unit on
             mCarve.setMode(2);
-            
+
             // do processing
             for (size_t iii {0}; iii < buffer.size(); iii++) {
                 buffer[iii] = mCarve.process(buffer[iii]);
             }
-            
+
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
                     CHECK(buffer[iii] == Approx(0.0));
@@ -63,21 +61,21 @@ SCENARIO("CarveDSPUnit: Sine Default") {
         constexpr size_t SAMPLE_RATE {44100};
         constexpr size_t SINE_FREQ {1000};
         constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
-        
+
         WHEN("The silence samples are processed") {
             // fill the buffer
             std::generate(buffer.begin(),
                           buffer.end(),
-                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );            
+                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
 
             // turn the unit on
             mCarve.setMode(2);
-            
+
             // do processing
             for (size_t iii {0}; iii < buffer.size(); iii++) {
                 buffer[iii] = mCarve.process(buffer[iii]);
             }
-            
+
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
                     CHECK(buffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
@@ -99,21 +97,21 @@ SCENARIO("CarveDSPUnit: Parabolic Soft Default") {
         constexpr size_t SAMPLE_RATE {44100};
         constexpr size_t SINE_FREQ {1000};
         constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
-        
+
         WHEN("The silence samples are processed") {
             // fill the buffer
             std::generate(buffer.begin(),
                           buffer.end(),
-                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );            
+                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
 
             // turn the unit on
             mCarve.setMode(3);
-            
+
             // do processing
             for (size_t iii {0}; iii < buffer.size(); iii++) {
                 buffer[iii] = mCarve.process(buffer[iii]);
             }
-            
+
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
                     CHECK(buffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
@@ -135,21 +133,21 @@ SCENARIO("CarveDSPUnit: Parabolic Hard Default") {
         constexpr size_t SAMPLE_RATE {44100};
         constexpr size_t SINE_FREQ {1000};
         constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
-        
+
         WHEN("The silence samples are processed") {
             // fill the buffer
             std::generate(buffer.begin(),
                           buffer.end(),
-                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );            
+                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
 
             // turn the unit on
             mCarve.setMode(4);
-            
+
             // do processing
             for (size_t iii {0}; iii < buffer.size(); iii++) {
                 buffer[iii] = mCarve.process(buffer[iii]);
             }
-            
+
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
                     CHECK(buffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
@@ -171,21 +169,21 @@ SCENARIO("CarveDSPUnit: Asymetric Sine Default") {
         constexpr size_t SAMPLE_RATE {44100};
         constexpr size_t SINE_FREQ {1000};
         constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
-        
+
         WHEN("The silence samples are processed") {
             // fill the buffer
             std::generate(buffer.begin(),
                           buffer.end(),
-                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );            
+                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
 
             // turn the unit on
             mCarve.setMode(5);
-            
+
             // do processing
             for (size_t iii {0}; iii < buffer.size(); iii++) {
                 buffer[iii] = mCarve.process(buffer[iii]);
             }
-            
+
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
                     CHECK(buffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
@@ -207,21 +205,21 @@ SCENARIO("CarveDSPUnit: Exponent Default") {
         constexpr size_t SAMPLE_RATE {44100};
         constexpr size_t SINE_FREQ {1000};
         constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
-        
+
         WHEN("The silence samples are processed") {
             // fill the buffer
             std::generate(buffer.begin(),
                           buffer.end(),
-                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );            
+                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
 
             // turn the unit on
             mCarve.setMode(6);
-            
+
             // do processing
             for (size_t iii {0}; iii < buffer.size(); iii++) {
                 buffer[iii] = mCarve.process(buffer[iii]);
             }
-            
+
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
                     CHECK(buffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));
@@ -243,21 +241,21 @@ SCENARIO("CarveDSPUnit: Clipper Default") {
         constexpr size_t SAMPLE_RATE {44100};
         constexpr size_t SINE_FREQ {1000};
         constexpr double SAMPLES_PER_CYCLE {SAMPLE_RATE / SINE_FREQ};
-        
+
         WHEN("The silence samples are processed") {
             // fill the buffer
             std::generate(buffer.begin(),
                           buffer.end(),
-                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );            
+                          [iii = 0]() mutable {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );
 
             // turn the unit on
             mCarve.setMode(7);
-            
+
             // do processing
             for (size_t iii {0}; iii < buffer.size(); iii++) {
                 buffer[iii] = mCarve.process(buffer[iii]);
             }
-            
+
             THEN("The expected output is produced") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
                     CHECK(buffer[iii] == Approx(expectedOutput[iii]).margin(0.00001));

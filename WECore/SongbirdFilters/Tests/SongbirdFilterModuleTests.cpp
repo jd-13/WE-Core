@@ -1,8 +1,6 @@
 /*
  *  File:       SongbirdFilterModuleTests.cpp
  *
- *  Version:    1.0.0
- *
  *  Created:    07/01/2017
  *
  *	This file is part of WECore.

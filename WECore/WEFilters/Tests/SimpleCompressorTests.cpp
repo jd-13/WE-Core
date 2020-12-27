@@ -1,8 +1,6 @@
 /*
  *  File:       TPTSVFilterTests.cpp
  *
- *  Version:    1.0.0
- *
  *  Created:    04/12/2020
  *
  *	This file is part of WECore.

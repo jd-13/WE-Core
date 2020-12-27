@@ -1,8 +1,6 @@
 /*
  *  File:       SimpleCompressorParameters.h
  *
- *  Version:    1.0.0
- *
  *  Created:    07/05/2017
  *
  *	This file is part of WECore.

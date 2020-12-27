@@ -1,8 +1,6 @@
 /*
  *  File:       ModulationSource.h
  *
- *  Version:    1.0.0
- *
  *  Created:    22/11/2020
  *
  *	This file is part of WECore.

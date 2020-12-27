@@ -1,8 +1,6 @@
 /*
  *  File:       RichterWaveViewer.h
  *
- *  Version:    2.0.0
- *
  *  Created:    16/07/2020
  *
  *	This file is part of WECore.

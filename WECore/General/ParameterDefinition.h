@@ -1,8 +1,6 @@
 /*
  *  File:       ParameterDefinition.h
  *
- *  Version:    1.0.0
- *
  *  Created:    22/09/2016
  *
  *	This file is part of WECore.

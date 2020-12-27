@@ -1,8 +1,6 @@
 /*
  *  File:       CarveDSPUnitTests.cpp
  *
- *  Version:    1.0.0
- *
  *  Created:    26/12/2016
  *
  *	This file is part of WECore.

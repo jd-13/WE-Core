@@ -1,8 +1,6 @@
 /*
  *  File:       RichterLFO.h
  *
- *  Version:    2.0.0
- *
  *  Created:    18/01/2015
  *
  *	This file is part of WECore.

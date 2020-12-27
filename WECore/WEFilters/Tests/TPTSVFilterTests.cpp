@@ -1,8 +1,6 @@
 /*
  *  File:       TPTSVFilterTests.cpp
  *
- *  Version:    1.0.0
- *
  *  Created:    09/05/2017
  *
  *	This file is part of WECore.
@@ -56,13 +54,13 @@ SCENARIO("TPTSVFilter: Parameters can be set and retrieved correctly") {
 SCENARIO("TPTSVFilter: Parameters enforce their bounds correctly") {
     GIVEN("A new TPTSVFilter object") {
         WECore::TPTSVF::TPTSVFilter<double> mFilter;
-        
+
         WHEN("All parameter values are too low") {
             mFilter.setMode(-1);
             mFilter.setCutoff(19);
             mFilter.setQ(0);
             mFilter.setGain(-1);
-            
+
             THEN("Parameters enforce their lower bounds") {
                 CHECK(mFilter.getMode() == 1);
                 CHECK(mFilter.getCutoff() == Approx(20.0));
@@ -76,7 +74,7 @@ SCENARIO("TPTSVFilter: Parameters enforce their bounds correctly") {
             mFilter.setCutoff(20001);
             mFilter.setQ(21);
             mFilter.setGain(3);
-            
+
             THEN("Parameters enforce their upper bounds") {
                 CHECK(mFilter.getMode() == 4);
                 CHECK(mFilter.getCutoff() == Approx(20000.0));
@@ -91,14 +89,14 @@ SCENARIO("TPTSVFilter: Silence in = silence out") {
     GIVEN("A TPTSVFilter and a buffer of silent samples") {
         std::vector<double> buffer(1024);
         WECore::TPTSVF::TPTSVFilter<double> mFilter;
-        
+
         WHEN("The silence samples are processed") {
             // fill the buffer
             std::fill(buffer.begin(), buffer.end(), 0);
-            
+
             // do processing
             mFilter.processBlock(&buffer[0], buffer.size());
-            
+
             THEN("The output is silence") {
                 for (size_t iii {0}; iii < buffer.size(); iii++) {
                     CHECK(buffer[iii] == Approx(0.0));

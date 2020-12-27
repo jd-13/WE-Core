@@ -1,8 +1,6 @@
 /*
  *  File:       StereoWidthProcessorTests.cpp
  *
- *  Version:    1.0.0
- *
  *  Created:    05/12/2020
  *
  *	This file is part of WECore.

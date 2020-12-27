@@ -1,8 +1,6 @@
 /*
  *  File:       CoreMath.h
  *
- *  Version:    1.0.0
- *
  *  Created:    18/03/2017
  *
  *	This file is part of WECore.

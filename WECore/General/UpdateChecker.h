@@ -1,8 +1,6 @@
 /*
  *  File:       UpdateChecker.h
  *
- *  Version:    1.0.0
- *
  *  Created:    05/05/2017
  *
  *	This file is part of WECore.
@@ -30,40 +28,40 @@
 class UpdateChecker {
 public:
     UpdateChecker() = default;
-    
+
     bool checkIsLatestVersion(const char* productName,
                               const char* productVersion) {
-        
+
         // cURL setup
         CURL *curl;
         CURLcode result;
         curl = curl_easy_init();
-        
+
         // build the URL we'll be sending
         std::string requestURL {TARGET_URL};
         requestURL.append("?product=");
         requestURL.append(productName);
-        
+
         std::string response;
-        
+
         // setup the request
         curl_easy_setopt(curl, CURLOPT_URL, requestURL.c_str());
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, _writeToString);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, &response);
-        
+
         // send the request and clean up
         result = curl_easy_perform(curl);
         curl_easy_cleanup(curl);
-        
+
         return (productVersion == response);
     }
-    
+
 private:
     const std::string TARGET_URL {"https://whiteelephantaudio.com/versionChecker.php"};
 
     static size_t _writeToString(char* ptr, size_t size, size_t nmemb, std::string* stream) {
         *stream = std::string(ptr);
-        
+
         return size * nmemb;
     }
 };

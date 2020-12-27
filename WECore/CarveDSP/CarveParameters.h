@@ -1,8 +1,6 @@
 /*
  *  File:       CarveParameters.h
  *
- *  Version:    1.0.0
- *
  *  Created:    25/09/2016
  *
  *	This file is part of WECore.

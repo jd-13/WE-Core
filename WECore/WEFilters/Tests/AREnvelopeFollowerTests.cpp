@@ -1,8 +1,6 @@
 /*
  *  File:       AREnvelopeFollowerTests.cpp
  *
- *  Version:    1.0.0
- *
  *  Created:    03/06/2017
  *
  *	This file is part of WECore.

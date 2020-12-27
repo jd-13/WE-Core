@@ -1,8 +1,6 @@
 /*
  *  File:       AREnveloperFollowerBase.h
  *
- *  Version:    1.0.0
- *
  *  Created:    27/05/2017
  *
  *	This file is part of WECore.

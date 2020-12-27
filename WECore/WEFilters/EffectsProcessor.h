@@ -1,8 +1,6 @@
 /*
  *  File:       EffectsProcessor.h
  *
- *  Version:    1.0.0
- *
  *  Created:    03/12/2020
  *
  *	This file is part of WECore.

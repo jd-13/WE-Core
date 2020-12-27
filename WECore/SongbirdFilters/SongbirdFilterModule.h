@@ -1,8 +1,6 @@
 /*
  *  File:       SongbirdFilterModule.h
  *
- *  Version:    1.0.0
- *
  *  Created:    12/06/2016
  *
  *	This file is part of WECore.

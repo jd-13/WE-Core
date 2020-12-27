@@ -1,8 +1,6 @@
 /*
  *  File:       Formant.h
  *
- *  Version:    1.0.0
- *
  *  Created:    16/07/2016
  *
  *	This file is part of WECore.
@@ -30,11 +28,11 @@ namespace WECore::Songbird {
     class Formant {
     public:
         Formant() : frequency(0), gaindB(0) {}
-        
+
         Formant(double newFreq,
                 double newGaindB) : frequency(newFreq),
                                     gaindB(newGaindB) {}
-        
+
         double frequency;
         double gaindB;
     };

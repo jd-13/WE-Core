@@ -1,8 +1,6 @@
 /*
  *  File:       PerformanceTests.cpp
  *
- *  Version:    1.0.0
- *
  *  Created:    26/05/2017
  *
  *	This file is part of WECore.
