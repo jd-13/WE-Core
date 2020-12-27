@@ -6,8 +6,8 @@ var searchData=
   ['lfoswitch_5foff_1089',['LFOSWITCH_OFF',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a0ee906ec53ecf1dfdb496b8ebf0b8906',1,'WECore::Richter::Parameters']]],
   ['lfoswitch_5fon_1090',['LFOSWITCH_ON',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a5e1066525cfef1818520f49b310a9a32',1,'WECore::Richter::Parameters']]],
   ['lightcolour_1091',['lightColour',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html#a04f80e9ef606e22fbb8b2bd5c652c888',1,'WECore::JUCEPlugin::CoreLookAndFeel']]],
-  ['long_5fe_1092',['LONG_E',['../namespace_core_math.html#a2c7d3da1be9be65882d245a8208b495f',1,'CoreMath']]],
-  ['long_5fpi_1093',['LONG_PI',['../namespace_core_math.html#a01c66b7eff7774bf211ecb68b3e51408',1,'CoreMath']]],
-  ['long_5ftau_1094',['LONG_TAU',['../namespace_core_math.html#a1ea596ed12ddf86429415b464000f6a0',1,'CoreMath']]],
+  ['long_5fe_1092',['LONG_E',['../namespace_w_e_core_1_1_core_math.html#a66eb9dbb7872a833f372497f63d26bd6',1,'WECore::CoreMath']]],
+  ['long_5fpi_1093',['LONG_PI',['../namespace_w_e_core_1_1_core_math.html#a5d314c1ddebfe77e35a5aff1e989c226',1,'WECore::CoreMath']]],
+  ['long_5ftau_1094',['LONG_TAU',['../namespace_w_e_core_1_1_core_math.html#ae48928dac2c6a1de85c4c1e2badf504e',1,'WECore::CoreMath']]],
   ['lowpass_1095',['LOWPASS',['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters_1_1_mode_parameter.html#af5ebc0490c5a836313872e54e89b1df2',1,'WECore::TPTSVF::Parameters::ModeParameter']]]
 ];

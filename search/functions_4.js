@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['dbtolinear_725',['dBToLinear',['../namespace_core_math.html#af8eb68bd34f9dcc3488368a0089e61ac',1,'CoreMath']]],
+  ['dbtolinear_725',['dBToLinear',['../namespace_w_e_core_1_1_core_math.html#a85ee386c309a88a71d52a5a63828cb69',1,'WECore::CoreMath']]],
   ['depth_726',['DEPTH',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a8c2f0b39436a64ebf28590e4e992577d',1,'WECore::Richter::Parameters']]],
   ['depthmod_727',['DEPTHMOD',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a3dbdd28bc5c829452a65bd1c9df12a27',1,'WECore::Richter::Parameters']]],
   ['drawbuttonbackground_728',['drawButtonBackground',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html#a704fcdf661720edf347f0b765ae1555f',1,'WECore::JUCEPlugin::CoreLookAndFeel::drawButtonBackground()'],['../class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html#a301c9238690c7a505b076218924e4d16',1,'WECore::LookAndFeelMixins::ButtonV2::drawButtonBackground()']]],

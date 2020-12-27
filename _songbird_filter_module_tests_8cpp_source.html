@@ -229,10 +229,10 @@ $(document).ready(function(){initNavTree('_songbird_filter_module_tests_8cpp_sou
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;        <span class="comment">// fill the buffers, phase shift the right one so that they&#39;re not identical</span></div>
 <div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;        std::generate(leftBuffer.begin(),</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                      leftBuffer.end(),</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                      [iii = 0]() <span class="keyword">mutable</span> {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                      [iii = 0]() <span class="keyword">mutable</span> {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;        std::generate(rightBuffer.begin(),</div>
 <div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                      rightBuffer.end(),</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                      [iii = 0]() <span class="keyword">mutable</span> {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + CoreMath::LONG_PI);} );</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;                      [iii = 0]() <span class="keyword">mutable</span> {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + WECore::CoreMath::LONG_PI);} );</div>
 <div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        WHEN(<span class="stringliteral">&quot;The parameters are set and samples are processed&quot;</span>) {</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            <span class="comment">// Set freq mode</span></div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            mSongbird.<a class="code" href="class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a00376416bf1c59fa98b19a0b18a66b72">setVowel1</a>(1);</div>
@@ -271,10 +271,10 @@ $(document).ready(function(){initNavTree('_songbird_filter_module_tests_8cpp_sou
 <div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="comment">// fill the buffers, phase shift the right one so that they&#39;re not identical</span></div>
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;        std::generate(leftBuffer.begin(),</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;                      leftBuffer.end(),</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                      [iii = 0]() <span class="keyword">mutable</span> {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;                      [iii = 0]() <span class="keyword">mutable</span> {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE));} );</div>
 <div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;        std::generate(rightBuffer.begin(),</div>
 <div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                      rightBuffer.end(),</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                      [iii = 0]() <span class="keyword">mutable</span> {return std::sin(CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + CoreMath::LONG_PI);} );</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                      [iii = 0]() <span class="keyword">mutable</span> {return std::sin(WECore::CoreMath::LONG_TAU * (iii++ / SAMPLES_PER_CYCLE) + WECore::CoreMath::LONG_PI);} );</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;        WHEN(<span class="stringliteral">&quot;The parameters are set and samples are processed&quot;</span>) {</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;            <span class="comment">// Set blend mode</span></div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;            mSongbird.<a class="code" href="class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a00376416bf1c59fa98b19a0b18a66b72">setVowel1</a>(1);</div>

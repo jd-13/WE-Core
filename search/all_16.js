@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['arenv_503',['AREnv',['../namespace_w_e_core_1_1_a_r_env.html',1,'WECore']]],
-  ['carve_504',['Carve',['../namespace_w_e_core_1_1_carve.html',1,'WECore']]],
+  ['arenv_502',['AREnv',['../namespace_w_e_core_1_1_a_r_env.html',1,'WECore']]],
+  ['carve_503',['Carve',['../namespace_w_e_core_1_1_carve.html',1,'WECore']]],
+  ['coremath_504',['CoreMath',['../namespace_w_e_core_1_1_core_math.html',1,'WECore']]],
   ['juceplugin_505',['JUCEPlugin',['../namespace_w_e_core_1_1_j_u_c_e_plugin.html',1,'WECore']]],
   ['lookandfeelmixins_506',['LookAndFeelMixins',['../namespace_w_e_core_1_1_look_and_feel_mixins.html',1,'WECore']]],
   ['monstr_507',['MONSTR',['../namespace_w_e_core_1_1_m_o_n_s_t_r.html',1,'WECore']]],

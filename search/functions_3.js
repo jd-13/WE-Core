@@ -5,7 +5,7 @@ var searchData=
   ['changelistenercallback_716',['changeListenerCallback',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor_1_1_parameter_change_listener.html#ab9329f947e8fbf3b0a1df44b93612ccb',1,'WECore::JUCEPlugin::CoreProcessorEditor::ParameterChangeListener']]],
   ['checkislatestversion_717',['checkIsLatestVersion',['../class_update_checker.html#a610dd3c68a88ee2f6f8a7bfab2ec6153',1,'UpdateChecker']]],
   ['comboboxv2_718',['ComboBoxV2',['../class_w_e_core_1_1_look_and_feel_mixins_1_1_combo_box_v2.html#a0311024e7387775014ca73071740133b',1,'WECore::LookAndFeelMixins::ComboBoxV2']]],
-  ['comparefloatsequal_719',['compareFloatsEqual',['../namespace_core_math.html#aa508b26b043c8b062c5993327b62dfd6',1,'CoreMath']]],
+  ['comparefloatsequal_719',['compareFloatsEqual',['../namespace_w_e_core_1_1_core_math.html#a503b862f6a4bb5d20c4e5f24e1292af8',1,'WECore::CoreMath']]],
   ['coreaudioprocessor_720',['CoreAudioProcessor',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ae41ff5c0c6c4a8251cd58253265740c8',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
   ['corelookandfeel_721',['CoreLookAndFeel',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html#a09484de8181b14fe99f326cfbfe4d661',1,'WECore::JUCEPlugin::CoreLookAndFeel::CoreLookAndFeel()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html#ac56b2d132306f0fce0001d9e079e0dd5',1,'WECore::JUCEPlugin::CoreLookAndFeel::CoreLookAndFeel(CoreLookAndFeel &amp;)=delete']]],
   ['coreprocessoreditor_722',['CoreProcessorEditor',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html#a9b129fbf60963bc68f80cc6f3760a97a',1,'WECore::JUCEPlugin::CoreProcessorEditor']]],
