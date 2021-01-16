@@ -115,6 +115,13 @@ namespace WECore::MONSTR {
          */
         inline void setSampleRate(double newSampleRate);
 
+        /**
+         * Sets the number of bands without performing any logic to configure the new bands.
+         *
+         * Only use this if you're going to manually configure the new bands.
+         */
+        void setNumBands(int val) { _numBands = Parameters::NUM_BANDS.BoundsCheck(val); }
+
         /** @} */
 
         /** @name Getter Methods */
