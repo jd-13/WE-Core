@@ -17,6 +17,7 @@ var class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover =
     [ "setIsActive", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#aa66d2e58fc571da84112211802968bbf", null ],
     [ "setIsMuted", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#a288befefbf52221b7887871b2be9a7c6", null ],
     [ "setIsSoloed", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#a52bdddcb0e34ece332137eb23f409684", null ],
+    [ "setNumBands", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#a054c0365144605167624c379745fad33", null ],
     [ "setSampleRate", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#a27131906f232a32f6e7aba3fd137b1b5", null ],
     [ "_bands", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#a4c7099bd82ab4e2a714cc5fcca0fe326", null ],
     [ "_numBands", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#af9b8457dd088e449058663d5099e2365", null ],

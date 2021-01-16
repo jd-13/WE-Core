@@ -1,9 +1,9 @@
 var hierarchy =
 [
-    [ "AudioProcessor", null, [
+    [ "juce::AudioProcessor", null, [
       [ "WECore::JUCEPlugin::CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html", null ]
     ] ],
-    [ "AudioProcessorEditor", null, [
+    [ "juce::AudioProcessorEditor", null, [
       [ "WECore::JUCEPlugin::CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", null ]
     ] ],
     [ "WECore::MONSTR::MONSTRCrossover< SampleType >::BandWrapper", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover_1_1_band_wrapper.html", null ],
@@ -26,10 +26,10 @@ var hierarchy =
     ] ],
     [ "ParameterDefinition::BooleanParameter", "class_parameter_definition_1_1_boolean_parameter.html", null ],
     [ "WECore::Carve::CarveDSPUnit< T >", "class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html", null ],
-    [ "ChangeBroadcaster", null, [
+    [ "juce::ChangeBroadcaster", null, [
       [ "WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html", null ]
     ] ],
-    [ "ChangeListener", null, [
+    [ "juce::ChangeListener", null, [
       [ "WECore::JUCEPlugin::CoreProcessorEditor::ParameterChangeListener", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor_1_1_parameter_change_listener.html", null ]
     ] ],
     [ "Component", null, [
@@ -40,7 +40,7 @@ var hierarchy =
       [ "WECore::StereoWidth::StereoWidthProcessor< SampleType >", "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html", null ]
     ] ],
     [ "WECore::Songbird::Formant", "class_w_e_core_1_1_songbird_1_1_formant.html", null ],
-    [ "Listener", null, [
+    [ "juce::AudioProcessorParameter::Listener", null, [
       [ "WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html", null ]
     ] ],
     [ "LookAndFeel_V2", null, [
