@@ -32,7 +32,7 @@ namespace WECore::StereoWidth {
      * Processor which can apply stereo widening or narrowing.
      */
     template <typename SampleType>
-    class StereoWidthProcessor : public EffectsProcessor<SampleType> {
+    class StereoWidthProcessor : public EffectsProcessor2in2out<SampleType> {
     public:
         StereoWidthProcessor() : _width(Parameters::WIDTH.defaultValue) {}
         virtual ~StereoWidthProcessor() override = default;

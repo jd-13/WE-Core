@@ -37,7 +37,7 @@ namespace WECore::SimpleCompressor {
      * downward compression types.
      */
     template <typename SampleType>
-    class SimpleCompressor : public EffectsProcessor<SampleType> {
+    class SimpleCompressor : public EffectsProcessor1in1out<SampleType> {
     public:
         SimpleCompressor();
         virtual ~SimpleCompressor() override = default;

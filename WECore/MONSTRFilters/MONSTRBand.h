@@ -138,7 +138,7 @@ namespace WECore::MONSTR {
         /**
          * Specifies the processor that this band should pass audio through.
          */
-        void setEffectsProcessor(std::shared_ptr<EffectsProcessor<SampleType>> processor) { _processor = processor; }
+        void setEffectsProcessor(std::shared_ptr<EffectsProcessor2in2out<SampleType>> processor) { _processor = processor; }
 
         /** @} */
 
@@ -185,7 +185,7 @@ namespace WECore::MONSTR {
 
         double _sampleRate;
 
-        std::shared_ptr<EffectsProcessor<SampleType>> _processor;
+        std::shared_ptr<EffectsProcessor2in2out<SampleType>> _processor;
 
         static constexpr int FILTER_ORDER {2};
 

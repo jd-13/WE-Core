@@ -481,7 +481,7 @@ SCENARIO("MONSTRCrossover: EffectsProcessors are not called for muted bands") {
         WECore::MONSTR::MONSTRCrossover<double> mCrossover;
 
         // Create a processor that will fail the test if called
-        class TestProcessor : public WECore::EffectsProcessor<double> {
+        class TestProcessor : public WECore::EffectsProcessor2in2out<double> {
         public:
             void process2in2out(double* /*inSamplesLeft*/,
                                 double* /*inSamplesRight*/,
@@ -514,7 +514,7 @@ SCENARIO("MONSTRCrossover: EffectsProcessors are not called for bands that aren'
         WECore::MONSTR::MONSTRCrossover<double> mCrossover;
 
         // Create a processor that will fail the test if called
-        class TestProcessor : public WECore::EffectsProcessor<double> {
+        class TestProcessor : public WECore::EffectsProcessor2in2out<double> {
         public:
             void process2in2out(double* /*inSamplesLeft*/,
                                 double* /*inSamplesRight*/,

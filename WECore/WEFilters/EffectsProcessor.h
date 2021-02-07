@@ -21,31 +21,19 @@
 
 #pragma once
 
-#include <cassert>
-#include <unordered_map>
-#include <vector>
 namespace WECore {
 
     /**
-     * Provides a standard interface for effects which process a buffer of samples.
+     * Base class for EffectsProcessors with different channel configurations to inherit from.
      */
     template <typename SampleType>
-    class EffectsProcessor {
+    class EffectsProcessorBase {
         static_assert(std::is_floating_point<SampleType>::value,
                       "Must be provided with a floating point template type");
 
     public:
-        EffectsProcessor() = default;
-        virtual ~EffectsProcessor() = default;
-
-        /**
-         * Override these as required by the processor.
-         *
-         * Any combination can be overidden as needed, but unimplemented methods must not be called.
-         */
-        virtual void process1in1out(SampleType* /*inSamples*/, size_t /*numSamples*/) { assert(false); }
-        virtual void process1in2out(SampleType* /*inSamplesLeft*/, SampleType* /*inSamplesRight*/, size_t /*numSamples*/) { assert(false); }
-        virtual void process2in2out(SampleType* /*inSamplesLeft*/, SampleType* /*inSamplesRight*/, size_t /*numSamples*/) { assert(false); }
+        EffectsProcessorBase() = default;
+        virtual ~EffectsProcessorBase() = default;
 
         /**
          * Resets the internal state of the processor.
@@ -53,5 +41,41 @@ namespace WECore {
          * Override this to reset everything as necessary.
          */
         inline virtual void reset() {}
+    };
+
+    /**
+     * Provides a standard interface for effects which process a mono buffer of samples.
+     */
+    template <typename SampleType>
+    class EffectsProcessor1in1out : public EffectsProcessorBase<SampleType> {
+    public:
+        EffectsProcessor1in1out() = default;
+        virtual ~EffectsProcessor1in1out() = default;
+
+        virtual void process1in1out(SampleType* inSamples, size_t numSamples) = 0;
+    };
+
+    /**
+     * Provides a standard interface for effects which process a mono to stereo buffer of samples.
+     */
+    template <typename SampleType>
+    class EffectsProcessor1in2out : public EffectsProcessorBase<SampleType> {
+    public:
+        EffectsProcessor1in2out() = default;
+        virtual ~EffectsProcessor1in2out() = default;
+
+        virtual void process1in2out(SampleType* inSamplesLeft, SampleType* inSamplesRight, size_t numSamples) = 0;
+    };
+
+    /**
+     * Provides a standard interface for effects which process stereo buffers of samples.
+     */
+    template <typename SampleType>
+    class EffectsProcessor2in2out : public EffectsProcessorBase<SampleType> {
+    public:
+        EffectsProcessor2in2out() = default;
+        virtual ~EffectsProcessor2in2out() = default;
+
+        virtual void process2in2out(SampleType* inSamplesLeft, SampleType* inSamplesRight, size_t numSamples) = 0;
     };
 }

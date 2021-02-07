@@ -105,7 +105,7 @@ namespace WECore::MONSTR {
          * @param   processor   EffectsProcessor to use
          */
         inline void setEffectsProcessor(
-            size_t index, std::shared_ptr<EffectsProcessor<SampleType>> processor);
+            size_t index, std::shared_ptr<EffectsProcessor2in2out<SampleType>> processor);
 
         /**
          * Configures the filters for the correct sample rate. Ensure this is
@@ -309,7 +309,7 @@ namespace WECore::MONSTR {
     }
 
     template <typename SampleType>
-    void MONSTRCrossover<SampleType>::setEffectsProcessor(size_t index, std::shared_ptr<EffectsProcessor<SampleType>> processor) {
+    void MONSTRCrossover<SampleType>::setEffectsProcessor(size_t index, std::shared_ptr<EffectsProcessor2in2out<SampleType>> processor) {
 
         if (index < _bands.size()) {
             _bands[index].band.setEffectsProcessor(processor);
