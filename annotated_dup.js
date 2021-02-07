@@ -66,7 +66,10 @@ var annotated_dup =
         ] ],
         [ "TPTSVFilter", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter" ]
       ] ],
-      [ "EffectsProcessor", "class_w_e_core_1_1_effects_processor.html", "class_w_e_core_1_1_effects_processor" ],
+      [ "EffectsProcessorBase", "class_w_e_core_1_1_effects_processor_base.html", "class_w_e_core_1_1_effects_processor_base" ],
+      [ "EffectsProcessor1in1out", "class_w_e_core_1_1_effects_processor1in1out.html", "class_w_e_core_1_1_effects_processor1in1out" ],
+      [ "EffectsProcessor1in2out", "class_w_e_core_1_1_effects_processor1in2out.html", "class_w_e_core_1_1_effects_processor1in2out" ],
+      [ "EffectsProcessor2in2out", "class_w_e_core_1_1_effects_processor2in2out.html", "class_w_e_core_1_1_effects_processor2in2out" ],
       [ "ModulationSource", "class_w_e_core_1_1_modulation_source.html", "class_w_e_core_1_1_modulation_source" ]
     ] ],
     [ "UpdateChecker", "class_update_checker.html", "class_update_checker" ]

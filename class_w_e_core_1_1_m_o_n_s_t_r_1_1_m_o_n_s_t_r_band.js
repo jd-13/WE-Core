@@ -10,7 +10,7 @@ var class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band =
     [ "process2in2out", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#aedfbe9514db416c1ef67567e1fa00395", null ],
     [ "reset", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#ac520655fdc9aaf5fc98e2311c7c887ab", null ],
     [ "setBandType", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a78b9fca448e27869aa3437ce7f534721", null ],
-    [ "setEffectsProcessor", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a8bdbb4bb286a0b77dc3a2b7888c137ae", null ],
+    [ "setEffectsProcessor", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#af33947715dde7a5d998bea831323cde5", null ],
     [ "setHighCutoff", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#af812a0e389a82caa69d4bb41ecfc9b43", null ],
     [ "setIsActive", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a6e0f444bd9c8be3518c44e6c08e81781", null ],
     [ "setIsMuted", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#af4762ed13c8684d6bc30d044de8abc3b", null ],
@@ -25,7 +25,7 @@ var class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band =
     [ "_lowCut1", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#ad48ba3fd718615b4c5537fc72ead7d47", null ],
     [ "_lowCut2", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a3e030a6951d68b22fa5123f49d163d91", null ],
     [ "_lowCutoffHz", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#aefe61dc60cd7532443e6a79823ace551", null ],
-    [ "_processor", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a1cf483b59d700b0dba0c87a4317208d3", null ],
+    [ "_processor", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a2ec03e7dffb13f6956223e732025910e", null ],
     [ "_sampleRate", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a1d5713ab043ba2108e9d70db53125175", null ],
     [ "FILTER_ORDER", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a7358800cfc6d73d2568b5446408e3b05", null ]
 ];

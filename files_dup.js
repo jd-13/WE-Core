@@ -42,7 +42,10 @@ var files_dup =
     [ "DSPUnitParameterTests.cpp", "_d_s_p_unit_parameter_tests_8cpp.html", "_d_s_p_unit_parameter_tests_8cpp" ],
     [ "DSPUnitProcessingTests.cpp", "_d_s_p_unit_processing_tests_8cpp.html", "_d_s_p_unit_processing_tests_8cpp" ],
     [ "EffectsProcessor.h", "_effects_processor_8h.html", [
-      [ "EffectsProcessor", "class_w_e_core_1_1_effects_processor.html", "class_w_e_core_1_1_effects_processor" ]
+      [ "EffectsProcessorBase", "class_w_e_core_1_1_effects_processor_base.html", "class_w_e_core_1_1_effects_processor_base" ],
+      [ "EffectsProcessor1in1out", "class_w_e_core_1_1_effects_processor1in1out.html", "class_w_e_core_1_1_effects_processor1in1out" ],
+      [ "EffectsProcessor1in2out", "class_w_e_core_1_1_effects_processor1in2out.html", "class_w_e_core_1_1_effects_processor1in2out" ],
+      [ "EffectsProcessor2in2out", "class_w_e_core_1_1_effects_processor2in2out.html", "class_w_e_core_1_1_effects_processor2in2out" ]
     ] ],
     [ "Formant.h", "_formant_8h.html", [
       [ "Formant", "class_w_e_core_1_1_songbird_1_1_formant.html", "class_w_e_core_1_1_songbird_1_1_formant" ]

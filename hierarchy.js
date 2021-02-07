@@ -35,9 +35,14 @@ var hierarchy =
     [ "Component", null, [
       [ "WECore::Richter::WaveViewer", "class_w_e_core_1_1_richter_1_1_wave_viewer.html", null ]
     ] ],
-    [ "WECore::EffectsProcessor< SampleType >", "class_w_e_core_1_1_effects_processor.html", [
-      [ "WECore::SimpleCompressor::SimpleCompressor< SampleType >", "class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html", null ],
-      [ "WECore::StereoWidth::StereoWidthProcessor< SampleType >", "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html", null ]
+    [ "WECore::EffectsProcessorBase< SampleType >", "class_w_e_core_1_1_effects_processor_base.html", [
+      [ "WECore::EffectsProcessor1in1out< SampleType >", "class_w_e_core_1_1_effects_processor1in1out.html", [
+        [ "WECore::SimpleCompressor::SimpleCompressor< SampleType >", "class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html", null ]
+      ] ],
+      [ "WECore::EffectsProcessor1in2out< SampleType >", "class_w_e_core_1_1_effects_processor1in2out.html", null ],
+      [ "WECore::EffectsProcessor2in2out< SampleType >", "class_w_e_core_1_1_effects_processor2in2out.html", [
+        [ "WECore::StereoWidth::StereoWidthProcessor< SampleType >", "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html", null ]
+      ] ]
     ] ],
     [ "WECore::Songbird::Formant", "class_w_e_core_1_1_songbird_1_1_formant.html", null ],
     [ "juce::AudioProcessorParameter::Listener", null, [

@@ -13,7 +13,7 @@ var class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover =
     [ "removeBand", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#a1fc6e8174b04411c794114628b9a67b1", null ],
     [ "reset", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#a22ef357abd526568828def0aca388b8b", null ],
     [ "setCrossoverFrequency", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#aab0ea07eb67c7ac3dfb364de3aa94029", null ],
-    [ "setEffectsProcessor", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#af909e2a136b21c9a57011f1dda6b17c3", null ],
+    [ "setEffectsProcessor", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#a082f936f18d7fbd2cb36ebdb719a6a1f", null ],
     [ "setIsActive", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#aa66d2e58fc571da84112211802968bbf", null ],
     [ "setIsMuted", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#a288befefbf52221b7887871b2be9a7c6", null ],
     [ "setIsSoloed", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#a52bdddcb0e34ece332137eb23f409684", null ],
