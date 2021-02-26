@@ -181,7 +181,15 @@ namespace WECore::Richter {
          * samples processed
          *
          */
-        inline void calcIndexAndScaleInLoop();
+        inline void _calcIndexAndScaleInLoop();
+
+        /**
+         * Applies frequency modulation to the oscillator. Performed in the processing
+         * loop so that the frequency can be updated before processing each sample.
+         *
+         * @param   modGain             The gain output from the modulation oscillator.
+         */
+        inline void _calcFreqInLoop(double modGain);
 
         /**
          * Returns the next output of the LFO.
@@ -192,14 +200,6 @@ namespace WECore::Richter {
          * @return  The value of the LFO's output at this moment, a value between -1 and 1.
          */
         inline double _getNextOutputImpl(double inSample) override;
-
-        /**
-         * Applies frequency modulation to the oscillator. Performed in the processing
-         * loop so that the frequency can be updated before processing each sample.
-         *
-         * @param   modGain             The gain output from the modulation oscillator.
-         */
-        inline void _calcFreqInLoop(double modGain);
 
         /**
          * Resets internal counters including indexOffset and currentScale.
@@ -294,7 +294,7 @@ namespace WECore::Richter {
         _freq = Parameters::FREQ.BoundsCheck(_freq);
     }
 
-    void RichterLFO::calcIndexAndScaleInLoop() {
+    void RichterLFO::_calcIndexAndScaleInLoop() {
         // calculate the current index within the wave table
         _index = static_cast<int>(static_cast<long>(_samplesProcessed * static_cast<long double>(_currentScale)) % Wavetables::SIZE);
 
@@ -317,8 +317,19 @@ namespace WECore::Richter {
         _samplesProcessed++;
     }
 
+    void RichterLFO::_calcFreqInLoop(double modAmount) {
+        // calculate the frequency based on whether tempo sync or frequency modulation is active
+
+        if (!_tempoSyncSwitch) {
+            _freq = _rawFreq + (_freqMod * (Parameters::FREQ.maxValue / 2) * modAmount);
+        }
+
+        // Bounds check frequency after the modulation is applied to it
+        _freq = Parameters::FREQ.BoundsCheck(_freq);
+    }
+
     double RichterLFO::_getNextOutputImpl(double /*inSample*/) {
-        calcIndexAndScaleInLoop();
+        _calcIndexAndScaleInLoop();
 
         // Get the mod amount to use, divide by 2 to reduce range to -0.5:0.5
         const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(0) / 2 : 0};
@@ -336,16 +347,5 @@ namespace WECore::Richter {
         } else {
             return 0;
         }
-    }
-
-    void RichterLFO::_calcFreqInLoop(double modAmount) {
-        // calculate the frequency based on whether tempo sync or frequency modulation is active
-
-        if (!_tempoSyncSwitch) {
-            _freq = _rawFreq + (_freqMod * (Parameters::FREQ.maxValue / 2) * modAmount);
-        }
-
-        // Bounds check frequency after the modulation is applied to it
-        _freq = Parameters::FREQ.BoundsCheck(_freq);
     }
 }
