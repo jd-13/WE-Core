@@ -121,7 +121,6 @@ namespace WECore::Richter {
 
         double  _tempoNumer,
                 _tempoDenom,
-                _freq,
                 _rawFreq,
                 _freqMod,
                 _rawDepth,
@@ -130,7 +129,8 @@ namespace WECore::Richter {
                 _gain,
                 _currentScale,
                 _nextScale,
-                _sampleRate;
+                _sampleRate,
+                _bpm;
 
         const double* _waveArrayPointer;
 
@@ -152,9 +152,9 @@ namespace WECore::Richter {
          * Calculates the frequency of the oscillator. Will use either the frequency
          * or tempoNumer/tempoDenom depending on whether tempo sync is enabled.
          *
-         * @param   bpm   Current bpm of the host DAW
+         * @param   modAmount     The gain output from the modulation oscillator.
          */
-        inline void _calcFreq(double bpm);
+        inline double _calcFreq(double modAmount);
 
         /**
          * Calculates the current index of the oscillator in its wavetable. Includes
@@ -162,16 +162,10 @@ namespace WECore::Richter {
          * currentScale. Call from within the processing loop. Increments the number of
          * samples processed
          *
-         */
-        inline void _calcIndexAndScaleInLoop();
-
-        /**
-         * Applies frequency modulation to the oscillator. Performed in the processing
-         * loop so that the frequency can be updated before processing each sample.
+         * @param   freq        The absolute frequency of the LFO, including tempo sync or modulation.
          *
-         * @param   modGain             The gain output from the modulation oscillator.
          */
-        inline void _calcFreqInLoop(double modGain);
+        inline void _calcIndexAndScaleInLoop(double freq);
 
         /**
          * Returns the next output of the LFO.
@@ -202,7 +196,6 @@ namespace WECore::Richter {
                                _needsSeekOffsetCalc(true),
                                _tempoNumer(Parameters::TEMPONUMER.defaultValue),
                                _tempoDenom(Parameters::TEMPODENOM.defaultValue),
-                               _freq(Parameters::FREQ.defaultValue),
                                _rawFreq(Parameters::FREQ.defaultValue),
                                _freqMod(Parameters::FREQMOD.defaultValue),
                                _rawDepth(Parameters::DEPTH.defaultValue),
@@ -212,6 +205,7 @@ namespace WECore::Richter {
                                _currentScale(0),
                                _nextScale(0),
                                _sampleRate(44100),
+                               _bpm(0),
                                _waveArrayPointer(Wavetables::getInstance()->getSine()),
                                _modulationSource(nullptr) {
     }
@@ -232,10 +226,8 @@ namespace WECore::Richter {
 
     void RichterLFO::prepareForNextBuffer(double bpm,
                                           double timeInSeconds) {
-        _calcFreq(bpm);
+        _bpm = bpm;
         _calcPhaseOffset(timeInSeconds);
-        _samplesPerTremoloCycle = _sampleRate / _freq;
-        _nextScale = Wavetables::SIZE / _samplesPerTremoloCycle;
     }
 
     void RichterLFO::_resetImpl() {
@@ -252,7 +244,7 @@ namespace WECore::Richter {
         // and starts again
         static int seekIndexOffset {0};
         if (_needsSeekOffsetCalc) {
-            const double waveLength {1 / _freq};
+            const double waveLength {1 / _calcFreq(0)};
             const double waveTimePosition {std::fmod(timeInSeconds, waveLength)};
 
             seekIndexOffset = static_cast<int>((waveTimePosition / waveLength) * Wavetables::SIZE);
@@ -266,19 +258,24 @@ namespace WECore::Richter {
         }
     }
 
-    void RichterLFO::_calcFreq(double bpm) {
-        // calculate the frequency based on whether tempo sync is active
+    double RichterLFO::_calcFreq(double modAmount) {
+        // Calculate the frequency based on whether tempo sync is active
 
-        const double tempoFreq {(bpm / 60) * (_tempoDenom / _tempoNumer)};
+        double freq {0};
 
         if (_tempoSyncSwitch) {
-            _freq = tempoFreq;
+            freq = (_bpm / 60) * (_tempoDenom / _tempoNumer);
+        } else {
+            freq = _rawFreq + (_freqMod * (Parameters::FREQ.maxValue / 2) * modAmount);
         }
 
-        _freq = Parameters::FREQ.BoundsCheck(_freq);
+        return Parameters::FREQ.BoundsCheck(freq);
     }
 
-    void RichterLFO::_calcIndexAndScaleInLoop() {
+    void RichterLFO::_calcIndexAndScaleInLoop(double freq) {
+        _samplesPerTremoloCycle = _sampleRate / freq;
+        _nextScale = Wavetables::SIZE / _samplesPerTremoloCycle;
+
         // Calculate the current index within the wave table
         _index = static_cast<int>(static_cast<long>(_samplesProcessed * static_cast<long double>(_currentScale)) % Wavetables::SIZE);
 
@@ -292,24 +289,12 @@ namespace WECore::Richter {
         _samplesProcessed++;
     }
 
-    void RichterLFO::_calcFreqInLoop(double modAmount) {
-        // calculate the frequency based on whether tempo sync or frequency modulation is active
-
-        if (!_tempoSyncSwitch) {
-            _freq = _rawFreq + (_freqMod * (Parameters::FREQ.maxValue / 2) * modAmount);
-        }
-
-        // Bounds check frequency after the modulation is applied to it
-        _freq = Parameters::FREQ.BoundsCheck(_freq);
-    }
-
-    double RichterLFO::_getNextOutputImpl(double /*inSample*/) {
-        _calcIndexAndScaleInLoop();
-
+    double RichterLFO::_getNextOutputImpl(double inSample) {
         // Get the mod amount to use, divide by 2 to reduce range to -0.5:0.5
-        const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(0) / 2 : 0};
+        // This is the only function that should advance the modulation state by calling getNextOutput()
+        const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(inSample) / 2 : 0};
 
-        _calcFreqInLoop(modAmount);
+        _calcIndexAndScaleInLoop(_calcFreq(modAmount));
 
         // Calculate the depth value after modulation
         const double depth {Parameters::DEPTH.BoundsCheck(
