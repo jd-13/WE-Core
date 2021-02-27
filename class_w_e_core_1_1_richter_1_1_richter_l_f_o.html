@@ -109,8 +109,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a6753231a50595fcd086573d6edd04020"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1be1378ce6ac7cb3bb1ddd82398737f6"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a1be1378ce6ac7cb3bb1ddd82398737f6">~RichterLFO</a> () override=default</td></tr>
 <tr class="separator:a1be1378ce6ac7cb3bb1ddd82398737f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbbd2281dd631ce4b124f9d0d25d51d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#abbbd2281dd631ce4b124f9d0d25d51d0">prepareForNextBuffer</a> (double bpm, double timeInSeconds, double sampleRate)</td></tr>
-<tr class="separator:abbbd2281dd631ce4b124f9d0d25d51d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ba52d534a580bfe4dfe9a9a318ad660"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a0ba52d534a580bfe4dfe9a9a318ad660">prepareForNextBuffer</a> (double bpm, double timeInSeconds)</td></tr>
+<tr class="separator:a0ba52d534a580bfe4dfe9a9a318ad660"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1696e1cf57e502f7606b7998acf6eaad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html">RichterLFO</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a1696e1cf57e502f7606b7998acf6eaad">operator=</a> (<a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html">RichterLFO</a> &amp;other)=delete</td></tr>
 <tr class="separator:a1696e1cf57e502f7606b7998acf6eaad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a132106b58e981e6e5d9db19399ca09eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a132106b58e981e6e5d9db19399ca09eb">RichterLFO</a> (<a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html">RichterLFO</a> &amp;)=delete</td></tr>
@@ -169,6 +169,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa993a7dece4f91fa3abe0e186fc926da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3bad617c392c76609f26632b2a10b1d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a3bad617c392c76609f26632b2a10b1d4">setIndexOffset</a> (int val)</td></tr>
 <tr class="separator:a3bad617c392c76609f26632b2a10b1d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab9aa3568534b2a914013bba905eeb4e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#aab9aa3568534b2a914013bba905eeb4e">setSampleRate</a> (double val)</td></tr>
+<tr class="separator:aab9aa3568534b2a914013bba905eeb4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ef85f086a58124447b461078cfb9c55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a0ef85f086a58124447b461078cfb9c55">setModulationSource</a> (std::shared_ptr&lt; <a class="el" href="class_w_e_core_1_1_modulation_source.html">ModulationSource</a> &gt; val)</td></tr>
 <tr class="separator:a0ef85f086a58124447b461078cfb9c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_w_e_core_1_1_modulation_source"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_w_e_core_1_1_modulation_source')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_w_e_core_1_1_modulation_source.html">WECore::ModulationSource&lt; double &gt;</a></td></tr>
@@ -189,16 +191,12 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:ab4092a75bcfffe910902ff4fae877013"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a647fa6ec75d839b1ff712382a8ea92e5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a647fa6ec75d839b1ff712382a8ea92e5">_calcFreq</a> (double bpm)</td></tr>
 <tr class="separator:a647fa6ec75d839b1ff712382a8ea92e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab7f5071f4d533aa31f53d43d95ea369f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ab7f5071f4d533aa31f53d43d95ea369f">_calcSamplesPerTremoloCycle</a> (double sampleRate)</td></tr>
-<tr class="separator:ab7f5071f4d533aa31f53d43d95ea369f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a315635bf8df73ea512e2f354131983ed"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a315635bf8df73ea512e2f354131983ed">_calcNextScale</a> ()</td></tr>
-<tr class="separator:a315635bf8df73ea512e2f354131983ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28bbb9a213bd256e69d3dd85794de3fe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a28bbb9a213bd256e69d3dd85794de3fe">calcIndexAndScaleInLoop</a> ()</td></tr>
-<tr class="separator:a28bbb9a213bd256e69d3dd85794de3fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bc3f708c54b950567c6b96e0a78b4bf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a7bc3f708c54b950567c6b96e0a78b4bf">_getNextOutputImpl</a> (double inSample) override</td></tr>
-<tr class="separator:a7bc3f708c54b950567c6b96e0a78b4bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a319d8fd5f1d96561cf6cfdff2ed86fdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a319d8fd5f1d96561cf6cfdff2ed86fdb">_calcIndexAndScaleInLoop</a> ()</td></tr>
+<tr class="separator:a319d8fd5f1d96561cf6cfdff2ed86fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed8cc18da0270a24f49f104b71b6be01"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#aed8cc18da0270a24f49f104b71b6be01">_calcFreqInLoop</a> (double modGain)</td></tr>
 <tr class="separator:aed8cc18da0270a24f49f104b71b6be01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bc3f708c54b950567c6b96e0a78b4bf"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a7bc3f708c54b950567c6b96e0a78b4bf">_getNextOutputImpl</a> (double inSample) override</td></tr>
+<tr class="separator:a7bc3f708c54b950567c6b96e0a78b4bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05557e347e7d4f3d5e9c5b1830415c20"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a05557e347e7d4f3d5e9c5b1830415c20">_resetImpl</a> () override</td></tr>
 <tr class="separator:a05557e347e7d4f3d5e9c5b1830415c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -222,8 +220,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ac5c379ef45286684f2a699cde2188260"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe00b73260e698702e62535f14dc2595"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#afe00b73260e698702e62535f14dc2595">_invertSwitch</a></td></tr>
 <tr class="separator:afe00b73260e698702e62535f14dc2595"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8dcce3eba1c171b48d7bdaf22ddf306"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ab8dcce3eba1c171b48d7bdaf22ddf306">_needsPhaseCalc</a></td></tr>
-<tr class="separator:ab8dcce3eba1c171b48d7bdaf22ddf306"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe0a7030769620e7a468d41636e93024"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#abe0a7030769620e7a468d41636e93024">_needsSeekOffsetCalc</a></td></tr>
+<tr class="separator:abe0a7030769620e7a468d41636e93024"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae646c90f1a2bb00daa0f8940e8d2bdec"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ae646c90f1a2bb00daa0f8940e8d2bdec">_tempoNumer</a></td></tr>
 <tr class="separator:ae646c90f1a2bb00daa0f8940e8d2bdec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa7c9a48b0a555a48e66b033bb7a14667"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#aa7c9a48b0a555a48e66b033bb7a14667">_tempoDenom</a></td></tr>
@@ -246,6 +244,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ad6d571d7fa7c0df0a07ffe4767aa2130"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a878e0751d5a03f41c786fa96b19aafe0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a878e0751d5a03f41c786fa96b19aafe0">_nextScale</a></td></tr>
 <tr class="separator:a878e0751d5a03f41c786fa96b19aafe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a594b4d163537e64519a854ac9f99ec19"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a594b4d163537e64519a854ac9f99ec19">_sampleRate</a></td></tr>
+<tr class="separator:a594b4d163537e64519a854ac9f99ec19"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a008c6df8d60dcb1a1b881bdcda4d0ac2"><td class="memItemLeft" align="right" valign="top">const double *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a008c6df8d60dcb1a1b881bdcda4d0ac2">_waveArrayPointer</a></td></tr>
 <tr class="separator:a008c6df8d60dcb1a1b881bdcda4d0ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac688890a6e6d3f40d5c5f3112ecdf628"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_w_e_core_1_1_modulation_source.html">ModulationSource</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ac688890a6e6d3f40d5c5f3112ecdf628">_modulationSource</a></td></tr>
@@ -288,7 +288,7 @@ Friends</h2></td></tr>
 <p>Generates the wave tables on initialsation, while running gain values are simply looked up from these wave tables.</p>
 <p>Also initialises parameters (that are not part of RichterLFOBase) to default values. </p>
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00211">211</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00195">195</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
 </div>
 </div>
@@ -375,11 +375,11 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00285">285</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00271">271</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
 <p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00126">_freq</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00125">_tempoDenom</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00124">_tempoNumer</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00119">_tempoSyncSwitch</a>, and <a class="el" href="namespace_w_e_core_1_1_richter_1_1_parameters.html#a10d255bf2b341cd2f9325e0eb61dba42">WECore::Richter::Parameters::FREQ()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00250">prepareForNextBuffer()</a>, and <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00105">WECore::Richter::RichterLFOPair::prepareForNextBuffer()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00235">prepareForNextBuffer()</a>.</p>
 
 </div>
 </div>
@@ -414,16 +414,16 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00341">341</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00297">297</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
 <p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00126">_freq</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00128">_freqMod</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00127">_rawFreq</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00119">_tempoSyncSwitch</a>, and <a class="el" href="namespace_w_e_core_1_1_richter_1_1_parameters.html#a10d255bf2b341cd2f9325e0eb61dba42">WECore::Richter::Parameters::FREQ()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00320">_getNextOutputImpl()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00308">_getNextOutputImpl()</a>.</p>
 
 </div>
 </div>
-<a id="a315635bf8df73ea512e2f354131983ed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a315635bf8df73ea512e2f354131983ed">&#9670;&nbsp;</a></span>_calcNextScale()</h2>
+<a id="a319d8fd5f1d96561cf6cfdff2ed86fdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a319d8fd5f1d96561cf6cfdff2ed86fdb">&#9670;&nbsp;</a></span>_calcIndexAndScaleInLoop()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -432,7 +432,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void WECore::Richter::RichterLFO::_calcNextScale </td>
+          <td class="memname">void WECore::Richter::RichterLFO::_calcIndexAndScaleInLoop </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -444,13 +444,13 @@ Friends</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Calculates the scale factor to be applied when calculating the index. </p>
+<p>Calculates the current index of the oscillator in its wavetable. Includes protection against indexes out of range (caused by phase offset) and updates currentScale. Call from within the processing loop. Increments the number of samples processed </p>
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00173">173</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00283">283</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00134">_nextScale</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00131">_samplesPerTremoloCycle</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00037">WECore::Richter::Wavetables::SIZE</a>.</p>
+<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00133">_currentScale</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00132">_gain</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00113">_index</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00114">_indexOffset</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00134">_nextScale</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00116">_samplesProcessed</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00137">_waveArrayPointer</a>, <a class="el" href="_core_math_8h_source.html#l00045">WECore::CoreMath::compareFloatsEqual()</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00037">WECore::Richter::Wavetables::SIZE</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00250">prepareForNextBuffer()</a>, and <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00105">WECore::Richter::RichterLFOPair::prepareForNextBuffer()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00308">_getNextOutputImpl()</a>.</p>
 
 </div>
 </div>
@@ -485,50 +485,11 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00266">266</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00250">250</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00126">_freq</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00114">_indexOffset</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00111">_manualPhase</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00122">_needsPhaseCalc</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00120">_phaseSyncSwitch</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00037">WECore::Richter::Wavetables::SIZE</a>.</p>
+<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00126">_freq</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00114">_indexOffset</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00111">_manualPhase</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00122">_needsSeekOffsetCalc</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00120">_phaseSyncSwitch</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00037">WECore::Richter::Wavetables::SIZE</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00250">prepareForNextBuffer()</a>, and <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00105">WECore::Richter::RichterLFOPair::prepareForNextBuffer()</a>.</p>
-
-</div>
-</div>
-<a id="ab7f5071f4d533aa31f53d43d95ea369f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab7f5071f4d533aa31f53d43d95ea369f">&#9670;&nbsp;</a></span>_calcSamplesPerTremoloCycle()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void WECore::Richter::RichterLFO::_calcSamplesPerTremoloCycle </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>sampleRate</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Calculates the number of samples which pass in the same time as one cycle of the LFO. Dependant on the LFO frequency and the sample rate.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">sampleRate</td><td>Sample rate of the host DAW </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00166">166</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
-
-<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00126">_freq</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00131">_samplesPerTremoloCycle</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00250">prepareForNextBuffer()</a>, and <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00105">WECore::Richter::RichterLFOPair::prepareForNextBuffer()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00235">prepareForNextBuffer()</a>.</p>
 
 </div>
 </div>
@@ -561,9 +522,9 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_w_e_core_1_1_modulation_source.html#a73881e6bdc1e722ed5b0b8c3b81c5829">WECore::ModulationSource&lt; double &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00320">320</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00308">308</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00118">_bypassSwitch</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00341">_calcFreqInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00130">_depthMod</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00132">_gain</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00121">_invertSwitch</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00141">_modulationSource</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00129">_rawDepth</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00297">calcIndexAndScaleInLoop()</a>, and <a class="el" href="namespace_w_e_core_1_1_richter_1_1_parameters.html#a8c2f0b39436a64ebf28590e4e992577d">WECore::Richter::Parameters::DEPTH()</a>.</p>
+<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00118">_bypassSwitch</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00297">_calcFreqInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00283">_calcIndexAndScaleInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00130">_depthMod</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00132">_gain</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00121">_invertSwitch</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00142">_modulationSource</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00129">_rawDepth</a>, and <a class="el" href="namespace_w_e_core_1_1_richter_1_1_parameters.html#a8c2f0b39436a64ebf28590e4e992577d">WECore::Richter::Parameters::DEPTH()</a>.</p>
 
 </div>
 </div>
@@ -593,41 +554,9 @@ Friends</h2></td></tr>
 
 <p>Implements <a class="el" href="class_w_e_core_1_1_modulation_source.html#abf563a25d206e6daef92b363187d5e3e">WECore::ModulationSource&lt; double &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00259">259</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00243">243</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00133">_currentScale</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00114">_indexOffset</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00122">_needsPhaseCalc</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00116">_samplesProcessed</a>.</p>
-
-</div>
-</div>
-<a id="a28bbb9a213bd256e69d3dd85794de3fe"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28bbb9a213bd256e69d3dd85794de3fe">&#9670;&nbsp;</a></span>calcIndexAndScaleInLoop()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void WECore::Richter::RichterLFO::calcIndexAndScaleInLoop </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Calculates the current index of the oscillator in its wavetable. Includes protection against indexes out of range (caused by phase offset) and updates currentScale. Call from within the processing loop. Increments the number of samples processed </p>
-
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00297">297</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
-
-<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00133">_currentScale</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00132">_gain</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00113">_index</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00114">_indexOffset</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00134">_nextScale</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00116">_samplesProcessed</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00136">_waveArrayPointer</a>, <a class="el" href="_core_math_8h_source.html#l00045">WECore::CoreMath::compareFloatsEqual()</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00037">WECore::Richter::Wavetables::SIZE</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00320">_getNextOutputImpl()</a>.</p>
+<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00133">_currentScale</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00114">_indexOffset</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00122">_needsSeekOffsetCalc</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00116">_samplesProcessed</a>.</p>
 
 </div>
 </div>
@@ -658,7 +587,7 @@ Friends</h2></td></tr>
 
 <p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00118">_bypassSwitch</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00127">WECore::Richter::RichterLFOPair::_getNextOutputImpl()</a>, and <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00025">SCENARIO()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00128">WECore::Richter::RichterLFOPair::_getNextOutputImpl()</a>, and <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00025">SCENARIO()</a>.</p>
 
 </div>
 </div>
@@ -689,7 +618,7 @@ Friends</h2></td></tr>
 
 <p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00129">_rawDepth</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00127">WECore::Richter::RichterLFOPair::_getNextOutputImpl()</a>, and <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00025">SCENARIO()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00128">WECore::Richter::RichterLFOPair::_getNextOutputImpl()</a>, and <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00025">SCENARIO()</a>.</p>
 
 </div>
 </div>
@@ -1058,8 +987,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="abbbd2281dd631ce4b124f9d0d25d51d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abbbd2281dd631ce4b124f9d0d25d51d0">&#9670;&nbsp;</a></span>prepareForNextBuffer()</h2>
+<a id="a0ba52d534a580bfe4dfe9a9a318ad660"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ba52d534a580bfe4dfe9a9a318ad660">&#9670;&nbsp;</a></span>prepareForNextBuffer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1077,13 +1006,7 @@ Friends</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>timeInSeconds</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>sampleRate</em>&#160;</td>
+          <td class="paramname"><em>timeInSeconds</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1102,14 +1025,15 @@ Friends</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">bpm</td><td>Current bpm of the host </td></tr>
     <tr><td class="paramname">timeInSeconds</td><td>Position of the host DAW's playhead at the start of playback. </td></tr>
-    <tr><td class="paramname">sampleRate</td><td>Current sample rate of the host </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00250">250</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00235">235</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00285">_calcFreq()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00173">_calcNextScale()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00266">_calcPhaseOffset()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00166">_calcSamplesPerTremoloCycle()</a>.</p>
+<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00271">_calcFreq()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00250">_calcPhaseOffset()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00126">_freq</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00134">_nextScale</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00135">_sampleRate</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00131">_samplesPerTremoloCycle</a>, and <a class="el" href="_richter_wavetables_8h_source.html#l00037">WECore::Richter::Wavetables::SIZE</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00111">WECore::Richter::RichterLFOPair::prepareForNextBuffer()</a>.</p>
 
 </div>
 </div>
@@ -1391,11 +1315,11 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00093">93</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00094">94</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00141">_modulationSource</a>.</p>
+<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00142">_modulationSource</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00100">WECore::Richter::RichterLFOPair::RichterLFOPair()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00106">WECore::Richter::RichterLFOPair::RichterLFOPair()</a>.</p>
 
 </div>
 </div>
@@ -1428,6 +1352,38 @@ Friends</h2></td></tr>
 <p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00120">_phaseSyncSwitch</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00025">SCENARIO()</a>.</p>
+
+</div>
+</div>
+<a id="aab9aa3568534b2a914013bba905eeb4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab9aa3568534b2a914013bba905eeb4e">&#9670;&nbsp;</a></span>setSampleRate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WECore::Richter::RichterLFO::setSampleRate </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00092">92</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+
+<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00135">_sampleRate</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00118">WECore::Richter::RichterLFOPair::setSampleRate()</a>.</p>
 
 </div>
 </div>
@@ -1551,9 +1507,9 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00236">236</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00221">221</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00112">_wave</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00136">_waveArrayPointer</a>, <a class="el" href="_parameter_definition_8h_source.html#l00090">ParameterDefinition::BaseParameter&lt; T &gt;::BoundsCheck()</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00039">WECore::Richter::Wavetables::getInstance()</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00046">WECore::Richter::Wavetables::getSaw()</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00047">WECore::Richter::Wavetables::getSidechain()</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00044">WECore::Richter::Wavetables::getSine()</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00045">WECore::Richter::Wavetables::getSquare()</a>, and <a class="el" href="_richter_parameters_8h_source.html#l00039">WECore::Richter::Parameters::WAVE</a>.</p>
+<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00112">_wave</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00137">_waveArrayPointer</a>, <a class="el" href="_parameter_definition_8h_source.html#l00090">ParameterDefinition::BaseParameter&lt; T &gt;::BoundsCheck()</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00039">WECore::Richter::Wavetables::getInstance()</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00046">WECore::Richter::Wavetables::getSaw()</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00047">WECore::Richter::Wavetables::getSidechain()</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00044">WECore::Richter::Wavetables::getSine()</a>, <a class="el" href="_richter_wavetables_8h_source.html#l00045">WECore::Richter::Wavetables::getSquare()</a>, and <a class="el" href="_richter_parameters_8h_source.html#l00039">WECore::Richter::Parameters::WAVE</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00025">SCENARIO()</a>.</p>
 
@@ -1607,7 +1563,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00118">118</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00320">_getNextOutputImpl()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00062">getBypassSwitch()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00079">setBypassSwitch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00308">_getNextOutputImpl()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00062">getBypassSwitch()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00079">setBypassSwitch()</a>.</p>
 
 </div>
 </div>
@@ -1633,7 +1589,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00133">133</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00259">_resetImpl()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00297">calcIndexAndScaleInLoop()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00283">_calcIndexAndScaleInLoop()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00243">_resetImpl()</a>.</p>
 
 </div>
 </div>
@@ -1659,7 +1615,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00130">130</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00320">_getNextOutputImpl()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00072">getDepthMod()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00089">setDepthMod()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00308">_getNextOutputImpl()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00072">getDepthMod()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00089">setDepthMod()</a>.</p>
 
 </div>
 </div>
@@ -1685,7 +1641,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00126">126</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00285">_calcFreq()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00341">_calcFreqInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00266">_calcPhaseOffset()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00166">_calcSamplesPerTremoloCycle()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00271">_calcFreq()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00297">_calcFreqInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00250">_calcPhaseOffset()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00235">prepareForNextBuffer()</a>.</p>
 
 </div>
 </div>
@@ -1711,7 +1667,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00128">128</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00341">_calcFreqInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00070">getFreqMod()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00087">setFreqMod()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00297">_calcFreqInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00070">getFreqMod()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00087">setFreqMod()</a>.</p>
 
 </div>
 </div>
@@ -1737,7 +1693,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00132">132</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00320">_getNextOutputImpl()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00297">calcIndexAndScaleInLoop()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00283">_calcIndexAndScaleInLoop()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00308">_getNextOutputImpl()</a>.</p>
 
 </div>
 </div>
@@ -1763,7 +1719,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00113">113</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00297">calcIndexAndScaleInLoop()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00283">_calcIndexAndScaleInLoop()</a>.</p>
 
 </div>
 </div>
@@ -1789,7 +1745,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00114">114</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00266">_calcPhaseOffset()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00259">_resetImpl()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00297">calcIndexAndScaleInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00074">getIndexOffset()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00091">setIndexOffset()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00283">_calcIndexAndScaleInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00250">_calcPhaseOffset()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00243">_resetImpl()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00074">getIndexOffset()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00091">setIndexOffset()</a>.</p>
 
 </div>
 </div>
@@ -1815,7 +1771,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00121">121</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00320">_getNextOutputImpl()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00065">getInvertSwitch()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00082">setInvertSwitch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00308">_getNextOutputImpl()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00065">getInvertSwitch()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00082">setInvertSwitch()</a>.</p>
 
 </div>
 </div>
@@ -1841,7 +1797,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00111">111</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00266">_calcPhaseOffset()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00073">getManualPhase()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00090">setManualPhase()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00250">_calcPhaseOffset()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00073">getManualPhase()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00090">setManualPhase()</a>.</p>
 
 </div>
 </div>
@@ -1865,14 +1821,14 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00141">141</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00142">142</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00320">_getNextOutputImpl()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00093">setModulationSource()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00308">_getNextOutputImpl()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00094">setModulationSource()</a>.</p>
 
 </div>
 </div>
-<a id="ab8dcce3eba1c171b48d7bdaf22ddf306"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8dcce3eba1c171b48d7bdaf22ddf306">&#9670;&nbsp;</a></span>_needsPhaseCalc</h2>
+<a id="abe0a7030769620e7a468d41636e93024"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe0a7030769620e7a468d41636e93024">&#9670;&nbsp;</a></span>_needsSeekOffsetCalc</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1881,7 +1837,7 @@ Friends</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool WECore::Richter::RichterLFO::_needsPhaseCalc</td>
+          <td class="memname">bool WECore::Richter::RichterLFO::_needsSeekOffsetCalc</td>
         </tr>
       </table>
   </td>
@@ -1893,7 +1849,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00122">122</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00266">_calcPhaseOffset()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00259">_resetImpl()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00250">_calcPhaseOffset()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00243">_resetImpl()</a>.</p>
 
 </div>
 </div>
@@ -1919,7 +1875,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00134">134</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00173">_calcNextScale()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00297">calcIndexAndScaleInLoop()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00283">_calcIndexAndScaleInLoop()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00235">prepareForNextBuffer()</a>.</p>
 
 </div>
 </div>
@@ -1945,7 +1901,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00120">120</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00266">_calcPhaseOffset()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00063">getPhaseSyncSwitch()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00080">setPhaseSyncSwitch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00250">_calcPhaseOffset()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00063">getPhaseSyncSwitch()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00080">setPhaseSyncSwitch()</a>.</p>
 
 </div>
 </div>
@@ -1971,7 +1927,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00129">129</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00320">_getNextOutputImpl()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00071">getDepth()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00088">setDepth()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00308">_getNextOutputImpl()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00071">getDepth()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00088">setDepth()</a>.</p>
 
 </div>
 </div>
@@ -1997,7 +1953,33 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00127">127</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00341">_calcFreqInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00069">getFreq()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00086">setFreq()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00297">_calcFreqInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00069">getFreq()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00086">setFreq()</a>.</p>
+
+</div>
+</div>
+<a id="a594b4d163537e64519a854ac9f99ec19"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a594b4d163537e64519a854ac9f99ec19">&#9670;&nbsp;</a></span>_sampleRate</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double WECore::Richter::RichterLFO::_sampleRate</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00135">135</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00235">prepareForNextBuffer()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00092">setSampleRate()</a>.</p>
 
 </div>
 </div>
@@ -2023,7 +2005,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00131">131</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00173">_calcNextScale()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00166">_calcSamplesPerTremoloCycle()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00235">prepareForNextBuffer()</a>.</p>
 
 </div>
 </div>
@@ -2049,7 +2031,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00116">116</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00259">_resetImpl()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00297">calcIndexAndScaleInLoop()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00283">_calcIndexAndScaleInLoop()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00243">_resetImpl()</a>.</p>
 
 </div>
 </div>
@@ -2075,7 +2057,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00125">125</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00285">_calcFreq()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00068">getTempoDenom()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00085">setTempoDenom()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00271">_calcFreq()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00068">getTempoDenom()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00085">setTempoDenom()</a>.</p>
 
 </div>
 </div>
@@ -2101,7 +2083,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00124">124</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00285">_calcFreq()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00067">getTempoNumer()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00084">setTempoNumer()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00271">_calcFreq()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00067">getTempoNumer()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00084">setTempoNumer()</a>.</p>
 
 </div>
 </div>
@@ -2127,7 +2109,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00119">119</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00285">_calcFreq()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00341">_calcFreqInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00064">getTempoSyncSwitch()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00081">setTempoSyncSwitch()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00271">_calcFreq()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00297">_calcFreqInLoop()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00064">getTempoSyncSwitch()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00081">setTempoSyncSwitch()</a>.</p>
 
 </div>
 </div>
@@ -2153,7 +2135,7 @@ Friends</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00112">112</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00066">getWave()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00236">setWave()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00066">getWave()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00221">setWave()</a>.</p>
 
 </div>
 </div>
@@ -2177,9 +2159,9 @@ Friends</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00136">136</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_8h_source.html#l00137">137</a> of file <a class="el" href="_richter_l_f_o_8h_source.html">RichterLFO.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00297">calcIndexAndScaleInLoop()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00236">setWave()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_8h_source.html#l00283">_calcIndexAndScaleInLoop()</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00221">setWave()</a>.</p>
 
 </div>
 </div>
