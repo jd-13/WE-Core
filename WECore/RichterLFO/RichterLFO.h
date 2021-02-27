@@ -71,7 +71,6 @@ namespace WECore::Richter {
         double getDepth() { return _rawDepth; }
         double getDepthMod() { return _depthMod; }
         int getManualPhase() const { return _manualPhase; }
-        int getIndexOffset() { return _indexOffset; }
         /** @} */
 
         /** @name Setter Methods */
@@ -88,7 +87,6 @@ namespace WECore::Richter {
         void setDepth(double val) { _rawDepth = Parameters::DEPTH.BoundsCheck(val); }
         void setDepthMod(double val) { _depthMod = Parameters::DEPTHMOD.BoundsCheck(val); }
         void setManualPhase(int val) { _manualPhase = static_cast<int>(Parameters::PHASE.BoundsCheck(val)); }
-        void setIndexOffset(int val) { _indexOffset = val; }
         void setSampleRate(double val) { _sampleRate = val; }
 
         void setModulationSource(std::shared_ptr<ModulationSource> val) { _modulationSource = val; }
