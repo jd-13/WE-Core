@@ -89,6 +89,7 @@ namespace WECore::Richter {
         void setDepthMod(double val) { _depthMod = Parameters::DEPTHMOD.BoundsCheck(val); }
         void setManualPhase(int val) { _manualPhase = static_cast<int>(Parameters::PHASE.BoundsCheck(val)); }
         void setIndexOffset(int val) { _indexOffset = val; }
+        void setSampleRate(double val) { _sampleRate = val; }
 
         void setModulationSource(std::shared_ptr<ModulationSource> val) { _modulationSource = val; }
         /** @} */
@@ -100,9 +101,8 @@ namespace WECore::Richter {
          * @param   bpm             Current bpm of the host
          * @param   timeInSeconds   Position of the host DAW's playhead at the start of
          *                          playback.
-         * @param   sampleRate      Current sample rate of the host
          */
-        inline void prepareForNextBuffer(double bpm, double timeInSeconds, double sampleRate);
+        inline void prepareForNextBuffer(double bpm, double timeInSeconds);
 
         RichterLFO operator= (RichterLFO& other) = delete;
         RichterLFO(RichterLFO&) = delete;
@@ -131,7 +131,8 @@ namespace WECore::Richter {
                 _samplesPerTremoloCycle,
                 _gain,
                 _currentScale,
-                _nextScale;
+                _nextScale,
+                _sampleRate;
 
         const double* _waveArrayPointer;
 
@@ -156,23 +157,6 @@ namespace WECore::Richter {
          * @param   bpm   Current bpm of the host DAW
          */
         inline void _calcFreq(double bpm);
-
-        /**
-         * Calculates the number of samples which pass in the same time as one cycle
-         * of the LFO. Dependant on the LFO frequency and the sample rate.
-         *
-         * @param   sampleRate   Sample rate of the host DAW
-         */
-        void _calcSamplesPerTremoloCycle(double sampleRate) {
-            _samplesPerTremoloCycle = sampleRate / _freq;
-        }
-
-        /**
-         * Calculates the scale factor to be applied when calculating the index.
-         */
-        void _calcNextScale() {
-            _nextScale = Wavetables::SIZE / _samplesPerTremoloCycle;
-        }
 
         /**
          * Calculates the current index of the oscillator in its wavetable. Includes
@@ -229,6 +213,7 @@ namespace WECore::Richter {
                                _gain(1),
                                _currentScale(0),
                                _nextScale(0),
+                               _sampleRate(44100),
                                _waveArrayPointer(Wavetables::getInstance()->getSine()),
                                _modulationSource(nullptr) {
     }
@@ -248,12 +233,11 @@ namespace WECore::Richter {
     }
 
     void RichterLFO::prepareForNextBuffer(double bpm,
-                                              double timeInSeconds,
-                                              double sampleRate) {
+                                          double timeInSeconds) {
         _calcFreq(bpm);
         _calcPhaseOffset(timeInSeconds);
-        _calcSamplesPerTremoloCycle(sampleRate);
-        _calcNextScale();
+        _samplesPerTremoloCycle = _sampleRate / _freq;
+        _nextScale = Wavetables::SIZE / _samplesPerTremoloCycle;
     }
 
     void RichterLFO::_resetImpl() {
@@ -295,7 +279,7 @@ namespace WECore::Richter {
     }
 
     void RichterLFO::_calcIndexAndScaleInLoop() {
-        // calculate the current index within the wave table
+        // Calculate the current index within the wave table
         _index = static_cast<int>(static_cast<long>(_samplesProcessed * static_cast<long double>(_currentScale)) % Wavetables::SIZE);
 
         if ((!CoreMath::compareFloatsEqual(_nextScale, _currentScale)) && (_index == 0)) {

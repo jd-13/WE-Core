@@ -72,9 +72,15 @@ namespace WECore::Richter {
          * @param   bpm             Current bpm of the host.
          * @param   timeInSeconds   Position of the host DAW's playhead at the start of
          *                          playback.
+         */
+        inline void prepareForNextBuffer(double bpm, double timeInSeconds);
+
+        /**
+         * Sets the sample rate for both LFOs.
+         *
          * @param   sampleRate      Current sample rate of the host
          */
-        inline void prepareForNextBuffer(double bpm, double timeInSeconds, double sampleRate);
+        inline void setSampleRate(double sampleRate);
 
         RichterLFO LFO;
         std::shared_ptr<RichterLFO> MOD;
@@ -103,20 +109,15 @@ namespace WECore::Richter {
     }
 
     void RichterLFOPair::prepareForNextBuffer(double bpm,
-                                              double timeInSeconds,
-                                              double sampleRate) {
+                                              double timeInSeconds) {
 
-        MOD->_calcFreq(bpm);
-        MOD->_calcPhaseOffset(timeInSeconds);
+        LFO.prepareForNextBuffer(bpm, timeInSeconds);
+        MOD->prepareForNextBuffer(bpm, timeInSeconds);
+    }
 
-        LFO._calcFreq(bpm);
-        LFO._calcPhaseOffset(timeInSeconds);
-
-        LFO._calcSamplesPerTremoloCycle(sampleRate);
-        MOD->_calcSamplesPerTremoloCycle(sampleRate);
-
-        LFO._calcNextScale();
-        MOD->_calcNextScale();
+    void RichterLFOPair::setSampleRate(double sampleRate) {
+        LFO.setSampleRate(sampleRate);
+        MOD->setSampleRate(sampleRate);
     }
 
     void RichterLFOPair::_resetImpl() {
