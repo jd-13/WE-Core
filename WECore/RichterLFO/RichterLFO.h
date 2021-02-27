@@ -119,7 +119,7 @@ namespace WECore::Richter {
                 _tempoSyncSwitch,
                 _phaseSyncSwitch,
                 _invertSwitch,
-                _needsPhaseCalc;
+                _needsSeekOffsetCalc;
 
         double  _tempoNumer,
                 _tempoDenom,
@@ -201,7 +201,7 @@ namespace WECore::Richter {
                                _tempoSyncSwitch(Parameters::TEMPOSYNC_DEFAULT),
                                _phaseSyncSwitch(Parameters::PHASESYNC_DEFAULT),
                                _invertSwitch(Parameters::INVERT_DEFAULT),
-                               _needsPhaseCalc(true),
+                               _needsSeekOffsetCalc(true),
                                _tempoNumer(Parameters::TEMPONUMER.defaultValue),
                                _tempoDenom(Parameters::TEMPODENOM.defaultValue),
                                _freq(Parameters::FREQ.defaultValue),
@@ -241,29 +241,31 @@ namespace WECore::Richter {
     }
 
     void RichterLFO::_resetImpl() {
-        _needsPhaseCalc = true;
+        _needsSeekOffsetCalc = true;
         _indexOffset = 0;
         _currentScale = 0;
         _samplesProcessed = 0;
     }
 
     void RichterLFO::_calcPhaseOffset(double timeInSeconds) {
-        if (_phaseSyncSwitch && _needsPhaseCalc) {
-            double waveLength {1 / _freq};
-            double waveTimePosition {0};
 
-            if (waveLength < timeInSeconds) {
-                waveTimePosition = fmod(timeInSeconds, waveLength);
-            } else {
-                waveTimePosition = timeInSeconds;
-            }
-            _indexOffset = static_cast<int>(waveTimePosition / waveLength) * Wavetables::SIZE + _manualPhase;
+        // The phase offset applied by the playhead's start position needs to be calculated only
+        // when playback initially starts, and not for any subsequent buffers until playback stops
+        // and starts again
+        static int seekIndexOffset {0};
+        if (_needsSeekOffsetCalc) {
+            const double waveLength {1 / _freq};
+            const double waveTimePosition {std::fmod(timeInSeconds, waveLength)};
+
+            seekIndexOffset = static_cast<int>(waveTimePosition / waveLength) * Wavetables::SIZE;
+            _needsSeekOffsetCalc = false;
         }
 
-        if (!_phaseSyncSwitch && _needsPhaseCalc) {
+        if (_phaseSyncSwitch) {
+            _indexOffset = seekIndexOffset + _manualPhase;
+        } else {
             _indexOffset = _manualPhase;
         }
-        _needsPhaseCalc = false;
     }
 
     void RichterLFO::_calcFreq(double bpm) {
