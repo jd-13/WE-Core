@@ -303,16 +303,7 @@ namespace WECore::Richter {
             _samplesProcessed = 0;
         }
 
-
-        // Must provide two possibilities for each index lookup in order to protect the array from
-        // being overflowed by the indexOffset, the first if statement uses the standard index
-        // lookup while second if statement deals with the overflow possibility
-
-        if ((_index + _indexOffset) < Wavetables::SIZE) {
-            _gain = _waveArrayPointer[_index + _indexOffset];
-        } else if ((_index + _indexOffset) >= Wavetables::SIZE) {
-            _gain = _waveArrayPointer[(_index + _indexOffset) % Wavetables::SIZE];
-        }
+        _gain = _waveArrayPointer[(_index + _indexOffset) % Wavetables::SIZE];
 
         _samplesProcessed++;
     }
