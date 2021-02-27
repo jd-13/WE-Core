@@ -167,7 +167,6 @@ namespace WECore::JUCEPlugin {
     void CoreAudioProcessor::setStateInformation(const void* data, int sizeInBytes)
     {
         std::unique_ptr<juce::XmlElement> pRoot(getXmlFromBinary(data, sizeInBytes));
-        std::vector<float> readParamValues;
 
         // Parse the XML
         if (pRoot != NULL) {
