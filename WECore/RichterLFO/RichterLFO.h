@@ -108,7 +108,6 @@ namespace WECore::Richter {
     private:
         int     _manualPhase,
                 _wave,
-                _index,
                 _indexOffset;
 
         long    _samplesProcessed;
@@ -125,10 +124,7 @@ namespace WECore::Richter {
                 _freqMod,
                 _rawDepth,
                 _depthMod,
-                _samplesPerTremoloCycle,
-                _gain,
                 _currentScale,
-                _nextScale,
                 _sampleRate,
                 _bpm;
 
@@ -157,15 +153,15 @@ namespace WECore::Richter {
         inline double _calcFreq(double modAmount);
 
         /**
-         * Calculates the current index of the oscillator in its wavetable. Includes
-         * protection against indexes out of range (caused by phase offset) and updates
-         * currentScale. Call from within the processing loop. Increments the number of
-         * samples processed
+         * Calculates the current index of the oscillator in its wavetable and increments the number
+         * of samples processed.
          *
          * @param   freq        The absolute frequency of the LFO, including tempo sync or modulation.
          *
+         * @return  The value in the wavetable at the current index.
+         *
          */
-        inline void _calcIndexAndScaleInLoop(double freq);
+        inline double _calcIndexAndScale(double freq);
 
         /**
          * Returns the next output of the LFO.
@@ -186,7 +182,6 @@ namespace WECore::Richter {
 
     RichterLFO::RichterLFO() : _manualPhase(static_cast<int>(Parameters::PHASE.defaultValue)),
                                _wave(Parameters::WAVE.defaultValue),
-                               _index(0),
                                _indexOffset(0),
                                _samplesProcessed(0),
                                _bypassSwitch(Parameters::LFOSWITCH_DEFAULT),
@@ -200,10 +195,7 @@ namespace WECore::Richter {
                                _freqMod(Parameters::FREQMOD.defaultValue),
                                _rawDepth(Parameters::DEPTH.defaultValue),
                                _depthMod(Parameters::DEPTHMOD.defaultValue),
-                               _samplesPerTremoloCycle(1),
-                               _gain(1),
                                _currentScale(0),
-                               _nextScale(0),
                                _sampleRate(44100),
                                _bpm(0),
                                _waveArrayPointer(Wavetables::getInstance()->getSine()),
@@ -272,21 +264,23 @@ namespace WECore::Richter {
         return Parameters::FREQ.BoundsCheck(freq);
     }
 
-    void RichterLFO::_calcIndexAndScaleInLoop(double freq) {
-        _samplesPerTremoloCycle = _sampleRate / freq;
-        _nextScale = Wavetables::SIZE / _samplesPerTremoloCycle;
+    double RichterLFO::_calcIndexAndScale(double freq) {
+        const double samplesPerTremoloCycle {_sampleRate / freq};
+        const double nextScale {Wavetables::SIZE / samplesPerTremoloCycle};
 
         // Calculate the current index within the wave table
-        _index = static_cast<int>(static_cast<long>(_samplesProcessed * static_cast<long double>(_currentScale)) % Wavetables::SIZE);
+        const int index {
+            static_cast<int>(static_cast<long>(_samplesProcessed * static_cast<long double>(_currentScale)) % Wavetables::SIZE)
+        };
 
-        if ((!CoreMath::compareFloatsEqual(_nextScale, _currentScale)) && (_index == 0)) {
-            _currentScale = _nextScale;
+        if ((!CoreMath::compareFloatsEqual(nextScale, _currentScale)) && (index == 0)) {
+            _currentScale = nextScale;
             _samplesProcessed = 0;
         }
 
-        _gain = _waveArrayPointer[(_index + _indexOffset) % Wavetables::SIZE];
-
         _samplesProcessed++;
+
+        return _waveArrayPointer[(index + _indexOffset) % Wavetables::SIZE];
     }
 
     double RichterLFO::_getNextOutputImpl(double inSample) {
@@ -294,7 +288,7 @@ namespace WECore::Richter {
         // This is the only function that should advance the modulation state by calling getNextOutput()
         const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(inSample) / 2 : 0};
 
-        _calcIndexAndScaleInLoop(_calcFreq(modAmount));
+        const double lfoValue {_calcIndexAndScale(_calcFreq(modAmount))};
 
         // Calculate the depth value after modulation
         const double depth {Parameters::DEPTH.BoundsCheck(
@@ -303,7 +297,7 @@ namespace WECore::Richter {
 
         if (_bypassSwitch) {
             // Produce a value in the range -1:1, invert if needed
-            return (_gain * depth) * (_invertSwitch ? -1 : 1);
+            return (lfoValue * depth) * (_invertSwitch ? -1 : 1);
         } else {
             return 0;
         }
