@@ -257,14 +257,14 @@ namespace WECore::Richter {
             const double waveLength {1 / _freq};
             const double waveTimePosition {std::fmod(timeInSeconds, waveLength)};
 
-            seekIndexOffset = static_cast<int>(waveTimePosition / waveLength) * Wavetables::SIZE;
+            seekIndexOffset = static_cast<int>((waveTimePosition / waveLength) * Wavetables::SIZE);
             _needsSeekOffsetCalc = false;
         }
 
         if (_phaseSyncSwitch) {
             _indexOffset = seekIndexOffset + _manualPhase;
         } else {
-            _indexOffset = _manualPhase;
+            _indexOffset = 0;
         }
     }
 
