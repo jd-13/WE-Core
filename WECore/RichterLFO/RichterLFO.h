@@ -110,8 +110,6 @@ namespace WECore::Richter {
                 _wave,
                 _indexOffset;
 
-        long    _samplesProcessed;
-
         bool    _bypassSwitch,
                 _tempoSyncSwitch,
                 _phaseSyncSwitch,
@@ -124,9 +122,9 @@ namespace WECore::Richter {
                 _freqMod,
                 _rawDepth,
                 _depthMod,
-                _currentScale,
                 _sampleRate,
-                _bpm;
+                _bpm,
+                _wavetablePosition;
 
         const double* _waveArrayPointer;
 
@@ -161,7 +159,7 @@ namespace WECore::Richter {
          * @return  The value in the wavetable at the current index.
          *
          */
-        inline double _calcIndexAndScale(double freq);
+        inline double _calcLFOValue(double freq);
 
         /**
          * Returns the next output of the LFO.
@@ -183,7 +181,6 @@ namespace WECore::Richter {
     RichterLFO::RichterLFO() : _manualPhase(static_cast<int>(Parameters::PHASE.defaultValue)),
                                _wave(Parameters::WAVE.defaultValue),
                                _indexOffset(0),
-                               _samplesProcessed(0),
                                _bypassSwitch(Parameters::LFOSWITCH_DEFAULT),
                                _tempoSyncSwitch(Parameters::TEMPOSYNC_DEFAULT),
                                _phaseSyncSwitch(Parameters::PHASESYNC_DEFAULT),
@@ -195,9 +192,9 @@ namespace WECore::Richter {
                                _freqMod(Parameters::FREQMOD.defaultValue),
                                _rawDepth(Parameters::DEPTH.defaultValue),
                                _depthMod(Parameters::DEPTHMOD.defaultValue),
-                               _currentScale(0),
                                _sampleRate(44100),
                                _bpm(0),
+                               _wavetablePosition(0),
                                _waveArrayPointer(Wavetables::getInstance()->getSine()),
                                _modulationSource(nullptr) {
     }
@@ -225,8 +222,7 @@ namespace WECore::Richter {
     void RichterLFO::_resetImpl() {
         _needsSeekOffsetCalc = true;
         _indexOffset = 0;
-        _currentScale = 0;
-        _samplesProcessed = 0;
+        _wavetablePosition = 0;
     }
 
     void RichterLFO::_calcPhaseOffset(double timeInSeconds) {
@@ -264,21 +260,14 @@ namespace WECore::Richter {
         return Parameters::FREQ.BoundsCheck(freq);
     }
 
-    double RichterLFO::_calcIndexAndScale(double freq) {
+    double RichterLFO::_calcLFOValue(double freq) {
         const double samplesPerTremoloCycle {_sampleRate / freq};
-        const double nextScale {Wavetables::SIZE / samplesPerTremoloCycle};
+        const double scale {Wavetables::SIZE / samplesPerTremoloCycle};
 
-        // Calculate the current index within the wave table
-        const int index {
-            static_cast<int>(static_cast<long>(_samplesProcessed * static_cast<long double>(_currentScale)) % Wavetables::SIZE)
-        };
+        // Calculate the current position within the wave table
+        _wavetablePosition = std::fmod(_wavetablePosition + scale, Wavetables::SIZE);
 
-        if ((!CoreMath::compareFloatsEqual(nextScale, _currentScale)) && (index == 0)) {
-            _currentScale = nextScale;
-            _samplesProcessed = 0;
-        }
-
-        _samplesProcessed++;
+        const int index {static_cast<int>(_wavetablePosition)};
 
         return _waveArrayPointer[(index + _indexOffset) % Wavetables::SIZE];
     }
@@ -288,7 +277,7 @@ namespace WECore::Richter {
         // This is the only function that should advance the modulation state by calling getNextOutput()
         const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(inSample) / 2 : 0};
 
-        const double lfoValue {_calcIndexAndScale(_calcFreq(modAmount))};
+        const double lfoValue {_calcLFOValue(_calcFreq(modAmount))};
 
         // Calculate the depth value after modulation
         const double depth {Parameters::DEPTH.BoundsCheck(
