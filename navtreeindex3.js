@@ -1,5 +1,9 @@
 var NAVTREEINDEX3 =
 {
+"class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a6a4d4e1cf938694031dcb296678b0bdd":[1,0,1,9,1,3],
+"class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a6ab458d8a3b8c9d2cb87c12e823ddaf6":[1,0,1,9,1,21],
+"class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a7f4caf960c0358774e07d4611f03f957":[1,0,1,9,1,7],
+"class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a94ee8fb50df475606363a31e43685a24":[1,0,1,9,1,0],
 "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a9692839f30189629804ecba547fd34b9":[1,0,1,9,1,4],
 "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a99046ef470f4cc16e95558b9742657d0":[1,0,1,9,1,6],
 "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a9b69d1f2de697a696e88a7f13c3b3f38":[1,0,1,9,1,16],
@@ -14,8 +18,8 @@ var NAVTREEINDEX3 =
 "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#aff5869e04e0302aa905da8dde9ebd522":[1,0,1,9,1,13],
 "classes.html":[1,1],
 "files.html":[2,0],
-"functions.html":[1,3,0],
 "functions.html":[1,3,0,0],
+"functions.html":[1,3,0],
 "functions_a.html":[1,3,0,1],
 "functions_b.html":[1,3,0,2],
 "functions_c.html":[1,3,0,3],
@@ -189,6 +193,7 @@ var NAVTREEINDEX3 =
 "namespaces.html":[0,0],
 "pages.html":[],
 "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html":[1,0,1,2,0,1],
-"struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html#a47026f174f12549b33759dfe4e8f42bc":[1,0,1,2,0,1,1],
+"struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html#a47026f174f12549b33759dfe4e8f42bc":[1,0,1,2,0,1,2],
+"struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html#a8b4eb1032fcadb75e7f4f6f955159a9a":[1,0,1,2,0,1,1],
 "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html#ad7b48f4f6282e5c9e211e207bf8a685a":[1,0,1,2,0,1,0]
 };
