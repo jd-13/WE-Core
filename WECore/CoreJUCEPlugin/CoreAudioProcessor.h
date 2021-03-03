@@ -106,13 +106,28 @@ namespace WECore::JUCEPlugin {
                                       std::function<void(bool)> setter);
         /** @} */
 
+        /**
+         * Override this and return a vector of parameter names corresponding to the order that
+         * parameters were stored in using the legacy schema.
+         */
+        virtual std::vector<juce::String> _provideParamNamesForMigration() = 0;
+
+        /**
+         * Override this to migrate saved parameter values from normalised to internal.
+         */
+        virtual void _migrateParamValues(std::vector<float>& paramValues) = 0;
+
     private:
+
+        // Increment this after changing how parameter states are stored
+        static constexpr int PARAMS_SCHEMA_VERSION {1};
 
         /**
          * Stores a setter and getter for a parameter. Used when persisting parameter values to XML
          * and restoring values from XML.
          */
         struct ParameterInterface {
+            juce::String name;
             std::function<float()> getter;
             std::function<void(float)> setter;
         };
@@ -145,48 +160,47 @@ namespace WECore::JUCEPlugin {
 
         inline std::vector<float> _stringToFloatVector(const juce::String sFloatCSV) const;
 
+        inline std::unique_ptr<juce::XmlElement> _migrateParameters(
+                std::unique_ptr<juce::XmlElement> rootElement);
+
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreAudioProcessor)
     };
 
     void CoreAudioProcessor::getStateInformation(juce::MemoryBlock& destData)
     {
-        // Compile the list of parameter values
-        std::vector<float> paramValues;
+        // Build the XML
+        juce::XmlElement rootElement("Root");
+
+        // Set the XML params version
+        rootElement.setAttribute("SchemaVersion", PARAMS_SCHEMA_VERSION);
+
+        // Store the parameters
+        juce::XmlElement* paramsElement = rootElement.createNewChildElement("Params");
         for (const ParameterInterface& param : _paramsList) {
-            paramValues.push_back(param.getter());
+            paramsElement->setAttribute(param.name, param.getter());
         }
 
-        // Build the XML
-        juce::XmlElement root("Root");
-        juce::XmlElement *el = root.createNewChildElement("AllUserParam");
-
-        el->addTextElement(juce::String(_floatVectorToString(paramValues)));
-        copyXmlToBinary(root, destData);
+        copyXmlToBinary(rootElement, destData);
     }
 
     void CoreAudioProcessor::setStateInformation(const void* data, int sizeInBytes)
     {
-        std::unique_ptr<juce::XmlElement> pRoot(getXmlFromBinary(data, sizeInBytes));
+        std::unique_ptr<juce::XmlElement> rootElement(getXmlFromBinary(data, sizeInBytes));
 
         // Parse the XML
-        if (pRoot != NULL) {
-            forEachXmlChildElement((*pRoot), pChild) {
-                if (pChild->hasTagName("AllUserParam")) {
+        if (rootElement != nullptr) {
 
-                    // Read the values into a float array
-                    juce::String sFloatCSV = pChild->getAllSubText();
-                    const std::vector<float> readParamValues = _stringToFloatVector(sFloatCSV);
+            // If state was saved using an old plugin we need to migrate the XML data
+            if (rootElement->getIntAttribute("SchemaVersion", 0) < PARAMS_SCHEMA_VERSION) {
+                rootElement = _migrateParameters(std::move(rootElement));
+            }
 
-                    // Pass each value read from XML to a setter, being careful not to go out of
-                    // range on either of the vectors
-                    //
-                    // For this to work it relies the order not changing between plugin versions,
-                    // otherwise parameter values written by an old version will be assigned to the
-                    // wrong parameters in a new version (new parameters are ok though)
-                    for (int idx {0}; idx < _paramsList.size(); idx++) {
-                        if (idx < readParamValues.size()) {
-                            _paramsList[idx].setter(readParamValues[idx]);
-                        }
+            // Iterate through our list of parameters, restoring them from the XML attributes
+            juce::XmlElement* paramsElement = rootElement->getChildByName("Params");
+            if (paramsElement != nullptr) {
+                for (const ParameterInterface& param : _paramsList) {
+                    if (paramsElement->hasAttribute(param.name)) {
+                        param.setter(paramsElement->getDoubleAttribute(param.name));
                     }
                 }
             }
@@ -201,8 +215,9 @@ namespace WECore::JUCEPlugin {
                                                std::function<void(float)> setter) {
         param = new juce::AudioParameterFloat(name, name, {0.0f, 1.0f, precision}, range->InternalToNormalised(defaultValue));
 
-        ParameterInterface interface = {[&param]() { return param->get(); },
-                                        setter};
+        ParameterInterface interface = {name,
+                                        [&param, range]() { return range->NormalisedToInternal(param->get()); },
+                                        [setter, range](float val) { setter(range->InternalToNormalised(val)); }};
         _paramsList.push_back(interface);
 
         param->addListener(&_parameterBroadcaster);
@@ -216,7 +231,8 @@ namespace WECore::JUCEPlugin {
                                                std::function<void(int)> setter) {
         param = new juce::AudioParameterInt(name, name, range->minValue, range->maxValue, defaultValue);
 
-        ParameterInterface interface = {[&param]() { return param->get(); },
+        ParameterInterface interface = {name,
+                                        [&param]() { return param->get(); },
                                         [setter](float val) { setter(static_cast<int>(val)); }};
         _paramsList.push_back(interface);
 
@@ -230,28 +246,13 @@ namespace WECore::JUCEPlugin {
                                                std::function<void(bool)> setter) {
         param = new juce::AudioParameterBool(name, name, defaultValue);
 
-        ParameterInterface interface = {[&param]() { return param->get(); },
+        ParameterInterface interface = {name,
+                                        [&param]() { return param->get(); },
                                         [setter](float val) { setter(static_cast<bool>(val)); }};
         _paramsList.push_back(interface);
 
         param->addListener(&_parameterBroadcaster);
         addParameter(param);
-    }
-
-    juce::String CoreAudioProcessor::_floatVectorToString(const std::vector<float>& fData) const {
-        juce::String result {""};
-
-        if (fData.size() < 1) {
-            return result;
-        }
-
-        for (int iii {0}; iii < (fData.size() - 1); iii++) {
-            result << juce::String(fData[iii])<<",";
-        }
-
-        result << juce::String(fData[fData.size() - 1]);
-
-        return result;
     }
 
     std::vector<float> CoreAudioProcessor::_stringToFloatVector(const juce::String sFloatCSV) const {
@@ -265,5 +266,37 @@ namespace WECore::JUCEPlugin {
         }
 
         return values;
+    }
+
+    std::unique_ptr<juce::XmlElement> CoreAudioProcessor::_migrateParameters(std::unique_ptr<juce::XmlElement> rootElement) {
+        const int schemaVersion {rootElement->getIntAttribute("SchemaVersion", 0)};
+
+        std::unique_ptr<juce::XmlElement> retVal = std::make_unique<juce::XmlElement>("Root");
+
+        if (schemaVersion == 0) {
+            // This is an original parameter schema - parameters are normalised values in a single string
+
+            forEachXmlChildElement((*rootElement), childElement) {
+                if (childElement->hasTagName("AllUserParam")) {
+
+                    // Read the values into a float array
+                    juce::String sFloatCSV = childElement->getAllSubText();
+                    std::vector<float> readParamValues = _stringToFloatVector(sFloatCSV);
+                    _migrateParamValues(readParamValues);
+
+                    std::vector<juce::String> paramNames = _provideParamNamesForMigration();
+
+                    juce::XmlElement* paramsElement = retVal->createNewChildElement("Params");
+
+                    for (int idx {0}; idx < paramNames.size(); idx++) {
+                        if (idx < readParamValues.size()) {
+                            paramsElement->setAttribute(paramNames[idx], readParamValues[idx]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return retVal;
     }
 }
