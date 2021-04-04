@@ -36,8 +36,7 @@ var files_dup =
     ] ],
     [ "CoreMath.h", "_core_math_8h.html", "_core_math_8h" ],
     [ "CoreProcessorEditor.h", "_core_processor_editor_8h.html", [
-      [ "CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor" ],
-      [ "ParameterChangeListener", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor_1_1_parameter_change_listener.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor_1_1_parameter_change_listener" ]
+      [ "CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor" ]
     ] ],
     [ "DSPUnitParameterTests.cpp", "_d_s_p_unit_parameter_tests_8cpp.html", "_d_s_p_unit_parameter_tests_8cpp" ],
     [ "DSPUnitProcessingTests.cpp", "_d_s_p_unit_processing_tests_8cpp.html", "_d_s_p_unit_processing_tests_8cpp" ],
@@ -73,6 +72,10 @@ var files_dup =
     [ "MONSTRCrossoverTests.cpp", "_m_o_n_s_t_r_crossover_tests_8cpp.html", "_m_o_n_s_t_r_crossover_tests_8cpp" ],
     [ "MONSTRParameters.h", "_m_o_n_s_t_r_parameters_8h.html", "_m_o_n_s_t_r_parameters_8h" ],
     [ "ParameterDefinition.h", "_parameter_definition_8h.html", "_parameter_definition_8h" ],
+    [ "ParameterUpdateHandler.h", "_parameter_update_handler_8h.html", [
+      [ "ParameterUpdateHandler", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler" ],
+      [ "ParameterUpdateListener", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler_1_1_parameter_update_listener.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler_1_1_parameter_update_listener" ]
+    ] ],
     [ "PerformanceTests.cpp", "_performance_tests_8cpp.html", "_performance_tests_8cpp" ],
     [ "PopupMenuV2.h", "_popup_menu_v2_8h.html", [
       [ "PopupMenuV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2" ]

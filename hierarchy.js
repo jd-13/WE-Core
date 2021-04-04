@@ -30,7 +30,7 @@ var hierarchy =
       [ "WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html", null ]
     ] ],
     [ "juce::ChangeListener", null, [
-      [ "WECore::JUCEPlugin::CoreProcessorEditor::ParameterChangeListener", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor_1_1_parameter_change_listener.html", null ]
+      [ "WECore::JUCEPlugin::ParameterUpdateHandler::ParameterUpdateListener", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler_1_1_parameter_update_listener.html", null ]
     ] ],
     [ "Component", null, [
       [ "WECore::Richter::WaveViewer", "class_w_e_core_1_1_richter_1_1_wave_viewer.html", null ]
@@ -64,6 +64,10 @@ var hierarchy =
     [ "WECore::MONSTR::MONSTRCrossover< SampleType >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", null ],
     [ "WECore::Carve::NoiseFilter< T >", "class_w_e_core_1_1_carve_1_1_noise_filter.html", null ],
     [ "WECore::JUCEPlugin::CoreAudioProcessor::ParameterInterface", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html", null ],
+    [ "WECore::JUCEPlugin::ParameterUpdateHandler", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler.html", [
+      [ "WECore::JUCEPlugin::CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html", null ],
+      [ "WECore::JUCEPlugin::CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", null ]
+    ] ],
     [ "Slider", null, [
       [ "WECore::JUCEPlugin::SliderLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html", [
         [ "WECore::JUCEPlugin::LabelReadoutSlider< T >", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html", null ]
