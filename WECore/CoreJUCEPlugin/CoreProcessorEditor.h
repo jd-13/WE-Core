@@ -36,7 +36,8 @@ namespace WECore::JUCEPlugin {
      * Classes inheriting from this should:
      *   - Override _onParameterUpdate and call it in the constructor
      */
-class CoreProcessorEditor : public juce::AudioProcessorEditor {
+class CoreProcessorEditor : public juce::AudioProcessorEditor,
+                            public ParameterUpdateHandler {
     public:
         ~CoreProcessorEditor() {
             dynamic_cast<CoreAudioProcessor&>(processor).
@@ -45,29 +46,10 @@ class CoreProcessorEditor : public juce::AudioProcessorEditor {
 
     protected:
 
-        /**
-         * Is notified when a parameter has changed and calls _onParameterUpdate.
-         */
-        class ParameterChangeListener : public juce::ChangeListener {
-        public:
-            ParameterChangeListener(CoreProcessorEditor* parent) : _parent(parent) {};
-            virtual ~ParameterChangeListener() = default;
-
-            virtual void changeListenerCallback(juce::ChangeBroadcaster* /*source*/) {
-                _parent->_onParameterUpdate();
-            }
-
-        private:
-            CoreProcessorEditor* _parent;
-        };
-
-        ParameterChangeListener _parameterListener;
-
         juce::SharedResourcePointer<juce::TooltipWindow> _tooltipWindow;
 
         CoreProcessorEditor(CoreAudioProcessor& ownerFilter)
-                : AudioProcessorEditor(ownerFilter),
-                  _parameterListener(this) {
+                : AudioProcessorEditor(ownerFilter) {
             dynamic_cast<CoreAudioProcessor&>(processor).
                 addParameterChangeListener(&_parameterListener);
         }
@@ -99,11 +81,6 @@ class CoreProcessorEditor : public juce::AudioProcessorEditor {
                 getChildComponent(iii)->setLookAndFeel(nullptr);
             }
         }
-
-        /**
-         * This will be called whenever a parameter has been updated.
-         */
-        virtual void _onParameterUpdate() = 0;
 
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreProcessorEditor)
     };

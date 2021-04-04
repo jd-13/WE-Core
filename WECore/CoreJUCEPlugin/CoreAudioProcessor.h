@@ -26,6 +26,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "General/ParameterDefinition.h"
+#include "ParameterUpdateHandler.h"
 
 namespace WECore::JUCEPlugin {
 
@@ -36,10 +37,34 @@ namespace WECore::JUCEPlugin {
      * Classes inheriting from this should:
      *   - Call registerParameter to declare parameters
      */
-    class CoreAudioProcessor : public juce::AudioProcessor {
+    class CoreAudioProcessor : public juce::AudioProcessor,
+                               public ParameterUpdateHandler {
     public:
-        CoreAudioProcessor() = default;
+        inline CoreAudioProcessor();
         virtual ~CoreAudioProcessor() = default;
+
+        /**
+         * Sets a given parameter using a value in the internal (non-normalised) range.
+         */
+        /** @{ */
+        inline void setParameterValueInternal(juce::AudioParameterFloat* param, float value);
+        inline void setParameterValueInternal(juce::AudioParameterInt* param, int value);
+        inline void setParameterValueInternal(juce::AudioParameterBool* param, bool value);
+        /** @} */
+
+        /**
+         * Adds a listener that will be notified whenever a parameter is changed.
+         */
+        void addParameterChangeListener(juce::ChangeListener* listener) {
+            _parameterBroadcaster.addChangeListener(listener);
+        }
+
+        /**
+         * Removes a previously added listener.
+         */
+        void removeParameterChangeListener(juce::ChangeListener* listener) {
+            _parameterBroadcaster.removeChangeListener(listener);
+        }
 
         /**
          * Collects the registered parameter values and writes them to XML.
@@ -56,20 +81,6 @@ namespace WECore::JUCEPlugin {
          * Restores parameter values from previously written XML.
          */
         inline void setStateInformation(const void* data, int sizeInBytes) override;
-
-        /**
-         * Adds a listener that will be notified whenever a parameter is changed.
-         */
-        void addParameterChangeListener(juce::ChangeListener* listener) {
-            _parameterBroadcaster.addChangeListener(listener);
-        }
-
-        /**
-         * Removes a previously added listener.
-         */
-        void removeParameterChangeListener(juce::ChangeListener* listener) {
-            _parameterBroadcaster.removeChangeListener(listener);
-        }
 
     protected:
         /**
@@ -166,8 +177,23 @@ namespace WECore::JUCEPlugin {
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreAudioProcessor)
     };
 
-    void CoreAudioProcessor::getStateInformation(juce::MemoryBlock& destData)
-    {
+    CoreAudioProcessor::CoreAudioProcessor() {
+        addParameterChangeListener(&_parameterListener);
+    }
+
+    void CoreAudioProcessor::setParameterValueInternal(juce::AudioParameterFloat* param, float value) {
+        param->setValueNotifyingHost(param->getNormalisableRange().convertTo0to1(value));
+    }
+
+    void CoreAudioProcessor::setParameterValueInternal(juce::AudioParameterInt* param, int value) {
+        param->setValueNotifyingHost(param->getNormalisableRange().convertTo0to1(value));
+    }
+
+    void CoreAudioProcessor::setParameterValueInternal(juce::AudioParameterBool* param, bool value) {
+        param->setValueNotifyingHost(value);
+    }
+
+    void CoreAudioProcessor::getStateInformation(juce::MemoryBlock& destData) {
         // Build the XML
         juce::XmlElement rootElement("Root");
 
@@ -183,8 +209,7 @@ namespace WECore::JUCEPlugin {
         copyXmlToBinary(rootElement, destData);
     }
 
-    void CoreAudioProcessor::setStateInformation(const void* data, int sizeInBytes)
-    {
+    void CoreAudioProcessor::setStateInformation(const void* data, int sizeInBytes) {
         std::unique_ptr<juce::XmlElement> rootElement(getXmlFromBinary(data, sizeInBytes));
 
         // Parse the XML
@@ -213,11 +238,11 @@ namespace WECore::JUCEPlugin {
                                                float defaultValue,
                                                float precision,
                                                std::function<void(float)> setter) {
-        param = new juce::AudioParameterFloat(name, name, {0.0f, 1.0f, precision}, range->InternalToNormalised(defaultValue));
+        param = new juce::AudioParameterFloat(name, name, {static_cast<float>(range->minValue), static_cast<float>(range->maxValue), precision}, defaultValue);
 
         ParameterInterface interface = {name,
-                                        [&param, range]() { return range->NormalisedToInternal(param->get()); },
-                                        [setter, range](float val) { setter(range->InternalToNormalised(val)); }};
+                                        [&param]() { return param->get(); },
+                                        [setter](float val) { setter(val); }};
         _paramsList.push_back(interface);
 
         param->addListener(&_parameterBroadcaster);

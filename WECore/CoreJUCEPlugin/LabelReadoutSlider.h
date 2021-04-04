@@ -86,7 +86,6 @@ namespace WECore::JUCEPlugin {
     public:
         explicit LabelReadoutSlider(const String& componentName) : SliderLabelUpdater(componentName),
                                                                    _targetLabel(nullptr),
-                                                                   _parameter(nullptr),
                                                                    _isRunning(false) {}
 
         virtual ~LabelReadoutSlider() = default;
@@ -94,11 +93,9 @@ namespace WECore::JUCEPlugin {
         /**
          * Tells the slider to start writing to the label on mouse enter events.
          *
-         * Doesn't take ownership of the label or parameter.
+         * Doesn't take ownership of the label.
          */
-        inline void start(Label* targetLabel,
-                          String labelText,
-                          const ParameterDefinition::RangedParameter<T>* parameter);
+        inline void start(Label* targetLabel, String labelText);
 
         /**
          * Tells the slider to stop writing to the label.
@@ -111,7 +108,6 @@ namespace WECore::JUCEPlugin {
     private:
         Label* _targetLabel;
         String _labelText;
-        const ParameterDefinition::RangedParameter<T>* _parameter;
         bool _isRunning;
 
         inline virtual void _updateLabel() override;
@@ -120,12 +116,9 @@ namespace WECore::JUCEPlugin {
     };
 
     template <class T>
-    void LabelReadoutSlider<T>::start(Label* targetLabel,
-                                    String labelText,
-                                    const ParameterDefinition::RangedParameter<T>* parameter) {
+    void LabelReadoutSlider<T>::start(Label* targetLabel, String labelText) {
         _targetLabel = targetLabel;
         _labelText = labelText;
-        _parameter = parameter;
         _isRunning = true;
     }
 
@@ -137,7 +130,7 @@ namespace WECore::JUCEPlugin {
     template <class T>
     void LabelReadoutSlider<T>::_updateLabel() {
         if (_isRunning) {
-            String valueString(_parameter->NormalisedToInternal(getValue()), 2);
+            String valueString(getValue(), 2);
             _targetLabel->setText(valueString, dontSendNotification);
         }
     }
