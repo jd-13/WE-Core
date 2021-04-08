@@ -73,7 +73,7 @@ This produces the binaries:
 ### Docker
 Docker containers are available on Docker hub for clang and gcc which are able to build and run the tests for this project. They are available at the tags:
 * jackd13/audioplugins:clang10
-* jackd13/audioplugins:gcc7
+* jackd13/audioplugins:gcc10
 
 To build a container locally and push to Docker hub (using the clang example):
 
