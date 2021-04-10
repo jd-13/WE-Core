@@ -6,7 +6,7 @@ var searchData=
   ['parameterupdatehandler_838',['ParameterUpdateHandler',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler.html#a49413e2c98a3dc65d44c4cc715d1d8d4',1,'WECore::JUCEPlugin::ParameterUpdateHandler']]],
   ['parameterupdatelistener_839',['ParameterUpdateListener',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler_1_1_parameter_update_listener.html#aa8b9c38af57f6ca7ffeed72cf7efe027',1,'WECore::JUCEPlugin::ParameterUpdateHandler::ParameterUpdateListener']]],
   ['parametervaluechanged_840',['parameterValueChanged',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#a23d77a3f02bd4a4aeb25b814e4f03cf0',1,'WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster']]],
-  ['phase_841',['PHASE',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#adcf1413d2cc991474390aeed82410b95',1,'WECore::Richter::Parameters']]],
+  ['phase_841',['PHASE',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a0acd9377cc329963f319f10e7baf20de',1,'WECore::Richter::Parameters']]],
   ['popupmenuv2_842',['PopupMenuV2',['../class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html#a0b4396859d4c12c187808bca30392cac',1,'WECore::LookAndFeelMixins::PopupMenuV2']]],
   ['postgain_843',['POSTGAIN',['../namespace_w_e_core_1_1_carve_1_1_parameters.html#af6191b6162d4568c955af2535ecd79ae',1,'WECore::Carve::Parameters']]],
   ['pregain_844',['PREGAIN',['../namespace_w_e_core_1_1_carve_1_1_parameters.html#a81e10fa290b7485bcfb1f26b84009a74',1,'WECore::Carve::Parameters']]],

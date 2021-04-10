@@ -15,7 +15,7 @@ var searchData=
   ['params_5fschema_5fversion_359',['PARAMS_SCHEMA_VERSION',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a45249e4c4c1fc4ae2d7af1c7101ca040',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
   ['peak_360',['PEAK',['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters_1_1_mode_parameter.html#aeafd5f0563d3dd13d2f517e8a8966138',1,'WECore::TPTSVF::Parameters::ModeParameter']]],
   ['performancetests_2ecpp_361',['PerformanceTests.cpp',['../_performance_tests_8cpp.html',1,'']]],
-  ['phase_362',['PHASE',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#adcf1413d2cc991474390aeed82410b95',1,'WECore::Richter::Parameters']]],
+  ['phase_362',['PHASE',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a0acd9377cc329963f319f10e7baf20de',1,'WECore::Richter::Parameters']]],
   ['phasesync_5fdefault_363',['PHASESYNC_DEFAULT',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#ad646f623936bcca06c959e83af7d736b',1,'WECore::Richter::Parameters']]],
   ['phasesync_5foff_364',['PHASESYNC_OFF',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a7cfdd76edbd74a8e7ed790df141cc4eb',1,'WECore::Richter::Parameters']]],
   ['phasesync_5fon_365',['PHASESYNC_ON',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a852d9ae55168f85ce45a050b29f44c40',1,'WECore::Richter::Parameters']]],

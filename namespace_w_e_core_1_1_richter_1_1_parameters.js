@@ -5,7 +5,7 @@ var namespace_w_e_core_1_1_richter_1_1_parameters =
     [ "DEPTHMOD", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a3dbdd28bc5c829452a65bd1c9df12a27", null ],
     [ "FREQ", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a10d255bf2b341cd2f9325e0eb61dba42", null ],
     [ "FREQMOD", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a5043008545468fd74eb77027852b643e", null ],
-    [ "PHASE", "namespace_w_e_core_1_1_richter_1_1_parameters.html#adcf1413d2cc991474390aeed82410b95", null ],
+    [ "PHASE", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a0acd9377cc329963f319f10e7baf20de", null ],
     [ "TEMPODENOM", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a695df64bf56c2e11a03c3382bb8baa7f", null ],
     [ "TEMPONUMER", "namespace_w_e_core_1_1_richter_1_1_parameters.html#aeda6e8b39e4f8d22a903d7d59a6656c4", null ],
     [ "INVERT_DEFAULT", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a5f0c8c4b077e625d48ef79f34a31bc99", null ],

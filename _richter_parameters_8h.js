@@ -5,7 +5,7 @@ var _richter_parameters_8h =
     [ "DEPTHMOD", "_richter_parameters_8h.html#a3dbdd28bc5c829452a65bd1c9df12a27", null ],
     [ "FREQ", "_richter_parameters_8h.html#a10d255bf2b341cd2f9325e0eb61dba42", null ],
     [ "FREQMOD", "_richter_parameters_8h.html#a5043008545468fd74eb77027852b643e", null ],
-    [ "PHASE", "_richter_parameters_8h.html#adcf1413d2cc991474390aeed82410b95", null ],
+    [ "PHASE", "_richter_parameters_8h.html#a0acd9377cc329963f319f10e7baf20de", null ],
     [ "TEMPODENOM", "_richter_parameters_8h.html#a695df64bf56c2e11a03c3382bb8baa7f", null ],
     [ "TEMPONUMER", "_richter_parameters_8h.html#aeda6e8b39e4f8d22a903d7d59a6656c4", null ],
     [ "INVERT_DEFAULT", "_richter_parameters_8h.html#a5f0c8c4b077e625d48ef79f34a31bc99", null ],

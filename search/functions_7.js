@@ -25,7 +25,7 @@ var searchData=
   ['getkneewidth_781',['getKneeWidth',['../class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a2ac21dc1533898fa6dd284d21f692fbb',1,'WECore::SimpleCompressor::SimpleCompressor']]],
   ['getlastoutput_782',['getLastOutput',['../class_w_e_core_1_1_modulation_source.html#a19334b3157152f274d95581e476bbba9',1,'WECore::ModulationSource']]],
   ['getlowcutoff_783',['getLowCutoff',['../class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#add8641a1aa30c39a6eb509f02376dd19',1,'WECore::MONSTR::MONSTRBand']]],
-  ['getmanualphase_784',['getManualPhase',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ad5c4d09f49d9d73215c908155d51ea07',1,'WECore::Richter::RichterLFO']]],
+  ['getmanualphase_784',['getManualPhase',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a972b3409ed747792d67c4a8321fc0525',1,'WECore::Richter::RichterLFO']]],
   ['getmix_785',['getMix',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a7632b8c43643fbb87b1deaed57c6d423',1,'WECore::Songbird::SongbirdFilterModule']]],
   ['getmode_786',['getMode',['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a99046ef470f4cc16e95558b9742657d0',1,'WECore::TPTSVF::TPTSVFilter::getMode()'],['../class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html#a0e2cb26f3ae8a42fb1980a0311fba869',1,'WECore::Carve::CarveDSPUnit::getMode()']]],
   ['getmodmode_787',['getModMode',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ad10f64d1886b7c44dc88b4fd9bf9d7fc',1,'WECore::Songbird::SongbirdFilterModule']]],
