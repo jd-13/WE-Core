@@ -30,7 +30,7 @@ namespace WECore::Richter {
     public:
         WaveViewer() : _waveArrayPointer(nullptr), _depth(0), _phaseShift(0), _isInverted(false) {}
 
-        inline void setWave(const double* pointer, double depth, int phaseShift, bool isInverted);
+        inline void setWave(const double* pointer, double depth, double phaseShift, bool isInverted);
 
         inline virtual void paint(Graphics& g);
 
@@ -44,11 +44,11 @@ namespace WECore::Richter {
     private:
         const double* _waveArrayPointer;
         double _depth;
-        int _phaseShift;
+        double _phaseShift;
         bool _isInverted;
     };
 
-    void WaveViewer::setWave(const double* pointer, double depth, int phaseShift, bool isInverted) {
+    void WaveViewer::setWave(const double* pointer, double depth, double phaseShift, bool isInverted) {
         _waveArrayPointer = pointer;
         _depth = depth;
         _phaseShift = phaseShift;
@@ -68,8 +68,11 @@ namespace WECore::Richter {
 
             for (size_t idx {0}; idx < NUM_SAMPLES; idx++) {
                 // Calculate the index of the sample accounting for downsampling and phase shift
+                const int phaseIndexOffset {
+                    static_cast<int>((_phaseShift / Parameters::PHASE.maxValue) * Wavetables::SIZE)
+                };
                 const int sampleIdx {(
-                    (static_cast<int>(idx * INCREMENT + _phaseShift) % Wavetables::SIZE)
+                    (static_cast<int>(idx * INCREMENT + phaseIndexOffset) % Wavetables::SIZE)
                 )};
 
                 // Get the sample for this value

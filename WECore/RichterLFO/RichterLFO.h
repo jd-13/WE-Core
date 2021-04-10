@@ -70,7 +70,7 @@ namespace WECore::Richter {
         double getFreqMod() { return _freqMod; }
         double getDepth() { return _rawDepth; }
         double getDepthMod() { return _depthMod; }
-        int getManualPhase() const { return _manualPhase; }
+        double getManualPhase() const { return _manualPhase; }
         /** @} */
 
         /** @name Setter Methods */
@@ -86,7 +86,7 @@ namespace WECore::Richter {
         void setFreqMod(double val) { _freqMod = Parameters::FREQMOD.BoundsCheck(val); }
         void setDepth(double val) { _rawDepth = Parameters::DEPTH.BoundsCheck(val); }
         void setDepthMod(double val) { _depthMod = Parameters::DEPTHMOD.BoundsCheck(val); }
-        void setManualPhase(int val) { _manualPhase = static_cast<int>(Parameters::PHASE.BoundsCheck(val)); }
+        void setManualPhase(double val) { _manualPhase = Parameters::PHASE.BoundsCheck(val); }
         void setSampleRate(double val) { _sampleRate = val; }
 
         void setModulationSource(std::shared_ptr<ModulationSource> val) { _modulationSource = val; }
@@ -106,8 +106,7 @@ namespace WECore::Richter {
         RichterLFO(RichterLFO&) = delete;
 
     private:
-        int     _manualPhase,
-                _wave,
+        int     _wave,
                 _indexOffset;
 
         bool    _bypassSwitch,
@@ -122,6 +121,7 @@ namespace WECore::Richter {
                 _freqMod,
                 _rawDepth,
                 _depthMod,
+                _manualPhase,
                 _sampleRate,
                 _bpm,
                 _wavetablePosition;
@@ -178,8 +178,7 @@ namespace WECore::Richter {
 
     };
 
-    RichterLFO::RichterLFO() : _manualPhase(static_cast<int>(Parameters::PHASE.defaultValue)),
-                               _wave(Parameters::WAVE.defaultValue),
+    RichterLFO::RichterLFO() : _wave(Parameters::WAVE.defaultValue),
                                _indexOffset(0),
                                _bypassSwitch(Parameters::LFOSWITCH_DEFAULT),
                                _tempoSyncSwitch(Parameters::TEMPOSYNC_DEFAULT),
@@ -192,6 +191,7 @@ namespace WECore::Richter {
                                _freqMod(Parameters::FREQMOD.defaultValue),
                                _rawDepth(Parameters::DEPTH.defaultValue),
                                _depthMod(Parameters::DEPTHMOD.defaultValue),
+                               _manualPhase(Parameters::PHASE.defaultValue),
                                _sampleRate(44100),
                                _bpm(0),
                                _wavetablePosition(0),
@@ -240,7 +240,10 @@ namespace WECore::Richter {
         }
 
         if (_phaseSyncSwitch) {
-            _indexOffset = seekIndexOffset + _manualPhase;
+            const int phaseIndexOffset {
+                static_cast<int>((_manualPhase / Parameters::PHASE.maxValue) * Wavetables::SIZE)
+            };
+            _indexOffset = seekIndexOffset + phaseIndexOffset;
         } else {
             _indexOffset = 0;
         }
