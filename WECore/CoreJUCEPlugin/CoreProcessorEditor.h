@@ -45,9 +45,6 @@ class CoreProcessorEditor : public juce::AudioProcessorEditor,
         }
 
     protected:
-
-        juce::SharedResourcePointer<juce::TooltipWindow> _tooltipWindow;
-
         CoreProcessorEditor(CoreAudioProcessor& ownerFilter)
                 : AudioProcessorEditor(ownerFilter) {
             dynamic_cast<CoreAudioProcessor&>(processor).
@@ -62,7 +59,6 @@ class CoreProcessorEditor : public juce::AudioProcessorEditor,
          * one is closed the other will stop applying defaultLookAndFeel.
          */
         void _assignLookAndFeelToAllChildren(juce::LookAndFeel& defaultLookAndFeel) {
-            _tooltipWindow->setLookAndFeel(&defaultLookAndFeel);
             for (int iii {0}; iii < getNumChildComponents(); iii++) {
                 getChildComponent(iii)->setLookAndFeel(&defaultLookAndFeel);
             }
@@ -75,8 +71,6 @@ class CoreProcessorEditor : public juce::AudioProcessorEditor,
          * editor's destructor.
          */
         void _removeLookAndFeelFromAllChildren() {
-            _tooltipWindow->setLookAndFeel(nullptr);
-
             for (int iii {0}; iii < getNumChildComponents(); iii++) {
                 getChildComponent(iii)->setLookAndFeel(nullptr);
             }
