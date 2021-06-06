@@ -62,6 +62,9 @@ var hierarchy =
     ] ],
     [ "WECore::MONSTR::MONSTRBand< SampleType >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", null ],
     [ "WECore::MONSTR::MONSTRCrossover< SampleType >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", null ],
+    [ "juce::MouseListener", null, [
+      [ "WECore::JUCEPlugin::TooltipLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html", null ]
+    ] ],
     [ "WECore::Carve::NoiseFilter< T >", "class_w_e_core_1_1_carve_1_1_noise_filter.html", null ],
     [ "WECore::JUCEPlugin::CoreAudioProcessor::ParameterInterface", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html", null ],
     [ "WECore::JUCEPlugin::ParameterUpdateHandler", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler.html", [

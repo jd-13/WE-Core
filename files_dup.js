@@ -115,6 +115,9 @@ var files_dup =
     [ "MONSTRFilters/Tests/TestData.h", "_m_o_n_s_t_r_filters_2_tests_2_test_data_8h.html", "_m_o_n_s_t_r_filters_2_tests_2_test_data_8h" ],
     [ "SongbirdFilters/Tests/TestData.h", "_songbird_filters_2_tests_2_test_data_8h.html", "_songbird_filters_2_tests_2_test_data_8h" ],
     [ "TestUtils.h", "_test_utils_8h.html", "_test_utils_8h" ],
+    [ "TooltipLabelUpdater.h", "_tooltip_label_updater_8h.html", [
+      [ "TooltipLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater" ]
+    ] ],
     [ "TPTSVFilter.h", "_t_p_t_s_v_filter_8h.html", [
       [ "TPTSVFilter", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter" ]
     ] ],

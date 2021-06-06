@@ -24,7 +24,8 @@ var annotated_dup =
         [ "CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor" ],
         [ "SliderLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater" ],
         [ "LabelReadoutSlider", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider" ],
-        [ "ParameterUpdateHandler", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler" ]
+        [ "ParameterUpdateHandler", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler" ],
+        [ "TooltipLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater" ]
       ] ],
       [ "LookAndFeelMixins", "namespace_w_e_core_1_1_look_and_feel_mixins.html", [
         [ "ButtonV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2" ],

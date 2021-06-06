@@ -84,7 +84,6 @@ $(document).ready(function(){initNavTree('class_w_e_core_1_1_j_u_c_e_plugin_1_1_
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">WECore::JUCEPlugin::CoreProcessorEditor Class Reference</div>  </div>
@@ -124,10 +123,8 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a015826da3b7c0562104d9092ccd0826b inherit pro_methods_class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler.html#a015826da3b7c0562104d9092ccd0826b">_onParameterUpdate</a> ()=0</td></tr>
 <tr class="separator:a015826da3b7c0562104d9092ccd0826b inherit pro_methods_class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a802736c32b0439e023cbda6bf2cb6e08"><td class="memItemLeft" align="right" valign="top">juce::SharedResourcePointer&lt; juce::TooltipWindow &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html#a802736c32b0439e023cbda6bf2cb6e08">_tooltipWindow</a></td></tr>
-<tr class="separator:a802736c32b0439e023cbda6bf2cb6e08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler.html">WECore::JUCEPlugin::ParameterUpdateHandler</a></td></tr>
 <tr class="memitem:a3a78f93aae3f02a14b6739e0a73a6a42 inherit pro_attribs_class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler_1_1_parameter_update_listener.html">ParameterUpdateListener</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler.html#a3a78f93aae3f02a14b6739e0a73a6a42">_parameterListener</a></td></tr>
 <tr class="separator:a3a78f93aae3f02a14b6739e0a73a6a42 inherit pro_attribs_class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,7 +190,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_processor_editor_8h_source.html#l00051">51</a> of file <a class="el" href="_core_processor_editor_8h_source.html">CoreProcessorEditor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_processor_editor_8h_source.html#l00048">48</a> of file <a class="el" href="_core_processor_editor_8h_source.html">CoreProcessorEditor.h</a>.</p>
 
 <p class="reference">References <a class="el" href="_parameter_update_handler_8h_source.html#l00053">WECore::JUCEPlugin::ParameterUpdateHandler::_parameterListener</a>.</p>
 
@@ -226,9 +223,7 @@ Protected Attributes</h2></td></tr>
 <p>Sets the look and feel for all child components.</p>
 <p>Previously LookAndFeel::setDefaultLookAndFeel(&amp;defaultLookAndFeel); was used but this resulted in a bug where upon opening two instances of the same plugin simultaneously, when one is closed the other will stop applying defaultLookAndFeel. </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_processor_editor_8h_source.html#l00064">64</a> of file <a class="el" href="_core_processor_editor_8h_source.html">CoreProcessorEditor.h</a>.</p>
-
-<p class="reference">References <a class="el" href="_core_processor_editor_8h_source.html#l00049">_tooltipWindow</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_processor_editor_8h_source.html#l00061">61</a> of file <a class="el" href="_core_processor_editor_8h_source.html">CoreProcessorEditor.h</a>.</p>
 
 </div>
 </div>
@@ -257,36 +252,7 @@ Protected Attributes</h2></td></tr>
 <p>Sets the LookAndFeel for all child components to nullptr.</p>
 <p>Must be called before the LookAndFeel is deallocated, normally this is in the derived editor's destructor. </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_processor_editor_8h_source.html#l00077">77</a> of file <a class="el" href="_core_processor_editor_8h_source.html">CoreProcessorEditor.h</a>.</p>
-
-<p class="reference">References <a class="el" href="_core_processor_editor_8h_source.html#l00049">_tooltipWindow</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a802736c32b0439e023cbda6bf2cb6e08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a802736c32b0439e023cbda6bf2cb6e08">&#9670;&nbsp;</a></span>_tooltipWindow</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">juce::SharedResourcePointer&lt;juce::TooltipWindow&gt; WECore::JUCEPlugin::CoreProcessorEditor::_tooltipWindow</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_core_processor_editor_8h_source.html#l00049">49</a> of file <a class="el" href="_core_processor_editor_8h_source.html">CoreProcessorEditor.h</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="_core_processor_editor_8h_source.html#l00064">_assignLookAndFeelToAllChildren()</a>, and <a class="el" href="_core_processor_editor_8h_source.html#l00077">_removeLookAndFeelFromAllChildren()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_processor_editor_8h_source.html#l00073">73</a> of file <a class="el" href="_core_processor_editor_8h_source.html">CoreProcessorEditor.h</a>.</p>
 
 </div>
 </div>

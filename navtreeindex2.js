@@ -1,5 +1,14 @@
 var NAVTREEINDEX2 =
 {
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a78b9fca448e27869aa3437ce7f534721":[1,0,1,4,1,9],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a78e728c46bb96a18fba3f2da82a3a2de":[1,0,1,4,1,5],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a8779e079987e108a35f80b8f2f8c9298":[1,0,1,4,1,3],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a941927fbe68e4ae02e2ecf447a1d72fe":[1,0,1,4,1,20],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#aa04d61aaa0f1e646d7d7a805568f1e8c":[1,0,1,4,1,1],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#ab098b812962876a52d008615ca2cc118":[1,0,1,4,1,16],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#ab31d154361f0d91ef9ca11f0be0fc8f3":[1,0,1,4,1,18],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#ac23625c6a24afa61108cb2c6c9ee399f":[1,0,1,4,1,19],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#ac520655fdc9aaf5fc98e2311c7c887ab":[1,0,1,4,1,8],
 "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#ad48ba3fd718615b4c5537fc72ead7d47":[1,0,1,4,1,22],
 "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#add8641a1aa30c39a6eb509f02376dd19":[1,0,1,4,1,6],
 "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#aedfbe9514db416c1ef67567e1fa00395":[1,0,1,4,1,7],
@@ -240,14 +249,5 @@ var NAVTREEINDEX2 =
 "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html#af1b818c5f8882edeeb64edd4e93bd26b":[1,0,1,7,3,2],
 "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html":[1,0,1,8,0],
 "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#a0192c8a44b8d6669448dbb6a7e177a45":[1,0,1,8,0,2],
-"class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#a04c7d8f54235284fed37b40663fa674b":[1,0,1,8,0,3],
-"class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#a6e07c45b9ad34c89ea9666b1a93ef18e":[1,0,1,8,0,4],
-"class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#ab82b78cbc31dc214cd051d0d6dd39211":[1,0,1,8,0,0],
-"class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#ad37be2e0e0ceef9f2566d8bdc52b02d9":[1,0,1,8,0,5],
-"class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#aff5e0fa66551da24375bd721688872fa":[1,0,1,8,0,1],
-"class_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters_1_1_mode_parameter.html":[1,0,1,9,0,0],
-"class_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters_1_1_mode_parameter.html#a500f641292d78b1784f5c2e83ad96c29":[1,0,1,9,0,0,1],
-"class_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters_1_1_mode_parameter.html#a9d1761fd2deeb34ce5286ee0d97a0190":[1,0,1,9,0,0,2],
-"class_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters_1_1_mode_parameter.html#ade38321d9064bff1fe5fe8df18cdf090":[1,0,1,9,0,0,0],
-"class_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters_1_1_mode_parameter.html#aeafd5f0563d3dd13d2f517e8a8966138":[1,0,1,9,0,0,4]
+"class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#a04c7d8f54235284fed37b40663fa674b":[1,0,1,8,0,3]
 };
