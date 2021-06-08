@@ -116,11 +116,13 @@ namespace WECore::MONSTR {
         inline void setSampleRate(double newSampleRate);
 
         /**
-         * Sets the number of bands without performing any logic to configure the new bands.
+         * Sets the number of bands without performing any logic to configure the crossover
+         * frequencies of the new bands.
          *
-         * Only use this if you're going to manually configure the new bands.
+         * Only use this if you're going to manually set the frequencies of the new bands (ie. when
+         * restoring a saved state by setting the number of bands, then the crossover frequencies).
          */
-        void setNumBands(int val) { _numBands = Parameters::NUM_BANDS.BoundsCheck(val); }
+        inline void setNumBands(int val);
 
         /** @} */
 
@@ -320,6 +322,22 @@ namespace WECore::MONSTR {
     void MONSTRCrossover<SampleType>::setSampleRate(double newSampleRate) {
         for (BandWrapper band : _bands) {
             band.band.setSampleRate(newSampleRate);
+        }
+    }
+
+    template <typename SampleType>
+    void MONSTRCrossover<SampleType>::setNumBands(int val) {
+        _numBands = Parameters::NUM_BANDS.BoundsCheck(val);
+
+        // Make sure the bands are set to the correct types
+        for (size_t bandIdx {0}; bandIdx < _numBands; bandIdx++) {
+            if (bandIdx == 0) {
+                _bands[bandIdx].band.setBandType(BandType::LOWER);
+            } else if (bandIdx == _numBands - 1) {
+                _bands[bandIdx].band.setBandType(BandType::UPPER);
+            } else {
+                _bands[bandIdx].band.setBandType(BandType::MIDDLE);
+            }
         }
     }
 
