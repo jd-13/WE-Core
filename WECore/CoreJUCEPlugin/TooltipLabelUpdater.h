@@ -59,9 +59,7 @@ namespace WECore::JUCEPlugin {
 
     void TooltipLabelUpdater::mouseEnter(const juce::MouseEvent &event) {
         if (_targetLabel != nullptr) {
-            juce::Component* component = juce::Desktop::getInstance().getMainMouseSource().getComponentUnderMouse();
-
-            TooltipClient* tooltipClient = dynamic_cast<TooltipClient*>(component);
+            TooltipClient* tooltipClient = dynamic_cast<TooltipClient*>(event.eventComponent);
 
             if (tooltipClient != nullptr) {
                 _targetLabel->setText(tooltipClient->getTooltip(), dontSendNotification);
