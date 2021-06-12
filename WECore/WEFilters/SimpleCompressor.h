@@ -190,7 +190,7 @@ namespace WECore::SimpleCompressor {
 
     template <typename SampleType>
     void SimpleCompressor<SampleType>::setSampleRate(double val) {
-        if (!compareFloatsEqual(_sampleRate, val)) {
+        if (!WECore::CoreMath::compareFloatsEqual(_sampleRate, val)) {
             _sampleRate = val;
 
             _attackCoef = _calcCoef(_attackMs);
