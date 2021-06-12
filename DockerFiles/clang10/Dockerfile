@@ -1,8 +1,4 @@
-FROM ubuntu:focal
-
-# Envs
-ENV PATH /opt/llvm/bin:$PATH
-ENV CXX clang++-10
+FROM ubuntu:hirsute
 
 # Prevents "Configuring tzdata" dialog from stalling build
 ENV DEBIAN_FRONTEND=noninteractive
@@ -21,17 +17,15 @@ ENV CATCH_PATH /home/catch/
 # Clang
 RUN apt-get install -y software-properties-common
 RUN wget -O - http://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-RUN add-apt-repository -y "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-10 main"
+RUN add-apt-repository -y "deb http://apt.llvm.org/$(lsb_release -c -s)/ llvm-toolchain-$(lsb_release -c -s)-10 main"
 RUN apt-get update
-RUN apt-get install -y clang-10
+RUN apt-get install -y clang-10 clang-tidy
+
+ENV PATH /opt/llvm/bin:$PATH
+ENV CXX clang++-10
 
 # Valgrind
-RUN apt-get install -y autotools-dev automake
-RUN wget https://sourceware.org/pub/valgrind/valgrind-3.16.1.tar.bz2 -P "/home"
-RUN mkdir -p /home/valgrind && tar -xf /home/valgrind-3.16.1.tar.bz2 -C /home/valgrind
-RUN mv /home/valgrind/valgrind-3.16.1/* /home/valgrind && rm -rf /home/valgrind/valgrind-3.16.1
-RUN cd /home/valgrind && ./autogen.sh && ./configure && make && make install
-ENV VALGRIND_PATH /home/valgrind
+RUN apt-get install -y valgrind
 
 # VST SDK
 RUN wget http://www.steinberg.net/sdk_downloads/vstsdk367_03_03_2017_build_352.zip

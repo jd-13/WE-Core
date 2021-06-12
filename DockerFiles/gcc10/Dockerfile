@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:hirsute
 
 # Prevents "Configuring tzdata" dialog from stalling build
 ENV DEBIAN_FRONTEND=noninteractive
@@ -26,12 +26,7 @@ ENV COVERAGE_COMMAND /usr/bin/gcov-10
 ENV COVERAGE_FLAGS --coverage
 
 # Valgrind
-RUN apt-get install -y autotools-dev automake
-RUN wget https://sourceware.org/pub/valgrind/valgrind-3.16.1.tar.bz2 -P "/home"
-RUN mkdir -p /home/valgrind && tar -xf /home/valgrind-3.16.1.tar.bz2 -C /home/valgrind
-RUN mv /home/valgrind/valgrind-3.16.1/* /home/valgrind && rm -rf /home/valgrind/valgrind-3.16.1
-RUN cd /home/valgrind && ./autogen.sh && ./configure && make && make install
-ENV VALGRIND_PATH /home/valgrind
+RUN apt-get install -y valgrind
 
 # VST SDK
 RUN wget http://www.steinberg.net/sdk_downloads/vstsdk367_03_03_2017_build_352.zip

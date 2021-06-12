@@ -3,8 +3,11 @@
 set -e
 
 GENERATE_COVERAGE=false
+RUN_CLANG_TIDY=true
+
 if [ "$CXX" = "/usr/bin/g++-10" ]; then
     GENERATE_COVERAGE=true
+    RUN_CLANG_TIDY=false
 fi
 
 echo "=== Compiler is $CXX ==="
@@ -21,11 +24,11 @@ export WECORE_SRC="$WECORE_HOME/WECore"
 echo "=== Starting build ==="
 
 cd $WECORE_HOME
-mkdir build && cd build
+mkdir -p build && cd build
 cmake .. && make
 
 echo "=== Starting tests ==="
-$VALGRIND_PATH/coregrind/valgrind --tool=callgrind ./WECoreTest
+valgrind --tool=callgrind ./WECoreTest
 
 if [ $GENERATE_COVERAGE = true ]; then
     echo "=== Generating coverage ==="
@@ -38,5 +41,10 @@ if [ $GENERATE_COVERAGE = true ]; then
 fi
 
 echo "=== Renaming callgrind output ==="
-
 mv callgrind.out.* callgrind.out.$(git log --pretty=format:'%h' -n 1)
+
+if [ $RUN_CLANG_TIDY = true ]; then
+    echo "=== Running clang-tidy ==="
+    INCLUDES=-I$WECORE_SRC -I$CATCH_PATH -I$WECORE_HOME/DSPFilters/shared/DSPFilters/include
+    clang-tidy -header-filter=.* $(find $WECORE_SRC -name *.cpp) -- $INCLUDES
+fi
