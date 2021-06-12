@@ -80,3 +80,7 @@ To build a container locally and push to Docker hub (using the clang example):
     cd DockerFiles/clang10
     docker build --tag <user id>/audioplugins:clang10 .
     docker push <user id>/audioplugins:clang10
+
+To run locally in a Docker container:
+
+    docker run --rm -v $(pwd):/home/WECore -it jackd13/audioplugins:clang10
