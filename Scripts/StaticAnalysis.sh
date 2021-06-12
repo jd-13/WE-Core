@@ -9,7 +9,7 @@ export WECORE_SRC="$WECORE_HOME/WECore"
 cd $WECORE_HOME
 
 echo "=== Running clang-tidy ==="
-clang-tidy -header-filter=.* \
+clang-tidy -header-filter=.*WECore.* \
     -checks=bugprone-*,clang-analyzer-*,-clang-diagnostic-c++17-extensions,modernize-*,-modernize-use-trailing-return-type,performance-* \
     $(find $WECORE_SRC -name *.cpp) -- \
     -I$WECORE_SRC \
