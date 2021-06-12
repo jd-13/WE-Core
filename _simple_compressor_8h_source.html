@@ -197,7 +197,7 @@ $(document).ready(function(){initNavTree('_simple_compressor_8h_source.html','')
 <div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> SampleType&gt;</div>
 <div class="line"><a name="l00192"></a><span class="lineno"><a class="line" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#a2b702a4c805af66eb4d22941d98d639f">  192</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html">SimpleCompressor&lt;SampleType&gt;::setSampleRate</a>(<span class="keywordtype">double</span> val) {</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="namespace_w_e_core_1_1_core_math.html#a503b862f6a4bb5d20c4e5f24e1292af8">compareFloatsEqual</a>(_sampleRate, val)) {</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;        <span class="keywordflow">if</span> (!<a class="code" href="namespace_w_e_core_1_1_core_math.html#a503b862f6a4bb5d20c4e5f24e1292af8">WECore::CoreMath::compareFloatsEqual</a>(_sampleRate, val)) {</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;            _sampleRate = val;</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
 <div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;            _attackCoef = _calcCoef(_attackMs);</div>
