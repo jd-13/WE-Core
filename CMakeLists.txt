@@ -47,8 +47,10 @@ add_executable(WECoreTest ${CMAKE_CURRENT_LIST_DIR}/WECore/Tests/catchMain.cpp
                           ${CMAKE_CURRENT_LIST_DIR}/WECore/RichterLFO/Tests/RichterLFOPairTests.cpp
                           ${CMAKE_CURRENT_LIST_DIR}/WECore/SongbirdFilters/Tests/SongbirdFilterModuleTests.cpp
                           ${CMAKE_CURRENT_LIST_DIR}/WECore/WEFilters/Tests/AREnvelopeFollowerTests.cpp
-                          ${CMAKE_CURRENT_LIST_DIR}/WECore/WEFilters/Tests/TPTSVFilterTests.cpp
-                          ${CMAKE_CURRENT_LIST_DIR}/WECore/WEFilters/Tests/StereoWidthProcessorTests.cpp)
+                          ${CMAKE_CURRENT_LIST_DIR}/WECore/WEFilters/Tests/SimpleCompressorTests.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/WECore/WEFilters/Tests/StereoWidthProcessorTests.cpp
+                          ${CMAKE_CURRENT_LIST_DIR}/WECore/WEFilters/Tests/TPTSVFilterTests.cpp)
+
 
 add_executable(WECoreTestPerf ${CMAKE_CURRENT_LIST_DIR}/WECore/Tests/catchMain.cpp
                               ${CMAKE_CURRENT_LIST_DIR}/WECore/Tests/PerformanceTests.cpp)
