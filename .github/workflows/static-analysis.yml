@@ -11,9 +11,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: RunBuild
+      - name: RunStaticAnalysis
         run: Scripts/StaticAnalysis.sh
       - uses: actions/upload-artifact@v2
+        if: failure()
         with:
           name: clang-tidy
           path: clang-tidy.txt
