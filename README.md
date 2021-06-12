@@ -1,4 +1,5 @@
-[![CI Main](https://github.com/jd-13/WE-Core/workflows/CI%20Main/badge.svg)](https://github.com/jd-13/WE-Core/actions?query=workflow%3A%22CI+Main%22)
+[![Build and Test](https://github.com/jd-13/WE-Core/actions/workflows/build-and-test.yml/badge.svg?branch=master)](https://github.com/jd-13/WE-Core/actions/workflows/build-and-test.yml)
+[![Static Analysis](https://github.com/jd-13/WE-Core/actions/workflows/static-analysis.yml/badge.svg?branch=master)](https://github.com/jd-13/WE-Core/actions/workflows/static-analysis.yml)
 [![codecov](https://codecov.io/gh/jd-13/WE-Core/branch/master/graph/badge.svg)](https://codecov.io/gh/jd-13/WE-Core)
 [![](https://img.shields.io/badge/Docs-Over_here!-blueviolet)](https://jd-13.github.io/WE-Core/)
 ![](https://img.shields.io/badge/C%2B%2B-17-informational)
