@@ -24,15 +24,13 @@ cd $WECORE_HOME
 mkdir build && cd build
 cmake .. && make
 
-if [ $GENERATE_COVERAGE = true ]; then
-    $WECORE_HOME/Scripts/get_code_cov.sh;
-fi
-
 echo "=== Starting tests ==="
-
 $VALGRIND_PATH/coregrind/valgrind --tool=callgrind ./WECoreTest
 
 if [ $GENERATE_COVERAGE = true ]; then
+    echo "=== Generating coverage ==="
+    $WECORE_HOME/Scripts/get_code_cov.sh;
+
     echo "=== Uploading coverage report ==="
     curl -Os https://uploader.codecov.io/latest/codecov-linux
     chmod +x codecov-linux
