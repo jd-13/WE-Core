@@ -1,0 +1,19 @@
+name: Static Analysis
+
+on: [push, pull_request]
+
+jobs:
+  StaticAnalysis:
+    runs-on: ubuntu-latest
+    container: jackd13/audioplugins:clang10
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+      - name: RunBuild
+        run: Scripts/StaticAnalysis.sh
+      - uses: actions/upload-artifact@v2
+        with:
+          name: clang-tidy
+          path: clang-tidy.txt

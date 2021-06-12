@@ -1,4 +1,4 @@
-name: CI Main
+name: Build and Test
 
 on: [push, pull_request]
 
@@ -12,7 +12,7 @@ jobs:
         with:
           submodules: true
       - name: RunBuild
-        run: Scripts/CIBuild.sh
+        run: Scripts/BuildAndTest.sh
       - uses: actions/upload-artifact@v2
         with:
           name: callgrind-clang
@@ -27,7 +27,7 @@ jobs:
         with:
           submodules: true
       - name: RunBuild
-        run: Scripts/CIBuild.sh
+        run: Scripts/BuildAndTest.sh
       - uses: actions/upload-artifact@v2
         with:
           name: callgrind-gcc

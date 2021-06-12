@@ -3,11 +3,9 @@
 set -e
 
 GENERATE_COVERAGE=false
-RUN_CLANG_TIDY=true
 
 if [ "$CXX" = "/usr/bin/g++-10" ]; then
     GENERATE_COVERAGE=true
-    RUN_CLANG_TIDY=false
 fi
 
 echo "=== Compiler is $CXX ==="
@@ -42,11 +40,3 @@ fi
 
 echo "=== Renaming callgrind output ==="
 mv callgrind.out.* callgrind.out.$(git log --pretty=format:'%h' -n 1)
-
-if [ $RUN_CLANG_TIDY = true ]; then
-    echo "=== Running clang-tidy ==="
-    clang-tidy -header-filter=.* $(find $WECORE_SRC -name *.cpp) -- \
-        -I$WECORE_SRC \
-        -I$CATCH_PATH \
-        -I$WECORE_HOME/DSPFilters/shared/DSPFilters/include
-fi
