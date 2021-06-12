@@ -10,7 +10,7 @@ cd $WECORE_HOME
 
 echo "=== Running clang-tidy ==="
 clang-tidy -header-filter=.* \
-    -checks=clang-analyzer-*,-clang-diagnostic-c++17-extensions,performance-* \
+    -checks=bugprone-*,clang-analyzer-*,-clang-diagnostic-c++17-extensions,modernize-*,-modernize-use-trailing-return-type,performance-* \
     $(find $WECORE_SRC -name *.cpp) -- \
     -I$WECORE_SRC \
     -I$CATCH_PATH \
