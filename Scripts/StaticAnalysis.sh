@@ -2,8 +2,6 @@
 
 set -e
 
-echo "=== Compiler is $CXX ==="
-
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" > /dev/null 2>&1 && pwd )"
 export WECORE_HOME="$(cd $SCRIPT_DIR/.. > /dev/null 2>&1 && pwd)"
 export WECORE_SRC="$WECORE_HOME/WECore"
