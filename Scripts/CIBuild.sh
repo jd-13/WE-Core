@@ -34,7 +34,9 @@ $VALGRIND_PATH/coregrind/valgrind --tool=callgrind ./WECoreTest
 
 if [ $GENERATE_COVERAGE = true ]; then
     echo "=== Uploading coverage report ==="
-    bash <(curl -s https://codecov.io/bash);
+    curl -Os https://uploader.codecov.io/latest/codecov-linux
+    chmod +x codecov-linux
+    ./codecov-linux
 fi
 
 echo "=== Renaming callgrind output ==="
