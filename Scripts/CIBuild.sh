@@ -45,6 +45,8 @@ mv callgrind.out.* callgrind.out.$(git log --pretty=format:'%h' -n 1)
 
 if [ $RUN_CLANG_TIDY = true ]; then
     echo "=== Running clang-tidy ==="
-    INCLUDES=-I$WECORE_SRC -I$CATCH_PATH -I$WECORE_HOME/DSPFilters/shared/DSPFilters/include
-    clang-tidy -header-filter=.* $(find $WECORE_SRC -name *.cpp) -- $INCLUDES
+    clang-tidy -header-filter=.* $(find $WECORE_SRC -name *.cpp) -- \
+        -I$WECORE_SRC \
+        -I$CATCH_PATH \
+        -I$WECORE_HOME/DSPFilters/shared/DSPFilters/include
 fi
