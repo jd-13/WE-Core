@@ -5,3 +5,4 @@ doxygen/doxygen*
 build/*
 .vscode/*
 .DS_Store
+clang-tidy.txt
