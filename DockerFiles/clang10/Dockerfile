@@ -1,4 +1,4 @@
-FROM ubuntu:hirsute
+FROM ubuntu:focal
 
 # Prevents "Configuring tzdata" dialog from stalling build
 ENV DEBIAN_FRONTEND=noninteractive
