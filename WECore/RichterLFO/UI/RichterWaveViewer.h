@@ -26,13 +26,13 @@
 
 namespace WECore::Richter {
 
-    class WaveViewer : public Component {
+    class WaveViewer : public juce::Component {
     public:
         WaveViewer() : _waveArrayPointer(nullptr), _depth(0), _phaseShift(0), _isInverted(false) {}
 
         inline void setWave(const double* pointer, double depth, double phaseShift, bool isInverted);
 
-        inline virtual void paint(Graphics& g);
+        inline virtual void paint(juce::Graphics& g);
 
         void stop() { _waveArrayPointer = nullptr; }
 
@@ -55,7 +55,7 @@ namespace WECore::Richter {
         _isInverted = isInverted;
     }
 
-    void WaveViewer::paint(Graphics &g) {
+    void WaveViewer::paint(juce::Graphics &g) {
 
         // Down sample the wave array
         constexpr int NUM_SAMPLES {25};
@@ -64,7 +64,7 @@ namespace WECore::Richter {
         const float INCREMENT {static_cast<float>(Wavetables::SIZE) / NUM_SAMPLES};
 
         if (_waveArrayPointer != nullptr) {
-            Path p;
+            juce::Path p;
 
             for (size_t idx {0}; idx < NUM_SAMPLES; idx++) {
                 // Calculate the index of the sample accounting for downsampling and phase shift
@@ -91,7 +91,7 @@ namespace WECore::Richter {
             }
 
             g.setColour(findColour(highlightColourId));
-            g.strokePath(p, PathStrokeType(3.0f));
+            g.strokePath(p, juce::PathStrokeType(3.0f));
         }
     }
 }

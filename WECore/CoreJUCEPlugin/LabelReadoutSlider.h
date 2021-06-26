@@ -32,35 +32,35 @@ namespace WECore::JUCEPlugin {
     /**
      * Handles mouse events that may indicate that the Slider value has changed.
      */
-    class SliderLabelUpdater : public Slider {
+    class SliderLabelUpdater : public juce::Slider {
     public:
-        explicit SliderLabelUpdater(const String& componentName) : Slider(componentName) {}
+    explicit SliderLabelUpdater(const juce::String& componentName) : Slider(componentName) {}
         virtual ~SliderLabelUpdater() = default;
 
         /** @name Mouse event handlers */
         /** @{ */
-        virtual void mouseEnter(const MouseEvent& event) override {
+    virtual void mouseEnter(const juce::MouseEvent& event) override {
             Slider::mouseEnter(event);
             _updateLabel();
         }
 
-        virtual void mouseExit(const MouseEvent& event) override {
+    virtual void mouseExit(const juce::MouseEvent& event) override {
             Slider::mouseExit(event);
             _resetLabel();
         }
 
-        virtual void mouseDoubleClick(const MouseEvent& event) override {
+    virtual void mouseDoubleClick(const juce::MouseEvent& event) override {
             Slider::mouseDoubleClick(event);
             _updateLabel();
         }
 
-        virtual void mouseDrag(const MouseEvent& event) override {
+    virtual void mouseDrag(const juce::MouseEvent& event) override {
             Slider::mouseDrag(event);
             _updateLabel();
         }
 
-        virtual void mouseWheelMove(const MouseEvent& event,
-                                    const MouseWheelDetails& wheel) override {
+    virtual void mouseWheelMove(const juce::MouseEvent& event,
+                                const juce::MouseWheelDetails& wheel) override {
             Slider::mouseWheelMove(event, wheel);
             _updateLabel();
         }
@@ -84,7 +84,7 @@ namespace WECore::JUCEPlugin {
     template <class T>
     class LabelReadoutSlider : public SliderLabelUpdater {
     public:
-        explicit LabelReadoutSlider(const String& componentName) : SliderLabelUpdater(componentName),
+        explicit LabelReadoutSlider(const juce::String& componentName) : SliderLabelUpdater(componentName),
                                                                    _targetLabel(nullptr),
                                                                    _isRunning(false) {}
 
@@ -95,7 +95,7 @@ namespace WECore::JUCEPlugin {
          *
          * Doesn't take ownership of the label.
          */
-        inline void start(Label* targetLabel, String labelText);
+        inline void start(juce::Label* targetLabel, juce::String labelText);
 
         /**
          * Tells the slider to stop writing to the label.
@@ -106,8 +106,8 @@ namespace WECore::JUCEPlugin {
         inline void stop();
 
     private:
-        Label* _targetLabel;
-        String _labelText;
+        juce::Label* _targetLabel;
+        juce::String _labelText;
         bool _isRunning;
 
         inline virtual void _updateLabel() override;
@@ -116,7 +116,7 @@ namespace WECore::JUCEPlugin {
     };
 
     template <class T>
-    void LabelReadoutSlider<T>::start(Label* targetLabel, String labelText) {
+    void LabelReadoutSlider<T>::start(juce::Label* targetLabel, juce::String labelText) {
         _targetLabel = targetLabel;
         _labelText = labelText;
         _isRunning = true;
@@ -130,15 +130,15 @@ namespace WECore::JUCEPlugin {
     template <class T>
     void LabelReadoutSlider<T>::_updateLabel() {
         if (_isRunning) {
-            String valueString(getValue(), 2);
-            _targetLabel->setText(valueString, dontSendNotification);
+            juce::String valueString(getValue(), 2);
+            _targetLabel->setText(valueString, juce::dontSendNotification);
         }
     }
 
     template <class T>
     void LabelReadoutSlider<T>::_resetLabel() {
         if (_isRunning) {
-            _targetLabel->setText(_labelText, dontSendNotification);
+            _targetLabel->setText(_labelText, juce::dontSendNotification);
         }
     }
 }
