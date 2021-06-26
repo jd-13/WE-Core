@@ -32,7 +32,7 @@ var hierarchy =
     [ "juce::ChangeListener", null, [
       [ "WECore::JUCEPlugin::ParameterUpdateHandler::ParameterUpdateListener", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler_1_1_parameter_update_listener.html", null ]
     ] ],
-    [ "Component", null, [
+    [ "juce::Component", null, [
       [ "WECore::Richter::WaveViewer", "class_w_e_core_1_1_richter_1_1_wave_viewer.html", null ]
     ] ],
     [ "WECore::EffectsProcessorBase< SampleType >", "class_w_e_core_1_1_effects_processor_base.html", [
@@ -71,7 +71,7 @@ var hierarchy =
       [ "WECore::JUCEPlugin::CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html", null ],
       [ "WECore::JUCEPlugin::CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", null ]
     ] ],
-    [ "Slider", null, [
+    [ "juce::Slider", null, [
       [ "WECore::JUCEPlugin::SliderLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html", [
         [ "WECore::JUCEPlugin::LabelReadoutSlider< T >", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html", null ]
       ] ]

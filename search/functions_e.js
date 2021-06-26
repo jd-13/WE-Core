@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['paint_839',['paint',['../class_w_e_core_1_1_richter_1_1_wave_viewer.html#a6d5f1c5bf7847aaf65597518e3d9be04',1,'WECore::Richter::WaveViewer']]],
+  ['paint_839',['paint',['../class_w_e_core_1_1_richter_1_1_wave_viewer.html#aa62176c7989afef44e24616cd8adc7d3',1,'WECore::Richter::WaveViewer']]],
   ['parameterbroadcaster_840',['ParameterBroadcaster',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#add9f19509f2f7bcac297688e624ecc91',1,'WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster']]],
   ['parametergesturechanged_841',['parameterGestureChanged',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#a7bfb77a44a6d730e9a09b669555a07f4',1,'WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster']]],
   ['parameterupdatehandler_842',['ParameterUpdateHandler',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler.html#a49413e2c98a3dc65d44c4cc715d1d8d4',1,'WECore::JUCEPlugin::ParameterUpdateHandler']]],
