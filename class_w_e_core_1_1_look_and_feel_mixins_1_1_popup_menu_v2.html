@@ -107,10 +107,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a349471299de5466eaf1292653e53fa34"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html#a349471299de5466eaf1292653e53fa34">setPopupMenuFontName</a> (const char *fontName)</td></tr>
 <tr class="separator:a349471299de5466eaf1292653e53fa34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
-<tr class="memitem:a0d242796ad89162f50cd35bd0c845e97"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html#a0d242796ad89162f50cd35bd0c845e97">drawPopupMenuItem</a> (Graphics &amp;g, const Rectangle&lt; int &gt; &amp;area, bool isSeparator, bool isActive, bool isHighlighted, bool isTicked, bool hasSubMenu, const String &amp;text, const String &amp;shortcutKeyText, const Drawable *icon, const Colour *textColour) override</td></tr>
-<tr class="separator:a0d242796ad89162f50cd35bd0c845e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc5ff6706bc5e25ad5c7175bc799ec11"><td class="memItemLeft" align="right" valign="top">virtual Font&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html#adc5ff6706bc5e25ad5c7175bc799ec11">getPopupMenuFont</a> () override</td></tr>
-<tr class="separator:adc5ff6706bc5e25ad5c7175bc799ec11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5140b9089822eb2f89e82917a789ded"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html#ab5140b9089822eb2f89e82917a789ded">drawPopupMenuItem</a> (juce::Graphics &amp;g, const juce::Rectangle&lt; int &gt; &amp;area, bool isSeparator, bool isActive, bool isHighlighted, bool isTicked, bool hasSubMenu, const juce::String &amp;text, const juce::String &amp;shortcutKeyText, const juce::Drawable *icon, const juce::Colour *textColour) override</td></tr>
+<tr class="separator:ab5140b9089822eb2f89e82917a789ded"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab857970ad7b407b5659eda88c18e0fb8"><td class="memItemLeft" align="right" valign="top">virtual juce::Font&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html#ab857970ad7b407b5659eda88c18e0fb8">getPopupMenuFont</a> () override</td></tr>
+<tr class="separator:ab857970ad7b407b5659eda88c18e0fb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -187,8 +187,8 @@ template&lt;typename BASE &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0d242796ad89162f50cd35bd0c845e97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d242796ad89162f50cd35bd0c845e97">&#9670;&nbsp;</a></span>drawPopupMenuItem()</h2>
+<a id="ab5140b9089822eb2f89e82917a789ded"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5140b9089822eb2f89e82917a789ded">&#9670;&nbsp;</a></span>drawPopupMenuItem()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -201,13 +201,13 @@ template&lt;typename BASE &gt; </div>
         <tr>
           <td class="memname">void <a class="el" href="class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html">WECore::LookAndFeelMixins::PopupMenuV2</a>&lt; BASE &gt;::drawPopupMenuItem </td>
           <td>(</td>
-          <td class="paramtype">Graphics &amp;&#160;</td>
+          <td class="paramtype">juce::Graphics &amp;&#160;</td>
           <td class="paramname"><em>g</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Rectangle&lt; int &gt; &amp;&#160;</td>
+          <td class="paramtype">const juce::Rectangle&lt; int &gt; &amp;&#160;</td>
           <td class="paramname"><em>area</em>, </td>
         </tr>
         <tr>
@@ -243,25 +243,25 @@ template&lt;typename BASE &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const String &amp;&#160;</td>
+          <td class="paramtype">const juce::String &amp;&#160;</td>
           <td class="paramname"><em>text</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const String &amp;&#160;</td>
+          <td class="paramtype">const juce::String &amp;&#160;</td>
           <td class="paramname"><em>shortcutKeyText</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Drawable *&#160;</td>
+          <td class="paramtype">const juce::Drawable *&#160;</td>
           <td class="paramname"><em>icon</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const Colour *&#160;</td>
+          <td class="paramtype">const juce::Colour *&#160;</td>
           <td class="paramname"><em>textColour</em>&#160;</td>
         </tr>
         <tr>
@@ -282,8 +282,8 @@ template&lt;typename BASE &gt; </div>
 
 </div>
 </div>
-<a id="adc5ff6706bc5e25ad5c7175bc799ec11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc5ff6706bc5e25ad5c7175bc799ec11">&#9670;&nbsp;</a></span>getPopupMenuFont()</h2>
+<a id="ab857970ad7b407b5659eda88c18e0fb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab857970ad7b407b5659eda88c18e0fb8">&#9670;&nbsp;</a></span>getPopupMenuFont()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -294,7 +294,7 @@ template&lt;typename BASE &gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">Font <a class="el" href="class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html">WECore::LookAndFeelMixins::PopupMenuV2</a>&lt; BASE &gt;::getPopupMenuFont</td>
+          <td class="memname">juce::Font <a class="el" href="class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html">WECore::LookAndFeelMixins::PopupMenuV2</a>&lt; BASE &gt;::getPopupMenuFont</td>
         </tr>
       </table>
   </td>

@@ -11,6 +11,7 @@ var hierarchy =
       [ "WECore::LookAndFeelMixins::ButtonV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html", null ],
       [ "WECore::LookAndFeelMixins::ComboBoxV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_combo_box_v2.html", null ],
       [ "WECore::LookAndFeelMixins::GroupComponentV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_group_component_v2.html", null ],
+      [ "WECore::LookAndFeelMixins::LinearSliderV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_linear_slider_v2.html", null ],
       [ "WECore::LookAndFeelMixins::MidAnchoredRotarySlider< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_mid_anchored_rotary_slider.html", null ],
       [ "WECore::LookAndFeelMixins::PopupMenuV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html", null ],
       [ "WECore::LookAndFeelMixins::RotarySliderV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2.html", null ]
@@ -48,7 +49,7 @@ var hierarchy =
     [ "juce::AudioProcessorParameter::Listener", null, [
       [ "WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html", null ]
     ] ],
-    [ "LookAndFeel_V2", null, [
+    [ "juce::LookAndFeel_V2", null, [
       [ "WECore::JUCEPlugin::CoreLookAndFeel", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html", null ]
     ] ],
     [ "WECore::ModulationSource< SampleType >", "class_w_e_core_1_1_modulation_source.html", null ],

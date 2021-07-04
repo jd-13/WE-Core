@@ -1,5 +1,13 @@
 var NAVTREEINDEX2 =
 {
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a1d5713ab043ba2108e9d70db53125175":[1,0,1,4,1,26],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a2ec03e7dffb13f6956223e732025910e":[1,0,1,4,1,25],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a3e030a6951d68b22fa5123f49d163d91":[1,0,1,4,1,23],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a41997902974540718a08c7dc85c3f1c6":[1,0,1,4,1,0],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a5382318d46d6796e70bef6ed5183a25a":[1,0,1,4,1,4],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a617eae4f1a1f7c7de147eb78cbcffbbd":[1,0,1,4,1,21],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a6e0f444bd9c8be3518c44e6c08e81781":[1,0,1,4,1,12],
+"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a7358800cfc6d73d2568b5446408e3b05":[1,0,1,4,1,27],
 "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a78b9fca448e27869aa3437ce7f534721":[1,0,1,4,1,9],
 "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a78e728c46bb96a18fba3f2da82a3a2de":[1,0,1,4,1,5],
 "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a8779e079987e108a35f80b8f2f8c9298":[1,0,1,4,1,3],
@@ -241,13 +249,5 @@ var NAVTREEINDEX2 =
 "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#afe763007238b47b144670f387dcd1bea":[1,0,1,7,2,37],
 "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html":[1,0,1,7,3],
 "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html#a03d3de40465c13d5353052f2d8456263":[1,0,1,7,3,5],
-"class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html#a3b71835751c7e6adf0f1c6d3aff1454f":[1,0,1,7,3,3],
-"class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html#a8b93e6d74dcc63c0f2d89d88179ec1b6":[1,0,1,7,3,1],
-"class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html#a9078023d598f8e08a29cb10bfa044d8d":[1,0,1,7,3,4],
-"class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html#a997d6a5492422d4b1b5ac80337348029":[1,0,1,7,3,6],
-"class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html#ae223f68e7bcd6d98cc792515c01a97b5":[1,0,1,7,3,0],
-"class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html#af1b818c5f8882edeeb64edd4e93bd26b":[1,0,1,7,3,2],
-"class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html":[1,0,1,8,0],
-"class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#a0192c8a44b8d6669448dbb6a7e177a45":[1,0,1,8,0,2],
-"class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#a04c7d8f54235284fed37b40663fa674b":[1,0,1,8,0,3]
+"class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html#a3b71835751c7e6adf0f1c6d3aff1454f":[1,0,1,7,3,3]
 };
