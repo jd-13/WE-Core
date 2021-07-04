@@ -45,14 +45,14 @@ namespace WECore::LookAndFeelMixins {
         virtual ~ButtonV2() = default;
 
         /** @{ LookAndFeel overrides */
-        inline virtual void drawButtonBackground(Graphics& g,
-                                                 Button& button,
-                                                 const Colour& backgroundColour,
+        inline virtual void drawButtonBackground(juce::Graphics& g,
+                                                 juce::Button& button,
+                                                 const juce::Colour& backgroundColour,
                                                  bool isMouseOverButton,
                                                  bool isButtonDown) override;
 
-        inline virtual void drawButtonText(Graphics& g,
-                                           TextButton& textButton,
+        inline virtual void drawButtonText(juce::Graphics& g,
+                                           juce::TextButton& textButton,
                                            bool isMouseOverButton,
                                            bool isButtonDown) override;
         /** @} */
@@ -62,29 +62,29 @@ namespace WECore::LookAndFeelMixins {
     };
 
     template <typename BASE>
-    void ButtonV2<BASE>::drawButtonBackground(Graphics& g,
-                                              Button& button,
-                                              const Colour& /*backgroundColour*/,
+    void ButtonV2<BASE>::drawButtonBackground(juce::Graphics& g,
+                                              juce::Button& button,
+                                              const juce::Colour& /*backgroundColour*/,
                                               bool /*isMouseOverButton*/,
                                               bool /*isButtonDown*/) {
         const int width {button.getWidth()};
         const int height {button.getHeight()};
 
         constexpr float indent {2.0f};
-        const int cornerSize {jmin (roundToInt(width * 0.4f),
-                                    roundToInt(height * 0.4f))};
+        const int cornerSize {juce::jmin(juce::roundToInt(width * 0.4f),
+                                         juce::roundToInt(height * 0.4f))};
 
-        Path p;
-        PathStrokeType pStroke(1);
+        juce::Path p;
+        juce::PathStrokeType pStroke(1);
 
         if (button.isEnabled()) {
             if (button.getToggleState()) {
-                g.setColour(button.findColour(TextButton::buttonOnColourId));
+                g.setColour(button.findColour(juce::TextButton::buttonOnColourId));
             } else {
-                g.setColour(button.findColour(TextButton::buttonColourId));
+                g.setColour(button.findColour(juce::TextButton::buttonColourId));
             }
         } else {
-            g.setColour(button.findColour(TextButton::buttonColourId).darker(_disabledDarker));
+            g.setColour(button.findColour(juce::TextButton::buttonColourId).darker(_disabledDarker));
         }
 
         p.addRoundedRectangle(indent,
@@ -97,23 +97,23 @@ namespace WECore::LookAndFeelMixins {
     }
 
     template <typename BASE>
-    void ButtonV2<BASE>::drawButtonText(Graphics& g,
-                                        TextButton& textButton,
+    void ButtonV2<BASE>::drawButtonText(juce::Graphics& g,
+                                        juce::TextButton& textButton,
                                         bool /*isMouseOverButton*/,
                                         bool /*isButtonDown*/) {
         if (textButton.isEnabled()) {
             if (textButton.getToggleState()) {
-                g.setColour(textButton.findColour(TextButton::textColourOnId));
+                g.setColour(textButton.findColour(juce::TextButton::textColourOnId));
             } else {
-                g.setColour(textButton.findColour(TextButton::textColourOffId));
+                g.setColour(textButton.findColour(juce::TextButton::textColourOffId));
             }
         } else {
-            g.setColour(textButton.findColour(TextButton::textColourOffId).darker(_disabledDarker));
+            g.setColour(textButton.findColour(juce::TextButton::textColourOffId).darker(_disabledDarker));
         }
 
         constexpr int MARGIN {0};
 
-        Font font;
+        juce::Font font;
         font.setTypefaceName(BASE::getTypefaceForFont(font)->getName());
         g.setFont(font);
 
@@ -122,7 +122,7 @@ namespace WECore::LookAndFeelMixins {
                         0,
                         textButton.getWidth() - 2 * MARGIN,
                         textButton.getHeight(),
-                        Justification::centred,
+                        juce::Justification::centred,
                         0);
     }
 }

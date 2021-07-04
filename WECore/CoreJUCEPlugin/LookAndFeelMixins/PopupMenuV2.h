@@ -44,19 +44,19 @@ namespace WECore::LookAndFeelMixins {
         virtual ~PopupMenuV2() = default;
 
         /** @{ LookAndFeel overrides */
-        inline virtual void drawPopupMenuItem(Graphics& g,
-                                              const Rectangle<int>& area,
+        inline virtual void drawPopupMenuItem(juce::Graphics& g,
+                                              const juce::Rectangle<int>& area,
                                               bool isSeparator,
                                               bool isActive,
                                               bool isHighlighted,
                                               bool isTicked,
                                               bool hasSubMenu,
-                                              const String& text,
-                                              const String& shortcutKeyText,
-                                              const Drawable* icon,
-                                              const Colour* textColour) override;
+                                              const juce::String& text,
+                                              const juce::String& shortcutKeyText,
+                                              const juce::Drawable* icon,
+                                              const juce::Colour* textColour) override;
 
-        inline virtual Font getPopupMenuFont() override;
+        inline virtual juce::Font getPopupMenuFont() override;
         /** @} */
 
         void setPopupMenuFontName(const char* fontName) { _popupMenuFontName = fontName; }
@@ -66,35 +66,35 @@ namespace WECore::LookAndFeelMixins {
     };
 
     template <typename BASE>
-    void PopupMenuV2<BASE>::drawPopupMenuItem(Graphics& g,
-                                              const Rectangle<int>& area,
+    void PopupMenuV2<BASE>::drawPopupMenuItem(juce::Graphics& g,
+                                              const juce::Rectangle<int>& area,
                                               bool /*isSeparator*/,
                                               bool /*isActive*/,
                                               bool isHighlighted,
                                               bool isTicked,
                                               bool /*hasSubMenu*/,
-                                              const String& text,
-                                              const String& /*shortcutKeyText*/,
-                                              const Drawable* /*icon*/,
-                                              const Colour* /*textColour*/) {
+                                              const juce::String& text,
+                                              const juce::String& /*shortcutKeyText*/,
+                                              const juce::Drawable* /*icon*/,
+                                              const juce::Colour* /*textColour*/) {
 
-        Rectangle<int> r = area.reduced(1);
+        juce::Rectangle<int> r = area.reduced(1);
 
         if (isHighlighted) {
-            g.setColour(BASE::findColour(PopupMenu::highlightedBackgroundColourId));
+            g.setColour(BASE::findColour(juce::PopupMenu::highlightedBackgroundColourId));
             g.fillRect(r);
 
-            g.setColour(BASE::findColour(PopupMenu::highlightedTextColourId));
+            g.setColour(BASE::findColour(juce::PopupMenu::highlightedTextColourId));
         } else if (isTicked) {
-            g.setColour(BASE::findColour(PopupMenu::highlightedBackgroundColourId).withAlpha(0.2f));
+            g.setColour(BASE::findColour(juce::PopupMenu::highlightedBackgroundColourId).withAlpha(0.2f));
             g.fillRect(r);
 
-            g.setColour(BASE::findColour(PopupMenu::textColourId));
+            g.setColour(BASE::findColour(juce::PopupMenu::textColourId));
         } else {
-            g.setColour(BASE::findColour(PopupMenu::textColourId));
+            g.setColour(BASE::findColour(juce::PopupMenu::textColourId));
         }
 
-        Font font(getPopupMenuFont());
+        juce::Font font(getPopupMenuFont());
 
         const float maxFontHeight {area.getHeight() / 1.3f};
 
@@ -105,12 +105,12 @@ namespace WECore::LookAndFeelMixins {
         g.setFont(font);
 
         r.removeFromLeft(3);
-        g.drawFittedText(text, r, Justification::centredLeft, 1);
+        g.drawFittedText(text, r, juce::Justification::centredLeft, 1);
     }
 
     template <typename BASE>
-    Font PopupMenuV2<BASE>::getPopupMenuFont() {
-        Font comboFont;
+    juce::Font PopupMenuV2<BASE>::getPopupMenuFont() {
+        juce::Font comboFont;
         comboFont.setTypefaceName(_popupMenuFontName);
         return comboFont;
     }

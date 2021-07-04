@@ -42,7 +42,7 @@ namespace WECore::LookAndFeelMixins {
         virtual ~ComboBoxV2() = default;
 
         /** @{ LookAndFeel overrides */
-        inline virtual void drawComboBox(Graphics& g,
+        inline virtual void drawComboBox(juce::Graphics& g,
                                          int width,
                                          int height,
                                          const bool isButtonDown,
@@ -50,12 +50,12 @@ namespace WECore::LookAndFeelMixins {
                                          int buttonY,
                                          int buttonW,
                                          int buttonH,
-                                         ComboBox& box) override;
+                                         juce::ComboBox& box) override;
         /** @} */
     };
 
     template <typename BASE>
-    void ComboBoxV2<BASE>::drawComboBox(Graphics& g,
+    void ComboBoxV2<BASE>::drawComboBox(juce::Graphics& g,
                                         int /*width*/,
                                         int /*height*/,
                                         const bool /*isButtonDown*/,
@@ -63,11 +63,11 @@ namespace WECore::LookAndFeelMixins {
                                         int buttonY,
                                         int buttonW,
                                         int buttonH,
-                                        ComboBox& box) {
+                                        juce::ComboBox& box) {
 
-        g.setColour(box.findColour(ComboBox::arrowColourId));
+        g.setColour(box.findColour(juce::ComboBox::arrowColourId));
 
-        Path p;
+        juce::Path p;
         constexpr float LINE_WIDTH {0.5};
         const int arrowMarginX {buttonY / 4};
         const int arrowMarginY {buttonH / 3};
@@ -75,19 +75,19 @@ namespace WECore::LookAndFeelMixins {
         const int arrowTipY {buttonY + buttonH - arrowMarginY};
 
         // Left side of arrow
-        p.addLineSegment(Line<float>(buttonX + arrowMarginX,
-                                    buttonY + arrowMarginY,
-                                    arrowTipX,
-                                    arrowTipY),
+        p.addLineSegment(juce::Line<float>(buttonX + arrowMarginX,
+                                           buttonY + arrowMarginY,
+                                           arrowTipX,
+                                           arrowTipY),
                         LINE_WIDTH);
 
         // Right side of arrow
-        p.addLineSegment(Line<float>(buttonX + buttonW - arrowMarginX,
-                                    buttonY + arrowMarginY,
-                                    arrowTipX,
-                                    arrowTipY),
+        p.addLineSegment(juce::Line<float>(buttonX + buttonW - arrowMarginX,
+                                           buttonY + arrowMarginY,
+                                           arrowTipX,
+                                           arrowTipY),
                         LINE_WIDTH);
 
-        g.strokePath(p, PathStrokeType(1));
+        g.strokePath(p, juce::PathStrokeType(1));
     }
 }

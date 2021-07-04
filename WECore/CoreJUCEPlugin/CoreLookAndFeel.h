@@ -41,12 +41,12 @@ namespace WECore::JUCEPlugin {
      * The colour members (highlightColour, etc) are being phased out as it doesn't fit well with
      * how colours are managed in JUCE.
      */
-    class CoreLookAndFeel : public LookAndFeel_V2 {
+    class CoreLookAndFeel : public juce::LookAndFeel_V2 {
     public:
         CoreLookAndFeel() {
-            setHighlightColour(Colour(34, 252, 255));
-            setLightColour(Colour(200, 200, 200));
-            setDarkColour(Colour(107, 107, 107));
+            setHighlightColour(juce::Colour(34, 252, 255));
+            setLightColour(juce::Colour(200, 200, 200));
+            setDarkColour(juce::Colour(107, 107, 107));
         }
 
         virtual ~CoreLookAndFeel() = default;
@@ -54,7 +54,7 @@ namespace WECore::JUCEPlugin {
         CoreLookAndFeel operator=(CoreLookAndFeel&) = delete;
         CoreLookAndFeel(CoreLookAndFeel&) = delete;
 
-        virtual inline void drawRotarySlider(Graphics& g,
+        virtual inline void drawRotarySlider(juce::Graphics& g,
                                              int /*x*/,
                                              int /*y*/,
                                              int width,
@@ -62,9 +62,9 @@ namespace WECore::JUCEPlugin {
                                              float /*sliderPosProportional*/,
                                              float /*rotaryStartAngle*/,
                                              float /*rotaryEndAngle*/,
-                                             Slider &slider) override;
+                                             juce::Slider &slider) override;
 
-        virtual inline void drawLinearSliderThumb(Graphics& g,
+        virtual inline void drawLinearSliderThumb(juce::Graphics& g,
                                                   int x,
                                                   int y,
                                                   int width,
@@ -72,21 +72,21 @@ namespace WECore::JUCEPlugin {
                                                   float sliderPos,
                                                   float /*minSliderPos*/,
                                                   float /*maxSliderPos*/,
-                                                  const Slider::SliderStyle style,
-                                                  Slider& slider) override;
+                                                  const juce::Slider::SliderStyle style,
+                                                  juce::Slider& slider) override;
 
-        virtual inline void drawButtonBackground(Graphics& g,
-                                                    Button& button,
-                                                    const Colour& /*backgroundColour*/,
-                                                    bool /*isMouseOverButton*/,
-                                                    bool /*isButtonDown*/) override;
+        virtual inline void drawButtonBackground(juce::Graphics& g,
+                                                 juce::Button& button,
+                                                 const juce::Colour& /*backgroundColour*/,
+                                                 bool /*isMouseOverButton*/,
+                                                 bool /*isButtonDown*/) override;
 
-        virtual inline void drawButtonText(Graphics& g,
-                                           TextButton& textButton,
+        virtual inline void drawButtonText(juce::Graphics& g,
+                                           juce::TextButton& textButton,
                                            bool /*isMouseOverButton*/,
                                            bool /*isButtonDown*/) override;
 
-        virtual inline void drawComboBox(Graphics& g,
+        virtual inline void drawComboBox(juce::Graphics& g,
                                          int /*width*/,
                                          int /*height*/,
                                          const bool /*isButtonDown*/,
@@ -94,9 +94,9 @@ namespace WECore::JUCEPlugin {
                                          int buttonY,
                                          int buttonW,
                                          int buttonH,
-                                         ComboBox& box) override;
+                                         juce::ComboBox& box) override;
 
-        virtual inline void drawLinearSliderBackground(Graphics& g,
+        virtual inline void drawLinearSliderBackground(juce::Graphics& g,
                                                        int x,
                                                        int y,
                                                        int width,
@@ -104,35 +104,35 @@ namespace WECore::JUCEPlugin {
                                                        float /*sliderPos*/,
                                                        float /*minSliderPos*/,
                                                        float /*maxSliderPos*/,
-                                                       const Slider::SliderStyle /*style*/,
-                                                       Slider& slider) override;
+                                                       const juce::Slider::SliderStyle /*style*/,
+                                                       juce::Slider& slider) override;
 
-        virtual inline void drawTooltip(Graphics& g,
-                                        const String& text,
+        virtual inline void drawTooltip(juce::Graphics& g,
+                                        const juce::String& text,
                                         int width,
                                         int height) override;
 
-        virtual void setHighlightColour(Colour newColour) {
-            setColour(ComboBox::arrowColourId, newColour);
-            setColour(GroupComponent::textColourId, newColour);
-            setColour(Slider::rotarySliderFillColourId, newColour);
-            setColour(TextButton::buttonOnColourId, newColour);
-            setColour(TextButton::textColourOnId, newColour);
+        virtual void setHighlightColour(juce::Colour newColour) {
+            setColour(juce::ComboBox::arrowColourId, newColour);
+            setColour(juce::GroupComponent::textColourId, newColour);
+            setColour(juce::Slider::rotarySliderFillColourId, newColour);
+            setColour(juce::TextButton::buttonOnColourId, newColour);
+            setColour(juce::TextButton::textColourOnId, newColour);
 
             highlightColour = newColour;
         }
 
-        virtual void setLightColour(Colour newColour) {
-            setColour(PopupMenu::backgroundColourId, newColour);
-            setColour(Slider::rotarySliderOutlineColourId, newColour);
-            setColour(TextButton::buttonColourId, newColour);
-            setColour(TextButton::textColourOffId, newColour);
+        virtual void setLightColour(juce::Colour newColour) {
+            setColour(juce::PopupMenu::backgroundColourId, newColour);
+            setColour(juce::Slider::rotarySliderOutlineColourId, newColour);
+            setColour(juce::TextButton::buttonColourId, newColour);
+            setColour(juce::TextButton::textColourOffId, newColour);
 
             lightColour = newColour;
         }
 
-        virtual void setDarkColour(Colour newColour) {
-            setColour(PopupMenu::highlightedBackgroundColourId, newColour);
+        virtual void setDarkColour(juce::Colour newColour) {
+            setColour(juce::PopupMenu::highlightedBackgroundColourId, newColour);
 
             darkColour = newColour;
         }
@@ -140,12 +140,12 @@ namespace WECore::JUCEPlugin {
     protected:
         JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(CoreLookAndFeel)
 
-        Colour  lightColour,
-                darkColour,
-                highlightColour;
+        juce::Colour lightColour,
+                     darkColour,
+                     highlightColour;
     };
 
-    void CoreLookAndFeel::drawRotarySlider(Graphics& g,
+    void CoreLookAndFeel::drawRotarySlider(juce::Graphics& g,
                                            int /*x*/,
                                            int /*y*/,
                                            int width,
@@ -153,7 +153,7 @@ namespace WECore::JUCEPlugin {
                                            float /*sliderPosProportional*/,
                                            float /*rotaryStartAngle*/,
                                            float /*rotaryEndAngle*/,
-                                           Slider &slider) {
+                                           juce::Slider &slider) {
 
         // calculate useful constants
         const double rangeOfMotion {260 * (CoreMath::DOUBLE_PI / 180)};
@@ -163,7 +163,7 @@ namespace WECore::JUCEPlugin {
         const float diameter {static_cast<float>(height - margin * 2)};
 
         // draw centre circle
-        Path p;
+        juce::Path p;
         g.setColour(darkColour);
         p.addEllipse(width / 2 - diameter / 2, height / 2 - diameter / 2, diameter, diameter);
         g.fillPath(p);
@@ -180,10 +180,10 @@ namespace WECore::JUCEPlugin {
         const double gap {0.4};
         p.addCentredArc(width / 2, height / 2, diameter / 2, diameter / 2, rotation, gap, 2 * CoreMath::DOUBLE_PI - gap, true);
 
-        g.strokePath(p, PathStrokeType(2.0f));
+        g.strokePath(p, juce::PathStrokeType(2.0f));
     }
 
-    void CoreLookAndFeel::drawLinearSliderThumb(Graphics& g,
+    void CoreLookAndFeel::drawLinearSliderThumb(juce::Graphics& g,
                                                 int x,
                                                 int y,
                                                 int width,
@@ -191,12 +191,12 @@ namespace WECore::JUCEPlugin {
                                                 float sliderPos,
                                                 float /*minSliderPos*/,
                                                 float /*maxSliderPos*/,
-                                                const Slider::SliderStyle style,
-                                                Slider& slider) {
+                                                const juce::Slider::SliderStyle style,
+                                                juce::Slider& slider) {
 
         const float sliderRadius = static_cast<float>(getSliderThumbRadius(slider) - 2);
 
-        Colour* ring;
+        juce::Colour* ring;
 
         if (slider.isEnabled()) {
             ring = &highlightColour;
@@ -204,11 +204,11 @@ namespace WECore::JUCEPlugin {
             ring = &lightColour;
         }
 
-        if (style == Slider::LinearHorizontal || style == Slider::LinearVertical)
+        if (style == juce::Slider::LinearHorizontal || style == juce::Slider::LinearVertical)
         {
             float kx, ky;
 
-            if (style == Slider::LinearVertical)
+            if (style == juce::Slider::LinearVertical)
             {
                 kx = x + width * 0.5f;
                 ky = sliderPos;
@@ -219,33 +219,33 @@ namespace WECore::JUCEPlugin {
                 ky = y + height * 0.5f;
             }
 
-            Path p;
+            juce::Path p;
             p.addEllipse(kx - sliderRadius, ky - sliderRadius, sliderRadius * 2, sliderRadius * 2);
 
             g.setColour(darkColour);
             g.fillPath(p);
 
             g.setColour(*ring);
-            g.strokePath(p, PathStrokeType(2.0f));
+            g.strokePath(p, juce::PathStrokeType(2.0f));
         }
 
     }
 
-    void CoreLookAndFeel::drawButtonBackground(Graphics& g,
-                                               Button& button,
-                                               const Colour& /*backgroundColour*/,
+    void CoreLookAndFeel::drawButtonBackground(juce::Graphics& g,
+                                               juce::Button& button,
+                                               const juce::Colour& /*backgroundColour*/,
                                                bool /*isMouseOverButton*/,
                                                bool /*isButtonDown*/) {
         const int width {button.getWidth()};
         const int height {button.getHeight()};
 
         const float indent {2.0f};
-        const int cornerSize {jmin (roundToInt(width * 0.4f),
-                                    roundToInt(height * 0.4f))};
+        const int cornerSize {juce::jmin(juce::roundToInt(width * 0.4f),
+                                         juce::roundToInt(height * 0.4f))};
 
-        Path p;
-        PathStrokeType pStroke(1);
-        Colour* bc {nullptr};
+        juce::Path p;
+        juce::PathStrokeType pStroke(1);
+        juce::Colour* bc {nullptr};
 
 
 
@@ -267,12 +267,12 @@ namespace WECore::JUCEPlugin {
         g.strokePath(p, pStroke);
     }
 
-    void CoreLookAndFeel::drawButtonText(Graphics& g,
-                                         TextButton& textButton,
+    void CoreLookAndFeel::drawButtonText(juce::Graphics& g,
+                                         juce::TextButton& textButton,
                                          bool /*isMouseOverButton*/,
                                          bool /*isButtonDown*/) {
 
-        Colour* textColour {nullptr};
+        juce::Colour* textColour {nullptr};
 
         if (textButton.isEnabled()) {
             if (textButton.getToggleState() || textButton.getWidth() < 24) {
@@ -292,10 +292,10 @@ namespace WECore::JUCEPlugin {
             margin = 5;
         }
 
-        g.drawFittedText(textButton.getButtonText(), margin, 0, textButton.getWidth() - 2 * margin, textButton.getHeight(), Justification::centred, 0);
+        g.drawFittedText(textButton.getButtonText(), margin, 0, textButton.getWidth() - 2 * margin, textButton.getHeight(), juce::Justification::centred, 0);
     }
 
-    void CoreLookAndFeel::drawComboBox(Graphics& g,
+    void CoreLookAndFeel::drawComboBox(juce::Graphics& g,
                                        int /*width*/,
                                        int /*height*/,
                                        const bool /*isButtonDown*/,
@@ -303,7 +303,7 @@ namespace WECore::JUCEPlugin {
                                        int buttonY,
                                        int buttonW,
                                        int buttonH,
-                                       ComboBox& box) {
+                                       juce::ComboBox& box) {
 
         g.fillAll(lightColour);
         g.setColour(darkColour);
@@ -313,7 +313,7 @@ namespace WECore::JUCEPlugin {
         const float arrowH {0.3f};
 
         if (box.isEnabled()) {
-            Path p;
+            juce::Path p;
             p.addTriangle(buttonX + buttonW * 0.5f,            buttonY + buttonH * (0.45f - arrowH),
                           buttonX + buttonW * (1.0f - arrowX), buttonY + buttonH * 0.45f,
                           buttonX + buttonW * arrowX,          buttonY + buttonH * 0.45f);
@@ -328,7 +328,7 @@ namespace WECore::JUCEPlugin {
         }
     }
 
-    void CoreLookAndFeel::drawLinearSliderBackground(Graphics& g,
+    void CoreLookAndFeel::drawLinearSliderBackground(juce::Graphics& g,
                                                      int x,
                                                      int y,
                                                      int width,
@@ -336,8 +336,8 @@ namespace WECore::JUCEPlugin {
                                                      float /*sliderPos*/,
                                                      float /*minSliderPos*/,
                                                      float /*maxSliderPos*/,
-                                                     const Slider::SliderStyle /*style*/,
-                                                     Slider& slider) {
+                                                     const juce::Slider::SliderStyle /*style*/,
+                                                     juce::Slider& slider) {
         g.setColour(lightColour);
 
         if (slider.isHorizontal()) {
@@ -345,14 +345,14 @@ namespace WECore::JUCEPlugin {
         }
     }
 
-    void CoreLookAndFeel::drawTooltip(Graphics& g,
-                                      const String& text,
+    void CoreLookAndFeel::drawTooltip(juce::Graphics& g,
+                                      const juce::String& text,
                                       int width,
                                       int height) {
         g.setColour(lightColour);
         g.fillRect(0, 0, width, height);
 
         g.setColour(darkColour);
-        g.drawFittedText(text, 0, 0, width, height, Justification::centred, 3);
+        g.drawFittedText(text, 0, 0, width, height, juce::Justification::centred, 3);
     }
 }

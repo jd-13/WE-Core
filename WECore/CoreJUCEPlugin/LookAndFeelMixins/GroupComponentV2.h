@@ -42,12 +42,12 @@ namespace WECore::LookAndFeelMixins {
         virtual ~GroupComponentV2() = default;
 
         /** @{ LookAndFeel overrides */
-        inline virtual void drawGroupComponentOutline(Graphics& g,
+        inline virtual void drawGroupComponentOutline(juce::Graphics& g,
                                                       int width,
                                                       int height,
-                                                      const String& text,
-                                                      const Justification& justification,
-                                                      GroupComponent& group) override;
+                                                      const juce::String& text,
+                                                      const juce::Justification& justification,
+                                                      juce::GroupComponent& group) override;
 
         /** @} */
 
@@ -58,18 +58,18 @@ namespace WECore::LookAndFeelMixins {
     };
 
     template <typename BASE>
-    void GroupComponentV2<BASE>::drawGroupComponentOutline(Graphics& g,
+    void GroupComponentV2<BASE>::drawGroupComponentOutline(juce::Graphics& g,
                                                            int width,
                                                            int height,
-                                                           const String& text,
-                                                           const Justification& /*justification*/,
-                                                           GroupComponent& group) {
+                                                           const juce::String& text,
+                                                           const juce::Justification& /*justification*/,
+                                                           juce::GroupComponent& group) {
 
         constexpr int MARGIN {2};
 
-        g.setColour(group.findColour(GroupComponent::textColourId));
+        g.setColour(group.findColour(juce::GroupComponent::textColourId));
 
-        Font font;
+        juce::Font font;
         font.setTypefaceName(_groupFontName);
         g.setFont(font);
 
@@ -78,7 +78,7 @@ namespace WECore::LookAndFeelMixins {
                 MARGIN,
                 width,
                 height,
-                Justification::topLeft,
+                juce::Justification::topLeft,
                 true);
     }
 

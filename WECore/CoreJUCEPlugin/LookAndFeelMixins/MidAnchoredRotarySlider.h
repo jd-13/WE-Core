@@ -44,7 +44,7 @@ namespace WECore::LookAndFeelMixins {
         virtual ~MidAnchoredRotarySlider() = default;
 
         /** @{ LookAndFeel overrides */
-        inline virtual void drawRotarySlider(Graphics& g,
+        inline virtual void drawRotarySlider(juce::Graphics& g,
                                              int x,
                                              int y,
                                              int width,
@@ -52,12 +52,12 @@ namespace WECore::LookAndFeelMixins {
                                              float sliderPosProportional,
                                              float rotaryStartAngle,
                                              float rotaryEndAngle,
-                                             Slider &slider) override;
+                                             juce::Slider &slider) override;
         /** @} */
     };
 
     template <typename BASE>
-    void MidAnchoredRotarySlider<BASE>::drawRotarySlider(Graphics& g,
+    void MidAnchoredRotarySlider<BASE>::drawRotarySlider(juce::Graphics& g,
                                                          int /*x*/,
                                                          int /*y*/,
                                                          int width,
@@ -65,7 +65,7 @@ namespace WECore::LookAndFeelMixins {
                                                          float /*sliderPosProportional*/,
                                                          float /*rotaryStartAngle*/,
                                                          float /*rotaryEndAngle*/,
-                                                         Slider &slider) {
+                                                         juce::Slider &slider) {
 
         // Calculate useful constants
         constexpr double arcGap {CoreMath::DOUBLE_TAU / 4};
@@ -88,12 +88,12 @@ namespace WECore::LookAndFeelMixins {
         const double diameter {static_cast<float>(height - margin * 2)};
 
         if (slider.isEnabled()) {
-            g.setColour(slider.findColour(Slider::rotarySliderFillColourId));
+            g.setColour(slider.findColour(juce::Slider::rotarySliderFillColourId));
         } else {
-            g.setColour(slider.findColour(Slider::rotarySliderOutlineColourId));
+            g.setColour(slider.findColour(juce::Slider::rotarySliderOutlineColourId));
         }
 
-        Path p;
+        juce::Path p;
 
         // Draw inner ring
         constexpr int arcSpacing {3};
@@ -106,7 +106,7 @@ namespace WECore::LookAndFeelMixins {
                         CoreMath::DOUBLE_TAU - (arcGap / 2),
                         true);
 
-        g.strokePath(p, PathStrokeType(0.7f));
+        g.strokePath(p, juce::PathStrokeType(0.7f));
 
         // Draw outer ring
         p.clear();
@@ -118,6 +118,6 @@ namespace WECore::LookAndFeelMixins {
                         arcStartPoint,
                         arcEndPoint,
                         true);
-        g.strokePath(p, PathStrokeType(3.0f));
+        g.strokePath(p, juce::PathStrokeType(3.0f));
     }
 }
