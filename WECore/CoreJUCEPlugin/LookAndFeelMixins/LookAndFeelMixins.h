@@ -27,6 +27,7 @@
 #include "ButtonV2.h"
 #include "ComboBoxV2.h"
 #include "GroupComponentV2.h"
+#include "LinearSliderV2.h"
 #include "MidAnchoredRotarySlider.h"
 #include "PopupMenuV2.h"
 #include "RotarySliderV2.h"
@@ -97,8 +98,9 @@ namespace WECore::LookAndFeelMixins {
     typedef ButtonV2<
             ComboBoxV2<
             GroupComponentV2<
+            LinearSliderV2<
             PopupMenuV2<
             RotarySliderV2<
                 WECore::JUCEPlugin::CoreLookAndFeel
-            >>>>> WEV2LookAndFeel;
+            >>>>>> WEV2LookAndFeel;
 }

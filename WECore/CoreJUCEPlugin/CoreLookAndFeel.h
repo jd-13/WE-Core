@@ -116,6 +116,8 @@ namespace WECore::JUCEPlugin {
             setColour(juce::ComboBox::arrowColourId, newColour);
             setColour(juce::GroupComponent::textColourId, newColour);
             setColour(juce::Slider::rotarySliderFillColourId, newColour);
+            setColour(juce::Slider::thumbColourId, newColour);
+            setColour(juce::Slider::trackColourId, newColour);
             setColour(juce::TextButton::buttonOnColourId, newColour);
             setColour(juce::TextButton::textColourOnId, newColour);
 
@@ -124,6 +126,7 @@ namespace WECore::JUCEPlugin {
 
         virtual void setLightColour(juce::Colour newColour) {
             setColour(juce::PopupMenu::backgroundColourId, newColour);
+            setColour(juce::Slider::backgroundColourId, newColour);
             setColour(juce::Slider::rotarySliderOutlineColourId, newColour);
             setColour(juce::TextButton::buttonColourId, newColour);
             setColour(juce::TextButton::textColourOffId, newColour);
