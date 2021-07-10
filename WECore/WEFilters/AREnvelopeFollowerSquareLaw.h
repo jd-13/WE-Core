@@ -43,7 +43,7 @@ namespace WECore::AREnv {
          *
          * @return  The updated envelope value
          */
-        virtual double _getNextOutputImpl(double inSample) override {
+        virtual double _envGetNextOutputImpl(double inSample) override {
             const double tmp = inSample * inSample;
 
             if (tmp > _envVal)

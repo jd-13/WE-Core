@@ -57,13 +57,13 @@ SCENARIO("TPTSVFilter: Parameters enforce their bounds correctly") {
 
         WHEN("All parameter values are too low") {
             mFilter.setMode(-1);
-            mFilter.setCutoff(19);
+            mFilter.setCutoff(-1);
             mFilter.setQ(0);
             mFilter.setGain(-1);
 
             THEN("Parameters enforce their lower bounds") {
                 CHECK(mFilter.getMode() == 1);
-                CHECK(mFilter.getCutoff() == Approx(20.0));
+                CHECK(mFilter.getCutoff() == Approx(0.0));
                 CHECK(mFilter.getQ() == Approx(0.1));
                 CHECK(mFilter.getGain() == Approx(0.0));
             }

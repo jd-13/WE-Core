@@ -22,6 +22,7 @@
 #pragma once
 
 #include "General/ParameterDefinition.h"
+#include "TPTSVFilterParameters.h"
 
 namespace WECore::AREnv::Parameters {
     //@{
@@ -33,6 +34,10 @@ namespace WECore::AREnv::Parameters {
      *      default value
      */
     const ParameterDefinition::RangedParameter<double>  ATTACK_MS(0.1, 10000, 20),
-                                                        RELEASE_MS(0.1, 10000, 200);
+                                                        RELEASE_MS(0.1, 10000, 200),
+                                                        LOW_CUT(TPTSVF::Parameters::CUTOFF.minValue, TPTSVF::Parameters::CUTOFF.maxValue, 0),
+                                                        HIGH_CUT(TPTSVF::Parameters::CUTOFF.minValue, TPTSVF::Parameters::CUTOFF.maxValue, 20000);
     //@}
+
+    const ParameterDefinition::BooleanParameter FILTER_ENABLED(false);
 }

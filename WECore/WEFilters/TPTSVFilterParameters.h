@@ -45,7 +45,7 @@ namespace WECore::TPTSVF::Parameters {
      *      maximum value,
      *      default value
      */
-    const ParameterDefinition::RangedParameter<double>  CUTOFF(20, 20000, 20),
+    const ParameterDefinition::RangedParameter<double>  CUTOFF(0, 20000, 20),
                                                         Q(0.1, 20, 0.5),
                                                         GAIN(0, 2, 1);
     //@}
