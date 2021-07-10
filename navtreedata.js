@@ -62,9 +62,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_r_envelope_follower_base_8h.html",
-"_t_p_t_s_v_filter_tests_8cpp.html#abde08f1e1e4febdd44ae91452c115d9b",
-"class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a1d5713ab043ba2108e9d70db53125175",
-"class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html#a8b93e6d74dcc63c0f2d89d88179ec1b6"
+"_t_p_t_s_v_filter_tests_8cpp.html",
+"class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html#a349471299de5466eaf1292653e53fa34",
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ab8e9f8861670d5d664dbaca2f75fd03a"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -82,6 +82,7 @@ var hierarchy =
     [ "WECore::Songbird::SongbirdFormantFilter< T, NUM_AIR_FORMANTS >", "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html", null ],
     [ "WECore::Songbird::SongbirdFormantFilter< T, NUM_FORMANTS_PER_VOWEL >", "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html", null ],
     [ "WECore::TPTSVF::TPTSVFilter< T >", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html", null ],
+    [ "WECore::TPTSVF::TPTSVFilter< double >", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html", null ],
     [ "UpdateChecker", "class_update_checker.html", null ],
     [ "WECore::Richter::Wavetables", "class_w_e_core_1_1_richter_1_1_wavetables.html", null ]
 ];

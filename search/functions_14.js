@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['vowelparameter_944',['VowelParameter',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a499a67bea77069d2c97f70caf76a1e24',1,'WECore::Songbird::Parameters::VowelParameter']]]
+  ['updatechecker_968',['UpdateChecker',['../class_update_checker.html#a9957cdd090fe1c06b94df450fe1a9169',1,'UpdateChecker']]]
 ];
