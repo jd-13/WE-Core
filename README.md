@@ -4,6 +4,7 @@
 [![](https://img.shields.io/badge/Docs-Over_here!-blueviolet)](https://jd-13.github.io/WE-Core/)
 ![](https://img.shields.io/badge/C%2B%2B-17-informational)
 ![](https://img.shields.io/badge/license-GPLv3-informational)
+[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/jd-13/WE-Core)
 
 # WE-Core
 A set of core libraries for useful DSP related classes that are used by multiple White Elephant
