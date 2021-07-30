@@ -54,16 +54,6 @@ namespace WECore::JUCEPlugin {
         CoreLookAndFeel operator=(CoreLookAndFeel&) = delete;
         CoreLookAndFeel(CoreLookAndFeel&) = delete;
 
-        virtual inline void drawRotarySlider(juce::Graphics& g,
-                                             int /*x*/,
-                                             int /*y*/,
-                                             int width,
-                                             int height,
-                                             float /*sliderPosProportional*/,
-                                             float /*rotaryStartAngle*/,
-                                             float /*rotaryEndAngle*/,
-                                             juce::Slider &slider) override;
-
         virtual inline void drawLinearSliderThumb(juce::Graphics& g,
                                                   int x,
                                                   int y,
@@ -95,6 +85,17 @@ namespace WECore::JUCEPlugin {
                                          int buttonW,
                                          int buttonH,
                                          juce::ComboBox& box) override;
+
+        virtual inline void drawLinearSlider(juce::Graphics& g,
+                                             int x,
+                                             int y,
+                                             int width,
+                                             int height,
+                                             float sliderPos,
+                                             float minSliderPos,
+                                             float maxSliderPos,
+                                             const juce::Slider::SliderStyle style,
+                                             juce::Slider& slider) override;
 
         virtual inline void drawLinearSliderBackground(juce::Graphics& g,
                                                        int x,
@@ -147,44 +148,6 @@ namespace WECore::JUCEPlugin {
                      darkColour,
                      highlightColour;
     };
-
-    void CoreLookAndFeel::drawRotarySlider(juce::Graphics& g,
-                                           int /*x*/,
-                                           int /*y*/,
-                                           int width,
-                                           int height,
-                                           float /*sliderPosProportional*/,
-                                           float /*rotaryStartAngle*/,
-                                           float /*rotaryEndAngle*/,
-                                           juce::Slider &slider) {
-
-        // calculate useful constants
-        const double rangeOfMotion {260 * (CoreMath::DOUBLE_PI / 180)};
-        const double rotation {((slider.getValue() - slider.getMinimum()) / (slider.getMaximum() - slider.getMinimum())) * rangeOfMotion - rangeOfMotion / 2};
-
-        const int margin {1};
-        const float diameter {static_cast<float>(height - margin * 2)};
-
-        // draw centre circle
-        juce::Path p;
-        g.setColour(darkColour);
-        p.addEllipse(width / 2 - diameter / 2, height / 2 - diameter / 2, diameter, diameter);
-        g.fillPath(p);
-
-        // draw outer ring
-        if (slider.isEnabled()) {
-            g.setColour(highlightColour);
-        } else {
-            g.setColour(lightColour);
-        }
-
-        p.clear();
-
-        const double gap {0.4};
-        p.addCentredArc(width / 2, height / 2, diameter / 2, diameter / 2, rotation, gap, 2 * CoreMath::DOUBLE_PI - gap, true);
-
-        g.strokePath(p, juce::PathStrokeType(2.0f));
-    }
 
     void CoreLookAndFeel::drawLinearSliderThumb(juce::Graphics& g,
                                                 int x,
@@ -329,6 +292,21 @@ namespace WECore::JUCEPlugin {
 
             g.fillPath(p);
         }
+    }
+
+    void CoreLookAndFeel::drawLinearSlider(juce::Graphics& g,
+                                           int x,
+                                           int y,
+                                           int width,
+                                           int height,
+                                           float sliderPos,
+                                           float minSliderPos,
+                                           float maxSliderPos,
+                                           const juce::Slider::SliderStyle style,
+                                           juce::Slider& slider) {
+        // Draw background first
+        drawLinearSliderBackground(g, x, y, width, height, sliderPos, minSliderPos, maxSliderPos, style, slider);
+        drawLinearSliderThumb(g, x, y, width, height, sliderPos, minSliderPos, maxSliderPos, style, slider);
     }
 
     void CoreLookAndFeel::drawLinearSliderBackground(juce::Graphics& g,
