@@ -135,11 +135,6 @@ namespace WECore::JUCEPlugin {
                                       const ParameterDefinition::BaseParameter<int>* range,
                                       int defaultValue,
                                       std::function<void(int)> setter);
-
-        inline void registerParameter(juce::AudioParameterBool*& param,
-                                      const juce::String& name,
-                                      float defaultValue,
-                                      std::function<void(bool)> setter);
         /** @} */
 
         /**
@@ -301,10 +296,15 @@ namespace WECore::JUCEPlugin {
     void CoreAudioProcessor::registerParameter(juce::AudioParameterBool*& param,
                                                const juce::String& name,
                                                float defaultValue) {
-        registerParameter(param,
-                          name,
-                          defaultValue,
-                          [&](bool val) { setParameterValueInternal(param, val); });
+        param = new juce::AudioParameterBool(name, name, defaultValue);
+
+        ParameterInterface interface = {name,
+                                        [&param]() { return param->get(); },
+                                        [&](float val) { setParameterValueInternal(param, static_cast<bool>(val)); }};
+        _paramsList.push_back(interface);
+
+        param->addListener(&_parameterBroadcaster);
+        addParameter(param);
     }
 
     void CoreAudioProcessor::registerParameter(juce::AudioParameterFloat*& param,
@@ -351,21 +351,6 @@ namespace WECore::JUCEPlugin {
         ParameterInterface interface = {name,
                                         [&param]() { return param->get(); },
                                         [setter](float val) { setter(static_cast<int>(val)); }};
-        _paramsList.push_back(interface);
-
-        param->addListener(&_parameterBroadcaster);
-        addParameter(param);
-    }
-
-    void CoreAudioProcessor::registerParameter(juce::AudioParameterBool*& param,
-                                               const juce::String& name,
-                                               float defaultValue,
-                                               std::function<void(bool)> setter) {
-        param = new juce::AudioParameterBool(name, name, defaultValue);
-
-        ParameterInterface interface = {name,
-                                        [&param]() { return param->get(); },
-                                        [setter](float val) { setter(static_cast<bool>(val)); }};
         _paramsList.push_back(interface);
 
         param->addListener(&_parameterBroadcaster);
