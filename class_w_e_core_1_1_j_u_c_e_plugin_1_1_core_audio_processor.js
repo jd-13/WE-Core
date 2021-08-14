@@ -4,7 +4,7 @@ var class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor =
     [ "ParameterInterface", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface" ],
     [ "CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ad92f10a9bdc721a65da668a2a9fcec24", null ],
     [ "CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a160655da3b42df055746917b6e8615ae", null ],
-    [ "~CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a8e63ae813147c265387c17500ade197b", null ],
+    [ "~CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ab73f83cbd7db0086d80176daa93fa044", null ],
     [ "_migrateParameters", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a6e63d36b3007624b1f3c1b4d63acb1f1", null ],
     [ "_migrateParamValues", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a45d6490bb5e47d07e8f97cc2d4efa7d9", null ],
     [ "_provideParamNamesForMigration", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a9709b4ed0fecf1a85c46aa1596974321", null ],
@@ -24,5 +24,6 @@ var class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor =
     [ "setStateInformation", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a6e8e26d808c96cdeca23e3f8b8ff08ad", null ],
     [ "_parameterBroadcaster", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a94d9ce99230197aed71dbfc1eee0ffa5", null ],
     [ "_paramsList", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a35b1755619a623a3ea970a3c538ed270", null ],
+    [ "_privateParameters", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac18c2c66ef948707be4833aa34065707", null ],
     [ "PARAMS_SCHEMA_VERSION", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a45249e4c4c1fc4ae2d7af1c7101ca040", null ]
 ];

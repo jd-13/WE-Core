@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['arenvelopefollowerbase_581',['AREnvelopeFollowerBase',['../class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html',1,'WECore::AREnv']]],
-  ['arenvelopefollowerfullwave_582',['AREnvelopeFollowerFullWave',['../class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_full_wave.html',1,'WECore::AREnv']]],
-  ['arenvelopefollowersquarelaw_583',['AREnvelopeFollowerSquareLaw',['../class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_square_law.html',1,'WECore::AREnv']]]
+  ['arenvelopefollowerbase_582',['AREnvelopeFollowerBase',['../class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html',1,'WECore::AREnv']]],
+  ['arenvelopefollowerfullwave_583',['AREnvelopeFollowerFullWave',['../class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_full_wave.html',1,'WECore::AREnv']]],
+  ['arenvelopefollowersquarelaw_584',['AREnvelopeFollowerSquareLaw',['../class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_square_law.html',1,'WECore::AREnv']]]
 ];

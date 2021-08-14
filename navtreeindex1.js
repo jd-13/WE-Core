@@ -136,7 +136,7 @@ var NAVTREEINDEX1 =
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a08b387c080cf4509a0d3ab0052dc7427":[1,0,1,2,0,14],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a160655da3b42df055746917b6e8615ae":[1,0,1,2,0,3],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a35b1755619a623a3ea970a3c538ed270":[1,0,1,2,0,23],
-"class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a45249e4c4c1fc4ae2d7af1c7101ca040":[1,0,1,2,0,24],
+"class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a45249e4c4c1fc4ae2d7af1c7101ca040":[1,0,1,2,0,25],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a45d6490bb5e47d07e8f97cc2d4efa7d9":[1,0,1,2,0,6],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a4afd2a9e30f7c189224bd94972ec3b48":[1,0,1,2,0,19],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a575477f3461ac63bc18d2e2b02d32d5e":[1,0,1,2,0,16],
@@ -144,11 +144,12 @@ var NAVTREEINDEX1 =
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a69b96f0940e5dd38f31f847a6aaaf79e":[1,0,1,2,0,13],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a6e63d36b3007624b1f3c1b4d63acb1f1":[1,0,1,2,0,5],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a6e8e26d808c96cdeca23e3f8b8ff08ad":[1,0,1,2,0,21],
-"class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a8e63ae813147c265387c17500ade197b":[1,0,1,2,0,4],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a8fdad0c3c094bb0f798d7f315160939c":[1,0,1,2,0,9],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a94d9ce99230197aed71dbfc1eee0ffa5":[1,0,1,2,0,22],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a9709b4ed0fecf1a85c46aa1596974321":[1,0,1,2,0,7],
+"class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ab73f83cbd7db0086d80176daa93fa044":[1,0,1,2,0,4],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#abaa14f4793e3b60b0c2c12ae1a3cf4a6":[1,0,1,2,0,15],
+"class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac18c2c66ef948707be4833aa34065707":[1,0,1,2,0,24],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac7c282ae8a89516085d96a1f6db7298b":[1,0,1,2,0,10],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ace3c5500b44d1833a80702d65726c9d7":[1,0,1,2,0,20],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ad63880796af88beed934062810ebb246":[1,0,1,2,0,17],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "class_w_e_core_1_1_look_and_feel_mixins_1_1_mid_anchored_rotary_slider.html#a734b2fbd9122a138863f448f7bef1228":[1,0,1,3,4,0],
 "class_w_e_core_1_1_look_and_feel_mixins_1_1_mid_anchored_rotary_slider.html#aa00ba7fa895005d53dd272a9e064ad66":[1,0,1,3,4,1],
 "class_w_e_core_1_1_look_and_feel_mixins_1_1_mid_anchored_rotary_slider.html#ae8a9a68b81a9cf0e4c2fce4243b9b450":[1,0,1,3,4,2],
-"class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html":[1,0,1,3,5],
-"class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html#a0b4396859d4c12c187808bca30392cac":[1,0,1,3,5,0]
+"class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html":[1,0,1,3,5]
 };
