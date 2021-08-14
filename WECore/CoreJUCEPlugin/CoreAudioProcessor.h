@@ -85,7 +85,7 @@ namespace WECore::JUCEPlugin {
 
     protected:
         /**
-         * Used to register parameters.
+         * Used to register public parameters that are visible to the host.
          *
          * Float parameters are created with their real (not normalised) ranges.
          *
@@ -114,20 +114,36 @@ namespace WECore::JUCEPlugin {
         inline void registerParameter(juce::AudioParameterBool*& param,
                                       const juce::String& name,
                                       float defaultValue);
+        /** @} */
 
         // These methods allow custom setters if needed
-        inline void registerParameter(juce::AudioParameterFloat*& param,
-                                      const juce::String& name,
-                                      const ParameterDefinition::RangedParameter<double>* range,
-                                      float defaultValue,
-                                      float precision,
-                                      std::function<void(float)> setter);
+        /**
+         * Used to register private parameters that are not visible to the host. Used for parameters
+         * that cause other parameter or state changes so make automation impractical, but should
+         * still be saved/restored and trigger updates through the ParameterBroadcaster as usual.
+         *
+         * These parameters typically need a custom setter when being restored to trigger the extra
+         * parameter/state changes.
+         *
+         * Float parameters are created with their real (not normalised) ranges.
+         *
+         * Int parameters are created with their real (not normalised) ranges.
+         *
+         * (Bool parameters don't have a meaningful range.)
+         */
+        /** @{ */
+        inline void registerPrivateParameter(juce::AudioParameterFloat*& param,
+                                             const juce::String& name,
+                                             const ParameterDefinition::RangedParameter<double>* range,
+                                             float defaultValue,
+                                             float precision,
+                                             std::function<void(float)> setter);
 
-        inline void registerParameter(juce::AudioParameterInt*& param,
-                                      const juce::String& name,
-                                      const ParameterDefinition::BaseParameter<int>* range,
-                                      int defaultValue,
-                                      std::function<void(int)> setter);
+        inline void registerPrivateParameter(juce::AudioParameterInt*& param,
+                                             const juce::String& name,
+                                             const ParameterDefinition::BaseParameter<int>* range,
+                                             int defaultValue,
+                                             std::function<void(int)> setter);
         /** @} */
 
         /**
@@ -252,12 +268,15 @@ namespace WECore::JUCEPlugin {
                                                const ParameterDefinition::RangedParameter<double>* range,
                                                float defaultValue,
                                                float precision) {
-        registerParameter(param,
-                          name,
-                          range,
-                          defaultValue,
-                          precision,
-                          [&](float val) { setParameterValueInternal(param, val); });
+        param = new juce::AudioParameterFloat(name, name, {static_cast<float>(range->minValue), static_cast<float>(range->maxValue), precision}, defaultValue);
+
+        ParameterInterface interface = {name,
+                                        [&param]() { return param->get(); },
+                                        [&](float val) { setParameterValueInternal(param, val); }};
+        _paramsList.push_back(interface);
+
+        param->addListener(&_parameterBroadcaster);
+        addParameter(param);
     }
 
     void CoreAudioProcessor::registerParameter(juce::AudioParameterFloat*& param,
@@ -280,11 +299,15 @@ namespace WECore::JUCEPlugin {
                                                const juce::String& name,
                                                const ParameterDefinition::BaseParameter<int>* range,
                                                int defaultValue) {
-        registerParameter(param,
-                          name,
-                          range,
-                          defaultValue,
-                          [&](int val) { setParameterValueInternal(param, val); });
+        param = new juce::AudioParameterInt(name, name, range->minValue, range->maxValue, defaultValue);
+
+        ParameterInterface interface = {name,
+                                        [&param]() { return param->get(); },
+                                        [&](float val) { setParameterValueInternal(param, static_cast<int>(val)); }};
+        _paramsList.push_back(interface);
+
+        param->addListener(&_parameterBroadcaster);
+        addParameter(param);
     }
 
     void CoreAudioProcessor::registerParameter(juce::AudioParameterBool*& param,
@@ -301,12 +324,12 @@ namespace WECore::JUCEPlugin {
         addParameter(param);
     }
 
-    void CoreAudioProcessor::registerParameter(juce::AudioParameterFloat*& param,
-                                               const juce::String& name,
-                                               const ParameterDefinition::RangedParameter<double>* range,
-                                               float defaultValue,
-                                               float precision,
-                                               std::function<void(float)> setter) {
+    void CoreAudioProcessor::registerPrivateParameter(juce::AudioParameterFloat*& param,
+                                                      const juce::String& name,
+                                                      const ParameterDefinition::RangedParameter<double>* range,
+                                                      float defaultValue,
+                                                      float precision,
+                                                      std::function<void(float)> setter) {
         param = new juce::AudioParameterFloat(name, name, {static_cast<float>(range->minValue), static_cast<float>(range->maxValue), precision}, defaultValue);
 
         ParameterInterface interface = {name,
@@ -315,14 +338,13 @@ namespace WECore::JUCEPlugin {
         _paramsList.push_back(interface);
 
         param->addListener(&_parameterBroadcaster);
-        addParameter(param);
     }
 
-    void CoreAudioProcessor::registerParameter(juce::AudioParameterInt*& param,
-                                               const juce::String& name,
-                                               const ParameterDefinition::BaseParameter<int>* range,
-                                               int defaultValue,
-                                               std::function<void(int)> setter) {
+    void CoreAudioProcessor::registerPrivateParameter(juce::AudioParameterInt*& param,
+                                                      const juce::String& name,
+                                                      const ParameterDefinition::BaseParameter<int>* range,
+                                                      int defaultValue,
+                                                      std::function<void(int)> setter) {
         param = new juce::AudioParameterInt(name, name, range->minValue, range->maxValue, defaultValue);
 
         ParameterInterface interface = {name,
@@ -331,7 +353,6 @@ namespace WECore::JUCEPlugin {
         _paramsList.push_back(interface);
 
         param->addListener(&_parameterBroadcaster);
-        addParameter(param);
     }
 
     std::vector<float> CoreAudioProcessor::_stringToFloatVector(const juce::String sFloatCSV) const {
