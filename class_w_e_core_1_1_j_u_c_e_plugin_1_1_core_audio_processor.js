@@ -13,7 +13,6 @@ var class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor =
     [ "addParameterChangeListener", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a8fdad0c3c094bb0f798d7f315160939c", null ],
     [ "getStateInformation", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac7c282ae8a89516085d96a1f6db7298b", null ],
     [ "registerParameter", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a5bc43f02afa2a546a57c49055a4f8c07", null ],
-    [ "registerParameter", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a57fc745a3d8875068df354d2cb5aef46", null ],
     [ "registerParameter", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#aeb80812d344d16c49e6406c0e4c291f6", null ],
     [ "registerParameter", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#adfb8d9f4fb04e76bf6b92397940b200d", null ],
     [ "registerParameter", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a69b96f0940e5dd38f31f847a6aaaf79e", null ],

@@ -1,6 +1,5 @@
 var NAVTREEINDEX3 =
 {
-"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#aafdab81dd2c2945bda0efb5416471ffb":[1,0,1,7,2,2],
 "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ab4fd1a79e6efac76600cf7382f216843":[1,0,1,7,2,1],
 "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ab7407a244e19c71aaf1a98543c76d264":[1,0,1,7,2,36],
 "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ab8e9f8861670d5d664dbaca2f75fd03a":[1,0,1,7,2,0],
@@ -62,8 +61,8 @@ var NAVTREEINDEX3 =
 "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#aff5869e04e0302aa905da8dde9ebd522":[1,0,1,9,1,13],
 "classes.html":[1,1],
 "files.html":[2,0],
-"functions.html":[1,3,0,0],
 "functions.html":[1,3,0],
+"functions.html":[1,3,0,0],
 "functions_a.html":[1,3,0,1],
 "functions_b.html":[1,3,0,2],
 "functions_c.html":[1,3,0,3],

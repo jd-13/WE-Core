@@ -1,6 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"class_w_e_core_1_1_look_and_feel_mixins_1_1_mid_anchored_rotary_slider.html#ae8a9a68b81a9cf0e4c2fce4243b9b450":[1,0,1,3,4,2],
 "class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html":[1,0,1,3,5],
 "class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html#a0b4396859d4c12c187808bca30392cac":[1,0,1,3,5,0],
 "class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html#a349471299de5466eaf1292653e53fa34":[1,0,1,3,5,4],
@@ -249,5 +248,6 @@ var NAVTREEINDEX2 =
 "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a9872427d7a4562fe53d713886a0559d3":[1,0,1,7,2,16],
 "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a99c691cb8a16db3cb535915012dedb15":[1,0,1,7,2,13],
 "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#aa26742f5919e15604f1d8eb6d5ce1acc":[1,0,1,7,2,39],
-"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#aaf6aa212c69d8e5fdcacdcb1bced7e4b":[1,0,1,7,2,12]
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#aaf6aa212c69d8e5fdcacdcb1bced7e4b":[1,0,1,7,2,12],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#aafdab81dd2c2945bda0efb5416471ffb":[1,0,1,7,2,2]
 };
