@@ -42,7 +42,7 @@ namespace WECore::JUCEPlugin {
     public:
         inline CoreAudioProcessor();
         inline CoreAudioProcessor(const BusesProperties& ioLayouts);
-        virtual ~CoreAudioProcessor() = default;
+        inline virtual ~CoreAudioProcessor();
 
         /**
          * Sets a given parameter using a value in the internal (non-normalised) range.
@@ -87,6 +87,8 @@ namespace WECore::JUCEPlugin {
         /**
          * Used to register public parameters that are visible to the host.
          *
+         * The parameter will be deleted when the processor class is deallocated.
+         *
          * Float parameters are created with their real (not normalised) ranges.
          *
          * Int parameters are created with their real (not normalised) ranges.
@@ -125,6 +127,8 @@ namespace WECore::JUCEPlugin {
          * These parameters typically need a custom setter when being restored to trigger the extra
          * parameter/state changes.
          *
+         * The parameter will be deleted when the processor class is deallocated.
+         *
          * Float parameters are created with their real (not normalised) ranges.
          *
          * Int parameters are created with their real (not normalised) ranges.
@@ -161,6 +165,10 @@ namespace WECore::JUCEPlugin {
 
         // Increment this after changing how parameter states are stored
         static constexpr int PARAMS_SCHEMA_VERSION {1};
+
+        // We need to store pointers to all the private parameters that are registered so that they
+        // can be deallocated by the destructor
+        std::vector<juce::AudioProcessorParameter*> _privateParameters;
 
         /**
          * Stores a setter and getter for a parameter. Used when persisting parameter values to XML
@@ -210,6 +218,12 @@ namespace WECore::JUCEPlugin {
 
     CoreAudioProcessor::CoreAudioProcessor(const BusesProperties& ioLayouts) : juce::AudioProcessor(ioLayouts) {
         addParameterChangeListener(&_parameterListener);
+    }
+
+    CoreAudioProcessor::~CoreAudioProcessor() {
+        for (juce::AudioProcessorParameter* parameter : _privateParameters) {
+            delete parameter;
+        }
     }
 
     void CoreAudioProcessor::setParameterValueInternal(juce::AudioParameterFloat* param, float value) {
@@ -338,6 +352,7 @@ namespace WECore::JUCEPlugin {
         _paramsList.push_back(interface);
 
         param->addListener(&_parameterBroadcaster);
+        _privateParameters.push_back(param);
     }
 
     void CoreAudioProcessor::registerPrivateParameter(juce::AudioParameterInt*& param,
@@ -353,6 +368,7 @@ namespace WECore::JUCEPlugin {
         _paramsList.push_back(interface);
 
         param->addListener(&_parameterBroadcaster);
+        _privateParameters.push_back(param);
     }
 
     std::vector<float> CoreAudioProcessor::_stringToFloatVector(const juce::String sFloatCSV) const {
