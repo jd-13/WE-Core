@@ -41,6 +41,7 @@ namespace WECore::JUCEPlugin {
                                public ParameterUpdateHandler {
     public:
         inline CoreAudioProcessor();
+        inline CoreAudioProcessor(const BusesProperties& ioLayouts);
         virtual ~CoreAudioProcessor() = default;
 
         /**
@@ -86,21 +87,22 @@ namespace WECore::JUCEPlugin {
         /**
          * Used to register parameters.
          *
-         * Float parameters are created with the normalised 0 to 1 range.
+         * Float parameters are created with their real (not normalised) ranges.
          *
          * Int parameters are created with their real (not normalised) ranges.
          *
          * (Bool parameters don't have a meaningful range.)
-         *
-         * The order parameters are registered in determines the order they are persisted to XML
-         * and read from XML when restoring previous values. If this order changes between versions
-         * then a plugin restoring parameter data from XML written by a previous version will assign
-         * values to the wrong parameters.
          */
         /** @{ */
         inline void registerParameter(juce::AudioParameterFloat*& param,
                                       const juce::String& name,
                                       const ParameterDefinition::RangedParameter<double>* range,
+                                      float defaultValue,
+                                      float precision);
+
+        inline void registerParameter(juce::AudioParameterFloat*& param,
+                                      const juce::String& name,
+                                      const ParameterDefinition::RangedParameter<float>* range,
                                       float defaultValue,
                                       float precision);
 
@@ -113,9 +115,17 @@ namespace WECore::JUCEPlugin {
                                       const juce::String& name,
                                       float defaultValue);
 
+        // These methods allow custom setters if needed
         inline void registerParameter(juce::AudioParameterFloat*& param,
                                       const juce::String& name,
                                       const ParameterDefinition::RangedParameter<double>* range,
+                                      float defaultValue,
+                                      float precision,
+                                      std::function<void(float)> setter);
+
+        inline void registerParameter(juce::AudioParameterFloat*& param,
+                                      const juce::String& name,
+                                      const ParameterDefinition::RangedParameter<float>* range,
                                       float defaultValue,
                                       float precision,
                                       std::function<void(float)> setter);
@@ -196,6 +206,10 @@ namespace WECore::JUCEPlugin {
         addParameterChangeListener(&_parameterListener);
     }
 
+    CoreAudioProcessor::CoreAudioProcessor(const BusesProperties& ioLayouts) : juce::AudioProcessor(ioLayouts) {
+        addParameterChangeListener(&_parameterListener);
+    }
+
     void CoreAudioProcessor::setParameterValueInternal(juce::AudioParameterFloat* param, float value) {
         param->setValueNotifyingHost(param->getNormalisableRange().convertTo0to1(value));
     }
@@ -260,6 +274,19 @@ namespace WECore::JUCEPlugin {
                           [&](float val) { setParameterValueInternal(param, val); });
     }
 
+    void CoreAudioProcessor::registerParameter(juce::AudioParameterFloat*& param,
+                                               const juce::String& name,
+                                               const ParameterDefinition::RangedParameter<float>* range,
+                                               float defaultValue,
+                                               float precision) {
+        registerParameter(param,
+                          name,
+                          range,
+                          defaultValue,
+                          precision,
+                          [&](float val) { setParameterValueInternal(param, val); });
+    }
+
     void CoreAudioProcessor::registerParameter(juce::AudioParameterInt*& param,
                                                const juce::String& name,
                                                const ParameterDefinition::BaseParameter<int>* range,
@@ -283,6 +310,23 @@ namespace WECore::JUCEPlugin {
     void CoreAudioProcessor::registerParameter(juce::AudioParameterFloat*& param,
                                                const juce::String& name,
                                                const ParameterDefinition::RangedParameter<double>* range,
+                                               float defaultValue,
+                                               float precision,
+                                               std::function<void(float)> setter) {
+        param = new juce::AudioParameterFloat(name, name, {static_cast<float>(range->minValue), static_cast<float>(range->maxValue), precision}, defaultValue);
+
+        ParameterInterface interface = {name,
+                                        [&param]() { return param->get(); },
+                                        [setter](float val) { setter(val); }};
+        _paramsList.push_back(interface);
+
+        param->addListener(&_parameterBroadcaster);
+        addParameter(param);
+    }
+
+    void CoreAudioProcessor::registerParameter(juce::AudioParameterFloat*& param,
+                                               const juce::String& name,
+                                               const ParameterDefinition::RangedParameter<float>* range,
                                                float defaultValue,
                                                float precision,
                                                std::function<void(float)> setter) {
