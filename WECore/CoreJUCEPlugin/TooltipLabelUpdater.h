@@ -57,19 +57,19 @@ namespace WECore::JUCEPlugin {
     TooltipLabelUpdater::TooltipLabelUpdater() : _targetLabel(nullptr) {
     }
 
-    void TooltipLabelUpdater::mouseEnter(const juce::MouseEvent &event) {
+    void TooltipLabelUpdater::mouseEnter(const juce::MouseEvent& event) {
         if (_targetLabel != nullptr) {
-            TooltipClient* tooltipClient = dynamic_cast<TooltipClient*>(event.eventComponent);
+            juce::TooltipClient* tooltipClient = dynamic_cast<juce::TooltipClient*>(event.eventComponent);
 
             if (tooltipClient != nullptr) {
-                _targetLabel->setText(tooltipClient->getTooltip(), dontSendNotification);
+                _targetLabel->setText(tooltipClient->getTooltip(), juce::dontSendNotification);
             }
         }
     }
 
-    void TooltipLabelUpdater::mouseExit(const juce::MouseEvent &event) {
+    void TooltipLabelUpdater::mouseExit(const juce::MouseEvent& /*event*/) {
         if (_targetLabel != nullptr) {
-            _targetLabel->setText("", dontSendNotification);
+            _targetLabel->setText("", juce::dontSendNotification);
         }
     }
 }
