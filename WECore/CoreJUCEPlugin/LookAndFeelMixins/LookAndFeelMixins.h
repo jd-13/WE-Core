@@ -31,6 +31,7 @@
 #include "MidAnchoredRotarySlider.h"
 #include "PopupMenuV2.h"
 #include "RotarySliderV2.h"
+#include "CoreJUCEPlugin/CoreLookAndFeel.h"
 
 /**
  * Mixin LookAndFeel classes that can be used to augment any existing class derived from

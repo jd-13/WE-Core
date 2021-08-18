@@ -25,6 +25,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "General/CoreMath.h"
 
 namespace WECore::LookAndFeelMixins {
 
