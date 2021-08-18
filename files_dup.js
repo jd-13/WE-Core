@@ -29,6 +29,7 @@ var files_dup =
     [ "CoreAudioProcessor.h", "_core_audio_processor_8h.html", [
       [ "CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor" ],
       [ "ParameterInterface", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface" ],
+      [ "CustomParameterInterface", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_custom_parameter_interface.html", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_custom_parameter_interface" ],
       [ "ParameterBroadcaster", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster" ]
     ] ],
     [ "CoreLookAndFeel.h", "_core_look_and_feel_8h.html", [
@@ -37,6 +38,9 @@ var files_dup =
     [ "CoreMath.h", "_core_math_8h.html", "_core_math_8h" ],
     [ "CoreProcessorEditor.h", "_core_processor_editor_8h.html", [
       [ "CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor" ]
+    ] ],
+    [ "CustomParameter.h", "_custom_parameter_8h.html", [
+      [ "CustomParameter", "class_custom_parameter.html", "class_custom_parameter" ]
     ] ],
     [ "DSPUnitParameterTests.cpp", "_d_s_p_unit_parameter_tests_8cpp.html", "_d_s_p_unit_parameter_tests_8cpp" ],
     [ "DSPUnitProcessingTests.cpp", "_d_s_p_unit_processing_tests_8cpp.html", "_d_s_p_unit_processing_tests_8cpp" ],

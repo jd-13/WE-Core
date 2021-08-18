@@ -1,5 +1,20 @@
 var NAVTREEINDEX3 =
 {
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a74b014ffefb385bdf6890a3ce9672197":[1,0,1,7,2,5],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a7632b8c43643fbb87b1deaed57c6d423":[1,0,1,7,2,7],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a7917076e1eb6ea31a1d9f11e9ef7fb1b":[1,0,1,7,2,41],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a7e888ac87f47acac1c063f9843bae6d1":[1,0,1,7,2,33],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a7f37e2691ea6f33120fd295a25f99b72":[1,0,1,7,2,20],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a881b49ab8c2244afc002e4a90b4f281c":[1,0,1,7,2,23],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a8d6443f9062a78f0019d609d1fb8660f":[1,0,1,7,2,14],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a92902cbbbabaa2fe69694f13233f0da6":[1,0,1,7,2,22],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a9676a8c34196bf4cd1e0ed23df08afe5":[1,0,1,7,2,29],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a9872427d7a4562fe53d713886a0559d3":[1,0,1,7,2,16],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a99c691cb8a16db3cb535915012dedb15":[1,0,1,7,2,13],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#aa26742f5919e15604f1d8eb6d5ce1acc":[1,0,1,7,2,39],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#aaf6aa212c69d8e5fdcacdcb1bced7e4b":[1,0,1,7,2,12],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#aafdab81dd2c2945bda0efb5416471ffb":[1,0,1,7,2,2],
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ab4fd1a79e6efac76600cf7382f216843":[1,0,1,7,2,1],
 "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ab7407a244e19c71aaf1a98543c76d264":[1,0,1,7,2,36],
 "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ab8e9f8861670d5d664dbaca2f75fd03a":[1,0,1,7,2,0],
 "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ac57f6cae5fd48557e712184be68c246c":[1,0,1,7,2,17],
@@ -234,11 +249,5 @@ var NAVTREEINDEX3 =
 "namespacemembers_enum.html":[0,1,4],
 "namespacemembers_func.html":[0,1,1],
 "namespacemembers_type.html":[0,1,3],
-"namespacemembers_vars.html":[0,1,2],
-"namespaces.html":[0,0],
-"pages.html":[],
-"struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html":[1,0,1,2,0,1],
-"struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html#a47026f174f12549b33759dfe4e8f42bc":[1,0,1,2,0,1,2],
-"struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html#a8b4eb1032fcadb75e7f4f6f955159a9a":[1,0,1,2,0,1,1],
-"struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html#ad7b48f4f6282e5c9e211e207bf8a685a":[1,0,1,2,0,1,0]
+"namespacemembers_vars.html":[0,1,2]
 };

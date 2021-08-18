@@ -75,5 +75,6 @@ var annotated_dup =
       [ "EffectsProcessor2in2out", "class_w_e_core_1_1_effects_processor2in2out.html", "class_w_e_core_1_1_effects_processor2in2out" ],
       [ "ModulationSource", "class_w_e_core_1_1_modulation_source.html", "class_w_e_core_1_1_modulation_source" ]
     ] ],
+    [ "CustomParameter", "class_custom_parameter.html", "class_custom_parameter" ],
     [ "UpdateChecker", "class_update_checker.html", "class_update_checker" ]
 ];
