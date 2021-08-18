@@ -27,6 +27,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "General/ParameterDefinition.h"
 #include "ParameterUpdateHandler.h"
+#include "CustomParameter.h"
 
 namespace WECore::JUCEPlugin {
 
@@ -118,7 +119,6 @@ namespace WECore::JUCEPlugin {
                                       float defaultValue);
         /** @} */
 
-        // These methods allow custom setters if needed
         /**
          * Used to register private parameters that are not visible to the host. Used for parameters
          * that cause other parameter or state changes so make automation impractical, but should
@@ -133,7 +133,10 @@ namespace WECore::JUCEPlugin {
          *
          * Int parameters are created with their real (not normalised) ranges.
          *
+         * Custom parameters don't have a range and can only ever be private.
+         *
          * (Bool parameters don't have a meaningful range.)
+         *
          */
         /** @{ */
         inline void registerPrivateParameter(juce::AudioParameterFloat*& param,
@@ -148,6 +151,9 @@ namespace WECore::JUCEPlugin {
                                              const ParameterDefinition::BaseParameter<int>* range,
                                              int defaultValue,
                                              std::function<void(int)> setter);
+
+        template <typename PARAM_TYPE>
+        inline void registerPrivateParameter(PARAM_TYPE*& param, const juce::String& name);
         /** @} */
 
         /**
@@ -169,6 +175,7 @@ namespace WECore::JUCEPlugin {
         // We need to store pointers to all the private parameters that are registered so that they
         // can be deallocated by the destructor
         std::vector<juce::AudioProcessorParameter*> _privateParameters;
+        std::vector<CustomParameter*> _customParameters;
 
         /**
          * Stores a setter and getter for a parameter. Used when persisting parameter values to XML
@@ -178,6 +185,17 @@ namespace WECore::JUCEPlugin {
             juce::String name;
             std::function<float()> getter;
             std::function<void(float)> setter;
+        };
+
+        /**
+         * Stores a setter and getter for a custom parameter. Used when persisting parameter values
+         * to XML and restoring values from XML. Access to the params XML element is provided since
+         * custom parameters typically need to store complex data.
+         */
+        struct CustomParameterInterface {
+            juce::String name;
+            std::function<void(juce::XmlElement*)> writeToXml;
+            std::function<void(juce::XmlElement*)> restoreFromXml;
         };
 
         /**
@@ -200,9 +218,10 @@ namespace WECore::JUCEPlugin {
         ParameterBroadcaster _parameterBroadcaster;
 
         /**
-         * List of parameters in the order they are registered and stored in XML.
+         * List of parameters which will trigger updates and are stored in XML.
          */
         std::vector<ParameterInterface> _paramsList;
+        std::vector<CustomParameterInterface> _customParamsList;
 
         inline std::vector<float> _stringToFloatVector(const juce::String sFloatCSV) const;
 
@@ -222,6 +241,10 @@ namespace WECore::JUCEPlugin {
 
     CoreAudioProcessor::~CoreAudioProcessor() {
         for (juce::AudioProcessorParameter* parameter : _privateParameters) {
+            delete parameter;
+        }
+
+        for (CustomParameter* parameter : _customParameters) {
             delete parameter;
         }
     }
@@ -251,6 +274,11 @@ namespace WECore::JUCEPlugin {
             paramsElement->setAttribute(param.name, param.getter());
         }
 
+        for (const CustomParameterInterface& param : _customParamsList) {
+            juce::XmlElement* thisParameterElement = paramsElement->createNewChildElement(param.name);
+            param.writeToXml(thisParameterElement);
+        }
+
         copyXmlToBinary(rootElement, destData);
     }
 
@@ -271,6 +299,14 @@ namespace WECore::JUCEPlugin {
                 for (const ParameterInterface& param : _paramsList) {
                     if (paramsElement->hasAttribute(param.name)) {
                         param.setter(paramsElement->getDoubleAttribute(param.name));
+                    }
+                }
+
+                for (const CustomParameterInterface& param : _customParamsList) {
+                    juce::XmlElement* thisParameterElement = paramsElement->getChildByName(param.name);
+
+                    if (thisParameterElement != nullptr) {
+                        param.restoreFromXml(thisParameterElement);
                     }
                 }
             }
@@ -369,6 +405,19 @@ namespace WECore::JUCEPlugin {
 
         param->addListener(&_parameterBroadcaster);
         _privateParameters.push_back(param);
+    }
+
+    template <typename PARAM_TYPE>
+    void CoreAudioProcessor::registerPrivateParameter(PARAM_TYPE*& param, const juce::String& name) {
+        param = new PARAM_TYPE();
+
+        CustomParameterInterface interface = {name,
+                                              [&param](juce::XmlElement* element) { param->writeToXml(element); },
+                                              [&param](juce::XmlElement* element) { param->restoreFromXml(element); }};
+        _customParamsList.push_back(interface);
+
+        param->setListener(&_parameterBroadcaster);
+        _customParameters.push_back(param);
     }
 
     std::vector<float> CoreAudioProcessor::_stringToFloatVector(const juce::String sFloatCSV) const {
