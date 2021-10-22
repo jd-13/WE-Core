@@ -25,6 +25,10 @@ var namespace_w_e_core =
       [ "generateSine", "namespace_w_e_core_1_1_test_utils.html#ab1e760c434e356503a5d8d42c5b7b840", null ]
     ] ],
     [ "TPTSVF", "namespace_w_e_core_1_1_t_p_t_s_v_f.html", "namespace_w_e_core_1_1_t_p_t_s_v_f" ],
+    [ "AudioSpinMutex", "class_w_e_core_1_1_audio_spin_mutex.html", "class_w_e_core_1_1_audio_spin_mutex" ],
+    [ "AudioSpinLockBase", "class_w_e_core_1_1_audio_spin_lock_base.html", "class_w_e_core_1_1_audio_spin_lock_base" ],
+    [ "AudioSpinLock", "class_w_e_core_1_1_audio_spin_lock.html", "class_w_e_core_1_1_audio_spin_lock" ],
+    [ "AudioSpinTryLock", "class_w_e_core_1_1_audio_spin_try_lock.html", "class_w_e_core_1_1_audio_spin_try_lock" ],
     [ "EffectsProcessorBase", "class_w_e_core_1_1_effects_processor_base.html", "class_w_e_core_1_1_effects_processor_base" ],
     [ "EffectsProcessor1in1out", "class_w_e_core_1_1_effects_processor1in1out.html", "class_w_e_core_1_1_effects_processor1in1out" ],
     [ "EffectsProcessor1in2out", "class_w_e_core_1_1_effects_processor1in2out.html", "class_w_e_core_1_1_effects_processor1in2out" ],

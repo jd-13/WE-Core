@@ -6,6 +6,11 @@ var hierarchy =
     [ "juce::AudioProcessorEditor", null, [
       [ "WECore::JUCEPlugin::CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", null ]
     ] ],
+    [ "WECore::AudioSpinLockBase", "class_w_e_core_1_1_audio_spin_lock_base.html", [
+      [ "WECore::AudioSpinLock", "class_w_e_core_1_1_audio_spin_lock.html", null ],
+      [ "WECore::AudioSpinTryLock", "class_w_e_core_1_1_audio_spin_try_lock.html", null ]
+    ] ],
+    [ "WECore::AudioSpinMutex", "class_w_e_core_1_1_audio_spin_mutex.html", null ],
     [ "WECore::MONSTR::MONSTRCrossover< SampleType >::BandWrapper", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover_1_1_band_wrapper.html", null ],
     [ "BASE", null, [
       [ "WECore::LookAndFeelMixins::ButtonV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html", null ],

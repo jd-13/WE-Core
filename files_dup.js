@@ -11,6 +11,12 @@ var files_dup =
       [ "AREnvelopeFollowerSquareLaw", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_square_law.html", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_square_law" ]
     ] ],
     [ "AREnvelopeFollowerTests.cpp", "_a_r_envelope_follower_tests_8cpp.html", "_a_r_envelope_follower_tests_8cpp" ],
+    [ "AudioSpinMutex.h", "_audio_spin_mutex_8h.html", [
+      [ "AudioSpinMutex", "class_w_e_core_1_1_audio_spin_mutex.html", "class_w_e_core_1_1_audio_spin_mutex" ],
+      [ "AudioSpinLockBase", "class_w_e_core_1_1_audio_spin_lock_base.html", "class_w_e_core_1_1_audio_spin_lock_base" ],
+      [ "AudioSpinLock", "class_w_e_core_1_1_audio_spin_lock.html", "class_w_e_core_1_1_audio_spin_lock" ],
+      [ "AudioSpinTryLock", "class_w_e_core_1_1_audio_spin_try_lock.html", "class_w_e_core_1_1_audio_spin_try_lock" ]
+    ] ],
     [ "ButtonV2.h", "_button_v2_8h.html", [
       [ "ButtonV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2" ]
     ] ],
