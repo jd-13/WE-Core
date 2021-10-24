@@ -26,51 +26,53 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-/**
- * Used to store state that shouldn't be exposed to the host, but would benefit from using the
- * save/restore and update mechanism used by conventional parameters.
- *
- * Derive from this class and add your own setter/getter methods as needed, just call
- * _updateListener() to trigger an update.
- *
- * Provide an implementation for restoreFromXml and writeToXml to enable saving and restoring
- * parameter state.
- */
-class CustomParameter {
-public:
-    inline CustomParameter();
-    virtual ~CustomParameter() = default;
+namespace WECore::JUCEPlugin {
+    /**
+     * Used to store state that shouldn't be exposed to the host, but would benefit from using the
+     * save/restore and update mechanism used by conventional parameters.
+     *
+     * Derive from this class and add your own setter/getter methods as needed, just call
+     * _updateListener() to trigger an update.
+     *
+     * Provide an implementation for restoreFromXml and writeToXml to enable saving and restoring
+     * parameter state.
+     */
+    class CustomParameter {
+    public:
+        inline CustomParameter();
+        virtual ~CustomParameter() = default;
 
-    inline void setListener(juce::AudioProcessorParameter::Listener* listener);
-    inline void removeListener();
+        inline void setListener(juce::AudioProcessorParameter::Listener* listener);
+        inline void removeListener();
 
-    virtual void restoreFromXml(juce::XmlElement* element) = 0;
-    virtual void writeToXml(juce::XmlElement* element) = 0;
+        virtual void restoreFromXml(juce::XmlElement* element) = 0;
+        virtual void writeToXml(juce::XmlElement* element) = 0;
 
-protected:
-    inline void _updateListener();
+    protected:
+        inline void _updateListener();
 
-private:
-    std::mutex _listenerMutex;
-    juce::AudioProcessorParameter::Listener* _listener;
-};
+    private:
+        std::mutex _listenerMutex;
+        juce::AudioProcessorParameter::Listener* _listener;
+    };
 
-CustomParameter::CustomParameter() : _listener(nullptr) {
-}
+    CustomParameter::CustomParameter() : _listener(nullptr) {
+    }
 
-void CustomParameter::setListener(juce::AudioProcessorParameter::Listener* listener) {
-    std::scoped_lock lock(_listenerMutex);
-    _listener = listener;
-}
+    void CustomParameter::setListener(juce::AudioProcessorParameter::Listener* listener) {
+        std::scoped_lock lock(_listenerMutex);
+        _listener = listener;
+    }
 
-void CustomParameter::removeListener() {
-    std::scoped_lock lock(_listenerMutex);
-    _listener = nullptr;
-}
+    void CustomParameter::removeListener() {
+        std::scoped_lock lock(_listenerMutex);
+        _listener = nullptr;
+    }
 
-void CustomParameter::_updateListener() {
-    std::scoped_lock lock(_listenerMutex);
-    if (_listener != nullptr) {
-        _listener->parameterValueChanged(0, 0);
+    void CustomParameter::_updateListener() {
+        std::scoped_lock lock(_listenerMutex);
+        if (_listener != nullptr) {
+            _listener->parameterValueChanged(0, 0);
+        }
     }
 }
