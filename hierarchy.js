@@ -41,7 +41,7 @@ var hierarchy =
     [ "juce::Component", null, [
       [ "WECore::Richter::WaveViewer", "class_w_e_core_1_1_richter_1_1_wave_viewer.html", null ]
     ] ],
-    [ "CustomParameter", "class_custom_parameter.html", null ],
+    [ "WECore::JUCEPlugin::CustomParameter", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_custom_parameter.html", null ],
     [ "WECore::JUCEPlugin::CoreAudioProcessor::CustomParameterInterface", "struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_custom_parameter_interface.html", null ],
     [ "WECore::EffectsProcessorBase< SampleType >", "class_w_e_core_1_1_effects_processor_base.html", [
       [ "WECore::EffectsProcessor1in1out< SampleType >", "class_w_e_core_1_1_effects_processor1in1out.html", [

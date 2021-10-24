@@ -12,7 +12,7 @@ var searchData=
   ['_7ecoreaudioprocessor_579',['~CoreAudioProcessor',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ab73f83cbd7db0086d80176daa93fa044',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
   ['_7ecorelookandfeel_580',['~CoreLookAndFeel',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html#afc6d7724ae1f43eef5f182bb6b719d51',1,'WECore::JUCEPlugin::CoreLookAndFeel']]],
   ['_7ecoreprocessoreditor_581',['~CoreProcessorEditor',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html#a8aeaf3a736f58aa6db50e8eb2b70ea8b',1,'WECore::JUCEPlugin::CoreProcessorEditor']]],
-  ['_7ecustomparameter_582',['~CustomParameter',['../class_custom_parameter.html#a64bee6d7b88640a3d3443077539920ee',1,'CustomParameter']]],
+  ['_7ecustomparameter_582',['~CustomParameter',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_custom_parameter.html#a0e0ad32406d6b6e5736afd0e8a8138f4',1,'WECore::JUCEPlugin::CustomParameter']]],
   ['_7eeffectsprocessor1in1out_583',['~EffectsProcessor1in1out',['../class_w_e_core_1_1_effects_processor1in1out.html#a0fc3da011ebf2492ee396f6509bba003',1,'WECore::EffectsProcessor1in1out']]],
   ['_7eeffectsprocessor1in2out_584',['~EffectsProcessor1in2out',['../class_w_e_core_1_1_effects_processor1in2out.html#a49fbdacd29d82335ca0d09ffee45a50e',1,'WECore::EffectsProcessor1in2out']]],
   ['_7eeffectsprocessor2in2out_585',['~EffectsProcessor2in2out',['../class_w_e_core_1_1_effects_processor2in2out.html#aca339b6b2ccd7505696b766daf68f36f',1,'WECore::EffectsProcessor2in2out']]],

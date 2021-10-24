@@ -29,7 +29,7 @@ var searchData=
   ['setissoloed_969',['setIsSoloed',['../class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html#a52bdddcb0e34ece332137eb23f409684',1,'WECore::MONSTR::MONSTRCrossover']]],
   ['setkneewidth_970',['setKneeWidth',['../class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#afdfcd44e32a024f1e5a0100c6d3db032',1,'WECore::SimpleCompressor::SimpleCompressor']]],
   ['setlightcolour_971',['setLightColour',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html#a7fa348b2a2de615480415a12369d21e2',1,'WECore::JUCEPlugin::CoreLookAndFeel']]],
-  ['setlistener_972',['setListener',['../class_custom_parameter.html#ab5e2899e9d41ec4564d91d88be6dce80',1,'CustomParameter']]],
+  ['setlistener_972',['setListener',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_custom_parameter.html#ac801ccf927dec937b4dd14de506b032b',1,'WECore::JUCEPlugin::CustomParameter']]],
   ['setlowcuthz_973',['setLowCutHz',['../class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html#a67c429477ff586fd271716582a3c7c11',1,'WECore::AREnv::AREnvelopeFollowerBase']]],
   ['setlowcutoff_974',['setLowCutoff',['../class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a17b244a825e209fec48ed5cb3c04bc2a',1,'WECore::MONSTR::MONSTRBand']]],
   ['setmanualphase_975',['setManualPhase',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a77be454611b1e7335bb8a68b648cab37',1,'WECore::Richter::RichterLFO']]],

@@ -28,6 +28,6 @@ var searchData=
   ['_5fsetvowel1_774',['_setVowel1',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ae090fcab7f09a3e01531793a87367da5',1,'WECore::Songbird::SongbirdFilterModule']]],
   ['_5fstringtofloatvector_775',['_stringToFloatVector',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ada37b03c841ca239927ac201f014d173',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
   ['_5fupdatelabel_776',['_updateLabel',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ac7d9db0e9a534371310ca6f89eae9453',1,'WECore::JUCEPlugin::SliderLabelUpdater::_updateLabel()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html#aabe24d895e9a72785d655887c9d884bb',1,'WECore::JUCEPlugin::LabelReadoutSlider::_updateLabel()']]],
-  ['_5fupdatelistener_777',['_updateListener',['../class_custom_parameter.html#acc8a882713fadefc8f565e799207ad7a',1,'CustomParameter']]],
+  ['_5fupdatelistener_777',['_updateListener',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_custom_parameter.html#a7b08a604d3e0aac19895a8c49b11d0f9',1,'WECore::JUCEPlugin::CustomParameter']]],
   ['_5fwritetostring_778',['_writeToString',['../class_update_checker.html#a2b37dc7aefeaf3922522b34044f1210d',1,'UpdateChecker']]]
 ];

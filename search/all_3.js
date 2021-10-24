@@ -24,7 +24,7 @@ var searchData=
   ['crossover_5ffrequency_198',['CROSSOVER_FREQUENCY',['../namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#a3cd11dd11b2da8dd84ac148034681933',1,'WECore::MONSTR::Parameters']]],
   ['crossover_5flower_5fdefault_199',['CROSSOVER_LOWER_DEFAULT',['../namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#afc1582297d7fc32369bd82290cf4a99e',1,'WECore::MONSTR::Parameters']]],
   ['crossover_5fupper_5fdefault_200',['CROSSOVER_UPPER_DEFAULT',['../namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#a8d307f513b4e84ad682e639042763544',1,'WECore::MONSTR::Parameters']]],
-  ['customparameter_201',['CustomParameter',['../class_custom_parameter.html',1,'CustomParameter'],['../class_custom_parameter.html#ac943aa6f331741f076bccee06c74fc9a',1,'CustomParameter::CustomParameter()']]],
+  ['customparameter_201',['CustomParameter',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_custom_parameter.html#afe8646d676d2b736cb8562c878276d88',1,'WECore::JUCEPlugin::CustomParameter::CustomParameter()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_custom_parameter.html',1,'WECore::JUCEPlugin::CustomParameter']]],
   ['customparameter_2eh_202',['CustomParameter.h',['../_custom_parameter_8h.html',1,'']]],
   ['customparameterinterface_203',['CustomParameterInterface',['../struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_custom_parameter_interface.html',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
   ['cutoff_204',['CUTOFF',['../namespace_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters.html#a56cf89918fba61012242e65c46a280e6',1,'WECore::TPTSVF::Parameters']]],

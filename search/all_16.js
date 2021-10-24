@@ -20,5 +20,5 @@ var searchData=
   ['wecore_566',['WECore',['../namespace_w_e_core.html',1,'']]],
   ['wev2lookandfeel_567',['WEV2LookAndFeel',['../namespace_w_e_core_1_1_look_and_feel_mixins.html#a6f9684d4f6dc327e2deae04436a1c861',1,'WECore::LookAndFeelMixins']]],
   ['width_568',['WIDTH',['../namespace_w_e_core_1_1_stereo_width_1_1_parameters.html#a68d22f0c42eb0657b1ef560d1064cd5e',1,'WECore::StereoWidth::Parameters']]],
-  ['writetoxml_569',['writeToXml',['../struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_custom_parameter_interface.html#a7909e9438d97d7f247832d73f38f7a5a',1,'WECore::JUCEPlugin::CoreAudioProcessor::CustomParameterInterface::writeToXml()'],['../class_custom_parameter.html#a19952b49b6bb876e0a113874689a07c3',1,'CustomParameter::writeToXml()']]]
+  ['writetoxml_569',['writeToXml',['../struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_custom_parameter_interface.html#a7909e9438d97d7f247832d73f38f7a5a',1,'WECore::JUCEPlugin::CoreAudioProcessor::CustomParameterInterface::writeToXml()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_custom_parameter.html#a46e27252884803a99438e8f322d5a077',1,'WECore::JUCEPlugin::CustomParameter::writeToXml()']]]
 ];

@@ -9,6 +9,6 @@ var searchData=
   ['corelookandfeel_801',['CoreLookAndFeel',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html#a09484de8181b14fe99f326cfbfe4d661',1,'WECore::JUCEPlugin::CoreLookAndFeel::CoreLookAndFeel()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html#ac56b2d132306f0fce0001d9e079e0dd5',1,'WECore::JUCEPlugin::CoreLookAndFeel::CoreLookAndFeel(CoreLookAndFeel &amp;)=delete']]],
   ['coreprocessoreditor_802',['CoreProcessorEditor',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html#a9b129fbf60963bc68f80cc6f3760a97a',1,'WECore::JUCEPlugin::CoreProcessorEditor']]],
   ['crossover_5ffrequency_803',['CROSSOVER_FREQUENCY',['../namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#a3cd11dd11b2da8dd84ac148034681933',1,'WECore::MONSTR::Parameters']]],
-  ['customparameter_804',['CustomParameter',['../class_custom_parameter.html#ac943aa6f331741f076bccee06c74fc9a',1,'CustomParameter']]],
+  ['customparameter_804',['CustomParameter',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_custom_parameter.html#afe8646d676d2b736cb8562c878276d88',1,'WECore::JUCEPlugin::CustomParameter']]],
   ['cutoff_805',['CUTOFF',['../namespace_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters.html#a56cf89918fba61012242e65c46a280e6',1,'WECore::TPTSVF::Parameters']]]
 ];
