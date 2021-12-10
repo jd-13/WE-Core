@@ -22,6 +22,7 @@
 #pragma once
 
 #include "JuceHeader.h"
+#include "RichterLFO/RichterParameters.h"
 #include "RichterLFO/RichterWavetables.h"
 
 namespace WECore::Richter {
