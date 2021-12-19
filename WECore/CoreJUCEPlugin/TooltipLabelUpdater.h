@@ -40,7 +40,7 @@ namespace WECore::JUCEPlugin {
         /**
          * Starts updating the label as necessary.
          */
-        void start(juce::Label* targetLabel) { _targetLabel = targetLabel; }
+        inline void start(juce::Label* targetLabel, bool showVersionString);
 
         /**
          * Must be called before the given label is destructed.
@@ -52,9 +52,47 @@ namespace WECore::JUCEPlugin {
 
     private:
         juce::Label* _targetLabel;
+        juce::String _defaultString;
     };
 
     TooltipLabelUpdater::TooltipLabelUpdater() : _targetLabel(nullptr) {
+    }
+
+    void TooltipLabelUpdater::start(juce::Label* targetLabel, bool showVersionString) {
+        _targetLabel = targetLabel;
+
+        if (showVersionString) {
+            _defaultString = JucePlugin_Name;
+            _defaultString += " ";
+            _defaultString += JucePlugin_VersionString;
+
+            // OS
+            _defaultString += " ";
+#if _WIN32
+            _defaultString += "Win";
+#elif __APPLE__
+            _defaultString += "macOS";
+#elif __linux__
+            _defaultString += "Linux";
+#else
+    #error "Unknown OS"
+#endif
+
+            // Arch
+            _defaultString += " ";
+#if __x86_64__
+            _defaultString += "x86_64";
+#elif __aarch64__
+            _defaultString += "arm64";
+#else
+    #error "Unknown arch"
+#endif
+
+        } else {
+            _defaultString = "";
+        }
+
+        _targetLabel->setText(_defaultString, juce::dontSendNotification);
     }
 
     void TooltipLabelUpdater::mouseEnter(const juce::MouseEvent& event) {
@@ -62,14 +100,15 @@ namespace WECore::JUCEPlugin {
             juce::TooltipClient* tooltipClient = dynamic_cast<juce::TooltipClient*>(event.eventComponent);
 
             if (tooltipClient != nullptr) {
-                _targetLabel->setText(tooltipClient->getTooltip(), juce::dontSendNotification);
+                const juce::String displayString = tooltipClient->getTooltip().isEmpty() ? _defaultString : tooltipClient->getTooltip();
+                _targetLabel->setText(displayString, juce::dontSendNotification);
             }
         }
     }
 
     void TooltipLabelUpdater::mouseExit(const juce::MouseEvent& /*event*/) {
         if (_targetLabel != nullptr) {
-            _targetLabel->setText("", juce::dontSendNotification);
+            _targetLabel->setText(_defaultString, juce::dontSendNotification);
         }
     }
 }
