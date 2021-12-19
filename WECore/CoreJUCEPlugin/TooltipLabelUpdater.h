@@ -38,9 +38,16 @@ namespace WECore::JUCEPlugin {
         ~TooltipLabelUpdater() = default;
 
         /**
-         * Starts updating the label as necessary.
+         * Starts updating the label as necessary displaying an empty string when not showing a
+         * tooltip.
          */
-        inline void start(juce::Label* targetLabel, bool showVersionString);
+        inline void start(juce::Label* targetLabel);
+
+        /**
+         * Starts updating the label as necessary, displaying build information when not showing a
+         * tooltip.
+         */
+        inline void start(juce::Label* targetLabel, juce::AudioProcessor::WrapperType pluginFormat);
 
         /**
          * Must be called before the given label is destructed.
@@ -58,39 +65,43 @@ namespace WECore::JUCEPlugin {
     TooltipLabelUpdater::TooltipLabelUpdater() : _targetLabel(nullptr) {
     }
 
-    void TooltipLabelUpdater::start(juce::Label* targetLabel, bool showVersionString) {
+    void TooltipLabelUpdater::start(juce::Label* targetLabel) {
+        _targetLabel = targetLabel;
+        _defaultString = "";
+    }
+
+    void TooltipLabelUpdater::start(juce::Label* targetLabel, juce::AudioProcessor::WrapperType pluginFormat) {
         _targetLabel = targetLabel;
 
-        if (showVersionString) {
-            _defaultString = JucePlugin_Name;
-            _defaultString += " ";
-            _defaultString += JucePlugin_VersionString;
+        _defaultString = JucePlugin_Name;
+        _defaultString += " ";
+        _defaultString += JucePlugin_VersionString;
 
-            // OS
-            _defaultString += " ";
+        // Format
+        _defaultString += " ";
+        _defaultString += juce::AudioProcessor::getWrapperTypeDescription(pluginFormat);
+
+        // OS
+        _defaultString += " ";
 #if _WIN32
-            _defaultString += "Win";
+        _defaultString += "Win";
 #elif __APPLE__
-            _defaultString += "macOS";
+        _defaultString += "macOS";
 #elif __linux__
-            _defaultString += "Linux";
+        _defaultString += "Linux";
 #else
     #error "Unknown OS"
 #endif
 
-            // Arch
-            _defaultString += " ";
+        // Arch
+        _defaultString += " ";
 #if __x86_64__
-            _defaultString += "x86_64";
+        _defaultString += "x86_64";
 #elif __aarch64__
-            _defaultString += "arm64";
+        _defaultString += "arm64";
 #else
     #error "Unknown arch"
 #endif
-
-        } else {
-            _defaultString = "";
-        }
 
         _targetLabel->setText(_defaultString, juce::dontSendNotification);
     }
