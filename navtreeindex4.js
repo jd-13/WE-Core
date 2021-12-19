@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"namespace_w_e_core_1_1_songbird_1_1_parameters.html#a696b9d27af46debf2bfc7783c54cbbd8":[0,0,2,8,0,1],
 "namespace_w_e_core_1_1_songbird_1_1_parameters.html#a7e8bb55b0967bc72f47bfc7aa58c3ec3":[0,0,2,8,0,5],
 "namespace_w_e_core_1_1_songbird_1_1_parameters.html#ae59c42c047712554c4cf49b37872b1fa":[0,0,2,8,0,4],
 "namespace_w_e_core_1_1_songbird_1_1_parameters.html#aed304a25b66b3b5dfa7aaea78d36de4d":[0,0,2,8,0,3],

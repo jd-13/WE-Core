@@ -3,11 +3,12 @@ var NAVTREEINDEX2 =
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html":[1,0,1,2,7],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a2c188b573db893d9a57a90126c46a19e":[1,0,1,2,7,3],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a637ab81fa4fa2fd27b31b1c56d90a668":[1,0,1,2,7,1],
-"class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a8376be7b2169f32ac90be7b2d085494f":[1,0,1,2,7,6],
+"class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a8376be7b2169f32ac90be7b2d085494f":[1,0,1,2,7,7],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a88e0e28c2bc38adef84014b9fc291ae8":[1,0,1,2,7,5],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a91c6e3186996da0364ea91ce615612f0":[1,0,1,2,7,2],
-"class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#ace0d727f984facec1b30766c215085e8":[1,0,1,2,7,4],
 "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#adf07f8f2b04ae870ca3e048d135708a1":[1,0,1,2,7,0],
+"class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#ae9c956acc8db977099584872c16d09ce":[1,0,1,2,7,6],
+"class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#afd846140242937156b621d99d9988403":[1,0,1,2,7,4],
 "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html":[1,0,1,3,0],
 "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html#a01dd2f00b9571eefc7c3717df8aace0f":[1,0,1,3,0,0],
 "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html#a0df0a0253f51b002f5d25c16bd0ed18b":[1,0,1,3,0,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "class_w_e_core_1_1_songbird_1_1_formant.html#add9046e116d1665adda70b4e211cf3ed":[1,0,1,7,1,2],
 "class_w_e_core_1_1_songbird_1_1_formant.html#aec539c2148cd13213a40a7dcb3fb1158":[1,0,1,7,1,0],
 "class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html":[1,0,1,7,0,0],
-"class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a2e250d46e05e3f4d3bd8fbc41f77b8c6":[1,0,1,7,0,0,2],
-"class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a499a67bea77069d2c97f70caf76a1e24":[1,0,1,7,0,0,0]
+"class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a2e250d46e05e3f4d3bd8fbc41f77b8c6":[1,0,1,7,0,0,2]
 };
