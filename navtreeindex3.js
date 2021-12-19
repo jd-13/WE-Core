@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a2e250d46e05e3f4d3bd8fbc41f77b8c6":[1,0,1,7,0,0,2],
 "class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a499a67bea77069d2c97f70caf76a1e24":[1,0,1,7,0,0,0],
 "class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a7e7b93324b8888cb91c687a0c93a615e":[1,0,1,7,0,0,3],
 "class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#ac727a655b71d33afae056f13c8c6c29b":[1,0,1,7,0,0,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "namespace_w_e_core_1_1_songbird_1_1_parameters.html":[0,0,2,8,0],
 "namespace_w_e_core_1_1_songbird_1_1_parameters.html#a1d5282f11aceb45acb4fab7ab748f506":[0,0,2,8,0,6],
 "namespace_w_e_core_1_1_songbird_1_1_parameters.html#a266ff9073edfbf6a74636b86096b907a":[0,0,2,8,0,2],
-"namespace_w_e_core_1_1_songbird_1_1_parameters.html#a296bc7b6d794b489b9f1b1ec49577500":[0,0,2,8,0,7],
-"namespace_w_e_core_1_1_songbird_1_1_parameters.html#a4426102c5467f146719ddeb0137f3009":[0,0,2,8,0,9]
+"namespace_w_e_core_1_1_songbird_1_1_parameters.html#a296bc7b6d794b489b9f1b1ec49577500":[0,0,2,8,0,7]
 };
