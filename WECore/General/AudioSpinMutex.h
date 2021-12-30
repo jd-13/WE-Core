@@ -19,6 +19,8 @@
  *  along with WECore.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#pragma once
+
 #include <array>
 #include <thread>
 #include <atomic>
