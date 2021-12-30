@@ -25,9 +25,12 @@
 #include <thread>
 #include <atomic>
 
+// Some useful links about these instructions in notes/splnlock-instructions.txt
 #ifdef __x86_64__
     #include <emmintrin.h>
-    #define CPU_PAUSE _mm_pause
+    #define CPU_PAUSE _mm_pause();
+#elif defined(__aarch64__)
+    #define CPU_PAUSE __asm__ __volatile__("yield" ::: "memory");
 #else
     #error Unsupported architecture
 #endif
@@ -64,7 +67,7 @@ namespace WECore {
                     return;
                 }
 
-                CPU_PAUSE();
+                CPU_PAUSE
             }
 
             while (true) {
@@ -73,16 +76,16 @@ namespace WECore {
                         return;
                     }
 
-                    CPU_PAUSE();
-                    CPU_PAUSE();
-                    CPU_PAUSE();
-                    CPU_PAUSE();
-                    CPU_PAUSE();
-                    CPU_PAUSE();
-                    CPU_PAUSE();
-                    CPU_PAUSE();
-                    CPU_PAUSE();
-                    CPU_PAUSE();
+                    CPU_PAUSE
+                    CPU_PAUSE
+                    CPU_PAUSE
+                    CPU_PAUSE
+                    CPU_PAUSE
+                    CPU_PAUSE
+                    CPU_PAUSE
+                    CPU_PAUSE
+                    CPU_PAUSE
+                    CPU_PAUSE
                 }
 
                 // Waiting longer than we should, let's give other threads

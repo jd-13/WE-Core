@@ -1,0 +1,10 @@
+https://timur.audio/using-locks-in-real-time-audio-processing-safely
+https://www.keil.com/support/man/docs/armasm/armasm_dom1361289926047.htm
+https://stackoverflow.com/questions/7086220/what-does-rep-nop-mean-in-x86-assembly-is-it-the-same-as-the-pause-instru
+https://stackoverflow.com/questions/12894078/what-is-the-purpose-of-the-pause-instruction-in-x86
+https://stackoverflow.com/questions/7488196/what-is-the-different-of-busy-loop-with-sleep0-and-pause-instruction
+https://stackoverflow.com/questions/19779569/cross-platform-implementation-of-the-x86-pause-instruction
+http://lkml.iu.edu/hypermail/linux/kernel/2107.2/04837.html
+https://support.huaweicloud.com/intl/en-us/pinsrcase-kunpengprocs/kunpengprocessor_18_0013.html
+https://developer.arm.com/documentation/dui0473/m/arm-and-thumb-instructions/yield
+https://developer.arm.com/documentation/ddi0406/b/Application-Level-Architecture/Application-Level-Programmers--Model/Exceptions--debug-events-and-checks/The-Yield-instruction?lang=en
