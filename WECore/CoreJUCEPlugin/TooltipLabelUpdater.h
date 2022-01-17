@@ -95,9 +95,9 @@ namespace WECore::JUCEPlugin {
 
         // Arch
         _defaultString += " ";
-#if __x86_64__
+#ifdef __x86_64__ || _M_AMD64
         _defaultString += "x86_64";
-#elif __aarch64__
+#elif defined(__aarch64__)
         _defaultString += "arm64";
 #else
     #error "Unknown arch"

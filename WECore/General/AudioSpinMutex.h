@@ -26,7 +26,7 @@
 #include <atomic>
 
 // Some useful links about these instructions in notes/splnlock-instructions.txt
-#ifdef __x86_64__
+#ifdef __x86_64__ || _M_AMD64
     #include <emmintrin.h>
     #define CPU_PAUSE _mm_pause();
 #elif defined(__aarch64__)
