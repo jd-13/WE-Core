@@ -167,9 +167,9 @@ $(document).ready(function(){initNavTree('_tooltip_label_updater_8h_source.html'
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="comment">// Arch</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <a class="code" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#ae9c956acc8db977099584872c16d09ce">_defaultString</a> += <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#ifdef __x86_64__ || _M_AMD64</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#if defined(__x86_64__) || defined(_M_AMD64)</span></div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        <a class="code" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#ae9c956acc8db977099584872c16d09ce">_defaultString</a> += <span class="stringliteral">&quot;x86_64&quot;</span>;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#elif defined(__aarch64__)</span></div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#elif defined(__aarch64__) || defined(_M_ARM64)</span></div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        <a class="code" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#ae9c956acc8db977099584872c16d09ce">_defaultString</a> += <span class="stringliteral">&quot;arm64&quot;</span>;</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">#else</span></div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">    #error &quot;Unknown arch&quot;</span></div>
