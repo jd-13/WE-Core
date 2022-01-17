@@ -82,6 +82,11 @@ To build a container locally and push to Docker hub (using the clang example):
     cd DockerFiles/clang10
     docker build --tag <user id>/audioplugins:clang10 .
     docker push <user id>/audioplugins:clang10
+    
+Or on an arm64 mac:
+
+    cd DockerFiles/clang10
+    docker buildx build --platform linux/amd64,linux/arm64 --push --tag <user id>/audioplugins:clang10 .
 
 To run locally in a Docker container:
 
