@@ -29,11 +29,11 @@ ENV COVERAGE_FLAGS --coverage
 RUN apt-get install -y valgrind
 
 # VST SDK
-RUN wget http://www.steinberg.net/sdk_downloads/vstsdk367_03_03_2017_build_352.zip
-RUN unzip vstsdk367_03_03_2017_build_352.zip -d /home
+RUN wget https://www.steinberg.net/vst3sdk
+RUN unzip vst3sdk -d /home
 
 # JUCE SDK
-ARG JUCE_VERSION=6.0.8
+ARG JUCE_VERSION=6.1.4
 RUN wget https://github.com/juce-framework/JUCE/releases/download/${JUCE_VERSION}/juce-${JUCE_VERSION}-linux.zip
 RUN unzip juce-${JUCE_VERSION}-linux.zip -d /home
 ENV JUCE_PATH /home/JUCE
