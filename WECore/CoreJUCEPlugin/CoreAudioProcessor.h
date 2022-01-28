@@ -116,7 +116,7 @@ namespace WECore::JUCEPlugin {
 
         inline void registerParameter(juce::AudioParameterBool*& param,
                                       const juce::String& name,
-                                      float defaultValue);
+                                      bool defaultValue);
         /** @} */
 
         /**
@@ -208,11 +208,11 @@ namespace WECore::JUCEPlugin {
             ParameterBroadcaster() = default;
             virtual ~ParameterBroadcaster() = default;
 
-            virtual void parameterValueChanged(int /*parameterIndex*/, float /*newValue*/) {
+            virtual void parameterValueChanged(int /*parameterIndex*/, float /*newValue*/) override {
                 this->sendChangeMessage();
             }
 
-            virtual void parameterGestureChanged(int parameterIndex, bool gestureIsStarting) {}
+            virtual void parameterGestureChanged(int /*parameterIndex*/, bool /*gestureIsStarting*/) override {}
         };
 
         ParameterBroadcaster _parameterBroadcaster;
@@ -298,7 +298,7 @@ namespace WECore::JUCEPlugin {
             if (paramsElement != nullptr) {
                 for (const ParameterInterface& param : _paramsList) {
                     if (paramsElement->hasAttribute(param.name)) {
-                        param.setter(paramsElement->getDoubleAttribute(param.name));
+                        param.setter(static_cast<float>(paramsElement->getDoubleAttribute(param.name)));
                     }
                 }
 
@@ -362,7 +362,7 @@ namespace WECore::JUCEPlugin {
 
     void CoreAudioProcessor::registerParameter(juce::AudioParameterBool*& param,
                                                const juce::String& name,
-                                               float defaultValue) {
+                                               bool defaultValue) {
         param = new juce::AudioParameterBool(name, name, defaultValue);
 
         ParameterInterface interface = {name,
@@ -453,7 +453,7 @@ namespace WECore::JUCEPlugin {
 
                     juce::XmlElement* paramsElement = retVal->createNewChildElement("Params");
 
-                    for (int idx {0}; idx < paramNames.size(); idx++) {
+                    for (size_t idx {0}; idx < paramNames.size(); idx++) {
                         if (idx < readParamValues.size()) {
                             paramsElement->setAttribute(paramNames[idx], readParamValues[idx]);
                         }
