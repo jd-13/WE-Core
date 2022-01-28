@@ -2,10 +2,10 @@ var searchData=
 [
   ['paint_913',['paint',['../class_w_e_core_1_1_richter_1_1_wave_viewer.html#aa62176c7989afef44e24616cd8adc7d3',1,'WECore::Richter::WaveViewer']]],
   ['parameterbroadcaster_914',['ParameterBroadcaster',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#add9f19509f2f7bcac297688e624ecc91',1,'WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster']]],
-  ['parametergesturechanged_915',['parameterGestureChanged',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#a7bfb77a44a6d730e9a09b669555a07f4',1,'WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster']]],
+  ['parametergesturechanged_915',['parameterGestureChanged',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#af6dcb4bd20ff163356b89d3426dc92c3',1,'WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster']]],
   ['parameterupdatehandler_916',['ParameterUpdateHandler',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler.html#a49413e2c98a3dc65d44c4cc715d1d8d4',1,'WECore::JUCEPlugin::ParameterUpdateHandler']]],
   ['parameterupdatelistener_917',['ParameterUpdateListener',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler_1_1_parameter_update_listener.html#aa8b9c38af57f6ca7ffeed72cf7efe027',1,'WECore::JUCEPlugin::ParameterUpdateHandler::ParameterUpdateListener']]],
-  ['parametervaluechanged_918',['parameterValueChanged',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#a23d77a3f02bd4a4aeb25b814e4f03cf0',1,'WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster']]],
+  ['parametervaluechanged_918',['parameterValueChanged',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#a99a32a49769bbc16f3066f6f72cb23a0',1,'WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster']]],
   ['phase_919',['PHASE',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a0acd9377cc329963f319f10e7baf20de',1,'WECore::Richter::Parameters']]],
   ['popupmenuv2_920',['PopupMenuV2',['../class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html#a0b4396859d4c12c187808bca30392cac',1,'WECore::LookAndFeelMixins::PopupMenuV2']]],
   ['postgain_921',['POSTGAIN',['../namespace_w_e_core_1_1_carve_1_1_parameters.html#af6191b6162d4568c955af2535ecd79ae',1,'WECore::Carve::Parameters']]],

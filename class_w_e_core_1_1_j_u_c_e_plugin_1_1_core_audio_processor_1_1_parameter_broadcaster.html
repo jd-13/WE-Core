@@ -101,10 +101,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:add9f19509f2f7bcac297688e624ecc91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1b304962af24c84cf28d2ce8f4a7b48"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#ac1b304962af24c84cf28d2ce8f4a7b48">~ParameterBroadcaster</a> ()=default</td></tr>
 <tr class="separator:ac1b304962af24c84cf28d2ce8f4a7b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23d77a3f02bd4a4aeb25b814e4f03cf0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#a23d77a3f02bd4a4aeb25b814e4f03cf0">parameterValueChanged</a> (int, float)</td></tr>
-<tr class="separator:a23d77a3f02bd4a4aeb25b814e4f03cf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7bfb77a44a6d730e9a09b669555a07f4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#a7bfb77a44a6d730e9a09b669555a07f4">parameterGestureChanged</a> (int parameterIndex, bool gestureIsStarting)</td></tr>
-<tr class="separator:a7bfb77a44a6d730e9a09b669555a07f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99a32a49769bbc16f3066f6f72cb23a0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#a99a32a49769bbc16f3066f6f72cb23a0">parameterValueChanged</a> (int, float) override</td></tr>
+<tr class="separator:a99a32a49769bbc16f3066f6f72cb23a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af6dcb4bd20ff163356b89d3426dc92c3"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_broadcaster.html#af6dcb4bd20ff163356b89d3426dc92c3">parameterGestureChanged</a> (int, bool) override</td></tr>
+<tr class="separator:af6dcb4bd20ff163356b89d3426dc92c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Listens for parameter changes and triggers the broadcaster so the changes can be handled by another thread. </p>
@@ -162,8 +162,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7bfb77a44a6d730e9a09b669555a07f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7bfb77a44a6d730e9a09b669555a07f4">&#9670;&nbsp;</a></span>parameterGestureChanged()</h2>
+<a id="af6dcb4bd20ff163356b89d3426dc92c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6dcb4bd20ff163356b89d3426dc92c3">&#9670;&nbsp;</a></span>parameterGestureChanged()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -175,13 +175,13 @@ Public Member Functions</h2></td></tr>
           <td class="memname">virtual void WECore::JUCEPlugin::CoreAudioProcessor::ParameterBroadcaster::parameterGestureChanged </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>parameterIndex</em>, </td>
+          <td class="paramname">, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>gestureIsStarting</em>&#160;</td>
+          <td class="paramname">&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -191,7 +191,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -200,8 +200,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a23d77a3f02bd4a4aeb25b814e4f03cf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23d77a3f02bd4a4aeb25b814e4f03cf0">&#9670;&nbsp;</a></span>parameterValueChanged()</h2>
+<a id="a99a32a49769bbc16f3066f6f72cb23a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99a32a49769bbc16f3066f6f72cb23a0">&#9670;&nbsp;</a></span>parameterValueChanged()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -229,7 +229,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
