@@ -137,9 +137,9 @@ namespace WECore::LookAndFeelMixins {
         } else {
             // Vertical rectangle
             g.fillRect(juce::Rectangle<float>(x + MARGIN,
-                                              minSliderPos,
+                                              y + height,
                                               width - 3 * MARGIN,
-                                              sliderPos - minSliderPos));
+                                              -(y + height - sliderPos)));
         }
     }
 
