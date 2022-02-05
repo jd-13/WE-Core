@@ -1,8 +1,8 @@
 var _a_r_envelope_follower_parameters_8h =
 [
-    [ "ATTACK_MS", "_a_r_envelope_follower_parameters_8h.html#ae39727d2f7d5ab98afc8e56441707190", null ],
+    [ "ATTACK_MS", "_a_r_envelope_follower_parameters_8h.html#ae31dd21c358ab4872d23c0ec5a10fc6c", null ],
     [ "FILTER_ENABLED", "_a_r_envelope_follower_parameters_8h.html#a54735986a61084ac8a691af52108e3b9", null ],
-    [ "HIGH_CUT", "_a_r_envelope_follower_parameters_8h.html#a58af282b178294f1962d9a95c990055d", null ],
-    [ "LOW_CUT", "_a_r_envelope_follower_parameters_8h.html#a43fc0fbfd6f16d74a34b98ef07c9b497", null ],
-    [ "RELEASE_MS", "_a_r_envelope_follower_parameters_8h.html#a9474f3bdcb6fce6ee9e8891b5b2230c3", null ]
+    [ "HIGH_CUT", "_a_r_envelope_follower_parameters_8h.html#a689eb62aa02ea22f0c4538a2b3ac6624", null ],
+    [ "LOW_CUT", "_a_r_envelope_follower_parameters_8h.html#aae3e4e4338b77fa9d9432e6ebb83799b", null ],
+    [ "RELEASE_MS", "_a_r_envelope_follower_parameters_8h.html#a65caa77a6cca85c0f051d8d3ba665933", null ]
 ];

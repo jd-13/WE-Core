@@ -1,8 +1,8 @@
 var annotated_dup =
 [
     [ "ParameterDefinition", "namespace_parameter_definition.html", [
-      [ "BooleanParameter", "class_parameter_definition_1_1_boolean_parameter.html", "class_parameter_definition_1_1_boolean_parameter" ],
       [ "BaseParameter", "class_parameter_definition_1_1_base_parameter.html", "class_parameter_definition_1_1_base_parameter" ],
+      [ "BooleanParameter", "class_parameter_definition_1_1_boolean_parameter.html", "class_parameter_definition_1_1_boolean_parameter" ],
       [ "RangedParameter", "class_parameter_definition_1_1_ranged_parameter.html", "class_parameter_definition_1_1_ranged_parameter" ]
     ] ],
     [ "WECore", "namespace_w_e_core.html", [
@@ -23,9 +23,9 @@ var annotated_dup =
         [ "CoreLookAndFeel", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel" ],
         [ "CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor" ],
         [ "CustomParameter", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_custom_parameter.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_custom_parameter" ],
-        [ "SliderLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater" ],
         [ "LabelReadoutSlider", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider" ],
         [ "ParameterUpdateHandler", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_parameter_update_handler" ],
+        [ "SliderLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater" ],
         [ "TooltipLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater" ]
       ] ],
       [ "LookAndFeelMixins", "namespace_w_e_core_1_1_look_and_feel_mixins.html", [
@@ -38,8 +38,8 @@ var annotated_dup =
         [ "RotarySliderV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2" ]
       ] ],
       [ "MONSTR", "namespace_w_e_core_1_1_m_o_n_s_t_r.html", [
-        [ "MONSTRCrossover", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover" ],
-        [ "MONSTRBand", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band" ]
+        [ "MONSTRBand", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band" ],
+        [ "MONSTRCrossover", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover" ]
       ] ],
       [ "Richter", "namespace_w_e_core_1_1_richter.html", [
         [ "Parameters", "namespace_w_e_core_1_1_richter_1_1_parameters.html", [
@@ -70,14 +70,14 @@ var annotated_dup =
         ] ],
         [ "TPTSVFilter", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter" ]
       ] ],
-      [ "AudioSpinMutex", "class_w_e_core_1_1_audio_spin_mutex.html", "class_w_e_core_1_1_audio_spin_mutex" ],
-      [ "AudioSpinLockBase", "class_w_e_core_1_1_audio_spin_lock_base.html", "class_w_e_core_1_1_audio_spin_lock_base" ],
       [ "AudioSpinLock", "class_w_e_core_1_1_audio_spin_lock.html", "class_w_e_core_1_1_audio_spin_lock" ],
+      [ "AudioSpinLockBase", "class_w_e_core_1_1_audio_spin_lock_base.html", "class_w_e_core_1_1_audio_spin_lock_base" ],
+      [ "AudioSpinMutex", "class_w_e_core_1_1_audio_spin_mutex.html", "class_w_e_core_1_1_audio_spin_mutex" ],
       [ "AudioSpinTryLock", "class_w_e_core_1_1_audio_spin_try_lock.html", "class_w_e_core_1_1_audio_spin_try_lock" ],
-      [ "EffectsProcessorBase", "class_w_e_core_1_1_effects_processor_base.html", "class_w_e_core_1_1_effects_processor_base" ],
       [ "EffectsProcessor1in1out", "class_w_e_core_1_1_effects_processor1in1out.html", "class_w_e_core_1_1_effects_processor1in1out" ],
       [ "EffectsProcessor1in2out", "class_w_e_core_1_1_effects_processor1in2out.html", "class_w_e_core_1_1_effects_processor1in2out" ],
       [ "EffectsProcessor2in2out", "class_w_e_core_1_1_effects_processor2in2out.html", "class_w_e_core_1_1_effects_processor2in2out" ],
+      [ "EffectsProcessorBase", "class_w_e_core_1_1_effects_processor_base.html", "class_w_e_core_1_1_effects_processor_base" ],
       [ "ModulationSource", "class_w_e_core_1_1_modulation_source.html", "class_w_e_core_1_1_modulation_source" ]
     ] ],
     [ "UpdateChecker", "class_update_checker.html", "class_update_checker" ]

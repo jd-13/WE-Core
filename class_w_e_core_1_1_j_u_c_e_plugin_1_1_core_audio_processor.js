@@ -8,7 +8,7 @@ var class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor =
     [ "~CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ab73f83cbd7db0086d80176daa93fa044", null ],
     [ "_migrateParameters", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a6e63d36b3007624b1f3c1b4d63acb1f1", null ],
     [ "_migrateParamValues", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a45d6490bb5e47d07e8f97cc2d4efa7d9", null ],
-    [ "_provideParamNamesForMigration", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a9709b4ed0fecf1a85c46aa1596974321", null ],
+    [ "_provideParamNamesForMigration", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a32ace3a0777f58285da43818c7de653d", null ],
     [ "_stringToFloatVector", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ada37b03c841ca239927ac201f014d173", null ],
     [ "addParameterChangeListener", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a8fdad0c3c094bb0f798d7f315160939c", null ],
     [ "getStateInformation", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac7c282ae8a89516085d96a1f6db7298b", null ],

@@ -104,7 +104,7 @@ var searchData=
   ['_5fprocessparabolichard_101',['_processParabolicHard',['../class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html#ad43ba40dbe61fba9c2cfa817206bfdc9',1,'WECore::Carve::CarveDSPUnit']]],
   ['_5fprocessparabolicsoft_102',['_processParabolicSoft',['../class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html#afaac8598653ad0e6fece5f324b87b141',1,'WECore::Carve::CarveDSPUnit']]],
   ['_5fprocesssine_103',['_processSine',['../class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html#aa1300d6132b318892409428790c27980',1,'WECore::Carve::CarveDSPUnit']]],
-  ['_5fprovideparamnamesformigration_104',['_provideParamNamesForMigration',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a9709b4ed0fecf1a85c46aa1596974321',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
+  ['_5fprovideparamnamesformigration_104',['_provideParamNamesForMigration',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a32ace3a0777f58285da43818c7de653d',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
   ['_5fq_105',['_Q',['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a4b268f77a4f12d12e39e0976c6f7a06c',1,'WECore::TPTSVF::TPTSVFilter']]],
   ['_5fratio_106',['_ratio',['../class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#af044ad38dac24ff1bda5574d39248be1',1,'WECore::SimpleCompressor::SimpleCompressor']]],
   ['_5frawdepth_107',['_rawDepth',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#abaa0ffd91d0c5a25aa34467ea313bc1e',1,'WECore::Richter::RichterLFO']]],

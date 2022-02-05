@@ -21,7 +21,7 @@ var class_w_e_core_1_1_songbird_1_1_songbird_filter_module =
     [ "setFilterPosition", "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ae1bf07c52c19b3dee88e9494d4fb6e57", null ],
     [ "setMix", "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#af3eef0fee769a6b60b2445ad06fc0b1e", null ],
     [ "setModMode", "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a7f37e2691ea6f33120fd295a25f99b72", null ],
-    [ "setModulationSource", "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a57465d3cd9ee950596adee8b3b47203e", null ],
+    [ "setModulationSource", "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a0a9b666bcf026e73a90b7f42dcac7ebc", null ],
     [ "setOutputGain", "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a92902cbbbabaa2fe69694f13233f0da6", null ],
     [ "setSampleRate", "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a881b49ab8c2244afc002e4a90b4f281c", null ],
     [ "setVowel1", "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a00376416bf1c59fa98b19a0b18a66b72", null ],

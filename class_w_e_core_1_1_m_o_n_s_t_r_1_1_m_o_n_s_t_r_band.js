@@ -10,7 +10,7 @@ var class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band =
     [ "process2in2out", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#aedfbe9514db416c1ef67567e1fa00395", null ],
     [ "reset", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#ac520655fdc9aaf5fc98e2311c7c887ab", null ],
     [ "setBandType", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a78b9fca448e27869aa3437ce7f534721", null ],
-    [ "setEffectsProcessor", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#af33947715dde7a5d998bea831323cde5", null ],
+    [ "setEffectsProcessor", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a541fdbb965195df591802e6c8e63d5d3", null ],
     [ "setHighCutoff", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#af812a0e389a82caa69d4bb41ecfc9b43", null ],
     [ "setIsActive", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#a6e0f444bd9c8be3518c44e6c08e81781", null ],
     [ "setIsMuted", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html#af4762ed13c8684d6bc30d044de8abc3b", null ],
