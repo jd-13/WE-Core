@@ -10,5 +10,6 @@ var searchData=
   ['mousedrag_7',['mouseDrag',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#aa532ef23daa3b38ad88a7e1fe18362c4',1,'WECore::JUCEPlugin::SliderLabelUpdater']]],
   ['mouseenter_8',['mouseEnter',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a53bb81cc39ea3019d328f66ed037e745',1,'WECore::JUCEPlugin::SliderLabelUpdater::mouseEnter()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a91c6e3186996da0364ea91ce615612f0',1,'WECore::JUCEPlugin::TooltipLabelUpdater::mouseEnter()']]],
   ['mouseexit_9',['mouseExit',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ab5c1d6cb3e77f26c20f3b15a79c0c093',1,'WECore::JUCEPlugin::SliderLabelUpdater::mouseExit()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a2c188b573db893d9a57a90126c46a19e',1,'WECore::JUCEPlugin::TooltipLabelUpdater::mouseExit()']]],
-  ['mousewheelmove_10',['mouseWheelMove',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a45da3b32e8966e18c1c330f5d90cffff',1,'WECore::JUCEPlugin::SliderLabelUpdater']]]
+  ['mousemove_10',['mouseMove',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a4a33410ad3ec73754683529b01788ca4',1,'WECore::JUCEPlugin::SliderLabelUpdater']]],
+  ['mousewheelmove_11',['mouseWheelMove',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a45da3b32e8966e18c1c330f5d90cffff',1,'WECore::JUCEPlugin::SliderLabelUpdater']]]
 ];

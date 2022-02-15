@@ -110,6 +110,8 @@ Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><div class="groupHeader">Mouse event handlers</div></td></tr>
 <tr class="memitem:a53bb81cc39ea3019d328f66ed037e745"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a53bb81cc39ea3019d328f66ed037e745">mouseEnter</a> (const juce::MouseEvent &amp;event) override</td></tr>
 <tr class="separator:a53bb81cc39ea3019d328f66ed037e745"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a33410ad3ec73754683529b01788ca4"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a4a33410ad3ec73754683529b01788ca4">mouseMove</a> (const juce::MouseEvent &amp;event) override</td></tr>
+<tr class="separator:a4a33410ad3ec73754683529b01788ca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5c1d6cb3e77f26c20f3b15a79c0c093"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ab5c1d6cb3e77f26c20f3b15a79c0c093">mouseExit</a> (const juce::MouseEvent &amp;event) override</td></tr>
 <tr class="separator:ab5c1d6cb3e77f26c20f3b15a79c0c093"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab53f0e6080ebe6f708f5a43f4fe0bddf"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ab53f0e6080ebe6f708f5a43f4fe0bddf">mouseDoubleClick</a> (const juce::MouseEvent &amp;event) override</td></tr>
@@ -121,8 +123,8 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:ac7d9db0e9a534371310ca6f89eae9453"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ac7d9db0e9a534371310ca6f89eae9453">_updateLabel</a> ()=0</td></tr>
-<tr class="separator:ac7d9db0e9a534371310ca6f89eae9453"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9152a433d8c767afa6dd0b710e4c5977"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a9152a433d8c767afa6dd0b710e4c5977">_updateLabel</a> (const juce::MouseEvent &amp;event)=0</td></tr>
+<tr class="separator:a9152a433d8c767afa6dd0b710e4c5977"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1271c65df0fd62e21d34e9bf45dd2e47"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a1271c65df0fd62e21d34e9bf45dd2e47">_resetLabel</a> ()=0</td></tr>
 <tr class="separator:a1271c65df0fd62e21d34e9bf45dd2e47"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -211,12 +213,12 @@ Private Member Functions</h2></td></tr>
 
 <p>Implemented in <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html#a5ac0a503ec061002d435edc97a14f4c3">WECore::JUCEPlugin::LabelReadoutSlider&lt; T &gt;</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_label_readout_slider_8h_source.html#l00047">mouseExit()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_label_readout_slider_8h_source.html#l00052">mouseExit()</a>.</p>
 
 </div>
 </div>
-<a id="ac7d9db0e9a534371310ca6f89eae9453" name="ac7d9db0e9a534371310ca6f89eae9453"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac7d9db0e9a534371310ca6f89eae9453">&#9670;&nbsp;</a></span>_updateLabel()</h2>
+<a id="a9152a433d8c767afa6dd0b710e4c5977" name="a9152a433d8c767afa6dd0b710e4c5977"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9152a433d8c767afa6dd0b710e4c5977">&#9670;&nbsp;</a></span>_updateLabel()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -227,7 +229,8 @@ Private Member Functions</h2></td></tr>
         <tr>
           <td class="memname">virtual void WECore::JUCEPlugin::SliderLabelUpdater::_updateLabel </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const juce::MouseEvent &amp;&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -239,9 +242,9 @@ Private Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p >Called when the Slider value may have changed and the Label(s) should be updated. </p>
 
-<p>Implemented in <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html#aabe24d895e9a72785d655887c9d884bb">WECore::JUCEPlugin::LabelReadoutSlider&lt; T &gt;</a>.</p>
+<p>Implemented in <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html#ae7dc229b2e8b289987ccba49728300a5">WECore::JUCEPlugin::LabelReadoutSlider&lt; T &gt;</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_label_readout_slider_8h_source.html#l00052">mouseDoubleClick()</a>, <a class="el" href="_label_readout_slider_8h_source.html#l00057">mouseDrag()</a>, <a class="el" href="_label_readout_slider_8h_source.html#l00042">mouseEnter()</a>, and <a class="el" href="_label_readout_slider_8h_source.html#l00062">mouseWheelMove()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_label_readout_slider_8h_source.html#l00057">mouseDoubleClick()</a>, <a class="el" href="_label_readout_slider_8h_source.html#l00062">mouseDrag()</a>, <a class="el" href="_label_readout_slider_8h_source.html#l00042">mouseEnter()</a>, <a class="el" href="_label_readout_slider_8h_source.html#l00047">mouseMove()</a>, and <a class="el" href="_label_readout_slider_8h_source.html#l00067">mouseWheelMove()</a>.</p>
 
 </div>
 </div>
@@ -269,9 +272,9 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_readout_slider_8h_source.html#l00052">52</a> of file <a class="el" href="_label_readout_slider_8h_source.html">LabelReadoutSlider.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_label_readout_slider_8h_source.html#l00057">57</a> of file <a class="el" href="_label_readout_slider_8h_source.html">LabelReadoutSlider.h</a>.</p>
 
-<p class="reference">References <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ac7d9db0e9a534371310ca6f89eae9453">_updateLabel()</a>.</p>
+<p class="reference">References <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a9152a433d8c767afa6dd0b710e4c5977">_updateLabel()</a>.</p>
 
 </div>
 </div>
@@ -299,9 +302,9 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_readout_slider_8h_source.html#l00057">57</a> of file <a class="el" href="_label_readout_slider_8h_source.html">LabelReadoutSlider.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_label_readout_slider_8h_source.html#l00062">62</a> of file <a class="el" href="_label_readout_slider_8h_source.html">LabelReadoutSlider.h</a>.</p>
 
-<p class="reference">References <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ac7d9db0e9a534371310ca6f89eae9453">_updateLabel()</a>.</p>
+<p class="reference">References <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a9152a433d8c767afa6dd0b710e4c5977">_updateLabel()</a>.</p>
 
 </div>
 </div>
@@ -331,7 +334,7 @@ Private Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_label_readout_slider_8h_source.html#l00042">42</a> of file <a class="el" href="_label_readout_slider_8h_source.html">LabelReadoutSlider.h</a>.</p>
 
-<p class="reference">References <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ac7d9db0e9a534371310ca6f89eae9453">_updateLabel()</a>.</p>
+<p class="reference">References <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a9152a433d8c767afa6dd0b710e4c5977">_updateLabel()</a>.</p>
 
 </div>
 </div>
@@ -359,9 +362,39 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_readout_slider_8h_source.html#l00047">47</a> of file <a class="el" href="_label_readout_slider_8h_source.html">LabelReadoutSlider.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_label_readout_slider_8h_source.html#l00052">52</a> of file <a class="el" href="_label_readout_slider_8h_source.html">LabelReadoutSlider.h</a>.</p>
 
 <p class="reference">References <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a1271c65df0fd62e21d34e9bf45dd2e47">_resetLabel()</a>.</p>
+
+</div>
+</div>
+<a id="a4a33410ad3ec73754683529b01788ca4" name="a4a33410ad3ec73754683529b01788ca4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a33410ad3ec73754683529b01788ca4">&#9670;&nbsp;</a></span>mouseMove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void WECore::JUCEPlugin::SliderLabelUpdater::mouseMove </td>
+          <td>(</td>
+          <td class="paramtype">const juce::MouseEvent &amp;&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_label_readout_slider_8h_source.html#l00047">47</a> of file <a class="el" href="_label_readout_slider_8h_source.html">LabelReadoutSlider.h</a>.</p>
+
+<p class="reference">References <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a9152a433d8c767afa6dd0b710e4c5977">_updateLabel()</a>.</p>
 
 </div>
 </div>
@@ -399,9 +432,9 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_label_readout_slider_8h_source.html#l00062">62</a> of file <a class="el" href="_label_readout_slider_8h_source.html">LabelReadoutSlider.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_label_readout_slider_8h_source.html#l00067">67</a> of file <a class="el" href="_label_readout_slider_8h_source.html">LabelReadoutSlider.h</a>.</p>
 
-<p class="reference">References <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ac7d9db0e9a534371310ca6f89eae9453">_updateLabel()</a>.</p>
+<p class="reference">References <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a9152a433d8c767afa6dd0b710e4c5977">_updateLabel()</a>.</p>
 
 </div>
 </div>
