@@ -27,7 +27,8 @@
 
 namespace WECore::Richter {
 
-    class WaveViewer : public juce::Component {
+    class WaveViewer : public juce::Component,
+                       public juce::SettableTooltipClient {
     public:
         WaveViewer() : _waveArrayPointer(nullptr), _depth(0), _phaseShift(0), _isInverted(false) {}
 
