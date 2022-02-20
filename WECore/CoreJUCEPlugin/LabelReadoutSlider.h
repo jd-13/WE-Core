@@ -90,7 +90,8 @@ namespace WECore::JUCEPlugin {
     class LabelReadoutSlider : public SliderLabelUpdater {
     public:
         explicit LabelReadoutSlider(const juce::String& componentName) : SliderLabelUpdater(componentName),
-                                                                         _isRunning(false) {}
+                                                                         _isRunning(false),
+                                                                         _valueToString([](T value) { return juce::String(value, 2); }) {}
 
         virtual ~LabelReadoutSlider() = default;
 
@@ -112,9 +113,12 @@ namespace WECore::JUCEPlugin {
          */
         inline void stop();
 
+        void setValueToString(std::function<juce::String(T)> valueToString) { _valueToString = valueToString; }
+
     protected:
         std::function<void(const juce::String&)> _targetCallback;
         bool _isRunning;
+        std::function<juce::String(T)> _valueToString;
 
     private:
         juce::String _defaultText;
@@ -154,8 +158,7 @@ namespace WECore::JUCEPlugin {
     template <class T>
     void LabelReadoutSlider<T>::_updateLabel(const juce::MouseEvent& /*event*/) {
         if (_isRunning) {
-            const juce::String valueString(getValue(), 2);
-            _targetCallback(valueString);
+            _targetCallback(_valueToString(getValue()));
         }
     }
 
