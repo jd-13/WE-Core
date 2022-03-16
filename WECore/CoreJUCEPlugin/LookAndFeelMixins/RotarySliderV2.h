@@ -74,8 +74,10 @@ namespace WECore::LookAndFeelMixins {
                                             (slider.getMaximum() - slider.getMinimum())};
         const double arcEndPoint {sliderNormalisedValue * rangeOfMotion + arcGap / 2};
 
-        constexpr double margin {1.5};
-        const double diameter {static_cast<float>(height - margin * 2)};
+        constexpr int margin {2};
+        juce::Rectangle<int> area = slider.getBounds();
+        area.reduce(margin, margin);
+        const int diameter {std::min(area.getWidth(), area.getHeight())};
 
         if (slider.isEnabled()) {
             g.setColour(slider.findColour(juce::Slider::rotarySliderFillColourId));
