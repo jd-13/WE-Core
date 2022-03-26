@@ -70,8 +70,7 @@ namespace WECore::LookAndFeelMixins {
         constexpr double arcGap {CoreMath::DOUBLE_TAU / 4};
         constexpr double rangeOfMotion {CoreMath::DOUBLE_TAU - arcGap};
 
-        const double sliderNormalisedValue {(slider.getValue() - slider.getMinimum()) /
-                                            (slider.getMaximum() - slider.getMinimum())};
+        const double sliderNormalisedValue {slider.valueToProportionOfLength(slider.getValue())};
         const double arcEndPoint {sliderNormalisedValue * rangeOfMotion + arcGap / 2};
 
         constexpr int margin {2};
