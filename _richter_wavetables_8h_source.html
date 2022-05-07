@@ -196,14 +196,15 @@ $(document).ready(function(){initNavTree('_richter_wavetables_8h_source.html',''
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> idx = 0; idx &lt; <a class="code hl_variable" href="class_w_e_core_1_1_richter_1_1_wavetables.html#a239ed04e97a55aea3c8cfffa2d5bc13a">Wavetables::SIZE</a>; idx++) {</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>            <span class="keyword">const</span> <span class="keywordtype">double</span> radians {idx * <a class="code hl_variable" href="namespace_w_e_core_1_1_core_math.html#ae00c8ec17baff1f901f8e7515e4af029">CoreMath::DOUBLE_TAU</a> / <a class="code hl_variable" href="class_w_e_core_1_1_richter_1_1_wavetables.html#a239ed04e97a55aea3c8cfffa2d5bc13a">Wavetables::SIZE</a>};</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span> </div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <span class="comment">// y = -2sin( (0.15x - 1.21)^6 ) + 1</span></div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            <a class="code hl_variable" href="class_w_e_core_1_1_richter_1_1_wavetables.html#a362aa391b2808574be04ab75a4058b15">_sidechainTable</a>[idx] =</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>            (</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                -2 * sin(pow(0.15 * radians - 1.21, 6)) + 1</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            );</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        }</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    }</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>}</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>            <a class="code hl_variable" href="class_w_e_core_1_1_richter_1_1_wavetables.html#a362aa391b2808574be04ab75a4058b15">_sidechainTable</a>[idx] =</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>            (</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                radians &lt; 0.4497 ?</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                    -2 * sin(pow(0.2 * radians - 0.8245, 6) * 10) + 1 :</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>                    -2 * sin(pow(0.15 * radians - 0.802, 6) * 10) + 1</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            );</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>        }</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>    }</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>}</div>
 <div class="ttc" id="a_core_math_8h_html"><div class="ttname"><a href="_core_math_8h.html">CoreMath.h</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_richter_1_1_wavetables_html"><div class="ttname"><a href="class_w_e_core_1_1_richter_1_1_wavetables.html">WECore::Richter::Wavetables</a></div><div class="ttdef"><b>Definition:</b> <a href="_richter_wavetables_8h_source.html#l00031">RichterWavetables.h:31</a></div></div>
 <div class="ttc" id="aclass_w_e_core_1_1_richter_1_1_wavetables_html_a1b68ba7e957a0325396ce4f38bbb11e6"><div class="ttname"><a href="class_w_e_core_1_1_richter_1_1_wavetables.html#a1b68ba7e957a0325396ce4f38bbb11e6">WECore::Richter::Wavetables::_sawTable</a></div><div class="ttdeci">double _sawTable[SIZE]</div><div class="ttdef"><b>Definition:</b> <a href="_richter_wavetables_8h_source.html#l00052">RichterWavetables.h:52</a></div></div>
