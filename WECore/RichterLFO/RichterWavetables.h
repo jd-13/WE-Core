@@ -118,10 +118,11 @@ namespace WECore::Richter {
         for (int idx = 0; idx < Wavetables::SIZE; idx++) {
             const double radians {idx * CoreMath::DOUBLE_TAU / Wavetables::SIZE};
 
-            // y = -2sin( (0.15x - 1.21)^6 ) + 1
             _sidechainTable[idx] =
             (
-                -2 * sin(pow(0.15 * radians - 1.21, 6)) + 1
+                radians < 0.4497 ?
+                    -2 * sin(pow(0.2 * radians - 0.8245, 6) * 10) + 1 :
+                    -2 * sin(pow(0.15 * radians - 0.802, 6) * 10) + 1
             );
         }
     }
