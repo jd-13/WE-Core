@@ -102,7 +102,7 @@ namespace WECore::LookAndFeelMixins {
                                                      int height,
                                                      float sliderPos,
                                                      float minSliderPos,
-                                                     float maxSliderPos,
+                                                     float /*maxSliderPos*/,
                                                      const juce::Slider::SliderStyle style,
                                                      juce::Slider& slider) {
 
@@ -113,20 +113,6 @@ namespace WECore::LookAndFeelMixins {
         } else {
             g.setColour(slider.findColour(juce::Slider::backgroundColourId));
         }
-
-        // Horizontal
-        float rectangleX {static_cast<float>(minSliderPos)};
-        float rectangleY {static_cast<float>(y) + MARGIN};
-        float rectangleWidth {sliderPos - minSliderPos};
-        float rectangleHeight {static_cast<float>(height) - 3 * MARGIN};
-
-        if (style == juce::Slider::LinearVertical) {
-            rectangleX = x + MARGIN;
-            rectangleY = maxSliderPos;
-            rectangleWidth = width - 3 * MARGIN;
-            rectangleHeight = -(sliderPos - minSliderPos);
-        }
-
 
         if (style == juce::Slider::LinearHorizontal) {
             // Horizontal rectangle
