@@ -33,7 +33,7 @@ RUN wget https://www.steinberg.net/vst3sdk
 RUN unzip vst3sdk -d /home
 
 # JUCE SDK
-ARG JUCE_VERSION=7.0.3
+ARG JUCE_VERSION=7.0.4
 RUN wget https://github.com/juce-framework/JUCE/releases/download/${JUCE_VERSION}/juce-${JUCE_VERSION}-linux.zip
 RUN unzip juce-${JUCE_VERSION}-linux.zip -d /home
 ENV JUCE_PATH /home/JUCE
