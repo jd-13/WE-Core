@@ -69,6 +69,11 @@ namespace WECore::JUCEPlugin {
         }
 
         /**
+         * Calls writeToXml and stores the XML in the given memory block.
+         */
+        inline void getStateInformation(juce::MemoryBlock& destData) override;
+
+        /**
          * Collects the registered parameter values and writes them to XML.
          *
          * Float parameters are written in their normalised 0 to 1 range.
@@ -77,12 +82,17 @@ namespace WECore::JUCEPlugin {
          *
          * Bool parameters are written as a float representation of true or false.
          */
-        inline void getStateInformation(juce::MemoryBlock& destData) override;
+        inline std::unique_ptr<juce::XmlElement> writeToXml();
+
+        /**
+         * Reads the given memory into an XmlElement and calls restoreFromXml.
+         */
+        inline void setStateInformation(const void* data, int sizeInBytes) override;
 
         /**
          * Restores parameter values from previously written XML.
          */
-        inline void setStateInformation(const void* data, int sizeInBytes) override;
+        inline void restoreFromXml(std::unique_ptr<juce::XmlElement> element);
 
     protected:
         /**
@@ -262,14 +272,18 @@ namespace WECore::JUCEPlugin {
     }
 
     void CoreAudioProcessor::getStateInformation(juce::MemoryBlock& destData) {
-        // Build the XML
-        juce::XmlElement rootElement("Root");
+        std::unique_ptr<juce::XmlElement> element = writeToXml();
+        copyXmlToBinary(*element.get(), destData);
+    }
+
+    std::unique_ptr<juce::XmlElement> CoreAudioProcessor::writeToXml() {
+        auto rootElement = std::make_unique<juce::XmlElement>("Root");
 
         // Set the XML params version
-        rootElement.setAttribute("SchemaVersion", PARAMS_SCHEMA_VERSION);
+        rootElement->setAttribute("SchemaVersion", PARAMS_SCHEMA_VERSION);
 
         // Store the parameters
-        juce::XmlElement* paramsElement = rootElement.createNewChildElement("Params");
+        juce::XmlElement* paramsElement = rootElement->createNewChildElement("Params");
         for (const ParameterInterface& param : _paramsList) {
             paramsElement->setAttribute(param.name, param.getter());
         }
@@ -279,22 +293,25 @@ namespace WECore::JUCEPlugin {
             param.writeToXml(thisParameterElement);
         }
 
-        copyXmlToBinary(rootElement, destData);
+        return rootElement;
     }
 
     void CoreAudioProcessor::setStateInformation(const void* data, int sizeInBytes) {
-        std::unique_ptr<juce::XmlElement> rootElement(getXmlFromBinary(data, sizeInBytes));
+        std::unique_ptr<juce::XmlElement> element(getXmlFromBinary(data, sizeInBytes));
+        restoreFromXml(std::move(element));
+    }
 
+    void CoreAudioProcessor::restoreFromXml(std::unique_ptr<juce::XmlElement> element) {
         // Parse the XML
-        if (rootElement != nullptr) {
+        if (element != nullptr) {
 
             // If state was saved using an old plugin we need to migrate the XML data
-            if (rootElement->getIntAttribute("SchemaVersion", 0) < PARAMS_SCHEMA_VERSION) {
-                rootElement = _migrateParameters(std::move(rootElement));
+            if (element->getIntAttribute("SchemaVersion", 0) < PARAMS_SCHEMA_VERSION) {
+                element = _migrateParameters(std::move(element));
             }
 
             // Iterate through our list of parameters, restoring them from the XML attributes
-            juce::XmlElement* paramsElement = rootElement->getChildByName("Params");
+            juce::XmlElement* paramsElement = element->getChildByName("Params");
             if (paramsElement != nullptr) {
                 for (const ParameterInterface& param : _paramsList) {
                     if (paramsElement->hasAttribute(param.name)) {
