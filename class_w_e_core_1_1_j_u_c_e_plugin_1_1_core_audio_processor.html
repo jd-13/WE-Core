@@ -135,8 +135,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad63880796af88beed934062810ebb246"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7c282ae8a89516085d96a1f6db7298b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac7c282ae8a89516085d96a1f6db7298b">getStateInformation</a> (juce::MemoryBlock &amp;destData) override</td></tr>
 <tr class="separator:ac7c282ae8a89516085d96a1f6db7298b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab89ab6c8e7f64f21422d984bfefebaed"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; juce::XmlElement &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ab89ab6c8e7f64f21422d984bfefebaed">writeToXml</a> ()</td></tr>
+<tr class="separator:ab89ab6c8e7f64f21422d984bfefebaed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e8e26d808c96cdeca23e3f8b8ff08ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a6e8e26d808c96cdeca23e3f8b8ff08ad">setStateInformation</a> (const void *data, int sizeInBytes) override</td></tr>
 <tr class="separator:a6e8e26d808c96cdeca23e3f8b8ff08ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cd9b1cec770b52e9213ddfa435bde82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a9cd9b1cec770b52e9213ddfa435bde82">restoreFromXml</a> (std::unique_ptr&lt; juce::XmlElement &gt; element)</td></tr>
+<tr class="separator:a9cd9b1cec770b52e9213ddfa435bde82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader"></div></td></tr>
 <tr class="memitem:a4afd2a9e30f7c189224bd94972ec3b48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a4afd2a9e30f7c189224bd94972ec3b48">setParameterValueInternal</a> (juce::AudioParameterFloat *param, float value)</td></tr>
 <tr class="separator:a4afd2a9e30f7c189224bd94972ec3b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,7 +243,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00234">234</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00244">244</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
 <p class="reference">References <a class="el" href="_parameter_update_handler_8h_source.html#l00053">WECore::JUCEPlugin::ParameterUpdateHandler::_parameterListener</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00060">addParameterChangeListener()</a>.</p>
 
@@ -269,7 +273,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00238">238</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00248">248</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
 <p class="reference">References <a class="el" href="_parameter_update_handler_8h_source.html#l00053">WECore::JUCEPlugin::ParameterUpdateHandler::_parameterListener</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00060">addParameterChangeListener()</a>.</p>
 
@@ -298,9 +302,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00242">242</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00252">252</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00178">_customParameters</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00177">_privateParameters</a>.</p>
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00188">_customParameters</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00187">_privateParameters</a>.</p>
 
 </div>
 </div>
@@ -329,11 +333,11 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00436">436</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00453">453</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a45d6490bb5e47d07e8f97cc2d4efa7d9">_migrateParamValues()</a>, <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a32ace3a0777f58285da43818c7de653d">_provideParamNamesForMigration()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00423">_stringToFloatVector()</a>.</p>
+<p class="reference">References <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a45d6490bb5e47d07e8f97cc2d4efa7d9">_migrateParamValues()</a>, <a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a32ace3a0777f58285da43818c7de653d">_provideParamNamesForMigration()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00440">_stringToFloatVector()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00285">setStateInformation()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00304">restoreFromXml()</a>.</p>
 
 </div>
 </div>
@@ -362,7 +366,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p >Override this to migrate saved parameter values from normalised to internal. </p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00436">_migrateParameters()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00453">_migrateParameters()</a>.</p>
 
 </div>
 </div>
@@ -390,7 +394,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 <p >Override this and return a vector of parameter names corresponding to the order that parameters were stored in using the legacy schema. </p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00436">_migrateParameters()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00453">_migrateParameters()</a>.</p>
 
 </div>
 </div>
@@ -418,9 +422,9 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00423">423</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00440">440</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00436">_migrateParameters()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00453">_migrateParameters()</a>.</p>
 
 </div>
 </div>
@@ -451,9 +455,9 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00060">60</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00218">_parameterBroadcaster</a>.</p>
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00228">_parameterBroadcaster</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00234">CoreAudioProcessor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00244">CoreAudioProcessor()</a>.</p>
 
 </div>
 </div>
@@ -480,14 +484,11 @@ Additional Inherited Members</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Collects the registered parameter values and writes them to XML.</p>
-<p >Float parameters are written in their normalised 0 to 1 range.</p>
-<p >Int parameters are written as a float representation of their real (not normalised) value.</p>
-<p >Bool parameters are written as a float representation of true or false. </p>
+<p >Calls writeToXml and stores the XML in the given memory block. </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00264">264</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00274">274</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00224">_customParamsList</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00223">_paramsList</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00173">PARAMS_SCHEMA_VERSION</a>.</p>
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00279">writeToXml()</a>.</p>
 
 </div>
 </div>
@@ -536,9 +537,9 @@ Additional Inherited Members</h2></td></tr>
 <p >Int parameters are created with their real (not normalised) ranges.</p>
 <p >(Bool parameters don't have a meaningful range.) </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00363">363</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00380">380</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00218">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00223">_paramsList</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00252">setParameterValueInternal()</a>.</p>
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00228">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00233">_paramsList</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00262">setParameterValueInternal()</a>.</p>
 
 </div>
 </div>
@@ -599,9 +600,9 @@ Additional Inherited Members</h2></td></tr>
 <p >Int parameters are created with their real (not normalised) ranges.</p>
 <p >(Bool parameters don't have a meaningful range.) </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00316">316</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00333">333</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00218">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00223">_paramsList</a>, <a class="el" href="_parameter_definition_8h_source.html#l00068">ParameterDefinition::BaseParameter&lt; T &gt;::maxValue</a>, <a class="el" href="_parameter_definition_8h_source.html#l00067">ParameterDefinition::BaseParameter&lt; T &gt;::minValue</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00252">setParameterValueInternal()</a>.</p>
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00228">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00233">_paramsList</a>, <a class="el" href="_parameter_definition_8h_source.html#l00068">ParameterDefinition::BaseParameter&lt; T &gt;::maxValue</a>, <a class="el" href="_parameter_definition_8h_source.html#l00067">ParameterDefinition::BaseParameter&lt; T &gt;::minValue</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00262">setParameterValueInternal()</a>.</p>
 
 </div>
 </div>
@@ -662,9 +663,9 @@ Additional Inherited Members</h2></td></tr>
 <p >Int parameters are created with their real (not normalised) ranges.</p>
 <p >(Bool parameters don't have a meaningful range.) </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00332">332</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00349">349</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00218">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00223">_paramsList</a>, <a class="el" href="_parameter_definition_8h_source.html#l00068">ParameterDefinition::BaseParameter&lt; T &gt;::maxValue</a>, <a class="el" href="_parameter_definition_8h_source.html#l00067">ParameterDefinition::BaseParameter&lt; T &gt;::minValue</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00252">setParameterValueInternal()</a>.</p>
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00228">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00233">_paramsList</a>, <a class="el" href="_parameter_definition_8h_source.html#l00068">ParameterDefinition::BaseParameter&lt; T &gt;::maxValue</a>, <a class="el" href="_parameter_definition_8h_source.html#l00067">ParameterDefinition::BaseParameter&lt; T &gt;::minValue</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00262">setParameterValueInternal()</a>.</p>
 
 </div>
 </div>
@@ -719,9 +720,9 @@ Additional Inherited Members</h2></td></tr>
 <p >Int parameters are created with their real (not normalised) ranges.</p>
 <p >(Bool parameters don't have a meaningful range.) </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00348">348</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00365">365</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00218">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00223">_paramsList</a>, <a class="el" href="_parameter_definition_8h_source.html#l00068">ParameterDefinition::BaseParameter&lt; T &gt;::maxValue</a>, <a class="el" href="_parameter_definition_8h_source.html#l00067">ParameterDefinition::BaseParameter&lt; T &gt;::minValue</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00252">setParameterValueInternal()</a>.</p>
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00228">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00233">_paramsList</a>, <a class="el" href="_parameter_definition_8h_source.html#l00068">ParameterDefinition::BaseParameter&lt; T &gt;::maxValue</a>, <a class="el" href="_parameter_definition_8h_source.html#l00067">ParameterDefinition::BaseParameter&lt; T &gt;::minValue</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00262">setParameterValueInternal()</a>.</p>
 
 </div>
 </div>
@@ -790,9 +791,9 @@ Additional Inherited Members</h2></td></tr>
 <p >Custom parameters don't have a range and can only ever be private.</p>
 <p >(Bool parameters don't have a meaningful range.) </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00377">377</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00394">394</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00218">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00223">_paramsList</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00177">_privateParameters</a>, <a class="el" href="_parameter_definition_8h_source.html#l00068">ParameterDefinition::BaseParameter&lt; T &gt;::maxValue</a>, and <a class="el" href="_parameter_definition_8h_source.html#l00067">ParameterDefinition::BaseParameter&lt; T &gt;::minValue</a>.</p>
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00228">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00233">_paramsList</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00187">_privateParameters</a>, <a class="el" href="_parameter_definition_8h_source.html#l00068">ParameterDefinition::BaseParameter&lt; T &gt;::maxValue</a>, and <a class="el" href="_parameter_definition_8h_source.html#l00067">ParameterDefinition::BaseParameter&lt; T &gt;::minValue</a>.</p>
 
 </div>
 </div>
@@ -855,9 +856,9 @@ Additional Inherited Members</h2></td></tr>
 <p >Custom parameters don't have a range and can only ever be private.</p>
 <p >(Bool parameters don't have a meaningful range.) </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00394">394</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00411">411</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00218">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00223">_paramsList</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00177">_privateParameters</a>, <a class="el" href="_parameter_definition_8h_source.html#l00068">ParameterDefinition::BaseParameter&lt; T &gt;::maxValue</a>, and <a class="el" href="_parameter_definition_8h_source.html#l00067">ParameterDefinition::BaseParameter&lt; T &gt;::minValue</a>.</p>
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00228">_parameterBroadcaster</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00233">_paramsList</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00187">_privateParameters</a>, <a class="el" href="_parameter_definition_8h_source.html#l00068">ParameterDefinition::BaseParameter&lt; T &gt;::maxValue</a>, and <a class="el" href="_parameter_definition_8h_source.html#l00067">ParameterDefinition::BaseParameter&lt; T &gt;::minValue</a>.</p>
 
 </div>
 </div>
@@ -904,9 +905,9 @@ template&lt;typename PARAM_TYPE &gt; </div>
 <p >Custom parameters don't have a range and can only ever be private.</p>
 <p >(Bool parameters don't have a meaningful range.) </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00411">411</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00428">428</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00178">_customParameters</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00224">_customParamsList</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00218">_parameterBroadcaster</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00197">WECore::JUCEPlugin::CoreAudioProcessor::CustomParameterInterface::writeToXml</a>.</p>
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00188">_customParameters</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00234">_customParamsList</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00228">_parameterBroadcaster</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00207">WECore::JUCEPlugin::CoreAudioProcessor::CustomParameterInterface::writeToXml</a>.</p>
 
 </div>
 </div>
@@ -937,7 +938,40 @@ template&lt;typename PARAM_TYPE &gt; </div>
 
 <p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00067">67</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00218">_parameterBroadcaster</a>.</p>
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00228">_parameterBroadcaster</a>.</p>
+
+</div>
+</div>
+<a id="a9cd9b1cec770b52e9213ddfa435bde82" name="a9cd9b1cec770b52e9213ddfa435bde82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cd9b1cec770b52e9213ddfa435bde82">&#9670;&#160;</a></span>restoreFromXml()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WECore::JUCEPlugin::CoreAudioProcessor::restoreFromXml </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; juce::XmlElement &gt;&#160;</td>
+          <td class="paramname"><em>element</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Restores parameter values from previously written XML. </p>
+
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00304">304</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00234">_customParamsList</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00453">_migrateParameters()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00233">_paramsList</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00183">PARAMS_SCHEMA_VERSION</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00299">setStateInformation()</a>.</p>
 
 </div>
 </div>
@@ -976,7 +1010,7 @@ template&lt;typename PARAM_TYPE &gt; </div>
 </div><div class="memdoc">
 <p >Sets a given parameter using a value in the internal (non-normalised) range. </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00260">260</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00270">270</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
 </div>
 </div>
@@ -1015,9 +1049,9 @@ template&lt;typename PARAM_TYPE &gt; </div>
 </div><div class="memdoc">
 <p >Sets a given parameter using a value in the internal (non-normalised) range. </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00252">252</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00262">262</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00316">registerParameter()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00333">registerParameter()</a>.</p>
 
 </div>
 </div>
@@ -1056,7 +1090,7 @@ template&lt;typename PARAM_TYPE &gt; </div>
 </div><div class="memdoc">
 <p >Sets a given parameter using a value in the internal (non-normalised) range. </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00256">256</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00266">266</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
 </div>
 </div>
@@ -1093,11 +1127,46 @@ template&lt;typename PARAM_TYPE &gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Restores parameter values from previously written XML. </p>
+<p >Reads the given memory into an XmlElement and calls restoreFromXml. </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00285">285</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00299">299</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00224">_customParamsList</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00436">_migrateParameters()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00223">_paramsList</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00173">PARAMS_SCHEMA_VERSION</a>.</p>
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00304">restoreFromXml()</a>.</p>
+
+</div>
+</div>
+<a id="ab89ab6c8e7f64f21422d984bfefebaed" name="ab89ab6c8e7f64f21422d984bfefebaed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab89ab6c8e7f64f21422d984bfefebaed">&#9670;&#160;</a></span>writeToXml()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt; juce::XmlElement &gt; WECore::JUCEPlugin::CoreAudioProcessor::writeToXml </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Collects the registered parameter values and writes them to XML.</p>
+<p >Float parameters are written in their normalised 0 to 1 range.</p>
+<p >Int parameters are written as a float representation of their real (not normalised) value.</p>
+<p >Bool parameters are written as a float representation of true or false. </p>
+
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00279">279</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+
+<p class="reference">References <a class="el" href="_core_audio_processor_8h_source.html#l00234">_customParamsList</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00233">_paramsList</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00183">PARAMS_SCHEMA_VERSION</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00274">getStateInformation()</a>.</p>
 
 </div>
 </div>
@@ -1122,9 +1191,9 @@ template&lt;typename PARAM_TYPE &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00178">178</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00188">188</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00411">registerPrivateParameter()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00242">~CoreAudioProcessor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00428">registerPrivateParameter()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00252">~CoreAudioProcessor()</a>.</p>
 
 </div>
 </div>
@@ -1148,9 +1217,9 @@ template&lt;typename PARAM_TYPE &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00224">224</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00234">234</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00264">getStateInformation()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00411">registerPrivateParameter()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00285">setStateInformation()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00428">registerPrivateParameter()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00304">restoreFromXml()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00279">writeToXml()</a>.</p>
 
 </div>
 </div>
@@ -1174,9 +1243,9 @@ template&lt;typename PARAM_TYPE &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00218">218</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00228">228</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00060">addParameterChangeListener()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00316">registerParameter()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00377">registerPrivateParameter()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00067">removeParameterChangeListener()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00060">addParameterChangeListener()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00333">registerParameter()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00394">registerPrivateParameter()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00067">removeParameterChangeListener()</a>.</p>
 
 </div>
 </div>
@@ -1201,9 +1270,9 @@ template&lt;typename PARAM_TYPE &gt; </div>
 </div><div class="memdoc">
 <p >List of parameters which will trigger updates and are stored in XML. </p>
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00223">223</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00233">233</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00264">getStateInformation()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00316">registerParameter()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00377">registerPrivateParameter()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00285">setStateInformation()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00333">registerParameter()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00394">registerPrivateParameter()</a>, <a class="el" href="_core_audio_processor_8h_source.html#l00304">restoreFromXml()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00279">writeToXml()</a>.</p>
 
 </div>
 </div>
@@ -1227,9 +1296,9 @@ template&lt;typename PARAM_TYPE &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00177">177</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00187">187</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00377">registerPrivateParameter()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00242">~CoreAudioProcessor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00394">registerPrivateParameter()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00252">~CoreAudioProcessor()</a>.</p>
 
 </div>
 </div>
@@ -1253,9 +1322,9 @@ template&lt;typename PARAM_TYPE &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00173">173</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_core_audio_processor_8h_source.html#l00183">183</a> of file <a class="el" href="_core_audio_processor_8h_source.html">CoreAudioProcessor.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00264">getStateInformation()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00285">setStateInformation()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_core_audio_processor_8h_source.html#l00304">restoreFromXml()</a>, and <a class="el" href="_core_audio_processor_8h_source.html#l00279">writeToXml()</a>.</p>
 
 </div>
 </div>
