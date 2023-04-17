@@ -1,7 +1,7 @@
 var namespace_w_e_core_1_1_m_o_n_s_t_r =
 [
     [ "Parameters", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html", [
-      [ "CROSSOVER_FREQUENCY", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#aeb5a5f681bab09125f38930db2d1b6e9", null ],
+      [ "CROSSOVER_FREQUENCY", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#a0c61e6d89a1fa17d6347a9597d7ea3c2", null ],
       [ "NUM_BANDS", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#a3a12adfa38f27e78ca0e81aa15181e49", null ],
       [ "_DEFAULT_NUM_BANDS", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#acbae7b0f626fc8bf60ecb65b9383107b", null ],
       [ "_MAX_NUM_BANDS", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#ae9dd3155863c2904b60f94360a26ba30", null ],
@@ -13,9 +13,7 @@ var namespace_w_e_core_1_1_m_o_n_s_t_r =
       [ "BANDSOLO_ON", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#afb0264c40068be492f783fa4e5935d3c", null ],
       [ "BANDSWITCH_DEFAULT", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#ae4f79df4506dc9982dddc7ad73df9c5f", null ],
       [ "BANDSWITCH_OFF", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#aface683228ad9a78fdf1bd27b2d83590", null ],
-      [ "BANDSWITCH_ON", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#acd5cfd37a543d047f08e62e619a3389c", null ],
-      [ "CROSSOVER_LOWER_DEFAULT", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#afc1582297d7fc32369bd82290cf4a99e", null ],
-      [ "CROSSOVER_UPPER_DEFAULT", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#a8d307f513b4e84ad682e639042763544", null ]
+      [ "BANDSWITCH_ON", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#acd5cfd37a543d047f08e62e619a3389c", null ]
     ] ],
     [ "MONSTRBand", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band" ],
     [ "MONSTRCrossover", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover" ],
