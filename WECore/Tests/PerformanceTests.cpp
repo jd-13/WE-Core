@@ -28,7 +28,6 @@
 #include <chrono>
 
 #include "CarveDSP/CarveDSPUnit.h"
-#include "MONSTRFilters/MONSTRCrossover.h"
 #include "SongbirdFilters/SongbirdFilterModule.h"
 
 
@@ -134,57 +133,6 @@ SCENARIO("Performance: CarveDSPUnit, 100 buffers of 1024 samples each") {
                 for (size_t jjj {0}; jjj < buffer.size(); jjj++) {
                     buffer[jjj] = mCarve.process(buffer[jjj]);
                 }
-                const clock_t endTime {clock()};
-
-                // calculate the execution time
-                const double CLOCKS_PER_MICROSEC {static_cast<double>(CLOCKS_PER_SEC) / 1000};
-                const double executionTime {static_cast<double>(endTime - startTime) / CLOCKS_PER_MICROSEC};
-                executionTimes.push_back(executionTime);
-                CHECK(executionTime < mLimits.INDIVIDUAL);
-            }
-
-            THEN("The average and variance are within limits") {
-                Stats mStats = calcAverageAndDeviation(executionTimes);
-                CHECK(mStats.average < mLimits.AVERAGE);
-                CHECK(mStats.deviation < mLimits.DEVIATION);
-
-                appendToResultsFile(mStats, Catch::getResultCapture().getCurrentTestName());
-            }
-        }
-    }
-}
-
-SCENARIO("Performance: MONSTRCrossover, 100 buffers of 1024 samples each") {
-    GIVEN("A MONSTRCrossover and a buffer of samples") {
-
-        const int NUM_BUFFERS {100};
-        std::vector<double> leftBuffer(1024);
-        std::vector<double> rightBuffer(1024);
-        WECore::MONSTR::MONSTRCrossover<double> mCrossover;
-
-        // set the performance limits
-        Limits mLimits{1.0, 0.8, 0.08};
-
-        // store the execution time for each buffer
-        std::vector<double> executionTimes;
-
-        WHEN("The samples are processed") {
-            // turn the crossover on
-            mCrossover.setIsActive(0, true);
-            mCrossover.setIsActive(1, true);
-            mCrossover.setIsActive(2, true);
-
-            for (int nbuf {0}; nbuf < NUM_BUFFERS; nbuf++) {
-
-                // fill the buffer with a sine wave
-                int iii {0};
-                std::generate(leftBuffer.begin(), leftBuffer.end(), [&iii]{ return std::sin(iii++); });
-                rightBuffer = leftBuffer;
-
-
-                // do processing
-                const clock_t startTime {clock()};
-                mCrossover.Process2in2out(&leftBuffer[0], &rightBuffer[0], leftBuffer.size());
                 const clock_t endTime {clock()};
 
                 // calculate the execution time
