@@ -14,12 +14,5 @@ var namespace_w_e_core_1_1_m_o_n_s_t_r =
       [ "BANDSWITCH_DEFAULT", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#ae4f79df4506dc9982dddc7ad73df9c5f", null ],
       [ "BANDSWITCH_OFF", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#aface683228ad9a78fdf1bd27b2d83590", null ],
       [ "BANDSWITCH_ON", "namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#acd5cfd37a543d047f08e62e619a3389c", null ]
-    ] ],
-    [ "MONSTRBand", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band" ],
-    [ "MONSTRCrossover", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover" ],
-    [ "BandType", "namespace_w_e_core_1_1_m_o_n_s_t_r.html#aa3dd0c471f30fc720d9d0e181cb03992", [
-      [ "LOWER", "namespace_w_e_core_1_1_m_o_n_s_t_r.html#aa3dd0c471f30fc720d9d0e181cb03992aa7c48ba367e019d004bfb0239b85f2b3", null ],
-      [ "MIDDLE", "namespace_w_e_core_1_1_m_o_n_s_t_r.html#aa3dd0c471f30fc720d9d0e181cb03992a43eedd8685eb86592022f8da962e3474", null ],
-      [ "UPPER", "namespace_w_e_core_1_1_m_o_n_s_t_r.html#aa3dd0c471f30fc720d9d0e181cb03992a9e43f5291e6fcb2ad99c8e3f91acd179", null ]
     ] ]
 ];

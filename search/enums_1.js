@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['colourids_0',['ColourIds',['../class_w_e_core_1_1_richter_1_1_wave_viewer.html#a77db56f053d1664f9c6fc407f40ca19d',1,'WECore::Richter::WaveViewer']]]
+  ['direction_0',['Direction',['../namespace_w_e_core_1_1_simple_compressor.html#a6fa9f98ed0f3dd1a96c0be762f293bc9',1,'WECore::SimpleCompressor']]]
 ];

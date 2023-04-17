@@ -11,7 +11,6 @@ var hierarchy =
       [ "WECore::AudioSpinTryLock", "class_w_e_core_1_1_audio_spin_try_lock.html", null ]
     ] ],
     [ "WECore::AudioSpinMutex", "class_w_e_core_1_1_audio_spin_mutex.html", null ],
-    [ "WECore::MONSTR::MONSTRCrossover< SampleType >::BandWrapper", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover_1_1_band_wrapper.html", null ],
     [ "BASE", null, [
       [ "WECore::LookAndFeelMixins::ButtonV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html", null ],
       [ "WECore::LookAndFeelMixins::ComboBoxV2< BASE >", "class_w_e_core_1_1_look_and_feel_mixins_1_1_combo_box_v2.html", null ],
@@ -68,8 +67,6 @@ var hierarchy =
       [ "WECore::Richter::RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html", null ],
       [ "WECore::Richter::RichterLFOPair", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html", null ]
     ] ],
-    [ "WECore::MONSTR::MONSTRBand< SampleType >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", null ],
-    [ "WECore::MONSTR::MONSTRCrossover< SampleType >", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", null ],
     [ "juce::MouseListener", null, [
       [ "WECore::JUCEPlugin::TooltipLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html", null ]
     ] ],

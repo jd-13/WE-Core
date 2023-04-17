@@ -62,12 +62,11 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_r_envelope_follower_base_8h.html",
-"_t_p_t_s_v_filter_parameters_8h.html#ad0b9a8b906376644815d3eceb9ace6bf",
-"class_w_e_core_1_1_effects_processor1in1out.html",
-"class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a91c6e3186996da0364ea91ce615612f0",
-"class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a1a1e9c9670f87d628597c7d0011879b1",
-"class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#afd699d949179341df342101bd60913be",
-"index.html"
+"class_parameter_definition_1_1_base_parameter.html#ae351e4a77060f2d0fbeb03f532388977",
+"class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a066f3d2b6ac87bfad06520e1115bbc02",
+"class_w_e_core_1_1_look_and_feel_mixins_1_1_group_component_v2.html#a75a2466da0d15534e7c7c7fbd0df9c7a",
+"class_w_e_core_1_1_richter_1_1_wavetables.html#a6c98fc18684f8bc5af3209c8ef9bb5c2",
+"class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a6ab458d8a3b8c9d2cb87c12e823ddaf6"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

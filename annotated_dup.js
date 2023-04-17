@@ -37,10 +37,6 @@ var annotated_dup =
         [ "PopupMenuV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2" ],
         [ "RotarySliderV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2" ]
       ] ],
-      [ "MONSTR", "namespace_w_e_core_1_1_m_o_n_s_t_r.html", [
-        [ "MONSTRBand", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_band" ],
-        [ "MONSTRCrossover", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover.html", "class_w_e_core_1_1_m_o_n_s_t_r_1_1_m_o_n_s_t_r_crossover" ]
-      ] ],
       [ "Richter", "namespace_w_e_core_1_1_richter.html", [
         [ "Parameters", "namespace_w_e_core_1_1_richter_1_1_parameters.html", [
           [ "WaveParameter", "class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html", "class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter" ]
