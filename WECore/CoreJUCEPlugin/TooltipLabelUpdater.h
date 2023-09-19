@@ -95,13 +95,7 @@ namespace WECore::JUCEPlugin {
 
         // Arch
         _defaultString += " ";
-#if defined(__x86_64__) || defined(_M_AMD64)
         _defaultString += "x86_64";
-#elif defined(__aarch64__) || defined(_M_ARM64)
-        _defaultString += "arm64";
-#else
-    #error "Unknown arch"
-#endif
 
         _targetLabel->setText(_defaultString, juce::dontSendNotification);
     }
