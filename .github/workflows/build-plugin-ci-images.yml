@@ -17,7 +17,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: DockerFiles/clang10/.
+          context: "{{defaultContext}}:DockerFiles/clang10/."
           push: true
           tags: jackd13/audioplugins:clang10
 
@@ -35,6 +35,6 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: DockerFiles/gcc10/.
+          context: "{{defaultContext}}:DockerFiles/gcc10/."
           push: true
           tags: jackd13/audioplugins:gcc10
