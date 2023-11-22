@@ -43,7 +43,7 @@ namespace WECore::TPTSVF {
     public:
         TPTSVFilter() : _sampleRate(44100),
                         _cutoffHz(Parameters::CUTOFF.defaultValue),
-                        _Q(Parameters::Q.defaultValue),
+                        _q(Parameters::Q.defaultValue),
                         _gain(Parameters::GAIN.defaultValue),
                         _s1(0),
                         _s2(0),
@@ -79,7 +79,7 @@ namespace WECore::TPTSVF {
 
         int getMode() const { return _mode; }
         double getCutoff() const { return _cutoffHz; }
-        double getQ() const { return _Q; }
+        double getQ() const { return _q; }
         double getGain() const { return _gain; }
 
         /** @} */
@@ -98,7 +98,7 @@ namespace WECore::TPTSVF {
     private:
         double  _sampleRate,
                 _cutoffHz,
-                _Q,
+                _q,
                 _gain;
 
         T _s1,
@@ -119,7 +119,7 @@ namespace WECore::TPTSVF {
             for (size_t idx {0}; idx < numSamples; idx++) {
                 const T sample {inSamples[idx]};
 
-                const T yH {static_cast<T>(_h * (sample - (1.0f / _Q + _g) * _s1 - _s2))};
+                const T yH {static_cast<T>(_h * (sample - (1.0f / _q + _g) * _s1 - _s2))};
 
                 const T yB {static_cast<T>(_g * yH + _s1)};
                 _s1 = _g * yH + yB;
@@ -152,7 +152,7 @@ namespace WECore::TPTSVF {
 
     template <typename T>
     void TPTSVFilter<T>::setQ(double val) {
-        _Q = Parameters::Q.BoundsCheck(val);
+        _q = Parameters::Q.BoundsCheck(val);
         _calculateCoefficients();
     }
 
@@ -165,6 +165,6 @@ namespace WECore::TPTSVF {
     template <typename T>
     void TPTSVFilter<T>::_calculateCoefficients() {
         _g  = static_cast<T>(std::tan(CoreMath::DOUBLE_PI * _cutoffHz / _sampleRate));
-        _h  = static_cast<T>(1.0 / (1 + _g / _Q + _g * _g));
+        _h  = static_cast<T>(1.0 / (1 + _g / _q + _g * _g));
     }
 }
