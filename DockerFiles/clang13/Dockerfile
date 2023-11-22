@@ -17,12 +17,12 @@ ENV CATCH_PATH /home/catch/
 # Clang
 RUN apt-get install -y software-properties-common
 RUN wget -O - http://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
-RUN add-apt-repository -y "deb http://apt.llvm.org/$(lsb_release -c -s)/ llvm-toolchain-$(lsb_release -c -s)-10 main"
+RUN add-apt-repository -y "deb http://apt.llvm.org/$(lsb_release -c -s)/ llvm-toolchain-$(lsb_release -c -s)-13 main"
 RUN apt-get update
-RUN apt-get install -y clang-10 clang-tidy
+RUN apt-get install -y clang-13 clang-tidy
 
 ENV PATH /opt/llvm/bin:$PATH
-ENV CXX clang++-10
+ENV CXX clang++-13
 
 # Valgrind
 RUN apt-get install -y valgrind
