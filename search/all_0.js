@@ -92,7 +92,7 @@ var searchData=
   ['_5fprocessparabolicsoft_89',['_processParabolicSoft',['../class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html#afaac8598653ad0e6fece5f324b87b141',1,'WECore::Carve::CarveDSPUnit']]],
   ['_5fprocesssine_90',['_processSine',['../class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html#aa1300d6132b318892409428790c27980',1,'WECore::Carve::CarveDSPUnit']]],
   ['_5fprovideparamnamesformigration_91',['_provideParamNamesForMigration',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a32ace3a0777f58285da43818c7de653d',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
-  ['_5fq_92',['_Q',['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a4b268f77a4f12d12e39e0976c6f7a06c',1,'WECore::TPTSVF::TPTSVFilter']]],
+  ['_5fq_92',['_q',['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a4f3ae9b551588557702933e7d030b49d',1,'WECore::TPTSVF::TPTSVFilter']]],
   ['_5fratio_93',['_ratio',['../class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#af044ad38dac24ff1bda5574d39248be1',1,'WECore::SimpleCompressor::SimpleCompressor']]],
   ['_5frawdepth_94',['_rawDepth',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#abaa0ffd91d0c5a25aa34467ea313bc1e',1,'WECore::Richter::RichterLFO']]],
   ['_5frawfreq_95',['_rawFreq',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ab4c56d52d51b317c24bce30399655bea',1,'WECore::Richter::RichterLFO']]],

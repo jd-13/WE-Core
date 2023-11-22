@@ -70,7 +70,7 @@ var searchData=
   ['_5fpostgain_67',['_postGain',['../class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html#a67d761b0a50f1fa71a11c2cb9f632916',1,'WECore::Carve::CarveDSPUnit']]],
   ['_5fpregain_68',['_preGain',['../class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html#acd8107be190841c722b12a65ac671516',1,'WECore::Carve::CarveDSPUnit']]],
   ['_5fprivateparameters_69',['_privateParameters',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac18c2c66ef948707be4833aa34065707',1,'WECore::JUCEPlugin::CoreAudioProcessor']]],
-  ['_5fq_70',['_Q',['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a4b268f77a4f12d12e39e0976c6f7a06c',1,'WECore::TPTSVF::TPTSVFilter']]],
+  ['_5fq_70',['_q',['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a4f3ae9b551588557702933e7d030b49d',1,'WECore::TPTSVF::TPTSVFilter']]],
   ['_5fratio_71',['_ratio',['../class_w_e_core_1_1_simple_compressor_1_1_simple_compressor.html#af044ad38dac24ff1bda5574d39248be1',1,'WECore::SimpleCompressor::SimpleCompressor']]],
   ['_5frawdepth_72',['_rawDepth',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#abaa0ffd91d0c5a25aa34467ea313bc1e',1,'WECore::Richter::RichterLFO']]],
   ['_5frawfreq_73',['_rawFreq',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ab4c56d52d51b317c24bce30399655bea',1,'WECore::Richter::RichterLFO']]],
