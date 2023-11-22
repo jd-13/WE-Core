@@ -50,7 +50,7 @@ namespace WECore {
     class EffectsProcessor1in1out : public EffectsProcessorBase<SampleType> {
     public:
         EffectsProcessor1in1out() = default;
-        virtual ~EffectsProcessor1in1out() = default;
+        virtual ~EffectsProcessor1in1out() override = default;
 
         virtual void process1in1out(SampleType* inSamples, size_t numSamples) = 0;
     };
@@ -62,7 +62,7 @@ namespace WECore {
     class EffectsProcessor1in2out : public EffectsProcessorBase<SampleType> {
     public:
         EffectsProcessor1in2out() = default;
-        virtual ~EffectsProcessor1in2out() = default;
+        virtual ~EffectsProcessor1in2out() override = default;
 
         virtual void process1in2out(SampleType* inSamplesLeft, SampleType* inSamplesRight, size_t numSamples) = 0;
     };
@@ -74,7 +74,7 @@ namespace WECore {
     class EffectsProcessor2in2out : public EffectsProcessorBase<SampleType> {
     public:
         EffectsProcessor2in2out() = default;
-        virtual ~EffectsProcessor2in2out() = default;
+        virtual ~EffectsProcessor2in2out() override = default;
 
         virtual void process2in2out(SampleType* inSamplesLeft, SampleType* inSamplesRight, size_t numSamples) = 0;
     };
