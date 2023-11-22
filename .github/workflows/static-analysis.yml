@@ -5,7 +5,7 @@ on: [push, pull_request]
 jobs:
   StaticAnalysis:
     runs-on: ubuntu-latest
-    container: jackd13/audioplugins:clang10
+    container: jackd13/audioplugins:clang
 
     steps:
       - uses: actions/checkout@v2
