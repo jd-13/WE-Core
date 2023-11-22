@@ -11,7 +11,8 @@ set(GCOV_FLAGS -fprofile-arcs -ftest-coverage)
 
 # Set the GCC and Clang flags
 # TODO: work on removing the need for the below Wno flags
-set(CXXFLAGS_CLANG -std=c++17 -g -Wall -Werror -Wextra -Wconversion -Wshadow -Weverything -Wpedantic -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion -Wno-unknown-warning-option -Wno-c++98-compat -Wno-padded -Wno-global-constructors)
+# TODO: replace -gdwarf-4 with -g once the build image uses ubuntu mantic - it's a work around for an older valgrind version https://github.com/llvm/llvm-project/issues/56550
+set(CXXFLAGS_CLANG -std=c++17 -gdwarf-4 -Wall -Werror -Wextra -Wconversion -Wshadow -Weverything -Wpedantic -Wno-exit-time-destructors -Wno-weak-vtables -Wno-reserved-id-macro -Wno-double-promotion -Wno-unknown-warning-option -Wno-c++98-compat -Wno-padded -Wno-global-constructors)
 set(CXXFLAGS_GCC   -std=c++17 -g -Wall -Werror -Wextra -Wconversion -Wshadow -pedantic ${GCOV_FLAGS})
 
 # Set the flags we'll actually use based on the compiler
