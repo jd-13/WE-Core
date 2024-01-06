@@ -133,11 +133,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a8fdad0c3c094bb0f798d7f315160939c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad63880796af88beed934062810ebb246"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ad63880796af88beed934062810ebb246">removeParameterChangeListener</a> (juce::ChangeListener *listener)</td></tr>
 <tr class="separator:ad63880796af88beed934062810ebb246"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7c282ae8a89516085d96a1f6db7298b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac7c282ae8a89516085d96a1f6db7298b">getStateInformation</a> (juce::MemoryBlock &amp;destData) override</td></tr>
+<tr class="memitem:ac7c282ae8a89516085d96a1f6db7298b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ac7c282ae8a89516085d96a1f6db7298b">getStateInformation</a> (juce::MemoryBlock &amp;destData) override</td></tr>
 <tr class="separator:ac7c282ae8a89516085d96a1f6db7298b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab89ab6c8e7f64f21422d984bfefebaed"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; juce::XmlElement &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ab89ab6c8e7f64f21422d984bfefebaed">writeToXml</a> ()</td></tr>
 <tr class="separator:ab89ab6c8e7f64f21422d984bfefebaed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e8e26d808c96cdeca23e3f8b8ff08ad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a6e8e26d808c96cdeca23e3f8b8ff08ad">setStateInformation</a> (const void *data, int sizeInBytes) override</td></tr>
+<tr class="memitem:a6e8e26d808c96cdeca23e3f8b8ff08ad"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a6e8e26d808c96cdeca23e3f8b8ff08ad">setStateInformation</a> (const void *data, int sizeInBytes) override</td></tr>
 <tr class="separator:a6e8e26d808c96cdeca23e3f8b8ff08ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9cd9b1cec770b52e9213ddfa435bde82"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#a9cd9b1cec770b52e9213ddfa435bde82">restoreFromXml</a> (std::unique_ptr&lt; juce::XmlElement &gt; element)</td></tr>
 <tr class="separator:a9cd9b1cec770b52e9213ddfa435bde82"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -480,7 +480,7 @@ Additional Inherited Members</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1123,7 +1123,7 @@ template&lt;typename PARAM_TYPE &gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
