@@ -71,7 +71,7 @@ namespace WECore::JUCEPlugin {
         /**
          * Calls writeToXml and stores the XML in the given memory block.
          */
-        inline void getStateInformation(juce::MemoryBlock& destData) override;
+        inline virtual void getStateInformation(juce::MemoryBlock& destData) override;
 
         /**
          * Collects the registered parameter values and writes them to XML.
@@ -87,7 +87,7 @@ namespace WECore::JUCEPlugin {
         /**
          * Reads the given memory into an XmlElement and calls restoreFromXml.
          */
-        inline void setStateInformation(const void* data, int sizeInBytes) override;
+        inline virtual void setStateInformation(const void* data, int sizeInBytes) override;
 
         /**
          * Restores parameter values from previously written XML.
