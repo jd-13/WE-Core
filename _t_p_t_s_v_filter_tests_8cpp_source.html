@@ -240,7 +240,7 @@ $(document).ready(function(){initNavTree('_t_p_t_s_v_filter_tests_8cpp_source.ht
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>                std::vector&lt;double&gt; buffer2 = generateBuffer();</div>
 <div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>                clonedFilter.<a class="code hl_function" href="class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#ab4d8924b9041783e18ff3e890fc5d506">processBlock</a>(&amp;buffer2[0], buffer2.size());</div>
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> index {0}; index &lt; buffer.size(); index++) {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> index {0}; index &lt; buffer1.size(); index++) {</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>                    CHECK(buffer1[index] == Approx(buffer2[index]));</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                }</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>            }</div>
