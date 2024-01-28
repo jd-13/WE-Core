@@ -146,7 +146,7 @@ SCENARIO("TPTSVFilter: Clone works correctly") {
                 std::vector<double> buffer2 = generateBuffer();
                 clonedFilter.processBlock(&buffer2[0], buffer2.size());
 
-                for (int index {0}; index < buffer1.size(); index++) {
+                for (size_t index {0}; index < buffer1.size(); index++) {
                     CHECK(buffer1[index] == Approx(buffer2[index]));
                 }
             }
