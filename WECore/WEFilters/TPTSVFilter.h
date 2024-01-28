@@ -53,7 +53,6 @@ namespace WECore::TPTSVF {
             _calculateCoefficients();
         }
 
-        TPTSVFilter(const TPTSVFilter& other) = default;
         virtual ~TPTSVFilter() = default;
 
         /**
@@ -95,6 +94,10 @@ namespace WECore::TPTSVF {
 
         /** @} */
 
+        TPTSVFilter clone() const {
+            return TPTSVFilter(*this);
+        }
+
     private:
         double  _sampleRate,
                 _cutoffHz,
@@ -109,6 +112,20 @@ namespace WECore::TPTSVF {
         int _mode;
 
         void _calculateCoefficients();
+
+        TPTSVFilter(const TPTSVFilter& other) {
+            _sampleRate = other._sampleRate;
+            _cutoffHz = other._cutoffHz;
+            _q = other._q;
+            _gain = other._gain;
+
+            _s1 = other._s1;
+            _s2 = other._s2;
+            _g = other._g;
+            _h = other._h;
+
+            _mode = other._mode;
+        }
     };
 
     template <typename T>

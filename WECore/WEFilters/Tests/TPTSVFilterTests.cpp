@@ -105,3 +105,51 @@ SCENARIO("TPTSVFilter: Silence in = silence out") {
         }
     }
 }
+
+SCENARIO("TPTSVFilter: Clone works correctly") {
+    GIVEN("A TPTSVFilter and a buffer of samples") {
+        auto generateBuffer = []() {
+            std::vector<double> buffer(1024);
+            std::fill(buffer.begin(), buffer.end(), 0);
+            std::fill(buffer.begin() + 300, buffer.end(), 0.5);
+            std::fill(buffer.begin() + 600, buffer.end(), 0.7);
+            return buffer;
+        };
+
+        std::vector<double> initialBuffer = generateBuffer();
+        WECore::TPTSVF::TPTSVFilter<double> filter;
+
+        // Set some unique values so we can test for them later
+        filter.setMode(WECore::TPTSVF::Parameters::FILTER_MODE.HIGHPASS);
+        filter.setCutoff(1001);
+        filter.setQ(1.1);
+        filter.setGain(0.8);
+        filter.setSampleRate(48000);
+
+        // Set up some internal state
+        filter.processBlock(&initialBuffer[0], initialBuffer.size());
+
+        WHEN("It is cloned") {
+            WECore::TPTSVF::TPTSVFilter<double> clonedFilter = filter.clone();
+
+            THEN("The cloned filter is equal to the original") {
+                CHECK(clonedFilter.getMode() == filter.getMode());
+                CHECK(clonedFilter.getCutoff() == Approx(filter.getCutoff()));
+                CHECK(clonedFilter.getQ() == Approx(filter.getQ()));
+                CHECK(clonedFilter.getGain() == Approx(filter.getGain()));
+                // CHECK(clonedFilter.getSampleRate() == Approx(filter.getSampleRate()));
+
+                // Check internal state
+                std::vector<double> buffer1 = generateBuffer();
+                filter.processBlock(&buffer1[0], buffer1.size());
+
+                std::vector<double> buffer2 = generateBuffer();
+                clonedFilter.processBlock(&buffer2[0], buffer2.size());
+
+                for (int index {0}; index < buffer.size(); index++) {
+                    CHECK(buffer1[index] == Approx(buffer2[index]));
+                }
+            }
+        }
+    }
+}
