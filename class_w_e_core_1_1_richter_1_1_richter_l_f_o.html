@@ -91,8 +91,8 @@ $(document).ready(function(){initNavTree('class_w_e_core_1_1_richter_1_1_richter
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pri-methods">Private Member Functions</a> &#124;
-<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#friends">Friends</a> &#124;
 <a href="class_w_e_core_1_1_richter_1_1_richter_l_f_o-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">WECore::Richter::RichterLFO Class Reference</div></div>
@@ -188,8 +188,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af3ae0df22ec6985d4657ca4824899fa6 inherit pub_methods_class_w_e_core_1_1_modulation_source"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_modulation_source.html#af3ae0df22ec6985d4657ca4824899fa6">reset</a> ()</td></tr>
 <tr class="separator:af3ae0df22ec6985d4657ca4824899fa6 inherit pub_methods_class_w_e_core_1_1_modulation_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
-Private Member Functions</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-methods" name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
 <tr class="memitem:ab4092a75bcfffe910902ff4fae877013"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ab4092a75bcfffe910902ff4fae877013">_calcPhaseOffset</a> (double timeInSeconds)</td></tr>
 <tr class="separator:ab4092a75bcfffe910902ff4fae877013"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ada2a5ee1981bace954f6859e455a6c4d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ada2a5ee1981bace954f6859e455a6c4d">_calcFreq</a> (double modAmount)</td></tr>
@@ -200,9 +200,13 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a7bc3f708c54b950567c6b96e0a78b4bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05557e347e7d4f3d5e9c5b1830415c20"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a05557e347e7d4f3d5e9c5b1830415c20">_resetImpl</a> () override</td></tr>
 <tr class="separator:a05557e347e7d4f3d5e9c5b1830415c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73881e6bdc1e722ed5b0b8c3b81c5829"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_modulation_source.html#a73881e6bdc1e722ed5b0b8c3b81c5829">_getNextOutputImpl</a> (double inSample)=0</td></tr>
+<tr class="separator:a73881e6bdc1e722ed5b0b8c3b81c5829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf563a25d206e6daef92b363187d5e3e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_modulation_source.html#abf563a25d206e6daef92b363187d5e3e">_resetImpl</a> ()=0</td></tr>
+<tr class="separator:abf563a25d206e6daef92b363187d5e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
-Private Attributes</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
 <tr class="memitem:a75b0490fb0c48321b41568bc6c3064e6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a75b0490fb0c48321b41568bc6c3064e6">_wave</a></td></tr>
 <tr class="separator:a75b0490fb0c48321b41568bc6c3064e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0bf6bf3471a6d2e2bd07468937776b9b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a0bf6bf3471a6d2e2bd07468937776b9b">_indexOffset</a></td></tr>
@@ -241,6 +245,9 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a008c6df8d60dcb1a1b881bdcda4d0ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac688890a6e6d3f40d5c5f3112ecdf628"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_w_e_core_1_1_modulation_source.html">ModulationSource</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ac688890a6e6d3f40d5c5f3112ecdf628">_modulationSource</a></td></tr>
 <tr class="separator:ac688890a6e6d3f40d5c5f3112ecdf628"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_w_e_core_1_1_modulation_source"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_w_e_core_1_1_modulation_source')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_w_e_core_1_1_modulation_source.html">WECore::ModulationSource&lt; double &gt;</a></td></tr>
+<tr class="memitem:ac11b71a5f203b96c269cbfce2e4937e8 inherit pro_attribs_class_w_e_core_1_1_modulation_source"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_modulation_source.html#ac11b71a5f203b96c269cbfce2e4937e8">_cachedOutput</a></td></tr>
+<tr class="separator:ac11b71a5f203b96c269cbfce2e4937e8 inherit pro_attribs_class_w_e_core_1_1_modulation_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -354,7 +361,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -393,7 +400,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -433,7 +440,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -472,7 +479,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -506,7 +513,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">private</span><span class="mlabel">virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1457,7 +1464,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1483,7 +1490,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1509,7 +1516,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1535,7 +1542,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1561,7 +1568,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1587,7 +1594,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1613,7 +1620,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1639,7 +1646,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1665,7 +1672,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1691,7 +1698,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1717,7 +1724,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1743,7 +1750,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1769,7 +1776,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1795,7 +1802,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1821,7 +1828,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1847,7 +1854,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1873,7 +1880,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1899,7 +1906,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1925,7 +1932,7 @@ Friends</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

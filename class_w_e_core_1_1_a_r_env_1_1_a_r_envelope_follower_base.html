@@ -163,6 +163,10 @@ Protected Member Functions</h2></td></tr>
 <tr class="separator:a45226f1ba2a8ae8966fd82a3a14c277d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a589933e396ee8dac2385eeed8929e8ac"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html#a589933e396ee8dac2385eeed8929e8ac">_calcCoef</a> (double timeMs)</td></tr>
 <tr class="separator:a589933e396ee8dac2385eeed8929e8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73881e6bdc1e722ed5b0b8c3b81c5829"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_modulation_source.html#a73881e6bdc1e722ed5b0b8c3b81c5829">_getNextOutputImpl</a> (double inSample)=0</td></tr>
+<tr class="separator:a73881e6bdc1e722ed5b0b8c3b81c5829"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf563a25d206e6daef92b363187d5e3e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_modulation_source.html#abf563a25d206e6daef92b363187d5e3e">_resetImpl</a> ()=0</td></tr>
+<tr class="separator:abf563a25d206e6daef92b363187d5e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -184,6 +188,9 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:ac05cfa26c359b6b049c5d718103491fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a392f120a6d8899889661c444a487888e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html#a392f120a6d8899889661c444a487888e">_sampleRate</a></td></tr>
 <tr class="separator:a392f120a6d8899889661c444a487888e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_attribs_class_w_e_core_1_1_modulation_source"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_w_e_core_1_1_modulation_source')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_w_e_core_1_1_modulation_source.html">WECore::ModulationSource&lt; double &gt;</a></td></tr>
+<tr class="memitem:ac11b71a5f203b96c269cbfce2e4937e8 inherit pro_attribs_class_w_e_core_1_1_modulation_source"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_modulation_source.html#ac11b71a5f203b96c269cbfce2e4937e8">_cachedOutput</a></td></tr>
+<tr class="separator:ac11b71a5f203b96c269cbfce2e4937e8 inherit pro_attribs_class_w_e_core_1_1_modulation_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Base class for an envelope follower with controls for attack and release times, with optional low/high cut filters before the envelope stage. </p>
@@ -215,7 +222,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00035">35</a> of file <a class="el" href="_a_r_envelope_follower_base_8h_source.html">AREnvelopeFollowerBase.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00148">_highCutFilter</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00147">_lowCutFilter</a>, <a class="el" href="_t_p_t_s_v_filter_parameters_8h_source.html#l00038">WECore::TPTSVF::Parameters::FILTER_MODE</a>, <a class="el" href="namespace_w_e_core_1_1_a_r_env_1_1_parameters.html#a689eb62aa02ea22f0c4538a2b3ac6624">WECore::AREnv::Parameters::HIGH_CUT()</a>, <a class="el" href="namespace_w_e_core_1_1_a_r_env_1_1_parameters.html#aae3e4e4338b77fa9d9432e6ebb83799b">WECore::AREnv::Parameters::LOW_CUT()</a>, <a class="el" href="_modulation_source_8h_source.html#l00082">WECore::ModulationSource&lt; double &gt;::reset()</a>, <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00148">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::setCutoff()</a>, <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00090">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::setMode()</a>, and <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00166">setSampleRate()</a>.</p>
+<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00148">_highCutFilter</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00147">_lowCutFilter</a>, <a class="el" href="_t_p_t_s_v_filter_parameters_8h_source.html#l00038">WECore::TPTSVF::Parameters::FILTER_MODE</a>, <a class="el" href="namespace_w_e_core_1_1_a_r_env_1_1_parameters.html#a689eb62aa02ea22f0c4538a2b3ac6624">WECore::AREnv::Parameters::HIGH_CUT()</a>, <a class="el" href="namespace_w_e_core_1_1_a_r_env_1_1_parameters.html#aae3e4e4338b77fa9d9432e6ebb83799b">WECore::AREnv::Parameters::LOW_CUT()</a>, <a class="el" href="_modulation_source_8h_source.html#l00082">WECore::ModulationSource&lt; double &gt;::reset()</a>, <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00165">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::setCutoff()</a>, <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00089">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::setMode()</a>, and <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00166">setSampleRate()</a>.</p>
 
 </div>
 </div>
@@ -336,7 +343,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00185">185</a> of file <a class="el" href="_a_r_envelope_follower_base_8h_source.html">AREnvelopeFollowerBase.h</a>.</p>
 
-<p class="reference">References <a class="el" href="class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html#a8e3b7f8d403fec134b69fe46ae5ffc83">_envGetNextOutputImpl()</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00146">_filterEnabled</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00148">_highCutFilter</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00147">_lowCutFilter</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00115">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::processBlock()</a>.</p>
+<p class="reference">References <a class="el" href="class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html#a8e3b7f8d403fec134b69fe46ae5ffc83">_envGetNextOutputImpl()</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00146">_filterEnabled</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00148">_highCutFilter</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00147">_lowCutFilter</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00132">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::processBlock()</a>.</p>
 
 </div>
 </div>
@@ -368,7 +375,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00194">194</a> of file <a class="el" href="_a_r_envelope_follower_base_8h_source.html">AREnvelopeFollowerBase.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00138">_envVal</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00148">_highCutFilter</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00147">_lowCutFilter</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00072">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::reset()</a>.</p>
+<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00138">_envVal</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00148">_highCutFilter</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00147">_lowCutFilter</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00071">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::reset()</a>.</p>
 
 </div>
 </div>
@@ -462,7 +469,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00134">134</a> of file <a class="el" href="_a_r_envelope_follower_base_8h_source.html">AREnvelopeFollowerBase.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00148">_highCutFilter</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00081">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::getCutoff()</a>.</p>
+<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00148">_highCutFilter</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00080">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::getCutoff()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_a_r_envelope_follower_tests_8cpp_source.html#l00025">SCENARIO()</a>.</p>
 
@@ -494,7 +501,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00129">129</a> of file <a class="el" href="_a_r_envelope_follower_base_8h_source.html">AREnvelopeFollowerBase.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00147">_lowCutFilter</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00081">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::getCutoff()</a>.</p>
+<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00147">_lowCutFilter</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00080">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::getCutoff()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_a_r_envelope_follower_tests_8cpp_source.html#l00025">SCENARIO()</a>.</p>
 
@@ -646,7 +653,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00105">105</a> of file <a class="el" href="_a_r_envelope_follower_base_8h_source.html">AREnvelopeFollowerBase.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00148">_highCutFilter</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00148">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::setCutoff()</a>.</p>
+<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00148">_highCutFilter</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00165">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::setCutoff()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_a_r_envelope_follower_tests_8cpp_source.html#l00025">SCENARIO()</a>.</p>
 
@@ -686,7 +693,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00096">96</a> of file <a class="el" href="_a_r_envelope_follower_base_8h_source.html">AREnvelopeFollowerBase.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00147">_lowCutFilter</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00148">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::setCutoff()</a>.</p>
+<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00147">_lowCutFilter</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00165">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::setCutoff()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_a_r_envelope_follower_tests_8cpp_source.html#l00025">SCENARIO()</a>.</p>
 
@@ -765,7 +772,7 @@ Protected Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00166">166</a> of file <a class="el" href="_a_r_envelope_follower_base_8h_source.html">AREnvelopeFollowerBase.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00143">_attackCoef</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00140">_attackTimeMs</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00161">_calcCoef()</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00148">_highCutFilter</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00147">_lowCutFilter</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00144">_releaseCoef</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00141">_releaseTimeMs</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00150">_sampleRate</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00160">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::setSampleRate()</a>.</p>
+<p class="reference">References <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00143">_attackCoef</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00140">_attackTimeMs</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00161">_calcCoef()</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00148">_highCutFilter</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00147">_lowCutFilter</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00144">_releaseCoef</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00141">_releaseTimeMs</a>, <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00150">_sampleRate</a>, and <a class="el" href="_t_p_t_s_v_filter_8h_source.html#l00177">WECore::TPTSVF::TPTSVFilter&lt; T &gt;::setSampleRate()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="_a_r_envelope_follower_base_8h_source.html#l00035">AREnvelopeFollowerBase()</a>.</p>
 

@@ -1,9 +1,10 @@
 var class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter =
 [
     [ "TPTSVFilter", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a94ee8fb50df475606363a31e43685a24", null ],
-    [ "TPTSVFilter", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a068f56a1504cd53c0ad47d8a205e4ed5", null ],
     [ "~TPTSVFilter", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#aaf39d6d6585e4dff60d7d59fc2b98340", null ],
+    [ "TPTSVFilter", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a601b37676eb809b2256efef0f0840d0c", null ],
     [ "_calculateCoefficients", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a6a4d4e1cf938694031dcb296678b0bdd", null ],
+    [ "clone", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a27f2c9b46fd268d3d0a573cef24b9569", null ],
     [ "getCutoff", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a9692839f30189629804ecba547fd34b9", null ],
     [ "getGain", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a2c359e32a4ed5dd0341ba5d3670bf68f", null ],
     [ "getMode", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a99046ef470f4cc16e95558b9742657d0", null ],
