@@ -105,7 +105,7 @@ namespace WECore::Richter {
         RichterLFO operator= (RichterLFO& other) = delete;
         RichterLFO(RichterLFO&) = delete;
 
-    private:
+    protected:
         int     _wave,
                 _indexOffset;
 

@@ -55,7 +55,7 @@ namespace WECore {
          */
         inline void reset();
 
-    private:
+    protected:
         SampleType _cachedOutput;
 
         /**
