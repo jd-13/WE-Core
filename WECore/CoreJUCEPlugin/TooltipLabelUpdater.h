@@ -54,8 +54,10 @@ namespace WECore::JUCEPlugin {
          */
         void stop() { _targetLabel = nullptr; }
 
-        inline virtual void mouseEnter(const juce::MouseEvent &event) override;
-        inline virtual void mouseExit(const juce::MouseEvent &event) override;
+        inline virtual void mouseEnter(const juce::MouseEvent& event) override;
+        inline virtual void mouseExit(const juce::MouseEvent& event) override;
+
+        inline void refreshTooltip(juce::Component* component);
 
     private:
         juce::Label* _targetLabel;
@@ -125,6 +127,17 @@ namespace WECore::JUCEPlugin {
     void TooltipLabelUpdater::mouseExit(const juce::MouseEvent& /*event*/) {
         if (_targetLabel != nullptr) {
             _targetLabel->setText(_defaultString, juce::dontSendNotification);
+        }
+    }
+
+    void TooltipLabelUpdater::refreshTooltip(juce::Component* component) {
+        if (_targetLabel != nullptr) {
+            juce::TooltipClient* tooltipClient = dynamic_cast<juce::TooltipClient*>(component);
+
+            if (tooltipClient != nullptr) {
+                const juce::String displayString = tooltipClient->getTooltip().isEmpty() ? _defaultString : tooltipClient->getTooltip();
+                _targetLabel->setText(displayString, juce::dontSendNotification);
+            }
         }
     }
 }
