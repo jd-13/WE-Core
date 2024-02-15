@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['labelreadoutslider_0',['LabelReadoutSlider',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html#ab755254cd82ffd74052c159f92c087b9',1,'WECore::JUCEPlugin::LabelReadoutSlider::LabelReadoutSlider()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html',1,'WECore::JUCEPlugin::LabelReadoutSlider&lt; T &gt;']]],
+  ['labelreadoutslider_0',['labelreadoutslider',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html#ab755254cd82ffd74052c159f92c087b9',1,'WECore::JUCEPlugin::LabelReadoutSlider::LabelReadoutSlider()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_label_readout_slider.html',1,'WECore::JUCEPlugin::LabelReadoutSlider&lt; T &gt;']]],
   ['labelreadoutslider_2eh_1',['LabelReadoutSlider.h',['../_label_readout_slider_8h.html',1,'']]],
   ['lfo_2',['LFO',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html#ad346c53771f37ea38a61ee3795c4b365',1,'WECore::Richter::RichterLFOPair']]],
   ['lfoswitch_5fdefault_3',['LFOSWITCH_DEFAULT',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#aa63a48f4c1f6833202b5f2a38d595d65',1,'WECore::Richter::Parameters']]],
   ['lfoswitch_5foff_4',['LFOSWITCH_OFF',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a0ee906ec53ecf1dfdb496b8ebf0b8906',1,'WECore::Richter::Parameters']]],
   ['lfoswitch_5fon_5',['LFOSWITCH_ON',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a5e1066525cfef1818520f49b310a9a32',1,'WECore::Richter::Parameters']]],
   ['lightcolour_6',['lightColour',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html#ad25b11f9ee6383e96722d59e8b91acfe',1,'WECore::JUCEPlugin::CoreLookAndFeel']]],
-  ['linearsliderv2_7',['LinearSliderV2',['../class_w_e_core_1_1_look_and_feel_mixins_1_1_linear_slider_v2.html#a5dff1abe89b13459d23ce3526917840c',1,'WECore::LookAndFeelMixins::LinearSliderV2::LinearSliderV2()'],['../class_w_e_core_1_1_look_and_feel_mixins_1_1_linear_slider_v2.html',1,'WECore::LookAndFeelMixins::LinearSliderV2&lt; BASE &gt;']]],
+  ['linearsliderv2_7',['linearsliderv2',['../class_w_e_core_1_1_look_and_feel_mixins_1_1_linear_slider_v2.html',1,'WECore::LookAndFeelMixins::LinearSliderV2&lt; BASE &gt;'],['../class_w_e_core_1_1_look_and_feel_mixins_1_1_linear_slider_v2.html#a5dff1abe89b13459d23ce3526917840c',1,'WECore::LookAndFeelMixins::LinearSliderV2::LinearSliderV2()']]],
   ['linearsliderv2_2eh_8',['LinearSliderV2.h',['../_linear_slider_v2_8h.html',1,'']]],
   ['lineartodb_9',['linearTodB',['../namespace_w_e_core_1_1_core_math.html#a089f8f9f20aeac605244023b895be4f9',1,'WECore::CoreMath']]],
   ['lock_10',['lock',['../class_w_e_core_1_1_audio_spin_mutex.html#a2cccd65aa5e1d58b5e921c9b82884485',1,'WECore::AudioSpinMutex']]],

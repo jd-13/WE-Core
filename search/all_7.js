@@ -25,7 +25,7 @@ var searchData=
   ['getlowcuthz_22',['getLowCutHz',['../class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_base.html#ac2e707d5ddb2733f8a40b589ddfd15c3',1,'WECore::AREnv::AREnvelopeFollowerBase']]],
   ['getmanualphase_23',['getManualPhase',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a972b3409ed747792d67c4a8321fc0525',1,'WECore::Richter::RichterLFO']]],
   ['getmix_24',['getMix',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a7632b8c43643fbb87b1deaed57c6d423',1,'WECore::Songbird::SongbirdFilterModule']]],
-  ['getmode_25',['getMode',['../class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html#a0e2cb26f3ae8a42fb1980a0311fba869',1,'WECore::Carve::CarveDSPUnit::getMode()'],['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a99046ef470f4cc16e95558b9742657d0',1,'WECore::TPTSVF::TPTSVFilter::getMode()']]],
+  ['getmode_25',['getmode',['../class_w_e_core_1_1_carve_1_1_carve_d_s_p_unit.html#a0e2cb26f3ae8a42fb1980a0311fba869',1,'WECore::Carve::CarveDSPUnit::getMode()'],['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#a99046ef470f4cc16e95558b9742657d0',1,'WECore::TPTSVF::TPTSVFilter::getMode()']]],
   ['getmodmode_26',['getModMode',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ad10f64d1886b7c44dc88b4fd9bf9d7fc',1,'WECore::Songbird::SongbirdFilterModule']]],
   ['getnextoutput_27',['getNextOutput',['../class_w_e_core_1_1_modulation_source.html#a8c83baa1209d7bb7e01fd13227ba8a3d',1,'WECore::ModulationSource']]],
   ['getoutputgain_28',['getOutputGain',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a72efa9fa5b19c4553c630ed5b0eed700',1,'WECore::Songbird::SongbirdFilterModule']]],
@@ -53,6 +53,6 @@ var searchData=
   ['getvoweldescription_50',['getVowelDescription',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#aaf6aa212c69d8e5fdcacdcb1bced7e4b',1,'WECore::Songbird::SongbirdFilterModule']]],
   ['getwave_51',['getWave',['../class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a782cd2b3fd109b601f51e4dbec44285f',1,'WECore::Richter::RichterLFO']]],
   ['getwidth_52',['getWidth',['../class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#a0192c8a44b8d6669448dbb6a7e177a45',1,'WECore::StereoWidth::StereoWidthProcessor']]],
-  ['groupcomponentv2_53',['GroupComponentV2',['../class_w_e_core_1_1_look_and_feel_mixins_1_1_group_component_v2.html#af8be460db91d8f452c473a35c320a248',1,'WECore::LookAndFeelMixins::GroupComponentV2::GroupComponentV2()'],['../class_w_e_core_1_1_look_and_feel_mixins_1_1_group_component_v2.html',1,'WECore::LookAndFeelMixins::GroupComponentV2&lt; BASE &gt;']]],
+  ['groupcomponentv2_53',['groupcomponentv2',['../class_w_e_core_1_1_look_and_feel_mixins_1_1_group_component_v2.html#af8be460db91d8f452c473a35c320a248',1,'WECore::LookAndFeelMixins::GroupComponentV2::GroupComponentV2()'],['../class_w_e_core_1_1_look_and_feel_mixins_1_1_group_component_v2.html',1,'WECore::LookAndFeelMixins::GroupComponentV2&lt; BASE &gt;']]],
   ['groupcomponentv2_2eh_54',['GroupComponentV2.h',['../_group_component_v2_8h.html',1,'']]]
 ];
