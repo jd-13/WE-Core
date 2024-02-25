@@ -112,8 +112,9 @@ namespace WECore::JUCEPlugin {
 
         // Preview build
         if (!prereleaseBuildHash.isEmpty()) {
-            _defaultString += " ";
+            _defaultString += " (Pre-release ";
             _defaultString += prereleaseBuildHash;
+            _defaultString += ")";
         }
 
         _targetLabel->setText(_defaultString, juce::dontSendNotification);
