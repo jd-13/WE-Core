@@ -47,7 +47,7 @@ namespace WECore::JUCEPlugin {
          * Starts updating the label as necessary, displaying build information when not showing a
          * tooltip.
          */
-        inline void start(juce::Label* targetLabel, juce::AudioProcessor::WrapperType pluginFormat, bool isDemo = false, const juce::String& prereleaseBuildHash = "");
+        inline void start(juce::Label* targetLabel, juce::AudioProcessor::WrapperType pluginFormat, const juce::String& buildHash, bool isDemo, bool isPreRelease);
 
         /**
          * Must be called before the given label is destructed.
@@ -72,7 +72,7 @@ namespace WECore::JUCEPlugin {
         _defaultString = "";
     }
 
-    void TooltipLabelUpdater::start(juce::Label* targetLabel, juce::AudioProcessor::WrapperType pluginFormat, bool isDemo, const juce::String& prereleaseBuildHash) {
+    void TooltipLabelUpdater::start(juce::Label* targetLabel, juce::AudioProcessor::WrapperType pluginFormat, const juce::String& buildHash, bool isDemo, bool isPreRelease) {
         _targetLabel = targetLabel;
 
         _defaultString = JucePlugin_Name;
@@ -105,16 +105,18 @@ namespace WECore::JUCEPlugin {
     #error "Unknown arch"
 #endif
 
+        // Build hash
+        _defaultString += " ";
+        _defaultString += buildHash;
+
         // Demo
         if (isDemo) {
             _defaultString += " (DEMO)";
         }
 
-        // Preview build
-        if (!prereleaseBuildHash.isEmpty()) {
-            _defaultString += " (Pre-release ";
-            _defaultString += prereleaseBuildHash;
-            _defaultString += ")";
+        // Pre-release build
+        if (isPreRelease) {
+            _defaultString += " (PRE-RELEASE)";
         }
 
         _targetLabel->setText(_defaultString, juce::dontSendNotification);
