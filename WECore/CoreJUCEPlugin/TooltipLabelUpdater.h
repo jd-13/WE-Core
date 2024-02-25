@@ -47,7 +47,7 @@ namespace WECore::JUCEPlugin {
          * Starts updating the label as necessary, displaying build information when not showing a
          * tooltip.
          */
-        inline void start(juce::Label* targetLabel, juce::AudioProcessor::WrapperType pluginFormat, bool isDemo = false);
+        inline void start(juce::Label* targetLabel, juce::AudioProcessor::WrapperType pluginFormat, bool isDemo = false, const juce::String& prereleaseBuildHash = "");
 
         /**
          * Must be called before the given label is destructed.
@@ -72,7 +72,7 @@ namespace WECore::JUCEPlugin {
         _defaultString = "";
     }
 
-    void TooltipLabelUpdater::start(juce::Label* targetLabel, juce::AudioProcessor::WrapperType pluginFormat, bool isDemo) {
+    void TooltipLabelUpdater::start(juce::Label* targetLabel, juce::AudioProcessor::WrapperType pluginFormat, bool isDemo, const juce::String& prereleaseBuildHash) {
         _targetLabel = targetLabel;
 
         _defaultString = JucePlugin_Name;
@@ -108,6 +108,12 @@ namespace WECore::JUCEPlugin {
         // Demo
         if (isDemo) {
             _defaultString += " (DEMO)";
+        }
+
+        // Preview build
+        if (!prereleaseBuildHash.isEmpty()) {
+            _defaultString += " ";
+            _defaultString += prereleaseBuildHash;
         }
 
         _targetLabel->setText(_defaultString, juce::dontSendNotification);
