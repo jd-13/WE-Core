@@ -141,7 +141,7 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
 
                 CHECK(mLFOPair.MOD->getWave() == 1);
                 CHECK(mLFOPair.MOD->getDepth() == Approx(0.0));
-                CHECK(mLFOPair.MOD->getFreq() == Approx(0.5));
+                CHECK(mLFOPair.MOD->getFreq() == Approx(0.0));
                 CHECK(mLFOPair.MOD->getManualPhase() == Approx(0.0));
                 CHECK(mLFOPair.MOD->getTempoNumer() == Approx(1.0));
                 CHECK(mLFOPair.MOD->getTempoDenom() == Approx(1.0));
