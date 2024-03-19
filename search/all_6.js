@@ -7,7 +7,7 @@ var searchData=
   ['flag_4',['flag',['../class_w_e_core_1_1_audio_spin_mutex.html#aba6af4f70a49c8f8c757ed409f8c7fdd',1,'WECore::AudioSpinMutex']]],
   ['formant_5',['formant',['../class_w_e_core_1_1_songbird_1_1_formant.html',1,'WECore::Songbird::Formant'],['../class_w_e_core_1_1_songbird_1_1_formant.html#aec539c2148cd13213a40a7dcb3fb1158',1,'WECore::Songbird::Formant::Formant()'],['../class_w_e_core_1_1_songbird_1_1_formant.html#a8cb4bb2e5bd42c835e878456edfab184',1,'WECore::Songbird::Formant::Formant(double newFreq, double newGaindB)']]],
   ['formant_2eh_6',['Formant.h',['../_formant_8h.html',1,'']]],
-  ['freq_7',['FREQ',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#ad9681d1bd62f0126936f41e37646065d',1,'WECore::Richter::Parameters']]],
+  ['freq_7',['FREQ',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a0081ab7ad7888d1aaf82e74d0b8ac411',1,'WECore::Richter::Parameters']]],
   ['freqmod_8',['FREQMOD',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a75ef89f6a11ac18061b8cfe8feed9429',1,'WECore::Richter::Parameters']]],
   ['frequency_9',['frequency',['../class_w_e_core_1_1_songbird_1_1_formant.html#add9046e116d1665adda70b4e211cf3ed',1,'WECore::Songbird::Formant']]]
 ];
