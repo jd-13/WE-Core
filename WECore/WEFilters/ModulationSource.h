@@ -48,7 +48,7 @@ namespace WECore {
         /**
          * Returns the most recent output of getNextOutput without advancing the internal state.
          */
-        SampleType getLastOutput() const { return _cachedOutput; }
+        virtual SampleType getLastOutput() const { return _cachedOutput; }
 
         /**
          * Resets the internal state of the modulation source.
@@ -83,4 +83,10 @@ namespace WECore {
         _resetImpl();
         _cachedOutput = 0;
     }
+
+    template <typename SampleType>
+    struct ModulationSourceWrapper {
+        std::shared_ptr<ModulationSource<SampleType>> source;
+        double amount;
+    };
 }

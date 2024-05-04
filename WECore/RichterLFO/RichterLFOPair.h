@@ -105,12 +105,12 @@ namespace WECore::Richter {
 
     RichterLFOPair::RichterLFOPair() {
         MOD = std::make_shared<RichterLFO>();
-        LFO.setModulationSource(MOD);
+        LFO.addFreqModulationSource(MOD);
+        LFO.addDepthModulationSource(MOD);
     }
 
     void RichterLFOPair::prepareForNextBuffer(double bpm,
                                               double timeInSeconds) {
-
         LFO.prepareForNextBuffer(bpm, timeInSeconds);
         MOD->prepareForNextBuffer(bpm, timeInSeconds);
     }
@@ -126,8 +126,10 @@ namespace WECore::Richter {
     }
 
     double RichterLFOPair::_getNextOutputImpl(double /*inSample*/) {
-
         double retVal {1};
+
+        // Advance the modulation LFO state
+        MOD->getNextOutput(0);
 
         // Always call getNextOutput regardless of bypassed state
         const double tempGain {LFO.getNextOutput(0)};

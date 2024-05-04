@@ -67,10 +67,11 @@ namespace WECore::Richter {
         double getTempoNumer() const { return _tempoNumer; }
         double getTempoDenom() const { return _tempoDenom; }
         double getFreq() { return _rawFreq; }
-        double getFreqMod() { return _freqMod; }
+        double getModulatedFreqValue() const { return _modulatedFreqValue; }
         double getDepth() { return _rawDepth; }
-        double getDepthMod() { return _depthMod; }
+        double getModulatedDepthValue() const { return _modulatedDepthValue; }
         double getManualPhase() const { return _manualPhase; }
+        double getModulatedPhaseValue() const { return _modulatedPhaseValue; }
         /** @} */
 
         /** @name Setter Methods */
@@ -83,14 +84,25 @@ namespace WECore::Richter {
         void setTempoNumer(int val) { _tempoNumer = Parameters::TEMPONUMER.BoundsCheck(val); }
         void setTempoDenom (int val) { _tempoDenom = Parameters::TEMPODENOM.BoundsCheck(val); }
         void setFreq(double val) { _rawFreq = Parameters::FREQ.BoundsCheck(val); }
-        void setFreqMod(double val) { _freqMod = Parameters::FREQMOD.BoundsCheck(val); }
         void setDepth(double val) { _rawDepth = Parameters::DEPTH.BoundsCheck(val); }
-        void setDepthMod(double val) { _depthMod = Parameters::DEPTHMOD.BoundsCheck(val); }
         void setManualPhase(double val) { _manualPhase = Parameters::PHASE.BoundsCheck(val); }
         void setSampleRate(double val) { _sampleRate = val; }
-
-        void setModulationSource(std::shared_ptr<ModulationSource> val) { _modulationSource = val; }
         /** @} */
+
+        inline bool addFreqModulationSource(std::shared_ptr<ModulationSource> source);
+        inline bool removeFreqModulationSource(std::shared_ptr<ModulationSource> source);
+        inline bool setFreqModulationAmount(int index, double amount);
+        std::vector<ModulationSourceWrapper<double>> getFreqModulationSources() const { return _freqModulationSources; }
+
+        inline bool addDepthModulationSource(std::shared_ptr<ModulationSource> source);
+        inline bool removeDepthModulationSource(std::shared_ptr<ModulationSource> source);
+        inline bool setDepthModulationAmount(int index, double amount);
+        std::vector<ModulationSourceWrapper<double>> getDepthModulationSources() const { return _depthModulationSources; }
+
+        inline bool addPhaseModulationSource(std::shared_ptr<ModulationSource> source);
+        inline bool removePhaseModulationSource(std::shared_ptr<ModulationSource> source);
+        inline bool setPhaseModulationAmount(int index, double amount);
+        std::vector<ModulationSourceWrapper<double>> getPhaseModulationSources() const { return _phaseModulationSources; }
 
         /**
          * Prepares for processing the next buffer of samples. For example if using JUCE, you
@@ -118,20 +130,20 @@ namespace WECore::Richter {
         double  _tempoNumer,
                 _tempoDenom,
                 _rawFreq,
-                _freqMod,
+                _modulatedFreqValue,
                 _rawDepth,
-                _depthMod,
+                _modulatedDepthValue,
                 _manualPhase,
+                _modulatedPhaseValue,
                 _sampleRate,
                 _bpm,
                 _wavetablePosition;
 
         const double* _waveArrayPointer;
 
-
-        // It may make more sense for this to be a weak_ptr, but weak_ptr.lock() seems to come with
-        // a performance penalty
-        std::shared_ptr<ModulationSource> _modulationSource;
+        std::vector<ModulationSourceWrapper<double>> _freqModulationSources,
+                                                     _depthModulationSources,
+                                                     _phaseModulationSources;
 
         /**
          * Calculates the phase offset to be applied to the oscillator, including any
@@ -159,7 +171,7 @@ namespace WECore::Richter {
          * @return  The value in the wavetable at the current index.
          *
          */
-        inline double _calcLFOValue(double freq);
+        inline double _calcLFOValue(double freq, double phaseModValue);
 
         /**
          * Returns the next output of the LFO.
@@ -176,6 +188,15 @@ namespace WECore::Richter {
          */
         virtual inline void _resetImpl() override;
 
+        double _calcModValue(const std::vector<ModulationSourceWrapper<double>>& sources) const {
+            double retVal {0};
+
+            for (const ModulationSourceWrapper<double>& source : sources) {
+                retVal += source.source->getLastOutput() * source.amount;
+            }
+
+            return retVal;
+        }
     };
 
     RichterLFO::RichterLFO() : _wave(Parameters::WAVE.defaultValue),
@@ -188,15 +209,15 @@ namespace WECore::Richter {
                                _tempoNumer(Parameters::TEMPONUMER.defaultValue),
                                _tempoDenom(Parameters::TEMPODENOM.defaultValue),
                                _rawFreq(Parameters::FREQ.defaultValue),
-                               _freqMod(Parameters::FREQMOD.defaultValue),
+                               _modulatedFreqValue(0),
                                _rawDepth(Parameters::DEPTH.defaultValue),
-                               _depthMod(Parameters::DEPTHMOD.defaultValue),
+                               _modulatedDepthValue(0),
                                _manualPhase(Parameters::PHASE.defaultValue),
+                               _modulatedPhaseValue(0),
                                _sampleRate(44100),
                                _bpm(0),
                                _wavetablePosition(0),
-                               _waveArrayPointer(Wavetables::getInstance()->getSine()),
-                               _modulationSource(nullptr) {
+                               _waveArrayPointer(Wavetables::getInstance()->getSine()) {
     }
 
     void RichterLFO::setWave(int val) {
@@ -211,6 +232,102 @@ namespace WECore::Richter {
         } else if (_wave == Parameters::WAVE.SIDECHAIN) {
             _waveArrayPointer = Wavetables::getInstance()->getSidechain();
         }
+    }
+
+    bool RichterLFO::addFreqModulationSource(std::shared_ptr<ModulationSource> source) {
+        // Check if the source is already in the list
+        for (const ModulationSourceWrapper<double>& existingSource : _freqModulationSources) {
+            if (existingSource.source == source) {
+                return false;
+            }
+        }
+
+        _freqModulationSources.push_back({source, 0});
+        return true;
+    }
+
+    bool RichterLFO::removeFreqModulationSource(std::shared_ptr<ModulationSource> source) {
+        for (auto it = _freqModulationSources.begin(); it != _freqModulationSources.end(); it++) {
+            if ((*it).source == source) {
+                _freqModulationSources.erase(it);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool RichterLFO::setFreqModulationAmount(int index, double amount) {
+        if (index < 0 || index >= _freqModulationSources.size()) {
+            return false;
+        }
+
+        _freqModulationSources[index].amount = amount;
+        return true;
+    }
+
+    bool RichterLFO::addDepthModulationSource(std::shared_ptr<ModulationSource> source) {
+        // Check if the source is already in the list
+        for (const ModulationSourceWrapper<double>& existingSource : _depthModulationSources) {
+            if (existingSource.source == source) {
+                return false;
+            }
+        }
+
+        _depthModulationSources.push_back({source, 0});
+        return true;
+    }
+
+    bool RichterLFO::removeDepthModulationSource(std::shared_ptr<ModulationSource> source) {
+        for (auto it = _depthModulationSources.begin(); it != _depthModulationSources.end(); it++) {
+            if ((*it).source == source) {
+                _depthModulationSources.erase(it);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool RichterLFO::setDepthModulationAmount(int index, double amount) {
+        if (index < 0 || index >= _depthModulationSources.size()) {
+            return false;
+        }
+
+        _depthModulationSources[index].amount = amount;
+        return true;
+    }
+
+    bool RichterLFO::addPhaseModulationSource(std::shared_ptr<ModulationSource> source) {
+        // Check if the source is already in the list
+        for (const ModulationSourceWrapper<double>& existingSource : _phaseModulationSources) {
+            if (existingSource.source == source) {
+                return false;
+            }
+        }
+
+        _phaseModulationSources.push_back({source, 0});
+        return true;
+    }
+
+    bool RichterLFO::removePhaseModulationSource(std::shared_ptr<ModulationSource> source) {
+        for (auto it = _phaseModulationSources.begin(); it != _phaseModulationSources.end(); it++) {
+            if ((*it).source == source) {
+                _phaseModulationSources.erase(it);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    bool RichterLFO::setPhaseModulationAmount(int index, double amount) {
+        if (index < 0 || index >= _phaseModulationSources.size()) {
+            return false;
+        }
+
+        _phaseModulationSources[index].amount = amount;
+        return true;
     }
 
     void RichterLFO::prepareForNextBuffer(double bpm,
@@ -240,10 +357,7 @@ namespace WECore::Richter {
         }
 
         if (_phaseSyncSwitch) {
-            const int phaseIndexOffset {
-                static_cast<int>((_manualPhase / Parameters::PHASE.maxValue) * Wavetables::SIZE)
-            };
-            _indexOffset = seekIndexOffset + phaseIndexOffset;
+            _indexOffset = seekIndexOffset;
         } else {
             _indexOffset = 0;
         }
@@ -251,41 +365,51 @@ namespace WECore::Richter {
 
     double RichterLFO::_calcFreq(double modAmount) {
         // Calculate the frequency based on whether tempo sync is active
-
         double freq {0};
 
         if (_tempoSyncSwitch) {
             freq = (_bpm / 60) * (_tempoDenom / _tempoNumer);
         } else {
-            freq = _rawFreq + (_freqMod * (Parameters::FREQ.maxValue / 2) * modAmount);
+            freq = _rawFreq + ((Parameters::FREQ.maxValue / 2) * modAmount);
         }
 
-        return Parameters::FREQ.BoundsCheck(freq);
+        freq = Parameters::FREQ.BoundsCheck(freq);
+        _modulatedFreqValue = freq;
+
+        return freq;
     }
 
-    double RichterLFO::_calcLFOValue(double freq) {
+    double RichterLFO::_calcLFOValue(double freq, double phaseModValue) {
         const double samplesPerTremoloCycle {_sampleRate / freq};
         const double scale {Wavetables::SIZE / samplesPerTremoloCycle};
 
         // Calculate the current position within the wave table
         _wavetablePosition = std::fmod(_wavetablePosition + scale, Wavetables::SIZE);
 
+        _modulatedPhaseValue = _manualPhase + (phaseModValue * Parameters::PHASE.maxValue);
+
+        const int phaseIndexOffset {
+            static_cast<int>((_modulatedPhaseValue / Parameters::PHASE.maxValue) * Wavetables::SIZE)
+        };
+
         const int index {static_cast<int>(_wavetablePosition)};
 
-        return _waveArrayPointer[(index + _indexOffset) % Wavetables::SIZE];
+        return _waveArrayPointer[(index + _indexOffset + phaseIndexOffset) % Wavetables::SIZE];
     }
 
-    double RichterLFO::_getNextOutputImpl(double inSample) {
+    double RichterLFO::_getNextOutputImpl(double /*inSample*/) {
         // Get the mod amount to use, divide by 2 to reduce range to -0.5:0.5
-        // This is the only function that should advance the modulation state by calling getNextOutput()
-        const double modAmount {_modulationSource != nullptr ? _modulationSource->getNextOutput(inSample) / 2 : 0};
+        const double freqModValue {_calcModValue(_freqModulationSources) / 2};
+        const double depthModValue {_calcModValue(_depthModulationSources) / 2};
+        const double phaseModValue {_calcModValue(_phaseModulationSources) / 2};
 
-        const double lfoValue {_calcLFOValue(_calcFreq(modAmount))};
+        const double lfoValue {_calcLFOValue(_calcFreq(freqModValue), phaseModValue)};
 
         // Calculate the depth value after modulation
         const double depth {Parameters::DEPTH.BoundsCheck(
-            _rawDepth + (_depthMod * Parameters::DEPTH.maxValue * modAmount)
+            _rawDepth + (Parameters::DEPTH.maxValue * depthModValue)
         )};
+        _modulatedDepthValue = depth;
 
         if (_bypassSwitch) {
             // Produce a value in the range -1:1, invert if needed
