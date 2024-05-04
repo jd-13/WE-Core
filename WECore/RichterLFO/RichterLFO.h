@@ -91,17 +91,17 @@ namespace WECore::Richter {
 
         inline bool addFreqModulationSource(std::shared_ptr<ModulationSource> source);
         inline bool removeFreqModulationSource(std::shared_ptr<ModulationSource> source);
-        inline bool setFreqModulationAmount(int index, double amount);
+        inline bool setFreqModulationAmount(size_t index, double amount);
         std::vector<ModulationSourceWrapper<double>> getFreqModulationSources() const { return _freqModulationSources; }
 
         inline bool addDepthModulationSource(std::shared_ptr<ModulationSource> source);
         inline bool removeDepthModulationSource(std::shared_ptr<ModulationSource> source);
-        inline bool setDepthModulationAmount(int index, double amount);
+        inline bool setDepthModulationAmount(size_t index, double amount);
         std::vector<ModulationSourceWrapper<double>> getDepthModulationSources() const { return _depthModulationSources; }
 
         inline bool addPhaseModulationSource(std::shared_ptr<ModulationSource> source);
         inline bool removePhaseModulationSource(std::shared_ptr<ModulationSource> source);
-        inline bool setPhaseModulationAmount(int index, double amount);
+        inline bool setPhaseModulationAmount(size_t index, double amount);
         std::vector<ModulationSourceWrapper<double>> getPhaseModulationSources() const { return _phaseModulationSources; }
 
         /**
@@ -257,8 +257,8 @@ namespace WECore::Richter {
         return false;
     }
 
-    bool RichterLFO::setFreqModulationAmount(int index, double amount) {
-        if (index < 0 || index >= _freqModulationSources.size()) {
+    bool RichterLFO::setFreqModulationAmount(size_t index, double amount) {
+        if (index >= _freqModulationSources.size()) {
             return false;
         }
 
@@ -289,8 +289,8 @@ namespace WECore::Richter {
         return false;
     }
 
-    bool RichterLFO::setDepthModulationAmount(int index, double amount) {
-        if (index < 0 || index >= _depthModulationSources.size()) {
+    bool RichterLFO::setDepthModulationAmount(size_t index, double amount) {
+        if (index >= _depthModulationSources.size()) {
             return false;
         }
 
@@ -321,8 +321,8 @@ namespace WECore::Richter {
         return false;
     }
 
-    bool RichterLFO::setPhaseModulationAmount(int index, double amount) {
-        if (index < 0 || index >= _phaseModulationSources.size()) {
+    bool RichterLFO::setPhaseModulationAmount(size_t index, double amount) {
+        if (index >= _phaseModulationSources.size()) {
             return false;
         }
 
