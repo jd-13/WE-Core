@@ -130,8 +130,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae84d178f73fdb720221eb7d711c06eb4 inherit pub_methods_class_w_e_core_1_1_modulation_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c83baa1209d7bb7e01fd13227ba8a3d inherit pub_methods_class_w_e_core_1_1_modulation_source" id="r_a8c83baa1209d7bb7e01fd13227ba8a3d"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_modulation_source.html#a8c83baa1209d7bb7e01fd13227ba8a3d">getNextOutput</a> (double inSample)</td></tr>
 <tr class="separator:a8c83baa1209d7bb7e01fd13227ba8a3d inherit pub_methods_class_w_e_core_1_1_modulation_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19334b3157152f274d95581e476bbba9 inherit pub_methods_class_w_e_core_1_1_modulation_source" id="r_a19334b3157152f274d95581e476bbba9"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_modulation_source.html#a19334b3157152f274d95581e476bbba9">getLastOutput</a> () const</td></tr>
-<tr class="separator:a19334b3157152f274d95581e476bbba9 inherit pub_methods_class_w_e_core_1_1_modulation_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab459c85150ea89f79407db94f3c39ffc inherit pub_methods_class_w_e_core_1_1_modulation_source" id="r_ab459c85150ea89f79407db94f3c39ffc"><td class="memItemLeft" align="right" valign="top">virtual double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_modulation_source.html#ab459c85150ea89f79407db94f3c39ffc">getLastOutput</a> () const</td></tr>
+<tr class="separator:ab459c85150ea89f79407db94f3c39ffc inherit pub_methods_class_w_e_core_1_1_modulation_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3ae0df22ec6985d4657ca4824899fa6 inherit pub_methods_class_w_e_core_1_1_modulation_source" id="r_af3ae0df22ec6985d4657ca4824899fa6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_w_e_core_1_1_modulation_source.html#af3ae0df22ec6985d4657ca4824899fa6">reset</a> ()</td></tr>
 <tr class="separator:af3ae0df22ec6985d4657ca4824899fa6 inherit pub_methods_class_w_e_core_1_1_modulation_source"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -161,7 +161,7 @@ Additional Inherited Members</h2></td></tr>
 <p>The following example shows how to set up this object for audio at 120bpm and 44.1kHz: </p><div class="fragment"><div class="line"><a class="code hl_class" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html">RichterLFOPair</a> lfoPair;</div>
 <div class="line">lfoPair.<a class="code hl_function" href="class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html#a7137bcaf86d3a4e33de98d5191878272">prepareForNextBuffer</a>(120, 0, 44100);</div>
 <div class="ttc" id="aclass_w_e_core_1_1_richter_1_1_richter_l_f_o_pair_html"><div class="ttname"><a href="class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html">WECore::Richter::RichterLFOPair</a></div><div class="ttdef"><b>Definition</b> <a href="_richter_l_f_o_pair_8h_source.html#l00058">RichterLFOPair.h:58</a></div></div>
-<div class="ttc" id="aclass_w_e_core_1_1_richter_1_1_richter_l_f_o_pair_html_a7137bcaf86d3a4e33de98d5191878272"><div class="ttname"><a href="class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html#a7137bcaf86d3a4e33de98d5191878272">WECore::Richter::RichterLFOPair::prepareForNextBuffer</a></div><div class="ttdeci">void prepareForNextBuffer(double bpm, double timeInSeconds)</div><div class="ttdef"><b>Definition</b> <a href="_richter_l_f_o_pair_8h_source.html#l00111">RichterLFOPair.h:111</a></div></div>
+<div class="ttc" id="aclass_w_e_core_1_1_richter_1_1_richter_l_f_o_pair_html_a7137bcaf86d3a4e33de98d5191878272"><div class="ttname"><a href="class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html#a7137bcaf86d3a4e33de98d5191878272">WECore::Richter::RichterLFOPair::prepareForNextBuffer</a></div><div class="ttdeci">void prepareForNextBuffer(double bpm, double timeInSeconds)</div><div class="ttdef"><b>Definition</b> <a href="_richter_l_f_o_pair_8h_source.html#l00112">RichterLFOPair.h:112</a></div></div>
 </div><!-- fragment --><p>Then the class can be used to process a buffer as follows: (where numSamples is the size of the buffer) </p><div class="fragment"><div class="line"><span class="keywordflow">for</span> (<span class="keywordtype">size_t</span> iii {0}; iii &lt; numSamples; iii++) {</div>
 <div class="line">    buffer[iii] = buffer[iii] * lfoPair.<a class="code hl_function" href="class_w_e_core_1_1_modulation_source.html#a8c83baa1209d7bb7e01fd13227ba8a3d">getNextOutput</a>();</div>
 <div class="line">}</div>
@@ -195,7 +195,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00106">106</a> of file <a class="el" href="_richter_l_f_o_pair_8h_source.html">RichterLFOPair.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00085">LFO</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00086">MOD</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00092">WECore::Richter::RichterLFO::setModulationSource()</a>.</p>
+<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00269">WECore::Richter::RichterLFO::addDepthModulationSource()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00237">WECore::Richter::RichterLFO::addFreqModulationSource()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00085">LFO</a>, and <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00086">MOD</a>.</p>
 
 </div>
 </div>
@@ -282,7 +282,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00128">128</a> of file <a class="el" href="_richter_l_f_o_pair_8h_source.html">RichterLFOPair.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00062">WECore::Richter::RichterLFO::getBypassSwitch()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00071">WECore::Richter::RichterLFO::getDepth()</a>, <a class="el" href="_modulation_source_8h_source.html#l00076">WECore::ModulationSource&lt; SampleType &gt;::getNextOutput()</a>, and <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00085">LFO</a>.</p>
+<p class="reference">References <a class="el" href="_richter_l_f_o_8h_source.html#l00062">WECore::Richter::RichterLFO::getBypassSwitch()</a>, <a class="el" href="_richter_l_f_o_8h_source.html#l00071">WECore::Richter::RichterLFO::getDepth()</a>, <a class="el" href="_modulation_source_8h_source.html#l00076">WECore::ModulationSource&lt; SampleType &gt;::getNextOutput()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00085">LFO</a>, and <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00086">MOD</a>.</p>
 
 </div>
 </div>
@@ -387,9 +387,9 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00111">111</a> of file <a class="el" href="_richter_l_f_o_pair_8h_source.html">RichterLFOPair.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00112">112</a> of file <a class="el" href="_richter_l_f_o_pair_8h_source.html">RichterLFOPair.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00085">LFO</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00086">MOD</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00216">WECore::Richter::RichterLFO::prepareForNextBuffer()</a>.</p>
+<p class="reference">References <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00085">LFO</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00086">MOD</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00333">WECore::Richter::RichterLFO::prepareForNextBuffer()</a>.</p>
 
 </div>
 </div>
@@ -426,7 +426,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00118">118</a> of file <a class="el" href="_richter_l_f_o_pair_8h_source.html">RichterLFOPair.h</a>.</p>
 
-<p class="reference">References <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00085">LFO</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00086">MOD</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00090">WECore::Richter::RichterLFO::setSampleRate()</a>.</p>
+<p class="reference">References <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00085">LFO</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00086">MOD</a>, and <a class="el" href="_richter_l_f_o_8h_source.html#l00089">WECore::Richter::RichterLFO::setSampleRate()</a>.</p>
 
 </div>
 </div>
@@ -445,7 +445,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00085">85</a> of file <a class="el" href="_richter_l_f_o_pair_8h_source.html">RichterLFOPair.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00128">_getNextOutputImpl()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00123">_resetImpl()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00111">prepareForNextBuffer()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00106">RichterLFOPair()</a>, <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00025">SCENARIO()</a>, <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00111">SCENARIO()</a>, and <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00118">setSampleRate()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00128">_getNextOutputImpl()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00123">_resetImpl()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00112">prepareForNextBuffer()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00106">RichterLFOPair()</a>, <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00025">SCENARIO()</a>, <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00111">SCENARIO()</a>, and <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00118">setSampleRate()</a>.</p>
 
 </div>
 </div>
@@ -463,7 +463,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00086">86</a> of file <a class="el" href="_richter_l_f_o_pair_8h_source.html">RichterLFOPair.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00123">_resetImpl()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00111">prepareForNextBuffer()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00106">RichterLFOPair()</a>, <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00025">SCENARIO()</a>, <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00111">SCENARIO()</a>, and <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00118">setSampleRate()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00128">_getNextOutputImpl()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00123">_resetImpl()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00112">prepareForNextBuffer()</a>, <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00106">RichterLFOPair()</a>, <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00025">SCENARIO()</a>, <a class="el" href="_richter_l_f_o_pair_tests_8cpp_source.html#l00111">SCENARIO()</a>, and <a class="el" href="_richter_l_f_o_pair_8h_source.html#l00118">setSampleRate()</a>.</p>
 
 </div>
 </div>

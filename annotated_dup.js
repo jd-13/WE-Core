@@ -74,7 +74,8 @@ var annotated_dup =
       [ "EffectsProcessor1in2out", "class_w_e_core_1_1_effects_processor1in2out.html", "class_w_e_core_1_1_effects_processor1in2out" ],
       [ "EffectsProcessor2in2out", "class_w_e_core_1_1_effects_processor2in2out.html", "class_w_e_core_1_1_effects_processor2in2out" ],
       [ "EffectsProcessorBase", "class_w_e_core_1_1_effects_processor_base.html", "class_w_e_core_1_1_effects_processor_base" ],
-      [ "ModulationSource", "class_w_e_core_1_1_modulation_source.html", "class_w_e_core_1_1_modulation_source" ]
+      [ "ModulationSource", "class_w_e_core_1_1_modulation_source.html", "class_w_e_core_1_1_modulation_source" ],
+      [ "ModulationSourceWrapper", "struct_w_e_core_1_1_modulation_source_wrapper.html", "struct_w_e_core_1_1_modulation_source_wrapper" ]
     ] ],
     [ "UpdateChecker", "class_update_checker.html", "class_update_checker" ]
 ];

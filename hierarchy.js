@@ -67,6 +67,7 @@ var hierarchy =
       [ "WECore::Richter::RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html", null ],
       [ "WECore::Richter::RichterLFOPair", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html", null ]
     ] ],
+    [ "WECore::ModulationSourceWrapper< SampleType >", "struct_w_e_core_1_1_modulation_source_wrapper.html", null ],
     [ "juce::MouseListener", null, [
       [ "WECore::JUCEPlugin::TooltipLabelUpdater", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html", null ]
     ] ],

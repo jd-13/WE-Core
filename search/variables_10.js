@@ -5,5 +5,6 @@ var searchData=
   ['sidechain_2',['SIDECHAIN',['../class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html#ad3477a95a68229c5a152cf2e103cc7f0',1,'WECore::Richter::Parameters::WaveParameter']]],
   ['sine_3',['sine',['../class_w_e_core_1_1_carve_1_1_parameters_1_1_mode_parameter.html#a44f6bd027da91c83d6d136be96b3be42',1,'WECore::Carve::Parameters::ModeParameter::SINE'],['../class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html#a8b7c3010bc690840a053f434657fe61a',1,'WECore::Richter::Parameters::WaveParameter::SINE']]],
   ['size_4',['SIZE',['../class_w_e_core_1_1_richter_1_1_wavetables.html#a239ed04e97a55aea3c8cfffa2d5bc13a',1,'WECore::Richter::Wavetables']]],
-  ['square_5',['SQUARE',['../class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html#ab4586e068bcfadfe45667f4bf34b5e25',1,'WECore::Richter::Parameters::WaveParameter']]]
+  ['source_5',['source',['../struct_w_e_core_1_1_modulation_source_wrapper.html#a999d74bb884be4bd4eee83f101fbfd95',1,'WECore::ModulationSourceWrapper']]],
+  ['square_6',['SQUARE',['../class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html#ab4586e068bcfadfe45667f4bf34b5e25',1,'WECore::Richter::Parameters::WaveParameter']]]
 ];

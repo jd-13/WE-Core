@@ -15,11 +15,12 @@ var searchData=
   ['modulationsource_12',['modulationsource',['../class_w_e_core_1_1_modulation_source.html#aacd9d003f5c7595f131e16a194294293',1,'WECore::ModulationSource::ModulationSource()'],['../class_w_e_core_1_1_modulation_source.html',1,'WECore::ModulationSource&lt; SampleType &gt;']]],
   ['modulationsource_2eh_13',['ModulationSource.h',['../_modulation_source_8h.html',1,'']]],
   ['modulationsource_3c_20double_20_3e_14',['ModulationSource&lt; double &gt;',['../class_w_e_core_1_1_modulation_source.html',1,'WECore']]],
-  ['monstrparameters_2eh_15',['MONSTRParameters.h',['../_m_o_n_s_t_r_parameters_8h.html',1,'']]],
-  ['mousedoubleclick_16',['mouseDoubleClick',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ab53f0e6080ebe6f708f5a43f4fe0bddf',1,'WECore::JUCEPlugin::SliderLabelUpdater']]],
-  ['mousedrag_17',['mouseDrag',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#aa532ef23daa3b38ad88a7e1fe18362c4',1,'WECore::JUCEPlugin::SliderLabelUpdater']]],
-  ['mouseenter_18',['mouseenter',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a53bb81cc39ea3019d328f66ed037e745',1,'WECore::JUCEPlugin::SliderLabelUpdater::mouseEnter()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a91c6e3186996da0364ea91ce615612f0',1,'WECore::JUCEPlugin::TooltipLabelUpdater::mouseEnter()']]],
-  ['mouseexit_19',['mouseexit',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ab5c1d6cb3e77f26c20f3b15a79c0c093',1,'WECore::JUCEPlugin::SliderLabelUpdater::mouseExit()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a2c188b573db893d9a57a90126c46a19e',1,'WECore::JUCEPlugin::TooltipLabelUpdater::mouseExit()']]],
-  ['mousemove_20',['mouseMove',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a4a33410ad3ec73754683529b01788ca4',1,'WECore::JUCEPlugin::SliderLabelUpdater']]],
-  ['mousewheelmove_21',['mouseWheelMove',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a45da3b32e8966e18c1c330f5d90cffff',1,'WECore::JUCEPlugin::SliderLabelUpdater']]]
+  ['modulationsourcewrapper_15',['ModulationSourceWrapper',['../struct_w_e_core_1_1_modulation_source_wrapper.html',1,'WECore']]],
+  ['monstrparameters_2eh_16',['MONSTRParameters.h',['../_m_o_n_s_t_r_parameters_8h.html',1,'']]],
+  ['mousedoubleclick_17',['mouseDoubleClick',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ab53f0e6080ebe6f708f5a43f4fe0bddf',1,'WECore::JUCEPlugin::SliderLabelUpdater']]],
+  ['mousedrag_18',['mouseDrag',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#aa532ef23daa3b38ad88a7e1fe18362c4',1,'WECore::JUCEPlugin::SliderLabelUpdater']]],
+  ['mouseenter_19',['mouseenter',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a53bb81cc39ea3019d328f66ed037e745',1,'WECore::JUCEPlugin::SliderLabelUpdater::mouseEnter()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a91c6e3186996da0364ea91ce615612f0',1,'WECore::JUCEPlugin::TooltipLabelUpdater::mouseEnter()']]],
+  ['mouseexit_20',['mouseexit',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ab5c1d6cb3e77f26c20f3b15a79c0c093',1,'WECore::JUCEPlugin::SliderLabelUpdater::mouseExit()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a2c188b573db893d9a57a90126c46a19e',1,'WECore::JUCEPlugin::TooltipLabelUpdater::mouseExit()']]],
+  ['mousemove_21',['mouseMove',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a4a33410ad3ec73754683529b01788ca4',1,'WECore::JUCEPlugin::SliderLabelUpdater']]],
+  ['mousewheelmove_22',['mouseWheelMove',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#a45da3b32e8966e18c1c330f5d90cffff',1,'WECore::JUCEPlugin::SliderLabelUpdater']]]
 ];
