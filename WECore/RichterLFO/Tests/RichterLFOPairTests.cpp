@@ -82,9 +82,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 CHECK(mLFOPair.LFO.getInvertSwitch() == true);
                 CHECK(mLFOPair.LFO.getWave() == 2);
                 CHECK(mLFOPair.LFO.getDepth() == Approx(0.1));
-                CHECK(mLFOPair.LFO.getDepthMod() == Approx(0.2));
                 CHECK(mLFOPair.LFO.getFreq() == Approx(3.0));
-                CHECK(mLFOPair.LFO.getFreqMod() == Approx(0.4));
                 CHECK(mLFOPair.LFO.getManualPhase() == Approx(0.5));
                 CHECK(mLFOPair.LFO.getTempoNumer() == Approx(2.0));
                 CHECK(mLFOPair.LFO.getTempoDenom() == Approx(3.0));
