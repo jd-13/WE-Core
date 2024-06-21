@@ -33,6 +33,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 CHECK(mLFOPair.LFO.getTempoSyncSwitch() == false);
                 CHECK(mLFOPair.LFO.getInvertSwitch() == false);
                 CHECK(mLFOPair.LFO.getWave() == 1);
+                CHECK(mLFOPair.LFO.getOutputMode() == 2);
                 CHECK(mLFOPair.LFO.getDepth() == Approx(0.5));
                 CHECK(mLFOPair.LFO.getFreq() == Approx(2.0));
                 CHECK(mLFOPair.LFO.getManualPhase() == Approx(0.0));
@@ -44,6 +45,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 CHECK(mLFOPair.MOD->getTempoSyncSwitch() == false);
                 CHECK(mLFOPair.MOD->getInvertSwitch() == false);
                 CHECK(mLFOPair.MOD->getWave() == 1);
+                CHECK(mLFOPair.MOD->getOutputMode() == 2);
                 CHECK(mLFOPair.MOD->getDepth() == Approx(0.5));
                 CHECK(mLFOPair.MOD->getFreq() == Approx(2.0));
                 CHECK(mLFOPair.MOD->getManualPhase() == Approx(0.0));
@@ -58,6 +60,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
             mLFOPair.LFO.setTempoSyncSwitch(true);
             mLFOPair.LFO.setInvertSwitch(true);
             mLFOPair.LFO.setWave(2);
+            mLFOPair.LFO.setOutputMode(1);
             mLFOPair.LFO.setDepth(0.1);
             mLFOPair.LFO.setFreq(3);
             mLFOPair.LFO.setManualPhase(0.5);
@@ -69,6 +72,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
             mLFOPair.MOD->setTempoSyncSwitch(true);
             mLFOPair.MOD->setInvertSwitch(true);
             mLFOPair.MOD->setWave(3);
+            mLFOPair.MOD->setOutputMode(1);
             mLFOPair.MOD->setDepth(0.5);
             mLFOPair.MOD->setFreq(6);
             mLFOPair.MOD->setManualPhase(0.7);
@@ -81,6 +85,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 CHECK(mLFOPair.LFO.getTempoSyncSwitch() == true);
                 CHECK(mLFOPair.LFO.getInvertSwitch() == true);
                 CHECK(mLFOPair.LFO.getWave() == 2);
+                CHECK(mLFOPair.LFO.getOutputMode() == 1);
                 CHECK(mLFOPair.LFO.getDepth() == Approx(0.1));
                 CHECK(mLFOPair.LFO.getFreq() == Approx(3.0));
                 CHECK(mLFOPair.LFO.getManualPhase() == Approx(0.5));
@@ -92,6 +97,7 @@ SCENARIO("RichterLFOPair: Parameters can be set and retrieved correctly") {
                 CHECK(mLFOPair.MOD->getTempoSyncSwitch() == true);
                 CHECK(mLFOPair.MOD->getInvertSwitch() == true);
                 CHECK(mLFOPair.MOD->getWave() == 3);
+                CHECK(mLFOPair.MOD->getOutputMode() == 1);
                 CHECK(mLFOPair.MOD->getDepth() == Approx(0.5));
                 CHECK(mLFOPair.MOD->getFreq() == Approx(6.0));
                 CHECK(mLFOPair.MOD->getManualPhase() == Approx(0.7));
@@ -108,6 +114,7 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
 
         WHEN("All parameter values are too low") {
             mLFOPair.LFO.setWave(-5);
+            mLFOPair.LFO.setOutputMode(-5);
             mLFOPair.LFO.setDepth(-5);
             mLFOPair.LFO.setFreq(-5);
             mLFOPair.LFO.setManualPhase(-5);
@@ -115,6 +122,7 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
             mLFOPair.LFO.setTempoDenom(-5);
 
             mLFOPair.MOD->setWave(-5);
+            mLFOPair.MOD->setOutputMode(-5);
             mLFOPair.MOD->setDepth(-5);
             mLFOPair.MOD->setFreq(-5);
             mLFOPair.MOD->setManualPhase(-5);
@@ -123,6 +131,7 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
 
             THEN("Parameters enforce their lower bounds") {
                 CHECK(mLFOPair.LFO.getWave() == 1);
+                CHECK(mLFOPair.LFO.getOutputMode() == 1);
                 CHECK(mLFOPair.LFO.getDepth() == Approx(0.0));
                 CHECK(mLFOPair.LFO.getFreq() == Approx(0.0));
                 CHECK(mLFOPair.LFO.getManualPhase() == Approx(0.0));
@@ -130,6 +139,7 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
                 CHECK(mLFOPair.LFO.getTempoDenom() == Approx(1.0));
 
                 CHECK(mLFOPair.MOD->getWave() == 1);
+                CHECK(mLFOPair.MOD->getOutputMode() == 1);
                 CHECK(mLFOPair.MOD->getDepth() == Approx(0.0));
                 CHECK(mLFOPair.MOD->getFreq() == Approx(0.0));
                 CHECK(mLFOPair.MOD->getManualPhase() == Approx(0.0));
@@ -140,6 +150,7 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
 
         WHEN("All parameter values are too high") {
             mLFOPair.LFO.setWave(100);
+            mLFOPair.LFO.setOutputMode(100);
             mLFOPair.LFO.setDepth(100);
             mLFOPair.LFO.setFreq(100);
             mLFOPair.LFO.setManualPhase(10000);
@@ -147,6 +158,7 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
             mLFOPair.LFO.setTempoDenom(100);
 
             mLFOPair.MOD->setWave(100);
+            mLFOPair.MOD->setOutputMode(100);
             mLFOPair.MOD->setDepth(100);
             mLFOPair.MOD->setFreq(100);
             mLFOPair.MOD->setManualPhase(10000);
@@ -155,6 +167,7 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
 
             THEN("Parameters enforce their upper bounds") {
                 CHECK(mLFOPair.LFO.getWave() == 4);
+                CHECK(mLFOPair.LFO.getOutputMode() == 2);
                 CHECK(mLFOPair.LFO.getDepth() == Approx(1.0));
                 CHECK(mLFOPair.LFO.getFreq() == Approx(20.0));
                 CHECK(mLFOPair.LFO.getManualPhase() == Approx(360.0));
@@ -162,6 +175,7 @@ SCENARIO("RichterLFOPair: Parameters enforce their bounds correctly") {
                 CHECK(mLFOPair.LFO.getTempoDenom() == Approx(32.0));
 
                 CHECK(mLFOPair.MOD->getWave() == 4);
+                CHECK(mLFOPair.MOD->getOutputMode() == 2);
                 CHECK(mLFOPair.MOD->getDepth() == Approx(1.0));
                 CHECK(mLFOPair.MOD->getFreq() == Approx(20.0));
                 CHECK(mLFOPair.MOD->getManualPhase() == Approx(360.0));

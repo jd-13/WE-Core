@@ -64,6 +64,7 @@ namespace WECore::Richter {
         bool getTempoSyncSwitch() const { return _tempoSyncSwitch; }
         bool getInvertSwitch() const { return _invertSwitch; }
         int getWave() const { return _wave; }
+        int getOutputMode() { return _outputMode; }
         double getTempoNumer() const { return _tempoNumer; }
         double getTempoDenom() const { return _tempoDenom; }
         double getFreq() { return _rawFreq; }
@@ -81,6 +82,7 @@ namespace WECore::Richter {
         void setTempoSyncSwitch(bool val) { _tempoSyncSwitch = val; }
         void setInvertSwitch(bool val) { _invertSwitch = val; }
         inline void setWave(int val);
+        void setOutputMode(int val) { _outputMode = Parameters::OUTPUTMODE.BoundsCheck(val); }
         void setTempoNumer(int val) { _tempoNumer = Parameters::TEMPONUMER.BoundsCheck(val); }
         void setTempoDenom (int val) { _tempoDenom = Parameters::TEMPODENOM.BoundsCheck(val); }
         void setFreq(double val) { _rawFreq = Parameters::FREQ.BoundsCheck(val); }
@@ -119,7 +121,8 @@ namespace WECore::Richter {
 
     protected:
         int     _wave,
-                _indexOffset;
+                _indexOffset,
+                _outputMode;
 
         bool    _bypassSwitch,
                 _tempoSyncSwitch,
@@ -201,6 +204,7 @@ namespace WECore::Richter {
 
     RichterLFO::RichterLFO() : _wave(Parameters::WAVE.defaultValue),
                                _indexOffset(0),
+                               _outputMode(Parameters::OUTPUTMODE.defaultValue),
                                _bypassSwitch(Parameters::LFOSWITCH_DEFAULT),
                                _tempoSyncSwitch(Parameters::TEMPOSYNC_DEFAULT),
                                _phaseSyncSwitch(Parameters::PHASESYNC_DEFAULT),
@@ -394,7 +398,9 @@ namespace WECore::Richter {
 
         const int index {static_cast<int>(_wavetablePosition)};
 
-        return _waveArrayPointer[(index + _indexOffset + phaseIndexOffset) % Wavetables::SIZE];
+        const double wavetableValue {_waveArrayPointer[(index + _indexOffset + phaseIndexOffset) % Wavetables::SIZE]};
+
+        return _outputMode == Parameters::OUTPUTMODE.BIPOLAR ? wavetableValue : (wavetableValue + 1);
     }
 
     double RichterLFO::_getNextOutputImpl(double /*inSample*/) {
@@ -412,7 +418,7 @@ namespace WECore::Richter {
         _modulatedDepthValue = depth;
 
         if (_bypassSwitch) {
-            // Produce a value in the range -1:1, invert if needed
+            // Produce a value in the range -1:1 (or 0:2), invert if needed
             return (lfoValue * depth) * (_invertSwitch ? -1 : 1);
         } else {
             return 0;

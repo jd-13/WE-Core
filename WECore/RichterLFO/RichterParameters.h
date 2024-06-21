@@ -38,6 +38,16 @@ namespace WECore::Richter::Parameters {
 
     const WaveParameter WAVE;
 
+    class OutputModeParameter : public ParameterDefinition::BaseParameter<int> {
+    public:
+        OutputModeParameter() : ParameterDefinition::BaseParameter<int>(UNIPOLAR, BIPOLAR, BIPOLAR) {}
+
+        static constexpr int UNIPOLAR {1},
+                             BIPOLAR {2};
+    };
+
+    const OutputModeParameter OUTPUTMODE;
+
     const ParameterDefinition::RangedParameter<int> TEMPONUMER(1, 32, 1),
                                                     TEMPODENOM(1, 32, 1);
 
