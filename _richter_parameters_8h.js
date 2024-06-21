@@ -1,6 +1,7 @@
 var _richter_parameters_8h =
 [
     [ "WECore::Richter::Parameters::WaveParameter", "class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html", "class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter" ],
+    [ "WECore::Richter::Parameters::OutputModeParameter", "class_w_e_core_1_1_richter_1_1_parameters_1_1_output_mode_parameter.html", "class_w_e_core_1_1_richter_1_1_parameters_1_1_output_mode_parameter" ],
     [ "DEPTH", "_richter_parameters_8h.html#a306b673a2bf1ac9e38e44d0a1cd73ae4", null ],
     [ "DEPTHMOD", "_richter_parameters_8h.html#a4cab3747d38866ae323abab841c8564d", null ],
     [ "FREQ", "_richter_parameters_8h.html#a0081ab7ad7888d1aaf82e74d0b8ac411", null ],
@@ -14,6 +15,7 @@ var _richter_parameters_8h =
     [ "LFOSWITCH_DEFAULT", "_richter_parameters_8h.html#aa63a48f4c1f6833202b5f2a38d595d65", null ],
     [ "LFOSWITCH_OFF", "_richter_parameters_8h.html#a0ee906ec53ecf1dfdb496b8ebf0b8906", null ],
     [ "LFOSWITCH_ON", "_richter_parameters_8h.html#a5e1066525cfef1818520f49b310a9a32", null ],
+    [ "OUTPUTMODE", "_richter_parameters_8h.html#a228d4a4b7ddaa96c380265cbb402ab79", null ],
     [ "PHASESYNC_DEFAULT", "_richter_parameters_8h.html#ad646f623936bcca06c959e83af7d736b", null ],
     [ "PHASESYNC_OFF", "_richter_parameters_8h.html#a7cfdd76edbd74a8e7ed790df141cc4eb", null ],
     [ "PHASESYNC_ON", "_richter_parameters_8h.html#a852d9ae55168f85ce45a050b29f44c40", null ],

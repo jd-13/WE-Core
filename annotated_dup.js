@@ -39,6 +39,7 @@ var annotated_dup =
       ] ],
       [ "Richter", "namespace_w_e_core_1_1_richter.html", [
         [ "Parameters", "namespace_w_e_core_1_1_richter_1_1_parameters.html", [
+          [ "OutputModeParameter", "class_w_e_core_1_1_richter_1_1_parameters_1_1_output_mode_parameter.html", "class_w_e_core_1_1_richter_1_1_parameters_1_1_output_mode_parameter" ],
           [ "WaveParameter", "class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html", "class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter" ]
         ] ],
         [ "RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html", "class_w_e_core_1_1_richter_1_1_richter_l_f_o" ],

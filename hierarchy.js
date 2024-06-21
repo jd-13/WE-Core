@@ -25,6 +25,7 @@ var hierarchy =
     ] ],
     [ "ParameterDefinition::BaseParameter< int >", "class_parameter_definition_1_1_base_parameter.html", [
       [ "WECore::Carve::Parameters::ModeParameter", "class_w_e_core_1_1_carve_1_1_parameters_1_1_mode_parameter.html", null ],
+      [ "WECore::Richter::Parameters::OutputModeParameter", "class_w_e_core_1_1_richter_1_1_parameters_1_1_output_mode_parameter.html", null ],
       [ "WECore::Richter::Parameters::WaveParameter", "class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html", null ],
       [ "WECore::Songbird::Parameters::VowelParameter", "class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html", null ],
       [ "WECore::TPTSVF::Parameters::ModeParameter", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters_1_1_mode_parameter.html", null ]

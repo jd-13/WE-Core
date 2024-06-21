@@ -1,5 +1,6 @@
 var namespace_w_e_core_1_1_richter_1_1_parameters =
 [
+    [ "OutputModeParameter", "class_w_e_core_1_1_richter_1_1_parameters_1_1_output_mode_parameter.html", "class_w_e_core_1_1_richter_1_1_parameters_1_1_output_mode_parameter" ],
     [ "WaveParameter", "class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html", "class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter" ],
     [ "DEPTH", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a306b673a2bf1ac9e38e44d0a1cd73ae4", null ],
     [ "DEPTHMOD", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a4cab3747d38866ae323abab841c8564d", null ],
@@ -14,6 +15,7 @@ var namespace_w_e_core_1_1_richter_1_1_parameters =
     [ "LFOSWITCH_DEFAULT", "namespace_w_e_core_1_1_richter_1_1_parameters.html#aa63a48f4c1f6833202b5f2a38d595d65", null ],
     [ "LFOSWITCH_OFF", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a0ee906ec53ecf1dfdb496b8ebf0b8906", null ],
     [ "LFOSWITCH_ON", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a5e1066525cfef1818520f49b310a9a32", null ],
+    [ "OUTPUTMODE", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a228d4a4b7ddaa96c380265cbb402ab79", null ],
     [ "PHASESYNC_DEFAULT", "namespace_w_e_core_1_1_richter_1_1_parameters.html#ad646f623936bcca06c959e83af7d736b", null ],
     [ "PHASESYNC_OFF", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a7cfdd76edbd74a8e7ed790df141cc4eb", null ],
     [ "PHASESYNC_ON", "namespace_w_e_core_1_1_richter_1_1_parameters.html#a852d9ae55168f85ce45a050b29f44c40", null ],

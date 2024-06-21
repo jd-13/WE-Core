@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['vowel_0',['vowel',['../namespace_w_e_core_1_1_songbird.html#a3a3ef6451fa968c851e21391558ef016',1,'WECore::Songbird::Vowel'],['../namespace_w_e_core_1_1_songbird_1_1_parameters.html#a4426102c5467f146719ddeb0137f3009',1,'WECore::Songbird::Parameters::VOWEL']]],
+  ['vowel_0',['vowel',['../namespace_w_e_core_1_1_songbird_1_1_parameters.html#a4426102c5467f146719ddeb0137f3009',1,'WECore::Songbird::Parameters::VOWEL'],['../namespace_w_e_core_1_1_songbird.html#a3a3ef6451fa968c851e21391558ef016',1,'WECore::Songbird::Vowel']]],
   ['vowel_5fa_1',['VOWEL_A',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#afd699d949179341df342101bd60913be',1,'WECore::Songbird::Parameters::VowelParameter']]],
   ['vowel_5fe_2',['VOWEL_E',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a2e250d46e05e3f4d3bd8fbc41f77b8c6',1,'WECore::Songbird::Parameters::VowelParameter']]],
   ['vowel_5fi_3',['VOWEL_I',['../class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#a7e7b93324b8888cb91c687a0c93a615e',1,'WECore::Songbird::Parameters::VowelParameter']]],
