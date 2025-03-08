@@ -37,6 +37,12 @@ var annotated_dup =
         [ "PopupMenuV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_popup_menu_v2" ],
         [ "RotarySliderV2", "class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2.html", "class_w_e_core_1_1_look_and_feel_mixins_1_1_rotary_slider_v2" ]
       ] ],
+      [ "Perlin", "namespace_w_e_core_1_1_perlin.html", [
+        [ "Parameters", "namespace_w_e_core_1_1_perlin_1_1_parameters.html", [
+          [ "OutputModeParameter", "class_w_e_core_1_1_perlin_1_1_parameters_1_1_output_mode_parameter.html", "class_w_e_core_1_1_perlin_1_1_parameters_1_1_output_mode_parameter" ]
+        ] ],
+        [ "PerlinSource", "class_w_e_core_1_1_perlin_1_1_perlin_source.html", "class_w_e_core_1_1_perlin_1_1_perlin_source" ]
+      ] ],
       [ "Richter", "namespace_w_e_core_1_1_richter.html", [
         [ "Parameters", "namespace_w_e_core_1_1_richter_1_1_parameters.html", [
           [ "OutputModeParameter", "class_w_e_core_1_1_richter_1_1_parameters_1_1_output_mode_parameter.html", "class_w_e_core_1_1_richter_1_1_parameters_1_1_output_mode_parameter" ],

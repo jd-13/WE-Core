@@ -5,7 +5,6 @@ var class_w_e_core_1_1_richter_1_1_richter_l_f_o =
     [ "RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a132106b58e981e6e5d9db19399ca09eb", null ],
     [ "_calcFreq", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ada2a5ee1981bace954f6859e455a6c4d", null ],
     [ "_calcLFOValue", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#aa7d1cbec866e17f49a73b7c4e3c15798", null ],
-    [ "_calcModValue", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a77c03de46fe2c888bb82c7be451ccb80", null ],
     [ "_calcPhaseOffset", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#ab4092a75bcfffe910902ff4fae877013", null ],
     [ "_getNextOutputImpl", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a7bc3f708c54b950567c6b96e0a78b4bf", null ],
     [ "_resetImpl", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a05557e347e7d4f3d5e9c5b1830415c20", null ],

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['name_0',['name',['../struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_parameter_interface.html#a8b4eb1032fcadb75e7f4f6f955159a9a',1,'WECore::JUCEPlugin::CoreAudioProcessor::ParameterInterface::name'],['../struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_custom_parameter_interface.html#a31dab3b966f257d5a4814e796d4effbf',1,'WECore::JUCEPlugin::CoreAudioProcessor::CustomParameterInterface::name']]],
-  ['noisefilter_1',['noisefilter',['../class_w_e_core_1_1_carve_1_1_noise_filter.html',1,'WECore::Carve::NoiseFilter&lt; T &gt;'],['../class_w_e_core_1_1_carve_1_1_noise_filter.html#a3e7b9516644c13c5be0d8bfada40a801',1,'WECore::Carve::NoiseFilter::NoiseFilter()']]],
+  ['noisefilter_1',['NoiseFilter',['../class_w_e_core_1_1_carve_1_1_noise_filter.html',1,'WECore::Carve::NoiseFilter&lt; T &gt;'],['../class_w_e_core_1_1_carve_1_1_noise_filter.html#a3e7b9516644c13c5be0d8bfada40a801',1,'WECore::Carve::NoiseFilter::NoiseFilter()']]],
   ['normalisedtointernal_2',['NormalisedToInternal',['../class_parameter_definition_1_1_ranged_parameter.html#a19171f82b90b6a1ed0e6c9b8d1692813',1,'ParameterDefinition::RangedParameter']]],
   ['num_5fair_5fformants_3',['NUM_AIR_FORMANTS',['../namespace_w_e_core_1_1_songbird.html#a2093ae2d6a076c2c90b7d163b378081f',1,'WECore::Songbird']]],
   ['num_5fbands_4',['NUM_BANDS',['../namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#a3a12adfa38f27e78ca0e81aa15181e49',1,'WECore::MONSTR::Parameters']]],

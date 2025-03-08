@@ -9,6 +9,6 @@ var searchData=
   ['bandswitch_5fdefault_6',['BANDSWITCH_DEFAULT',['../namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#ae4f79df4506dc9982dddc7ad73df9c5f',1,'WECore::MONSTR::Parameters']]],
   ['bandswitch_5foff_7',['BANDSWITCH_OFF',['../namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#aface683228ad9a78fdf1bd27b2d83590',1,'WECore::MONSTR::Parameters']]],
   ['bandswitch_5fon_8',['BANDSWITCH_ON',['../namespace_w_e_core_1_1_m_o_n_s_t_r_1_1_parameters.html#acd5cfd37a543d047f08e62e619a3389c',1,'WECore::MONSTR::Parameters']]],
-  ['bipolar_9',['BIPOLAR',['../class_w_e_core_1_1_richter_1_1_parameters_1_1_output_mode_parameter.html#ab8dc62548748d42b8e3c099ccc20bf7f',1,'WECore::Richter::Parameters::OutputModeParameter']]],
+  ['bipolar_9',['BIPOLAR',['../class_w_e_core_1_1_richter_1_1_parameters_1_1_output_mode_parameter.html#ab8dc62548748d42b8e3c099ccc20bf7f',1,'WECore::Richter::Parameters::OutputModeParameter::BIPOLAR'],['../class_w_e_core_1_1_perlin_1_1_parameters_1_1_output_mode_parameter.html#a79b660f7f2503e3b83f502bcd6d6ea03',1,'WECore::Perlin::Parameters::OutputModeParameter::BIPOLAR']]],
   ['bypass_10',['BYPASS',['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters_1_1_mode_parameter.html#a500f641292d78b1784f5c2e83ad96c29',1,'WECore::TPTSVF::Parameters::ModeParameter']]]
 ];

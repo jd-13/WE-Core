@@ -25,6 +25,7 @@ var hierarchy =
     ] ],
     [ "ParameterDefinition::BaseParameter< int >", "class_parameter_definition_1_1_base_parameter.html", [
       [ "WECore::Carve::Parameters::ModeParameter", "class_w_e_core_1_1_carve_1_1_parameters_1_1_mode_parameter.html", null ],
+      [ "WECore::Perlin::Parameters::OutputModeParameter", "class_w_e_core_1_1_perlin_1_1_parameters_1_1_output_mode_parameter.html", null ],
       [ "WECore::Richter::Parameters::OutputModeParameter", "class_w_e_core_1_1_richter_1_1_parameters_1_1_output_mode_parameter.html", null ],
       [ "WECore::Richter::Parameters::WaveParameter", "class_w_e_core_1_1_richter_1_1_parameters_1_1_wave_parameter.html", null ],
       [ "WECore::Songbird::Parameters::VowelParameter", "class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html", null ],
@@ -65,6 +66,7 @@ var hierarchy =
         [ "WECore::AREnv::AREnvelopeFollowerFullWave", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_full_wave.html", null ],
         [ "WECore::AREnv::AREnvelopeFollowerSquareLaw", "class_w_e_core_1_1_a_r_env_1_1_a_r_envelope_follower_square_law.html", null ]
       ] ],
+      [ "WECore::Perlin::PerlinSource", "class_w_e_core_1_1_perlin_1_1_perlin_source.html", null ],
       [ "WECore::Richter::RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html", null ],
       [ "WECore::Richter::RichterLFOPair", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html", null ]
     ] ],

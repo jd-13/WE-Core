@@ -7,6 +7,7 @@ var dir_6e024fb2ef05ee707e64ab345e182e1f =
     [ "AREnvelopeFollowerSquareLaw.h", "_a_r_envelope_follower_square_law_8h.html", "_a_r_envelope_follower_square_law_8h" ],
     [ "EffectsProcessor.h", "_effects_processor_8h.html", "_effects_processor_8h" ],
     [ "ModulationSource.h", "_modulation_source_8h.html", "_modulation_source_8h" ],
+    [ "PerlinSource.hpp", "_perlin_source_8hpp.html", "_perlin_source_8hpp" ],
     [ "SimpleCompressor.h", "_simple_compressor_8h.html", "_simple_compressor_8h" ],
     [ "SimpleCompressorParameters.h", "_simple_compressor_parameters_8h.html", "_simple_compressor_parameters_8h" ],
     [ "StereoWidthProcessor.h", "_stereo_width_processor_8h.html", "_stereo_width_processor_8h" ],

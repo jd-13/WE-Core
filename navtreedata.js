@@ -62,12 +62,12 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_r_envelope_follower_base_8h.html",
-"class_parameter_definition_1_1_base_parameter.html#ac7a5508a702d6d11d07254d4a8182dd6",
-"class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html",
-"class_w_e_core_1_1_look_and_feel_mixins_1_1_group_component_v2.html",
-"class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html#a614eb73062fa36e873485388c3038aa4",
-"class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html",
-"namespace_w_e_core_1_1_t_p_t_s_v_f.html"
+"class_parameter_definition_1_1_base_parameter.html#a04c402945050ea382d6f0ea1ea77daf7",
+"class_w_e_core_1_1_effects_processor2in2out.html#a9f42df691ece3f0a48e0d4e7af99e89b",
+"class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html#ae1ff99cf2a3d1b92964548ce83b9336a",
+"class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a7e89b68d8b506006e60d126eb8899cb7",
+"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a47866559cf002481a68f72245091f8cf",
+"namespace_w_e_core_1_1_a_r_env_1_1_parameters.html#a689eb62aa02ea22f0c4538a2b3ac6624"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

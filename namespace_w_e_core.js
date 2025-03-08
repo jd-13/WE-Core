@@ -17,6 +17,7 @@ var namespace_w_e_core =
     [ "JUCEPlugin", "namespace_w_e_core_1_1_j_u_c_e_plugin.html", "namespace_w_e_core_1_1_j_u_c_e_plugin" ],
     [ "LookAndFeelMixins", "namespace_w_e_core_1_1_look_and_feel_mixins.html", "namespace_w_e_core_1_1_look_and_feel_mixins" ],
     [ "MONSTR", "namespace_w_e_core_1_1_m_o_n_s_t_r.html", "namespace_w_e_core_1_1_m_o_n_s_t_r" ],
+    [ "Perlin", "namespace_w_e_core_1_1_perlin.html", "namespace_w_e_core_1_1_perlin" ],
     [ "Richter", "namespace_w_e_core_1_1_richter.html", "namespace_w_e_core_1_1_richter" ],
     [ "SimpleCompressor", "namespace_w_e_core_1_1_simple_compressor.html", "namespace_w_e_core_1_1_simple_compressor" ],
     [ "Songbird", "namespace_w_e_core_1_1_songbird.html", "namespace_w_e_core_1_1_songbird" ],
@@ -34,5 +35,6 @@ var namespace_w_e_core =
     [ "EffectsProcessor2in2out", "class_w_e_core_1_1_effects_processor2in2out.html", "class_w_e_core_1_1_effects_processor2in2out" ],
     [ "EffectsProcessorBase", "class_w_e_core_1_1_effects_processor_base.html", "class_w_e_core_1_1_effects_processor_base" ],
     [ "ModulationSource", "class_w_e_core_1_1_modulation_source.html", "class_w_e_core_1_1_modulation_source" ],
-    [ "ModulationSourceWrapper", "struct_w_e_core_1_1_modulation_source_wrapper.html", "struct_w_e_core_1_1_modulation_source_wrapper" ]
+    [ "ModulationSourceWrapper", "struct_w_e_core_1_1_modulation_source_wrapper.html", "struct_w_e_core_1_1_modulation_source_wrapper" ],
+    [ "calcModValue", "namespace_w_e_core.html#a318e1debc7b37af33262b425504612ee", null ]
 ];
