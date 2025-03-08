@@ -89,4 +89,15 @@ namespace WECore {
         std::shared_ptr<ModulationSource<SampleType>> source;
         double amount;
     };
+
+    template <typename SampleType>
+    SampleType calcModValue(const std::vector<ModulationSourceWrapper<SampleType>>& sources) {
+        SampleType retVal {0};
+
+        for (const ModulationSourceWrapper<SampleType>& source : sources) {
+            retVal += source.source->getLastOutput() * source.amount;
+        }
+
+        return retVal;
+    }
 }

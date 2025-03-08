@@ -190,16 +190,6 @@ namespace WECore::Richter {
          * Resets internal counters including indexOffset and currentScale.
          */
         virtual inline void _resetImpl() override;
-
-        double _calcModValue(const std::vector<ModulationSourceWrapper<double>>& sources) const {
-            double retVal {0};
-
-            for (const ModulationSourceWrapper<double>& source : sources) {
-                retVal += source.source->getLastOutput() * source.amount;
-            }
-
-            return retVal;
-        }
     };
 
     RichterLFO::RichterLFO() : _wave(Parameters::WAVE.defaultValue),
@@ -405,9 +395,9 @@ namespace WECore::Richter {
 
     double RichterLFO::_getNextOutputImpl(double /*inSample*/) {
         // Get the mod amount to use, divide by 2 to reduce range to -0.5:0.5
-        const double freqModValue {_calcModValue(_freqModulationSources) / 2};
-        const double depthModValue {_calcModValue(_depthModulationSources) / 2};
-        const double phaseModValue {_calcModValue(_phaseModulationSources) / 2};
+        const double freqModValue {calcModValue(_freqModulationSources) / 2};
+        const double depthModValue {calcModValue(_depthModulationSources) / 2};
+        const double phaseModValue {calcModValue(_phaseModulationSources) / 2};
 
         const double lfoValue {_calcLFOValue(_calcFreq(freqModValue), phaseModValue)};
 
