@@ -88,7 +88,11 @@ namespace WECore::JUCEPlugin {
 #if _WIN32
         _defaultString += "Win";
 #elif __APPLE__
+    #if TARGET_OS_IPHONE
+        _defaultString += "iOS";
+    #else
         _defaultString += "macOS";
+    #endif
 #elif __linux__
         _defaultString += "Linux";
 #else
