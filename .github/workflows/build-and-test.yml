@@ -13,7 +13,7 @@ jobs:
           submodules: true
       - name: RunBuild
         run: Scripts/BuildAndTest.sh
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: callgrind-clang
           path: build/callgrind.out.*
@@ -28,7 +28,7 @@ jobs:
           submodules: true
       - name: RunBuild
         run: Scripts/BuildAndTest.sh
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: callgrind-gcc
           path: build/callgrind.out.*
