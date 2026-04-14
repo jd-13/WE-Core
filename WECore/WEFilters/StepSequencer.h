@@ -44,6 +44,7 @@ namespace WECore::StepSeq {
         const ParameterDefinition::RangedParameter<int>    TEMPONUMER(1, 32, 1);
         const ParameterDefinition::RangedParameter<int>    TEMPODENOM(1, 32, 1);
         const ParameterDefinition::RangedParameter<double> STEP_VALUE(0, 1, 0);
+        const ParameterDefinition::RangedParameter<int>    STEP_REPEAT(1, 8, 1);
 
         constexpr bool TEMPOSYNC_OFF = false,
                        TEMPOSYNC_ON = true,
@@ -54,6 +55,7 @@ namespace WECore::StepSeq {
         double value {Parameters::STEP_VALUE.defaultValue};
         StepShape shape {StepShape::FLAT};
         bool reverse {false};
+        int repeat {Parameters::STEP_REPEAT.defaultValue};
     };
 
     struct Pattern {
@@ -179,6 +181,13 @@ namespace WECore::StepSeq {
             _patterns[patternIndex].steps[stepIndex].reverse = reverse;
         }
 
+        void setStepRepeat(int patternIndex, int stepIndex, int repeat) {
+            if (patternIndex >= _patterns.size() || stepIndex >= static_cast<int>(_patterns[patternIndex].steps.size())) {
+                return;
+            }
+            _patterns[patternIndex].steps[stepIndex].repeat = Parameters::STEP_REPEAT.BoundsCheck(repeat);
+        }
+
         double getStepValue(int patternIndex, int stepIndex) const {
             if (patternIndex >= _patterns.size() || stepIndex >= static_cast<int>(_patterns[patternIndex].steps.size())) {
                 return 0;
@@ -200,6 +209,14 @@ namespace WECore::StepSeq {
             }
             return _patterns[patternIndex].steps[stepIndex].reverse;
         }
+
+        int getStepRepeat(int patternIndex, int stepIndex) const {
+            if (patternIndex >= _patterns.size() || stepIndex >= static_cast<int>(_patterns[patternIndex].steps.size())) {
+                return 1;
+            }
+            return _patterns[patternIndex].steps[stepIndex].repeat;
+        }
+
         /** @} */
 
         /**
@@ -364,10 +381,11 @@ namespace WECore::StepSeq {
             _currentStep = (_currentStep + 1) % numSteps;
         }
 
-        // Calculate position within current step (0..1)
-        const double t = _samplePosition / currentStepDuration;
-
         const Step& step = pattern.steps[_currentStep];
+
+        // Calculate position within current step (0..1), cycling repeat times
+        const double repetitionDuration = currentStepDuration / step.repeat;
+        const double t = std::fmod(_samplePosition, repetitionDuration) / repetitionDuration;
 
         // Apply shape (reverse flips the interpolation direction)
         const double tShaped = step.reverse ? 1.0 - t : t;
