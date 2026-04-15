@@ -45,6 +45,7 @@ namespace WECore::StepSeq {
         const ParameterDefinition::RangedParameter<int>    TEMPODENOM(1, 32, 1);
         const ParameterDefinition::RangedParameter<double> STEP_VALUE(0, 1, 0);
         const ParameterDefinition::RangedParameter<int>    STEP_REPEAT(1, 8, 1);
+        const ParameterDefinition::RangedParameter<double> STEP_LENGTH_MULTIPLIER(0.25, 4.0, 1.0);
 
         constexpr bool TEMPOSYNC_OFF = false,
                        TEMPOSYNC_ON = true,
@@ -56,6 +57,7 @@ namespace WECore::StepSeq {
         StepShape shape {StepShape::FLAT};
         bool reverse {false};
         int repeat {Parameters::STEP_REPEAT.defaultValue};
+        double lengthMultiplier {Parameters::STEP_LENGTH_MULTIPLIER.defaultValue};
     };
 
     struct Pattern {
@@ -188,6 +190,13 @@ namespace WECore::StepSeq {
             _patterns[patternIndex].steps[stepIndex].repeat = Parameters::STEP_REPEAT.BoundsCheck(repeat);
         }
 
+        void setStepLengthMultiplier(int patternIndex, int stepIndex, double lengthMultiplier) {
+            if (patternIndex >= _patterns.size() || stepIndex >= static_cast<int>(_patterns[patternIndex].steps.size())) {
+                return;
+            }
+            _patterns[patternIndex].steps[stepIndex].lengthMultiplier = Parameters::STEP_LENGTH_MULTIPLIER.BoundsCheck(lengthMultiplier);
+        }
+
         double getStepValue(int patternIndex, int stepIndex) const {
             if (patternIndex >= _patterns.size() || stepIndex >= static_cast<int>(_patterns[patternIndex].steps.size())) {
                 return 0;
@@ -217,6 +226,12 @@ namespace WECore::StepSeq {
             return _patterns[patternIndex].steps[stepIndex].repeat;
         }
 
+        double getStepLengthMultiplier(int patternIndex, int stepIndex) const {
+            if (patternIndex >= _patterns.size() || stepIndex >= static_cast<int>(_patterns[patternIndex].steps.size())) {
+                return 1.0;
+            }
+            return _patterns[patternIndex].steps[stepIndex].lengthMultiplier;
+        }
         /** @} */
 
         /**
@@ -312,8 +327,11 @@ namespace WECore::StepSeq {
         const int numSteps = static_cast<int>(pattern.steps.size());
         const double baseDuration = _calcBaseStepDuration();
 
-        // Calculate total cycle length in samples
-        const double totalCycleSamples = baseDuration * numSteps;
+        // Calculate total cycle length in samples, accounting for per-step length multipliers
+        double totalCycleSamples = 0;
+        for (int i = 0; i < numSteps; i++) {
+            totalCycleSamples += baseDuration * pattern.steps[i].lengthMultiplier;
+        }
 
         // Convert playhead time to samples and find position within the cycle
         const double positionInSamples = std::fmod(timeInSeconds * _sampleRate, totalCycleSamples);
@@ -321,7 +339,7 @@ namespace WECore::StepSeq {
         // Walk through steps to find which step and position we should be at
         double accumulated = 0;
         for (int i = 0; i < numSteps; i++) {
-            const double stepDuration = baseDuration;
+            const double stepDuration = baseDuration * pattern.steps[i].lengthMultiplier;
 
             if (accumulated + stepDuration > positionInSamples) {
                 _currentStep = i;
@@ -368,20 +386,21 @@ namespace WECore::StepSeq {
         const Pattern& pattern = _patterns[0];
         const int numSteps = static_cast<int>(pattern.steps.size());
 
-        const double currentStepDuration = _tempoSyncSwitch
+        const double baseDuration = _tempoSyncSwitch
             ? _sampleRate * (static_cast<double>(_tempoNumer) / _tempoDenom) * (60.0 / _bpm)
             : _sampleRate / _modulatedFreqValue;
 
         // Advance position by one sample and handle step transitions. The while loop
-        // handles the case where currentStepDuration is shorter than one sample, advancing
-        // multiple steps if needed.
+        // handles the case where a step duration is shorter than one sample, advancing
+        // multiple steps if needed. Each step may have a different duration via lengthMultiplier.
         _samplePosition += 1.0;
-        while (_samplePosition >= currentStepDuration) {
-            _samplePosition -= currentStepDuration;
+        while (_samplePosition >= baseDuration * pattern.steps[_currentStep].lengthMultiplier) {
+            _samplePosition -= baseDuration * pattern.steps[_currentStep].lengthMultiplier;
             _currentStep = (_currentStep + 1) % numSteps;
         }
 
         const Step& step = pattern.steps[_currentStep];
+        const double currentStepDuration = baseDuration * step.lengthMultiplier;
 
         // Calculate position within current step (0..1), cycling repeat times
         const double repetitionDuration = currentStepDuration / step.repeat;
