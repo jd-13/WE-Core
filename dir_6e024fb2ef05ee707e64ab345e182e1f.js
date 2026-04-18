@@ -10,6 +10,7 @@ var dir_6e024fb2ef05ee707e64ab345e182e1f =
     [ "PerlinSource.hpp", "_perlin_source_8hpp.html", "_perlin_source_8hpp" ],
     [ "SimpleCompressor.h", "_simple_compressor_8h.html", "_simple_compressor_8h" ],
     [ "SimpleCompressorParameters.h", "_simple_compressor_parameters_8h.html", "_simple_compressor_parameters_8h" ],
+    [ "StepSequencer.h", "_step_sequencer_8h.html", "_step_sequencer_8h" ],
     [ "StereoWidthProcessor.h", "_stereo_width_processor_8h.html", "_stereo_width_processor_8h" ],
     [ "StereoWidthProcessorParameters.h", "_stereo_width_processor_parameters_8h.html", "_stereo_width_processor_parameters_8h" ],
     [ "TPTSVFilter.h", "_t_p_t_s_v_filter_8h.html", "_t_p_t_s_v_filter_8h" ],

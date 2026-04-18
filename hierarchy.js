@@ -68,7 +68,8 @@ var hierarchy =
       ] ],
       [ "WECore::Perlin::PerlinSource", "class_w_e_core_1_1_perlin_1_1_perlin_source.html", null ],
       [ "WECore::Richter::RichterLFO", "class_w_e_core_1_1_richter_1_1_richter_l_f_o.html", null ],
-      [ "WECore::Richter::RichterLFOPair", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html", null ]
+      [ "WECore::Richter::RichterLFOPair", "class_w_e_core_1_1_richter_1_1_richter_l_f_o_pair.html", null ],
+      [ "WECore::StepSeq::StepSequencer", "class_w_e_core_1_1_step_seq_1_1_step_sequencer.html", null ]
     ] ],
     [ "WECore::ModulationSourceWrapper< SampleType >", "struct_w_e_core_1_1_modulation_source_wrapper.html", null ],
     [ "juce::MouseListener", null, [
@@ -80,6 +81,7 @@ var hierarchy =
       [ "WECore::JUCEPlugin::CoreAudioProcessor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html", null ],
       [ "WECore::JUCEPlugin::CoreProcessorEditor", "class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_processor_editor.html", null ]
     ] ],
+    [ "WECore::StepSeq::Pattern", "struct_w_e_core_1_1_step_seq_1_1_pattern.html", null ],
     [ "juce::SettableTooltipClient", null, [
       [ "WECore::Richter::WaveViewer", "class_w_e_core_1_1_richter_1_1_wave_viewer.html", null ]
     ] ],
@@ -92,6 +94,7 @@ var hierarchy =
     [ "WECore::Songbird::SongbirdFormantFilter< T, NUM_FORMANTS >", "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html", null ],
     [ "WECore::Songbird::SongbirdFormantFilter< T, NUM_AIR_FORMANTS >", "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html", null ],
     [ "WECore::Songbird::SongbirdFormantFilter< T, NUM_FORMANTS_PER_VOWEL >", "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html", null ],
+    [ "WECore::StepSeq::Step", "struct_w_e_core_1_1_step_seq_1_1_step.html", null ],
     [ "WECore::TPTSVF::TPTSVFilter< T >", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html", null ],
     [ "WECore::TPTSVF::TPTSVFilter< double >", "class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html", null ],
     [ "UpdateChecker", "class_update_checker.html", null ],

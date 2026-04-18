@@ -18,9 +18,11 @@ var searchData=
   ['wecore_3a_3asimplecompressor_3a_3aparameters_15',['Parameters',['../namespace_w_e_core_1_1_simple_compressor_1_1_parameters.html',1,'WECore::SimpleCompressor']]],
   ['wecore_3a_3asongbird_16',['Songbird',['../namespace_w_e_core_1_1_songbird.html',1,'WECore']]],
   ['wecore_3a_3asongbird_3a_3aparameters_17',['Parameters',['../namespace_w_e_core_1_1_songbird_1_1_parameters.html',1,'WECore::Songbird']]],
-  ['wecore_3a_3astereowidth_18',['StereoWidth',['../namespace_w_e_core_1_1_stereo_width.html',1,'WECore']]],
-  ['wecore_3a_3astereowidth_3a_3aparameters_19',['Parameters',['../namespace_w_e_core_1_1_stereo_width_1_1_parameters.html',1,'WECore::StereoWidth']]],
-  ['wecore_3a_3atestutils_20',['TestUtils',['../namespace_w_e_core_1_1_test_utils.html',1,'WECore']]],
-  ['wecore_3a_3atptsvf_21',['TPTSVF',['../namespace_w_e_core_1_1_t_p_t_s_v_f.html',1,'WECore']]],
-  ['wecore_3a_3atptsvf_3a_3aparameters_22',['Parameters',['../namespace_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters.html',1,'WECore::TPTSVF']]]
+  ['wecore_3a_3astepseq_18',['StepSeq',['../namespace_w_e_core_1_1_step_seq.html',1,'WECore']]],
+  ['wecore_3a_3astepseq_3a_3aparameters_19',['Parameters',['../namespace_w_e_core_1_1_step_seq_1_1_parameters.html',1,'WECore::StepSeq']]],
+  ['wecore_3a_3astereowidth_20',['StereoWidth',['../namespace_w_e_core_1_1_stereo_width.html',1,'WECore']]],
+  ['wecore_3a_3astereowidth_3a_3aparameters_21',['Parameters',['../namespace_w_e_core_1_1_stereo_width_1_1_parameters.html',1,'WECore::StereoWidth']]],
+  ['wecore_3a_3atestutils_22',['TestUtils',['../namespace_w_e_core_1_1_test_utils.html',1,'WECore']]],
+  ['wecore_3a_3atptsvf_23',['TPTSVF',['../namespace_w_e_core_1_1_t_p_t_s_v_f.html',1,'WECore']]],
+  ['wecore_3a_3atptsvf_3a_3aparameters_24',['Parameters',['../namespace_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters.html',1,'WECore::TPTSVF']]]
 ];

@@ -64,6 +64,11 @@ var annotated_dup =
         [ "SongbirdFilterModule", "class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html", "class_w_e_core_1_1_songbird_1_1_songbird_filter_module" ],
         [ "SongbirdFormantFilter", "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html", "class_w_e_core_1_1_songbird_1_1_songbird_formant_filter" ]
       ] ],
+      [ "StepSeq", "namespace_w_e_core_1_1_step_seq.html", [
+        [ "Pattern", "struct_w_e_core_1_1_step_seq_1_1_pattern.html", "struct_w_e_core_1_1_step_seq_1_1_pattern" ],
+        [ "Step", "struct_w_e_core_1_1_step_seq_1_1_step.html", "struct_w_e_core_1_1_step_seq_1_1_step" ],
+        [ "StepSequencer", "class_w_e_core_1_1_step_seq_1_1_step_sequencer.html", "class_w_e_core_1_1_step_seq_1_1_step_sequencer" ]
+      ] ],
       [ "StereoWidth", "namespace_w_e_core_1_1_stereo_width.html", [
         [ "StereoWidthProcessor", "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html", "class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor" ]
       ] ],

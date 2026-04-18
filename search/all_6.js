@@ -6,9 +6,10 @@ var searchData=
   ['filter_5forder_3',['FILTER_ORDER',['../namespace_w_e_core_1_1_songbird_1_1_parameters.html#a7e8bb55b0967bc72f47bfc7aa58c3ec3',1,'WECore::Songbird::Parameters']]],
   ['filter_5fposition_4',['FILTER_POSITION',['../namespace_w_e_core_1_1_songbird_1_1_parameters.html#a944a43061cc90ac403da0239d8ba0063',1,'WECore::Songbird::Parameters']]],
   ['flag_5',['flag',['../class_w_e_core_1_1_audio_spin_mutex.html#aba6af4f70a49c8f8c757ed409f8c7fdd',1,'WECore::AudioSpinMutex']]],
-  ['formant_6',['Formant',['../class_w_e_core_1_1_songbird_1_1_formant.html',1,'WECore::Songbird::Formant'],['../class_w_e_core_1_1_songbird_1_1_formant.html#aec539c2148cd13213a40a7dcb3fb1158',1,'WECore::Songbird::Formant::Formant()'],['../class_w_e_core_1_1_songbird_1_1_formant.html#a8cb4bb2e5bd42c835e878456edfab184',1,'WECore::Songbird::Formant::Formant(double newFreq, double newGaindB)']]],
-  ['formant_2eh_7',['Formant.h',['../_formant_8h.html',1,'']]],
-  ['freq_8',['FREQ',['../namespace_w_e_core_1_1_perlin_1_1_parameters.html#a247ce310c9f97461847dc53549479ea1',1,'WECore::Perlin::Parameters::FREQ'],['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a0081ab7ad7888d1aaf82e74d0b8ac411',1,'WECore::Richter::Parameters::FREQ(0, 20, 2)']]],
-  ['freqmod_9',['FREQMOD',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a75ef89f6a11ac18061b8cfe8feed9429',1,'WECore::Richter::Parameters']]],
-  ['frequency_10',['frequency',['../class_w_e_core_1_1_songbird_1_1_formant.html#add9046e116d1665adda70b4e211cf3ed',1,'WECore::Songbird::Formant']]]
+  ['flat_6',['FLAT',['../namespace_w_e_core_1_1_step_seq.html#a203eb95077d200abefdd088ee3b89a5eaf88a77e3d68d251c3dc4008c327b5a0c',1,'WECore::StepSeq']]],
+  ['formant_7',['Formant',['../class_w_e_core_1_1_songbird_1_1_formant.html',1,'WECore::Songbird::Formant'],['../class_w_e_core_1_1_songbird_1_1_formant.html#aec539c2148cd13213a40a7dcb3fb1158',1,'WECore::Songbird::Formant::Formant()'],['../class_w_e_core_1_1_songbird_1_1_formant.html#a8cb4bb2e5bd42c835e878456edfab184',1,'WECore::Songbird::Formant::Formant(double newFreq, double newGaindB)']]],
+  ['formant_2eh_8',['Formant.h',['../_formant_8h.html',1,'']]],
+  ['freq_9',['FREQ',['../namespace_w_e_core_1_1_perlin_1_1_parameters.html#a247ce310c9f97461847dc53549479ea1',1,'WECore::Perlin::Parameters::FREQ'],['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a0081ab7ad7888d1aaf82e74d0b8ac411',1,'WECore::Richter::Parameters::FREQ()'],['../namespace_w_e_core_1_1_step_seq_1_1_parameters.html#a03e7e0824db3326977efbe12bac58a59',1,'WECore::StepSeq::Parameters::FREQ()']]],
+  ['freqmod_10',['FREQMOD',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a75ef89f6a11ac18061b8cfe8feed9429',1,'WECore::Richter::Parameters']]],
+  ['frequency_11',['frequency',['../class_w_e_core_1_1_songbird_1_1_formant.html#add9046e116d1665adda70b4e211cf3ed',1,'WECore::Songbird::Formant']]]
 ];

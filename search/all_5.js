@@ -5,5 +5,6 @@ var searchData=
   ['effectsprocessor1in2out_2',['EffectsProcessor1in2out',['../class_w_e_core_1_1_effects_processor1in2out.html',1,'WECore::EffectsProcessor1in2out&lt; SampleType &gt;'],['../class_w_e_core_1_1_effects_processor1in2out.html#a6d638c004d2025368f63b2d891a432bb',1,'WECore::EffectsProcessor1in2out::EffectsProcessor1in2out()']]],
   ['effectsprocessor2in2out_3',['EffectsProcessor2in2out',['../class_w_e_core_1_1_effects_processor2in2out.html',1,'WECore::EffectsProcessor2in2out&lt; SampleType &gt;'],['../class_w_e_core_1_1_effects_processor2in2out.html#a60905f0352bbdc18d8e4d816830d802f',1,'WECore::EffectsProcessor2in2out::EffectsProcessor2in2out()']]],
   ['effectsprocessorbase_4',['EffectsProcessorBase',['../class_w_e_core_1_1_effects_processor_base.html',1,'WECore::EffectsProcessorBase&lt; SampleType &gt;'],['../class_w_e_core_1_1_effects_processor_base.html#aa293d8146ed75b40947698d2b6ed7367',1,'WECore::EffectsProcessorBase::EffectsProcessorBase()']]],
-  ['exponent_5',['EXPONENT',['../class_w_e_core_1_1_carve_1_1_parameters_1_1_mode_parameter.html#a7d430efecffa5d1e2640ad9c67c9e667',1,'WECore::Carve::Parameters::ModeParameter']]]
+  ['exp_5',['EXP',['../namespace_w_e_core_1_1_step_seq.html#a203eb95077d200abefdd088ee3b89a5ea8c670f8c37b95e1ed14a0ce414b049c7',1,'WECore::StepSeq']]],
+  ['exponent_6',['EXPONENT',['../class_w_e_core_1_1_carve_1_1_parameters_1_1_mode_parameter.html#a7d430efecffa5d1e2640ad9c67c9e667',1,'WECore::Carve::Parameters::ModeParameter']]]
 ];

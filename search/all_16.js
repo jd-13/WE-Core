@@ -22,12 +22,14 @@ var searchData=
   ['wecore_3a_3asimplecompressor_3a_3aparameters_19',['Parameters',['../namespace_w_e_core_1_1_simple_compressor_1_1_parameters.html',1,'WECore::SimpleCompressor']]],
   ['wecore_3a_3asongbird_20',['Songbird',['../namespace_w_e_core_1_1_songbird.html',1,'WECore']]],
   ['wecore_3a_3asongbird_3a_3aparameters_21',['Parameters',['../namespace_w_e_core_1_1_songbird_1_1_parameters.html',1,'WECore::Songbird']]],
-  ['wecore_3a_3astereowidth_22',['StereoWidth',['../namespace_w_e_core_1_1_stereo_width.html',1,'WECore']]],
-  ['wecore_3a_3astereowidth_3a_3aparameters_23',['Parameters',['../namespace_w_e_core_1_1_stereo_width_1_1_parameters.html',1,'WECore::StereoWidth']]],
-  ['wecore_3a_3atestutils_24',['TestUtils',['../namespace_w_e_core_1_1_test_utils.html',1,'WECore']]],
-  ['wecore_3a_3atptsvf_25',['TPTSVF',['../namespace_w_e_core_1_1_t_p_t_s_v_f.html',1,'WECore']]],
-  ['wecore_3a_3atptsvf_3a_3aparameters_26',['Parameters',['../namespace_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters.html',1,'WECore::TPTSVF']]],
-  ['wev2lookandfeel_27',['WEV2LookAndFeel',['../namespace_w_e_core_1_1_look_and_feel_mixins.html#a6f9684d4f6dc327e2deae04436a1c861',1,'WECore::LookAndFeelMixins']]],
-  ['width_28',['WIDTH',['../namespace_w_e_core_1_1_stereo_width_1_1_parameters.html#aca3cb81921e7766c66768bcc3f35cf76',1,'WECore::StereoWidth::Parameters']]],
-  ['writetoxml_29',['writeToXml',['../struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_custom_parameter_interface.html#a7909e9438d97d7f247832d73f38f7a5a',1,'WECore::JUCEPlugin::CoreAudioProcessor::CustomParameterInterface::writeToXml'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ab89ab6c8e7f64f21422d984bfefebaed',1,'WECore::JUCEPlugin::CoreAudioProcessor::writeToXml()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_custom_parameter.html#a46e27252884803a99438e8f322d5a077',1,'WECore::JUCEPlugin::CustomParameter::writeToXml()']]]
+  ['wecore_3a_3astepseq_22',['StepSeq',['../namespace_w_e_core_1_1_step_seq.html',1,'WECore']]],
+  ['wecore_3a_3astepseq_3a_3aparameters_23',['Parameters',['../namespace_w_e_core_1_1_step_seq_1_1_parameters.html',1,'WECore::StepSeq']]],
+  ['wecore_3a_3astereowidth_24',['StereoWidth',['../namespace_w_e_core_1_1_stereo_width.html',1,'WECore']]],
+  ['wecore_3a_3astereowidth_3a_3aparameters_25',['Parameters',['../namespace_w_e_core_1_1_stereo_width_1_1_parameters.html',1,'WECore::StereoWidth']]],
+  ['wecore_3a_3atestutils_26',['TestUtils',['../namespace_w_e_core_1_1_test_utils.html',1,'WECore']]],
+  ['wecore_3a_3atptsvf_27',['TPTSVF',['../namespace_w_e_core_1_1_t_p_t_s_v_f.html',1,'WECore']]],
+  ['wecore_3a_3atptsvf_3a_3aparameters_28',['Parameters',['../namespace_w_e_core_1_1_t_p_t_s_v_f_1_1_parameters.html',1,'WECore::TPTSVF']]],
+  ['wev2lookandfeel_29',['WEV2LookAndFeel',['../namespace_w_e_core_1_1_look_and_feel_mixins.html#a6f9684d4f6dc327e2deae04436a1c861',1,'WECore::LookAndFeelMixins']]],
+  ['width_30',['WIDTH',['../namespace_w_e_core_1_1_stereo_width_1_1_parameters.html#aca3cb81921e7766c66768bcc3f35cf76',1,'WECore::StereoWidth::Parameters']]],
+  ['writetoxml_31',['writeToXml',['../struct_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor_1_1_custom_parameter_interface.html#a7909e9438d97d7f247832d73f38f7a5a',1,'WECore::JUCEPlugin::CoreAudioProcessor::CustomParameterInterface::writeToXml'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_audio_processor.html#ab89ab6c8e7f64f21422d984bfefebaed',1,'WECore::JUCEPlugin::CoreAudioProcessor::writeToXml()'],['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_custom_parameter.html#a46e27252884803a99438e8f322d5a077',1,'WECore::JUCEPlugin::CustomParameter::writeToXml()']]]
 ];

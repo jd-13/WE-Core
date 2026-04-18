@@ -35,7 +35,8 @@ var searchData=
   ['_7esliderlabelupdater_32',['~SliderLabelUpdater',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_slider_label_updater.html#ad9fa66e933892f4ad4e03ae8da8e718b',1,'WECore::JUCEPlugin::SliderLabelUpdater']]],
   ['_7esongbirdfiltermodule_33',['~SongbirdFilterModule',['../class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#ab4fd1a79e6efac76600cf7382f216843',1,'WECore::Songbird::SongbirdFilterModule']]],
   ['_7esongbirdformantfilter_34',['~SongbirdFormantFilter',['../class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html#a8b93e6d74dcc63c0f2d89d88179ec1b6',1,'WECore::Songbird::SongbirdFormantFilter']]],
-  ['_7estereowidthprocessor_35',['~StereoWidthProcessor',['../class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#aff5e0fa66551da24375bd721688872fa',1,'WECore::StereoWidth::StereoWidthProcessor']]],
-  ['_7etooltiplabelupdater_36',['~TooltipLabelUpdater',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a637ab81fa4fa2fd27b31b1c56d90a668',1,'WECore::JUCEPlugin::TooltipLabelUpdater']]],
-  ['_7etptsvfilter_37',['~TPTSVFilter',['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#aaf39d6d6585e4dff60d7d59fc2b98340',1,'WECore::TPTSVF::TPTSVFilter']]]
+  ['_7estepsequencer_35',['~StepSequencer',['../class_w_e_core_1_1_step_seq_1_1_step_sequencer.html#a984fd8550af25945ff5922ed6b5a2bc1',1,'WECore::StepSeq::StepSequencer']]],
+  ['_7estereowidthprocessor_36',['~StereoWidthProcessor',['../class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#aff5e0fa66551da24375bd721688872fa',1,'WECore::StereoWidth::StereoWidthProcessor']]],
+  ['_7etooltiplabelupdater_37',['~TooltipLabelUpdater',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#a637ab81fa4fa2fd27b31b1c56d90a668',1,'WECore::JUCEPlugin::TooltipLabelUpdater']]],
+  ['_7etptsvfilter_38',['~TPTSVFilter',['../class_w_e_core_1_1_t_p_t_s_v_f_1_1_t_p_t_s_v_filter.html#aaf39d6d6585e4dff60d7d59fc2b98340',1,'WECore::TPTSVF::TPTSVFilter']]]
 ];

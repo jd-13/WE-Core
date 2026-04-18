@@ -62,12 +62,13 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "_a_r_envelope_follower_base_8h.html",
-"class_parameter_definition_1_1_base_parameter.html#a04c402945050ea382d6f0ea1ea77daf7",
-"class_w_e_core_1_1_effects_processor2in2out.html#a9f42df691ece3f0a48e0d4e7af99e89b",
-"class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html#ae1ff99cf2a3d1b92964548ce83b9336a",
-"class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a7e89b68d8b506006e60d126eb8899cb7",
-"class_w_e_core_1_1_songbird_1_1_songbird_filter_module.html#a47866559cf002481a68f72245091f8cf",
-"namespace_w_e_core_1_1_a_r_env_1_1_parameters.html#a689eb62aa02ea22f0c4538a2b3ac6624"
+"_t_p_t_s_v_filter_tests_8cpp.html#a915a62f1b93cb335baef973a5ffe9990",
+"class_w_e_core_1_1_effects_processor1in1out.html#a5b2c09765a454eb1dc8a015876ff5e6b",
+"class_w_e_core_1_1_j_u_c_e_plugin_1_1_tooltip_label_updater.html#ab806bd35e7fdb753f9b78347c566f8d2",
+"class_w_e_core_1_1_richter_1_1_richter_l_f_o.html#a6753231a50595fcd086573d6edd04020",
+"class_w_e_core_1_1_songbird_1_1_parameters_1_1_vowel_parameter.html#af3a55a94f872f08fb4f8b1e115e29c1d",
+"class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html#aff5e0fa66551da24375bd721688872fa",
+"namespace_w_e_core_1_1_step_seq.html#a203eb95077d200abefdd088ee3b89a5eaf89e1aea17dcf73105f3c89a72d3df3c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

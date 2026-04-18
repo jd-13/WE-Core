@@ -21,6 +21,7 @@ var namespace_w_e_core =
     [ "Richter", "namespace_w_e_core_1_1_richter.html", "namespace_w_e_core_1_1_richter" ],
     [ "SimpleCompressor", "namespace_w_e_core_1_1_simple_compressor.html", "namespace_w_e_core_1_1_simple_compressor" ],
     [ "Songbird", "namespace_w_e_core_1_1_songbird.html", "namespace_w_e_core_1_1_songbird" ],
+    [ "StepSeq", "namespace_w_e_core_1_1_step_seq.html", "namespace_w_e_core_1_1_step_seq" ],
     [ "StereoWidth", "namespace_w_e_core_1_1_stereo_width.html", "namespace_w_e_core_1_1_stereo_width" ],
     [ "TestUtils", "namespace_w_e_core_1_1_test_utils.html", [
       [ "generateSine", "namespace_w_e_core_1_1_test_utils.html#ab1e760c434e356503a5d8d42c5b7b840", null ]

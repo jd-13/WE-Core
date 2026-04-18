@@ -6,5 +6,7 @@ var searchData=
   ['songbirdformantfilter_3',['SongbirdFormantFilter',['../class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html',1,'WECore::Songbird']]],
   ['songbirdformantfilter_3c_20t_2c_20num_5fair_5fformants_20_3e_4',['SongbirdFormantFilter&lt; T, NUM_AIR_FORMANTS &gt;',['../class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html',1,'WECore::Songbird']]],
   ['songbirdformantfilter_3c_20t_2c_20num_5fformants_5fper_5fvowel_20_3e_5',['SongbirdFormantFilter&lt; T, NUM_FORMANTS_PER_VOWEL &gt;',['../class_w_e_core_1_1_songbird_1_1_songbird_formant_filter.html',1,'WECore::Songbird']]],
-  ['stereowidthprocessor_6',['StereoWidthProcessor',['../class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html',1,'WECore::StereoWidth']]]
+  ['step_6',['Step',['../struct_w_e_core_1_1_step_seq_1_1_step.html',1,'WECore::StepSeq']]],
+  ['stepsequencer_7',['StepSequencer',['../class_w_e_core_1_1_step_seq_1_1_step_sequencer.html',1,'WECore::StepSeq']]],
+  ['stereowidthprocessor_8',['StereoWidthProcessor',['../class_w_e_core_1_1_stereo_width_1_1_stereo_width_processor.html',1,'WECore::StereoWidth']]]
 ];

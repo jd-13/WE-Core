@@ -1,7 +1,7 @@
 var searchData=
 [
   ['dbtolinear_0',['dBToLinear',['../namespace_w_e_core_1_1_core_math.html#a85ee386c309a88a71d52a5a63828cb69',1,'WECore::CoreMath']]],
-  ['depth_1',['DEPTH',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a306b673a2bf1ac9e38e44d0a1cd73ae4',1,'WECore::Richter::Parameters']]],
+  ['depth_1',['DEPTH',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a306b673a2bf1ac9e38e44d0a1cd73ae4',1,'WECore::Richter::Parameters::DEPTH()'],['../namespace_w_e_core_1_1_step_seq_1_1_parameters.html#afb8150b80fa394702dcb6bcad0a59f89',1,'WECore::StepSeq::Parameters::DEPTH()']]],
   ['depthmod_2',['DEPTHMOD',['../namespace_w_e_core_1_1_richter_1_1_parameters.html#a4cab3747d38866ae323abab841c8564d',1,'WECore::Richter::Parameters']]],
   ['drawbuttonbackground_3',['drawButtonBackground',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html#a72eddb4557bf17376a3265a0b33782c1',1,'WECore::JUCEPlugin::CoreLookAndFeel::drawButtonBackground()'],['../class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html#ac13dbaa0e3a26096c17bd2f2e563d6c1',1,'WECore::LookAndFeelMixins::ButtonV2::drawButtonBackground()']]],
   ['drawbuttontext_4',['drawButtonText',['../class_w_e_core_1_1_j_u_c_e_plugin_1_1_core_look_and_feel.html#a05a6c673c5c5f70988daf46ab0cc440c',1,'WECore::JUCEPlugin::CoreLookAndFeel::drawButtonText()'],['../class_w_e_core_1_1_look_and_feel_mixins_1_1_button_v2.html#ae1ff99cf2a3d1b92964548ce83b9336a',1,'WECore::LookAndFeelMixins::ButtonV2::drawButtonText()']]],
