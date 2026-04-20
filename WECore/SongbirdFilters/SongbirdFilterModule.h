@@ -375,8 +375,8 @@ namespace WECore::Songbird {
     Vowel SongbirdFilterModule<T>::getVowelDescription(int val) const {
         Vowel tempVowel;
 
-        std::copy(&_allFormants[val - 1][0],
-                  &_allFormants[val - 1][NUM_FORMANTS_PER_VOWEL],
+        std::copy(_allFormants[val - 1].begin(),
+                  _allFormants[val - 1].end(),
                   std::begin(tempVowel));
 
         return tempVowel;
